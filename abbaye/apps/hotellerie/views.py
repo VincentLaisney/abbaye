@@ -1,5 +1,16 @@
 """ apps/hotellerie/views.py """
 
+from django.shortcuts import render
+
+
+def home(request):
+    """ Home page of Hotellerie. """
+    return render(
+        request,
+        'hotellerie/home.html',
+        {},
+    )
+
 
 def list(request):
     """ List of hotelleries. """

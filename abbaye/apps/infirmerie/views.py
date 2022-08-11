@@ -1,5 +1,16 @@
 """ apps/infirmerie/views.py """
 
+from django.shortcuts import render
+
+
+def home(request):
+    """ Home page of Infirmerie. """
+    return render(
+        request,
+        'infirmerie/home.html',
+        {},
+    )
+
 
 def list(request):
     """ List of infirmeries. """

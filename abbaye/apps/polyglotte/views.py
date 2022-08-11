@@ -1,5 +1,16 @@
 """ apps/polyglotte/views.py """
 
+from django.shortcuts import render
+
+
+def home(request):
+    """ Home page of Polyglotte. """
+    return render(
+        request,
+        'polyglotte/home.html',
+        {},
+    )
+
 
 def list(request):
     """ List of polyglottes. """
@@ -7,20 +18,20 @@ def list(request):
 
 
 def create(request):
-    """ Create an polyglotte. """
+    """ Create a polyglotte. """
     pass
 
 
 def details(request, **kwargs):
-    """ Details of an polyglotte. """
+    """ Details of a polyglotte. """
     pass
 
 
 def update(request, **kwargs):
-    """ Update an polyglotte. """
+    """ Update a polyglotte. """
     pass
 
 
 def delete(request, **kwargs):
-    """ Delete an polyglotte. """
+    """ Delete a polyglotte. """
     pass

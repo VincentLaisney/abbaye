@@ -1,5 +1,16 @@
 """ apps/agenda/views.py """
 
+from django.shortcuts import render
+
+
+def home(request):
+    """ Home page of Agenda. """
+    return render(
+        request,
+        'agenda/home.html',
+        {},
+    )
+
 
 def list(request):
     """ List of agendas. """

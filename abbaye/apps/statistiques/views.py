@@ -1,5 +1,16 @@
 """ apps/statistiques/views.py """
 
+from django.shortcuts import render
+
+
+def home(request):
+    """ Home page of Statistiques. """
+    return render(
+        request,
+        'statistiques/home.html',
+        {},
+    )
+
 
 def list(request):
     """ List of statistiques. """

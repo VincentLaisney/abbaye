@@ -1,5 +1,16 @@
 """ apps/editor/views.py """
 
+from django.shortcuts import render
+
+
+def home(request):
+    """ Home page of Editor. """
+    return render(
+        request,
+        'editor/home.html',
+        {},
+    )
+
 
 def list(request):
     """ List of editors. """
