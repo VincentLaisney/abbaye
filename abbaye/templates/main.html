@@ -34,11 +34,11 @@
                         <a class="ml-3" href={% url 'admin:index' %}><span class="fas fa-tools" title="Admin"></span></a>
                     {% endif %}
 
-                    <a class="ml-3" href="{% url 'main:home' %}?next={{ request.get_full_path }}">
+                    <a class="ml-3" href={% url 'accounts:logout' %}?next={{ request.get_full_path }}>
                         <span class="fas fa-sign-out-alt" title="Déconnexion"></span>
                     </a>
                 {% else %}
-                    <a class="ml-3" href="{% url 'main:home' %}?next={{ request.get_full_path }}">
+                    <a class="ml-3" href={% url 'accounts:login' %}?next={{ request.get_full_path }}>
                         <span class="fas fa-sign-in-alt fa-flip-horizontal" title="Connexion"></span>
                     </a>
                 {% endif %}
