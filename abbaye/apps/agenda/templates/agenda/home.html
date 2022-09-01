@@ -3,5 +3,26 @@
 {% block content %}
     <div class="d-flex flex-column align-items-center">
         <h1>Bienvenue sur Agenda !</h1>
+        <!-- TODO : if user.is_authenticated and user is in group 'agenda'. -->
+        <a href={% url 'agenda:create' %}>Ajouter un événement</a>
+    </div>
+
+    <div class="col-7">
+        <table class="table table-sm">
+            <tr>
+                <th class="col-6">Titre</th>
+                <th class="col-2">Du</th>
+                <th class="col-2">Au</th>
+                <th class="col-2"></th>
+            </tr>
+            {% for event in events %}
+                <tr>
+                    <td>{{ event.name }}</td>
+                    <td>{{ event.date_from }}</td>
+                    <td>{{ event.date_to }}</td>
+                    <td><a href={% url 'agenda:details' event.pk %}>Détails</a></td>
+                </tr>
+            {% endfor %}
+        </table>
     </div>
 {% endblock content %}
