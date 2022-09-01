@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'agenda:home' %}>Agenda</a></li>
+    <li class="breadcrumb-item active">{{ event.name }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>{{ event.name }}</h1>
+    <a href={% url 'agenda:update' event.pk %}>Modifier</a>
+    <a href={% url 'agenda:delete' event.pk %}>Supprimer</a>
+{% endblock content %}
