@@ -10,7 +10,12 @@ class AbbayeLoginForm(AuthenticationForm):
         label='Utilisateur :',
         error_messages={
             'required': 'Ce champ est obligatoire',
-        }
+        },
+        widget=forms.TextInput(
+            attrs={
+                'autofocus': True,
+            }
+        )
     )
     password = forms.CharField(
         label='Entrez votre mot de passe :',
@@ -18,7 +23,10 @@ class AbbayeLoginForm(AuthenticationForm):
             'required': 'Ce champ est obligatoire',
         },
         widget=forms.PasswordInput(
-            attrs={'autocomplete': 'new-password', 'autofocus': True}),
+            attrs={
+                'autocomplete': 'new-password',
+            }
+        ),
     )
 
     error_messages = {
