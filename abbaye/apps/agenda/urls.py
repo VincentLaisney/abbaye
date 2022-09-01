@@ -7,7 +7,6 @@ from . import views
 app_name = 'agenda'
 urlpatterns = [
     path('', views.home, name='home'),
-    path('list/', views.list, name='list'),
     path('create/', views.create, name='create'),
     path('<int:pk>/', views.details, name='details'),
     path('<int:pk>/update/', views.update, name='update'),
