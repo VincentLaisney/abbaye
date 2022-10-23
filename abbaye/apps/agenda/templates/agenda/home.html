@@ -6,27 +6,32 @@
 
 {% block content %}
     <div class="d-flex flex-column align-items-center">
-        <h1>Bienvenue sur Agenda !</h1>
+        <h1>Bienvenue sur l'agenda du Prieur !</h1>
         <!-- TODO : if user.is_authenticated and user is in group 'agenda'. -->
         <a href={% url 'agenda:create' %}>Ajouter un événement</a>
-    </div>
 
-    <div class="col-7">
-        <table class="table table-sm">
-            <tr>
-                <th class="col-6">Titre</th>
-                <th class="col-2">Du</th>
-                <th class="col-2">Au</th>
-                <th class="col-2"></th>
-            </tr>
-            {% for event in events %}
-                <tr>
-                    <td>{{ event.name }}</td>
-                    <td>{{ event.date_from }}</td>
-                    <td>{{ event.date_to }}</td>
-                    <td><a href={% url 'agenda:details' event.pk %}>Détails</a></td>
-                </tr>
+        <div class="col-12">
+            {% for day in days.values %}
+                <h4 class="text-center dark-red mt-4 mb-3">{{ day.date_string }}</h4>
+    
+                <div class="col-12 d-flex flex-column align-items-start">
+                    {% for event in day.events %}
+                    <div class="mb-3">
+                        <table>
+                            <tr>
+                                <td>[{{ event.category }}] </td>
+                                <td><a href={% url 'agenda:details' event.pk %}>{{ event.name }}</a></td>
+                            </tr>
+                            {% if event.comment %}
+                                <tr>
+                                    <td colspan="2"><small><div class="ml-5">{{ event.comment }}</div></small></td>
+                                </tr>
+                            {% endif %}
+                        </table>
+                    </div>
+                    {% endfor %}
+                </div>
             {% endfor %}
-        </table>
+        </div>
     </div>
 {% endblock content %}

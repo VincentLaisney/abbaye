@@ -1,8 +1,11 @@
 """ apps/agenda/views.py """
 
+from datetime import date, timedelta
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+
+from modules.dates import date_to_french_string
 
 from apps.main.decorators import group_required
 from .forms import EventForm
@@ -11,11 +14,25 @@ from .models import Event
 
 def home(request):
     """ Home page of Agenda. """
-    events = Event.objects.all().order_by('-date_from', '-date_to')
+    today = date.today()
+    days = {}
+    for i in range(15):
+        day = today + timedelta(i)
+        events = Event.objects.filter(
+            date_from__lte=day
+        ) & Event.objects.filter(
+            date_to__gte=day
+        )
+        days[day] = {
+            'date_string': date_to_french_string(day),
+            'events': list(events),
+        }
     return render(
         request,
         'agenda/home.html',
-        {'events': events},
+        {
+            'days': days,
+        },
     )
 
 
