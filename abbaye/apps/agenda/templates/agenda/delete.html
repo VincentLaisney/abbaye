@@ -1,0 +1,23 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'agenda:home' %}>Agenda</a></li>
+    <li class="breadcrumb-item"><a href={% url 'agenda:details' event.id %}>{{ event }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+
+        <h6>Êtes-vous sûr de vouloir supprimer cet événement ?</h6>
+
+        <!-- Validation -->
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-success mx-3">Oui</button>
+            <a href={% url 'agenda:details' event.id %} class="btn btn-primary mx-3">Non</a>
+        </div>
+    </form>
+{% endblock %}

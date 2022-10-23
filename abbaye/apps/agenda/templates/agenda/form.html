@@ -1,0 +1,180 @@
+{% extends 'main.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'agenda:home' %}>Agenda</a></li>
+
+    {% if event %}
+        <li class="breadcrumb-item"><a href={% url 'agenda:details' event.id %}>{{ event.name }}</a></li>
+        <li class="breadcrumb-item active">Modifier</li>
+    {% else %}
+        <li class="breadcrumb-item active">Créer</li>
+    {% endif %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+    {% if event %}
+        <h2>{{ event }}</h2>
+    {% else %}
+        <h2>Créer un nouvel événement</h2>
+    {% endif %}
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        <!-- Name -->
+        <div class="form-group">
+            {{ form.name.label_tag }}
+
+            {% if form.is_bound %}
+                {% if form.name.errors %}
+                    {% render_field form.name class="form-control is-invalid" %}
+                    {% for error in form.name.errors %}
+                        <div class="invalid-feedback" style="display: block;">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field form.name class="form-control is-valid" %}
+                {% endif %}
+            {% else %}
+                {% render_field form.name class="form-control" %}
+            {% endif %}
+
+            {% if form.name.help_text %}
+                <small class="form-text text-muted">
+                    {{ form.name.help_text }}
+                </small>
+            {% endif %}
+        </div>
+
+
+        <!-- Category -->
+        <div class="form-group">
+            {{ form.category.label_tag }}
+
+            {% if form.is_bound %}
+                {% if form.category.errors %}
+                    {% render_field form.category class="form-control is-invalid" %}
+                    {% for error in form.category.errors %}
+                        <div class="invalid-feedback" style="display: block;">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field form.category class="form-control is-valid" %}
+                {% endif %}
+            {% else %}
+                {% render_field form.category class="form-control" %}
+            {% endif %}
+
+            {% if form.category.help_text %}
+                <small class="form-text text-muted">
+                    {{ form.category.help_text }}
+                </small>
+            {% endif %}
+        </div>
+
+
+        <!-- Date from -->
+        <div class="row justify-content-start ml-0">
+            {{ form.date_from.label_tag }}
+
+            <div class="form-group">
+                {% if form.is_bound %}
+                    {% if form.date_from.errors %}
+                        {% render_field form.date_from class="form-control is-invalid" %}
+                        {% for error in form.date_from.errors %}
+                            <div class="invalid-feedback" style="display: block;">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.date_from class="form-control is-valid" %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.date_from class="form-control" %}
+                {% endif %}
+
+                {% if form.date_from.help_text %}
+                    <small class="form-text text-muted">
+                        {{ form.date_from.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Date to -->
+        <div class="row justify-content-start ml-0">
+            {{ form.date_to.label_tag }}
+
+            <div class="form-group">
+                {% if form.is_bound %}
+                    {% if form.date_to.errors %}
+                        {% render_field form.date_to class="form-control is-invalid" %}
+                        {% for error in form.date_to.errors %}
+                            <div class="invalid-feedback" style="display: block;">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.date_to class="form-control is-valid" %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.date_to class="form-control" %}
+                {% endif %}
+
+                {% if form.date_to.help_text %}
+                    <small class="form-text text-muted">
+                        {{ form.date_to.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+        </div>
+
+
+        <!-- Comment -->
+        <div class="row justify-content-start ml-0">
+            {{ form.comment.label_tag }}
+
+            <div class="form-group">
+                {% if form.is_bound %}
+                    {% if form.comment.errors %}
+                        {% render_field form.comment class="form-control is-invalid" %}
+                        {% for error in form.comment.errors %}
+                            <div class="invalid-feedback" style="display: block;">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.comment class="form-control is-valid" %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.comment class="form-control" %}
+                {% endif %}
+
+                {% if form.comment.help_text %}
+                    <small class="form-text text-muted">
+                        {{ form.comment.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Validation -->
+        <div class="d-flex justify-content-center">
+            {% if agenda %}
+                <a href={% url 'agenda:details' event.id %} class="btn btn-primary mx-3">Annuler</a>
+            {% else %}
+                <a href={% url 'agenda:home' %} class="btn btn-primary mx-3">Annuler</a>
+            {% endif %}
+            <button type="submit" class="btn btn-success mx-3">Valider</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block javascript %}
+    {{ form.media }}
+{% endblock javascript %}

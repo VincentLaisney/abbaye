@@ -1,0 +1,16 @@
+{% extends 'main.html' %}
+
+{% block content %}
+    <div class="d-flex flex-column align-items-center">
+        <h1>Bienvenue à l'Abbaye Saint-Joseph de Clairval !</h1>
+
+        <a href={% url 'absences:home' %}>Absences</a>
+        <a href={% url 'agenda:home' %}>Agenda</a>
+        <a href={% url 'editor:home' %}>Editor</a>
+        <a href={% url 'hotellerie:home' %}>Hôtellerie</a>
+        <a href={% url 'infirmerie:home' %}>Infirmerie</a>
+        <a href={% url 'moines:home' %}>Moines</a>
+        <a href={% url 'polyglotte:home' %}>Polyglotte</a>
+        <a href={% url 'statistiques:home' %}>Statistiques</a>
+    </div>
+{% endblock content %}
