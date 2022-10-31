@@ -19,8 +19,8 @@
                     <div class="mb-3">
                         <table>
                             <tr>
-                                <td>[{{ event.category }}] </td>
-                                <td><a href={% url 'agenda:details' event.pk %}>{{ event.name }}</a></td>
+                                <td><span class="fas fa-circle {{ event.category.color }} mr-2"></span></td>
+                                <td>{{ event.name }}<a href={% url 'agenda:details' event.pk %}><span class="fas fa-search ml-2" title="Voir les détails"></span></a></td>
                             </tr>
                             {% if event.comment %}
                                 <tr>

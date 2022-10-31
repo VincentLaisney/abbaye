@@ -3,7 +3,7 @@
 from django import forms
 from tempus_dominus.widgets import DatePicker
 
-from .models import Event
+from .models import Category, Event
 
 
 class EventForm(forms.ModelForm):
@@ -15,13 +15,9 @@ class EventForm(forms.ModelForm):
             'required': 'Ce champ est obligatoire.',
         },
     )
-    category = forms.ChoiceField(
+    category = forms.ModelChoiceField(
         label='Catégorie :',
-        choices=[
-            ('Conférence', 'Conférence'),
-            ('Retraite', 'Retraite'),
-            ('Promenade', 'Promenade'),
-        ],
+        queryset=Category.objects.all().order_by('name'),
         error_messages={
             'required': 'Ce champ est obligatoire',
         },

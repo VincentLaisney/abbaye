@@ -8,8 +8,9 @@ class Event(models.Model):
     name = models.CharField(
         max_length=255,
     )
-    category = models.CharField(
-        max_length=255,
+    category = models.ForeignKey(
+        "Category",
+        on_delete=models.CASCADE
     )
     date_from = models.DateField()
     date_to = models.DateField()
@@ -26,3 +27,19 @@ class Event(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Category(models.Model):
+    """ Category model. """
+    name = models.CharField(
+        max_length=255,
+    )
+    color = models.CharField(
+        max_length=255,
+    )
+
+    def __str__(self):
+        return '{} ({})'.format(self.name, self.color)
+
+    class Meta:
+        verbose_name_plural = 'categories'
