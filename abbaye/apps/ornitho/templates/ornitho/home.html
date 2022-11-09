@@ -29,7 +29,7 @@
                     <img src={% static "ornitho/images/bandeaux/oedipode.jpg" %}/>
                 </div>
                 <div id="texte_bandeau">
-                    <h1><a href="index.html">Ornitho</a></h1>
+                    <h1><a href={% url 'ornitho:home' %}>Ornitho</a></h1>
                     <h2>Voir le parc autrement…</h2>
                 </div>
             </div>
@@ -37,15 +37,15 @@
         <section>
             <nav>
                 <ul>
-                    <li><a class="current_link" href="index.html">ACCUEIL</a></li>
-                    <li><a  href="oiseaux.html">OISEAUX</a></li>
-                    <li><a  href="mammiferes.html">MAMMIFÈRES</a></li>
-                    <li><a  href="reptiles.html">REPTILES</a></li>
-                    <li><a  href="amphibiens.html">AMPHIBIENS</a></li>
-                    <li><a  href="libellules.html">LIBELLULES</a></li>
-                    <li><a  href="papillons.html">PAPILLONS</a></li>
-                    <li><a  href="sauterelles.html">SAUTERELLES</a></li>
-                    <li><a  href="galerie.html">GALERIE</a></li>
+                    <li><a class="current_link" href={% url 'ornitho:home' %}>ACCUEIL</a></li>
+                    <li><a  href={% url 'ornitho:list' 'oiseaux' %}>OISEAUX</a></li>
+                    <li><a  href={% url 'ornitho:list' 'mammiferes' %}>MAMMIFÈRES</a></li>
+                    <li><a  href={% url 'ornitho:list' 'reptiles' %}>REPTILES</a></li>
+                    <li><a  href={% url 'ornitho:list' 'amphibiens' %}>AMPHIBIENS</a></li>
+                    <li><a  href={% url 'ornitho:list' 'libellules' %}>LIBELLULES</a></li>
+                    <li><a  href={% url 'ornitho:list' 'papillons'  %}>PAPILLONS</a></li>
+                    <li><a  href={% url 'ornitho:list' 'sauterelles' %}>SAUTERELLES</a></li>
+                    <li><a  href={% url 'ornitho:galleria' %}>GALERIE</a></li>
                 </ul>
             </nav>
             <article>

@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'ornitho:home' %}>Ornitho</a></li>
+    <li class="breadcrumb-item active">{{ category_uppercase }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <ul>
+        {% for item in items %}
+            <li>{{ item }} ({{ item.category }})</li>
+        {% endfor %}
+    </ul>
+{% endblock content %}
