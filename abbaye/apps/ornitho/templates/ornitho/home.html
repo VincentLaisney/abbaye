@@ -1,81 +1,35 @@
-{% extends 'main.html' %}
+{% extends 'ornitho/main_ornitho.html' %}
 
 {% load static %}
-
-{% block css %}
-    <link rel="stylesheet/less" href={% static "ornitho/css/ornitho.less" %} />
-    <style>
-        @font-face {
-            font-family: Allura;
-            src: url("{% static 'ornitho/fonts/Allura-Regular.otf' %}");
-        }
-    </style>
-{% endblock css %}
 
 {% block breadcrumbs %}
     <li class="breadcrumb-item active">Ornitho</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <div id="bloc_page">
-        <header>
-            <div id="bandeau">
-                <div id="carrousel">
-                    <img src={% static "ornitho/images/bandeaux/crecerelle.jpg" %}/>
-                    <img src={% static "ornitho/images/bandeaux/gd.jpg" %}/>
-                    <img src={% static "ornitho/images/bandeaux/grues.jpg" %}/>
-                    <img src={% static "ornitho/images/bandeaux/anax.jpg" %}/>
-                    <img src={% static "ornitho/images/bandeaux/milan_royal.jpg" %}/>
-                    <img src={% static "ornitho/images/bandeaux/oedipode.jpg" %}/>
-                </div>
-                <div id="texte_bandeau">
-                    <h1><a href={% url 'ornitho:home' %}>Ornitho</a></h1>
-                    <h2>Voir le parc autrement…</h2>
-                </div>
-            </div>
-        </header>
-        <section>
-            <nav>
-                <ul>
-                    <li><a class="current_link" href={% url 'ornitho:home' %}>ACCUEIL</a></li>
-                    <li><a  href={% url 'ornitho:list' 'oiseaux' %}>OISEAUX</a></li>
-                    <li><a  href={% url 'ornitho:list' 'mammiferes' %}>MAMMIFÈRES</a></li>
-                    <li><a  href={% url 'ornitho:list' 'reptiles' %}>REPTILES</a></li>
-                    <li><a  href={% url 'ornitho:list' 'amphibiens' %}>AMPHIBIENS</a></li>
-                    <li><a  href={% url 'ornitho:list' 'libellules' %}>LIBELLULES</a></li>
-                    <li><a  href={% url 'ornitho:list' 'papillons'  %}>PAPILLONS</a></li>
-                    <li><a  href={% url 'ornitho:list' 'sauterelles' %}>SAUTERELLES</a></li>
-                    <li><a  href={% url 'ornitho:galleria' %}>GALERIE</a></li>
-                </ul>
-            </nav>
-            <article>
-                <p>
+    {{ block.super }}
+        {% block article %}
+            <div>
                 <div id="last_update">
                     Dernière mise à jour le 6 juin 2021
                 </div>
                 <div id="bienvenue">
                     Bienvenue sur le site naturaliste</br> des moines de Flavigny !
                 </div>
+            </div>
+            <div id="presentation">
+                Sur "Ornitho - Voir le parc autrement", vous pourrez :</b>
+                <img src={% static "ornitho/images/jumelles.jpg" %}></img>
+                <p>… apprendre à identifier les animaux du parc et d'ailleurs.</p>
+                <img src={% static "ornitho/images/fantome.jpg" %}></img>
+                <p>… parcourir une splendide galerie de photos</br> gracieusement mise à notre disposition par le Fr. Romain<br/>(ici en posture d'affût).</p>
+                <img src={% static "ornitho/images/moine.jpg" %}></img>
+                <p>… louer le Créateur pour les beautés de la création.</p>
+                <img src={% static "ornitho/images/chapelet.jpg" %}></img>
+                <p>Avec "Ornitho - Voir le parc autrement",</br>
+                    vous ne direz plus le chapelet comme avant !
                 </p>
-                <div id="presentation">
-                    Sur "Ornitho - Voir le parc autrement", vous pourrez :</b>
-                    <img src={% static "ornitho/images/jumelles.jpg" %}></img>
-                    <p>… apprendre à identifier les animaux du parc et d'ailleurs.</p>
-                    <img src={% static "ornitho/images/fantome.jpg" %}></img>
-                    <p>… parcourir une splendide galerie de photos</br> gracieusement mise à notre disposition par le Fr. Romain<br/>(ici en posture d'affût).</p>
-                    <img src={% static "ornitho/images/moine.jpg" %}></img>
-                    <p>… louer le Créateur pour les beautés de la création.</p>
-                    <img src={% static "ornitho/images/chapelet.jpg" %}></img>
-                    <p>Avec "Ornitho - Voir le parc autrement",</br>
-                        vous ne direz plus le chapelet comme avant !
-                    </p>
-                </div>
-                <a href="https://github.com/BrRoman/ornitho"><img id="logo_github" src={% static "ornitho/images/github.png" %} title="View my source code on Github"></a>
-            </article>
-        </section>
-    </div>
+            </div>
+            <a href="https://github.com/BrRoman/ornitho"><img id="logo_github" src={% static "ornitho/images/github.png" %} title="View my source code on Github"></a>
+        {% endblock article %}
 {% endblock content %}
-
-{% block javascript %}
-    <script src={% static "ornitho/js/animate.js" %}></script>
-{% endblock javascript %}

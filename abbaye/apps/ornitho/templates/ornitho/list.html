@@ -1,14 +1,47 @@
-{% extends 'main.html' %}
+{% extends 'ornitho/main_ornitho.html' %}
+
+{% load static %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href={% url 'ornitho:home' %}>Ornitho</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'ornitho:home' %}">Ornitho</a></li>
     <li class="breadcrumb-item active">{{ category_uppercase }}</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <ul>
-        {% for item in items %}
-            <li>{{ item }} ({{ item.category }})</li>
-        {% endfor %}
-    </ul>
+    {{ block.super }}
+
+    <div id="bloc_page">
+        <table>
+            <head>
+                <tr>
+                    <td>Nom</td>
+                    <td>Image</td>
+                    <td>Description</td>
+                    <td>Son</td>
+                    <td>Où le voir ?</td>
+                </tr>
+    
+                {% for item in items %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>
+                            <a href="{% get_static_prefix %}ornitho/images/{{ item.shortcut }}.jpg">
+                            <img src="{% get_static_prefix %}ornitho/images/vignettes/{{ item.shortcut }}_thumb.jpg" />
+                            </a>
+                        </td>
+                        <td>{{ item.description }}</td>
+                        <td><audio src="{% get_static_prefix %}ornitho/sounds/{{ item.shortcut }}.mp3" controls>Son</audio></td>
+                        <td>{{ item.where }}</td>
+                    </tr>
+                {% endfor %}
+            </head>
+        </table>
+    </div>
+    <div id="overlay"></div>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+
+    <script src={% static "ornitho/js/pictures.js" %}></script>
+{% endblock javascript %}
