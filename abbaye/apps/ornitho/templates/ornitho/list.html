@@ -7,38 +7,37 @@
     <li class="breadcrumb-item active">{{ category_uppercase }}</li>
 {% endblock breadcrumbs %}
 
-{% block content %}
-    {{ block.super }}
+{% block article %}
+    <table class="table table-bordered mt-3">
+        <thead>
+            <tr class="text-center">
+                <td>Nom</td>
+                <td>Image</td>
+                <td>Description</td>
+                <td>Son</td>
+                <td>Où le voir ?</td>
+            </tr>
+        </thead>
 
-    <div id="bloc_page">
-        <table>
-            <head>
+        <tbody>
+            {% for item in items %}
                 <tr>
-                    <td>Nom</td>
-                    <td>Image</td>
-                    <td>Description</td>
-                    <td>Son</td>
-                    <td>Où le voir ?</td>
+                    <td class="td-name align-middle">{{ item.name }}</td>
+                    <td>
+                        <a href="{% get_static_prefix %}ornitho/images/{{ item.shortcut }}.jpg">
+                        <img src="{% get_static_prefix %}ornitho/images/vignettes/{{ item.shortcut }}_thumb.jpg" />
+                        </a>
+                    </td>
+                    <td>{{ item.description }}</td>
+                    <td><audio src="{% get_static_prefix %}ornitho/sounds/{{ item.shortcut }}.mp3" controls>Son</audio></td>
+                    <td>{{ item.where }}</td>
                 </tr>
-    
-                {% for item in items %}
-                    <tr>
-                        <td>{{ item.name }}</td>
-                        <td>
-                            <a href="{% get_static_prefix %}ornitho/images/{{ item.shortcut }}.jpg">
-                            <img src="{% get_static_prefix %}ornitho/images/vignettes/{{ item.shortcut }}_thumb.jpg" />
-                            </a>
-                        </td>
-                        <td>{{ item.description }}</td>
-                        <td><audio src="{% get_static_prefix %}ornitho/sounds/{{ item.shortcut }}.mp3" controls>Son</audio></td>
-                        <td>{{ item.where }}</td>
-                    </tr>
-                {% endfor %}
-            </head>
-        </table>
-    </div>
+            {% endfor %}
+        </tbody>
+    </table>
+
     <div id="overlay"></div>
-{% endblock content %}
+{% endblock article %}
 
 {% block javascript %}
     {{ block.super }}

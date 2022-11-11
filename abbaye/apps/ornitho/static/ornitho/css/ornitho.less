@@ -51,6 +51,7 @@ article {
     padding-bottom: 50px;
     width: auto;
 
+    // Home page:
     #last_update {
         font-family: sans-serif;
     }
@@ -84,7 +85,50 @@ article {
         height: 32px;
         width: 32px;
     }
+
+    // List pages:
+    table {
+        thead {
+            color: red;
+            font-weight: bold;
+        }
+
+        tbody {
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        td {
+            background-color: rgb(230, 230, 230);
+        }
+
+        .td-name {
+            color: purple;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+    }
+
+    #overlay {
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.9);
+        color: white;
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 100hv;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 2;
+    }
+
+    #overlay img {
+        margin: auto;
+    }
 }
+
 
 
 // article h1 {
@@ -256,24 +300,6 @@ article {
 //     color: purple;
 // }
 
-// #overlay {
-//     align-items: center;
-//     background-color: rgba(0, 0, 0, 0.9);
-//     color: white;
-//     display: none;
-//     flex-direction: column;
-//     justify-content: flex-start;
-//     height: 100hv;
-//     left: 0;
-//     position: fixed;
-//     top: 0;
-//     width: 100%;
-//     z-index: 2;
-// }
-
-// #overlay img {
-//     margin: auto;
-// }
 
 
 
