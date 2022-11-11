@@ -20,6 +20,9 @@ class Item(models.Model):
     sound = models.TextField(
         null=True,
     )
+    sound_description = models.TextField(
+        null=True,
+    )
     where = models.TextField(
         null=True,
     )
