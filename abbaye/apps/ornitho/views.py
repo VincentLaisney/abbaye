@@ -16,7 +16,6 @@ def home(request):
 
 def list(request, **kwargs):
     """ List of items. """
-    items = Item.objects.all().order_by('name')
     if kwargs:
         category = kwargs['category']
         category_uppercase = {
@@ -39,6 +38,7 @@ def list(request, **kwargs):
         category_uppercase = ''
         column_sound = True
         items = Item.objects.all().order_by('name')
+
     return render(
         request,
         'ornitho/list.html',
