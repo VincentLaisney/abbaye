@@ -1,5 +1,8 @@
 """ apps/ornitho/models.py """
 
+import os
+
+from django.conf import settings
 from django.db import models
 
 
@@ -35,3 +38,21 @@ class Item(models.Model):
 
     def __str__(self):
         return self.name
+
+    def jpg_exists(self):
+        """ Tests if this item has a jpg. """
+        sound = os.path.join(
+            os.path.join(settings.BASE_DIR, 'static_files'),
+            'ornitho/images/',
+            self.shortcut
+        ) + '.jpg'
+        return os.path.exists(sound)
+
+    def mp3_exists(self):
+        """ Tests if this item has an mp3. """
+        sound = os.path.join(
+            os.path.join(settings.BASE_DIR, 'static_files'),
+            'ornitho/sounds/',
+            self.shortcut
+        ) + '.mp3'
+        return os.path.exists(sound)

@@ -24,14 +24,21 @@
                 <tr>
                     <td class="td-name align-middle">{{ item.name }}</td>
                     <td>
-                        <a href="{% get_static_prefix %}ornitho/images/{{ item.shortcut }}.jpg">
-                            <img src="{% get_static_prefix %}ornitho/images/vignettes/{{ item.shortcut }}_thumb.jpg" />
-                        </a>
+                        {% if item.jpg_exists %}
+                            <a href="{% get_static_prefix %}ornitho/images/{{ item.shortcut }}.jpg">
+                                <img src="{% get_static_prefix %}ornitho/images/vignettes/{{ item.shortcut }}_thumb.jpg" />
+                            </a>
+                        {% endif %}
                     </td>
                     <td>{{ item.description }}</td>
                     {% if column_sound %}
                         <td>
-                            <audio src="{% get_static_prefix %}ornitho/sounds/{{ item.shortcut }}.mp3" controls>Son</audio>
+                            {% if item.mp3_exists %}
+                                <audio src="{% get_static_prefix %}ornitho/sounds/{{ item.shortcut }}.mp3" controls>Son</audio>
+                            {% endif %}</br>
+                            {% if item.sound_description %}
+                                {{ item.sound_description }}
+                            {% endif %}
                         </td>
                     {% endif %}
                     <td>{{ item.where }}</td>
