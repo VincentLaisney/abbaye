@@ -6,30 +6,33 @@
     <li class="breadcrumb-item active">Ornitho</li>
 {% endblock breadcrumbs %}
 
-{% block content %}
-    {{ block.super }}
-        {% block article %}
-            <div>
-                <div id="last_update">
-                    Dernière mise à jour le 6 juin 2021
-                </div>
-                <div id="bienvenue">
-                    Bienvenue sur le site naturaliste</br> des moines de Flavigny !
-                </div>
-            </div>
-            <div id="presentation">
-                Sur "Ornitho - Voir le parc autrement", vous pourrez :</b>
-                <img src={% static "ornitho/images/jumelles.jpg" %}></img>
-                <p>… apprendre à identifier les animaux du parc et d'ailleurs.</p>
-                <img src={% static "ornitho/images/fantome.jpg" %}></img>
-                <p>… parcourir une splendide galerie de photos</br> gracieusement mise à notre disposition par le Fr. Romain<br/>(ici en posture d'affût).</p>
-                <img src={% static "ornitho/images/moine.jpg" %}></img>
-                <p>… louer le Créateur pour les beautés de la création.</p>
-                <img src={% static "ornitho/images/chapelet.jpg" %}></img>
-                <p>Avec "Ornitho - Voir le parc autrement",</br>
-                    vous ne direz plus le chapelet comme avant !
-                </p>
-            </div>
-            <a href="https://github.com/BrRoman/ornitho"><img id="logo_github" src={% static "ornitho/images/github.png" %} title="View my source code on Github"></a>
-        {% endblock article %}
-{% endblock content %}
+{% block article %}
+    <div id="last_update" class="d-flex justify-content-end">
+        <p><small>Dernière mise à jour le 6 juin 2021</small></p>
+    </div>
+
+    <div id="bienvenue" class="text-center">
+        Bienvenue sur le site naturaliste</br> des moines de Flavigny !
+    </div>
+
+    <div id="presentation" class="d-flex flex-column align-items-center">
+        <div>Sur "Ornitho - Voir le parc autrement", vous pourrez :</div>
+
+        <img src={% static "ornitho/images/jumelles.jpg" %}/>
+        <p>… apprendre à identifier les animaux du parc et d'ailleurs.</p>
+
+        <img src={% static "ornitho/images/fantome.jpg" %}/>
+        <p>… parcourir une splendide galerie de photos</br> gracieusement mise à notre disposition par le Fr. Romain<br/>(ici en posture d'affût).</p>
+
+        <img src={% static "ornitho/images/moine.jpg" %}/>
+        <p>… louer le Créateur pour les beautés de la création.</p>
+
+        <img src={% static "ornitho/images/chapelet.jpg" %}/>
+        <p>Avec "Ornitho - Voir le parc autrement",</br>
+            vous ne direz plus le chapelet comme avant !</p>
+    </div>
+
+    <a href="https://github.com/BrRoman/ornitho" class="w-100 d-flex justify-content-center">
+        <img id="logo_github" src={% static "ornitho/images/github.png" %} title="View my source code on Github"/>
+    </a>
+{% endblock article %}

@@ -3,7 +3,7 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet/less" href={% static "ornitho/css/ornitho.less" %} />
+    <link rel="stylesheet/less" href={% static "ornitho/css/ornitho.less" %}/>
     <style>
         @font-face {
             font-family: Allura;
@@ -13,9 +13,9 @@
 {% endblock css %}
 
 {% block content %}
-    <header>
-        <div id="bandeau">
-            <div id="carrousel">
+    <header class="">
+        <div id="bandeau" class="">
+            <div id="carrousel" class="d-flex justify-content-center">
                 <img src={% static "ornitho/images/bandeaux/crecerelle.jpg" %}/>
                 <img src={% static "ornitho/images/bandeaux/gd.jpg" %}/>
                 <img src={% static "ornitho/images/bandeaux/grues.jpg" %}/>
@@ -23,26 +23,29 @@
                 <img src={% static "ornitho/images/bandeaux/milan_royal.jpg" %}/>
                 <img src={% static "ornitho/images/bandeaux/oedipode.jpg" %}/>
             </div>
-            <div id="texte_bandeau" class="flex flex-column">
+    
+            <div id="texte_bandeau" class="d-flex flex-column">
                 <h1><a href={% url 'ornitho:home' %}>Ornitho</a></h1>
                 <h2>Voir le parc autrement…</h2>
             </div>
         </div>
     </header>
-    <nav class="flex flex-row">
-        <ul>
-            <li class="d-inline"><a href={% url 'ornitho:home' %}>ACCUEIL</a></li>
-            <li class="d-inline"><a href={% url 'ornitho:list' 'oiseaux' %}>OISEAUX</a></li>
-            <li class="d-inline"><a href={% url 'ornitho:list' 'mammiferes' %}>MAMMIFÈRES</a></li>
-            <li class="d-inline"><a href={% url 'ornitho:list' 'reptiles' %}>REPTILES</a></li>
-            <li class="d-inline"><a href={% url 'ornitho:list' 'amphibiens' %}>AMPHIBIENS</a></li>
-            <li class="d-inline"><a href={% url 'ornitho:list' 'libellules' %}>LIBELLULES</a></li>
-            <li class="d-inline"><a href={% url 'ornitho:list' 'papillons'  %}>PAPILLONS</a></li>
-            <li class="d-inline"><a href={% url 'ornitho:list' 'sauterelles' %}>SAUTERELLES</a></li>
-            <li class="d-inline"><a href={% url 'ornitho:galleria' %}>GALERIE</a></li>
+
+    <nav class="d-flex justify-content-center">
+        <ul class="m-0 p-2">
+            <li class="d-inline m-2 p-0"><a href={% url 'ornitho:home' %}>ACCUEIL</a></li>
+            <li class="d-inline m-2 p-0"><a href={% url 'ornitho:list' 'oiseaux' %}>OISEAUX</a></li>
+            <li class="d-inline m-2 p-0"><a href={% url 'ornitho:list' 'mammiferes' %}>MAMMIFÈRES</a></li>
+            <li class="d-inline m-2 p-0"><a href={% url 'ornitho:list' 'reptiles' %}>REPTILES</a></li>
+            <li class="d-inline m-2 p-0"><a href={% url 'ornitho:list' 'amphibiens' %}>AMPHIBIENS</a></li>
+            <li class="d-inline m-2 p-0"><a href={% url 'ornitho:list' 'libellules' %}>LIBELLULES</a></li>
+            <li class="d-inline m-2 p-0"><a href={% url 'ornitho:list' 'papillons'  %}>PAPILLONS</a></li>
+            <li class="d-inline m-2 p-0"><a href={% url 'ornitho:list' 'sauterelles' %}>SAUTERELLES</a></li>
+            <li class="d-inline m-2 p-0"><a href={% url 'ornitho:galleria' %}>GALERIE</a></li>
         </ul>
     </nav>
-    <article>
+
+    <article class="w-75">
         {% block article %}{% endblock article %}
     </article>
 {% endblock content %}
