@@ -12,9 +12,9 @@
         <thead>
             <tr class="text-center">
                 <td>Nom</td>
-                <td>Image</td>
+                <td>Aperçu</td>
                 <td>Description</td>
-                <td>Son</td>
+                {% if column_sound %}<td>Son</td>{% endif %}
                 <td>Où le voir ?</td>
             </tr>
         </thead>
@@ -25,11 +25,15 @@
                     <td class="td-name align-middle">{{ item.name }}</td>
                     <td>
                         <a href="{% get_static_prefix %}ornitho/images/{{ item.shortcut }}.jpg">
-                        <img src="{% get_static_prefix %}ornitho/images/vignettes/{{ item.shortcut }}_thumb.jpg" />
+                            <img src="{% get_static_prefix %}ornitho/images/vignettes/{{ item.shortcut }}_thumb.jpg" />
                         </a>
                     </td>
                     <td>{{ item.description }}</td>
-                    <td><audio src="{% get_static_prefix %}ornitho/sounds/{{ item.shortcut }}.mp3" controls>Son</audio></td>
+                    {% if column_sound %}
+                        <td>
+                            <audio src="{% get_static_prefix %}ornitho/sounds/{{ item.shortcut }}.mp3" controls>Son</audio>
+                        </td>
+                    {% endif %}
                     <td>{{ item.where }}</td>
                 </tr>
             {% endfor %}

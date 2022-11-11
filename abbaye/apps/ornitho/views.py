@@ -28,15 +28,24 @@ def list(request, **kwargs):
             'papillons': 'Papillons',
             'sauterelles': 'Sauterelles',
         }[category]
+        column_sound = category in [
+            'oiseaux',
+            'mammiferes',
+            'amphibiens',
+            'sauterelles',
+        ]
         items = Item.objects.filter(category=category).order_by('name')
     else:
+        category_uppercase = ''
+        column_sound = True
         items = Item.objects.all().order_by('name')
     return render(
         request,
         'ornitho/list.html',
         {
             'items': items,
-            'category_uppercase': category_uppercase if category_uppercase else '',
+            'category_uppercase': category_uppercase,
+            'column_sound': column_sound,
         }
     )
 
