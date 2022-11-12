@@ -1,0 +1,111 @@
+{% extends 'ornitho/main_ornitho.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{% url 'ornitho:home' %}">Ornitho</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'ornitho:galerie' %}">Galeries</a></li>
+    <li class="breadcrumb-item active">Insectes</li>
+{% endblock breadcrumbs %}
+
+{% block article %}
+    <div id="bienvenue" style="height: auto; margin: 15px 0px 0px 0px; text-align: center;">Galerie des paysages</div>
+    <h4 style="color: maroon; margin-top: 0px; text-align: center;">Vous pouvez me visualiser en mode diaporama et/ou en plein écran.</h4>
+    <h5 id="loading" style="text-align: center;">Images en cours de chargement. Veuillez patienter…</h5>
+
+    <div class="galleria">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/abeille.jpg" alt="Abeille">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/aeschne_bleue_1.jpg" alt="Aeschne bleue">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/aeschne_bleue_2.jpg" alt="Aeschne bleue">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/agrion_jouvencelle.jpg" alt="Agrion jouvencelle">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/agrion_mercure.jpg" alt="Agrion de Mercure">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/anax_empereur.jpg" alt="Anax empereur">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/agrions_jouvencelles_coeur_copulatoire.jpg" alt="Agrion jouvencelle (cœur copulatoire)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/argus_bleu_céleste.jpg" alt="Argus bleu céleste">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/ascalaphe.jpg" alt="Mi-papillons, mi-libellules : les ascalaphes">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/aurore.jpg" alt="Aurore">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/azure_commun_1.jpg" alt="Azuré commun">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/azure_commun_2.jpg" alt="Azuré commun">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/azure_commun_3.jpg" alt="Azuré commun">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/azure_commun_4.jpg" alt="Azuré commun">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/azure_commun_5.jpg" alt="Azuré commun">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/azure_commun_6.jpg" alt="Azuré commun">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/belle_dame.jpg" alt="Belle-dame">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/azure_frele.jpg" alt="Azuré frêle">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/calopteryx.jpg" alt="Calopteryx splendens mâle">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/carte_geographique.jpg" alt="Carte géographique">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/damier_frene.jpg" alt="Le Damier du frêne a presque complètement disparu. Les derniers individus survivent en Côte-d'Or.">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/demi_argus.jpg" alt="Demi-argus">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/demi_deuil.jpg" alt="Demi-deuil">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/gomphe_pattes_noires.jpg" alt="Gomphe à pattes noires">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/sylvaine.jpg" alt="Sylvaine">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/sympetrum.jpg" alt="Sympétrum">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/tabacs.jpg" alt="Tabacs d'Espagne">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/toujours_plus_haut.jpg" alt="Toujours plus haut">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/flambe_1.jpg" alt="Flambé">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/flambe_2.jpg" alt="Flambé">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/fontenelles_calopteryx_virgo_male.jpg" alt="Calopteryx virgo mâle">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/fontenelles_leste_vert.jpg" alt="Leste vert">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/fontenelles_sympetrum_strie_male.jpg" alt="Sympétrum strié mâle">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/fourmi_1.jpg" alt="« Va vers la fourmi, ô paresseux. » (Proverbes 6, 6)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/libellule_deprimee_1.jpg" alt="Libellule déprimée">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/libellule_deprimee_2.jpg" alt="Libellule déprimée">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/machaon.jpg" alt="Machaon">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/melitee.jpg" alt="Mélitée">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/nymphe_corps_feu.jpg" alt="Nymphe au corps de feu">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/pennipatte_1.jpg" alt="Pennipatte bleuâtre">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/pennipatte_2.jpg" alt="Pennipatte bleuâtre">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/petite_tortue_1.jpg" alt="Petite tortue">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/petite_tortue_2.jpg" alt="Petite tortue">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/pieride.jpg" alt="Piéride">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/pieride_navet.jpg" alt="Piéride du navet">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/spectre_paisible.jpg" alt="Le Spectre paisible est un hôte habituel des ponts, sous lesquels il aime s'abriter">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/satyre.jpg" alt="Satyre">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/scorpion.jpg" alt="Scorpion (Cévennes)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/servoz_azure_commun.jpg" alt="Azuré commun">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/servoz_petit_nacre.jpg" alt="Petit nacré">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/sphinx.jpg" alt="Moro-sphinx">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/mante.jpg" alt="Mante religieuse">
+    </div>
+
+    <h6 class="text-center mt-5">Powered by <a href="https://galleriajs.github.io">Galleria</a></h6>
+{% endblock article %}
+
+{% block javascript %}
+    {{ block.super }}
+
+    <script src="{% get_static_prefix %}ornitho/js/galleria/galleria.min.js"></script>
+
+    <script>
+        (function() {
+            Galleria.loadTheme('/statics/ornitho/js/galleria/themes/azur/galleria.azur.min.js');
+            Galleria.run('.galleria', {
+                carouselSpeed: 50,
+                fullscreenTransition: 'fade',
+                imageCrop: false,
+                transition: 'fade',
+                transitionSpeed: 1000,
+            });
+        }());
+    </script>
+
+    <script>
+        var imgs = document.images,
+        len = imgs.length,
+        counter = 0;
+
+        [].forEach.call( imgs, function( img ) {
+            if(img.complete)
+            incrementCounter();
+            else
+            img.addEventListener( 'load', incrementCounter, false );
+        } );
+
+        function incrementCounter() {
+            counter++;
+            if ( counter === len ) {
+                $("#loading").css("display", "none");
+            }
+        }
+    </script>
+{% endblock javascript %}

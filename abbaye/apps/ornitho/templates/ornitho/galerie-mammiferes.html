@@ -1,0 +1,89 @@
+{% extends 'ornitho/main_ornitho.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{% url 'ornitho:home' %}">Ornitho</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'ornitho:galerie' %}">Galeries</a></li>
+    <li class="breadcrumb-item active">Mammifères</li>
+{% endblock breadcrumbs %}
+
+{% block article %}
+    <div id="bienvenue" style="height: auto; margin: 15px 0px 0px 0px; text-align: center;">Galerie des paysages</div>
+    <h4 style="color: maroon; margin-top: 0px; text-align: center;">Vous pouvez me visualiser en mode diaporama et/ou en plein écran.</h4>
+    <h5 id="loading" style="text-align: center;">Images en cours de chargement. Veuillez patienter…</h5>
+
+    <div class="galleria">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/mulot.jpg" alt="Mulot (Haute-Savoie)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/marmotte.jpg" alt="Marmotte (Haute-Savoie)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/lievre_et_renardeau.jpg" alt="Ce lièvre se demande apparemment s'il doit avoir peur du renardeau ou pas…">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/lievre.jpg" alt="Lièvre">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/blaireau.jpg" alt="Blaireau (Causse Méjean)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/bouvreuil.jpg" alt="Bouvreuil en hiver">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/cerf_1.jpg" alt="Cerf (Haute-Savoie)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/cerf_2.jpg" alt="Le brame du cerf (Haute-Savoie)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/chamois_pormenaz_1.jpg" alt="Chamois (Haute-Savoie)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/chamois_pormenaz_2.jpg" alt="Chamois (Haute-Savoie)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/chevreuil_fontenelles.jpg" alt="Chevreuil">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/chevreuil_galop.jpg" alt="Chevreuil en été">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/chevreuil_hiver.jpg" alt="Chevreuil en hiver">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/chevreuil_pas_timide.jpg" alt="Le chevreuil est volontiers curieux">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/chevreuils_hivers.jpg" alt="Chevreuils en hiver">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/ecureuil_1.jpg" alt="Écureuil">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/ecureuil_2.jpg" alt="Écureuil">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/ragondin_1.jpg" alt="Ragondin">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/ragondin_2.jpg" alt="Ragondin">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/ragondin_3.jpg" alt="Ragondin">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/ragondin_4.jpg" alt="Ragondin">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/renard_1.jpg" alt="Renard">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/renard_2.jpg" alt="Renard">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/renard_3.jpg" alt="Renard">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/renard_4.jpg" alt="Renard">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/renard_5.jpg" alt="Renard">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/renard_6.jpg" alt="Renard">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/renard_7.jpg" alt="Renard">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/renard_8.jpg" alt="Renard">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/renard_9.jpg" alt="Renard">
+    </div>
+
+    <h6 class="text-center mt-5">Powered by <a href="https://galleriajs.github.io">Galleria</a></h6>
+{% endblock article %}
+
+{% block javascript %}
+    {{ block.super }}
+
+    <script src="{% get_static_prefix %}ornitho/js/galleria/galleria.min.js"></script>
+
+    <script>
+        (function() {
+            Galleria.loadTheme('/statics/ornitho/js/galleria/themes/azur/galleria.azur.min.js');
+            Galleria.run('.galleria', {
+                carouselSpeed: 50,
+                fullscreenTransition: 'fade',
+                imageCrop: false,
+                transition: 'fade',
+                transitionSpeed: 1000,
+            });
+        }());
+    </script>
+
+    <script>
+        var imgs = document.images,
+        len = imgs.length,
+        counter = 0;
+
+        [].forEach.call( imgs, function( img ) {
+            if(img.complete)
+            incrementCounter();
+            else
+            img.addEventListener( 'load', incrementCounter, false );
+        } );
+
+        function incrementCounter() {
+            counter++;
+            if ( counter === len ) {
+                $("#loading").css("display", "none");
+            }
+        }
+    </script>
+{% endblock javascript %}
