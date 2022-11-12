@@ -50,10 +50,73 @@ def list(request, **kwargs):
     )
 
 
-def galleria(request):
-    """ Galleria of pictures. """
+def galerie(request):
+    """ Galerie home. """
     return render(
         request,
-        'ornitho/galleria.html',
+        'ornitho/galerie.html',
+        {},
+    )
+
+
+def galerie_paysages(request):
+    """ Galerie paysages. """
+    return render(
+        request,
+        'ornitho/galerie-paysages.html',
+        {},
+    )
+
+
+def galerie_oiseaux(request):
+    """ Galerie oiseaux. """
+    return render(
+        request,
+        'ornitho/galerie-oiseaux.html',
+        {},
+    )
+
+
+def galerie_mammiferes(request):
+    """ Galerie mammifères. """
+    return render(
+        request,
+        'ornitho/galerie-mammiferes.html',
+        {},
+    )
+
+
+def galerie_insectes(request):
+    """ Galerie insectes. """
+    return render(
+        request,
+        'ornitho/galerie-insectes.html',
+        {},
+    )
+
+
+def galerie_reptiles_amphibiens(request):
+    """ Galerie reptiles et amphibiens. """
+    return render(
+        request,
+        'ornitho/galerie-reptiles-amphibiens.html',
+        {},
+    )
+
+
+def galerie_plantes(request):
+    """ Galerie plantes. """
+    return render(
+        request,
+        'ornitho/galerie-plantes.html',
+        {},
+    )
+
+
+def galerie_flavigny(request):
+    """ Galerie Flavigny. """
+    return render(
+        request,
+        'ornitho/galerie-flavigny.html',
         {},
     )
