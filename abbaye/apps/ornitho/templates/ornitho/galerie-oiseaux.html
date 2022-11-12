@@ -1,0 +1,144 @@
+{% extends 'ornitho/main_ornitho.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{% url 'ornitho:home' %}">Ornitho</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'ornitho:galerie' %}">Galeries</a></li>
+    <li class="breadcrumb-item active">Oiseaux</li>
+{% endblock breadcrumbs %}
+
+{% block article %}
+    <div id="bienvenue" style="height: auto; margin: 15px 0px 0px 0px; text-align: center;">Galerie des paysages</div>
+    <h4 style="color: maroon; margin-top: 0px; text-align: center;">Vous pouvez me visualiser en mode diaporama et/ou en plein écran.</h4>
+    <h5 id="loading" style="text-align: center;">Images en cours de chargement. Veuillez patienter…</h5>
+
+    <div class="galleria">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/tourterelle_rosier.jpg" alt="Jeune tourterelle turque dans un rosier">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/tourterelles_bois.jpg" alt="Tourterelles des bois">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/verdier.jpg" alt="Verdier d'Europe">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/aigrette_1.jpg" alt="Grande aigrette">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/aigrette_2.jpg" alt="Grande aigrette">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/aigrette_3.jpg" alt="Grande aigrette">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/aigrette_4.jpg" alt="Grande aigrette">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/alouette.jpg" alt="Alouette">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/rougequeue_1.jpg" alt="Rougequeue">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/rougequeue_3.jpg" alt="Rougequeue">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/sanderling.jpg" alt="Bécasseau sanderling (Sables-d'Olonne, Vendée)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/becassine_1.jpg" alt="Bécassine des marais">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/becassine_2.jpg" alt="Bécassine des marais">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/becassine_3.jpg" alt="Bécassine des marais">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/bergeronnette_grise.jpg" alt="Bergeronnette grise">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/bergeronnette_grise_juv.jpg" alt="Jeune bergeronnette grise">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/bergeronnette_printanniere.jpg" alt="Bergeronnette printannière dans un champ de colza">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/busard.jpg" alt="Busard femelle">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/busard_saint_martin_1.jpg" alt="Busard saint-martin mâle">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/busard_saint_martin_2.jpg" alt="Busard saint-martin femelle">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/buse_1.jpg" alt="Buse">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/buse_2.jpg" alt="Buse">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/buse_3.jpg" alt="Buse">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/buse_4.jpg" alt="Buse">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/buse_jeune.jpg" alt="Jeune buse">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/buses_parade.jpg" alt="Couple de buses (vol de parade)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/cassenoix.jpg" alt="Cassenoix moucheté (Haute-Savoie)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/charbo_juvenile.jpg" alt="Jeune mésange charbonnière">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/chardo.jpg" alt="Chardonneret">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/cheveche_aire_jeu.jpg" alt="La chouette chevêche vit volontiers près des habitations">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/cincle.jpg" alt="Cincle plongeur (« Merle d'eau »)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/crecerelle_1.jpg" alt="Faucon crécerelle">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/crecerelle_2.jpg" alt="Faucon crécerelle">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/crecerelle_3.jpg" alt="Faucon crécerelle">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/crecerelle_choucas.jpg" alt="Faucon crécerelle et Choucas des tours">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/crecerelle.jpg" alt="Faucon crécerelle">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/cygne.jpg" alt="Cygne">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/garzette_et_martin_pecheur.jpg" alt="Aigrette garzette et martin-pêcheur">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/garzette.jpg" alt="Aigrette garzette">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/gd_1.jpg" alt="Hibou grand-duc">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/gd_2.jpg" alt="Hibou grand-duc">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/goelands.jpg" alt="Goélands (Sables-d'Olonne, Vendée)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/gravelot_1.jpg" alt="Petit gravelot">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/gravelot_2.jpg" alt="Petit gravelot">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/grebe.jpg" alt="Le grèbe huppé, un véritable sous-marin miniature">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/grisette.jpg" alt="Fauvette grisette">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/guepier_1.jpg" alt="Guêpier d'Europe">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/guepier_2.jpg" alt="Guêpier d'Europe">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/guignette.jpg" alt="Chevalier guignette">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/hdm_1.jpg" alt="Hibou des marais">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/hdm_2.jpg" alt="Comme la chevêche, le hibou des marais est très à l'aise en plein jour">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/heron_1.jpg" alt="Héron cendré">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/heron_2.jpg" alt="Héron cendré">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/heron_laumes.jpg" alt="Héron cendré">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/hirondelles_nourrissage.jpg" alt="Hirondelle nourrissant ses petits tout juste sortis du nid">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/hobereau.jpg" alt="Faucon hobereau">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/hobereau_seine_marne.jpg" alt="Le faucon hobereau mange ses proies (généralement des libellules) en plein vol (Seine-et-Marne)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/hulotte.jpg" alt="Chouette hulotte dans un tilleul">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/effraie.jpg" alt="Chouette effraie">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/etourneau.jpg" alt="Étourneau sansonnet">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/faisan.jpg" alt="Faisan">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/draine.jpg" alt="Cette grive draine va nourrir ses petits, sinon elle aurait avalé la cerise depuis longtemps !">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/faisans_couple.jpg" alt="Couple de faisans">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/pic_epeiche.jpg" alt="Pic épeiche">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/milan_noir.jpg" alt="Milan noir">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/milan_royal.jpg" alt="Milan royal">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/mouette_rieuse.jpg" alt="Mouette rieuse (Sables d'Olonne, Vendée)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/moyen_duc_adulte.jpg" alt="Hibou moyen-duc">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/moyen_duc_jeunes.jpg" alt="Hibou moyen-duc (jeunes)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/pelerin.jpg" alt="Faucon pèlerin">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/pic_epeichette.jpg" alt="Pic épeichette dans un marronnier">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/remiz.jpg" alt="Rémiz penduline dans les roseaux">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/sterne.jpg" alt="Sterne pierregarin (Seine-et-Marne)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/tournepierre.jpg" alt="Tournepierre à collier">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/tournepierres.jpg" alt="Tournepierres">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/servoz_vautour.jpg" alt="Vautour fauve planant devant le Mont-Blanc du Tacul (Haute-Savoie)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/martin_pecheur_laumes.jpg" alt="Martin-pêcheur">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/martin_pecheur_saint_agnan.jpg" alt="Il est rare que les martins-pêcheurs survivent à un hiver rigoureux">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/limicoles_1.jpg" alt="Groupe de limicoles : 1 grand gravelot, 4 bécasseaux variables, 5 bécasseaux minutes">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/limicoles_2.jpg" alt="Groupe de limicoles : 2 grands gravelots, 8 bécasseaux variables, 4 bécasseaux minutes">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/litorne.jpg" alt="Grive litorne">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/malq.jpg" alt="Mésange à longue queue">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/mesange_bleue_1.jpg" alt="Mésange bleue">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/mesange_bleue_2.jpg" alt="Mésange bleue">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/mesange_bleue_prunus.jpg" alt="Mésange bleue dans un prunus après la pluie">
+    </div>
+
+    <h6 class="text-center mt-5">Powered by <a href="https://galleriajs.github.io">Galleria</a></h6>
+{% endblock article %}
+
+{% block javascript %}
+    {{ block.super }}
+
+    <script src="{% get_static_prefix %}ornitho/js/galleria/galleria.min.js"></script>
+
+    <script>
+        (function() {
+            Galleria.loadTheme('/statics/ornitho/js/galleria/themes/azur/galleria.azur.min.js');
+            Galleria.run('.galleria', {
+                carouselSpeed: 50,
+                fullscreenTransition: 'fade',
+                imageCrop: false,
+                transition: 'fade',
+                transitionSpeed: 1000,
+            });
+        }());
+    </script>
+
+    <script>
+        var imgs = document.images,
+        len = imgs.length,
+        counter = 0;
+
+        [].forEach.call( imgs, function( img ) {
+            if(img.complete)
+            incrementCounter();
+            else
+            img.addEventListener( 'load', incrementCounter, false );
+        } );
+
+        function incrementCounter() {
+            counter++;
+            if ( counter === len ) {
+                $("#loading").css("display", "none");
+            }
+        }
+    </script>
+{% endblock javascript %}

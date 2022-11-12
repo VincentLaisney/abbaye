@@ -1,0 +1,158 @@
+header {
+    #bandeau {
+        width: 1200px;
+        height: 227px;
+
+        #carrousel {
+            img {
+                border-radius: 5px;
+                position: absolute;
+            }
+        }
+
+        #texte_bandeau {
+            color: white;
+            height: 200px;
+            width: 500px;
+
+            h1 {
+                font-family: Allura;
+                font-size: 64px;
+                margin: 20px 0px 0px 20px;
+                padding-top: 0px 0px 0px 20px;
+                text-shadow: 4px 4px 6px white;
+                z-index: 1;
+
+                a {
+                    color: green;
+                    font-size: 2em;
+                    text-decoration: none;
+                }
+            }
+
+            h2 {
+                font-family: sans-serif;
+                font-size: 1em;
+                margin: -30px 0px 20px 0px;
+                padding: 0px 0px 0px 150px;
+                z-index: 1;
+            }
+
+        }
+    }
+}
+
+article {
+    border: 1px white solid;
+    border-radius: 7px 7px 7px 7px;
+    flex: 1;
+    font-family: Futura, Arial;
+    margin: 0px;
+    padding-bottom: 50px;
+    width: auto;
+
+    // Home page:
+    #last_update {
+        font-family: sans-serif;
+    }
+
+    #bienvenue {
+        color: green;
+        font-family: Allura, TR Lucida Handwriting, Verdana;
+        font-size: 4em;
+    }
+
+    #presentation {
+        color: rgb(180, 10, 10);
+        font-family: Futura, Arial;
+        font-size: 14pt;
+        text-align: center;
+
+        p {
+            margin-bottom: 80px;
+            color: purple;
+        }
+
+        img {
+            border: 2px solid white;
+            height: 300px;
+            margin-top: 30px;
+            margin-bottom: 0px;
+        }
+    }
+
+    // List pages:
+    table {
+        thead {
+            color: red;
+            font-weight: bold;
+        }
+
+        tbody {
+            font-size: 0.9em;
+            text-align: center;
+        }
+
+        td {
+            background-color: rgb(230, 230, 230);
+        }
+
+        .td-name {
+            color: purple;
+            font-size: 1.1em;
+            font-weight: bold;
+        }
+    }
+
+    #overlay {
+        align-items: center;
+        background-color: rgba(0, 0, 0, 0.9);
+        color: white;
+        display: none;
+        flex-direction: column;
+        justify-content: flex-start;
+        height: 100hv;
+        left: 0;
+        position: fixed;
+        top: 0;
+        width: 100%;
+        z-index: 2;
+    }
+
+    #overlay img {
+        margin: auto;
+    }
+
+    // Galerie home page:
+    #links_to_galerie {
+        margin: 0 150px 0 150px;
+    }
+
+    .block_link_to_galerie {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .block_link_to_galerie a {
+        margin-bottom: 10px;
+    }
+
+    .block_link_to_galerie img {
+        border: 1px solid grey;
+        border-radius: 4px;
+        margin: 50px 50px 0px 50px;
+        width: 100px;
+    }
+
+    // Galeries:
+    .galleria {
+        background: black;
+        height: 700px;
+        width: 1206px;
+    }
+
+    .galleria-info-description {
+        margin-top: 10px !important;
+    }
+}

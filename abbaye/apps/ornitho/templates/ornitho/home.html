@@ -1,0 +1,34 @@
+{% extends 'ornitho/main_ornitho.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Ornitho</li>
+{% endblock breadcrumbs %}
+
+{% block article %}
+    <div id="last_update" class="d-flex justify-content-end">
+        <p><small>Dernière mise à jour le 6 juin 2021</small></p>
+    </div>
+
+    <div id="bienvenue" class="text-center">
+        Bienvenue sur le site naturaliste</br> des moines de Flavigny !
+    </div>
+
+    <div id="presentation" class="d-flex flex-column align-items-center">
+        <div>Sur "Ornitho - Voir le parc autrement", vous pourrez :</div>
+
+        <img src={% static "ornitho/images/jumelles.jpg" %}/>
+        <p>… apprendre à identifier les animaux du parc et d'ailleurs.</p>
+
+        <img src={% static "ornitho/images/fantome.jpg" %}/>
+        <p>… parcourir une splendide galerie de photos</br> gracieusement mise à notre disposition par le Fr. Romain<br/>(ici en posture d'affût).</p>
+
+        <img src={% static "ornitho/images/moine.jpg" %}/>
+        <p>… louer le Créateur pour les beautés de la création.</p>
+
+        <img src={% static "ornitho/images/chapelet.jpg" %}/>
+        <p>Avec "Ornitho - Voir le parc autrement",</br>
+            vous ne direz plus le chapelet comme avant !</p>
+    </div>
+{% endblock article %}

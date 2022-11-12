@@ -1,0 +1,71 @@
+{% extends 'ornitho/main_ornitho.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{% url 'ornitho:home' %}">Ornitho</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'ornitho:galerie' %}">Galeries</a></li>
+    <li class="breadcrumb-item active">Plantes</li>
+{% endblock breadcrumbs %}
+
+{% block article %}
+    <div id="bienvenue" style="height: auto; margin: 15px 0px 0px 0px; text-align: center;">Galerie des paysages</div>
+    <h4 style="color: maroon; margin-top: 0px; text-align: center;">Vous pouvez me visualiser en mode diaporama et/ou en plein écran.</h4>
+    <h5 id="loading" style="text-align: center;">Images en cours de chargement. Veuillez patienter…</h5>
+
+    <div class="galleria">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/buis_neige.jpg" alt="Buis sous la neige">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/bourgeon_printemps.jpg" alt="Bourgeon de marronnier">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/tournesol.jpg" alt="Tournesol">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/amanite.jpg" alt="Amanite tue-mouches">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/coucou.jpg" alt="Primevères">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/geranium.jpg" alt="Géranium sauvage (« Herbe à Robert »)">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/millepertuis.jpg" alt="Millepertuis">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/stellaires_holostees.jpg" alt="Stellaire holostée">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/feuilles.jpg" alt="Feuilles dans la lumière">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/fin_hiver.jpg" alt="L'hiver touche à sa fin">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/fleurs.jpg" alt="Fleurs dans la lumière">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/colchique.jpg" alt="Colchique (Haute-Savoie)">
+    </div>
+
+    <h6 class="text-center mt-5">Powered by <a href="https://galleriajs.github.io">Galleria</a></h6>
+{% endblock article %}
+
+{% block javascript %}
+    {{ block.super }}
+
+    <script src="{% get_static_prefix %}ornitho/js/galleria/galleria.min.js"></script>
+
+    <script>
+        (function() {
+            Galleria.loadTheme('/statics/ornitho/js/galleria/themes/azur/galleria.azur.min.js');
+            Galleria.run('.galleria', {
+                carouselSpeed: 50,
+                fullscreenTransition: 'fade',
+                imageCrop: false,
+                transition: 'fade',
+                transitionSpeed: 1000,
+            });
+        }());
+    </script>
+
+    <script>
+        var imgs = document.images,
+        len = imgs.length,
+        counter = 0;
+
+        [].forEach.call( imgs, function( img ) {
+            if(img.complete)
+            incrementCounter();
+            else
+            img.addEventListener( 'load', incrementCounter, false );
+        } );
+
+        function incrementCounter() {
+            counter++;
+            if ( counter === len ) {
+                $("#loading").css("display", "none");
+            }
+        }
+    </script>
+{% endblock javascript %}

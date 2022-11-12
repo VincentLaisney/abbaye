@@ -1,0 +1,49 @@
+{% extends 'ornitho/main_ornitho.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{% url 'ornitho:home' %}">Ornitho</a></li>
+    <li class="breadcrumb-item active">Galeries</li>
+{% endblock breadcrumbs %}
+
+{% block article %}
+    <div id="bienvenue" style="height: auto; margin: 15px 0px 0px 0px; text-align: center;">Bienvenue sur la galerie Ornitho !</div>
+
+    <div id="links_to_galerie" class="d-flex justify-content-around flex-wrap">
+        <div class="block_link_to_galerie">
+            <div class="img"><img src="{% get_static_prefix %}ornitho/images/vignettes/links_to_galeries/paysages.jpg" alt="paysages"></div>
+            <a href={% url 'ornitho:galerie-paysages' %}>Paysages</a>
+        </div>
+
+        <div class="block_link_to_galerie">
+            <div class="img"><img src="{% get_static_prefix %}ornitho/images/vignettes/links_to_galeries/oiseaux.jpg" alt=""></div>
+            <a href={% url 'ornitho:galerie-oiseaux' %}>Oiseaux</a>
+        </div>
+
+        <div class="block_link_to_galerie">
+            <div class="img"><img src="{% get_static_prefix %}ornitho/images/vignettes/links_to_galeries/mammiferes.jpg" alt=""></div>
+            <a href={% url 'ornitho:galerie-mammiferes' %}>Mammifères</a>
+        </div>
+
+        <div class="block_link_to_galerie">
+            <div class="img"><img src="{% get_static_prefix %}ornitho/images/vignettes/links_to_galeries/reptiles_amphibiens.jpg" alt=""></div>
+            <a href={% url 'ornitho:galerie-reptiles-amphibiens' %}>Reptiles et amphibiens</a>
+        </div>
+
+        <div class="block_link_to_galerie">
+            <div class="img"><img src="{% get_static_prefix %}ornitho/images/vignettes/links_to_galeries/insectes.jpg" alt=""></div>
+            <a href={% url 'ornitho:galerie-insectes' %}>Insectes</a>
+        </div>
+
+        <div class="block_link_to_galerie">
+            <div class="img"><img src="{% get_static_prefix %}ornitho/images/vignettes/links_to_galeries/plantes.jpg" alt=""></div>
+            <a href={% url 'ornitho:galerie-plantes' %}>Plantes</a>
+        </div>
+
+        <div class="block_link_to_galerie">
+            <div class="img"><img src="{% get_static_prefix %}ornitho/images/vignettes/links_to_galeries/flavigny.jpg" alt=""></div>
+            <a href={% url 'ornitho:galerie-flavigny' %}>Flavigny</a>
+        </div>
+    </div>
+{% endblock article %}
