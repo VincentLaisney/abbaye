@@ -1,107 +1,77 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset="utf-8" />
-        <link rel="icon" sizes="200x200" href="images/ornitho.png" />
-        <link rel="stylesheet" href="styles.css" />
-        <script src="scripts/jquery-3.3.1.min.js"></script>
-        <script src="scripts/galleria/galleria.min.js"></script>
-        <title>Ornitho - Voir le parc autrement</title>
-    </head>
-    <body>
-        <div id="bloc_page">
-            <header>
-                <div id="bandeau">
-                    <div id="carrousel">
-                        <img src="bandeaux/crecerelle.jpg"/>
-                        <img src="bandeaux/gd.jpg"/>
-                        <img src="bandeaux/grues.jpg"/>
-                        <img src="bandeaux/anax.jpg"/>
-                        <img src="bandeaux/milan_royal.jpg"/>
-                        <img src="bandeaux/oedipode.jpg"/>
-                    </div>
-                    <div id="texte_bandeau">
-                        <h1><a href="index.html">Ornitho</a></h1>
-                        <h2>Voir le parc autrement…</h2>
-                    </div>
-                </div>
-            </header>
-            <section>
-                <nav>
-                    <ul>
-                        <li><a  href="index.html">ACCUEIL</a></li>
-                        <li><a  href="oiseaux.html">OISEAUX</a></li>
-                        <li><a  href="mammiferes.html">MAMMIFÈRES</a></li>
-                        <li><a  href="reptiles.html">REPTILES</a></li>
-                        <li><a  href="amphibiens.html">AMPHIBIENS</a></li>
-                        <li><a  href="libellules.html">LIBELLULES</a></li>
-                        <li><a  href="papillons.html">PAPILLONS</a></li>
-                        <li><a  href="sauterelles.html">SAUTERELLES</a></li>
-                        <li><a class="current_link" href="galerie.html">GALERIE</a></li>
-                    </ul>
-                </nav>
+{% extends 'ornitho/main_ornitho.html' %}
 
-                <div id="bienvenue" style="height: auto; margin: 15px 0px 0px 0px; text-align: center;">Bienvenue sur la galerie Ornitho !</div>
-                <h4 style="color: maroon; margin-top: 0px; text-align: center;">Vous pouvez me visualiser en mode diaporama et/ou en plein écran.</h4>
-                <h5 id="loading" style="text-align: center;">Images en cours de chargement. Veuillez patienter…</h5>
+{% load static %}
 
-                <div class="galleria">
-                    <img src="images/galerie/flavigny_automne.jpg" alt="Flavigny en automne">
-                    <img src="images/galerie/charmille_automne.jpg" alt="La charmille">
-                    <img src="images/galerie/flavigny_hiver.jpg" alt="Flavigny en hiver">
-                    <img src="images/galerie/flavigny_drone.jpg" alt="Flavigny vu de drône">
-                    <img src="images/galerie/charmille.jpg" alt="La charmille">
-                    <img src="images/galerie/lever_soleil_brume_sapin.jpg" alt="Lever de soleil à travers les sapins">
-                    <img src="images/galerie/iris.jpg" alt="Les iris du parc">
-                    <img src="images/galerie/stat_crux.jpg" alt="Stat crux dum volvitur orbis">
-                    <img src="images/galerie/ange_gardien.jpg" alt="Ange gardien">
-                    <img src="images/galerie/ange_gardien_sepia.jpg" alt="Ange gardien sepia">
-                    <img src="images/galerie/balustrade.jpg" alt="Le parc">
-                    <img src="images/galerie/chateau_cour_calvaire.jpg" alt="Le château">
-                    <img src="images/galerie/chateau_cour_sacre_coeur.jpg" alt="Le château">
-                    <img src="images/galerie/tourterelle_sacre_coeur.jpg" alt="Tourterelle turque dans les mains du Sacré-Cœur">
-                    <img src="images/galerie/moine.jpg" alt="Moine en prière">
-                    <img src="images/galerie/vitraux.jpg" alt="Vitraux du soir">
-                    <img src="images/galerie/messe.jpg" alt="La sainte messe. Ce phénomène lumineux ne se produit que deux fois par an : autour du 10 mai et du 10 août.">
-                    <img src="images/galerie/marie.jpg" alt="Notre-Dame du Sacré-Cœur">
-                </div>
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href="{% url 'ornitho:home' %}">Ornitho</a></li>
+    <li class="breadcrumb-item"><a href="{% url 'ornitho:galerie' %}">Galeries</a></li>
+    <li class="breadcrumb-item active">Flavigny</li>
+{% endblock breadcrumbs %}
 
-                <script>
-                    (function() {
-                        Galleria.loadTheme('scripts/galleria/themes/azur/galleria.azur.min.js');
-                        Galleria.run('.galleria', {
-                            carouselSpeed: 50,
-                            fullscreenTransition: 'fade',
-                            imageCrop: false,
-                            transition: 'fade',
-                            transitionSpeed: 1000,
-                        });
-                    }());
-                </script>
+{% block article %}
+    <div id="bienvenue" style="height: auto; margin: 15px 0px 0px 0px; text-align: center;">Galerie des paysages</div>
+    <h4 style="color: maroon; margin-top: 0px; text-align: center;">Vous pouvez me visualiser en mode diaporama et/ou en plein écran.</h4>
+    <h5 id="loading" style="text-align: center;">Images en cours de chargement. Veuillez patienter…</h5>
 
-                <script>
-                    var imgs = document.images,
-                    len = imgs.length,
-                    counter = 0;
+    <div class="galleria">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/flavigny_automne.jpg" alt="Flavigny en automne">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/charmille_automne.jpg" alt="La charmille">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/flavigny_hiver.jpg" alt="Flavigny en hiver">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/flavigny_drone.jpg" alt="Flavigny vu de drône">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/charmille.jpg" alt="La charmille">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/lever_soleil_brume_sapin.jpg" alt="Lever de soleil à travers les sapins">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/iris.jpg" alt="Les iris du parc">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/stat_crux.jpg" alt="Stat crux dum volvitur orbis">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/ange_gardien.jpg" alt="Ange gardien">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/ange_gardien_sepia.jpg" alt="Ange gardien sepia">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/balustrade.jpg" alt="Le parc">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/chateau_cour_calvaire.jpg" alt="Le château">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/chateau_cour_sacre_coeur.jpg" alt="Le château">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/tourterelle_sacre_coeur.jpg" alt="Tourterelle turque dans les mains du Sacré-Cœur">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/moine.jpg" alt="Moine en prière">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/vitraux.jpg" alt="Vitraux du soir">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/messe.jpg" alt="La sainte messe. Ce phénomène lumineux ne se produit que deux fois par an : autour du 10 mai et du 10 août.">
+        <img src="{% get_static_prefix %}ornitho/images/galerie/marie.jpg" alt="Notre-Dame du Sacré-Cœur">
+    </div>
 
-                    [].forEach.call( imgs, function( img ) {
-                        if(img.complete)
-                        incrementCounter();
-                        else
-                        img.addEventListener( 'load', incrementCounter, false );
-                    } );
+    <h6 class="text-center mt-5">Powered by <a href="https://galleriajs.github.io">Galleria</a></h6>
+{% endblock article %}
 
-                    function incrementCounter() {
-                        counter++;
-                        if ( counter === len ) {
-                            $("#loading").css("display", "none");
-                        }
-                    }
-                </script>
+{% block javascript %}
+    {{ block.super }}
 
-                <h6 style="text-align: center;">Powered by <a href="https://galleriajs.github.io">Galleria</a></h6>
-            </section>
-        </div>
-    </body>
-</html>
+    <script src="{% get_static_prefix %}ornitho/js/galleria/galleria.min.js"></script>
 
+    <script>
+        (function() {
+            Galleria.loadTheme('/statics/ornitho/js/galleria/themes/azur/galleria.azur.min.js');
+            Galleria.run('.galleria', {
+                carouselSpeed: 50,
+                fullscreenTransition: 'fade',
+                imageCrop: false,
+                transition: 'fade',
+                transitionSpeed: 1000,
+            });
+        }());
+    </script>
+
+    <script>
+        var imgs = document.images,
+        len = imgs.length,
+        counter = 0;
+
+        [].forEach.call( imgs, function( img ) {
+            if(img.complete)
+            incrementCounter();
+            else
+            img.addEventListener( 'load', incrementCounter, false );
+        } );
+
+        function incrementCounter() {
+            counter++;
+            if ( counter === len ) {
+                $("#loading").css("display", "none");
+            }
+        }
+    </script>
+{% endblock javascript %}
