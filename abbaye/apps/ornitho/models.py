@@ -42,7 +42,7 @@ class Item(models.Model):
     def jpg_exists(self):
         """ Tests if this item has a jpg. """
         sound = os.path.join(
-            os.path.join(settings.BASE_DIR, 'static_files'),
+            os.path.join(settings.BASE_DIR, 'statics'),
             'ornitho/images/',
             self.shortcut
         ) + '.jpg'
@@ -51,7 +51,7 @@ class Item(models.Model):
     def mp3_exists(self):
         """ Tests if this item has an mp3. """
         sound = os.path.join(
-            os.path.join(settings.BASE_DIR, 'static_files'),
+            os.path.join(settings.BASE_DIR, 'statics'),
             'ornitho/sounds/',
             self.shortcut
         ) + '.mp3'
