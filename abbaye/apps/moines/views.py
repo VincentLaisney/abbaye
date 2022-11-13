@@ -1,13 +1,18 @@
 """ apps/moines/views.py """
 from django.shortcuts import render
 
+from .models import Monk
+
 
 def home(request):
     """ Home page of Moines. """
+    monks = Monk.objects.all().order_by('entry', 'rank')
     return render(
         request,
         'moines/home.html',
-        {},
+        {
+            'monks': monks,
+        },
     )
 
 
