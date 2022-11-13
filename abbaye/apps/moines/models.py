@@ -30,9 +30,6 @@ class Monk(models.Model):
     death = models.DateField(
         null=True,
     )
-    email = models.EmailField(
-        null=True,
-    )
     active = models.BooleanField(
         default=True,
     )
