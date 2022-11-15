@@ -18,7 +18,6 @@
             <th class="col-1">Prof. temp.</th>
             <th class="col-1">Prof. perp.</th>
             <th class="col-1">Ordination</th>
-            <th class="col-1">Décès</th>
         </tr>
 
         {% for monk in monks %}
@@ -43,11 +42,6 @@
                 {% endif %}
                 {% if monk.priest %}
                     <td>{{ monk.priest_french }}</td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if monk.prof_temp %}
-                    <td>{{ monk.death_french }}</td>
                 {% else %}
                     <td></td>
                 {% endif %}
