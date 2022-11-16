@@ -30,8 +30,17 @@ class Monk(models.Model):
     death = models.DateField(
         null=True,
     )
-    active = models.BooleanField(
+    email = models.EmailField(
+        null=True,
+    )
+    additional_email = models.EmailField(
+        null=True,
+    )
+    is_active = models.BooleanField(
         default=True,
+    )
+    absences_recipient = models.BooleanField(
+        default=False,
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
