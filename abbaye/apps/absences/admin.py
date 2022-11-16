@@ -1,3 +1,6 @@
-from django.contrib import admin
+""" apps/absences/admin.py """
 
-# Register your models here.
+from django.contrib import admin
+from .models import Ticket
+
+admin.site.register(Ticket)

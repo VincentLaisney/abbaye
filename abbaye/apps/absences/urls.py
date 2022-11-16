@@ -7,9 +7,7 @@ from . import views
 app_name = 'absences'
 urlpatterns = [
     path('', views.home, name='home'),
-    path('list/', views.list, name='list'),
-    path('create/', views.create, name='create'),
-    path('<int:pk>/', views.details, name='details'),
-    path('<int:pk>/update/', views.update, name='update'),
-    path('<int:pk>/delete/', views.delete, name='delete'),
+    path('create/<str:action>/', views.create, name='create'),
+    path('success/', views.success, name='success'),
+    path('failure/', views.failure, name='failure'),
 ]
