@@ -1,0 +1,93 @@
+@green: rgb(0, 100, 0);
+@grey: rgb(150, 150, 150);
+@orange: rgb(255, 145, 0);
+@red: rgb(216, 0, 0);
+
+
+a:hover {
+    text-decoration: none;
+}
+
+.green {
+    color: @green;
+}
+
+.grey {
+    color: @grey;
+}
+
+.orange {
+    color: @orange;
+}
+
+.red {
+    color: @red;
+}
+
+body {
+    background-color: whitesmoke;
+
+    select {
+        height: 35px;
+    }
+
+    // Nav:
+    nav {
+
+        a,
+        a:hover {
+            color: whitesmoke;
+        }
+
+        #logo {
+            #title {
+                color: @orange;
+                font-family: LucidaHW;
+                font-size: 2.2em;
+            }
+
+            #logo {
+                font-size: 1.5em;
+            }
+        }
+    }
+
+    // Content:
+    #content {
+
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            color: @green;
+        }
+
+        h1 {
+            font-family: 'LucidaHW',
+        }
+
+        .datepicker,
+        .timepicker {
+            width: 120px;
+        }
+
+        #id_monks,
+        #id_additional_recipients {
+            column-width: 15vw;
+            font-size: 0.95em;
+        }
+
+        .recipients {
+            column-width: 30vw;
+            font-size: 0.95em;
+        }
+
+        #home_buttons {
+            .btn-primary {
+                width: 300px;
+            }
+        }
+    }
+}
