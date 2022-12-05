@@ -57,30 +57,27 @@ def create(request, **kwargs):
             form = TicketFormGo(data)
         elif action == 'back':
             form = TicketFormBack(data)
-        print(data)
         additional_recipients = dict(data)['additional_recipients'] \
             if 'additional_recipients' in dict(data).keys() else []
         if form.is_valid():
             form.save()
-            success = send_email(
+            if send_email(
                 action,
                 data,
                 dict(data)['monks'],
                 mandatory_recipients,
                 additional_recipients,
+            ):
+                return HttpResponseRedirect(
+                    reverse(
+                        'absences:success',
+                    )
+                )
+            return HttpResponseRedirect(
+                reverse(
+                    'absences:failure',
+                )
             )
-            if success:
-                return HttpResponseRedirect(
-                    reverse(
-                        'main:success',
-                    )
-                )
-            else:
-                return HttpResponseRedirect(
-                    reverse(
-                        'main:failure',
-                    )
-                )
 
     else:
         if action == 'back':
