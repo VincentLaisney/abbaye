@@ -1,0 +1,181 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'absences:home' %}>Absences</a></li>
+    <li class="breadcrumb-item active">
+        {% if action == 'go' %}
+            Billet d'absence
+        {% elif action == 'back' %}
+            Billet de retour
+        {% endif %}
+    </li>
+{% endblock breadcrumbs %}
+
+{% block css %}
+    <link rel="stylesheet/less" href={% static 'absences/css/absences.less' %}>
+{% endblock css %}
+
+{% block content %}
+    <form method="post" novalidate class="w-75">
+        {% csrf_token %}
+
+        <h1 class="text-center mt-5">
+            {% if action == 'go' %}
+                Billet d'absence
+            {% elif action == 'back' %}
+                Billet de retour
+            {% endif %}
+        </h1>
+
+        <div class="w-100">
+            <!-- MONKS -->
+            <div>
+                <h4 class="mt-5">
+                    {% if action == 'go' %}
+                        Cochez les moines qui vont s'absenter :
+                    {% elif action == 'back' %}
+                        Cochez les moines qui vont revenir :
+                    {% endif %}
+                </h4>
+                {{ form.monks }}
+                {% for error in form.monks.errors %}
+                    <div class="invalid-feedback font-weight-bold red d-block">
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- DESTINATION -->
+            {% if action == 'go' %}
+                <div>
+                    <h4 class="mt-5">Destination (facultatif) :</h4>
+                    {{ form.destination }}
+                </div>
+            {% endif %}
+
+            <!-- GO AND BACK -->
+            {% if action == 'go' %}
+                <div id="go_and_back" class="d-flex justify-content-between mt-5">
+            {% elif action == 'back' %}
+                <div id="go_and_back" class="d-flex justify-content-center mt-5">
+            {% endif %}
+                {% if action == 'go' %}
+                    <!-- GO -->
+                    <div id="go_block" class="col-6 m-2 border rounded p-2">
+                        <h2 class="text-center">DÉPART</h2>
+                        <div class="d-flex mb-3">
+                            <label class="green font-weight-bold mt-2">Date :</label>
+                            <div class="col-4">
+                                {{ form.go_date }}
+                                {% for error in form.go_date.errors %}
+                                    <div class="invalid-feedback font-weight-bold red d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            </div>
+                            {{ form.go_moment }}
+                        </div>
+            
+                        <div class="ml-3">
+                            {{ form.servants }}
+                            <label for="id_servants" class="green font-weight-bold mr-2">Repas avec les serveurs</label>
+                            {{ form.picnic }}
+                            <label for="id_picnic" class="green font-weight-bold" title="Cochez cette case, même si vous comptez préparer vous même votre casse-croûte.">Casse-croûte</label>
+                        </div>
+
+                        <div class="mb-1">
+                            <label class="green font-weight-bold mt-2">Moyen de transport :</label>
+                            {{ form.go_by }}
+                        </div>
+            
+                        <div id="group_train_go" class="d-flex">
+                            <label class="green font-weight-bold mt-2 mr-2">Gare :</label>
+                            {{ form.go_station }}
+                            <label class="green font-weight-bold mt-2 ml-2">à :</label>
+                            <div class="col-4">{{ form.go_hour }}</div>
+                        </div>
+                    </div>
+                {% endif %}
+    
+                <!-- BACK -->
+                <div id="back_block" class="col-6 m-2 border rounded p-2">
+                    <h2 class="text-center">RETOUR</h2>
+                    <div class="d-flex mb-3">
+                        <label class="green font-weight-bold mt-2">Date :</label>
+                        <div class="col-4">
+                            {{ form.back_date }}
+                            {% for error in form.back_date.errors %}
+                                <div class="invalid-feedback font-weight-bold red d-block">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        </div>
+                        {{ form.back_moment }}
+                    </div>
+
+                    <div class="ml-3">
+                        {{ form.keep_hot }}
+                        <label for="id_keep_hot" class="green font-weight-bold mr-2">Garder du chaud</label>
+                    </div>
+
+                    <div class="mb-1">
+                        <label class="green font-weight-bold mt-2">Moyen de transport :</label>
+                        {{ form.back_by }}
+                    </div>
+        
+                    <div id="group_train_back" class="d-flex">
+                        <label class="green font-weight-bold mt-2 mr-2">Gare :</label>
+                        {{ form.back_station }}
+                        <label class="green font-weight-bold mt-2 ml-2">à :</label>
+                        <div class="col-4">{{ form.back_hour }}</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FORME ORDINAIRE -->
+            {% if action == 'go' %}
+                <div>
+                    {{ form.ordinary_form }}
+                    <label for="id_ordinary_form" class="green font-weight-bold mr-2 mt-5">Forme ordinaire (pour les prêtres)</label>
+                </div>
+            {% endif %}
+
+            <!-- REMARQUES -->
+            <div>
+                <h4 class="mt-5">Commentaire :</h4>
+                {{ form.commentary }}
+            </div>
+
+            <!-- DESTINATAIRES OBLIGATOIRES -->
+            <h4 class="mt-5">Ce message sera envoyé <i>ex officio</i> aux moines suivants :</h4>
+            <div class="recipients">
+                {% for recipient in mandatory_recipients %}
+                    <b>{{ recipient.name }}</b> ({{ recipient.email }})<br>
+                {% endfor %}
+            </div>
+
+            <!-- DESTINATAIRES SUPPLÉMENTAIRES -->
+            <div>
+                <h4 class="mt-5 mb-0">Destinataires supplémentaires :</h4>
+                <div class="d-flex">
+                    <small class="grey mt-0 mr-auto">{{ form.additional_recipients.help_text }}</small>
+                    <input type="checkbox" id="checkbox_all_additional_recipients" class="my-0 ml-auto"></input>
+                    <label for="checkbox_all_additional_recipients" class="my-0 ml-1" style="font-size:0.9em;">Cocher tous les destinataires supplémentaires</input>
+                </div>
+                {{ form.additional_recipients }}
+            </div>
+
+            <!-- VALIDATION -->
+            <div class="w-100 d-flex flex-column align-items-center">
+                <button type="submit" id="btn_validate_billet" class="btn btn-primary mt-5">Envoyer le message maintenant</button>
+                <p class="red font-weight-bold mt-3 mb-5">Attention ! Le message sera envoyé directement. Il n'y a pas de fenêtre de vérification.</p>
+            </div>
+        </div>
+    </form>
+{% endblock content %}
+
+{% block javascript %}
+    <script src="{% static 'absences/js/absences.js' %}"></script>
+{% endblock javascript %}
