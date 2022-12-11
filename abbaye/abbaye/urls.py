@@ -11,6 +11,7 @@ urlpatterns = [
     path('agenda/', include('apps.agenda.urls')),
     path('editor/', include('apps.editor.urls')),
     path('hotellerie/', include('apps.hotellerie.urls')),
+    path('imprimerie/', include('apps.imprimerie.urls')),
     path('infirmerie/', include('apps.infirmerie.urls')),
     path('livrets/', include('apps.livrets.urls')),
     path('moines/', include('apps.moines.urls')),

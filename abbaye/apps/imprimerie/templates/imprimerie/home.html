@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Imprimerie</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <div class="d-flex flex-column align-items-center">
+        <h1>Bienvenue sur Imprimerie !</h1>
+    </div>
+
+    <a href={% url 'imprimerie:memo' %}>Mémo</a>
+{% endblock content %}
