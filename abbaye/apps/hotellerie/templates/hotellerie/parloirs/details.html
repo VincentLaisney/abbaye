@@ -1,0 +1,48 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:main_home' %}>Hôtellerie</a></li>
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:parloirs_list' %}>Parloirs</a></li>
+    <li class="breadcrumb-item active">{{ parloir }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h2>Parloir de {{ parloir.moines_string }}</h2>
+
+    <div class="row">
+        <a href={% url 'hotellerie:parloirs_update' parloir.id %} class="mx-1">Modifier</a>
+        <a href={% url 'hotellerie:parloirs_delete' parloir.id %} class="mx-1">Supprimer</a>
+        <a href={% url 'main:calendar' %} class="mx-1">Retour au calendrier</a>
+    </div>
+
+    <div class="col-6">
+        <table class="table table-sm">
+            <tr>
+                <td>Nombre en plus de la personne :</td>
+                <td>{{ parloir.nombre }}</td>
+            </tr>
+
+            <tr>
+                <td>Date :</td>
+                <td>{{ parloir.date }} ({{ parloir.repas }})</td>
+            </tr>
+
+            <tr>
+                <td>Parloir :</td>
+                <td>{{ parloir.parloir }}</td>
+            </tr>
+
+            <tr>
+                <td>Repas apporté :</td>
+                <td>{{ parloir.repas_apporte|yesno:'Oui,Non' }}</td>
+            </tr>
+            
+            <tr>
+                <td>Remarques :</td>
+                <td>{{ parloir.remarque }}</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}

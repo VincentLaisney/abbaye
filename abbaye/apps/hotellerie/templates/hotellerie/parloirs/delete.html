@@ -1,0 +1,24 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:main_home' %}>Hôtellerie</a></li>
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:parloirs_list' %}>Parloirs</a></li>
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:parloirs_details' parloir.id %}>{{ parloir }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+
+        <h6>Êtes-vous sûr de vouloir supprimer ce parloir ?</h6>
+
+        <!-- Validation -->
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-success mx-3">Oui</button>
+            <a href={% url 'hotellerie:parloirs_details' parloir.id %} class="btn btn-primary mx-3">Non</a>
+        </div>
+    </form>
+{% endblock %}

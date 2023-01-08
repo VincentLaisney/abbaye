@@ -1,0 +1,18 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Hôtellerie</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <div class="d-flex flex-column align-items-center">
+        <h1>Bienvenue sur Hôtellerie !</h1>
+    </div>
+
+    <div class="d-flex flex-column text-center">
+        <a href={% url 'hotellerie:main_calendar' %}>Calendrier</a>
+        <a href={% url 'hotellerie:sejours_list' %}>Séjours</a>
+        <a href={% url 'hotellerie:parloirs_list' %}>Parloirs</a>
+        <a href={% url 'hotellerie:retreats_list' %}>Retraites</a>
+    </div>
+{% endblock content %}
