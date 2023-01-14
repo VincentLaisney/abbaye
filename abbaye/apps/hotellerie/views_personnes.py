@@ -117,7 +117,7 @@ def create(request):
                         )
 
             return HttpResponseRedirect(reverse(
-                'personnes:details',
+                'hotellerie:personnes_details',
                 kwargs={'pk': personne.id}
             ))
 
@@ -232,7 +232,7 @@ def update(request, **kwargs):
                         )
 
             return HttpResponseRedirect(reverse(
-                'personnes:details',
+                'hotellerie:personnes_details',
                 kwargs={'pk': personne.id}
             ))
 
@@ -269,7 +269,7 @@ def delete(request, **kwargs):
     if request.method == 'POST':
         form = PersonneForm(request.POST, instance=personne)
         personne.delete()
-        return HttpResponseRedirect(reverse('personnes:list', args=first_letter))
+        return HttpResponseRedirect(reverse('hotellerie:personnes_list', args=first_letter))
 
     else:
         form = PersonneForm(instance=personne)

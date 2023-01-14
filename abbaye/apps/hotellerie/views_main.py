@@ -37,7 +37,7 @@ def calendar(request, *args, **kwargs):
     else:
         # Redirect to today:
         return redirect(reverse(
-            'main:calendar',
+            'hotellerie:main_calendar',
             kwargs={
                 'day': today['day'],
                 'month': today['month'],

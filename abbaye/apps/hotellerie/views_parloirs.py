@@ -59,7 +59,7 @@ def update(request, *args, **kwargs):
         if form.is_valid():
             form.save()
             date = form.cleaned_data['date']
-            return HttpResponseRedirect(reverse('main:calendar', kwargs={
+            return HttpResponseRedirect(reverse('hotellerie:main_calendar', kwargs={
                 'day': '{:%d}'.format(date),
                 'month': '{:%m}'.format(date),
                 'year': '{:%Y}'.format(date),
@@ -81,7 +81,7 @@ def delete(request, *args, **kwargs):
     if request.method == 'POST':
         form = ParloirForm(request.POST, instance=parloir)
         parloir.delete()
-        return HttpResponseRedirect(reverse('main:calendar'))
+        return HttpResponseRedirect(reverse('hotellerie:main_calendar'))
 
     form = ParloirForm(instance=parloir)
 

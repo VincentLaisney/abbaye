@@ -33,7 +33,7 @@ def create(request):
         if form.is_valid():
             form.save()
             date = form.cleaned_data['date_from']
-            return HttpResponseRedirect(reverse('main:calendar', kwargs={
+            return HttpResponseRedirect(reverse('hotellerie:main_calendar', kwargs={
                 'day': '{:%d}'.format(date),
                 'month': '{:%m}'.format(date),
                 'year': '{:%Y}'.format(date),
@@ -64,7 +64,7 @@ def update(request, **kwargs):
         if form.is_valid():
             form.save()
             date = form.cleaned_data['date_from']
-            return HttpResponseRedirect(reverse('main:calendar', kwargs={
+            return HttpResponseRedirect(reverse('hotellerie:main_calendar', kwargs={
                 'day': '{:%d}'.format(date),
                 'month': '{:%m}'.format(date),
                 'year': '{:%Y}'.format(date),
@@ -86,7 +86,7 @@ def delete(request, **kwargs):
     if request.method == 'POST':
         form = RetreatForm(request.POST, instance=retreat)
         retreat.delete()
-        return HttpResponseRedirect(reverse('main:calendar'))
+        return HttpResponseRedirect(reverse('hotellerie:main_calendar'))
 
     form = RetreatForm(instance=retreat)
 

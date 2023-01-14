@@ -40,7 +40,7 @@ def create(request):
                 mail_pere_suiveur(sejour)
 
             date = form.cleaned_data['sejour_du']
-            return HttpResponseRedirect(reverse('main:calendar', kwargs={
+            return HttpResponseRedirect(reverse('hotellerie:main_calendar', kwargs={
                 'day': '{:%d}'.format(date),
                 'month': '{:%m}'.format(date),
                 'year': '{:%Y}'.format(date),
@@ -88,7 +88,7 @@ def update(request, **kwargs):
             if sejour.personne and sejour.mail_pere_suiveur:
                 mail_pere_suiveur(sejour)
             date = form.cleaned_data['sejour_du']
-            return HttpResponseRedirect(reverse('main:calendar', kwargs={
+            return HttpResponseRedirect(reverse('hotellerie:main_calendar', kwargs={
                 'day': '{:%d}'.format(date),
                 'month': '{:%m}'.format(date),
                 'year': '{:%Y}'.format(date),
@@ -117,7 +117,7 @@ def delete(request, *args, **kwargs):
     if request.method == 'POST':
         form = SejourForm(request.POST, instance=sejour)
         sejour.delete()
-        return HttpResponseRedirect(reverse('main:calendar'))
+        return HttpResponseRedirect(reverse('hotellerie:main_calendar'))
 
     form = SejourForm(instance=sejour)
 
