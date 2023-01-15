@@ -8,4 +8,5 @@ app_name = 'imprimerie'
 urlpatterns = [
     path('', views.home, name='home'),
     path('memo', views.memo, name='memo'),
+    path('memo/update', views.memo_update, name='memo_update'),
 ]

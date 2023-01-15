@@ -9,4 +9,13 @@
     <div class="d-flex flex-column align-items-center">
         <h1>Mémo de l'imprimeur</h1>
     </div>
+
+    <p>Ici c'est du normal.</p>
+    <p>Ici c'est du gras.</p>
+    <p>Ici c'est de l'italique.</p>
+    <p>Ici c'est du normal.</p>
+
+    {{ content }}
+
+    <a href={% url 'imprimerie:memo_update' %}>Éditer le Mémo</a>
 {% endblock content %}
