@@ -10,12 +10,7 @@
         <h1>Mémo de l'imprimeur</h1>
     </div>
 
-    <p>Ici c'est du normal.</p>
-    <p>Ici c'est du gras.</p>
-    <p>Ici c'est de l'italique.</p>
-    <p>Ici c'est du normal.</p>
-
-    {{ content }}
+    <div class="border border-dark rounded my-3 px-5 py-2 w-50">{{ content|safe }}</div>
 
     <a href={% url 'imprimerie:memo_update' %}>Éditer le Mémo</a>
 {% endblock content %}
