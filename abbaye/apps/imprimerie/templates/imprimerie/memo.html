@@ -9,4 +9,8 @@
     <div class="d-flex flex-column align-items-center">
         <h1>Mémo de l'imprimeur</h1>
     </div>
+
+    <div class="border border-dark rounded my-3 px-5 py-2 w-50">{{ content|safe }}</div>
+
+    <a href={% url 'imprimerie:memo_update' %}>Éditer le Mémo</a>
 {% endblock content %}
