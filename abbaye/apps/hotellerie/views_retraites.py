@@ -1,17 +1,17 @@
 """ apps/hotellerie/view_retraites.py """
 
 
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
+from apps.main.decorators import group_required
 
 from .forms import RetreatForm
 from .models import Retreat
 
 
-@login_required
+@group_required('Hôtellerie')
 def list(request):
     """ List of retreats. """
     retreats = Retreat.objects.all().order_by('-date_from')
@@ -24,7 +24,7 @@ def list(request):
     )
 
 
-@login_required
+@group_required('Hôtellerie')
 def create(request):
     """ Create a Retreat. """
     if request.method == 'POST':
@@ -44,7 +44,7 @@ def create(request):
     return render(request, 'hotellerie/retreats/form.html', {'form': form})
 
 
-@login_required
+@group_required('Hôtellerie')
 def details(request, *args, **kwargs):
     """ Details of a Retreat. """
     retreat = get_object_or_404(Retreat, pk=kwargs['pk'])
@@ -53,7 +53,7 @@ def details(request, *args, **kwargs):
     })
 
 
-@login_required
+@group_required('Hôtellerie')
 def update(request, **kwargs):
     """ Update a Retreat. """
     retreat = get_object_or_404(Retreat, pk=kwargs['pk'])
@@ -78,7 +78,7 @@ def update(request, **kwargs):
     })
 
 
-@login_required
+@group_required('Hôtellerie')
 def delete(request, **kwargs):
     """ Delete a Retreat. """
     retreat = get_object_or_404(Retreat, pk=kwargs['pk'])

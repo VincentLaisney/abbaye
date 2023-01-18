@@ -3,20 +3,21 @@
 
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render, reverse
-from django.contrib.auth.decorators import login_required
+
+from apps.main.decorators import group_required
 
 from .forms import ParloirForm
 from .models import Parloir
 
 
-@login_required
+@group_required('Hôtellerie')
 def list(request):
     """ List of Parloirs. """
     parloirs = Parloir.objects.all().order_by('-date')
     return render(request, 'hotellerie/parloirs/list.html', {'parloirs': parloirs})
 
 
-@login_required
+@group_required('Hôtellerie')
 def create(request):
     """ Create a Parloir. """
     if request.method == 'POST':
@@ -36,7 +37,7 @@ def create(request):
     return render(request, 'hotellerie/parloirs/form.html', {'form': form})
 
 
-@login_required
+@group_required('Hôtellerie')
 def details(request, *args, **kwargs):
     """ Details of a Parloir. """
     parloir = get_object_or_404(Parloir, id=kwargs['pk'])
@@ -49,7 +50,7 @@ def details(request, *args, **kwargs):
     })
 
 
-@login_required
+@group_required('Hôtellerie')
 def update(request, *args, **kwargs):
     """ Update a Parloir. """
     parloir = get_object_or_404(Parloir, pk=kwargs['pk'])
@@ -73,7 +74,7 @@ def update(request, *args, **kwargs):
     })
 
 
-@login_required
+@group_required('Hôtellerie')
 def delete(request, *args, **kwargs):
     """ Delete a Parloir. """
     parloir = get_object_or_404(Parloir, pk=kwargs['pk'])

@@ -2,25 +2,26 @@
 
 import datetime
 
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from modules.mails import mail_pere_suiveur, mail_sacristie
 
+from apps.main.decorators import group_required
+
 from .forms import SejourForm
 from .models import Chambre, Sejour
 
 
-@login_required
+@group_required('Hôtellerie')
 def list(request):
     """ List view of Sejours. """
     sejours = Sejour.objects.all().order_by('-sejour_du')
     return render(request, 'hotellerie/sejours/list.html', {'sejours': sejours})
 
 
-@login_required
+@group_required('Hôtellerie')
 def create(request):
     """ Create a Sejour. """
     if request.method == 'POST':
@@ -51,7 +52,7 @@ def create(request):
     return render(request, 'hotellerie/sejours/form.html', {'form': form})
 
 
-@login_required
+@group_required('Hôtellerie')
 def details(request, *args, **kwargs):
     """ Details of a Sejour. """
     sejour = get_object_or_404(Sejour, pk=kwargs['pk'])
@@ -66,7 +67,7 @@ def details(request, *args, **kwargs):
     )
 
 
-@login_required
+@group_required('Hôtellerie')
 def update(request, **kwargs):
     """ Update a Sejour. """
     sejour = get_object_or_404(Sejour, pk=kwargs['pk'])
@@ -109,7 +110,7 @@ def update(request, **kwargs):
     })
 
 
-@login_required
+@group_required('Hôtellerie')
 def delete(request, *args, **kwargs):
     """ Delete a Sejour. """
     sejour = get_object_or_404(Sejour, pk=kwargs['pk'])

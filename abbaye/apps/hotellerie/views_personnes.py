@@ -3,17 +3,18 @@
 import re
 from dal import autocomplete
 
-from django.contrib.auth.decorators import login_required
 from django import forms
 from django.http import Http404, HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
+from apps.main.decorators import group_required
+
 from .forms import AdresseForm, MailForm, PersonneForm, TelephoneForm
 from .models import Adresse, Mail, Personne, Telephone
 
 
-@login_required
+@group_required('Hôtellerie')
 def list(request, letter, search=''):
     """ List of Personnes. """
     if letter == '-':
@@ -45,7 +46,7 @@ def list(request, letter, search=''):
     })
 
 
-@login_required
+@group_required('Hôtellerie')
 def create(request):
     """ Create a Personne. """
     mails_inline_formset = forms.inlineformset_factory(
@@ -135,7 +136,7 @@ def create(request):
     })
 
 
-@login_required
+@group_required('Hôtellerie')
 def details(request, **kwargs):
     """ Details of a Personne. """
     personne = get_object_or_404(Personne, pk=kwargs['pk'])
@@ -149,7 +150,7 @@ def details(request, **kwargs):
     })
 
 
-@login_required
+@group_required('Hôtellerie')
 def update(request, **kwargs):
     """ Update a Personne. """
     personne = get_object_or_404(Personne, pk=kwargs['pk'])
@@ -260,7 +261,7 @@ def update(request, **kwargs):
     })
 
 
-@login_required
+@group_required('Hôtellerie')
 def delete(request, **kwargs):
     """ Delete a Personne. """
     personne = get_object_or_404(Personne, pk=kwargs['pk'])
@@ -281,7 +282,7 @@ def delete(request, **kwargs):
     })
 
 
-@login_required
+@group_required('Hôtellerie')
 def get_pere_suiveur(request):
     """ Returns the pere_suiveur of a personne and checks if this pere_suiveur has an email. """
     personne = Personne.objects.get(pk=request.GET['personne'])

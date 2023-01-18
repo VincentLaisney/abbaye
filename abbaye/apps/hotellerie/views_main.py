@@ -2,9 +2,10 @@
 
 import datetime
 
-from django.contrib.auth.decorators import login_required
 from django.shortcuts import redirect, render
 from django.urls import reverse
+
+from apps.main.decorators import group_required
 
 from .models import Parloir
 from .models import Retreat
@@ -20,7 +21,7 @@ def home(request):
     )
 
 
-@login_required
+@group_required('Hôtellerie')
 def calendar(request, *args, **kwargs):
     """ Display calendar according to the required date. """
     date_today = datetime.date.today()
