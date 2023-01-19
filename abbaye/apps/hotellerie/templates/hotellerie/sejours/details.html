@@ -1,0 +1,83 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:main_home' %}>Hôtellerie</a></li>
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:sejours_list' %}>Séjours</a></li>
+    <li class="breadcrumb-item active">{{ sejour }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h2>Séjour de {{ sejour.personne }}</h2>
+
+    <div class="row">
+        <a href={% url 'hotellerie:sejours_update' sejour.id %} class="mx-1">Modifier</a>
+        <a href={% url 'hotellerie:sejours_delete' sejour.id %} class="mx-1">Supprimer</a>
+        <a href={% url 'hotellerie:main_calendar' %} class="mx-1">Retour au calendrier</a>
+    </div>
+
+    <div class="col-6">
+        <table class="table table-sm">
+            <tr>
+                <td>Du</td>
+                <td>{{ sejour.sejour_du }} {{ sejour.repas_du }}</td>
+            </tr>
+
+            <tr>
+                <td>Au</td>
+                <td>{{ sejour.sejour_au }} {{ sejour.repas_au }}</td>
+            </tr>
+
+            <tr>
+                <td>Chambres :</td>
+                <td>{{ chambres }}</td>
+            </tr>
+
+            <tr>
+                <td>Table :</td>
+                <td>{{ sejour.mensa }}</td>
+            </tr>
+
+            <tr>
+                <td>Prêtre avec Messe :</td>
+                <td>{{ sejour.pretre|yesno:'Oui,Non' }}</td>
+            </tr>
+
+            {% comment %} <tr>
+                <td>Messe lendemain :</td>
+                <td>{{ sejour.messe_lendemain|yesno:'Oui,Non' }}</td>
+            </tr> {% endcomment %}
+
+            <tr>
+                <td>Messe le premier jour :</td>
+                <td>{{ sejour.messe_premier_jour|yesno:'Oui,Non' }}</td>
+            </tr>
+
+            <tr>
+                <td>Tour de Messe :</td>
+                <td>{{ sejour.tour_messe }}</td>
+            </tr>
+
+            <tr>
+                <td>Servant :</td>
+                <td>{{ sejour.servant|yesno:'Oui,Non' }}</td>
+            </tr>
+
+            <tr>
+                <td>Oratoire :</td>
+                <td>{{ sejour.oratoire|default:'Non défini' }}</td>
+            </tr>
+
+            <tr>
+                <td>Commentaire cuisine :</td>
+                <td>{{ sejour.commentaire_cuisine|default_if_none:'' }}</td>
+            </tr>
+            
+            <tr>
+                <td>Commentaire sacristie :</td>
+                <td>{{ sejour.commentaire_sacristie|default_if_none:'' }}</td>
+            </tr>
+        </table>
+    </div>
+{% endblock %}
