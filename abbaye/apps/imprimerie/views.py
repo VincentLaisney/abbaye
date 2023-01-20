@@ -51,3 +51,83 @@ def memo_update(request):
             'content': content,
         }
     )
+
+
+def clients_list(request):
+    """ List of clients. """
+
+
+def client_create(request):
+    """ Create a client. """
+
+
+def client_details(request):
+    """ Details of client. """
+
+
+def client_update(request):
+    """ Update a client. """
+
+
+def client_delete(request):
+    """ Delete a client. """
+
+
+def papers_list(request):
+    """ List of papers. """
+
+
+def paper_create(request):
+    """ Create a paper. """
+
+
+def paper_details(request):
+    """ Details of a paper. """
+
+
+def paper_update(request):
+    """ Update a paper. """
+
+
+def paper_delete(request):
+    """ Delete a paper. """
+
+
+def jobs_list(request):
+    """ List of jobs. """
+
+
+def job_create(request):
+    """ Create a job. """
+
+
+def job_details(request):
+    """ Details of a job. """
+
+
+def job_update(request):
+    """ Update a job. """
+
+
+def job_delete(request):
+    """ Delete a job. """
+
+
+def elements_list(request):
+    """ List of elements. """
+
+
+def element_create(request):
+    """ Create an element. """
+
+
+def element_details(request):
+    """ Details of an element. """
+
+
+def element_update(request):
+    """ Update an element. """
+
+
+def element_delete(request):
+    """ Delete an element. """
