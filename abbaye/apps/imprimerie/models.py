@@ -74,8 +74,8 @@ class Paper(models.Model):
         return '{} {}g {}x{}'.format(self.name, self.weight, self.dim1, self.dim2)
 
 
-class Job(models.Model):
-    """ Job model. """
+class Project(models.Model):
+    """ Project model. """
     name = models.CharField(
         max_length=255,
     )
@@ -106,8 +106,8 @@ class Job(models.Model):
 
 class Element(models.Model):
     """ Element model. """
-    job = models.ForeignKey(
-        Job,
+    project = models.ForeignKey(
+        Project,
         on_delete=CASCADE,
         null=True,
         blank=True,
