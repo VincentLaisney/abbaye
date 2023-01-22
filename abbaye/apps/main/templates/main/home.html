@@ -1,20 +1,53 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet/less" href={% static 'main/css/home.less' %}>
+{% endblock css %}
+
 {% block content %}
     <div class="d-flex flex-column align-items-center">
-        <h1>Bienvenue à l'Abbaye Saint-Joseph de Clairval !</h1>
+        <h1 class="mb-2">Bienvenue à l'Abbaye Saint-Joseph de Clairval !</h1>
 
-        <a href={% url 'absences:home' %}>Absences</a>
-        <a href={% url 'agenda:home' %}>Agenda</a>
-        <a href={% url 'editor:home' %}>Editor</a>
-        <a href={% url 'hotellerie:main_home' %}>Hôtellerie</a>
-        <a href={% url 'imprimerie:home' %}>Imprimerie</a>
-        <a href={% url 'infirmerie:home' %}>Infirmerie</a>
-        <a href={% url 'livrets:home' %}>Livrets</a>
-        <a href={% url 'moines:home' %}>Moines</a>
-        <a href={% url 'ordomatic:home' %}>Ordomatic</a>
-        <a href={% url 'ornitho:home' %}>Ornitho</a>
-        <a href={% url 'polyglotte:home' %}>Polyglotte</a>
-        <a href={% url 'statistiques:home' %}>Statistiques</a>
+        <h3>Services :</h3>
+            <a href="https://docs.google.com/spreadsheets/d/14BfFLTsF54yjQVkQhylWuqB65ag2LhMYe08ubXkvlYE/edit#gid=0">TABLEAU DES SERVICES</a><p></p>
+            <a href={% url 'hotellerie:listings_cuisine' %}>LISTE DES HÔTES</a><p></p>
+            <a href="http://192.168.1.146/Liste_retraites.html">LISTE DES RETRAITES ET DES RETRAITANTS</a><p></p>
+
+        <h3>Vie du monastère :</h3>
+            <a href={% url 'agenda:home' %}>AGENDA COMMUNAUTAIRE (P. Prieur)</a><p>Conférences, retraites, promenades, fêtes des moines…</p>
+            <a href={% url 'statistiques:home' %}>STATISTIQUES</a><p>Dates et moyenne d'âge des moines.</p>
+            <a href="https://clairval.com/horaires-reglages/">HORAIRES SITE</a><p>Réglages des horaires du site de l'Abbaye</p>
+            <a href="http://www.asj.com/info/">INFOS</a><p>Liste des adresses mail, téléphone etc. (P. Stanislas).</p>
+            <a href="http://pmb.asj.com/pmb-bibli/opac_css">BIBLI</a><p>Accès à la base de données de la bibliothèque (Fr. Matthieu).</p>
+            <a href="http://192.168.1.144:5000/webman/index.cgi">DOCUMENTS</a><p>Documents sur Saint-Jérôme (Fr. Matthieu).</p>
+
+        <h3>Absences :</h3>
+            <a href={% url 'absences:home' %}>ABSENCES</a><p>Avis d'absence en ligne.</p>
+            <a href={% url 'courses:home' %}>COURSES</a><p>Calendrier des absences (P. David).</p>
+
+        <h3>Outils :</h3>
+            <a href={% url 'livrets:home' %}>LIVRETS</a><p>Livrets de messe pour les retraites.</p>
+            <a href={% url 'ordomatic:home' %}>ORDOMATIC</a><p>Créez votre ordo en ligne.</p>
+            <a href={% url 'accenteur:home' %}>ACCENTEUR</a><p>Numéricum instruméntum ad latínos textus accentizándos.</p>
+            <a href={% url 'barcode:home' %}>BARCODE</a><p>Un petit générateur de codes barres sympa.</p>
+
+        <h3>Obédiences :</h3>
+            <a href={% url 'hotellerie:main_home' %}>HÔTELLERIE</a><p></p>
+            <a href={% url 'infirmerie:home' %}>INFIRMERIE</a><p></p>
+            <a href={% url 'imprimerie:home' %}>IMPRIMERIE</a><p></p>
+            <a href={% url 'editor:home' %}>ÉDITIONS</a><p></p>
+
+        <h3>Gregorio :</h3>
+            <a href="http://gregorio-doc.asj.com">GREGORIO-DOC</a><p>Offline official doc of Gregorio.</p>
+            <a href="http://gregorio-doc.asj.com/gabc/summary-gabc.pdf">MEMO</a><p>A short Summary of GABC notations.</p>
+            <a href={% url 'jgabc:home' %}>GREGORIO-SCORES</a><p>Create your Gregorio scores online.</p>
+
+        <h3>Divers :</h3>
+            <a href={% url 'polyglotte:home' %}>POLYGLOTTE</a><p>Bible en hébreu, grec et latin.</p>
+            <a href={% url 'memo:home' %}>MÉMO LINUX</a><p>Aide-mémoire pour les utilisateurs de Linux.</p>
+            <a href={% url 'typetrainer:home' %}>TYPE-TRAINER</a><p>Pour apprendre à taper au clavier.</p>
+            <a href={% url 'ornitho:home' %}>ORNITHO</a><p>Voir le parc autrement…</p>
     </div>
 {% endblock content %}
