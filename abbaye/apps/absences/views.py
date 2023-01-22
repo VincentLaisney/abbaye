@@ -11,7 +11,7 @@ from .models import Monk
 
 
 def home(request):
-    """ Home view of absences. """
+    """ Home page of Absences. """
     return render(
         request,
         'absences/home.html',
