@@ -11,6 +11,7 @@ urlpatterns = [
     path('accenteur/', include('apps.accenteur.urls')),
     path('agenda/', include('apps.agenda.urls')),
     path('barcode/', include('apps.barcode.urls')),
+    path('courses/', include('apps.courses.urls')),
     path('editor/', include('apps.editor.urls')),
     path('hotellerie/', include('apps.hotellerie.urls')),
     path('imprimerie/', include('apps.imprimerie.urls')),
