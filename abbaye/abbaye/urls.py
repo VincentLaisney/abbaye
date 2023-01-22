@@ -16,6 +16,7 @@ urlpatterns = [
     path('hotellerie/', include('apps.hotellerie.urls')),
     path('imprimerie/', include('apps.imprimerie.urls')),
     path('infirmerie/', include('apps.infirmerie.urls')),
+    path('jgabc/', include('apps.jgabc.urls')),
     path('livrets/', include('apps.livrets.urls')),
     path('moines/', include('apps.moines.urls')),
     path('ordomatic/', include('apps.ordomatic.urls')),
