@@ -8,6 +8,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('accounts/', include('apps.accounts.urls')),
     path('absences/', include('apps.absences.urls')),
+    path('accenteur/', include('apps.accenteur.urls')),
     path('agenda/', include('apps.agenda.urls')),
     path('editor/', include('apps.editor.urls')),
     path('hotellerie/', include('apps.hotellerie.urls')),
