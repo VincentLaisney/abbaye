@@ -67,6 +67,10 @@ a:hover {
 body {
     background-color: whitesmoke;
 
+    a {
+        text-decoration: none;
+    }
+
     // Nav:
     nav {
 
@@ -85,52 +89,12 @@ body {
     }
 
     // Breadcrumbs:
-
     #breadcrumbs {
-        .dropdown {
-            .dropdown_button {
-                cursor: pointer;
-                font-size: 1em;
-            }
-
-            .dropdown {
-                display: inline-block;
-                position: relative;
-            }
-
-            .dropdown_content {
-                background-color: whitesmoke;
-                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-                display: none;
-                min-width: 200px;
-                position: absolute;
-                z-index: 3;
-            }
-
-            .dropdown_content a {
-                color: black;
-                display: block;
-                padding: 8px 16px;
-                text-decoration: none;
-            }
-
-            .dropdown_content a:hover {
-                background-color: @light-grey;
-            }
-
-            .dropdown:hover .dropdown_content {
-                display: block;
-            }
-
-            .dropdown:hover .dropbtn {
-                background-color: green;
-            }
-        }
+        background-color: @light-grey;
     }
 
     // Content:
     #content {
-
         h1 {
             color: @green;
             font-family: LucidaHW;
@@ -140,8 +104,21 @@ body {
             vertical-align: top;
         }
 
-        #validation {
+        .form-group {
+            margin: 5px 0 5px 0;
 
+            label {
+                color: @green;
+                font-weight: bold;
+            }
+        }
+
+        .invalid-feedback {
+            color: @full-red;
+            font-weight: bold;
+        }
+
+        #validation {
             .btn {
                 width: 100px;
             }

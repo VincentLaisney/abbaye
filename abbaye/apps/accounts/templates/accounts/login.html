@@ -10,7 +10,7 @@
     <div class="d-flex flex-column align-items-center">
         <h1>Connexion</h1>
 
-        <form method="post" novalidate>
+        <form method="post" novalidate class="d-flex flex-column align-items-center">
             {% csrf_token %}
 
             <div class='form-group d-flex flex-column align-items-start'>
@@ -67,7 +67,7 @@
                 {% endfor %}
             {% endif %}
 
-            <button type="submit" class="btn btn-primary btn-block">Connexion</button>
+            <button type="submit" class="btn btn-primary btn-block mt-3">Connexion</button>
         </form>
     </div>
 {% endblock content %}
