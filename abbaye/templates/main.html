@@ -18,55 +18,57 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark d-flex justify-content-between">
-            <div class="container mx-0">
-                <div id="logo" class="col-6 mr-auto d-flex">
-                    <a href={% url 'main:home' %} class="text-decoration-none">
-                        <img src={% static 'main/img/abbaye.png' %} class="mr-2 align-middle" style="width: 40px;">
-                        <span id="title" class="my-0 align-middle">Abbaye Saint-Joseph</span>
-                    </a>
+        <div class="position-fixed top-0 w-100" style="z-index: 1;">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark d-flex justify-content-between">
+                <div class="container mx-0">
+                    <div id="logo" class="col-6 mr-auto d-flex">
+                        <a href={% url 'main:home' %} class="text-decoration-none">
+                            <img src={% static 'main/img/abbaye.png' %} class="mr-2 align-middle" style="width: 40px;">
+                            <span id="title" class="my-0 align-middle">Abbaye Saint-Joseph</span>
+                        </a>
+                    </div>
                 </div>
-            </div>
-
-            <div class="d-flex me-5">
-                <div class="dropdown">
-                    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
-                        {% if user.is_authenticated %}
-                            {{ user.last_name }}
-                        {% else %}
-                            Utilisateur anonyme
-                        {% endif %}
-                    </a>
-
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
-                        {% if user.is_authenticated %}
-                            <li><a class="dropdown-item" href="#">Mon compte</a></li>
-                            <li><hr class="dropdown-divider"></li>
-                        {% endif %}
-                        {% if user.is_authenticated %}
-                            {% if user.is_superuser %}
-                                <li><a class="dropdown-item" href={% url 'admin:index' %}>Site d'administration</a></li>
+    
+                <div class="d-flex me-5">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                            {% if user.is_authenticated %}
+                                {{ user.last_name }}
+                            {% else %}
+                                Utilisateur anonyme
                             {% endif %}
-                            <li><a class="dropdown-item" href={% url 'accounts:logout' %}?next={{ request.get_full_path }}>Déconnexion</a></li>
-                        {% else %}
-                            <li><a class="dropdown-item" href={% url 'accounts:login' %}?next={{ request.get_full_path }}>Connexion</a></li>
-                            <li><a class="dropdown-item" href="#">Créer un compte</a></li>
-                        {% endif %}
-                    </ul>
+                        </a>
+    
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuLink">
+                            {% if user.is_authenticated %}
+                                <li><a class="dropdown-item" href="#">Mon compte</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                                {% if user.is_superuser %}
+                                    <li><a class="dropdown-item" href={% url 'admin:index' %}>Site d'administration</a></li>
+                                {% endif %}
+                                <li><a class="dropdown-item" href={% url 'accounts:logout' %}?next={{ request.get_full_path }}>Déconnexion</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href={% url 'accounts:login' %}?next={{ request.get_full_path }}>Connexion</a></li>
+                                <li><a class="dropdown-item" href="#">Créer un compte</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
                 </div>
+            </nav>
+    
+            <div id="breadcrumbs">
+                <ol class="breadcrumb m-0 p-2 ps-3">
+                    <li class="breadcrumb-item active"><a href={% url 'main:home' %} class="m-0"><span class="fas fa-home"></span></a></li>
+    
+                    {% block breadcrumbs %}
+                    {% endblock breadcrumbs %}
+                </ol>
             </div>
-        </nav>
-
-        <div id="breadcrumbs">
-            <ol class="breadcrumb m-0 p-2 ps-3">
-                <li class="breadcrumb-item active"><a href={% url 'main:home' %} class="m-0"><span class="fas fa-home"></span></a></li>
-
-                {% block breadcrumbs %}
-                {% endblock breadcrumbs %}
-            </ol>
         </div>
 
-        <div id="content" class="d-flex flex-column align-items-center mx-5 my-3">
+        <div id="content" class="d-flex flex-column align-items-center mx-5" style="margin-top: 150px;">
             {% block content %}
             {% endblock content %}
         </div>
