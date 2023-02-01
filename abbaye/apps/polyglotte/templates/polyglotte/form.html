@@ -1,0 +1,94 @@
+{% extends 'polyglotte/main_polyglotte.html' %}
+
+{% load widget_tweaks %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'polyglotte:home' %}>Polyglotte</a></li>
+    <li class="breadcrumb-item active">{{ object.book }} {{ object.chapter }}, {{ object.verse }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h5 class="orange">Mise à jour de {{ object.book }} {{ object.chapter }}, {{ object.verse }}</h5>
+    <form action="" method="post" class="d-flex flex-column">
+        {% csrf_token %}
+
+        <div class="form-group">
+            {{ form.txt_hebrew.label_tag }}
+            {% if form.is_bound %}
+                {% if form.txt_hebrew.errors %}
+                    {% render_field form.txt_hebrew class="form-control is-invalid" %}
+                    {% for error in form.txt_hebrew.errors %}
+                        <div class="invalid-feedback" style="display: block;">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field form.txt_hebrew class="form-control is-valid" %}
+                {% endif %}
+            {% else %}
+                {% render_field form.txt_hebrew class="form-control" %}
+            {% endif %}
+            {% if form.txt_hebrew.help_text %}
+                <small class="form-text text-muted">
+                    {{ form.txt_hebrew.help_text }}
+                </small>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.txt_greek.label_tag }}
+            {% if form.is_bound %}
+                {% if form.txt_greek.errors %}
+                    {% render_field form.txt_greek class="form-control is-invalid" %}
+                    {% for error in form.txt_greek.errors %}
+                        <div class="invalid-feedback" style="display: block;">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field form.txt_greek class="form-control is-valid" %}
+                {% endif %}
+            {% else %}
+                {% render_field form.txt_greek class="form-control" %}
+            {% endif %}
+            {% if form.txt_greek.help_text %}
+                <small class="form-text text-muted">
+                    {{ form.txt_greek.help_text }}
+                </small>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            {{ form.txt_latin.label_tag }}
+            {% if form.is_bound %}
+                {% if form.txt_latin.errors %}
+                    {% render_field form.txt_latin class="form-control is-invalid" %}
+                    {% for error in form.txt_latin.errors %}
+                        <div class="invalid-feedback" style="display: block;">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field form.txt_latin class="form-control is-valid" %}
+                {% endif %}
+            {% else %}
+                {% render_field form.txt_latin class="form-control" %}
+            {% endif %}
+            {% if form.txt_latin.help_text %}
+                <small class="form-text text-muted">
+                    {{ form.txt_latin.help_text }}
+                </small>
+            {% endif %}
+        </div>
+
+        <div class="d-flex justify-content-center mt-3">
+            <button class="btn btn-secondary ml-auto mx-2">Annuler</button>
+            <button type="submit" class="btn btn-primary mx-2">Valider</button>
+        </div>
+    </form>
+
+{% endblock %}
+
+{% block javascript %}
+    {{ form.media }}
+{% endblock javascript %}
