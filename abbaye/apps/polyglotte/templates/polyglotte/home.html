@@ -1,7 +1,112 @@
-{% extends 'main.html' %}
+{% extends 'polyglotte/main_polyglotte.html'%}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Polyglotte</li>
+{% endblock breadcrumbs %}
 
 {% block content %}
-    <div class="d-flex flex-column align-items-center">
-        <h1>Bienvenue sur Polyglotte !</h1>
+<h1 class="mb-5">Polyglotte</h1>
+
+<div class="d-flex">
+    <div class="col-7">
+        <h5 class="text-center fw-bold mb-3 orange">Ancien Testament</h5>
+        <div class="text-center d-flex border rounded p-2">
+            <ul class="list-unstyled" style="column-width: 15vw;">
+                <li><a href={% url 'polyglotte:list' 'Gn' 1%}>Genèse</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ex' 1%}>Exode</a></li>
+                <li><a href={% url 'polyglotte:list' 'Lev' 1%}>Lévitique</a></li>
+                <li><a href={% url 'polyglotte:list' 'Num' 1%}>Nombres</a></li>
+                <li><a href={% url 'polyglotte:list' 'Dt' 1%}>Deutéronome</a></li>
+            </ul>
+            <ul class="list-unstyled" style="column-width: 15vw;">
+                <li><a href={% url 'polyglotte:list' 'Jos' 1%}>Josué</a></li>
+                <li><a href={% url 'polyglotte:list' 'Jdc' 1%}>Juges</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ru' 1%}>Ruth</a></li>
+                <li><a href={% url 'polyglotte:list' '1 Reg' 1%}>1 Rois (1 Samuel)</a></li>
+                <li><a href={% url 'polyglotte:list' '2 Reg' 1%}>2 Rois (2 Samuel)</a></li>
+                <li><a href={% url 'polyglotte:list' '3 Reg' 1%}>3 Rois (1 Rois)</a></li>
+                <li><a href={% url 'polyglotte:list' '4 Reg' 1%}>4 Rois (2 Rois)</a></li>
+                <li><a href={% url 'polyglotte:list' '1 Par' 1%}>1 Paralipomènes</a></li>
+                <li><a href={% url 'polyglotte:list' '2 Par' 1%}>2 Paralipomènes</a></li>
+                <li><a href={% url 'polyglotte:list' 'Esd' 1%}>Esdras</a></li>
+                <li><a href={% url 'polyglotte:list' 'Neh' 1%}>Néhémie</a></li>
+                <li><a href={% url 'polyglotte:list' 'Tb' 1%}>Tobie</a></li>
+                <li><a href={% url 'polyglotte:list' 'Jdt' 1%}>Judith</a></li>
+                <li><a href={% url 'polyglotte:list' 'Est' 1%}>Esther</a></li>
+            </ul>
+            <ul class="list-unstyled" style="column-width: 15vw;">
+                <li><a href={% url 'polyglotte:list' 'Jb' 1%}>Job</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ps' 1%}>Psaumes</a></li>
+                <li><a href={% url 'polyglotte:list' 'Pr' 1%}>Proverbes</a></li>
+                <li><a href={% url 'polyglotte:list' 'Qo' 1%}>Ecclésiaste</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ct' 1%}>Cantique</a></li>
+                <li><a href={% url 'polyglotte:list' 'Sap' 1%}>Sagesse</a></li>
+                <li><a href={% url 'polyglotte:list' 'Si' 1%}>Ecclésiastique</a></li>
+            </ul>
+            <ul class="list-unstyled" style="column-width: 15vw;">
+                <li><a href={% url 'polyglotte:list' 'Is' 1%}>Isaïe</a></li>
+                <li><a href={% url 'polyglotte:list' 'Jer' 1%}>Jérémie</a></li>
+                <li><a href={% url 'polyglotte:list' 'Lam' 1%}>Lamentations</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ba' 1%}>Baruch</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ez' 1%}>Ézéchiel</a></li>
+                <li><a href={% url 'polyglotte:list' 'Dn' 1%}>Daniel</a></li>
+                <li><a href={% url 'polyglotte:list' 'Os' 1%}>Osée</a></li>
+                <li><a href={% url 'polyglotte:list' 'Jon' 1%}>Jonas</a></li>
+                <li><a href={% url 'polyglotte:list' 'Am' 1%}>Amos</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ab' 1%}>Abdias</a></li>
+                <li><a href={% url 'polyglotte:list' 'Jl' 1%}>Joël</a></li>
+                <li><a href={% url 'polyglotte:list' 'Mi' 1%}>Michée</a></li>
+                <li><a href={% url 'polyglotte:list' 'Na' 1%}>Nahum</a></li>
+                <li><a href={% url 'polyglotte:list' 'So' 1%}>Sophonie</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ha' 1%}>Habacuc</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ag' 1%}>Aggée</a></li>
+                <li><a href={% url 'polyglotte:list' 'Za' 1%}>Zacharie</a></li>
+                <li><a href={% url 'polyglotte:list' 'Mal' 1%}>Malachie</a></li>
+            </ul class="list-unstyled" style="column-width: 15vw;">
+            <ul class="list-unstyled" style="column-width: 15vw;">
+                <li><a href={% url 'polyglotte:list' '1 Ma' 1%}>1 Macchabées</a></li>
+                <li><a href={% url 'polyglotte:list' '2 Ma' 1%}>2 Macchabées</a></li>
+            </ul>
+        </div>
     </div>
+    <div class="col-1"></div>
+    <div class="col-4">
+        <h5 class="text-center fw-bold mb-3 orange">Nouveau Testament</h5>
+        <div class="text-center d-flex border rounded p-2">
+            <ul class="list-unstyled" style="column-width: 15vw;">
+                <li><a href={% url 'polyglotte:list' 'Mt' 1%}>Matthieu</a></li>
+                <li><a href={% url 'polyglotte:list' 'Mc' 1%}>Marc</a></li>
+                <li><a href={% url 'polyglotte:list' 'Lc' 1%}>Luc</a></li>
+                <li><a href={% url 'polyglotte:list' 'Jo' 1%}>Jean</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ac' 1%}>Actes</a></li>
+            </ul>
+            <ul class="list-unstyled" style="column-width: 15vw;">
+                <li><a href={% url 'polyglotte:list' 'Rm' 1%}>Romains</a></li>
+                <li><a href={% url 'polyglotte:list' '1 Co' 1%}>1 Corinthiens</a></li>
+                <li><a href={% url 'polyglotte:list' '2 Co' 1%}>2 Corinthiens</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ga' 1%}>Galates</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ep' 1%}>Éphésiens</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ph' 1%}>Philippiens</a></li>
+                <li><a href={% url 'polyglotte:list' 'Col' 1%}>Colossiens</a></li>
+                <li><a href={% url 'polyglotte:list' '1 Th' 1%}>1 Thessaloniciens</a></li>
+                <li><a href={% url 'polyglotte:list' '2 Th' 1%}>2 Thessaloniciens</a></li>
+                <li><a href={% url 'polyglotte:list' '1 Tim' 1%}>1 Timothée</a></li>
+                <li><a href={% url 'polyglotte:list' '2 Tim' 1%}>2 Timothée</a></li>
+                <li><a href={% url 'polyglotte:list' 'Tit' 1%}>Tite</a></li>
+                <li><a href={% url 'polyglotte:list' 'Phm' 1%}>Philémon</a></li>
+                <li><a href={% url 'polyglotte:list' 'He' 1%}>Hébreux</a></li>
+            </ul>
+            <ul class="list-unstyled" style="column-width: 15vw;">
+                <li><a href={% url 'polyglotte:list' 'Jc' 1%}>Jacques</a></li>
+                <li><a href={% url 'polyglotte:list' '1 Pe' 1%}>1 Pierre</a></li>
+                <li><a href={% url 'polyglotte:list' '2 Pe' 1%}>2 Pierre</a></li>
+                <li><a href={% url 'polyglotte:list' '1 Jo' 1%}>1 Jean</a></li>
+                <li><a href={% url 'polyglotte:list' '2 Jo' 1%}>2 Jean</a></li>
+                <li><a href={% url 'polyglotte:list' '3 Jo' 1%}>3 Jean</a></li>
+                <li><a href={% url 'polyglotte:list' 'Judæ' 1%}>Jude</a></li>
+                <li><a href={% url 'polyglotte:list' 'Ap' 1%}>Apocalypse</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
 {% endblock content %}

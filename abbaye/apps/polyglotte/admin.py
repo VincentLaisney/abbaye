@@ -1,3 +1,6 @@
-from django.contrib import admin
+""" apps/polyglotte/admin.py """
 
-# Register your models here.
+from django.contrib import admin
+from .models import Verse
+
+admin.site.register(Verse)

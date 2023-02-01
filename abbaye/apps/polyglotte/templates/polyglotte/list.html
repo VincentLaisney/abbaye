@@ -1,0 +1,42 @@
+{% extends 'polyglotte/main_polyglotte.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'polyglotte:home' %}>Polyglotte</a></li>
+    <li class="breadcrumb-item active">{{ current_book }} {{ current_chapter }}</li>
+
+    <div id="nav" class="p-0">
+        <!-- Books -->
+        <span id="previous_book" class="fas fa-angle-double-left" title="Livre précédent"></span>
+        <select name="select_books" id="select_books" title="Livre">
+            {% for book in books %}
+                <option value='{{ book }}' {% if book == current_book %}selected{% endif %}>{{ book }}</option>
+            {% endfor %}
+        </select>
+        <span id="next_book" class="fas fa-angle-double-right" title="Livre suivant"></span>
+
+        <!-- Chapters -->
+        <span id="previous_chapter" class="fas fa-angle-left" title="Chapitre précédent"></span>
+        <select name="select_chapters" id="select_chapters" title="Chapitre">
+            {% for chapter in chapters %}
+                <option value={{ chapter }} {% if chapter == current_chapter %}selected{% endif %}>{{ chapter }}</option>
+            {% endfor %}
+        </select>
+        <span id="next_chapter" class="fas fa-angle-right" title="Chapitre suivant"></span>
+
+        <!-- Search -->
+        <a href={% url 'polyglotte:search' %}><span class="fas fa-search orange" title="Rechercher un texte"></span></a>
+    </div>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <table class="table table-borderless">
+        {% for verse in verses %}
+            <tr>
+                <td class="td_ref"><a href={% url 'polyglotte:update' verse.book verse.chapter verse.verse%}>{{ verse.book }} {{ verse.chapter }}, {{ verse.verse }}</a></td>
+                <td class="td_hebrew text-right">{{ verse.txt_hebrew|default_if_none:"" }}</td>
+                <td class="td_greek text-justify">{{ verse.txt_greek|default_if_none:"" }}</td>
+                <td class="td_latin text-justify">{{ verse.txt_latin|default_if_none:"" }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}
