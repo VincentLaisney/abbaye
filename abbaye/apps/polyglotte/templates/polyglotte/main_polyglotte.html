@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block css %}
+    <style>@font-face{font-family: "Hebrew"; src: url({% static 'polyglotte/fonts/SILEOT.ttf' %});}</style>
+    <style>@font-face{font-family: "Greek"; src: url({% static 'polyglotte/fonts/SBL_grk.ttf' %});}</style>
+    <style>@font-face{font-family: "Latin"; src: url({% static 'polyglotte/fonts/Ubuntu-R.ttf' %});}</style>
+    <link rel="stylesheet/less" href={% static "polyglotte/css/polyglotte.less" %}/>
+{% endblock css %}
+
+{% block javascript %}
+    <script src="{% static 'polyglotte/js/polyglotte.js' %}"></script>
+{% endblock javascript %}
