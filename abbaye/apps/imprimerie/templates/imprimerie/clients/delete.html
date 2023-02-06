@@ -1,0 +1,13 @@
+{% extends 'imprimerie/main_imprimerie.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:clients_list' %}>Clients</a></li>
+    <li class="breadcrumb-item active">Delete</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h4>Delete a client</h4>
+
+    <a href={% url 'imprimerie:clients_list' %}>Retour à la liste</a>
+{% endblock content %}
