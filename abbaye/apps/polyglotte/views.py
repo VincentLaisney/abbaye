@@ -3,6 +3,7 @@
 from django.shortcuts import get_object_or_404, render, redirect
 from django.urls import reverse
 
+from apps.main.decorators import group_required
 from .forms import VerseForm
 from .models import Verse
 
@@ -52,6 +53,7 @@ def verses_list(request, **kwargs):
     })
 
 
+@group_required('Polyglotte')
 def verse_update(request, **kwargs):
     """ Form of verses. """
     verse = get_object_or_404(
