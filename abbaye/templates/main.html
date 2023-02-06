@@ -48,7 +48,7 @@
                                 {% if user.is_superuser %}
                                     <li><a class="dropdown-item" href={% url 'admin:index' %}>Site d'administration</a></li>
                                 {% endif %}
-                                <li><a class="dropdown-item" href={% url 'accounts:logout' %}?next={{ request.get_full_path }}>Déconnexion</a></li>
+                                <li><a class="dropdown-item" href={% url 'accounts:logout' %}>Déconnexion</a></li>
                             {% else %}
                                 <li><a class="dropdown-item" href={% url 'accounts:login' %}?next={{ request.get_full_path }}>Connexion</a></li>
                                 <li><a class="dropdown-item" href="#">Créer un compte</a></li>

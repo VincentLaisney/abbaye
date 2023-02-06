@@ -1,40 +1,6 @@
-@blue: rgb(0, 40, 114);
-@full-red: rgb(255, 0, 0);
-@green: rgb(0, 100, 0);
-@grey: rgb(200, 200, 200);
-@grey_light: rgb(220, 220, 220);
-@grey_text: rgb(49, 50, 57);
-@orange: rgb(255, 145, 0);
-@red: rgb(200, 0, 0);
-
-.blue {
-    color: @blue;
-}
-
-.full-red {
-    color: @full-red;
-}
-
-.green {
-    color: @green;
-}
-
-.grey {
-    color: @grey;
-}
-
-.orange {
-    color: @orange;
-}
-
-.red {
-    color: @red;
-}
-
+@import url("/statics/main/css/colors.less");
 
 body {
-    background-color: whitesmoke;
-
     h1 {
         color: @green;
     }
@@ -47,7 +13,7 @@ body {
     textarea:focus,
     .form-control,
     .form-control:focus {
-        color: @grey_text;
+        color: @grey-dark;
     }
 
     th {
@@ -58,7 +24,6 @@ body {
         vertical-align: top;
     }
 
-    // Nav:
     nav {
         #logo {
             img {
@@ -77,7 +42,6 @@ body {
         }
     }
 
-    // Contents:
     #content {
         .dropdown {
             .dropdown_button {
@@ -85,7 +49,7 @@ body {
                 color: white;
                 padding: 5px;
                 font-size: 10px;
-                border: 1px solid @grey_light;
+                border: 1px solid @grey-light;
                 border-radius: 4px;
                 cursor: pointer;
             }
@@ -112,7 +76,7 @@ body {
             }
 
             .dropdown_content a:hover {
-                background-color: @grey_light;
+                background-color: @grey-light;
             }
 
             .dropdown:hover .dropdown_content {
@@ -124,7 +88,6 @@ body {
             }
         }
 
-        // Tools:
         #tools {
             margin: 0px 10px 20px 10px;
 
@@ -154,7 +117,6 @@ body {
             }
         }
 
-        // Calendar:
         #calendar {
             text-align: center;
             width: 100%;
@@ -164,7 +126,7 @@ body {
                 z-index: 1;
 
                 .vertical_line {
-                    border-right: 1px solid @grey_light;
+                    border-right: 1px solid @grey-light;
 
                     &.zero {
                         border-left: 2px solid gray;
@@ -222,7 +184,7 @@ body {
                     .current_weekday,
                     .current_date {
                         background-color: gray;
-                        color: @grey_light;
+                        color: @grey-light;
                         font-weight: bold;
                         width: 100%;
                     }
@@ -260,7 +222,7 @@ body {
                 }
 
                 .groupe {
-                    background-color: @full-red;
+                    background-color: @red-full;
 
                     a {
                         color: white;
@@ -285,7 +247,6 @@ body {
             }
         }
 
-        // Forms:
         form {
             input[type='checkbox'] {
                 margin: 0px 5px 0px 0px;
@@ -303,20 +264,13 @@ body {
                 max-width: 200px;
             }
 
-            // Help texts:
             .text-muted {
                 text-align: center;
             }
 
-            // Sejour: autocomplete personne:
             .select2-selection--single {
                 height: 40px !important;
             }
-        }
-
-        // Listings
-        .background {
-            background-color: rgb(255, 232, 211);
         }
     }
 }

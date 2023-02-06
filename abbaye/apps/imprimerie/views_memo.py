@@ -1,32 +1,29 @@
-""" apps/imprimerie/views.py """
+""" apps/imprimerie/views_memo.py """
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 
+from apps.main.decorators import group_required
+
 from .models import Memo
 from .forms import MemoForm
 
 
-def home(request):
-    """ Home page of Imprimerie. """
-    return render(
-        request, 'imprimerie/home.html', {},
-    )
-
-
+@group_required('Imprimerie')
 def memo(request):
-    """ Memo page imprimerie. """
+    """ Memo imprimerie. """
     content = Memo.objects.first().content
     return render(
         request,
-        'imprimerie/memo.html',
+        'imprimerie/memo/memo.html',
         {
             'content': content,
         },
     )
 
 
+@group_required('Imprimerie')
 def memo_update(request):
     """ Update Memo imprimerie. """
     content = Memo.objects.first()
@@ -45,7 +42,7 @@ def memo_update(request):
 
     return render(
         request,
-        'imprimerie/memo_form.html',
+        'imprimerie/memo/form.html',
         {
             'form': form,
             'content': content,

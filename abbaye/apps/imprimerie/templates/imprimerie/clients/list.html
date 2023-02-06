@@ -1,0 +1,12 @@
+{% extends 'imprimerie/main_imprimerie.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
+    <li class="breadcrumb-item active">Clients</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h4>List of clients</h4>
+
+    <a href={% url 'imprimerie:clients_create' %}>Créer un nouveau client</a>
+{% endblock content %}
