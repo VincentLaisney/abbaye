@@ -3,5 +3,5 @@
 {% load custom_tags %}
 
 {% block group_required %}
-    <h6 class="text-center red">La page {{ request.get_full_path|url_after_next }} n'est accessible qu'à certains utilisateurs.<br>Veuillez vous identifier pour y accéder :</h6>
+    <h6 class="text-center red">La page <span class="font-monospace small black mx-1">{{ request.get_full_path|url_after_next }}</span> n'est accessible qu'à certains utilisateurs.<br>Veuillez vous identifier pour y accéder :</h6>
 {% endblock group_required %}
