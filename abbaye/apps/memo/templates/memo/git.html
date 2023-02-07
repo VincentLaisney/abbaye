@@ -1,0 +1,63 @@
+{% extends 'memo/main_memo.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'memo:home' %}>Mémo</a></li>
+    <li class="breadcrumb-item active">Git</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>Git</h1>
+
+    <div class="w-75">
+        <h1>Git</h1>
+
+        <table>
+            <tr>
+                <td><p class="terminal">git show &lt;sha du commit&gt;</p></td>
+                <td><p class="descr">Montre les détails d'un commit.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">git commit</p></td>
+                <td><p class="descr">Après avoir résolu un conflit.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">git rm -r --cached &lt;path to folder&gt;</p></td>
+                <td><p class="descr">Pour que Git ne suive plus un dossier, mais que ce dossier reste dans le working directory. Il faut d'abord avoir ajouté ce dossier au .gitignore.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">git branch -vv</p></td>
+                <td><p class="descr">Montre les branches et les remote-trackings.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">git diff -p &lt;commit_1&gt; &lt;commit_2&gt; &lt;nom_du_fichier&gt;</p></td>
+                <td><p class="descr">Montre les différences entre c1 et c2 sur le fichier mentionné.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">git blame &lt;nom fichier&gt;</p></td>
+                <td><p class="descr">Historique d'un fichier.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">git blame -L 150,+11 -- file.sh</p></td>
+                <td><p class="descr">Blâme sur une ou plusieurs lignes de code.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">git remote set-url remote_rep &lt;new_url&gt; [&lt;old_url]</p></td>
+                <td><p class="descr">Changer l’url du remote ‘remote_rep’.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">git log –grep=&lt;patter&gt;</p></td>
+                <td><p class="descr">Chercher &lt;pattern&gt; dans les logs.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">git merge --no-commit --squash branchA git reset HEAD</p></td>
+                <td><p class="descr">Pour merger les modifs de branchA dans la branche courante à l’état unstaged.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">1. Add it to .gitignore<br>2. Remove the file from git without deleting the file: git rm --cached path/to/settings.py<br>3. Commit the change: git commit -m "Remove settings.py"</p></td>
+                <td><p class="descr">Ne plus tracker le fichier settings.py.</p></td>
+            </tr>
+        </table>
+    </div>
+{% endblock content %}

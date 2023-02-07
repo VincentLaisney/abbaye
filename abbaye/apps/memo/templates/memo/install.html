@@ -1,0 +1,857 @@
+{% extends 'memo/main_memo.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'memo:home' %}>Mémo</a></li>
+    <li class="breadcrumb-item active">Installation</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>Installation Debian/Ubuntu</h1>
+
+    <div class="w-75">
+        <h4>Préparer la clé bootable :</h4>
+            <div class="group">
+                <p class="descr">Télécharger l'image iso de Debian (small image), et se placer dans le répertoire contenant cette image.<br>Insérer la clé USB, puis chercher son identifiant (en tant que su):</p>
+                <pre class="terminal">
+    fdisk -l
+    => /dev/sdd1    *   1   487 3911796 6   FAT16</pre>
+                <p class="descr">On voit que notre clé USB est montée sur /dev/sdd.<br>Lancer la copie des fichiers :</p>
+                <p class="terminal">dd if=image.iso of=/dev/sdd bs=4M && sync</p>
+                <p class="descr">Il ne reste plus qu'à booter sur la clé USB et à se laisser guider.<br>Quand l'installateur demande s'il faut installer le paquet iwlwifi à partir d'un volume externe, dire non. Ce paquet sera installé après coup (cf. ci-dessous).</p>
+            </div>
+
+        <h4>Installer le wifi :</h4>
+            <div class="group">
+                <p class="descr">Il faut d'abord ajouter l'option "non free" à la ligne  "deb.debian.org" du fichier /etc/apt/sources.list :</p>
+                <p class="file">deb http://deb.debian.org/debian/ buster main contrib non-free</p>
+                <p class="descr">Ensuite installer le paquet :</p>
+                <p class="terminal">apt-get install firmware-iwlwifi</p>
+            </div>
+
+        <h4>Montage de la partition DATA au démarrage :</h4>
+            <div class="group">
+                <p class="descr">Ajouter la ligne suivante dans /etc/fstab :</p>
+                <p class="terminal">UUID=e42f2506-cd08-4910-8602-57f43ca5be49	/media/frromain/DATA	ext4	defaults	0	2</p>
+            </div>
+
+        <h4>Installer aptitude, curl, tree, htop, ncdu, rsync, locate, imagemagick et imagemagick-doc, barcode, aspell-fr, mplayer, calcurse (ou taskwarrior), units.</h4>
+
+        <h4>Configurer le réseau.</h4>
+
+        <h4>Tester échanges.</h4>
+
+        <h4>Suppression de la mise en veille automatique (typiquement dans le cas d'un serveur).</h4>
+            <div class="group">
+                <p class="descr">Il suffit de modifer (en tant que su) le fichier /etc/systemd/sleep.conf :</p>
+                <pre class="terminal">
+    AllowSuspend=no
+    AllowHibernation=no
+    AllowSuspendThenHibernate=no
+    AllowHybridSleep=no</pre>
+            </div>
+
+        <h4>Clés SSH :</h4>
+            <div class="group">
+                <p class="terminal">ssh-keygen</p>
+                <p class="terminal">ssh-copy-id username@remote</p>
+            </div>
+
+        <h4>Firefox :</h4>
+            <div class="group">
+                <p class="descr">Bookmarks, home, proxy, sécurité, dossier de téléchargement, xdebug-helper (addon pour débugger PHP).</p>
+            </div>
+
+        <h4>Vim.</h4>
+
+        <h4>Mails (mutt) :</h4>
+            <div class="group">
+                <p class="descr">
+                    Installer mutt, ripmime, fetchmail, procmail, msmtp et links.<br>
+                    Ensuite copier les fichiers de configuration :</p>
+                <p class="descr">~/.muttrc :</p>
+                <pre class="file">
+    alternative_order text/plain text/enriched text/html
+    auto_view text/html
+    bind index D purge-message
+    bind index &lt;C-down&gt; sidebar-next
+    bind index &lt;C-right&gt; sidebar-open
+    bind index &lt;C-up&gt; sidebar-prev
+    color normal default default
+    color index brightcolor196 default "~N"
+    color index color214 default "~F"
+    color indicator black color28 
+    color status brightcolor196 color18
+    folder-hook . set sort=date-sent
+    hdr_order Date From To Cc Subject
+    ignore *
+    macro index,pager S "<pipe-message>ripmime -i - -d "
+    mailboxes =Inbox =Sent =Postponed =Trash
+    set alias_file=~/Mail/.aliases
+    set attribution="On %d, %n wrote:"
+    set beep
+    set beep_new
+    set charset=utf-8
+    set date_format="%d-%m-%Y %H:%M:%S%p"
+    set delete=yes
+    set edit_hdrs
+    set editor="vim -c 'set spell spelllang=fr'"
+    set envelope_from_address="editeur@traditions-monastiques.com"
+    set fast_reply
+    set folder=~/Mail
+    set forward_format="[%a: %s]"
+    set from="editeur@traditions-monastiques.com"
+    set honor_followup_to
+    set hostname="traditions-monastiques.com"
+    set include=yes
+    set index_format="%Z %D %-25.25L %s %*  |%-2.1X |%-4.4c"
+    set ispell="/usr/bin/aspell -d french -e -c"
+    set mail_check=5
+    set mailcap_path = ~/.mailcap
+    set mime_forward=yes
+    set pager_index_lines=10
+    set pager_stop
+    set postponed=~/Mail/Postponed
+    set quit=ask-yes
+    set realname="Frère Romain Marie"
+    set record=~/Mail/Sent
+    set reply_to
+    set send_charset=utf-8
+    set sendmail="/usr/bin/msmtp"
+    set sidebar_visible
+    set sidebar_width=20
+    set sig_on_top
+    set signature=~/Mail/.signature
+    set spoolfile=~/Mail/Inbox
+    set strict_threads
+    set text_flowed=no
+    set timeout=10
+    set trash=~/Mail/Trash
+    set use_domain
+    set use_envelope_from
+    set use_from
+    set xterm_set_titles=yes
+    set xterm_title="Mutt with %?m?%m messages&no messages?%?n? [%n NEW]?"
+    source ~/Mail/.aliases
+    unignore From To Cc Subject Date Reply-To
+    unset markers</pre>
+                <p class="descr">~/.fetchmailrc :</p>
+                <pre class="file">
+    poll 192.168.1.11
+    uidl
+    port 110
+    protocol POP3
+    username editeur@traditions-monastiques.com
+    password my_super_password
+    mda "/usr/bin/procmail -Y -d %T"</pre>
+                <p class="descr">~/.procmailrc :</p>
+                <pre class="file">
+    MAILDIR=$HOME/Mail                
+    LOGFILE=$HOME/.procmaillog
+    LOGABSTRACT=no
+    VERBOSE=off
+    DEFAULT=$MAILDIR/Inbox
+    ORGMAIL=$MAILDIR/Emergency
+    SHELL=/bin/bash
+
+    :0
+    * ^From.*
+    $DEFAULT</pre>
+                <p class="descr">~/.msmtprc :</p>
+                <pre class="file">
+    account editeur
+    host 192.168.1.11
+    port 25
+    auth off 
+    from editeur@traditions-monastiques.com
+
+    account default : editeur</pre>
+                <p class="descr">~/.mailcap :</p>
+                <pre class="file">
+    # Pour ouvrir des messages au format html avec Firefox (raccourci clavier "m"):
+    text/html; firefox '%s' & sleep 10;
+
+    # Ouvrir autres types MIME :
+    text/html; links -html-assume-codepage %{charset} '%s'; needsterminal; description=HTML Text; nametemplate=%s.html
+    image/jpeg; /usr/bin/eog %s; test=test -n "$DISPLAY"
+    image/jpg; /usr/bin/eog %s; test=test -n "$DISPLAY"
+    image/png; /usr/bin/eog %s; test=test -n "$DISPLAY"
+    image/tiff; /usr/bin/eog %s; test=test -n "$DISPLAY"
+    application/pdf; /usr/bin/evince %s; test=test -n "$DISPLAY"
+    audio/x-wav; /usr/bin/mplayer %s; test=test -n "$DISPLAY"</pre>
+                <p class="descr">Enfin lancer fetchmail (en mode nossl) et mutt :<p>
+                <p class="terminal">rm ~/.fetchmail.pid; fetchmail --nosslcertck -av -d 10; mutt</p>
+            </div>
+
+        <h4>Taskwarrior :</h4>
+            <div class="group">
+                <p class="descr">Fichier de config (~/.taskrc) :</p>
+                <pre class="file">
+    color=on
+    color.alternate=on
+    color.uda.priority.H=color9
+    color.uda.priority.M=color11
+    color.uda.priority.L=color2
+    column.padding=3
+    default.command=list
+    editor=vim
+    nag=""
+    report.list.columns=id,project,description
+    report.list.labels=id,Project,Description
+    report.list.sort=priority+\/,project+\/,description+</pre>
+            </div>
+
+        <h4>Configurer le proxy pour root :</h4>
+            <div class="group">
+                <p class="descr">Dans ~/.bashrc :</p>
+                <p class="terminal">export HTTP_PROXY=http://192.168.1.11:8080</p>
+                <p class="terminal">export HTTPS_PROXY=http://192.168.1.11:8080</p>
+            </div>
+
+            <div class="group">
+                <p class="descr">Dans ~/.wgetrc :</p>
+                <p class="terminal">HTTP_PROXY=http://192.168.1.11:8080</p>
+                <p class="terminal">HTTPS_PROXY=http://192.168.1.11:8080</p>
+            </div>
+
+        <h4>Virtualbox :</h4>
+                <div class="group">
+                <p class="descr">Pour installer :</p>
+                <pre class="terminal">wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -</pre>
+                <pre class="terminal">echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bionic contrib" | tee /etc/apt/sources.list.d/virtualbox.list</pre>
+                <pre class="terminal">apt update</pre>
+                <pre class="terminal">apt install virtualbox-6.1</pre>
+
+                <p class="descr">Pour désinstaller :</p>
+                <pre class="terminal">apt-get remove virtualbox-6.1</pre>
+            </div>
+
+        <h4>Apache :</h4>
+            <div class="group">
+                <p class="descr">Ajouter o+rx sur le dossier /media/frromain.</p>
+
+                <p class="descr">Dans le fichier /etc/apache2/envvars, changer www-data en frromain aux lignes suivantes, pour que les fichiers écrits par apache aient frromain comme propriétaire :</p>
+                <pre class="file">
+    export APACHE_RUN_USER=frromain
+    export APACHE_RUN_GROUP=frromain</pre>
+
+                <p class="descr">Dupliquer /etc/apache2/sites-available/000-default.conf avant de le modifier ainsi :</p>
+                <pre class="file">
+    &lt;VirtualHost *:80&gt;
+    ServerName localhost
+    DocumentRoot /media/frromain/DATA/Sites
+    &lt;Directory "/media/frromain/DATA/Sites"&gt;
+    Options FollowSymLinks
+    AllowOverride all
+    Require all granted
+    Order allow,deny
+    Allow from all
+    &lt;/Directory&gt;
+
+    &lt;Directory "/media/frromain/DATA/Sites/sql"&gt;
+    Options FollowSymLinks
+    AllowOverride all
+    Require all granted
+    Order deny,allow
+    deny from all
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    &lt;VirtualHost *:80&gt;
+    ServerName gregorio.local
+    DocumentRoot /media/frromain/DATA/Sites/gregorio-doc
+    &lt;Directory "/media/frromain/DATA/Sites/gregorio-doc/"&gt;
+    Options FollowSymLinks
+    AllowOverride all
+    Require all granted
+    Order allow,deny
+    Allow from all
+    &lt;/Directory&gt;
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    listen 8000
+    listen 8001
+    listen 8002
+    listen 8003
+    listen 8004
+    listen 8005
+    listen 8006
+    listen 8007
+    listen 8008
+    listen 8009
+    listen 8010
+
+    NameVirtualHost *:8000
+    &lt;VirtualHost *:8000&gt;
+    ServerName localhost
+    ServerAdmin editeur@traditions-monastiques.com
+    DocumentRoot /home/frromain/Sites/polyglotte/polyglotte
+    WSGIDaemonProcess polyglotte.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/polyglotte python-path=/home/frromain/Sites/polyglotte/polyglotte
+    WSGIProcessGroup polyglotte.asj.com
+    WSGIScriptAlias / /home/frromain/Sites/polyglotte/polyglotte/polyglotte/wsgi.py
+    &lt;Directory /home/frromain/Sites/polyglotte/polyglotte/polyglotte&gt;
+    &lt;Files wsgi.py&gt;
+    Require all granted
+    &lt;/Files&gt;
+    &lt;/Directory&gt;
+
+    Alias /static/ /home/frromain/Sites/polyglotte/polyglotte/static_files/
+    &lt;Directory /home/frromain/Sites/polyglotte/polyglotte/static_files&gt;
+    Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    NameVirtualHost *:8001
+    &lt;VirtualHost *:8001&gt;
+    ServerName localhost
+    ServerAdmin editeur@traditions-monastiques.com
+    DocumentRoot /home/frromain/Sites/infirmerie/infirmerie
+    WSGIDaemonProcess infirmerie.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/infirmerie python-path=/home/frromain/Sites/infirmerie/infirmerie
+    WSGIProcessGroup infirmerie.asj.com
+    WSGIScriptAlias / /home/frromain/Sites/infirmerie/infirmerie/infirmerie/wsgi.py
+    &lt;Directory /home/frromain/Sites/infirmerie/infirmerie/infirmerie&gt;
+    &lt;Files wsgi.py&gt;
+    Require all granted
+    &lt;/Files&gt;
+    &lt;/Directory&gt;
+
+    Alias /static/ /home/frromain/Sites/infirmerie/infirmerie/static_files/
+    &lt;Directory /home/frromain/Sites/infirmerie/infirmerie/static_files&gt;
+    Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    NameVirtualHost *:8002
+    &lt;VirtualHost *:8002&gt;
+    ServerName localhost
+    ServerAdmin editeur@traditions-monastiques.com
+    DocumentRoot /home/frromain/Sites/ordomatic/ordomatic
+    WSGIDaemonProcess ordomatic.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/ordomatic python-path=/home/frromain/Sites/ordomatic/ordomatic
+    WSGIProcessGroup ordomatic.asj.com
+    WSGIScriptAlias / /home/frromain/Sites/ordomatic/ordomatic/ordomatic/wsgi.py
+    &lt;Directory /home/frromain/Sites/ordomatic/ordomatic/ordomatic&gt;
+    &lt;Files wsgi.py&gt;
+    Require all granted
+    &lt;/Files&gt;
+    &lt;/Directory&gt;
+
+    Alias /static/ /home/frromain/Sites/ordomatic/ordomatic/static_files/
+    &lt;Directory /home/frromain/Sites/ordomatic/ordomatic/static_files&gt;
+    Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    NameVirtualHost *:8003
+    &lt;VirtualHost *:8003&gt;
+    ServerName localhost
+    ServerAdmin editeur@traditions-monastiques.com
+    DocumentRoot /home/frromain/Sites/hotellerie/hotellerie
+    WSGIDaemonProcess hotellerie.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/hotellerie python-path=/home/frromain/Sites/hotellerie/hotellerie
+    WSGIProcessGroup hotellerie.asj.com
+    WSGIScriptAlias / /home/frromain/Sites/hotellerie/hotellerie/hotellerie/wsgi.py
+    &lt;Directory /home/frromain/Sites/hotellerie/hotellerie/hotellerie&gt;
+    &lt;Files wsgi.py&gt;
+    Require all granted
+    &lt;/Files&gt;
+    &lt;/Directory&gt;
+
+    Alias /static/ /home/frromain/Sites/hotellerie/hotellerie/static_files/
+    &lt;Directory /home/frromain/Sites/hotellerie/hotellerie/static_files&gt;
+    Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    NameVirtualHost *:8004
+    &lt;VirtualHost *:8004&gt;
+    ServerName localhost
+    ServerAdmin editeur@traditions-monastiques.com
+    DocumentRoot /home/frromain/Sites/editor/editor
+    WSGIDaemonProcess editor.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/editor python-path=/home/frromain/Sites/editor/editor
+    WSGIProcessGroup editor.asj.com
+    WSGIScriptAlias / /home/frromain/Sites/editor/editor/editor/wsgi.py
+    &lt;Directory /home/frromain/Sites/editor/editor/editor&gt;
+    &lt;Files wsgi.py&gt;
+    Require all granted
+    &lt;/Files&gt;
+    &lt;/Directory&gt;
+
+    Alias /static/ /home/frromain/Sites/editor/editor/static_files/
+    &lt;Directory /home/frromain/Sites/editor/editor/static_files&gt;
+    Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    NameVirtualHost *:8005
+    &lt;VirtualHost *:8005&gt;
+    ServerName localhost
+    ServerAdmin editeur@traditions-monastiques.com
+    DocumentRoot /home/frromain/Sites/livrets/livrets
+    WSGIDaemonProcess livrets.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/livrets python-path=/home/frromain/Sites/livrets/livrets
+    WSGIProcessGroup livrets.asj.com
+    WSGIScriptAlias / /home/frromain/Sites/livrets/livrets/livrets/wsgi.py
+    &lt;Directory /home/frromain/Sites/livrets/livrets/livrets&gt;
+    &lt;Files wsgi.py&gt;
+    Require all granted
+    &lt;/Files&gt;
+    &lt;/Directory&gt;
+
+    Alias /static/ /home/frromain/Sites/livrets/livrets/static_files/
+    &lt;Directory /home/frromain/Sites/livrets/livrets/static_files&gt;
+    Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    NameVirtualHost *:8006
+    &lt;VirtualHost *:8006&gt;
+    ServerName localhost
+    ServerAdmin editeur@traditions-monastiques.com
+    DocumentRoot /home/frromain/Sites/absences/absences
+    WSGIDaemonProcess absences.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/absences python-path=/home/frromain/Sites/absences/absences
+    WSGIProcessGroup absences.asj.com
+    WSGIScriptAlias / /home/frromain/Sites/absences/absences/absences/wsgi.py
+    &lt;Directory /home/frromain/Sites/absences/absences/absences&gt;
+    &lt;Files wsgi.py&gt;
+    Require all granted
+    &lt;/Files&gt;
+    &lt;/Directory&gt;
+
+    Alias /static/ /home/frromain/Sites/absences/absences/static_files/
+    &lt;Directory /home/frromain/Sites/absences/absences/static_files&gt;
+    Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    NameVirtualHost *:8007
+    &lt;VirtualHost *:8007&gt;
+    ServerName localhost
+    ServerAdmin editeur@traditions-monastiques.com
+    DocumentRoot /home/frromain/Sites/barcode/barcode
+    WSGIDaemonProcess barcode.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/barcode python-path=/home/frromain/Sites/barcode/barcode
+    WSGIProcessGroup barcode.asj.com
+    WSGIScriptAlias / /home/frromain/Sites/barcode/barcode/barcode/wsgi.py
+    &lt;Directory /home/frromain/Sites/barcode/barcode/barcode&gt;
+    &lt;Files wsgi.py&gt;
+    Require all granted
+    &lt;/Files&gt;
+    &lt;/Directory&gt;
+
+    Alias /static/ /home/frromain/Sites/barcode/barcode/static_files/
+    &lt;Directory /home/frromain/Sites/barcode/barcode/static_files&gt;
+    Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    NameVirtualHost *:8008
+    &lt;VirtualHost *:8008&gt;
+    ServerName localhost
+    ServerAdmin editeur@traditions-monastiques.com
+    DocumentRoot /home/frromain/Sites/statistiques/statistiques
+    WSGIDaemonProcess statistiques.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/statistiques python-path=/home/frromain/Sites/statistiques/statistiques
+    WSGIProcessGroup statistiques.asj.com
+    WSGIScriptAlias / /home/frromain/Sites/statistiques/statistiques/statistiques/wsgi.py
+    &lt;Directory /home/frromain/Sites/statistiques/statistiques/statistiques&gt;
+    &lt;Files wsgi.py&gt;
+    Require all granted
+    &lt;/Files&gt;
+    &lt;/Directory&gt;
+
+    Alias /static/ /home/frromain/Sites/statistiques/statistiques/static_files/
+    &lt;Directory /home/frromain/Sites/statistiques/statistiques/static_files&gt;
+    Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    NameVirtualHost *:8009
+    &lt;VirtualHost *:8009&gt;
+    ServerName localhost
+    ServerAdmin editeur@traditions-monastiques.com
+    DocumentRoot /home/frromain/Sites/missa/missa
+    WSGIDaemonProcess missa.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/missa python-path=/home/frromain/Sites/missa/missa
+    WSGIProcessGroup missa.asj.com
+    WSGIScriptAlias / /home/frromain/Sites/missa/missa/missa/wsgi.py
+    &lt;Directory /home/frromain/Sites/missa/missa/missa&gt;
+    &lt;Files wsgi.py&gt;
+    Require all granted
+    &lt;/Files&gt;
+    &lt;/Directory&gt;
+
+    Alias /static/ /home/frromain/Sites/missa/missa/static_files/
+    &lt;Directory /home/frromain/Sites/missa/missa/static_files&gt;
+    Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    NameVirtualHost *:8010
+    &lt;VirtualHost *:8010&gt;
+    ServerName localhost
+    ServerAdmin editeur@traditions-monastiques.com
+    DocumentRoot /home/frromain/Sites/imprimerie/imprimerie
+    WSGIDaemonProcess imprimerie.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/imprimerie python-path=/home/frromain/Sites/imprimerie/imprimerie
+    WSGIProcessGroup imprimerie.asj.com
+    WSGIScriptAlias / /home/frromain/Sites/imprimerie/imprimerie/imprimerie/wsgi.py
+    &lt;Directory /home/frromain/Sites/imprimerie/imprimerie/imprimerie&gt;
+    &lt;Files wsgi.py&gt;
+    Require all granted
+    &lt;/Files&gt;
+    &lt;/Directory&gt;
+
+    Alias /static/ /home/frromain/Sites/imprimerie/imprimerie/static_files/
+    &lt;Directory /home/frromain/Sites/imprimerie/imprimerie/static_files&gt;
+    Require all granted
+    &lt;/Directory&gt;
+
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    &lt;/VirtualHost&gt;
+
+    # vim: syntax=apache ts=4 sw=4 sts=4 sr noet</pre>
+            </div>
+
+        <h4>MySQL :</h4>
+            <div class="group">
+                <p class="descr">MySQL8 n'est pas dispo dans les paquets Debian. Il faut l'installer manuellement à partir d'un dépôt distant :</p>
+                <p class="terminal">cd /tmp</p>
+                <p class="terminal">wget https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb</p>
+                <p class="terminal">dpkg -i mysql-apt-config_0.8.13-1_all.deb</p>
+
+                <p class="descr">Puis :</p>
+                <p class="terminal">apt update</p>
+                <p class="terminal">apt install mysql-server</p>
+
+                <p class="descr">Puis :</p>
+                <p class="terminal">mysql_secure_installation</p>
+
+                <p class="descr">Enfin dans une console MySQL :</p>
+                <p class="terminal">ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '&lt;my_password&gt;';</p>
+
+                <p class="descr">Créer le fichier ~/.my.cnf (pour ne pas avoir à saisir user et mdp à chaque connexion MySQL) :</p>
+                <pre class="file">
+    [mysql]
+    user=root
+    password=my_super_password
+    [mysqldump]
+    user=root
+    password=my_super_password</pre>
+            </div>
+
+        <h4>PHP7.3 + modules php7.3-mysql et php7.3-gd (ce dernier pour les statistiques).</h4>
+
+        <h4>Importer les bases de données.</h4>
+
+        <h4>Polices :</h4>
+            <div class="group">
+                <p class="descr">Fonts (Arno Pro, FlavGaramond, Garamond Premier Pro, GregPlantin, Menlo-Regular.ttf, PlantinStd, SilentiumPro-RomanI.otf) à copier dans /usr/share/fonts (ttf dans truetype et otf dans opentype). Puis :</p>
+                <p class="terminal">fc-cache -fv</p>
+            </div>
+
+        <h4>LaTeX :</h4>
+            <div class="group">
+                <p class="descr">Installer texlive texlive-luatex texlive-xetex texlive-lang-european texlive-lang-french texlive-extra-utils.</p>
+                <p class="descr">Ne pas installer texlive-full, qui semble faire des problèmes.</p>
+                <p class="descr">texlive-extra-utils contient latexindent, qui sert pour VSCode (formattage et compilation lors du Ctrl-S).</p>
+            </div>
+        
+
+        <h4>Gregorio :</h4>
+            <div class="group">
+                <p class="descr">Télécharger l'archive tar.bz2 sur le site de gregorio (releases).</p>
+                <p class="descr">Désarchiver.</p>
+                <p class="descr">Dans le dossier obtenu, exécuter <b>(en tant que su)</b> :</p>
+                <p class="terminal">./build.sh</p>
+                <p class="terminal">./install.sh</p>
+            </div>
+
+        <h4>Git :</h4>
+            <div class="group">
+                <p class="descr">Fichier ~/.gitconfig :</p>
+                <pre class="file">
+    [user]
+    name = BrRoman
+    email = editeur@traditions-monastiques.com
+    [alias]
+    ck = checkout
+    ci = commit -m
+    st = status -u
+    lg = log --graph --date=format:\"%d/%m/%Y %H:%M\" --pretty=format:\"%Cred%h%Creset %C(cyan)%d%Creset %s %C(yellow)%an%Creset %C(green)%ad%Creset\" --decorate --all
+    [diff]
+    mnemonicprefix = true
+    renames = true
+    wordRegex = .
+    [core]
+    editor = vim
+    [http]
+    proxy = http://192.168.1.11:8080
+    [https]
+    proxy = http://192.168.1.11:8080</pre>
+                <p class="descr">Fichier ~/.netrc :</p>
+                <pre class="file">machine github.com login BrRoman password my_super_password</pre>
+            </div>
+
+        <h4>Crons :</h4>
+            <div class="group">
+                <p class="descr">Éditer le crontab :</p>
+                <p class="terminal">crontab -e</p>
+                <p class="descr">Lignes à ajouter à la fin du fichier :</p>
+                <pre class="file">
+    */30 9-20 * * * /home/frromain/Scripts/server.sh
+    10 10,16 * * * /home/frromain/Scripts/github.sh</pre>
+            </div>
+
+        <h4>VSCode :</h4>
+            <div class="group">
+                <p class="descr">Clé :</p>
+                <p class="terminal">curl --proxy http://192.168.1.11:8080 https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg</p>
+                <p class="terminal">install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/</p>
+                <p class="descr">Dépôt :</p>
+                <p class="terminal">echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list</p>
+                <p class="descr">Installation proprement dite :</p>
+                <p class="terminal">apt update</p>
+                <p class="terminal">apt install code</p>
+                <p class="descr">Fichier de config (~/.config/Code/User/settings.json) :</p>
+                <pre class="file">
+    {
+    // Editor:
+    "editor.foldingHighlight": true,
+    "editor.fontFamily": "monospace",
+    "editor.fontSize": 14,
+    "editor.formatOnSave": true,
+    "editor.minimap.enabled": false,
+    "editor.renderControlCharacters": true,
+    "editor.renderWhitespace": "all",
+    "editor.smoothScrolling": true,
+    "editor.suggest.shareSuggestSelections": true,
+    "editor.suggestSelection": "first",
+    "editor.tabSize": 4,
+    "editor.wordWrap": "on",
+    "editor.wrappingIndent": "indent",
+    // Explorer:
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false,
+    "explorer.openEditors.visible": 12,
+    // Problems:
+    "problems.decorations.enabled": false,
+    "window.newWindowDimensions": "maximized",
+    "window.openFilesInNewWindow": "on",
+    "window.restoreFullscreen": true,
+    "window.restoreWindows": "none",
+    // Workbench:
+    "workbench.activityBar.visible": true,
+    "workbench.colorCustomizations": {
+    "editor.background": "#000000",
+    "editor.foreground": "#ffffff",
+    "editor.lineHighlightBorder": "#444444",
+    "statusBar.background": "#111111",
+    "statusBar.border": "#777777",
+    },
+    "workbench.editor.closeOnFileDelete": true,
+    "workbench.editor.highlightModifiedTabs": true,
+    "workbench.editor.openPositioning": "last",
+    "workbench.editorAssociations": {
+    "*.ipynb": "jupyter-notebook",
+    "*.pdf": "default"
+    },
+    "window.menuBarVisibility": "toggle",
+    "workbench.startupEditor": "welcomePage",
+    // Files:
+    "files.autoSave": "afterDelay",
+    "files.autoSaveDelay": 5000,
+    // Terminal:
+    "terminal.external.linuxExec": "gnome-terminal",
+    "terminal.integrated.allowChords": false,
+    "terminal.integrated.confirmOnExit": true,
+    "terminal.integrated.fontFamily": "monospace",
+    "terminal.integrated.fontSize": 13,
+    "terminal.integrated.tabs.enabled": true,
+    "terminal.integrated.tabs.hideCondition": "never",
+    // Debug:
+    "debug.allowBreakpointsEverywhere": true,
+    // Git:
+    "diffEditor.ignoreTrimWhitespace": false,
+    "diffEditor.renderSideBySide": true,
+    "git.confirmSync": false,
+    "git.showProgress": true,
+    "git-graph.maxDepthOfRepoSearch": 1,
+    // TODO highlight:
+    "todo-tree.general.tags": [
+    "FIXME",
+    "TODO",
+    "[ ]",
+    "[x]"
+    ],
+    "todo-tree.highlights.defaultHighlight": {
+    "fontWeight": "bold",
+    "foreground": "#FF9600",
+    "type": "tag"
+    },
+    "todo-tree.highlights.customHighlight": {
+    "TODO": {
+    "icon": "pin",
+    "iconColour": "yellow",
+    },
+    "FIXME": {
+    "icon": "alert",
+    "iconColour": "red",
+    }
+    },
+    "todo-tree.regex.regex": "(//|#|&lt;!--|;|/\\*|^|^\\s*(-|\\d+.))\\s*($TAGS)",
+    // HTML:
+    "html.format.templating": true,
+    // Javascript:
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    // LaTeX:
+    "latex-workshop.latex.recipes": [
+    {
+    "name": "lualatex",
+    "tools": [
+        "lualatex"
+    ]
+    }
+    ],
+    "latex-workshop.latex.tools": [
+    {
+    "name": "lualatex",
+    "command": "lualatex",
+    "args": [
+        "--shell-escape",
+        "%DOC%.tex"
+    ],
+    "env": {}
+    }
+    ],
+    // Python:
+    "python.pythonPath": "${workspaceFolder}/bin/python3.7/",
+    "python.formatting.autopep8Path": "${workspaceFolder}/bin/autopep8",
+    "python.linting.pylintPath": "${workspaceFolder}/bin/pylint",
+    "python.linting.enabled": true,
+    "python.linting.pylintEnabled": true,
+    "python.linting.pylintArgs": [
+    "--load-plugins",
+    "pylint_django"
+    ],
+    "emmet.includeLanguages": {
+    "django-html": "html"
+    },
+    "files.associations": {
+    "*.html": "django-html"
+    },
+    "notebook.cellToolbarLocation": {
+    "default": "right",
+    "jupyter-notebook": "left"
+    },
+    }</pre>
+                <p class="descr">Keybindings (~/.config/Code/User/keybindings.json) :</p>
+                <pre class="file">
+    [
+    {
+    "key": "ctrl+shift+[KeyM]",
+    "command": "workbench.action.openSettingsJson"
+    },
+    {
+    "key": "ctrl+f9",
+    "command": "editor.debug.action.goToNextBreakpoint"
+    },
+    {
+    "key": "ctrl+shift+f9",
+    "command": "editor.debug.action.goToPreviousBreakpoint"
+    }
+    ]</pre>
+                <p class="descr">Installer les extensions :</p>
+                <pre class="file">
+    Auto close tags
+    Auto rename tags
+    Beautify
+    Bookmarks
+    Bracket pair colorizer
+    Clipboard History
+    CSS peek
+    Django
+    Git graph
+    Highlight matching tags
+    Htmltagwrap
+    jQuery code snippets
+    LaTeX workshop
+    Markdown all in one
+    PHP debug
+    PHP intellisense
+    Project manager
+    Python
+    Remote-ssh
+    Todo tree
+    Vim</pre>
+            </div>
+
+        <h4>Collatinus :</h4>
+            <div class="group">
+                <p class="descr">Installation (paquet) :</p>
+                <pre class="terminal">
+    aptitude install collatinus</pre>
+                <p class="descr">L'importation des dicos via Collatinus (cf. barre de menu "Options > Télécharger…") ne fonctionne pas. Il faut donc :</p>
+                <p class="descr">1. Installer un paquet supplémentaire :</p>
+                <pre class="terminal">
+    aptitude install qt5-image-formats-plugins</pre>
+                <p class="descr">2. Copier à la main le contenu du dossier ~/Documents/Langues/Latin/Collatinus/dicos/ dans ~/.local/share/collatinus/data/dicos/ :</p>
+            </div>
+
+        <h4>Autres logiciels :</h4>
+            <div class="group">
+                <p class="descr">Anki (paquet), Audacity, FBReader pour lire les epubs (paquet), Gimp et gimp-help-en (paquets), Google chrome (.deb), RawTherapee (paquet), Scribus (paquet), Stellarium (paquet), VLC (paquet), XnView (.deb).</p>
+            </div>
+
+        <h4>Installation sans proxy :</h4>
+            <div class="group">
+                <p class="descr">Aptitude avec option sans proxy :</p>
+                <pre class="terminal">
+    aptitude -o Acquire::http::proxy=false install &lt;package&gt;</pre>
+            </div>
+
+        <h4>Installation automatique :</h4>
+            <div class="group">
+                <p class="descr">Exporter la liste des paquets installés :</p>
+                <p class="terminal">dpkg --get-selections > my_package_list.txt</p>
+                <p class="descr">Ou bien, pour exporter uniquement les paquets explicitement installés :</p>
+                <p class="terminal">aptitude search -F '%p %C' '~i!~M' > my_package_list.txt</p>
+                <p class="descr">Pour faire une installation à partir de cette lite :</p>
+                <pre class="terminal">
+    apt-cache dumpavail | dpkg --merge-avail
+    dpkg --set-selections &lt; my_package_list.txt
+    apt-get dselect-upgrade</pre>
+            </div>
+    </div>
+{% endblock content %}

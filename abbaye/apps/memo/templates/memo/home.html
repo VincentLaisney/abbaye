@@ -1,7 +1,41 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Mémo</li>
+{% endblock breadcrumbs %}
+
 {% block content %}
-    <div class="d-flex flex-column align-items-center">
-        <h1>Bienvenue sur Mémo Linux !</h1>
+    <div class="d-flex align-items-center">
+        <div>
+            <img src={% static 'memo/img/memo.png' %} class="m-2" style="max-width: 100px;">
+        </div>
+
+        <div class="d-flex flex-column">
+            <div class="d-flex align-items-center">
+                <h1>Bienvenue sur Mémo Linux !</h1>
+            </div>
+
+            <div class="d-flex justify-content-between">
+                <a href={% url 'memo:install' %} class="m-2">Installation</a>
+                <a href={% url 'memo:commands' %} class="m-2">Commandes</a>
+                <a href={% url 'memo:sh' %} class="m-2">Scripts</a>
+                <a href={% url 'memo:py' %} class="m-2">Python</a>
+                <a href={% url 'memo:js' %} class="m-2">Javascript</a>
+                <a href={% url 'memo:mysql' %} class="m-2">MySQL</a>
+                <a href={% url 'memo:vim' %} class="m-2">Vim</a>
+                <a href={% url 'memo:git' %} class="m-2">Git</a>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="red-dark mt-2">Commandes et scripts utiles aux utilisateurs de Linux</h2>
+    <div class="text-center mt-2 mb-5">
+        <p class="descr">Ce site n'est pas un cours sur Linux, Python, la programmation, etc., mais un aide-mémoire pour utilisateurs déjà rodés.</p>
+        <p class="descr">Pour une introduction à Linux from scratch (et en français), voir <a href="static/cours/linux_openclassrooms.pdf"> ce cours</a> de l'excellent site Openclassrooms (en ligne et à jour <a href="https://openclassrooms.com/fr/courses/43538-reprenez-le-controle-a-laide-de-linux">ici</a>).</p>
+        <p class="descr">Pour une introduction à Python et à la programmation en général, voir <a href="static/cours/python.pdf">ce très bon cours</a> réalisé par un professeur belge.</p>
+        <p class="descr">Côté MySQL, on trouvera difficilement mieux que <a href="static/cours/mysql_openclassrooms.pdf">ceci</a>, également distribué par Openclassrooms (en ligne et à jour <a href="https://openclassrooms.com/fr/courses/1959476-administrez-vos-bases-de-donnees-avec-mysql">ici</a>).</p>
+        <p class="descr">Pour les curieux (voire les bizarres) qui se demandent ce que c'est que Git, c'est <a href="static/cours/progit.pdf">par là</a>.</p>
     </div>
 {% endblock content %}
