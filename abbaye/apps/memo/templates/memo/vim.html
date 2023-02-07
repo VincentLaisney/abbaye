@@ -1,0 +1,85 @@
+{% extends 'memo/main_memo.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'memo:home' %}>Mémo</a></li>
+    <li class="breadcrumb-item active">Vim</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>Vim</h1>
+
+    <div class="w-75">
+        <table class="table-borderless">
+            <tr>
+                <td><p class="terminal">'.</p></td>
+                <td><p class="descr">Va à la dernière modification.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">''</p></td>
+                <td><p class="descr">Idem.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">'^</p></td>
+                <td><p class="descr">Idem.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">:%s/pattern//ng</p></td>
+                <td><p class="descr">Compte le nombre d'occurrences de 'pattern'.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">:g/pattern/p</p></td>
+                <td><p class="descr">Affiche toutes les occurrences de 'pattern'. A bit of trivia: This command is the origin of the name 'grep', as it would commonly be described as g/re/p, where re stands for "regular expression".</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">:g/pattern/d</p></td>
+                <td><p class="descr">Efface toutes les lignes (g) qui contiennent ‘pattern’.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">:g!/pattern/d</p></td>
+                <td><p class="descr">Efface toutes les lignes (g) qui ne contiennent pas ‘pattern’.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">d'a</p></td>
+                <td><p class="descr">Delete to mark a.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">y'a</p></td>
+                <td><p class="descr">Yank to mark a.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">:h quickref</p></td>
+                <td><p class="descr">Quick ref.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">gv</p></td>
+                <td><p class="descr">Retourne en mode visuel après une commande, avec la même sélection que la dernière fois.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">U</p></td>
+                <td><p class="descr">Met la sélection en uppercase.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">u</p></td>
+                <td><p class="descr">Met la sélection en lowercase.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">1^g</p></td>
+                <td><p class="descr">Chemin du fichier courant.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">set ft=php.txtfmt</p></td>
+                <td><p class="descr">Format fichier = php + txtfmt (permet d'avoir les 2 highlightings).</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">:!./%</p></td>
+                <td><p class="descr">Exécuter le fichier courant (%).</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">:!bash %</p></td>
+                <td><p class="descr">Exécuter le fichier courant avec bash.</p></td>
+            </tr>
+        </table>
+    </div>
+{% endblock content %}

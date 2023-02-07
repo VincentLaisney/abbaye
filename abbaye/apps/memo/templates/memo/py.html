@@ -1,0 +1,654 @@
+{% extends 'memo/main_memo.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'memo:home' %}>Mémo</a></li>
+    <li class="breadcrumb-item active">Python</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>Python / Django</h1>
+        <h5 class="descr text-center mb-5">Les chevrons (>>>) indiquent que la commande doit être exécutée dans un shell Python.</h5>
+
+    <div class="w-75">
+        <h4>THE ZEN OF PYTHON</h4>
+            <div class="group">
+                <pre class="terminal">
+>>> import this
+The Zen of Python, by Tim Peters
+
+Beautiful is better than ugly.
+Explicit is better than implicit.
+Simple is better than complex.
+Complex is better than complicated.
+Flat is better than nested.
+Sparse is better than dense.
+Readability counts.
+Special cases aren't special enough to break the rules.
+Although practicality beats purity.
+Errors should never pass silently.
+Unless explicitly silenced.
+In the face of ambiguity, refuse the temptation to guess.
+There should be one-- and preferably only one --obvious way to do it.
+Although that way may not be obvious at first unless you're Dutch.
+Now is better than never.
+Although never is often better than *right* now.
+If the implementation is hard to explain, it's a bad idea.
+If the implementation is easy to explain, it may be a good idea.
+Namespaces are one honking great idea -- let's do more of those!</pre>
+            </div>
+
+
+        <h4>COMMANDES SYSTÈME</h4>
+            <div class="group">
+                <p class="descr">Exécuter une commande système en Python :</p>
+                <pre class="terminal">
+>>> import os
+>>> os.system('ls -alh')</pre>
+            </div>
+
+
+        <h4>SLICES</h4>
+            <div class="group">
+                <p class="descr">Inverser une chaîne ([begin:end:step]) :</p>
+                <pre class="terminal">
+>>> 'Bonjour’[::-1]
+=> 'ruojnoB’</pre>
+            </div>
+
+
+        <h4>VARIABLES</h4>
+            <div class="group">
+                <p class="descr">Inverser les valeurs de deux variables :</p>
+                <pre class="terminal">
+# In-place value swapping
+
+# Let's say we want to swap
+# the values of a and b...
+a = 23
+b = 42
+
+# The "classic" way to do it
+# with a temporary variable:
+tmp = a
+a = b
+b = tmp
+
+# Python also lets us
+# use this short-hand:
+a, b = b, a</pre>
+            </div>
+
+        <h4>REGEX</h4>
+            <div class="group">
+                <p class="descr">Compter le nombre d'occurrences d'un motif dans une chaîne :</p>
+                <pre class="terminal">
+>>> import re
+>>> len(re.findall('ba', 'babar'))
+2</pre>
+            </div>
+
+        <h4>TESTS</h4>
+            <div class="group">
+                <p class="descr">Tests multiples :</p>
+                <pre class="terminal">
+# Different ways to test multiple
+# flags at once in Python
+x, y, z = 0, 1, 0
+
+if x == 1 or y == 1 or z == 1:
+print('passed')
+
+if 1 in (x, y, z):
+print('passed')
+
+# These only test for truthiness:
+if x or y or z:
+print('passed')
+
+if any((x, y, z)):
+print('passed')</pre>
+
+                <p class="descr">Différence entre "is" et "==" :</p>
+                <pre class="terminal">
+# "is" vs "=="
+
+>>> a = [1, 2, 3]
+>>> b = a
+
+>>> a is b
+True
+>>> a == b
+True
+
+>>> c = list(a)
+
+>>> a == c
+True
+>>> a is c
+False
+
+# • "is" expressions evaluate to True if two 
+#   variables point to the same object
+
+# • "==" evaluates to True if the objects 
+#   referred to by the variables are equal</pre>
+            </div>
+
+
+        <h4>ITÉRABLES</h4>
+            <div class="group">
+                <p class="descr">Trouver le ou les élément(s) le(s) plus commun(s) d'un itérable :</p>
+                <pre class="terminal">
+# collections.Counter lets you find the most common
+# elements in an iterable:
+
+>>> import collections
+>>> c = collections.Counter('helloworld')
+
+>>> c
+Counter({'l': 3, 'o': 2, 'e': 1, 'd': 1, 'h': 1, 'r': 1, 'w': 1})
+
+>>> c.most_common(3)
+[('l', 3), ('o', 2), ('e', 1)]</pre>
+
+                <p class="descr">Afficher toutes les combinaisons possibles d'un itérable :</p>
+                <pre class="terminal">
+# itertools.permutations() generates permutations 
+# for an iterable. Time to brute-force those passwords ;-)
+
+>>> import itertools
+>>> for p in itertools.permutations('ABCD'):
+...     print(p)
+
+('A', 'B', 'C', 'D')
+('A', 'B', 'D', 'C')
+('A', 'C', 'B', 'D')
+('A', 'C', 'D', 'B')
+('A', 'D', 'B', 'C')
+('A', 'D', 'C', 'B')
+('B', 'A', 'C', 'D')
+('B', 'A', 'D', 'C')
+('B', 'C', 'A', 'D')
+('B', 'C', 'D', 'A')
+('B', 'D', 'A', 'C')
+('B', 'D', 'C', 'A')
+('C', 'A', 'B', 'D')
+('C', 'A', 'D', 'B')
+('C', 'B', 'A', 'D')
+('C', 'B', 'D', 'A')
+('C', 'D', 'A', 'B')
+('C', 'D', 'B', 'A')
+('D', 'A', 'B', 'C')
+('D', 'A', 'C', 'B')
+('D', 'B', 'A', 'C')
+('D', 'B', 'C', 'A')
+('D', 'C', 'A', 'B')
+('D', 'C', 'B', 'A')</pre>
+            </div>
+
+
+        <h4>LISTES</h4>
+            <div class="group">
+                <p class="descr">Compréhension de listes :</p>
+                <pre class="terminal">
+# Python's list comprehensions are awesome.
+
+vals = [expression 
+for value in collection 
+if condition]
+
+# This is equivalent to:
+
+vals = []
+for value in collection:
+if condition:
+vals.append(expression)
+
+# Example:
+
+>>> even_squares = [x * x for x in range(10) if not x % 2]
+>>> even_squares
+[0, 4, 16, 36, 64]</pre>
+
+                <p class="descr">Listes sans indices, utiles pour diverses opérations :</p>
+                <pre class="terminal">
+# Python's list slice syntax can be used without indices
+# for a few fun and useful things:
+
+# You can clear all elements from a list:
+>>> lst = [1, 2, 3, 4, 5]
+>>> del lst[:]
+>>> lst
+[]
+
+# You can replace all elements of a list
+# without creating a new list object:
+>>> a = lst
+>>> lst[:] = [7, 8, 9]
+>>> lst
+[7, 8, 9]
+>>> a
+[7, 8, 9]
+>>> a is lst
+True
+
+# You can also create a (shallow) copy of a list:
+>>> b = lst[:]
+>>> b
+[7, 8, 9]
+>>> b is lst
+False</pre>
+            </div>
+
+
+        <h4>OPÉRATIONS SUR LES DICTIONNAIRES</h4>
+            <div class="group">
+                <p class="descr">Affichier un dictionnaire avec le module json :</p>
+                <pre class="terminal">
+# The standard string repr for dicts is hard to read:
+>>> my_mapping = {'a': 23, 'b': 42, 'c': 0xc0ffee}
+>>> my_mapping
+{'b': 42, 'c': 12648430. 'a': 23}  # 😞
+
+# The "json" module can do a much better job:
+>>> import json
+>>> print(json.dumps(my_mapping, indent=4, sort_keys=True))
+{
+"a": 23,
+"b": 42,
+"c": 12648430
+}
+
+# Note this only works with dicts containing
+# primitive types (check out the "pprint" module):
+>>> json.dumps({all: 'yup'})
+TypeError: keys must be a string</pre>
+
+                <p class="descr">Trier un dictionnaire par les values :</p>
+                <pre class="terminal">
+# How to sort a Python dict by value
+# (== get a representation sorted by value)
+
+>>> xs = {'a': 4, 'b': 3, 'c': 2, 'd': 1}
+
+>>> sorted(xs.items(), key=lambda x: x[1])
+[('d', 1), ('c', 2), ('b', 3), ('a', 4)]
+
+# Or:
+
+>>> import operator
+>>> sorted(xs.items(), key=operator.itemgetter(1))
+[('d', 1), ('c', 2), ('b', 3), ('a', 4)]</pre>
+
+                <p class="descr">La méthode get() peut être appliquée à un dict, et on peut lui donner une valeur par défaut :</p>
+                <pre class="terminal">
+# The get() method on dicts
+# and its "default" argument
+
+name_for_userid = {
+382: "Alice",
+590: "Bob",
+951: "Dilbert",
+}
+
+def greeting(userid):
+return "Hi %s!" % name_for_userid.get(userid, "there")
+
+>>> greeting(382)
+"Hi Alice!"
+
+>>> greeting(333333)
+"Hi there!"</pre>
+
+                <p class="descr">Merger deux dictionnaires :</p>
+                <pre class="terminal">
+# How to merge two dictionaries
+# in Python 3.5+
+
+>>> x = {'a': 1, 'b': 2}
+>>> y = {'b': 3, 'c': 4}
+
+>>> z = {**x, **y}
+
+>>> z
+{'c': 4, 'a': 1, 'b': 3}
+
+# In Python 2.x you could
+# use this:
+>>> z = dict(x, **y)
+>>> z
+{'a': 1, 'c': 4, 'b': 3}
+
+# In these examples, Python merges dictionary keys
+# in the order listed in the expression, overwriting
+# duplicates from left to right.
+#
+# See:
+<a href="https://t.dripemail2.com/c/eyJhY2NvdW50X2lkIjoiNjIxNDUwMCIsImRlbGl2ZXJ5X2lkIjoiYnV1azgzbDhtN3oydmo4YXhnbXYiLCJ1cmwiOiJodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PUR1ZXh3MDhLYUM4XHUwMDI2X19zPWxjdGdqaGZ2cmNveWl1NHk0NW5pIn0</pre>
+">https://t.dripemail2.com/c/eyJhY2NvdW50X2lkIjoiNjIxNDUwMCIsImRlbGl2ZXJ5X2lkIjoiYnV1azgzbDhtN3oydmo4YXhnbXYiLCJ1cmwiOiJodHRwczovL3d3dy55b3V0dWJlLmNvbS93YXRjaD92PUR1ZXh3MDhLYUM4XHUwMDI2X19zPWxjdGdqaGZ2cmNveWl1NHk0NW5pIn0</a></pre>
+            </div>
+
+
+        <h4>TUPLES</h4>
+            <div class="group">
+                <p class="descr">Utiliser un tuple nommé peut s'avérer plus rapide que de définir une classe :</p>
+                <pre class="terminal">
+# Namedtuples
+# Using namedtuple is way shorter than
+# defining a class manually:
+>>> from collections import namedtuple
+>>> Car = namedtuple('Car', 'color mileage')
+
+# Our new "Car" class works as expected:
+>>> my_car = Car('red', 3812.4)
+>>> my_car.color
+'red'
+>>> my_car.mileage
+3812.4
+
+# We get a nice string repr for free:
+>>> my_car
+Car(color='red' , mileage=3812.4)
+
+# Like tuples, namedtuples are immutable:
+>>> my_car.color = 'blue'
+AttributeError: "can't set attribute"</pre>
+            </div>
+
+
+        <h4>TEMPS</h4>
+            <div class="group">
+                <p class="descr">Mesurer la durée d'exécution d'un bout de code avec timeit :</p>
+                <pre class="terminal">
+# The "timeit" module lets you measure the execution
+# time of small bits of Python code
+
+>>> import timeit
+>>> timeit.timeit('"-".join(str(n) for n in range(100))',
+            number=10000)
+
+0.3412662749997253
+
+>>> timeit.timeit('"-".join([str(n) for n in range(100)])',
+            number=10000)
+
+0.2996307989997149
+
+>>> timeit.timeit('"-".join(map(str, range(100)))',
+            number=10000)
+
+0.24581470699922647</pre>
+            </div>
+
+
+        <h4>FONCTIONS</h4>
+            <div class="group">
+                <p class="descr">Function argument unpacking:</p>
+                <pre class="terminal">
+# Function argument unpacking
+
+def myfunc(x, y, z):
+print(x, y, z)
+
+tuple_vec = (1, 0, 1)
+dict_vec = {'x': 1, 'y': 0, 'z': 1}
+
+>>> myfunc(*tuple_vec)
+1, 0, 1
+
+>>> myfunc(**dict_vec)
+1, 0, 1</pre>
+
+                <p class="descr">Functions are first-class citizens in Python:</p>
+                <pre class="terminal">
+# Functions are first-class citizens in Python:
+
+# They can be passed as arguments to other functions,
+# returned as values from other functions, and
+# assigned to variables and stored in data structures.
+
+>>> def myfunc(a, b):
+...     return a + b
+...
+>>> funcs = [myfunc]
+>>> funcs[0]
+<function myfunc at 0x107012230>
+>>> funcs[0](2, 3)
+5</pre>
+
+                <p class="descr">On peut utiliser une fonction pour émuler un switch/case:</p>
+                <pre class="terminal">
+# Because Python has first-class functions they can
+# be used to emulate switch/case statements
+
+def dispatch_if(operator, x, y):
+if operator == 'add':
+return x + y
+elif operator == 'sub':
+return x - y
+elif operator == 'mul':
+return x * y
+elif operator == 'div':
+return x / y
+else:
+return None
+
+
+def dispatch_dict(operator, x, y):
+return {
+'add': lambda: x + y,
+'sub': lambda: x - y,
+'mul': lambda: x * y,
+'div': lambda: x / y,
+}.get(operator, lambda: None)()
+
+
+>>> dispatch_if('mul', 2, 8)
+16
+
+>>> dispatch_dict('mul', 2, 8)
+16
+
+>>> dispatch_if('unknown', 2, 8)
+None
+
+>>> dispatch_dict('unknown', 2, 8)
+None</pre>
+            </div>
+
+
+        <h4>SERVEUR WEB</h4>
+            <div class="group">
+                <p class="descr">On peut créer un serveur web basique avec la librairie standard de Python:</p>
+                <pre class="terminal">
+# Python has a HTTP server built into the
+# standard library. This is super handy for
+# previewing websites.
+
+# Python 3.x
+$ python3 -m http.server
+
+# Python 2.x
+$ python -m SimpleHTTPServer 8000
+
+# (This will serve the current directory at
+#  http://localhost:8000)</pre>
+            </div>
+
+
+        <h4>ENVIRONNEMENTS VIRTUELS</h4>
+            <div class="group">
+                <p class="descr">Installation de virtualenv (en su -):</p>
+                <pre class="terminal">
+pip3 install virtualenv</pre>
+
+                <p class="descr">Création du projet my_project dans un environnement virtuel :</p>
+                <pre class="terminal">
+virtualenv -p python3.7 my_project
+cd my_project</pre>
+
+                <p class="descr">Activer l’environnement virtuel :</p>
+                <pre class="terminal">
+source bin/activate</pre>
+
+                <p class="descr">Installer un module (ici Django) dans l'environnement virtuel :</p>
+                <pre class="terminal">
+pip install Django</pre>
+
+                <p class="descr">Installer des modules à partir d'un fichier :</p>
+                <pre class="terminal">
+pip install -r requirements.txt</pre>
+
+                <p class="descr">Tester la version de Django :</p>
+                <pre class="terminal">
+>>> import django;
+>>> print(django.get_version())</pre>
+            </div>
+
+
+        <h4>DÉMARRER UN PROJECT DJANGO</h4>
+            <div class="group">
+                <p class="descr">Création de l’application Django :</p>
+                <pre class="terminal">
+django-admin startproject my_project
+cd my_project</pre>
+
+                <p class="descr">Démarrer l'application sur 'http://localhost:8003' :</p>
+                <pre class="terminal">
+./manage.py runserver 8003</pre>
+            </div>
+
+
+        <h4>TESTS DJANGO</h4>
+            <div class="group">
+                <p class="descr">Liste des test à faire :</p>
+                <pre class="file">
+<b>test_models.py:</b>
+- full name
+- absolute_url
+- labels, help_texts etc.
+- max length
+<b>test_views.py:</b>
+- resolve(&lt;url&gt;) uses the right view
+- login_required
+- redirections
+- user’s access to that page/item
+- 200 with direct and reverse urls
+- 404
+- contains links to…
+- initial values of forms
+- redirect after form.is_valid()
+- uses correct template
+- pagination
+- items ordered by…
+<b>test_forms.py:</b>
+- form.is_valid()
+- contains widget
+- labels, help_texts etc.</pre>
+
+                <p class="descr">Les différents niveaux de tests : module, type (fichier), classe, fonction :</p>
+                <pre class="terminal">
+./manage.py test [module.tests[.test_models[.TestClass[.unit_test]]]]</pre>
+
+                <p class="descr">Avec coverage et une sortie html :</p>
+                <pre class="terminal">
+coverage run manage.py test; coverage html</pre>
+            </div>
+
+            
+        <h4>DJANGO TEMPUS-DOMINUS</h4>
+            <div class="group">
+                <p class="descr">Installer tempus-dominus :</p>
+                <pre class="terminal">
+pip install django-tempus-dominus</pre>
+
+                <p class="descr">Ensuite dans settings.py :</p>
+                <pre class="file">
+1. Installed apps: ajouter ‘tempus_dominus’.
+2. Ajouter tout en bas une option pour dire à Django de ne pas aller chercher les scripts sur le Cloud : TEMPUS_DOMINUS_INCLUDE_ASSETS = False</pre>
+
+                <p class="descr">Ensuite installer lesdits scripts dans le dossier static, en allant les chercher sur le Cloud :</p>
+                <pre class="file">
+https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/js/tempusdominus-bootstrap-4.min.js
+https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.1.2/css/tempusdominus-bootstrap-4.min.css
+https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js</pre>
+                <p class="descr">Enfin bien sûr indiquer le chemin de ces scripts dans le main template.html.</p>
+            </div>
+
+
+        <h4>DJANGO SUR UN SERVEUR</h4>
+            <div class="group">
+                <p class="descr">Ajouter un virtual host dans /etc/apache2/sites-available/000-default.conf :</p>
+                <pre class="file">
+NameVirtualHost *:8000
+&lt;VirtualHost *:8000&gt;
+ServerName python.asj.com
+ServerAdmin editeur@traditions-monastiques.com
+DocumentRoot /home/frromain/Sites/infirmerie/infirmerie
+WSGIDaemonProcess infirmerie.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/infirmerie python-path=/home_frromain/Sites/infirmerie/infirmerie
+WSGIProcessGroup infirmerie.asj.com
+WSGIScriptAlias / /home/frromain/Sites/infirmerie/infirmerie/infirmerie/wsgi.py
+&lt;Directory /home/frromain/Sites/infirmerie/infirmerie/infirmerie&gt;
+&lt;Files wsgi.py&gt;
+    Require all granted
+&lt;/Files&gt;
+&lt;/Directory&gt;
+
+Alias /static/ /home/frromain/Sites/infirmerie/infirmerie/static_files/
+&lt;Directory /home/frromain/Sites/infirmerie/infirmerie/static_files&gt;
+Require all granted
+&lt;/Directory&gt;
+
+ErrorLog ${APACHE_LOG_DIR}/error.log
+CustomLog ${APACHE_LOG_DIR}/access.log combined
+&lt;/VirtualHost&gt;</pre>
+
+                <p class="descr">Commentaires :<br>Le dossier static est celui dans lequel collectstatic va placer tous les fichiers statiques.<br>S'il y a plusieurs sites distingués uniquement par le port, ajouter un "listen" par port en tête des virtual hosts :</p>
+                <pre class="terminal">
+listen 8000
+listen 8001
+listen 8002</pre>
+
+                <p class="descr">Installer le module wsgi pour Apache :</p>
+                <pre class="terminal">
+aptitude install libapache2-mod-wsgi-py3</pre>
+
+                <p class="descr">Si besoin de MySQL :</p>
+                <pre class="terminal">
+aptitude install libssl-dev python3.7-dev libmysqlclient-dev</pre>
+
+                <p class="descr">Modifier settings.py :</p>
+                <pre class="file">
+DEBUG = False
+…
+ALLOWED_HOSTS = ['*']
+…
+TEMPLATES = [
+…
+'DIRS': ['/home/frromain/Sites/infirmerie/infirmerie/templates'],
+…
+]
+…
+STATIC_URL = '/static/'
+STATIC_ROOT = '/home/frromain/Sites/infirmerie/infirmerie/static_files/'</pre>
+
+                <p class="descr">Modifier wsgi.py :</p>
+                <pre class="file">
+import os
+import sys
+paths = [
+'/home/frromain/Sites/infirmerie/infirmerie',
+'/home/frromain/Sites/infirmerie/lib/python3.7/site-packages',
+]
+for path in paths:
+if path not in sys.path:
+sys.path.append(path)
+
+from django.core.wsgi import get_wsgi_application
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'infirmerie.settings')
+application = get_wsgi_application()</pre>
+            </div>
+    </div>
+{% endblock content %}
