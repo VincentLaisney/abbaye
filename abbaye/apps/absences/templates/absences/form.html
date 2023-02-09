@@ -2,6 +2,10 @@
 
 {% load static %}
 
+{% block css %}
+    <link rel="stylesheet/less" href={% static 'absences/css/absences.less' %}>
+{% endblock css %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'absences:home' %}>Absences</a></li>
     <li class="breadcrumb-item active">
@@ -12,10 +16,6 @@
         {% endif %}
     </li>
 {% endblock breadcrumbs %}
-
-{% block css %}
-    <link rel="stylesheet/less" href={% static 'absences/css/absences.less' %}>
-{% endblock css %}
 
 {% block content %}
     <form method="post" novalidate class="w-75">
@@ -177,5 +177,5 @@
 {% endblock content %}
 
 {% block javascript %}
-    <script src="{% static 'absences/js/absences.js' %}"></script>
+    <script src={% static 'absences/js/absences.js' %}></script>
 {% endblock javascript %}

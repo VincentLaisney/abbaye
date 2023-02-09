@@ -1,0 +1,219 @@
+{% extends 'memo/main_memo.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'memo:home' %}>Mémo</a></li>
+    <li class="breadcrumb-item active">Javascript</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>Node / Express / MongoDB / Electron</h1>
+        <h5 class="descr text-center mb-5">Les chevrons (>>>) indiquent que la commande doit être exécutée dans un shell Mongo.</h5>
+
+    <div class="w-75">
+        <h4>NODE :</h4>
+            <div class="group">
+                <p class="descr">Récupérer l'installateur, puis installer Node et npm (remplacer NN par le numéro de la dernière version) :</p>
+                <pre class="terminal">
+    curl --proxy http://192.168.1.11:8080 -sL https://deb.nodesource.com/setup_NN.x | bash -
+    apt-get install -y nodejs</pre>
+                <p class="descr">Configuration de npm (dans le dossier home) :</p>
+                <pre class="terminal">
+    npm config set proxy http://192.168.1.11:8080
+    npm config set https-proxy http://192.168.1.11:8080
+    npm config set strict-ssl false</pre>
+                <p class="descr">Liste des config de npm :</p>
+                <pre class="terminal">
+    npm config list</pre>
+            </div>
+
+
+        <h4>YARN (alternative à NPM) :</h4>
+            <div class="group">
+                <p class="descr">Configuration du repository :</p>
+                <pre class="terminal">
+    curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
+    echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list</pre>
+                <p class="descr">Installation :</p>
+                <pre class="terminal">
+    apt update && sudo apt install yarn</pre>
+                <p class="descr">Vérification :</p>
+                <pre class="terminal">
+    yarn --version</pre>
+            </div>
+
+
+        <h4>EXPRESS :</h4>
+            <div class="group">
+                <p class="descr">Installation d'express-generator, puis d'un skeleton Express (avec Pug comme moteur de template) :</p>
+                <pre class="terminal">
+    npm install express-generator -g
+    express my_project --view=pug
+    cd my_project
+    npm install
+    DEBUG=my_project:* npm start</pre>
+
+                <p class="descr">Installation de nodemon (to enable server restart on every change) :</p>
+                <pre class="terminal">
+    npm install --save-dev nodemon</pre>
+
+                <p class="descr">Puis dans package.json :</p>
+                <pre class="file">
+    "scripts": {
+    "start": "node ./bin/www",
+    "devstart": "nodemon ./bin/www",
+    "serverstart": "DEBUG=my_project:* npm run devstart"
+    },</pre>
+
+                <p class="descr">En cas de problème du type "[nodemon] Internal watch failed: ENOSPC: System limit for number of file watchers reached…", augmenter (en tant que su) le nombre de max_user_watches :</p>
+                <pre class="terminal">
+    sysctl -w fs.inotify.max_user_watches=165536</pre>
+            </div>
+
+
+        <h4>INSTALLATION DE MONGODB :</h4>
+            <div class="group">
+                <p class="descr">1. Récupérer la clé :</p>
+                <pre class="terminal">
+    wget -qO - https://www.mongodb.org/static/pgp/server-5.0.asc | apt-key add -</pre>
+                <p class="descr">2. Ajouter à la source list :</p>
+                <pre class="terminal">
+    echo "deb http://repo.mongodb.org/apt/debian buster/mongodb-org/5.0 main" | tee /etc/apt/sources.list.d/mongodb-org-5.0.list
+    apt-get update
+    apt-get install -y mongodb-org</pre>
+                <p class="descr">3. Démarrer :</p>
+                <pre class="terminal">
+    systemctl start mongod</pre>
+                <p class="descr">Enable on restart :</p>
+                <pre class="terminal">
+    systemctl enable mongod</pre>
+                <p class="descr">Vérifications :</p>
+                <pre class="terminal">
+    systemctl status mongod
+    systemctl stop mongod
+    systemctl restart mongod</pre>
+                <p class="descr">Démarrer un shell mongo :</p>
+                <pre class="terminal">
+    mongo</pre>
+            </div>
+
+
+        <h4>MONGODB : COMMANDES USUELLES :</h4>
+            <div class="group">
+                <p class="descr">Login :</p>
+                <pre class="terminal">
+    mongo -u &lt;username&gt; -p &lt;password&gt; --authenticationDatabase &lt;dbname&gt;</pre>
+                <p class="descr">Show databases :</p>
+                <pre class="terminal">
+    >>> show dbs</pre>
+                <p class="descr">Select db :</p>
+                <pre class="terminal">
+    >>> use databaseName</pre>
+                <p class="descr">Liste des collections :</p>
+                <pre class="terminal">
+    >>> show collections</pre>
+                <p class="descr">Créer une collection :</p>
+                <pre class="terminal">
+    >>> db.createCollection("collectionName")</pre>
+                <p class="descr">Insert :</p>
+                <pre class="terminal">
+    >>> db.&lt;collectionName&gt;.insert({field1: "value", field2: "value"})
+    >>> db.&lt;collectionName&gt;.insert([{field1: "value1"}, {field1: "value2"}])</pre>
+                <p class="descr">Update :</p>
+                <pre class="terminal">
+    >>> db.&lt;collectionName&gt;.save({"_id": new ObjectId("jhgsdjhgdsf"), field1: "value", field2: "value"})
+    </pre>
+                <p class="descr">Display :</p>
+                <pre class="terminal">
+    >>> db.&lt;collectionName&gt;.find();
+    >>> db.&lt;collectionName&gt;.find({"_id": ObjectId("someid")});
+    >>> db.&lt;collectionName&gt;.find({"_id": ObjectId("someid")}, {field1: 1, field2: 1})
+    >>> db.&lt;collectionName&gt;.find({"_id": ObjectId("someid")}, {field1: 0})</pre>
+
+                <p class="descr">Count :</p>
+                <pre class="terminal">
+    >>> db.&lt;collectionName&gt;.count();</pre>
+
+                <p class="descr">Tout supprimer :</p>
+                <pre class="terminal">
+    >>> db.&lt;collectionName&gt;.remove({});</pre>
+
+                <p class="descr">Commandes administrateur :</p>
+                <pre class="terminal">
+    >>> db.&lt;collectionName&gt;.stats()
+    >>> db.&lt;collectionName&gt;.dataSize()</pre>
+
+                <p class="descr">Toutes ces commandes peuvent être exécutées dans un shell bash grâce à l'option --eval de la commande mongo + nom de la base de données :</p>
+                <pre class="terminal">
+    mongo polyglotte --eval 'db.verses.drop()'</pre>
+
+                <p class="descr">Exporter une db vers un fichier :</p>
+                <pre class="terminal">
+    mongoexport --db=polyglotte --collection=verses --out=polyglotte.json</pre>
+
+                <p class="descr">Importer une db depuis un fichier :</p>
+                <pre class="terminal">
+    mongoimport --db=polyglotte --collection=verses --file=polyglotte.json</pre>
+            </div>
+
+
+        <h4>NOSQL client (interface graphique pour Mongo) :</h4>
+            <div class="group">
+                <p class="descr">Installer meteor :</p>
+                <pre class="terminal">
+    curl https://install.meteor.com/ | sh</pre>
+                <p class="descr">Dans le répertoire (cloné) de nosql-client :</p>
+                <pre class="terminal">
+    meteor --port 3113</pre>
+            </div>
+
+
+        <h4>ELECTRON :</h4>
+            <div class="group">
+                <p class="descr">Installation :</p>
+                <pre class="terminal">
+    ELECTRON_GET_USE_PROXY=true GLOBAL_AGENT_HTTPS_PROXY=http://192.168.1.11:8080 npm install --save-dev electron</pre>
+            </div>
+
+
+        <h4>METEOR :</h4>
+            <div class="group">
+                <p class="descr">Installation (sudo) :</p>
+                <pre class="terminal">
+    curl --proxy http://192.168.1.11:8080 https://install.meteor.com | sh</pre>
+                <p class="descr">Meteor behind a proxy :</p>
+                <pre class="terminal">
+    export HTTP_PROXY=http://192.168.1.11:8080
+    export HTTPS_PROXY=http://192.168.1.11:8080
+    meteor update</pre>
+
+                <p class="descr">Créer une application :</p>
+                <pre class="terminal">
+    meteor create --react my_app
+    cd my_app
+    meteor</pre>
+
+                <p class="descr">Packages utiles :</p>
+                <pre class="terminal">
+    meteor npm install less popper.js bootstrap</pre>
+
+                <p class="descr">Pour résoudre le problème du max_user_watches, lancer cette commande en tant que su :
+                    <pre class="terminal">
+    echo fs.inotify.max_user_watches = 524288 | tee -a /etc/sysctl.conf && sudo sysctl -p
+    vim /proc/sys/fs/inotify/max_user_watches</pre> 
+                </p>
+
+                <p class="descr">Pour connaître l'url de la mini database mongo :
+                    <pre class="terminal">
+    meteor mongo -U
+    => mongodb://127.0.0.1:3001/meteor</pre> 
+                </p>
+
+                <p class="descr">Pour se connecter à cette database via un shell mongo :
+                    <pre class="terminal">
+    mongo "mongodb://127.0.0.1:3001/meteor"</pre> 
+                </p>
+            </div>
+    </div>
+{% endblock content %}

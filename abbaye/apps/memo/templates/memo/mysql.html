@@ -1,0 +1,186 @@
+{% extends 'memo/main_memo.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'memo:home' %}>Mémo</a></li>
+    <li class="breadcrumb-item active">MySQL</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>MySQL</h1>
+        <h5 class="descr text-center mb-5">Les chevrons (>>>) indiquent que la commande doit être exécutée dans un shell MySQL.</h5>
+
+    <div class="w-75">
+        <h4>USERS</h4>
+            <div class="group">
+            <p class="descr">Voir les utilisateurs et leurs privilèges :</p>
+                <pre class="terminal">
+>>> SELECT User, Select_priv, Insert_priv, Create_priv, Update_priv FROM user;</pre>
+            <p class="descr">Créer un utilisateur. :</p>
+                <pre class="terminal">
+>>> CREATE USER 'savio'@'192.168.1.%' IDENTIFIED BY 'm0nk';</pre>
+            <p class="descr">Voir les privilèges d'un utilisateur :</p>
+                <pre class="terminal">
+>>> SHOW GRANTS FOR 'savio'@'192.168.1.%';</pre>
+            <p class="descr">Attribuer des privilèges :</p>
+                <pre class="terminal">
+>>> GRANT SELECT ON editor.* TO 'savio'@'192.168.1.%';</pre>
+            <p class="descr">Changer mot de passe :</p>
+                <pre class="terminal">
+>>> SET PASSWORD FOR 'user'@'localhost' = PASSWORD('mdp');</pre>
+            </div>
+
+
+        <h4>TABLES</h4>
+            <div class="group">
+            <p class="descr">Mettre une table en utf8 :</p>
+                <pre class="terminal">
+>>> ALTER TABLE Table CONVERT TO CHARACTER SET utf8;</pre>
+            <p class="descr">Modifier une colonne :</p>
+                <pre class="terminal">
+>>> ALTER TABLE Table CHANGE ancien_nom nouveau_nom VARCHAR(25) DEFAULT NULL;</pre>
+            <p class="descr">Renommer une table :</p>
+                <pre class="terminal">
+>>> RENAME TABLE Xxx TO Yyy;</pre>
+            <p class="descr">Compter les enregistrements de 'table' :</p>
+                <pre class="terminal">
+>>> SELECT COUNT(*) FROM table;</pre>
+            </div>
+
+
+        <h4>UPDATE</h4>
+            <div class="group">
+            <p class="descr">Mettre à jour tous les enregistrements d'une table (ici Objets) en attribuant à un champ une valeur extraite d'une table jointe (ici Interpretes_CD) (on fait le INNER JOIN et ensuite le SET):</p>
+                <pre class="terminal">
+>>> UPDATE Objets AS o
+INNER JOIN Interpretes_CD AS i
+ON o.Interprete_CD = i.ID
+SET o.Interprete = i.Interprete;</pre>
+            </div>
+
+
+        <h4>RECHERCHES</h4>
+            <div class="group">
+            <p class="descr">Avec le mot clé BINARY, la recherche devient sensible à la casse :</p>
+                <pre class="terminal">
+>>> SELECT nom, prenom FROM Personnes WHERE BINARY nom LIKE 'DE %';</pre>
+            </div>
+
+            <div class="group">
+            <p class="descr">GROUP BY avec COUNT(*) (ici on compte le nombre de mails de chaque personne) :</p>
+                <pre class="terminal">
+>>> SELECT id_personne, COUNT(*) AS nb_mails FROM Mails GROUP BY id_personne ORDER BY nb_mails;</pre>
+            </div>
+
+
+        <h4>FIELDS</h4>
+            <div class="group">
+            <p class="descr">Tronquer un champ à droite (field, length, fill) :</p>
+                <pre class="terminal">
+>>> RPAD(text, 50, “.”);</pre>
+            </div>
+
+
+        <h4>FOREIGN KEYS</h4>
+            <div class="group">
+            <p class="descr">Créer une clé étrangère :</p>
+                <pre class="terminal">
+>>> ALTER TABLE Billets ADD CONSTRAINT fk_billets_users FOREIGN KEY (author) REFERENCES Users(ID);</pre>
+            <p class="descr">Supprimer une clé étrangère :</p>
+                <pre class="terminal">
+>>> ALTER TABLE Billets DROP FOREIGN KEY fk_absences_absents;</pre>
+            <p class="descr">Voir les clés étrangères de toutes les tables :</p>
+                <pre class="terminal">
+>>> SELECT TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_NAME LIKE "%fk_%";</pre>
+            </div>
+
+
+        <h4>OPÉRATIONS MATHÉMATIQUES</h4>
+            <div class="group">
+            <p class="descr">Cette commande fait, pour tous les Objets dont le champ Ref_TM commence par "L1", la somme des montants dans la table Charges et la divise par le champ Chiffre_tirage de la table Objets (le GROUP BY final ne sert à rien mais évite la levée d'une erreur) :</p>
+                <pre class="terminal">
+>>> SELECT o.Ref_TM, (SUM(c.montant) / o.Chiffre_tirage) AS prix_revient FROM Charges AS c INNER JOIN Objets AS o ON o.ID = c.ID_objet WHERE o.Ref_TM LIKE "L1%" GROUP BY o.ID;</pre>
+            </div>
+
+
+        <h4>JSON</h4>
+            <div class="group">
+            <p class="descr">On peut exporter un statement au format JSON grâce à la combinaison des commandes JSON_ARRAYAGG() et JSON_OBJECT() :</p>
+                <pre class="terminal">
+>>> SELECT JSON_ARRAYAGG(JSON_OBJECT(
+'ref_tm', Ref_TM,
+'ean', EAN,
+'category', Cat_objet,
+'title', Titre,
+'sub_title', Sous_titre,
+'author', Auteur
+))
+FROM Objets
+WHERE ID = 159;</pre>
+
+            <p class="descr">Il est possible d'imbriquer plusieurs JSON_ARRAYAGG() en cas de jointure de tables (ici Charges et Objets) :</p>
+                <pre class="terminal">
+>>> SELECT JSON_ARRAYAGG(JSON_OBJECT(
+'ref_tm', o.Ref_TM,
+'ean', o.EAN,
+'category', o.Cat_objet,
+'title', o.Titre,
+'sub_title', o.Sous_titre,
+'author', o.Auteur,
+'charges', (SELECT JSON_ARRAYAGG(JSON_OBJECT('charge', c.Charge, 'montant', c.Montant)) FROM Charges AS c WHERE c.ID_objet = o.ID)
+))
+INTO OUTFILE '/var/lib/mysql-files/objects.json'
+FROM Objets AS o;</pre>
+            </div>
+
+
+        <h4>PROCÉDURES STOCKÉES</h4>
+            <div class="group">
+            <p class="descr">Créer une procédure stockée (mettre à jour un verset de la polyglotte s'il existe, sinon le créer) :</p>
+                <pre class="terminal">
+>>> DELIMITER |
+>>> CREATE PROCEDURE update_or_insert_hebrew(in_book VARCHAR(10), in_chapter INT, in_verse INT, in_txt TEXT)
+>>> BEGIN
+>>>     IF EXISTS(SELECT id FROM Verse WHERE book=in_book AND chapter=in_chapter AND verse=in_verse) THEN
+>>>         UPDATE Verse SET txt_hebrew = in_txt WHERE book=in_book AND chapter=in_chapter AND verse=in_verse;
+>>>     ELSE
+>>>         INSERT INTO Verse(book, chapter, verse, txt_hebrew) VALUES(in_book, in_chapter, in_verse, in_txt);
+>>>     END IF;
+>>> END
+>>> |
+>>> DELIMITER ;</pre>
+            <p class="descr">Appeler une procédure stockée :</p>
+                <pre class="terminal">
+>>> CALL update_or_insert_hebrew('Ex', 7, 30, 'test');</pre>
+            <p class="descr">Supprimer une procédure stockée :</p>
+                <pre class="terminal">
+>>> DROP PROCEDURE update_or_insert_hebrew;</pre>
+            <p class="descr">Voir toutes les procédures stockées :</p>
+                <pre class="terminal">
+>>> SELECT ROUTINE_TYPE, ROUTINE_NAME FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_SCHEMA='polyglotte';</pre>
+            </div>
+
+
+        <h4>EXPORTER DANS UN FICHIER</h4>
+            <div class="group">
+            <p class="descr">On n'a pas le droit d'exporter partout. Il faut d'abord rechercher dans quel répertoire on a le droit d'exporter :</p>
+                <pre class="terminal">
+>>> SHOW VARIABLES LIKE "secure_file_priv";</pre>
+            <p class="descr">Ensuite exporter le statement dans ce répertoire (ici /var/lib/mysql-files/):</p>
+                <pre class="terminal">
+>>> SELECT Ref_TM, Titre, Sous_titre INTO OUTFILE '/var/lib/mysql-files/books.txt' FIELDS TERMINATED BY "|" FROM Objets WHERE Cat_objet = 1 ORDER BY Ref_TM;</pre>
+            </div>
+
+
+        <h4>DIVERS</h4>
+            <div class="group">
+            <p class="descr">Utile pour repérer une erreur (par ex. échec de création d’une clé étrangère) :</p>
+                <pre class="terminal">
+>>> SHOW ENGINE INNODB STATUS;</pre>
+            <p class="descr">Exécuter un statement depuis le fichier file.sql sur la base my_database :</p>
+                <pre class="terminal">
+mysql my_database < file.sql</pre>
+                </div>
+    </div>
+{% endblock content %}

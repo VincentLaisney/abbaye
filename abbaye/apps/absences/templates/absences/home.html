@@ -14,7 +14,7 @@
     {% endif %}
 
     <div id="home_buttons" class="d-flex flex-column">
-        <a href="{% url 'absences:create' 'go' %}" class="btn btn-primary mt-5 mx-1" title="Pour un moine présent qui va s'absenter">Créer un billet d'absence normal<br>(aller et retour)</a>
-        <a href="{% url 'absences:create' 'back' %}" class="btn btn-secondary mt-5 mx-1" title="Pour un moine absent qui va revenir">Créer un billet de retour<br>(uniquement retour)</a>
+        <a href={% url 'absences:create' 'go' %} class="btn btn-primary mt-5 mx-1" title="Pour un moine présent qui va s'absenter">Créer un billet d'absence normal<br>(aller et retour)</a>
+        <a href={% url 'absences:create' 'back' %} class="btn btn-secondary mt-5 mx-1" title="Pour un moine absent qui va revenir">Créer un billet de retour<br>(uniquement retour)</a>
     </div>
 {% endblock content %}
