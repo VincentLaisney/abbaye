@@ -48,12 +48,12 @@ $("document").ready(function () {
                 mouseover: function (e) {
                     if ($(this).text().indexOf("?") != -1) {
                         $("#choice_dialog").dialog({
-                            autoOpen: false,
-                            position: {
-                                my: "left top",
-                                at: "left bottom",
-                                of: e.target
-                            },
+                            // autoOpen: false,
+                            // position: {
+                            //     my: "left top",
+                            //     at: "left bottom",
+                            //     of: e.target
+                            // },
                             title: "Elige tibi formam:",
                         });
                         var span_choice = $(this).parent();
