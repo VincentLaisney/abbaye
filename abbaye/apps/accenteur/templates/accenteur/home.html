@@ -11,7 +11,7 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-        <h2 class="text-center grey-dark mb-2">
+    <h2 class="text-center grey-dark mb-2">
             Accenteur
         </h2>
 
@@ -19,7 +19,7 @@
             Numericum instrumentum ad latinos textus accentizandos
         </h4>
 
-        <div class="d-flex">
+        <div id="input_output" class="d-flex mt-3">
             <div id="input" contenteditable="true" spellcheck="false" class="text_area"><span style="color: grey;">Hic scribe textum tuum…</span></div>
             <div id="output" contenteditable="true" spellcheck="false" class="text_area"></div>
         </div>
@@ -29,7 +29,21 @@
             <p>Afferuntur elementa…</p>
         </div>
 
-        <div id="choice_dialog"></div>
+        <div class="modal fade" id="choice_dialog" tabindex="-1" aria-labelledby="choice_dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="choice_dialog">Elige tibi formam</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Claudere"></button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Claude</button>
+                    <button type="button" id="validate_choice" class="btn btn-primary">Confirma</button>
+                </div>
+                </div>
+            </div>
+        </div>
 {% endblock content %}
 
 {% block javascript %}
