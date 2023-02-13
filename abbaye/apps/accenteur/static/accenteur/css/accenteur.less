@@ -14,22 +14,26 @@ h4 {
     font-size: 14pt;
 }
 
-.text_area {
-    background-color: white;
-    border: 1px solid grey;
-    font-family: sans-serif;
-    font-size: 12pt;
-    height: 300px;
-    margin: 20px;
-    margin-top: 0px;
-    overflow: scroll;
-    padding: 10px 20px 10px 20px;
-    width: 450px;
+#input_output {
+    .text_area {
+        background-color: white;
+        border: 1px solid grey;
+        font-family: sans-serif;
+        font-size: 12pt;
+        height: 50vh;
+        margin: 0px 20px 0px 20px;
+        overflow: scroll;
+        padding: 10px 20px 10px 20px;
+        width: 450px;
 
-    .word_checked_and_false {
-        color: green;
+        .btn-link:hover {
+            color: @red;
+        }
+
+        .word_checked_and_false {
+            color: green;
+        }
     }
-
 }
 
 #choice_dialog {
