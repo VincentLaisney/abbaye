@@ -5,42 +5,57 @@ from .models import Monk
 
 
 def home(request):
-    """ Home page of Moines. """
-    monks = Monk.objects.all().order_by('entry', 'rank')
+    """ Home page of Monks. """
     return render(
         request,
         'moines/home.html',
+        {},
+    )
+
+
+def statistiques(request):
+    """ Statistiques view of Monks. """
+    return render(
+        request,
+        'moines/statistiques.html',
+        {},
+    )
+
+
+def list(request):
+    """ List of monks. """
+    monks = Monk.objects.all().order_by('entry', 'rank')
+    return render(
+        request,
+        'moines/list.html',
         {
             'monks': monks,
         },
     )
 
 
-def list(request):
-    """ List of moines. """
-    # TODO
-    pass
-
-
 def create(request):
-    """ Create a moine. """
+    """ Create a monk. """
     # TODO
     pass
 
 
 def details(request, **kwargs):
-    """ Details of a moine. """
-    # TODO
-    pass
+    """ Details of a monk. """
+    return render(
+        request,
+        'moines/details.html',
+        {}
+    )
 
 
 def update(request, **kwargs):
-    """ Update a moine. """
+    """ Update a monk. """
     # TODO
     pass
 
 
 def delete(request, **kwargs):
-    """ Delete a moine. """
+    """ Delete a monk. """
     # TODO
     pass
