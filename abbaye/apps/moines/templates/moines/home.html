@@ -1,4 +1,4 @@
-{% extends 'main.html' %}
+{% extends 'moines/main_moines.html' %}
 
 {% block breadcrumbs %}
     <li class="breadcrumb-item active">Moines</li>
@@ -9,43 +9,6 @@
         <h1>Bienvenue sur Moines !</h1>
     </div>
 
-    <table class="table table-bordered">
-        <tr>
-            <th class="col-2">Moine</th>
-            <th class="col-1">Naissance</th class="col-1">
-            <th class="col-1">Entrée</th>
-            <th class="col-1">Habit</th>
-            <th class="col-1">Prof. temp.</th>
-            <th class="col-1">Prof. perp.</th>
-            <th class="col-1">Ordination</th>
-        </tr>
-
-        {% for monk in monks %}
-            <tr>
-                <td>{{ monk }}</td>
-                <td>{{ monk.birthday_french }}</td>
-                <td>{{ monk.entry_french }}</td>
-                {% if monk.habit %}
-                    <td>{{ monk.habit_french }}</td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if monk.profession_temp %}
-                    <td>{{ monk.profession_temp_french }}</td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if monk.profession_perp %}
-                    <td>{{ monk.profession_perp_french }}</td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if monk.priest %}
-                    <td>{{ monk.priest_french }}</td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-            </tr>
-        {% endfor %}
-    </table>
+    <a href={% url 'moines:list' %}>Liste des moines</a>
+    <a href={% url 'moines:statistiques' %}>Statistiques</a>
 {% endblock content %}
