@@ -25,6 +25,5 @@ urlpatterns = [
     path('ordomatic/', include('apps.ordomatic.urls')),
     path('ornitho/', include('apps.ornitho.urls')),
     path('polyglotte/', include('apps.polyglotte.urls')),
-    path('statistiques/', include('apps.statistiques.urls')),
     path('typetrainer/', include('apps.typetrainer.urls')),
 ]
