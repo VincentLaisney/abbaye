@@ -13,11 +13,12 @@
         <div class="d-flex w-100">
             <div class="col-4">
                 <h3>Vie du monastère</h3>
+                    <a href={% url 'moines:home' %}>MOINES</a><p>Tout sur les moines de Flavigny.</p>
                     <a href={% url 'agenda:home' %}>AGENDA COMMUNAUTAIRE (P. Prieur)</a><p>Conférences, retraites, promenades, fêtes des moines…</p>
                     <a href="https://docs.google.com/spreadsheets/d/14BfFLTsF54yjQVkQhylWuqB65ag2LhMYe08ubXkvlYE/edit#gid=0">TABLEAU DES SERVICES</a><p>Sur GoogleSheets (P. Louis).</p>
                     <a href={% url 'hotellerie:listings_cuisine' %}>LISTE DES HÔTES</a><p>Listing de la cuisine.</p>
                     <a href="http://192.168.1.146/Liste_retraites.html">LISTE DES RETRAITES ET DES RETRAITANTS</a><p>Générée par 4D (P. Dominique Savio).</p>
-                    <a href={% url 'statistiques:home' %}>STATISTIQUES</a><p>Dates d'entrée etc. et moyenne d'âge des moines.</p>
+                    <a href={% url 'moines:statistiques' %}>STATISTIQUES</a><p>Statistiques communautaires.</p>
                     <a href="https://clairval.com/horaires-reglages/">HORAIRES SITE <span class="red-full">*</span></a><p>Réglages des horaires du site de l'Abbaye.</p>
                     <a href="http://www.asj.com/info/">INFOS</a><p>Liste des adresses mail, téléphone etc. (P. Stanislas).</p>
                     <a href="http://pmb.asj.com/pmb-bibli/opac_css">BIBLI</a><p>Accès à la base de données de la bibliothèque (Fr. Matthieu).</p>
