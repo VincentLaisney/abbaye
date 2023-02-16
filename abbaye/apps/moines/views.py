@@ -4,24 +4,6 @@ from django.shortcuts import render
 from .models import Monk
 
 
-def home(request):
-    """ Home page of Monks. """
-    return render(
-        request,
-        'moines/home.html',
-        {},
-    )
-
-
-def statistiques(request):
-    """ Statistiques view of Monks. """
-    return render(
-        request,
-        'moines/statistiques.html',
-        {},
-    )
-
-
 def list(request):
     """ List of monks. """
     monks = Monk.objects.all().order_by('entry', 'rank')
@@ -57,5 +39,12 @@ def update(request, **kwargs):
 
 def delete(request, **kwargs):
     """ Delete a monk. """
-    # TODO
-    pass
+
+
+def statistiques(request):
+    """ Statistiques view of Monks. """
+    return render(
+        request,
+        'moines/statistiques.html',
+        {},
+    )
