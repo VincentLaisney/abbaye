@@ -22,7 +22,7 @@
         {% for verse in verses %}
             <tr>
                 <td class="td_ref"><a href={% url 'polyglotte:update' verse.book verse.chapter verse.verse%}>{{ verse.book }} {{ verse.chapter }}, {{ verse.verse }}</a></td>
-                <td class="td_hebrew text-end">{{ verse.txt_hebrew|default_if_none:"" }}</td>
+                <td class="td_hebrew text-right">{{ verse.txt_hebrew|default_if_none:"" }}</td>
                 <td class="td_greek text-justify">{{ verse.txt_greek|default_if_none:"" }}</td>
                 <td class="td_latin text-justify">{{ verse.txt_latin|default_if_none:"" }}</td>
             </tr>
