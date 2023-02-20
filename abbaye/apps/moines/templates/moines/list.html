@@ -5,6 +5,10 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
+    <h1>Moines de l'Abbaye Saint-Joseph</h1>
+
+    <a href={% url 'moines:create' %} class="my-3">Créer un nouveau moine</a>
+
     <table class="table table-bordered">
         <tr class="text-center red-dark">
             <th class="col-1">Moine</th>

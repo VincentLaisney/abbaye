@@ -1,0 +1,13 @@
+{% extends 'moines/main_moines.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'moines:list' %}>Moines</a></li>
+    <li class="breadcrumb-item active">{{ monk }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h3>{{ monk }}</h3>
+    <a href={% url 'moines:update' monk.pk %}>Modifier</a>
+    <a href={% url 'moines:delete' monk.pk %}>Supprimer</a>
+    <a href={% url 'moines:list' %}>Retour à la liste des moines</a>
+{% endblock content %}

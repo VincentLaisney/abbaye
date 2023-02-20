@@ -10,30 +10,43 @@ class Monk(models.Model):
     name = models.CharField(
         max_length=255,
     )
-    birthday = models.DateField()
-    entry = models.DateField()
+    birthday = models.DateField(
+        blank=True,
+        null=True,
+    )
+    entry = models.DateField(
+        blank=True,
+        null=True,
+    )
     rank = models.SmallIntegerField(
         default=1,
     )
     habit = models.DateField(
+        blank=True,
         null=True,
     )
     profession_temp = models.DateField(
+        blank=True,
         null=True,
     )
     profession_perp = models.DateField(
+        blank=True,
         null=True,
     )
     priest = models.DateField(
+        blank=True,
         null=True,
     )
     death = models.DateField(
+        blank=True,
         null=True,
     )
     email = models.EmailField(
+        blank=True,
         null=True,
     )
     additional_email = models.EmailField(
+        blank=True,
         null=True,
     )
     is_active = models.BooleanField(
