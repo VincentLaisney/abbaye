@@ -2,6 +2,11 @@
 
 {% block breadcrumbs %}
     <li class="breadcrumb-item active">Polyglotte</li>
+
+    <div class="ms-auto me-2">
+        <!-- Search -->
+        <a href={% url 'polyglotte:search' %}><span class="fas fa-search orange" title="Rechercher un texte"></span></a>
+    </div>
 {% endblock breadcrumbs %}
 
 {% block content %}
