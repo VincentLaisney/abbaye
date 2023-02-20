@@ -23,6 +23,7 @@ def home(request):
 
 def success(request):
     """ Success view. """
+    # TODO:  Message "IMPORTANT : Si ce billet en remplace un autre, pensez à supprimer l'ancien ICI."(et créer la view *list* à cet effet).
     return render(
         request,
         'absences/home.html',
