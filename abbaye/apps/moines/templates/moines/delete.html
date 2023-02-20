@@ -1,0 +1,10 @@
+{% extends 'moines/main_moines.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'moines:list' %}>Moines</a></li>
+    <li class="breadcrumb-item active"></li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h3>Delete</h3>
+{% endblock content %}

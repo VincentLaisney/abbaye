@@ -1,28 +1,28 @@
-{% extends 'main.html' %}
+{% extends 'moines/main_moines.html' %}
 
 {% block breadcrumbs %}
     <li class="breadcrumb-item active">Moines</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <div class="d-flex flex-column align-items-center">
-        <h1>Bienvenue sur Moines !</h1>
-    </div>
+    <h1>Moines de l'Abbaye Saint-Joseph</h1>
+
+    <a href={% url 'moines:create' %} class="my-3">Créer un nouveau moine</a>
 
     <table class="table table-bordered">
-        <tr>
-            <th class="col-2">Moine</th>
-            <th class="col-1">Naissance</th class="col-1">
+        <tr class="text-center red-dark">
+            <th class="col-1">Moine</th>
+            <th class="col-1">Naissance</th>
             <th class="col-1">Entrée</th>
-            <th class="col-1">Habit</th>
-            <th class="col-1">Prof. temp.</th>
-            <th class="col-1">Prof. perp.</th>
+            <th class="col-1">Prise d'habit</th>
+            <th class="col-1">Profession temporaire</th>
+            <th class="col-1">Profession perpétuelle</th>
             <th class="col-1">Ordination</th>
         </tr>
 
         {% for monk in monks %}
             <tr>
-                <td>{{ monk }}</td>
+                <td class="text-center fw-bold"><a href={% url 'moines:details' monk.pk %}>{{ monk }}<a ></td>
                 <td>{{ monk.birthday_french }}</td>
                 <td>{{ monk.entry_french }}</td>
                 {% if monk.habit %}
