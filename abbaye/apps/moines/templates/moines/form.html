@@ -23,9 +23,9 @@
 
         <!-- Nom -->
         <div class="row justify-content-start ml-0">
-            {{ form.name.label_tag }}
-
             <div class="form-group">
+                {{ form.name.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.name.errors %}
                         {% render_field form.name class="form-control is-invalid" %}
@@ -51,9 +51,9 @@
 
         <!-- Date de naissance -->
         <div class="row justify-content-start ml-0">
-            {{ form.birthday.label_tag }}
-
             <div class="form-group">
+                {{ form.birthday.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.birthday.errors %}
                         {% render_field form.birthday class="form-control is-invalid" %}
@@ -79,9 +79,9 @@
 
         <!-- Entrée -->
         <div class="row justify-content-start ml-0">
-            {{ form.entry.label_tag }}
-
             <div class="form-group">
+                {{ form.entry.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.entry.errors %}
                         {% render_field form.entry class="form-control is-invalid" %}
@@ -107,9 +107,9 @@
 
         <!-- Rang -->
         <div class="row justify-content-start ml-0">
-            {{ form.rank.label_tag }}
-
             <div class="form-group">
+                {{ form.rank.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.rank.errors %}
                         {% render_field form.rank class="form-control is-invalid" %}
@@ -135,9 +135,9 @@
 
         <!-- Prise d'habit -->
         <div class="row justify-content-start ml-0">
-            {{ form.habit.label_tag }}
-
             <div class="form-group">
+                {{ form.habit.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.habit.errors %}
                         {% render_field form.habit class="form-control is-invalid" %}
@@ -163,9 +163,9 @@
 
         <!-- Profession temporaire -->
         <div class="row justify-content-start ml-0">
-            {{ form.profession_temp.label_tag }}
-
             <div class="form-group">
+                {{ form.profession_temp.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.profession_temp.errors %}
                         {% render_field form.profession_temp class="form-control is-invalid" %}
@@ -191,9 +191,9 @@
 
         <!-- Profession perpétuelle -->
         <div class="row justify-content-start ml-0">
-            {{ form.profession_perp.label_tag }}
-
             <div class="form-group">
+                {{ form.profession_perp.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.profession_perp.errors %}
                         {% render_field form.profession_perp class="form-control is-invalid" %}
@@ -219,9 +219,9 @@
 
         <!-- Priest -->
         <div class="row justify-content-start ml-0">
-            {{ form.priest.label_tag }}
-
             <div class="form-group">
+                {{ form.priest.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.priest.errors %}
                         {% render_field form.priest class="form-control is-invalid" %}
@@ -247,9 +247,9 @@
 
         <!-- Décès -->
         <div class="row justify-content-start ml-0">
-            {{ form.death.label_tag }}
-
             <div class="form-group">
+                {{ form.death.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.death.errors %}
                         {% render_field form.death class="form-control is-invalid" %}
@@ -275,9 +275,9 @@
 
         <!-- Email -->
         <div class="row justify-content-start ml-0">
-            {{ form.email.label_tag }}
-
             <div class="form-group">
+                {{ form.email.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.email.errors %}
                         {% render_field form.email class="form-control is-invalid" %}
@@ -303,9 +303,9 @@
 
         <!-- Additional email -->
         <div class="row justify-content-start ml-0">
-            {{ form.additional_email.label_tag }}
-
             <div class="form-group">
+                {{ form.additional_email.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.additional_email.errors %}
                         {% render_field form.additional_email class="form-control is-invalid" %}
@@ -330,23 +330,21 @@
         </div>
 
         <!-- Is active -->
-        <div class="row justify-content-start ml-0">
-            {{ form.is_active.label_tag }}
-
+        <div class="d-flex justify-content-start ml-0">
             <div class="form-group">
                 {% if form.is_bound %}
                     {% if form.is_active.errors %}
-                        {% render_field form.is_active class="form-control is-invalid" %}
+                        {% render_field form.is_active class="is-invalid" %}
                         {% for error in form.is_active.errors %}
                             <div class="invalid-feedback" style="display: block;">
                                 {{ error }}
                             </div>
                         {% endfor %}
                     {% else %}
-                        {% render_field form.is_active class="form-control is-valid" %}
+                        {% render_field form.is_active class="is-valid" %}
                     {% endif %}
                 {% else %}
-                    {% render_field form.is_active class="form-control" %}
+                    {% render_field form.is_active %}
                 {% endif %}
                 
                 {% if form.is_active.help_text %}
@@ -354,34 +352,36 @@
                         {{ form.is_active.help_text }}
                     </small>
                 {% endif %}
+
+                {{ form.is_active.label_tag }}
             </div>
         </div>
 
-        <!-- Additional recipient -->
-        <div class="row justify-content-start ml-0">
-            {{ form.additional_recipient.label_tag }}
-
+        <!-- Mandatory recipient of Absences -->
+        <div class="d-flex justify-content-start ml-0">
             <div class="form-group">
                 {% if form.is_bound %}
-                    {% if form.additional_recipient.errors %}
-                        {% render_field form.additional_recipient class="form-control is-invalid" %}
-                        {% for error in form.additional_recipient.errors %}
+                    {% if form.absences_recipient.errors %}
+                        {% render_field form.absences_recipient class="is-invalid" %}
+                        {% for error in form.absences_recipient.errors %}
                             <div class="invalid-feedback" style="display: block;">
                                 {{ error }}
                             </div>
                         {% endfor %}
                     {% else %}
-                        {% render_field form.additional_recipient class="form-control is-valid" %}
+                        {% render_field form.absences_recipient class="is-valid" %}
                     {% endif %}
                 {% else %}
-                    {% render_field form.additional_recipient class="form-control" %}
+                    {% render_field form.absences_recipient %}
                 {% endif %}
                 
-                {% if form.additional_recipient.help_text %}
+                {% if form.absences_recipient.help_text %}
                     <small class="form-text text-muted">
-                        {{ form.additional_recipient.help_text }}
+                        {{ form.absences_recipient.help_text }}
                     </small>
                 {% endif %}
+
+                {{ form.absences_recipient.label_tag }}
             </div>
         </div>
 
@@ -400,5 +400,6 @@
 {% block javascript %}
     <script src={% static 'main/js/popper.min.js' %}></script>
     <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
-    <script src={% static 'moines/js/tempusdominus_monks.js' %}></script>
+    <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
+    <script src={% static 'moines/js/tempusdominus-moines.js' %}></script>
 {% endblock javascript %}

@@ -10,47 +10,81 @@ class MonkForm(forms.ModelForm):
     """ Monk form. """
     name = forms.CharField(
         max_length=255,
+        label='Nom',
+        label_suffix=' :',
     )
     birthday = forms.DateField(
         input_formats=[
             '%d/%m/%Y',
         ],
+        label='Date de naissance',
+        label_suffix=' :',
     )
     entry = forms.DateField(
         input_formats=[
             '%d/%m/%Y',
         ],
+        label='Date d\'entrée',
+        label_suffix=' :',
     )
-    rank = forms.IntegerField()
+    rank = forms.IntegerField(
+        label='Rang',
+        label_suffix=' :',
+        help_text='Si plusieurs moines sont entrés le même jour, indiquez ici leur rang (1 pour le premier, 2 pour le deuxième etc.).'
+    )
     habit = forms.DateField(
         input_formats=[
             '%d/%m/%Y',
         ],
+        label='Date de prise d\'habit',
+        label_suffix=' :',
     )
     profession_temp = forms.DateField(
         input_formats=[
             '%d/%m/%Y',
         ],
+        label='Date de profession temporaire',
+        label_suffix=' :',
     )
     profession_perp = forms.DateField(
         input_formats=[
             '%d/%m/%Y',
         ],
+        label='Date de profession perpétuelle',
+        label_suffix=' :',
     )
     priest = forms.DateField(
         input_formats=[
             '%d/%m/%Y',
         ],
+        label='Date d\'ordination sacerdotale',
+        label_suffix=' :',
     )
     death = forms.DateField(
         input_formats=[
             '%d/%m/%Y',
         ],
+        label='Date de décès',
+        label_suffix=' :',
     )
-    email = forms.EmailField()
-    additional_email = forms.EmailField()
-    is_active = forms.BooleanField()
-    absences_recipient = forms.BooleanField()
+    email = forms.EmailField(
+        label='Email',
+        label_suffix=' :',
+    )
+    additional_email = forms.EmailField(
+        label='Email supplémentaire',
+        label_suffix=' :',
+    )
+    is_active = forms.BooleanField(
+        required=False,
+        label='Est actif',
+        label_suffix='',
+    )
+    absences_recipient = forms.BooleanField(
+        required=False,
+        label='Destinataire ex officio des avis d\'absence',
+        label_suffix='',
+    )
 
     class Meta:
         model = Monk
