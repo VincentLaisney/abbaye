@@ -7,13 +7,15 @@ from .models import Monk
 
 
 class MonkForm(forms.ModelForm):
-    """ Monk form. """
+    """ Monk form.
+    Required fields: name and entry. """
     name = forms.CharField(
         max_length=255,
         label='Nom',
         label_suffix=' :',
     )
     birthday = forms.DateField(
+        required=False,
         input_formats=[
             '%d/%m/%Y',
         ],
@@ -28,11 +30,14 @@ class MonkForm(forms.ModelForm):
         label_suffix=' :',
     )
     rank = forms.IntegerField(
+        required=False,
         label='Rang',
         label_suffix=' :',
-        help_text='Si plusieurs moines sont entrés le même jour, indiquez ici leur rang (1 pour le premier, 2 pour le deuxième etc.).'
+        help_text='Si plusieurs moines sont entrés le même jour, indiquez ici leur rang (1 pour le premier, 2 pour le deuxième etc.).',
+        initial=1,
     )
     habit = forms.DateField(
+        required=False,
         input_formats=[
             '%d/%m/%Y',
         ],
@@ -40,6 +45,7 @@ class MonkForm(forms.ModelForm):
         label_suffix=' :',
     )
     profession_temp = forms.DateField(
+        required=False,
         input_formats=[
             '%d/%m/%Y',
         ],
@@ -47,6 +53,7 @@ class MonkForm(forms.ModelForm):
         label_suffix=' :',
     )
     profession_perp = forms.DateField(
+        required=False,
         input_formats=[
             '%d/%m/%Y',
         ],
@@ -54,6 +61,7 @@ class MonkForm(forms.ModelForm):
         label_suffix=' :',
     )
     priest = forms.DateField(
+        required=False,
         input_formats=[
             '%d/%m/%Y',
         ],
@@ -61,6 +69,7 @@ class MonkForm(forms.ModelForm):
         label_suffix=' :',
     )
     death = forms.DateField(
+        required=False,
         input_formats=[
             '%d/%m/%Y',
         ],
@@ -68,10 +77,12 @@ class MonkForm(forms.ModelForm):
         label_suffix=' :',
     )
     email = forms.EmailField(
+        required=False,
         label='Email',
         label_suffix=' :',
     )
     additional_email = forms.EmailField(
+        required=False,
         label='Email supplémentaire',
         label_suffix=' :',
     )
