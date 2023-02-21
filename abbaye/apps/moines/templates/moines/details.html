@@ -6,7 +6,89 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h3>{{ monk }}</h3>
+    <h3 class="my-5">{{ monk }}</h3>
+
+    <div class="col-5 mb-5">
+        <table class="table table-borderless table-sm">
+            <tr>
+                <td class="col-5 green fw-bold">Naissance :</td>
+                <td class="col-7">
+                    {% if monk.birthday %}
+                        {{ monk.birthday_french }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Entrée :</td>
+                <td class="col-7">{{ monk.entry_french }}</td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Prise d'habit :</td>
+                <td class="col-7">
+                    {% if monk.habit %}
+                        {{ monk.habit_french }}
+                    {% endif %}
+                </td>
+            </tr>
+
+               <tr>
+                <td class="col-5 green fw-bold">Profession temporaire :</td>
+                <td class="col-7">
+                    {% if monk.profession_temp %}
+                        {{ monk.profession_temp_french }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Profession perpétuelle :</td>
+                <td class="col-7">
+                    {% if monk.profession_perp %}
+                        {{ monk.profession_perp_french }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Ordination sacerdotale :</td>
+                <td class="col-7">
+                    {% if monk.priest %}
+                        {{ monk.priest_french }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Décès :</td>
+                <td class="col-7">
+                    {% if monk.death %}
+                        {{ monk.death_french }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Email :</td>
+                <td class="col-7">
+                    {% if monk.email %}
+                        {{ monk.email }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Email supplémentaire :</td>
+                <td class="col-7">
+                    {% if monk.additional_email %}
+                        {{ monk.additional_email }}
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div >
+
     <a href={% url 'moines:update' monk.pk %}>Modifier</a>
     <a href={% url 'moines:delete' monk.pk %}>Supprimer</a>
     <a href={% url 'moines:list' %}>Retour à la liste des moines</a>

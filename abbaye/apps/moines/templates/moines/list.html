@@ -9,7 +9,7 @@
 
     <a href={% url 'moines:create' %} class="my-3">Créer un nouveau moine</a>
 
-    <table class="table table-bordered">
+    <table id="table-monks" class="table table-bordered table-sm">
         <tr class="text-center red-dark">
             <th class="col-1">Moine</th>
             <th class="col-1">Naissance</th>
@@ -23,7 +23,9 @@
         {% for monk in monks %}
             <tr>
                 <td class="text-center fw-bold"><a href={% url 'moines:details' monk.pk %}>{{ monk }}<a ></td>
-                <td>{{ monk.birthday_french }}</td>
+                {% if monk.birthday %}
+                    <td>{{ monk.birthday_french }}</td>
+                {% endif %}
                 <td>{{ monk.entry_french }}</td>
                 {% if monk.habit %}
                     <td>{{ monk.habit_french }}</td>

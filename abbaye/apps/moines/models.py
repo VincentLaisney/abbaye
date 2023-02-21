@@ -14,10 +14,7 @@ class Monk(models.Model):
         blank=True,
         null=True,
     )
-    entry = models.DateField(
-        blank=True,
-        null=True,
-    )
+    entry = models.DateField()
     rank = models.SmallIntegerField(
         default=1,
     )
