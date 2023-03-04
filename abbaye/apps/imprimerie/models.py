@@ -4,18 +4,6 @@ from django.db.models.deletion import CASCADE
 from django.db import models
 
 
-class Memo(models.Model):
-    """ Memo model. """
-    content = models.TextField(
-    )
-    created = models.DateTimeField(
-        auto_now_add=True,
-    )
-    modified = models.DateTimeField(
-        auto_now=True,
-    )
-
-
 class Client(models.Model):
     """ Client model. """
     quality = models.CharField(
