@@ -1,0 +1,2 @@
+- Accueil : "Vous êtes (n'êtes pas) connecté comme…" / Login / Signup.
+- Page de login : Ajouter signup.
