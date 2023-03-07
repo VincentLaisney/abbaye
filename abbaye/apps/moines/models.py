@@ -2,7 +2,7 @@
 
 from django.db import models
 
-from modules.dates import date_to_french_string
+from modules.dates import MONTHS, date_to_french_string
 
 
 class Monk(models.Model):
@@ -10,6 +10,9 @@ class Monk(models.Model):
     name = models.CharField(
         max_length=255,
     )
+    feast_day = models.IntegerField()
+    feast_month = models.IntegerField()
+    laundry_number = models.IntegerField()
     birthday = models.DateField(
         blank=True,
         null=True,

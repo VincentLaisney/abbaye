@@ -2,7 +2,7 @@
 
 from django import forms
 
-
+from modules.dates import MONTHS
 from .models import Monk
 
 
@@ -14,6 +14,13 @@ class MonkForm(forms.ModelForm):
         label='Nom',
         label_suffix=' :',
     )
+    feast_day = forms.ChoiceField(
+        choices=[(i+1, i+1) for i in range(31)],
+    )
+    feast_month = forms.ChoiceField(
+        choices=MONTHS,
+    )
+    laundry_number = forms.IntegerField()
     birthday = forms.DateField(
         required=False,
         input_formats=[

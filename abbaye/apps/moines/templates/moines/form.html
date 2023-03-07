@@ -50,6 +50,91 @@
             </div>
         </div>
 
+        <!-- Fête -->
+        <div class="row justify-content-start ml-0">
+            <div class="form-group">
+                <label>Fête le :</label>
+
+                <!-- Jour -->
+                <div class="d-flex flex-row align-items-between">
+                    <div class="me-2">
+                        {% if form.is_bound %}
+                            {% if form.feast_day.errors %}
+                                {% render_field form.feast_day class="is-invalid" %}
+                                {% for error in form.feast_day.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.feast_day class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.feast_day %}
+                        {% endif %}
+    
+                        {% if form.feast_day.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.feast_day.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Mois -->
+                    <div class="ms-2">
+                        {% if form.is_bound %}
+                            {% if form.feast_month.errors %}
+                                {% render_field form.feast_month class="is-invalid" %}
+                                {% for error in form.feast_month.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.feast_month class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.feast_month %}
+                        {% endif %}
+    
+                        {% if form.feast_month.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.feast_month.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Numéro de linge -->
+        <div class="row justify-content-start ml-0">
+            <div class="form-group">
+                {{ form.laundry_number.label_tag }}
+
+                {% if form.is_bound %}
+                    {% if form.laundry_number.errors %}
+                        {% render_field form.laundry_number class="form-control is-invalid" %}
+                        {% for error in form.laundry_number.errors %}
+                            <div class="invalid-feedback" style="display: block;">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.laundry_number class="form-control is-valid" %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.laundry_number class="form-control" %}
+                {% endif %}
+
+                {% if form.laundry_number.help_text %}
+                    <small class="form-text text-muted">
+                        {{ form.laundry_number.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+        </div>
+
         <!-- Date de naissance -->
         <div class="row justify-content-start ml-0">
             <div class="form-group">
