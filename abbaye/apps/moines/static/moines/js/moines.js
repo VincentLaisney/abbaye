@@ -1,10 +1,17 @@
 $(document).ready(function () {
   $('#table-monks').DataTable({
     order: [[2, 'asc']],
-    info: false,
-    paging: false,
+    // info: false,
+    paging: 5,
     'language': {
-      'search': '<p class="text-center mb-0">Rechercher un moine :</p>',
+      'info': 'Page <b>_PAGE_</b> sur <b>_PAGES_</b>',
+      'infoFiltered': ' - sur un total de <b>_MAX_</b> moines',
+      'lengthMenu': 'Montrer _MENU_ moines par page',
+      'paginate': {
+        'previous': 'Page précédente',
+        'next': 'Page suivante',
+      },
+      'search': 'Rechercher un moine :',
       'zeroRecords': 'Aucun moine trouvé',
     },
     columnDefs: [

@@ -40,35 +40,41 @@
 
                     <td class="col-1">
                         {% if monk.birthday %}
-                            {{ monk.birthday|date:'Y-m-d' }}
+                            <span class="d-none">{{ monk.birthday|date:'Ymd' }}</span><!-- Span not displayed, only to be able to sort dates. -->
+                            {{ monk.birthday|date:'d/m/Y' }}
                         {% endif %}
                     </td>
 
                     <td class="col-1">
-                        {{ monk.entry|date:'Y-m-d' }}
+                        <span class="d-none">{{ monk.entry|date:'Ymd' }}</span><!-- Span not displayed, only to be able to sort dates. -->
+                        {{ monk.entry|date:'d/m/Y' }}
                     </td>
 
                     <td class="col-1">
                         {% if monk.habit %}
-                            {{ monk.habit|date:'Y-m-d' }}
+                            <span class="d-none">{{ monk.habit|date:'Ymd' }}</span><!-- Span not displayed, only to be able to sort dates. -->
+                            {{ monk.habit|date:'d/m/Y' }}
                         {% endif %}
                     </td>
 
                     <td class="col-1">
                         {% if monk.profession_temp %}
-                            {{ monk.profession_temp|date:'Y-m-d' }}
+                            <span class="d-none">{{ monk.profession_temp|date:'Ymd' }}</span><!-- Span not displayed, only to be able to sort dates. -->
+                            {{ monk.profession_temp|date:'d/m/Y' }}
                         {% endif %}
                     </td>
 
                     <td class="col-1">
                         {% if monk.profession_perp %}
-                            {{ monk.profession_perp|date:'Y-m-d' }}
+                            <span class="d-none">{{ monk.profession_perp|date:'Ymd' }}</span><!-- Span not displayed, only to be able to sort dates. -->
+                            {{ monk.profession_perp|date:'d/m/Y' }}
                         {% endif %}
                     </td>
 
                     <td class="col-1">
                         {% if monk.priest %}
-                            {{ monk.priest|date:'Y-m-d' }}
+                            <span class="d-none">{{ monk.priest|date:'Ymd' }}</span><!-- Span not displayed, only to be able to sort dates. -->
+                            {{ monk.priest|date:'d/m/Y' }}
                         {% endif %}
                     </td>
 

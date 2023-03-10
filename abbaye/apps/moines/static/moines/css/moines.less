@@ -11,6 +11,7 @@ h3 {
 
 #table-monks_wrapper {
     font-size: 0.9em;
+    margin-bottom: 50px;
     width: 90%;
 
     th,
@@ -18,11 +19,15 @@ h3 {
         text-align: center;
     }
 
-    #table-monks_filter {
+    #table-monks_filter,
+    #table-monks_info,
+    #table-monks_length,
+    #table-monks_paginate {
+        color: @green;
+
+        a,
         label {
-            color: @green;
             font-weight: bold;
-            margin-left: 0;
         }
     }
 }
