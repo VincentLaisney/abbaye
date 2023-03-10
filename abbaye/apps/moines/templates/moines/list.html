@@ -1,5 +1,12 @@
 {% extends 'moines/main_moines.html' %}
 
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/datatables/datatables.min.css'%}>
+{% endblock css %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item active">Moines</li>
 {% endblock breadcrumbs %}
@@ -9,45 +16,76 @@
 
     <a href={% url 'moines:create' %} class="my-3">Créer un nouveau moine</a>
 
-    <table id="table-monks" class="table table-bordered table-sm">
-        <tr class="text-center red-dark">
-            <th class="col-1">Moine</th>
-            <th class="col-1">Naissance</th>
-            <th class="col-1">Entrée</th>
-            <th class="col-1">Prise d'habit</th>
-            <th class="col-1">Profession temporaire</th>
-            <th class="col-1">Profession perpétuelle</th>
-            <th class="col-1">Ordination</th>
-        </tr>
-
-        {% for monk in monks %}
-            <tr>
-                <td class="text-center fw-bold"><a href={% url 'moines:details' monk.pk %}>{{ monk }}<a ></td>
-                {% if monk.birthday %}
-                    <td>{{ monk.birthday_french }}</td>
-                {% endif %}
-                <td>{{ monk.entry_french }}</td>
-                {% if monk.habit %}
-                    <td>{{ monk.habit_french }}</td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if monk.profession_temp %}
-                    <td>{{ monk.profession_temp_french }}</td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if monk.profession_perp %}
-                    <td>{{ monk.profession_perp_french }}</td>
-                {% else %}
-                    <td></td>
-                {% endif %}
-                {% if monk.priest %}
-                    <td>{{ monk.priest_french }}</td>
-                {% else %}
-                    <td></td>
-                {% endif %}
+    <table id="table-monks" class="cell-border order-column hover w-100">
+        <thead>
+            <tr class="red-dark">
+                <th>Moine</th>
+                <th>Naissance</th>
+                <th>Entrée</th>
+                <th>Prise d'habit</th>
+                <th>Prof. temp.</th>
+                <th>Prof. perp.</th>
+                <th>Ordination</th>
+                <th>Fête</th>
+                <th>N° de linge</th>
             </tr>
-        {% endfor %}
+        </thead>
+
+        <tbody>
+            {% for monk in monks %}
+                <tr>
+                    <td class="col-2 fw-bold">
+                        <a href={% url 'moines:details' monk.pk %}>{{ monk }}</a>
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.birthday %}
+                            {{ monk.birthday|date:'Y-m-d' }}
+                        {% endif %}
+                    </td>
+
+                    <td class="col-1">
+                        {{ monk.entry|date:'Y-m-d' }}
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.habit %}
+                            {{ monk.habit|date:'Y-m-d' }}
+                        {% endif %}
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.profession_temp %}
+                            {{ monk.profession_temp|date:'Y-m-d' }}
+                        {% endif %}
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.profession_perp %}
+                            {{ monk.profession_perp|date:'Y-m-d' }}
+                        {% endif %}
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.priest %}
+                            {{ monk.priest|date:'Y-m-d' }}
+                        {% endif %}
+                    </td>
+
+                    <td class="col-1">
+                        {{ monk.feast_date }}
+                    </td>
+
+                    <td class="col-1">
+                        {{ monk.laundry_number }}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
     </table>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'main/datatables/datatables.min.js'%}></script>
+{% endblock javascript %}
