@@ -92,3 +92,7 @@ class Monk(models.Model):
     def death_french(self):
         """ Date of death french formatted. """
         return date_to_french_string(self.death)
+
+    def feast_date(self):
+        """ Feast date. """
+        return '{}-{}'.format(self.feast_month, self.feast_day)
