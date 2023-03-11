@@ -4,8 +4,9 @@ $(document).ready(function () {
     // info: false,
     paging: 5,
     'language': {
-      'info': 'Page <b>_PAGE_</b> sur <b>_PAGES_</b>',
-      'infoFiltered': ' - sur un total de <b>_MAX_</b> moines',
+      'info': 'Page <b>_PAGE_</b> sur <b>_PAGES_</b> - Total : <b>_MAX_</b> moines',
+      'infoFiltered': ' - Affichés : moines <b>_START_</b> à <b>_END_</b> parmi <b>_TOTAL_</b> moines trouvés',// TODO: Remplacer "1 moines trouvés" par "1 moine trouvé":
+      'infoEmpty': 'Aucun moine trouvé',// TODO: Du coup supprimer le bloc 'infoFiltered', ainsi que "Page précédente" et "Page suivante".
       'lengthMenu': 'Montrer _MENU_ moines par page',
       'paginate': {
         'previous': 'Page précédente',
