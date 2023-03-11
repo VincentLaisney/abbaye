@@ -10,5 +10,7 @@
         <h1>Mémo de l'imprimeur</h1>
     </div>
 
+    <a href={% url 'imprimerie:memo_update' %} class="btn btn-primary btn-sm">Éditer le Mémo</a>
+
     <div id="memo" class="col-8 d-flex flex-column align-items-center border border-dark rounded p-2 my-3">{{ html|safe }}</div>
 {% endblock content %}

@@ -13,6 +13,7 @@ app_name = 'imprimerie'
 urlpatterns = [
     path('', views_main.home, name='home'),
     path('memo', views_memo.memo, name='memo'),
+    path('memo/update', views_memo.memo_update, name='memo_update'),
     path('clients/', views_clients.list, name='clients_list'),
     path('clients/create', views_clients.create, name='clients_create'),
     path('clients/details', views_clients.details, name='clients_details'),
