@@ -95,4 +95,4 @@ class Monk(models.Model):
 
     def feast_date(self):
         """ Feast date. """
-        return '{:02}-{:02}'.format(self.feast_day, self.feast_month)
+        return '{:02}/{:02}'.format(self.feast_day, self.feast_month)
