@@ -10,6 +10,15 @@ from .forms import MonkForm
 from .models import Monk
 
 
+def home(request):
+    """ Home page of monks. """
+    return render(
+        request,
+        'moines/home.html',
+        {},
+    )
+
+
 def list(request):
     """ List of monks. """
     monks = Monk.objects.all().order_by('entry', 'rank')

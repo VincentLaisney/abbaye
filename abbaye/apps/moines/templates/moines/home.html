@@ -1,0 +1,14 @@
+{% extends 'moines/main_moines.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Moines</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <div id="home-content" class="d-flex flex-column align-items-center">
+        <h1>Tout sur les moines de Flavigny</h1>
+
+        <a href={% url 'moines:list' %} class="btn btn-primary m-3">Liste des moines</a>
+        <a href={% url 'moines:statistiques' %} class="btn btn-primary">Statistiques</a>
+    </div>
+{% endblock content %}
