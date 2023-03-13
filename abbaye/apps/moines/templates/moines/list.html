@@ -8,7 +8,8 @@
 {% endblock css %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item active">Moines</li>
+    <li class="breadcrumb-item"><a href={% url 'moines:home' %}>Moines</a></li>
+    <li class="breadcrumb-item active">Liste</li>
 {% endblock breadcrumbs %}
 
 {% block content %}

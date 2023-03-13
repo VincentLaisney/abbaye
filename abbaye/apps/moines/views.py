@@ -1,5 +1,12 @@
 """ apps/moines/views.py """
 
+from datetime import date
+from statistics import mean
+import os
+import numpy
+from matplotlib import pyplot
+
+from django.conf import settings
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -8,6 +15,15 @@ from apps.main.decorators import group_required
 
 from .forms import MonkForm
 from .models import Monk
+
+
+def home(request):
+    """ Home page of monks. """
+    return render(
+        request,
+        'moines/home.html',
+        {},
+    )
 
 
 def list(request):
@@ -95,10 +111,98 @@ def delete(request, **kwargs):
 
 def statistiques(request):
     """ Statistiques view of Monks. """
+    monks = len(
+        Monk.objects.all()
+    )
+    postulants = len(
+        Monk.objects
+        .filter(habit__isnull=True)
+    )
+    novices = len(
+        Monk.objects
+        .filter(habit__isnull=False)
+        .filter(profession_temp__isnull=True)
+    )
+    tempo = len(
+        Monk.objects
+        .filter(profession_temp__isnull=False)
+        .filter(profession_perp__isnull=True)
+    )
+    perpetual = len(
+        Monk.objects
+        .filter(profession_perp__isnull=False)
+    )
+    priests = len(
+        Monk.objects
+        .filter(priest__isnull=False)
+    )
+
+    # Average age
+    ages = []
+    moines = Monk.objects.all()
+    for index, moine in enumerate(moines):
+        ages.append((date.today() - moine.birthday).days / 365)
+
+    # Histogram:
+    hist, bin_edges = numpy.histogram(
+        ages,
+        bins=[10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+    )
+    pyplot.figure(figsize=[10, 5])
+    result = pyplot.bar(
+        [i + 5 for i in bin_edges[:-1]],
+        hist,
+        width=9,
+        color='orange',
+    )
+    for i, patch in enumerate(result):
+        if hist[i] > 0:
+            pyplot.text(
+                bin_edges[i] + 5, hist[i] + 1, hist[i],
+                ha='center',
+                va='bottom',
+            )
+    pyplot.xlim(min(bin_edges), max(bin_edges))
+    pyplot.xlabel('Âge', fontsize=10)
+    pyplot.ylabel('Nombre de moines', fontsize=10)
+    pyplot.xticks(
+        numpy.arange(
+            min(bin_edges),
+            max(bin_edges),
+            10),
+        fontsize=10
+    )
+    pyplot.yticks(
+        numpy.arange(
+            0,
+            max(hist) + 5,
+            5),
+        fontsize=10
+    )
+    average_age = mean(ages)
+    pyplot.text(
+        20,
+        max(hist) - 5,
+        'Moyenne : {:.2f} ans'.format(average_age),
+        fontsize=10
+    )
+    pyplot.savefig(
+        os.path.join(settings.BASE_DIR,
+                     'apps/moines/static/moines/img/histogram.svg'),
+        format='svg',
+    )
+
     return render(
         request,
         'moines/statistiques.html',
-        {},
+        {
+            'monks': monks,
+            'postulants': postulants,
+            'novices': novices,
+            'tempo': tempo,
+            'perpetual': perpetual,
+            'priests': priests,
+        },
     )
 
 
