@@ -16,12 +16,12 @@
     <header class="">
         <div id="bandeau" class="">
             <div id="carrousel" class="d-flex justify-content-center">
-                <img src={% static "ornitho/images/bandeaux/crecerelle.jpg" %}/>
-                <img src={% static "ornitho/images/bandeaux/gd.jpg" %}/>
-                <img src={% static "ornitho/images/bandeaux/grues.jpg" %}/>
-                <img src={% static "ornitho/images/bandeaux/anax.jpg" %}/>
-                <img src={% static "ornitho/images/bandeaux/milan_royal.jpg" %}/>
-                <img src={% static "ornitho/images/bandeaux/oedipode.jpg" %}/>
+                <img src="{% static 'ornitho/images/bandeaux/crecerelle.jpg' %}"/>
+                <img src="{% static 'ornitho/images/bandeaux/gd.jpg' %}"/>
+                <img src="{% static 'ornitho/images/bandeaux/grues.jpg' %}"/>
+                <img src="{% static 'ornitho/images/bandeaux/anax.jpg' %}"/>
+                <img src="{% static 'ornitho/images/bandeaux/milan_royal.jpg' %}"/>
+                <img src="{% static 'ornitho/images/bandeaux/oedipode.jpg' %}"/>
             </div>
     
             <div id="texte_bandeau" class="d-flex flex-column">
@@ -45,7 +45,7 @@
         </ul>
     </nav>
 
-    <article class="w-100">
+    <article class="d-flex flex-column align-items-center w-100">
         {% block article %}{% endblock article %}
     </article>
 {% endblock content %}
