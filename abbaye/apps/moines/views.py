@@ -187,9 +187,7 @@ def statistiques(request):
         fontsize=10
     )
     pyplot.savefig(
-        os.path.join(settings.BASE_DIR,
-                     'apps/moines/static/moines/img/histogram.svg'),
-        format='svg',
+        os.path.join(settings.MEDIA_ROOT, 'moines/histogram.svg'),
     )
 
     return render(
