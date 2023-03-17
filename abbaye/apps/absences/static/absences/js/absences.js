@@ -15,16 +15,15 @@ $(document).ready(function () {
         }
     }).trigger('change');
 
-
     // Checkbox all additional recipients:
-    $('#checkbox_all_additional_recipients').click(function(){
-        if($(this).prop('checked')){
-            $('#id_additional_recipients').find(':checkbox').each(function(){
+    $('#checkbox_all_additional_recipients').click(function () {
+        if ($(this).prop('checked')) {
+            $('#id_additional_recipients').find(':checkbox').each(function () {
                 $(this).prop('checked', true);
             })
         }
-        else{
-            $('#id_additional_recipients').find(':checkbox').each(function(){
+        else {
+            $('#id_additional_recipients').find(':checkbox').each(function () {
                 $(this).prop('checked', false);
             })
         }
