@@ -20,6 +20,18 @@ STATIONS = [
 ]
 
 
+class AdditionalRecipients(forms.ModelMultipleChoiceField):
+    """ Override label. """
+
+    def label_from_instance(self, obj):
+        """
+        Convert objects into strings and generate the labels for the choices
+        presented by this object. Subclasses can override this method to
+        customize the display of the choices.
+        """
+        return '<b>{}</b> ({})'.format(obj.name, obj.email)
+
+
 class TicketFormBack(forms.ModelForm):
     """ Ticket form for back-only Ticket. """
     monks = forms.ModelMultipleChoiceField(
@@ -89,7 +101,7 @@ class TicketFormBack(forms.ModelForm):
             }
         ),
     )
-    additional_recipients = forms.ModelMultipleChoiceField(
+    additional_recipients = AdditionalRecipients(
         required=False,
         queryset=Monk.objects
         .filter(absences_recipient=False)

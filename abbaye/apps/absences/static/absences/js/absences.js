@@ -28,4 +28,9 @@ $(document).ready(function () {
             })
         }
     });
+
+    // Additional recipients: set name in bold:
+    $("[id^=id_additional_recipients_]").each(function (element) {
+        $(this).parent().html($(this).parent().html().replace('&lt;b&gt;', '<b>').replace('&lt;/b&gt;', '</b>'));
+    });
 });
