@@ -1,6 +1,7 @@
 {% extends 'main.html' %}
 
 {% load static %}
+{% load widget_tweaks %}
 
 {% block css %}
     <link rel="stylesheet/less" href={% static 'absences/css/absences.less' %}>
@@ -40,19 +41,56 @@
                         Cochez les moines qui vont revenir :
                     {% endif %}
                 </h4>
-                {{ form.monks }}
-                {% for error in form.monks.errors %}
-                    <div class="invalid-feedback font-weight-bold red d-block">
-                        {{ error }}
-                    </div>
-                {% endfor %}
+                <div>
+                    {% if form.is_bound %}
+                        {% if form.monks.errors %}
+                            {% render_field form.monks class="list-unstyled border rounded p-2 mb-0 is-invalid" %}
+                            {% for error in form.monks.errors %}
+                                <div class="invalid-feedback" style="display: block;">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.monks class="list-unstyled border rounded p-2 mb-0 is-valid" %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field form.monks class="list-unstyled border rounded p-2 mb-0" %}
+                    {% endif %}
+    
+                    {% if form.monks.help_text %}
+                        <small class="form-text text-muted">
+                            {{ form.monks.help_text }}
+                        </small>
+                    {% endif %}
+                </div>
             </div>
 
             <!-- DESTINATION -->
             {% if action == 'go' %}
                 <div>
                     <h4 class="mt-5">Destination (facultatif) :</h4>
-                    {{ form.destination }}
+                    <div class="d-flex my-2">
+                        {% if form.is_bound %}
+                            {% if form.destination.errors %}
+                                {% render_field form.destination class="form-control w-100 is-invalid" %}
+                                {% for error in form.destination.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.destination class="form-control w-100 is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.destination class="form-control w-100" %}
+                        {% endif %}
+        
+                        {% if form.destination.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.destination.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
                 </div>
             {% endif %}
 
@@ -64,89 +102,386 @@
             {% endif %}
                 {% if action == 'go' %}
                     <!-- GO -->
-                    <div id="go_block" class="col-6 m-2 border rounded p-2">
+                    <div id="go_block" class="col-5 m-2 border rounded p-2">
                         <h2 class="text-center">DÉPART</h2>
-                        <div class="d-flex mb-3">
-                            <label class="green font-weight-bold mt-2">Date :</label>
-                            <div class="col-4">
-                                {{ form.go_date }}
-                                {% for error in form.go_date.errors %}
-                                    <div class="invalid-feedback font-weight-bold red d-block">
-                                        {{ error }}
-                                    </div>
-                                {% endfor %}
+                        <div class="d-flex align-items-center mb-3">
+                            <label class="green fw-bold">Date :</label>
+                            <div class="d-flex my-2">
+                                {% if form.is_bound %}
+                                    {% if form.go_date.errors %}
+                                        {% render_field form.go_date class="form-control is-invalid mx-2" %}
+                                        {% for error in form.go_date.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% render_field form.go_date class="form-control is-valid mx-2" %}
+                                    {% endif %}
+                                {% else %}
+                                    {% render_field form.go_date class="form-control mx-2" %}
+                                {% endif %}
+                
+                                {% if form.go_date.help_text %}
+                                    <small class="form-text text-muted">
+                                        {{ form.go_date.help_text }}
+                                    </small>
+                                {% endif %}
                             </div>
-                            {{ form.go_moment }}
+                            <div class="d-flex my-2">
+                                {% if form.is_bound %}
+                                    {% if form.go_moment.errors %}
+                                        {% render_field form.go_moment class="custom-select is-invalid" %}
+                                        {% for error in form.go_moment.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% render_field form.go_moment class="custom-select is-valid" %}
+                                    {% endif %}
+                                {% else %}
+                                    {% render_field form.go_moment class="custom-select" %}
+                                {% endif %}
+                
+                                {% if form.go_moment.help_text %}
+                                    <small class="form-text text-muted">
+                                        {{ form.go_moment.help_text }}
+                                    </small>
+                                {% endif %}
+                            </div>
                         </div>
 
                         <div class="ml-3">
-                            {{ form.servants }}
-                            <label for="id_servants" class="green font-weight-bold mr-2">Repas avec les serveurs</label>
-                            {{ form.picnic }}
-                            <label for="id_picnic" class="green font-weight-bold" title="Cochez cette case, même si vous comptez préparer vous même votre casse-croûte.">Casse-croûte</label>
+                            <div class="d-flex my-2">
+                                {% if form.is_bound %}
+                                    {% if form.servants.errors %}
+                                        {% render_field form.servants class="is-invalid" %}
+                                        {% for error in form.servants.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% render_field form.servants class="is-valid" %}
+                                    {% endif %}
+                                {% else %}
+                                    {% render_field form.servants %}
+                                {% endif %}
+                
+                                {% if form.servants.help_text %}
+                                    <small class="form-text text-muted">
+                                        {{ form.servants.help_text }}
+                                    </small>
+                                {% endif %}
+                                <label for="id_servants" class="green fw-bold mx-2">Repas avec les serveurs</label>
+                                {% if form.is_bound %}
+                                    {% if form.picnic.errors %}
+                                        {% render_field form.picnic class="is-invalid" %}
+                                        {% for error in form.picnic.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% render_field form.picnic class="is-valid" %}
+                                    {% endif %}
+                                {% else %}
+                                    {% render_field form.picnic %}
+                                {% endif %}
+                
+                                {% if form.picnic.help_text %}
+                                    <small class="form-text text-muted">
+                                        {{ form.picnic.help_text }}
+                                    </small>
+                                {% endif %}
+                                <label for="id_picnic" class="green fw-bold mx-2" title="Cochez cette case, même si vous comptez préparer vous même votre casse-croûte.">Casse-croûte</label>
+                            </div>
                         </div>
 
                         <div class="mb-1">
-                            <label class="green font-weight-bold mt-2">Moyen de transport :</label>
-                            {{ form.go_by }}
+                            <div class="d-flex align-items-center my-2">
+                                <label class="green fw-bold me-2">Moyen de transport :</label>
+                                {% if form.is_bound %}
+                                    {% if form.go_by.errors %}
+                                        {% render_field form.go_by class="custom-select is-invalid" %}
+                                        {% for error in form.go_by.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% render_field form.go_by class="custom-select is-valid" %}
+                                    {% endif %}
+                                {% else %}
+                                    {% render_field form.go_by class="custom-select" %}
+                                {% endif %}
+                
+                                {% if form.go_by.help_text %}
+                                    <small class="form-text text-muted">
+                                        {{ form.go_by.help_text }}
+                                    </small>
+                                {% endif %}
+                            </div>
                         </div>
 
                         <div id="group_train_go" class="d-flex">
-                            <label class="green font-weight-bold mt-2 mr-2">Gare :</label>
-                            {{ form.go_station }}
-                            <label class="green font-weight-bold mt-2 ml-2">à :</label>
-                            <div class="col-4">{{ form.go_hour }}</div>
+                            <div class="d-flex align-items-center my-2">
+                                <label class="green fw-bold me-2">Gare :</label>
+                                {% if form.is_bound %}
+                                    {% if form.go_station.errors %}
+                                        {% render_field form.go_station class="custom-select is-invalid" %}
+                                        {% for error in form.go_station.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% render_field form.go_station class="custom-select is-valid" %}
+                                    {% endif %}
+                                {% else %}
+                                    {% render_field form.go_station class="custom-select" %}
+                                {% endif %}
+                
+                                {% if form.go_station.help_text %}
+                                    <small class="form-text text-muted">
+                                        {{ form.go_station.help_text }}
+                                    </small>
+                                {% endif %}
+                            </div>
+                            <div class="d-flex align-items-center my-2">
+                                <label class="green fw-bold mx-2">à :</label>
+                                {% if form.is_bound %}
+                                    {% if form.go_hour.errors %}
+                                        {% render_field form.go_hour class="form-control is-invalid" %}
+                                        {% for error in form.go_hour.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% render_field form.go_hour class="form-control is-valid" %}
+                                    {% endif %}
+                                {% else %}
+                                    {% render_field form.go_hour class="form-control" %}
+                                {% endif %}
+                
+                                {% if form.go_hour.help_text %}
+                                    <small class="form-text text-muted">
+                                        {{ form.go_hour.help_text }}
+                                    </small>
+                                {% endif %}
+                            </div>
                         </div>
                     </div>
                 {% endif %}
 
                 <!-- BACK -->
-                <div id="back_block" class="col-6 m-2 border rounded p-2">
+                <div id="back_block" class="col-5 m-2 border rounded p-2">
                     <h2 class="text-center">RETOUR</h2>
-                    <div class="d-flex mb-3">
-                        <label class="green font-weight-bold mt-2">Date :</label>
-                        <div class="col-4">
-                            {{ form.back_date }}
-                            {% for error in form.back_date.errors %}
-                                <div class="invalid-feedback font-weight-bold red d-block">
-                                    {{ error }}
-                                </div>
-                            {% endfor %}
+                    <div class="d-flex align-items-center mb-3">
+                        <label class="green fw-bold">Date :</label>
+                        <div class="d-flex my-2">
+                            {% if form.is_bound %}
+                                {% if form.back_date.errors %}
+                                    {% render_field form.back_date class="custom-select form-control is-invalid mx-2" %}
+                                    {% for error in form.back_date.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field form.back_date class="custom-select form-control is-valid mx-2" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field form.back_date class="custom-select form-control mx-2" %}
+                            {% endif %}
+            
+                            {% if form.back_date.help_text %}
+                                <small class="form-text text-muted">
+                                    {{ form.back_date.help_text }}
+                                </small>
+                            {% endif %}
                         </div>
-                        {{ form.back_moment }}
+                        <div class="d-flex my-2">
+                            {% if form.is_bound %}
+                                {% if form.back_moment.errors %}
+                                    {% render_field form.back_moment class="custom-select is-invalid" %}
+                                    {% for error in form.back_moment.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field form.back_moment class="custom-select is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field form.back_moment class="custom-select" %}
+                            {% endif %}
+            
+                            {% if form.back_moment.help_text %}
+                                <small class="form-text text-muted">
+                                    {{ form.back_moment.help_text }}
+                                </small>
+                            {% endif %}
+                        </div>
                     </div>
 
                     <div class="ml-3">
-                        {{ form.keep_hot }}
-                        <label for="id_keep_hot" class="green font-weight-bold mr-2">Garder du chaud</label>
+                        <div class="d-flex my-2">
+                            {% if form.is_bound %}
+                                {% if form.keep_hot.errors %}
+                                    {% render_field form.keep_hot class="is-invalid" %}
+                                    {% for error in form.keep_hot.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field form.keep_hot class="is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field form.keep_hot %}
+                            {% endif %}
+            
+                            {% if form.keep_hot.help_text %}
+                                <small class="form-text text-muted">
+                                    {{ form.keep_hot.help_text }}
+                                </small>
+                            {% endif %}
+                            <label for="id_keep_hot" class="green fw-bold mx-2">Garder du chaud</label>
+                        </div>
                     </div>
 
                     <div class="mb-1">
-                        <label class="green font-weight-bold mt-2">Moyen de transport :</label>
-                        {{ form.back_by }}
+                        <div class="d-flex align-items-center my-2">
+                            <label class="green fw-bold me-2">Moyen de transport :</label>
+                            {% if form.is_bound %}
+                                {% if form.back_by.errors %}
+                                    {% render_field form.back_by class="custom-select is-invalid" %}
+                                    {% for error in form.back_by.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field form.back_by class="custom-select is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field form.back_by class="custom-select" %}
+                            {% endif %}
+            
+                            {% if form.back_by.help_text %}
+                                <small class="form-text text-muted">
+                                    {{ form.back_by.help_text }}
+                                </small>
+                            {% endif %}
+                        </div>
                     </div>
 
                     <div id="group_train_back" class="d-flex">
-                        <label class="green font-weight-bold mt-2 mr-2">Gare :</label>
-                        {{ form.back_station }}
-                        <label class="green font-weight-bold mt-2 ml-2">à :</label>
-                        <div class="col-4">{{ form.back_hour }}</div>
+                        <div class="d-flex align-items-center my-2">
+                            <label class="green fw-bold me-2">Gare :</label>
+                            {% if form.is_bound %}
+                                {% if form.back_station.errors %}
+                                    {% render_field form.back_station class="custom-select is-invalid" %}
+                                    {% for error in form.back_station.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field form.back_station class="custom-select is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field form.back_station class="custom-select" %}
+                            {% endif %}
+            
+                            {% if form.back_station.help_text %}
+                                <small class="form-text text-muted">
+                                    {{ form.back_station.help_text }}
+                                </small>
+                            {% endif %}
+                        </div>
+                        <div class="d-flex align-items-center my-2">
+                            <label class="green fw-bold mx-2">à :</label>
+                            {% if form.is_bound %}
+                                {% if form.back_hour.errors %}
+                                    {% render_field form.back_hour class="form-control is-invalid" %}
+                                    {% for error in form.back_hour.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field form.back_hour class="form-control is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field form.back_hour class="form-control" %}
+                            {% endif %}
+            
+                            {% if form.back_hour.help_text %}
+                                <small class="form-text text-muted">
+                                    {{ form.back_hour.help_text }}
+                                </small>
+                            {% endif %}
+                        </div>
                     </div>
                 </div>
             </div>
 
             <!-- FORME ORDINAIRE -->
             {% if action == 'go' %}
-                <div>
-                    {{ form.ordinary_form }}
-                    <label for="id_ordinary_form" class="green font-weight-bold mr-2 mt-5">Forme ordinaire (pour les prêtres)</label>
+                <div class="d-flex my-5">
+                    {% if form.is_bound %}
+                        {% if form.ordinary_form.errors %}
+                            {% render_field form.ordinary_form class="is-invalid" %}
+                            {% for error in form.ordinary_form.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.ordinary_form class="is-valid" %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field form.ordinary_form %}
+                    {% endif %}
+
+                    {% if form.ordinary_form.help_text %}
+                        <small class="form-text text-muted">
+                            {{ form.ordinary_form.help_text }}
+                        </small>
+                    {% endif %}
+                    <label for="id_ordinary_form" class="green fw-bold mx-2">Forme ordinaire (pour les prêtres)</label>
                 </div>
             {% endif %}
 
             <!-- REMARQUES -->
             <div>
                 <h4 class="mt-5">Commentaire :</h4>
-                {{ form.commentary }}
+                <div class="d-flex my-2">
+                    {% if form.is_bound %}
+                        {% if form.commentary.errors %}
+                            {% render_field form.commentary class="form-control w-100 is-invalid" %}
+                            {% for error in form.commentary.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.commentary class="form-control w-100 is-valid" %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field form.commentary class="form-control w-100" %}
+                    {% endif %}
+    
+                    {% if form.commentary.help_text %}
+                        <small class="form-text text-muted">
+                            {{ form.commentary.help_text }}
+                        </small>
+                    {% endif %}
+                </div>
             </div>
 
             <!-- DESTINATAIRES OBLIGATOIRES -->
@@ -161,17 +496,33 @@
             <div>
                 <h4 class="mt-5 mb-0">Destinataires supplémentaires :</h4>
                 <div class="d-flex">
-                    <small class="grey mt-0 mr-auto">{{ form.additional_recipients.help_text }}</small>
-                    <input type="checkbox" id="checkbox_all_additional_recipients" class="my-0 ml-auto"></input>
-                    <label for="checkbox_all_additional_recipients" class="my-0 ml-1" style="font-size:0.9em;">Cocher tous les destinataires supplémentaires</input>
+                    {% if form.additional_recipients.help_text %}
+                        <small class="grey-dark mt-0 mr-auto">{{ form.additional_recipients.help_text }}</small>
+                    {% endif %}
+                    <input type="checkbox" id="checkbox_all_additional_recipients" class="my-0 ms-auto"></input>
+                    <label for="checkbox_all_additional_recipients" class="green fw-boldmy-0 ms-1" style="font-size:0.9em;">Cocher tous les destinataires supplémentaires</input>
                 </div>
-                {{ form.additional_recipients }}
+                <div class="d-flex my-2">
+                    {% if form.is_bound %}
+                        {% if form.additional_recipients.errors %}
+                            {% render_field form.additional_recipients class="list-unstyled border rounded p-2 mb-0 is-invalid" %}
+                            {% for error in form.additional_recipients.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.additional_recipients class="list-unstyled border rounded p-2 mb-0 is-valid" %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field form.additional_recipients class="list-unstyled border rounded p-2 mb-0" %}
+                    {% endif %}
+                </div>
             </div>
 
             <!-- VALIDATION -->
             <div class="w-100 d-flex flex-column align-items-center">
                 <button type="submit" id="btn_validate_billet" class="btn btn-primary mt-5">Envoyer le message maintenant</button>
-                <p class="red font-weight-bold mt-3 mb-5">Attention ! Le message sera envoyé directement. Il n'y a pas de fenêtre de vérification.</p>
             </div>
         </div>
     </form>

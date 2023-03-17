@@ -36,11 +36,7 @@ class TicketFormBack(forms.ModelForm):
         queryset=Monk.objects.filter(
             is_active=True)
         .order_by('entry', 'rank'),
-        widget=forms.CheckboxSelectMultiple(
-            attrs={
-                'class': 'list-unstyled border rounded p-2 mb-0',
-            },
-        ),
+        widget=forms.CheckboxSelectMultiple(),
         error_messages={
             'required': 'Veuillez sélectionner au moins 1 moine.',
         },
@@ -83,24 +79,16 @@ class TicketFormBack(forms.ModelForm):
     )
     commentary = forms.CharField(
         required=False,
-        widget=forms.Textarea(
-            attrs={
-                'class': 'w-100',
-            }
-        ),
+        widget=forms.Textarea(),
     )
     additional_recipients = AdditionalRecipients(
         required=False,
         queryset=Monk.objects
         .filter(absences_recipient=False)
         .filter(is_active=True)
-        .exclude(email='')
+        .exclude(email=None)
         .order_by('entry', 'rank'),
-        widget=forms.CheckboxSelectMultiple(
-            attrs={
-                'class': 'list-unstyled border rounded p-2 mb-0',
-            },
-        ),
+        widget=forms.CheckboxSelectMultiple(),
         help_text='Cochez les moines supplémentaires à qui vous souhaitez faire parvenir ce message.',
     )
 
@@ -114,11 +102,7 @@ class TicketFormGo(TicketFormBack):
     """ Ticket form for go-and-back Ticket. """
     destination = forms.CharField(
         required=False,
-        widget=forms.TextInput(
-            attrs={
-                'class': 'w-100',
-            },
-        ),
+        widget=forms.TextInput(),
     )
     go_date = forms.DateField(
         input_formats=[
