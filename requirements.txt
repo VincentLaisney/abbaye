@@ -6,7 +6,6 @@ coverage==5.0
 cycler==0.10.0
 Django==3.2.18
 django-autocomplete-light==3.5.1
-django-tempus-dominus==5.1.2.9
 django-widget-tweaks==1.4.5
 fonttools==4.38.0
 importlib-metadata==6.0.0
