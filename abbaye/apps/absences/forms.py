@@ -3,8 +3,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from tempus_dominus.widgets import DatePicker, TimePicker
-
 from apps.moines.models import Monk
 from .models import Ticket
 
@@ -20,17 +18,25 @@ STATIONS = [
 ]
 
 
+class AdditionalRecipients(forms.ModelMultipleChoiceField):
+    """ Override label. """
+
+    def label_from_instance(self, obj):
+        """
+        Convert objects into strings and generate the labels for the choices
+        presented by this object. Subclasses can override this method to
+        customize the display of the choices.
+        """
+        return '<b>{}</b> ({})'.format(obj.name, obj.email)
+
+
 class TicketFormBack(forms.ModelForm):
     """ Ticket form for back-only Ticket. """
     monks = forms.ModelMultipleChoiceField(
         queryset=Monk.objects.filter(
             is_active=True)
         .order_by('entry', 'rank'),
-        widget=forms.CheckboxSelectMultiple(
-            attrs={
-                'class': 'list-unstyled border rounded p-2 mb-0',
-            },
-        ),
+        widget=forms.CheckboxSelectMultiple(),
         error_messages={
             'required': 'Veuillez sélectionner au moins 1 moine.',
         },
@@ -39,11 +45,6 @@ class TicketFormBack(forms.ModelForm):
         input_formats=[
             '%d/%m/%Y',
         ],
-        widget=DatePicker(
-            options={
-                'format': 'DD/MM/YYYY',
-            },
-        ),
         error_messages={
             'required': 'Ce champ est obligatoire. Si vous ne connaissez pas la date de votre retour, entrez une date approximative et indiquez-le en commentaire.',
         },
@@ -75,32 +76,19 @@ class TicketFormBack(forms.ModelForm):
         input_formats=[
             '%H:%M',
         ],
-        widget=TimePicker(
-            options={
-                'format': 'HH:mm',
-            },
-        ),
     )
     commentary = forms.CharField(
         required=False,
-        widget=forms.Textarea(
-            attrs={
-                'class': 'w-100',
-            }
-        ),
+        widget=forms.Textarea(),
     )
-    additional_recipients = forms.ModelMultipleChoiceField(
+    additional_recipients = AdditionalRecipients(
         required=False,
         queryset=Monk.objects
         .filter(absences_recipient=False)
         .filter(is_active=True)
-        .exclude(email='')
+        .exclude(email=None)
         .order_by('entry', 'rank'),
-        widget=forms.CheckboxSelectMultiple(
-            attrs={
-                'class': 'list-unstyled border rounded p-2 mb-0',
-            },
-        ),
+        widget=forms.CheckboxSelectMultiple(),
         help_text='Cochez les moines supplémentaires à qui vous souhaitez faire parvenir ce message.',
     )
 
@@ -114,21 +102,12 @@ class TicketFormGo(TicketFormBack):
     """ Ticket form for go-and-back Ticket. """
     destination = forms.CharField(
         required=False,
-        widget=forms.TextInput(
-            attrs={
-                'class': 'w-100',
-            },
-        ),
+        widget=forms.TextInput(),
     )
     go_date = forms.DateField(
         input_formats=[
             '%d/%m/%Y',
         ],
-        widget=DatePicker(
-            options={
-                'format': 'DD/MM/YYYY',
-            },
-        ),
         error_messages={
             'required': 'Ce champ est obligatoire.',
         },
@@ -162,14 +141,6 @@ class TicketFormGo(TicketFormBack):
         input_formats=[
             '%H:%M',
         ],
-        widget=TimePicker(
-            options={
-                'format': 'HH:mm',
-            },
-            attrs={
-                'style': 'width: 100px',
-            }
-        ),
     )
     ordinary_form = forms.BooleanField(
         required=False,

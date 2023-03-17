@@ -35,22 +35,36 @@ body {
         h4,
         h5,
         h6 {
-            color: @green-light;
+            color: @green;
         }
 
         h1 {
             font-family: 'LucidaHW',
         }
 
-        .datepicker,
-        .timepicker {
-            width: 120px;
-        }
-
-        #id_monks,
-        #id_additional_recipients {
+        #id_monks {
             column-width: 15vw;
             font-size: 0.95em;
+
+            label {
+                .list-unstyled {
+                    margin: 5px 8px 5px 0px;
+                }
+            }
+        }
+
+        #id_additional_recipients {
+            column-width: 30vw;
+        }
+
+        #id_go_date,
+        #id_back_date,
+        #id_go_hour,
+        #id_back_hour {
+            color: @grey-dark;
+            font-weight: bold;
+            text-align: center;
+            width: 125px;
         }
 
         .recipients {
