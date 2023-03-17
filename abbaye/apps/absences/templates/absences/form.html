@@ -4,6 +4,7 @@
 
 {% block css %}
     <link rel="stylesheet/less" href={% static 'absences/css/absences.less' %}>
+    <link rel="stylesheet" href={% static 'main/tempusdominus/tempus-dominus.min.css' %}>
 {% endblock css %}
 
 {% block breadcrumbs %}
@@ -177,5 +178,9 @@
 {% endblock content %}
 
 {% block javascript %}
+    <script src={% static 'main/js/popper.min.js' %}></script>
+    <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
+    <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
+    <script src={% static 'absences/js/tempusdominus-absences.js' %}></script>
     <script src={% static 'absences/js/absences.js' %}></script>
 {% endblock javascript %}

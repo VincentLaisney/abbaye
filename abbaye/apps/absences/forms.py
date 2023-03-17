@@ -3,8 +3,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
 
-from tempus_dominus.widgets import DatePicker, TimePicker
-
 from apps.moines.models import Monk
 from .models import Ticket
 
@@ -51,11 +49,6 @@ class TicketFormBack(forms.ModelForm):
         input_formats=[
             '%d/%m/%Y',
         ],
-        widget=DatePicker(
-            options={
-                'format': 'DD/MM/YYYY',
-            },
-        ),
         error_messages={
             'required': 'Ce champ est obligatoire. Si vous ne connaissez pas la date de votre retour, entrez une date approximative et indiquez-le en commentaire.',
         },
@@ -87,11 +80,6 @@ class TicketFormBack(forms.ModelForm):
         input_formats=[
             '%H:%M',
         ],
-        widget=TimePicker(
-            options={
-                'format': 'HH:mm',
-            },
-        ),
     )
     commentary = forms.CharField(
         required=False,
@@ -136,11 +124,6 @@ class TicketFormGo(TicketFormBack):
         input_formats=[
             '%d/%m/%Y',
         ],
-        widget=DatePicker(
-            options={
-                'format': 'DD/MM/YYYY',
-            },
-        ),
         error_messages={
             'required': 'Ce champ est obligatoire.',
         },
@@ -174,14 +157,6 @@ class TicketFormGo(TicketFormBack):
         input_formats=[
             '%H:%M',
         ],
-        widget=TimePicker(
-            options={
-                'format': 'HH:mm',
-            },
-            attrs={
-                'style': 'width: 100px',
-            }
-        ),
     )
     ordinary_form = forms.BooleanField(
         required=False,
