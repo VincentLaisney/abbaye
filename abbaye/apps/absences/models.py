@@ -65,3 +65,10 @@ class Ticket(models.Model):
         Monk,
         related_name='additional_recipients',
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True,
+    )
+
