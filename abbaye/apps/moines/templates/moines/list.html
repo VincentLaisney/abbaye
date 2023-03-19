@@ -28,7 +28,8 @@
                 <th>Prof. perp.</th>
                 <th>Ordination</th>
                 <th>Fête</th>
-                <th>N° de linge</th>
+                <th>N° linge</th>
+                <th>Tél.</th>
             </tr>
         </thead>
 
@@ -84,7 +85,15 @@
                     </td>
 
                     <td class="col-1">
-                        {{ monk.laundry_number }}
+                        {% if monk.laundry_number %}
+                            {{ monk.laundry_number }}
+                        {% endif %}
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.phone_number %}
+                            {{ monk.phone_number }}
+                        {% endif %}
                     </td>
                 </tr>
             {% endfor %}
