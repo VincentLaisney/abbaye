@@ -3,27 +3,27 @@
 
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from .forms import TicketFormBack, TicketFormGo
-from .models import Monk
+from .models import Monk, Ticket
 
 
 def home(request):
     """ Home page of Absences. """
+    tickets = Ticket.objects.all().order_by('-go_date', '-back_date')
     return render(
         request,
         'absences/home.html',
         {
-            'title': 'welcome',
+            'tickets': tickets,
         },
     )
 
 
 def success(request):
     """ Success view. """
-    # TODO:  Message "IMPORTANT : Si ce billet en remplace un autre, pensez à supprimer l'ancien ICI."(et créer la view *list* à cet effet).
     return render(
         request,
         'absences/home.html',
@@ -94,6 +94,42 @@ def create(request, **kwargs):
             'action': action,
             'mandatory_recipients': mandatory_recipients,
         }
+    )
+
+
+def details(request, *args, **kwargs):
+    """ Details of a ticket. """
+    ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
+    return render(
+        request,
+        'absences/details.html',
+        {
+            'ticket': ticket,
+        },
+    )
+
+
+def update(request, *args, **kwargs):
+    """ Update a ticket. """
+    ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
+    return render(
+        request,
+        'absences/form.html',
+        {
+            'ticket': ticket,
+        },
+    )
+
+
+def delete(request, *args, **kwargs):
+    """ Delete a ticket. """
+    ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
+    return render(
+        request,
+        'absences/delete.html',
+        {
+            'ticket': ticket,
+        },
     )
 
 

@@ -1,0 +1,24 @@
+{% extends 'absences/main_absences.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'absences:home' %}>Absences</a></li>
+    <li class="breadcrumb-item active">{{ ticket.pk }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h3>Détails du billet {{ ticket }}</h3>
+
+    <table>
+        <tr>
+            <td>Départ :</td>
+            <td>{{ ticket.go_date }}</td>
+        </tr>
+        <tr>
+            <td>Retour :</td>
+            <td>{{ ticket.back_date }}</td>
+        </tr>
+    </table>
+
+    <a href={% url 'absences:update' ticket.pk %}>Modifier</a>
+    <a href={% url 'absences:delete' ticket.pk %}>Supprimer</a>
+{% endblock content %}

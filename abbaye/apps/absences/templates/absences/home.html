@@ -1,20 +1,63 @@
-{% extends 'main.html' %}
+{% extends 'absences/main_absences.html' %}
 
 {% block breadcrumbs %}
     <li class="breadcrumb-item active">Absences</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
-    {% if title == 'welcome' %}
-        <h1 class="mt-5">Bienvenue sur Absences !</h1>
-    {% elif title == 'success' %}
-        <h4 class="mt-5">Votre message a été envoyé avec succès aux responsables d'obédiences.</h4>
-    {% elif title == 'failure' %}
-        <h4 class="mt-5">Échec de l'envoi du billet.</h4>
+    <h1 class="my-3">Billets d'absence</h1>
+
+    {% if title %}
+        <div class="btn btn-info my-3 w-50">{{ title }}</div>
     {% endif %}
 
-    <div id="home_buttons" class="d-flex flex-column">
-        <a href={% url 'absences:create' 'go' %} class="btn btn-primary mt-5 mx-1" title="Pour un moine présent qui va s'absenter">Créer un billet d'absence normal<br>(aller et retour)</a>
-        <a href={% url 'absences:create' 'back' %} class="btn btn-secondary mt-5 mx-1" title="Pour un moine absent qui va revenir">Créer un billet de retour<br>(uniquement retour)</a>
+    <div class="d-flex w-50">
+        <a href={% url 'absences:create' 'go' %} class="btn btn-primary btn-sm mx-2 my-1 w-100" title="Pour un moine présent qui va s'absenter">Créer un billet d'absence normal<br>(aller et retour)</a>
+        <a href={% url 'absences:create' 'back' %} class="btn btn-primary btn-sm mx-2 my-1 w-100" title="Pour un moine absent qui va revenir">Créer un billet de retour<br>(uniquement retour)</a>
     </div>
-{% endblock content %}
+
+    <table class="table table-bordered table-striped table-sm mt-3">
+        <tr class="text-center">
+            <th class="col-1 grey-dark">Créé</th>
+            <th class="col-1 grey-dark">Modifié</th>
+            <th class="col-2 red">Départ</th>
+            <th class="col-2 red">Retour</th>
+            <th class="col-2 red">Destination</th>
+            <th class="col-2 red">Moines</th>
+            <th class="col-1"></th>
+        </tr>
+        {% for ticket in tickets %}
+            <tr>
+                <td>
+                    <table class="d-flex justify-content-center">
+                        <tr>
+                            <td class="orange fw-bold text-end me-2">Le</td>
+                            <td>{{ ticket.created_at|date:"d/m/Y" }}</td>
+                        </tr>
+                        <tr>
+                            <td class="orange fw-bold text-end me-2">à</span>
+                            <td>{{ ticket.created_at|time:"H:i:s" }}</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    <table class="d-flex justify-content-center">
+                        <tr>
+                            <td class="orange fw-bold text-end me-2">Le</td>
+                            <td>{{ ticket.last_modified|date:"d/m/Y" }}</td>
+                        </tr>
+                        <tr>
+                            <td class="orange fw-bold text-end me-2">à</span>
+                            <td>{{ ticket.last_modified|time:"H:i:s" }}</td>
+                        </tr>
+                    </table>
+                </td>
+                <td class="text-center fw-bold">{{ ticket.go_date|date:"l j F Y" }}</td>
+                <td class="text-center fw-bold">{{ ticket.back_date|date:"l j F Y" }}</td>
+                <td>{{ ticket.destination }}</td>
+                <td title="{{ ticket.monks_as_string }}">{{ ticket.monks_as_string|truncatewords:6 }}</td>
+                <td><a href={% url 'absences:details' ticket.pk %}>Détails</a></td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock content%}
