@@ -12,7 +12,14 @@ class Monk(models.Model):
     )
     feast_day = models.IntegerField()
     feast_month = models.IntegerField()
-    laundry_number = models.IntegerField()
+    laundry_number = models.IntegerField(
+        blank=True,
+        null=True,
+    )
+    phone_number = models.IntegerField(
+        blank=True,
+        null=True,
+    )
     birthday = models.DateField(
         blank=True,
         null=True,
