@@ -3,30 +3,30 @@
 
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from .forms import TicketFormBack, TicketFormGo
-from .models import Monk
+from .forms import TicketForm
+from .models import Monk, Ticket
 
 
-def home(request):
-    """ Home page of Absences. """
+def list(request):
+    """ List of Tickets (home page of Absences). """
+    tickets = Ticket.objects.all().order_by('-go_date', '-back_date')
     return render(
         request,
-        'absences/home.html',
+        'absences/list.html',
         {
-            'title': 'welcome',
+            'tickets': tickets,
         },
     )
 
 
 def success(request):
     """ Success view. """
-    # TODO:  Message "IMPORTANT : Si ce billet en remplace un autre, pensez à supprimer l'ancien ICI."(et créer la view *list* à cet effet).
     return render(
         request,
-        'absences/home.html',
+        'absences/list.html',
         {
             'title': 'success',
         },
@@ -37,16 +37,15 @@ def failure(request):
     """ Failure view. """
     return render(
         request,
-        'absences/home.html',
+        'absences/list.html',
         {
             'title': 'failure',
         },
     )
 
 
-def create(request, **kwargs):
+def create(request):
     """ Create ticket. """
-    action = kwargs['action']
     mandatory_recipients = Monk.objects \
         .filter(absences_recipient=True) \
         .filter(is_active=True) \
@@ -54,16 +53,12 @@ def create(request, **kwargs):
 
     if request.method == 'POST':
         data = request.POST
-        if action == 'go':
-            form = TicketFormGo(data)
-        elif action == 'back':
-            form = TicketFormBack(data)
+        form = TicketForm(data)
         additional_recipients = dict(data)['additional_recipients'] \
             if 'additional_recipients' in dict(data).keys() else []
         if form.is_valid():
             form.save()
             if send_email(
-                action,
                 data,
                 dict(data)['monks'],
                 mandatory_recipients,
@@ -81,23 +76,89 @@ def create(request, **kwargs):
             )
 
     else:
-        if action == 'back':
-            form = TicketFormBack()
-        elif action == 'go':
-            form = TicketFormGo()
+        form = TicketForm()
 
     return render(
         request,
         'absences/form.html',
         {
             'form': form,
-            'action': action,
             'mandatory_recipients': mandatory_recipients,
         }
     )
 
 
-def send_email(action, data, monks, mandatory_recipients, additional_recipients):
+def details(request, *args, **kwargs):
+    """ Details of a ticket. """
+    ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
+    return render(
+        request,
+        'absences/details.html',
+        {
+            'ticket': ticket,
+        },
+    )
+
+
+def update(request, *args, **kwargs):
+    """ Update a ticket. """
+    ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
+    mandatory_recipients = Monk.objects \
+        .filter(absences_recipient=True) \
+        .filter(is_active=True) \
+        .order_by('entry', 'rank')
+
+    if request.method == 'POST':
+        data = request.POST
+        form = TicketForm(data, instance=ticket)
+        additional_recipients = dict(data)['additional_recipients'] \
+            if 'additional_recipients' in dict(data).keys() else []
+        if form.is_valid():
+            form.save()
+            if send_email(
+                data,
+                dict(data)['monks'],
+                mandatory_recipients,
+                additional_recipients,
+            ):
+                return HttpResponseRedirect(
+                    reverse(
+                        'absences:success',
+                    )
+                )
+            return HttpResponseRedirect(
+                reverse(
+                    'absences:failure',
+                )
+            )
+
+    else:
+        form = TicketForm(instance=ticket)
+
+    return render(
+        request,
+        'absences/form.html',
+        {
+            'form': form,
+            'ticket': ticket,
+            'mandatory_recipients': mandatory_recipients,
+        }
+    )
+
+
+def delete(request, *args, **kwargs):
+    """ Delete a ticket. """
+    ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
+    return render(
+        request,
+        'absences/delete.html',
+        {
+            'ticket': ticket,
+        },
+    )
+
+
+def send_email(data, monks, mandatory_recipients, additional_recipients):
     """ Send email with data. """
     monks = ', '.join([Monk.objects.get(pk=monk).__str__() for monk in monks])
     mandatory_recipients_email = [
@@ -108,11 +169,8 @@ def send_email(action, data, monks, mandatory_recipients, additional_recipients)
         for additional_recipient in additional_recipients
     ]
     recipients_emails = mandatory_recipients_email + additional_recipients_emails
-    if action == 'go':
-        subject = 'AVIS D\'ABSENCE'
-    elif action == 'back':
-        subject = 'AVIS DE RETOUR'
-    body = write_body(action, data, monks)
+    subject = 'AVIS D\'ABSENCE'
+    body = write_body(data, monks)
     body += '\n\n{}'.format(''.join(['-'] * 72))
     body += '\nCe message vous a été envoyé depuis http://python.asj.com:8006/absences.'
     body += '\n{}'.format(''.join(['-'] * 72))
@@ -125,37 +183,31 @@ def send_email(action, data, monks, mandatory_recipients, additional_recipients)
     )
 
 
-def write_body(action, data, monks):
+def write_body(data, monks):
     """ Write the body of the mail. """
     body = ''
     # Monks
-    if action == 'go':
-        body += 'Les moines suivants vont s\'absenter :\n{}'.format(monks)
-    elif action == 'back':
-        body += 'Les moines suivants vont revenir au monastère :\n{}'.format(
-            monks)
+    body += 'Les moines suivants vont s\'absenter :\n{}'.format(monks)
 
     # Destination:
-    if action == 'go':
-        body += '\n\nDestination : {}' \
-            .format(data['destination']) if data['destination'] else ''
+    body += '\n\nDestination : {}' \
+        .format(data['destination']) if data['destination'] else ''
 
     # Go:
-    if action == 'go':
-        body += '\n\nDÉPART : {}' \
-            .format(data['go_date'])
-        body += ' ({})' \
-            .format(data['go_moment'].lower()) if data['go_moment'] else ''
-        body += ' en {}.' \
-            .format(data['go_by'].lower()) if data['go_by'] else ''
-        body += '\nGare : {}' \
-            .format(data['go_station']) if data['go_station'] else ''
-        body += ' à {}' \
-            .format(data['go_hour']) if data['go_hour'] else ''
-        body += '\n  + Repas avec les serveurs' \
-            if 'servants' in data.keys() and data['servants'] else ''
-        body += '\n  + Casse-croûte' \
-            if 'picnic' in data and data['picnic'] else ''
+    body += '\n\nDÉPART : {}' \
+        .format(data['go_date'])
+    body += ' ({})' \
+        .format(data['go_moment'].lower()) if data['go_moment'] else ''
+    body += ' en {}.' \
+        .format(data['go_by'].lower()) if data['go_by'] else ''
+    body += '\nGare : {}' \
+        .format(data['go_station']) if data['go_station'] else ''
+    body += ' à {}' \
+        .format(data['go_hour']) if data['go_hour'] else ''
+    body += '\n  + Repas avec les serveurs' \
+        if 'servants' in data.keys() and data['servants'] else ''
+    body += '\n  + Casse-croûte' \
+        if 'picnic' in data and data['picnic'] else ''
 
     # Back:
     body += '\n\nRETOUR : {}' \
@@ -172,9 +224,8 @@ def write_body(action, data, monks):
         if 'keep_hot' in data and data['keep_hot'] else ''
 
     # Ordinary form:
-    if action == 'go':
-        body += '\n\nMesse : forme ordinaire' \
-            if 'ordinary_form' in data and data['ordinary_form'] else ''
+    body += '\n\nMesse : forme ordinaire' \
+        if 'ordinary_form' in data and data['ordinary_form'] else ''
 
     # Commentary:
     body += '\n\nCommentaire :\n{}' \

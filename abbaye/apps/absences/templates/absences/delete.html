@@ -1,0 +1,11 @@
+{% extends 'absences/main_absences.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'absences:list' %}>Absences</a></li>
+    <li class="breadcrumb-item"><a href={% url 'absences:details' ticket.pk %}>{{ ticket.pk }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h3>Supression de {{ ticket }}</h3>
+{% endblock content %}

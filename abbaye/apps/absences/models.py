@@ -65,3 +65,19 @@ class Ticket(models.Model):
         Monk,
         related_name='additional_recipients',
     )
+    created_at = models.DateTimeField(
+        auto_now_add=True,
+    )
+    last_modified = models.DateTimeField(
+        auto_now=True,
+    )
+
+    def monks_as_string(self):
+        """ String containing all the monks of this ticket. """
+        return ', '.join(
+            monk['name'] for monk in list(
+                self.monks.all()
+                .order_by('entry', 'rank')
+                .values('name')
+            )
+        )

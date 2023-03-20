@@ -42,6 +42,48 @@ body {
             font-family: 'LucidaHW',
         }
 
+
+        #table-tickets_wrapper {
+            font-size: 0.9em;
+            margin-bottom: 50px;
+            width: 90%;
+
+            th,
+            td {
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            th {
+                color: @red;
+            }
+
+            td table td {
+                border: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            #table-tickets_filter,
+            #table-tickets_info,
+            #table-tickets_length,
+            #table-tickets_paginate {
+                color: @green;
+
+                a,
+                label {
+                    font-weight: bold;
+                }
+            }
+        }
+
+        table {
+
+            th,
+            td {}
+
+        }
+
         #id_monks {
             column-width: 15vw;
             font-size: 0.95em;
@@ -70,12 +112,6 @@ body {
         .recipients {
             column-width: 30vw;
             font-size: 0.95em;
-        }
-
-        #home_buttons {
-            .btn-primary {
-                width: 300px;
-            }
         }
     }
 }
