@@ -11,11 +11,15 @@
     <table>
         <tr>
             <td>Départ :</td>
-            <td>{{ ticket.go_date }}</td>
+            <td>{{ ticket.go_date|date:"l j F Y" }}</td>
         </tr>
         <tr>
             <td>Retour :</td>
-            <td>{{ ticket.back_date }}</td>
+            <td>{{ ticket.back_date|date:"l j F Y" }}</td>
+        </tr>
+        <tr>
+            <td>Moines :</td>
+            <td>{{ ticket.monks_as_string }}</td>
         </tr>
     </table>
 
