@@ -10,12 +10,12 @@ from .forms import TicketForm
 from .models import Monk, Ticket
 
 
-def home(request):
-    """ Home page of Absences. """
+def list(request):
+    """ List of Tickets (home page of Absences). """
     tickets = Ticket.objects.all().order_by('-go_date', '-back_date')
     return render(
         request,
-        'absences/home.html',
+        'absences/list.html',
         {
             'tickets': tickets,
         },
@@ -26,7 +26,7 @@ def success(request):
     """ Success view. """
     return render(
         request,
-        'absences/home.html',
+        'absences/list.html',
         {
             'title': 'success',
         },
@@ -37,7 +37,7 @@ def failure(request):
     """ Failure view. """
     return render(
         request,
-        'absences/home.html',
+        'absences/list.html',
         {
             'title': 'failure',
         },
