@@ -2,7 +2,6 @@
 
 from django.core.mail import send_mail
 
-from modules.dates import date_to_french_string
 from modules.preferences import PREFERENCES
 
 from apps.hotellerie.models import Mail, Personne
@@ -15,8 +14,8 @@ def mail_sacristie(sejour):
     body = 'Mon cher Père,\n\n'
     body += 'Il va y avoir un prêtre-hôte :\n'
     body += '{}\n'.format(priest)
-    body += 'Du : {}\n'.format(date_to_french_string(sejour.sejour_du))
-    body += 'Au : {}\n'.format(date_to_french_string(sejour.sejour_au))
+    body += 'Du : {}\n'.format(sejour.sejour_du)
+    body += 'Au : {}\n'.format(sejour.sejour_au)
     body += 'Chambre : {}\n\n'.format(sejour.chambres_string())
     body += 'IL CÉLÉBRERA LA MESSE LE JOUR DE SON ARRIVÉE\n\n' \
         if sejour.messe_premier_jour \
@@ -55,11 +54,11 @@ def mail_pere_suiveur(sejour):
     body += 'La chambre {} lui est attribuée.\n\n'.format(
         sejour.chambres_string())
     body += 'Il arrivera le {} ({})'.format(
-        date_to_french_string(sejour.sejour_du),
+        sejour.sejour_du,
         sejour.repas_du if sejour.repas_du != '---------' else 'repas non précisé'
     )
     body += ' et repartira le {} ({}).\n\n'.format(
-        date_to_french_string(sejour.sejour_au),
+        sejour.sejour_au,
         sejour.repas_au if sejour.repas_au != '---------' else 'repas non précisé'
     )
     body += 'Les frères de l\'hôtellerie l’accueilleront et vous préviendront lorsqu\'il sera installé.\n\n'
