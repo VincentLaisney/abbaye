@@ -21,6 +21,7 @@ class MonkForm(forms.ModelForm):
         choices=MONTHS,
     )
     laundry_number = forms.IntegerField()
+    phone_number = forms.IntegerField()
     birthday = forms.DateField(
         required=False,
         input_formats=[
