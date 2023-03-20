@@ -15,18 +15,22 @@ $(document).ready(function () {
         }
     }).trigger('change');
 
-
     // Checkbox all additional recipients:
-    $('#checkbox_all_additional_recipients').click(function(){
-        if($(this).prop('checked')){
-            $('#id_additional_recipients').find(':checkbox').each(function(){
+    $('#checkbox_all_additional_recipients').click(function () {
+        if ($(this).prop('checked')) {
+            $('#id_additional_recipients').find(':checkbox').each(function () {
                 $(this).prop('checked', true);
             })
         }
-        else{
-            $('#id_additional_recipients').find(':checkbox').each(function(){
+        else {
+            $('#id_additional_recipients').find(':checkbox').each(function () {
                 $(this).prop('checked', false);
             })
         }
+    });
+
+    // Additional recipients: set name in bold:
+    $("[id^=id_additional_recipients_]").each(function (element) {
+        $(this).parent().html($(this).parent().html().replace('&lt;b&gt;', '<b>').replace('&lt;/b&gt;', '</b>'));
     });
 });

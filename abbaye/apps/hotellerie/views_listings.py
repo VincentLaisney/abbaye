@@ -13,7 +13,6 @@ from django.conf import settings
 from django.http import FileResponse
 from django.shortcuts import render
 
-from modules.dates import date_to_french_string
 from .models import Parloir
 from .models import Sejour
 
@@ -25,7 +24,6 @@ def cuisine(request):
     """ Listing cuisine. """
     for i in range(15):
         day = TODAY + timedelta(days=i)
-        day_string = date_to_french_string(day)
         hote = is_first_repas = is_last_repas = is_monorepas = ''
         table_hotes_midi, \
             table_hotes_soir, \
@@ -248,7 +246,6 @@ def cuisine(request):
 
         # On compile le tout pour le jour concerné :
         DAYS[day] = {
-            'day_string': day_string,
             'midi': {
                 'table_hotes': table_hotes_midi,
                 'total_table_hotes_midi': total_table_hotes_midi,
@@ -352,8 +349,7 @@ def hotellerie(request):
         for index, parloir in enumerate(parloirs):
             coord_y += 15
             line = ''
-            line += '- {}'.format(
-                date_to_french_string(parloir.date))
+            line += '- {}'.format(parloir.date)
             line += ' ({})'.format(parloir.repas) if parloir.repas else ''
             line += ' : {}'.format(parloir.moines_string())
             line += ' + {}'.format(parloir.nombre) if parloir.nombre else ''
@@ -393,9 +389,9 @@ def hotellerie(request):
         pdf.drawString(40, coord_y, line)
         coord_y += 13
         line = 'Du {} ({}) au {} ({})'.format(
-            date_to_french_string(sejour.sejour_du),
+            sejour.sejour_du,
             sejour.repas_du,
-            date_to_french_string(sejour.sejour_au),
+            sejour.sejour_au,
             sejour.repas_au,
         )
         pdf.drawString(60, coord_y, line)

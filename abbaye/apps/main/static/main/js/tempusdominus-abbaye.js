@@ -7,9 +7,6 @@ const calendar = {
         locale: 'fr-FR',
     },
     display: {
-        buttons: {
-            close: true,
-        },
         components: {
             decades: true,
             year: true,
@@ -21,5 +18,27 @@ const calendar = {
         },
         theme: 'light',
         viewMode: 'calendar',
+    }
+};
+
+const clock = {
+    localization: {
+        dateFormats: {
+            L: 'HH:mm',
+        },
+        locale: 'fr-FR',
+    },
+    display: {
+        components: {
+            decades: false,
+            year: false,
+            month: false,
+            date: false,
+            hours: true,
+            minutes: true,
+            seconds: false
+        },
+        theme: 'light',
+        viewMode: 'clock',
     }
 };

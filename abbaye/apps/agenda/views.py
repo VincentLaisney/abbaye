@@ -5,8 +5,6 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from modules.dates import date_to_french_string
-
 from apps.main.decorators import group_required
 from .forms import EventForm
 from .models import Event
@@ -24,7 +22,6 @@ def home(request):
             date_to__gte=day
         )
         days[day] = {
-            'date_string': date_to_french_string(day),
             'events': list(events),
         }
     return render(

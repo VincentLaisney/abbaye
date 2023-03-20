@@ -1,0 +1,88 @@
+{% extends 'absences/main_absences.html' %}
+
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/datatables/datatables.min.css'%}>
+{% endblock css %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Absences</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1 class="my-3">Billets d'absence</h1>
+
+    {% if title %}
+        <div class="btn btn-info my-3 w-50">{{ title }}</div>
+    {% endif %}
+
+    <a href={% url 'absences:create' %} class="btn btn-primary btn-sm mb-4 w-25">Créer un nouveau billet d'absence</a>
+
+    <table id="table-tickets" class="cell-border order-column hover w-100">
+        <thead>
+            <tr class="text-center">
+                <th class="grey-dark">Créé</th>
+                <th class="grey-dark">Modifié</th>
+                <th class="red">Départ</th>
+                <th class="red">Retour</th>
+                <th class="red">Destination</th>
+                <th class="red">Moines</th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for ticket in tickets %}
+                <tr>
+                    <td class="col-1">
+                        <table class="d-flex justify-content-center">
+                            <tr>
+                                <td class="orange fw-bold text-end pe-1">
+                                    Le
+                                    <span class="d-none">
+                                        {{ ticket.created_at|date:"Ymd" }}{{ ticket.created_at|time:"His" }}
+                                    </span><!-- Span not displayed, only to be able to sort dates. -->
+                                </td>
+                                <td class="text-start ps-1">{{ ticket.created_at|date:"d/m/Y" }}</td>
+                            </tr>
+                            <tr>
+                                <td class="orange fw-bold text-end pe-1">à</span>
+                                <td class="text-start ps-1">{{ ticket.created_at|time:"H:i:s" }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="col-1">
+                        <table class="d-flex justify-content-center">
+                            <tr>
+                                <td class="orange fw-bold text-end pe-1">Le</td>
+                                <td class="text-start ps-1">{{ ticket.last_modified|date:"d/m/Y" }}</td>
+                            </tr>
+                            <tr>
+                                <td class="orange fw-bold text-end pe-1">à</span>
+                                <td class="text-start ps-1">{{ ticket.last_modified|time:"H:i:s" }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td class="col-3 text-center fw-bold">
+                        <span class="d-none">
+                            {{ ticket.go_date|date:"Ymd" }}
+                        </span><!-- Span not displayed, only to be able to sort dates. -->
+                        {{ ticket.go_date|date:"l j F Y" }}
+                    </td>
+                    <td class="col-3 text-center fw-bold">{{ ticket.back_date|date:"l j F Y" }}</td>
+                    <td class="col-2">{{ ticket.destination }}</td>
+                    <td class="col-2" title="{{ ticket.monks_as_string }}">{{ ticket.monks_as_string|truncatewords:6 }}</td>
+                    <td class="col-1"><a href={% url 'absences:details' ticket.pk %}>Détails</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content%}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'main/datatables/datatables.min.js'%}></script>
+    <script src={% static 'absences/js/datatable-tickets.js' %}></script>
+{% endblock javascript %}

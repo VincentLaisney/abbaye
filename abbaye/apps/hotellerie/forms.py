@@ -2,7 +2,6 @@
 
 from django import forms
 from dal import autocomplete
-from tempus_dominus.widgets import DatePicker
 
 from .models import Personne
 from .models import Sejour
@@ -214,9 +213,6 @@ class SejourForm(forms.ModelForm):
         input_formats=[
             '%d/%m/%Y',
         ],
-        widget=DatePicker(options={
-            'format': 'DD/MM/YYYY',
-        }),
     )
     sejour_au = forms.DateField(
         label='Au :',
@@ -224,9 +220,6 @@ class SejourForm(forms.ModelForm):
         input_formats=[
             '%d/%m/%Y',
         ],
-        widget=DatePicker(options={
-            'format': 'DD/MM/YYYY',
-        }),
     )
     repas_du = forms.ChoiceField(
         choices=[
@@ -397,9 +390,6 @@ class ParloirForm(forms.ModelForm):
         input_formats=[
             '%d/%m/%Y',
         ],
-        widget=DatePicker(options={
-            'format': 'DD/MM/YYYY',
-        }),
     )
     repas = forms.ChoiceField(
         choices=[
@@ -452,9 +442,6 @@ class RetreatForm(forms.ModelForm):
         input_formats=[
             '%d/%m/%Y',
         ],
-        widget=DatePicker(options={
-            'format': 'DD/MM/YYYY',
-        }),
     )
     duration = forms.IntegerField(
         label='Durée :',

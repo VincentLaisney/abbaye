@@ -12,7 +12,7 @@
 
         <div class="col-12">
             {% for day in days.values %}
-                <h4 class="text-center dark-red mt-4 mb-3">{{ day.date_string }}</h4>
+                <h4 class="text-center dark-red mt-4 mb-3">{{ day }}</h4>
     
                 <div class="col-12 d-flex flex-column align-items-start">
                     {% for event in day.events %}

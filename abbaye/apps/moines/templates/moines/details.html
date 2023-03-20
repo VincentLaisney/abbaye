@@ -14,21 +14,21 @@
                 <td class="col-5 green fw-bold">Naissance :</td>
                 <td class="col-7">
                     {% if monk.birthday %}
-                        {{ monk.birthday_french }}
+                        {{ monk.birthday|date:"l j F Y" }}
                     {% endif %}
                 </td>
             </tr>
 
             <tr>
                 <td class="col-5 green fw-bold">Entrée :</td>
-                <td class="col-7">{{ monk.entry_french }}</td>
+                <td class="col-7">{{ monk.entry|date:"l j F Y" }}</td>
             </tr>
 
             <tr>
                 <td class="col-5 green fw-bold">Prise d'habit :</td>
                 <td class="col-7">
                     {% if monk.habit %}
-                        {{ monk.habit_french }}
+                        {{ monk.habit|date:"l j F Y" }}
                     {% endif %}
                 </td>
             </tr>
@@ -37,7 +37,7 @@
                 <td class="col-5 green fw-bold">Profession temporaire :</td>
                 <td class="col-7">
                     {% if monk.profession_temp %}
-                        {{ monk.profession_temp_french }}
+                        {{ monk.profession_temp|date:"l j F Y" }}
                     {% endif %}
                 </td>
             </tr>
@@ -46,7 +46,7 @@
                 <td class="col-5 green fw-bold">Profession perpétuelle :</td>
                 <td class="col-7">
                     {% if monk.profession_perp %}
-                        {{ monk.profession_perp_french }}
+                        {{ monk.profession_perp|date:"l j F Y" }}
                     {% endif %}
                 </td>
             </tr>
@@ -55,7 +55,7 @@
                 <td class="col-5 green fw-bold">Ordination sacerdotale :</td>
                 <td class="col-7">
                     {% if monk.priest %}
-                        {{ monk.priest_french }}
+                        {{ monk.priest|date:"l j F Y" }}
                     {% endif %}
                 </td>
             </tr>
@@ -64,7 +64,7 @@
                 <td class="col-5 green fw-bold">Décès :</td>
                 <td class="col-7">
                     {% if monk.death %}
-                        {{ monk.death_french }}
+                        {{ monk.death|date:"l j F Y" }}
                     {% endif %}
                 </td>
             </tr>
