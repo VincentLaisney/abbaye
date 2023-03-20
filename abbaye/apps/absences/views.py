@@ -103,12 +103,46 @@ def details(request, *args, **kwargs):
 def update(request, *args, **kwargs):
     """ Update a ticket. """
     ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
+    mandatory_recipients = Monk.objects \
+        .filter(absences_recipient=True) \
+        .filter(is_active=True) \
+        .order_by('entry', 'rank')
+
+    if request.method == 'POST':
+        data = request.POST
+        form = TicketForm(data, instance=ticket)
+        additional_recipients = dict(data)['additional_recipients'] \
+            if 'additional_recipients' in dict(data).keys() else []
+        if form.is_valid():
+            form.save()
+            if send_email(
+                data,
+                dict(data)['monks'],
+                mandatory_recipients,
+                additional_recipients,
+            ):
+                return HttpResponseRedirect(
+                    reverse(
+                        'absences:success',
+                    )
+                )
+            return HttpResponseRedirect(
+                reverse(
+                    'absences:failure',
+                )
+            )
+
+    else:
+        form = TicketForm(instance=ticket)
+
     return render(
         request,
         'absences/form.html',
         {
+            'form': form,
             'ticket': ticket,
-        },
+            'mandatory_recipients': mandatory_recipients,
+        }
     )
 
 
