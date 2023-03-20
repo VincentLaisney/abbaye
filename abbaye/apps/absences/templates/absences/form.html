@@ -14,9 +14,7 @@
         <li class="breadcrumb-item"><a href={% url 'absences:details' ticket.pk %}>{{ ticket.pk }}</a></li>
         <li class="breadcrumb-item active">Modifier</li>
     {% else %}
-        <li class="breadcrumb-item active">
-            Billet d'absence
-        </li>
+        <li class="breadcrumb-item active">Créer un billet</li>
     {% endif %}
 {% endblock breadcrumbs %}
 
@@ -24,7 +22,7 @@
     <form method="post" novalidate class="w-75">
         {% csrf_token %}
 
-        <h1 class="text-center mt-5">
+        <h1 class="text-center mt-2">
             Billet d'absence
         </h1>
 
