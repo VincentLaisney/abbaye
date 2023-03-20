@@ -30,8 +30,8 @@ class AdditionalRecipients(forms.ModelMultipleChoiceField):
         return '<b>{}</b> ({})'.format(obj.name, obj.email)
 
 
-class TicketFormBack(forms.ModelForm):
-    """ Ticket form for back-only Ticket. """
+class TicketForm(forms.ModelForm):
+    """ Ticket form Ticket. """
     monks = forms.ModelMultipleChoiceField(
         queryset=Monk.objects.filter(
             is_active=True)
@@ -40,6 +40,51 @@ class TicketFormBack(forms.ModelForm):
         error_messages={
             'required': 'Veuillez sélectionner au moins 1 moine.',
         },
+    )
+    destination = forms.CharField(
+        required=False,
+        widget=forms.TextInput(),
+    )
+    go_date = forms.DateField(
+        input_formats=[
+            '%d/%m/%Y',
+        ],
+        error_messages={
+            'required': 'Ce champ est obligatoire.',
+        },
+    )
+    go_moment = forms.ChoiceField(
+        required=False,
+        choices=[
+            ('', ''),
+            ('Matin', 'Matin'),
+            ('Après-midi', 'Après-midi'),
+        ],
+    )
+    servants = forms.BooleanField(
+        required=False,
+    )
+    picnic = forms.BooleanField(
+        required=False,
+        label='Casse-croûte',
+        label_suffix=''
+    )
+    go_by = forms.ChoiceField(
+        required=False,
+        choices=BY,
+    )
+    go_station = forms.ChoiceField(
+        required=False,
+        choices=STATIONS,
+    )
+    go_hour = forms.TimeField(
+        required=False,
+        input_formats=[
+            '%H:%M',
+        ],
+    )
+    ordinary_form = forms.BooleanField(
+        required=False,
     )
     back_date = forms.DateField(
         input_formats=[
@@ -90,60 +135,6 @@ class TicketFormBack(forms.ModelForm):
         .order_by('entry', 'rank'),
         widget=forms.CheckboxSelectMultiple(),
         help_text='Cochez les moines supplémentaires à qui vous souhaitez faire parvenir ce message.',
-    )
-
-    class Meta:
-        model = Ticket
-        fields = ['monks', 'back_date', 'back_moment', 'keep_hot', 'back_by',
-                  'back_station', 'back_hour', 'commentary', 'additional_recipients']
-
-
-class TicketFormGo(TicketFormBack):
-    """ Ticket form for go-and-back Ticket. """
-    destination = forms.CharField(
-        required=False,
-        widget=forms.TextInput(),
-    )
-    go_date = forms.DateField(
-        input_formats=[
-            '%d/%m/%Y',
-        ],
-        error_messages={
-            'required': 'Ce champ est obligatoire.',
-        },
-    )
-    go_moment = forms.ChoiceField(
-        required=False,
-        choices=[
-            ('', ''),
-            ('Matin', 'Matin'),
-            ('Après-midi', 'Après-midi'),
-        ],
-    )
-    servants = forms.BooleanField(
-        required=False,
-    )
-    picnic = forms.BooleanField(
-        required=False,
-        label='Casse-croûte',
-        label_suffix=''
-    )
-    go_by = forms.ChoiceField(
-        required=False,
-        choices=BY,
-    )
-    go_station = forms.ChoiceField(
-        required=False,
-        choices=STATIONS,
-    )
-    go_hour = forms.TimeField(
-        required=False,
-        input_formats=[
-            '%H:%M',
-        ],
-    )
-    ordinary_form = forms.BooleanField(
-        required=False,
     )
 
     class Meta:

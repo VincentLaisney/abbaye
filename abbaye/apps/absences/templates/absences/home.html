@@ -11,10 +11,7 @@
         <div class="btn btn-info my-3 w-50">{{ title }}</div>
     {% endif %}
 
-    <div class="d-flex w-50">
-        <a href={% url 'absences:create' 'go' %} class="btn btn-primary btn-sm mx-2 my-1 w-100" title="Pour un moine présent qui va s'absenter">Créer un billet d'absence normal<br>(aller et retour)</a>
-        <a href={% url 'absences:create' 'back' %} class="btn btn-primary btn-sm mx-2 my-1 w-100" title="Pour un moine absent qui va revenir">Créer un billet de retour<br>(uniquement retour)</a>
-    </div>
+    <a href={% url 'absences:create' %} class="btn btn-primary btn-sm my-3 w-25">Créer un nouveau billet d'absence</a>
 
     <table class="table table-bordered table-striped table-sm mt-3">
         <tr class="text-center">
