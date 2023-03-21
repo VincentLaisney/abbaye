@@ -2,7 +2,7 @@ $(document).ready(function () {
     $('#table-tickets').DataTable({
         order: [
             [2, 'desc'],
-            [0, 'desc'],
+            [3, 'desc'],
         ],
         paging: 5,
         'language': {
@@ -37,7 +37,6 @@ $(document).ready(function () {
             // Retour le:
             {
                 target: 3,
-                orderable: false,
                 searchable: false,
             },
             // Destination:
