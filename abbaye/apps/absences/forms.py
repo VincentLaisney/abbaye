@@ -34,8 +34,9 @@ class TicketForm(forms.ModelForm):
     """ Ticket form Ticket. """
     monks = forms.ModelMultipleChoiceField(
         queryset=Monk.objects.filter(
-            is_active=True)
-        .order_by('entry', 'rank'),
+            is_active=True
+        )
+        .order_by('absolute_rank', 'entry', 'rank'),
         widget=forms.CheckboxSelectMultiple(),
         error_messages={
             'required': 'Veuillez sélectionner au moins 1 moine.',
@@ -132,7 +133,7 @@ class TicketForm(forms.ModelForm):
         .filter(absences_recipient=False)
         .filter(is_active=True)
         .exclude(email=None)
-        .order_by('entry', 'rank'),
+        .order_by('absolute_rank', 'entry', 'rank'),
         widget=forms.CheckboxSelectMultiple(),
         help_text='Cochez les moines supplémentaires à qui vous souhaitez faire parvenir ce message.',
     )

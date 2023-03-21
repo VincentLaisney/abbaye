@@ -49,7 +49,7 @@ def create(request):
     mandatory_recipients = Monk.objects \
         .filter(absences_recipient=True) \
         .filter(is_active=True) \
-        .order_by('entry', 'rank')
+        .order_by('absolute_rank', 'entry', 'rank')
 
     if request.method == 'POST':
         data = request.POST
@@ -106,7 +106,7 @@ def update(request, *args, **kwargs):
     mandatory_recipients = Monk.objects \
         .filter(absences_recipient=True) \
         .filter(is_active=True) \
-        .order_by('entry', 'rank')
+        .order_by('absolute_rank', 'entry', 'rank')
 
     if request.method == 'POST':
         data = request.POST
