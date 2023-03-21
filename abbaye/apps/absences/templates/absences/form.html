@@ -469,7 +469,7 @@
             <h4 class="mt-5">Ce message sera envoyé <i>ex officio</i> aux moines suivants :</h4>
             <div class="recipients">
                 {% for recipient in mandatory_recipients %}
-                    <b>{{ recipient.name }}</b> ({{ recipient.email }})<br>
+                    <b>{{ recipient }}</b> ({{ recipient.email }})<br>
                 {% endfor %}
             </div>
 
