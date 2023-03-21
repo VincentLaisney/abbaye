@@ -125,7 +125,11 @@ class TicketForm(forms.ModelForm):
     )
     commentary = forms.CharField(
         required=False,
-        widget=forms.Textarea(),
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': 'Tapez ici toutes vos remarques, et n\'oubliez pas de signer si votre identité n\'est pas évidente.',
+            }
+        ),
     )
     additional_recipients = AdditionalRecipients(
         required=False,
