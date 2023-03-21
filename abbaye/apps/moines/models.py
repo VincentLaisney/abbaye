@@ -8,6 +8,9 @@ class Monk(models.Model):
     name = models.CharField(
         max_length=255,
     )
+    absolute_rank = models.IntegerField(
+        default=3,
+    )
     feast_day = models.IntegerField()
     feast_month = models.IntegerField()
     laundry_number = models.IntegerField(
@@ -57,6 +60,15 @@ class Monk(models.Model):
     is_active = models.BooleanField(
         default=True,
     )
+    is_abbot = models.BooleanField(
+        default=False,
+    )
+    is_prior = models.BooleanField(
+        default=False,
+    )
+    is_abbot_emerite = models.BooleanField(
+        default=False,
+    )
     absences_recipient = models.BooleanField(
         default=False,
     )
@@ -68,6 +80,10 @@ class Monk(models.Model):
     )
 
     def __str__(self):
+        if self.is_abbot:
+            return 'TRP Abbé'
+        elif self.is_prior:
+            return 'RP Prieur'
         return self.name
 
     def feast_date(self):

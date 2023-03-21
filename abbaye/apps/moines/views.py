@@ -169,14 +169,16 @@ def statistiques(request):
         numpy.arange(
             min(bin_edges),
             max(bin_edges),
-            10),
+            10
+        ),
         fontsize=10
     )
     pyplot.yticks(
         numpy.arange(
             0,
-            max(hist) + 5,
-            5),
+            max(hist) + 15,
+            5
+        ),
         fontsize=10
     )
     average_age = mean(ages)
