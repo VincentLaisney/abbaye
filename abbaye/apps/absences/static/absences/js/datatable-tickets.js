@@ -17,7 +17,6 @@ $(document).ready(function () {
             [2, 'desc'],
             [3, 'desc'],
         ],
-        paging: 5,
         'language': {
             'info': 'Page <b>_PAGE_</b> sur <b>_PAGES_</b> - Total : <b>_MAX_</b> billets',
             'infoFiltered': ' - Affichés : billets <b>_START_</b> à <b>_END_</b> parmi <b>_TOTAL_</b> billets trouvés',// TODO: Remplacer "1 billets trouvés" par "1 billet trouvé":
