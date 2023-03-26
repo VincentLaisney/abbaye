@@ -11,8 +11,7 @@
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'absences:list' %}>Absences</a></li>
     {% if ticket %}
-        <li class="breadcrumb-item"><a href={% url 'absences:details' ticket.pk %}>{{ ticket.pk }}</a></li>
-        <li class="breadcrumb-item active">Modifier</li>
+        <li class="breadcrumb-item active">Modifier le billet {{ ticket }}</li>
     {% else %}
         <li class="breadcrumb-item active">Créer un billet</li>
     {% endif %}
@@ -23,7 +22,11 @@
         {% csrf_token %}
 
         <h1 class="text-center mt-2">
-            Billet d'absence
+            {% if ticket %}
+                Modifier le billet</br>{{ ticket }}
+            {% else %}
+                Créer un billet
+            {% endif %}
         </h1>
 
         <div class="w-100">
@@ -469,7 +472,7 @@
             <h4 class="mt-5">Ce message sera envoyé <i>ex officio</i> aux moines suivants :</h4>
             <div class="recipients">
                 {% for recipient in mandatory_recipients %}
-                    <b>{{ recipient.name }}</b> ({{ recipient.email }})<br>
+                    <b>{{ recipient }}</b> ({{ recipient.email }})<br>
                 {% endfor %}
             </div>
 
