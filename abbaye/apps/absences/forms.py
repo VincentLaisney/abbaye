@@ -47,9 +47,6 @@ class TicketForm(forms.ModelForm):
         widget=forms.TextInput(),
     )
     go_date = forms.DateField(
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         error_messages={
             'required': 'Ce champ est obligatoire.',
         },
@@ -88,9 +85,6 @@ class TicketForm(forms.ModelForm):
         required=False,
     )
     back_date = forms.DateField(
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         error_messages={
             'required': 'Ce champ est obligatoire. Si vous ne connaissez pas la date de votre retour, entrez une date approximative et indiquez-le en commentaire.',
         },
