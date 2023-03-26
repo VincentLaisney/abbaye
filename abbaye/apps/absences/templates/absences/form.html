@@ -11,7 +11,7 @@
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'absences:list' %}>Absences</a></li>
     {% if ticket %}
-        <li class="breadcrumb-item active">Modifier</li>
+        <li class="breadcrumb-item active">Modifier le billet {{ ticket }}</li>
     {% else %}
         <li class="breadcrumb-item active">Créer un billet</li>
     {% endif %}
@@ -22,7 +22,11 @@
         {% csrf_token %}
 
         <h1 class="text-center mt-2">
-            Billet d'absence
+            {% if ticket %}
+                Modifier le billet</br>{{ ticket }}
+            {% else %}
+                Créer un billet
+            {% endif %}
         </h1>
 
         <div class="w-100">
