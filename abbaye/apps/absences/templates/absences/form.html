@@ -11,7 +11,6 @@
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'absences:list' %}>Absences</a></li>
     {% if ticket %}
-        <li class="breadcrumb-item"><a href={% url 'absences:details' ticket.pk %}>{{ ticket.pk }}</a></li>
         <li class="breadcrumb-item active">Modifier</li>
     {% else %}
         <li class="breadcrumb-item active">Créer un billet</li>

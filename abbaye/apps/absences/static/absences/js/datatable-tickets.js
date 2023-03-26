@@ -73,17 +73,17 @@ $(document).ready(function () {
             },
         ],
     });
-    // Dates: break line after weekday:
-    const weekdays = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
-    $('#table-tickets td').each(function () {
-        for (w = 0; w < weekdays.length; w++) {
-            const weekday = weekdays[w];
-            $(this).html($(this).html()
-                .replace(
-                    weekday,
-                    weekday.substring(0, 1).toUpperCase() + weekday.substring(1) + '</br>'
-                )
-            );
-        }
-    });
+
+    $('#table-tickets')
+        // Details: fill modal when clicked on a button "Détails":
+        .on(
+            'click',
+            '.button_details',
+            function () {
+                const id = $(this).attr('id').split('_')[1];
+                $.get(id, function (data) {
+                    $('.modal-content').html(data);
+                });
+            }
+        );
 });

@@ -1,13 +1,8 @@
-{% extends 'absences/main_absences.html' %}
-
-{% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href={% url 'absences:list' %}>Absences</a></li>
-    <li class="breadcrumb-item active">{{ ticket.pk }}</li>
-{% endblock breadcrumbs %}
-
-{% block content %}
-    <h3>Détails du billet {{ ticket }}</h3>
-
+<div class="modal-header">
+    <h5 class="modal-title" id="title_ticket">Détails du billet {{ ticket }}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+</div>
+<div class="modal-body">
     <table>
         <tr>
             <td>Départ :</td>
@@ -22,7 +17,9 @@
             <td>{{ ticket.monks_as_string }}</td>
         </tr>
     </table>
-
-    <a href={% url 'absences:update' ticket.pk %}>Modifier</a>
-    <a href={% url 'absences:delete' ticket.pk %}>Supprimer</a>
-{% endblock content %}
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary me-auto" data-bs-dismiss="modal">Annuler</button>
+    <a href={% url 'absences:delete' ticket.pk %} type="button" class="btn btn-danger">Supprimer</a>
+    <a href={% url 'absences:update' ticket.pk %} type="button" class="btn btn-primary">Modifier</a>
+</div>
