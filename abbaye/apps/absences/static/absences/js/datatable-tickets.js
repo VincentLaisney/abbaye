@@ -15,7 +15,7 @@ $(document).ready(function () {
     $('#table-tickets').DataTable({
         order: [
             [2, 'desc'],
-            [3, 'desc'],
+            [3, 'asc'],
         ],
         'language': {
             'info': 'Page <b>_PAGE_</b> sur <b>_PAGES_</b> - Total : <b>_MAX_</b> billets',
