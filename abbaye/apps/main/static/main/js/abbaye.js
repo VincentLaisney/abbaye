@@ -1,3 +1,8 @@
 $(document).ready(function () {
-    url = new URL(window.location);
+    // Fade out '.fade_out' elements on clik:
+    $('.fade_out').click(function () {
+        $(this).fadeOut('slow', function () {
+            $(this).remove();
+        });
+    });
 });
