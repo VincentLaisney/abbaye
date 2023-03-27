@@ -6,5 +6,15 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h3>Suprimer le billet</br>{{ ticket }}</h3>
+<form method="post">
+    {% csrf_token %}
+
+    <h4 class="text-center"><p class="danger">Êtes-vous sûr de vouloir supprimer le billet</br>{{ ticket }} ?<p ></h4>
+
+    <!-- Validation -->
+    <div class="d-flex justify-content-center">
+        <button type="submit" class="btn btn-success mx-3">Oui</button>
+        <a href={% url 'absences:list' %} class="btn btn-primary mx-3">Non</a>
+    </div>
+</form>
 {% endblock content %}
