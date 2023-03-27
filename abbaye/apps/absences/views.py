@@ -141,10 +141,26 @@ def update(request, *args, **kwargs):
 def delete(request, *args, **kwargs):
     """ Delete a ticket. """
     ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
+
+    if request.method == 'POST':
+        form = TicketForm(request.POST, instance=ticket)
+        ticket.delete()
+        return HttpResponseRedirect(
+            reverse(
+                'absences:list',
+                kwargs={
+                    'message': 'success'
+                },
+            )
+        )
+
+    form = TicketForm(instance=ticket)
+
     return render(
         request,
         'absences/delete.html',
         {
+            'form': form,
             'ticket': ticket,
         },
     )
