@@ -15,7 +15,7 @@ $(document).ready(function () {
     $('#table-tickets').DataTable({
         order: [
             [2, 'desc'],
-            [3, 'asc'],
+            [3, 'desc'],
         ],
         'language': {
             'info': 'Page <b>_PAGE_</b> sur <b>_PAGES_</b> - Total : <b>_MAX_</b> billets',
@@ -81,7 +81,7 @@ $(document).ready(function () {
             '.button_details',
             function () {
                 const id = $(this).attr('id').split('_')[1];
-                $.get(id, function (data) {
+                $.get('/absences/' + id, function (data) {
                     $('.modal-content').html(data);
                 });
             }
