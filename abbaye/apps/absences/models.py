@@ -81,3 +81,23 @@ class Ticket(models.Model):
                 .values('name')
             )
         )
+
+    def __str__(self):
+        dates = '{:02}/{:02}/{}-{:02}/{:02}/{}'.format(
+            self.go_date.day,
+            self.go_date.month,
+            self.go_date.year,
+            self.back_date.day,
+            self.back_date.month,
+            self.back_date.year
+        )
+        dates = dates.split('-')[0] \
+            if self.back_date == self.go_date \
+            else dates
+        monks = self.monks_as_string() \
+            if len(self.monks.all()) == 1 \
+            else '{} et alii'.format(self.monks_as_string().split(',')[0])
+        return '"{} ({})"'.format(
+            dates,
+            monks
+        )

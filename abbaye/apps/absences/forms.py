@@ -34,8 +34,9 @@ class TicketForm(forms.ModelForm):
     """ Ticket form Ticket. """
     monks = forms.ModelMultipleChoiceField(
         queryset=Monk.objects.filter(
-            is_active=True)
-        .order_by('entry', 'rank'),
+            is_active=True
+        )
+        .order_by('absolute_rank', 'entry', 'rank'),
         widget=forms.CheckboxSelectMultiple(),
         error_messages={
             'required': 'Veuillez sélectionner au moins 1 moine.',
@@ -46,9 +47,6 @@ class TicketForm(forms.ModelForm):
         widget=forms.TextInput(),
     )
     go_date = forms.DateField(
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         error_messages={
             'required': 'Ce champ est obligatoire.',
         },
@@ -87,9 +85,6 @@ class TicketForm(forms.ModelForm):
         required=False,
     )
     back_date = forms.DateField(
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         error_messages={
             'required': 'Ce champ est obligatoire. Si vous ne connaissez pas la date de votre retour, entrez une date approximative et indiquez-le en commentaire.',
         },
@@ -124,7 +119,11 @@ class TicketForm(forms.ModelForm):
     )
     commentary = forms.CharField(
         required=False,
-        widget=forms.Textarea(),
+        widget=forms.Textarea(
+            attrs={
+                'placeholder': 'Tapez ici toutes vos remarques, et n\'oubliez pas de signer si votre identité n\'est pas évidente.',
+            }
+        ),
     )
     additional_recipients = AdditionalRecipients(
         required=False,
@@ -132,7 +131,7 @@ class TicketForm(forms.ModelForm):
         .filter(absences_recipient=False)
         .filter(is_active=True)
         .exclude(email=None)
-        .order_by('entry', 'rank'),
+        .order_by('absolute_rank', 'entry', 'rank'),
         widget=forms.CheckboxSelectMultiple(),
         help_text='Cochez les moines supplémentaires à qui vous souhaitez faire parvenir ce message.',
     )

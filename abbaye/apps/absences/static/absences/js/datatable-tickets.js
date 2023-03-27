@@ -1,10 +1,22 @@
 $(document).ready(function () {
+    function formatted_date(data) {
+        // Break line after first-letter-uppercased weekday:
+        const weekdays = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
+        for (w = 0; w < weekdays.length; w++) {
+            const weekday = weekdays[w];
+            data = data.replace(
+                weekday,
+                weekday.substring(0, 1).toUpperCase() + weekday.substring(1) + '</br>'
+            );
+        }
+        return data;
+    };
+
     $('#table-tickets').DataTable({
         order: [
             [2, 'desc'],
-            [0, 'desc'],
+            [3, 'desc'],
         ],
-        paging: 5,
         'language': {
             'info': 'Page <b>_PAGE_</b> sur <b>_PAGES_</b> - Total : <b>_MAX_</b> billets',
             'infoFiltered': ' - Affichés : billets <b>_START_</b> à <b>_END_</b> parmi <b>_TOTAL_</b> billets trouvés',// TODO: Remplacer "1 billets trouvés" par "1 billet trouvé":
@@ -33,12 +45,17 @@ $(document).ready(function () {
             {
                 target: 2,
                 searchable: false,
+                render: function (data) {
+                    return formatted_date(data);
+                }
             },
             // Retour le:
             {
                 target: 3,
-                orderable: false,
                 searchable: false,
+                render: function (data) {
+                    return formatted_date(data);
+                }
             },
             // Destination:
             {
@@ -56,4 +73,17 @@ $(document).ready(function () {
             },
         ],
     });
+
+    $('#table-tickets')
+        // Details: fill modal when clicked on a button "Détails":
+        .on(
+            'click',
+            '.button_details',
+            function () {
+                const id = $(this).attr('id').split('_')[1];
+                $.get('/absences/' + id, function (data) {
+                    $('.modal-content').html(data);
+                });
+            }
+        );
 });

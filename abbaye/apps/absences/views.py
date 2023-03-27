@@ -10,36 +10,16 @@ from .forms import TicketForm
 from .models import Monk, Ticket
 
 
-def list(request):
+def list(request, *args, **kwargs):
     """ List of Tickets (home page of Absences). """
     tickets = Ticket.objects.all().order_by('-go_date', '-back_date')
+    message = kwargs['message'] if kwargs else ''
     return render(
         request,
         'absences/list.html',
         {
             'tickets': tickets,
-        },
-    )
-
-
-def success(request):
-    """ Success view. """
-    return render(
-        request,
-        'absences/list.html',
-        {
-            'title': 'success',
-        },
-    )
-
-
-def failure(request):
-    """ Failure view. """
-    return render(
-        request,
-        'absences/list.html',
-        {
-            'title': 'failure',
+            'message': message,
         },
     )
 
@@ -49,7 +29,7 @@ def create(request):
     mandatory_recipients = Monk.objects \
         .filter(absences_recipient=True) \
         .filter(is_active=True) \
-        .order_by('entry', 'rank')
+        .order_by('absolute_rank', 'entry', 'rank')
 
     if request.method == 'POST':
         data = request.POST
@@ -66,12 +46,18 @@ def create(request):
             ):
                 return HttpResponseRedirect(
                     reverse(
-                        'absences:success',
+                        'absences:list',
+                        kwargs={
+                            'message': 'success'
+                        },
                     )
                 )
             return HttpResponseRedirect(
                 reverse(
-                    'absences:failure',
+                    'absences:list',
+                    kwargs={
+                        'message': 'failure'
+                    },
                 )
             )
 
@@ -106,7 +92,7 @@ def update(request, *args, **kwargs):
     mandatory_recipients = Monk.objects \
         .filter(absences_recipient=True) \
         .filter(is_active=True) \
-        .order_by('entry', 'rank')
+        .order_by('absolute_rank', 'entry', 'rank')
 
     if request.method == 'POST':
         data = request.POST
@@ -123,12 +109,18 @@ def update(request, *args, **kwargs):
             ):
                 return HttpResponseRedirect(
                     reverse(
-                        'absences:success',
+                        'absences:list',
+                        kwargs={
+                            'message': 'success'
+                        },
                     )
                 )
             return HttpResponseRedirect(
                 reverse(
-                    'absences:failure',
+                    'absences:list',
+                    kwargs={
+                        'message': 'failure'
+                    },
                 )
             )
 
@@ -149,10 +141,26 @@ def update(request, *args, **kwargs):
 def delete(request, *args, **kwargs):
     """ Delete a ticket. """
     ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
+
+    if request.method == 'POST':
+        form = TicketForm(request.POST, instance=ticket)
+        ticket.delete()
+        return HttpResponseRedirect(
+            reverse(
+                'absences:list',
+                kwargs={
+                    'message': 'success'
+                },
+            )
+        )
+
+    form = TicketForm(instance=ticket)
+
     return render(
         request,
         'absences/delete.html',
         {
+            'form': form,
             'ticket': ticket,
         },
     )
@@ -172,7 +180,7 @@ def send_email(data, monks, mandatory_recipients, additional_recipients):
     subject = 'AVIS D\'ABSENCE'
     body = write_body(data, monks)
     body += '\n\n{}'.format(''.join(['-'] * 72))
-    body += '\nCe message vous a été envoyé depuis http://python.asj.com:8006/absences.'
+    body += '\nCe message vous a été envoyé depuis http://python.asj.com:8080/absences.'
     body += '\n{}'.format(''.join(['-'] * 72))
     return send_mail(
         subject,
