@@ -97,7 +97,7 @@ class Ticket(models.Model):
         monks = self.monks_as_string() \
             if len(self.monks.all()) == 1 \
             else '{} et alii'.format(self.monks_as_string().split(',')[0])
-        return '[ Absence du {} ({}) ]'.format(
+        return '"{} ({})"'.format(
             dates,
             monks
         )
