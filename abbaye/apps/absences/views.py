@@ -10,36 +10,16 @@ from .forms import TicketForm
 from .models import Monk, Ticket
 
 
-def list(request):
+def list(request, *args, **kwargs):
     """ List of Tickets (home page of Absences). """
     tickets = Ticket.objects.all().order_by('-go_date', '-back_date')
+    message = kwargs['message'] if kwargs else ''
     return render(
         request,
         'absences/list.html',
         {
             'tickets': tickets,
-        },
-    )
-
-
-def success(request):
-    """ Success view. """
-    return render(
-        request,
-        'absences/list.html',
-        {
-            'title': 'success',
-        },
-    )
-
-
-def failure(request):
-    """ Failure view. """
-    return render(
-        request,
-        'absences/list.html',
-        {
-            'title': 'failure',
+            'message': message,
         },
     )
 
@@ -66,12 +46,18 @@ def create(request):
             ):
                 return HttpResponseRedirect(
                     reverse(
-                        'absences:success',
+                        'absences:list',
+                        kwargs={
+                            'message': 'success'
+                        },
                     )
                 )
             return HttpResponseRedirect(
                 reverse(
-                    'absences:failure',
+                    'absences:list',
+                    kwargs={
+                        'message': 'failure'
+                    },
                 )
             )
 
@@ -123,12 +109,18 @@ def update(request, *args, **kwargs):
             ):
                 return HttpResponseRedirect(
                     reverse(
-                        'absences:success',
+                        'absences:list',
+                        kwargs={
+                            'message': 'success'
+                        },
                     )
                 )
             return HttpResponseRedirect(
                 reverse(
-                    'absences:failure',
+                    'absences:list',
+                    kwargs={
+                        'message': 'failure'
+                    },
                 )
             )
 
