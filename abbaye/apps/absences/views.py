@@ -106,6 +106,7 @@ def update(request, *args, **kwargs):
                 dict(data)['monks'],
                 mandatory_recipients,
                 additional_recipients,
+                'update'
             ):
                 return HttpResponseRedirect(
                     reverse(
@@ -166,7 +167,7 @@ def delete(request, *args, **kwargs):
     )
 
 
-def send_email(data, monks, mandatory_recipients, additional_recipients):
+def send_email(data, monks, mandatory_recipients, additional_recipients, action=''):
     """ Send email with data. """
     monks = ', '.join([Monk.objects.get(pk=monk).__str__() for monk in monks])
     mandatory_recipients_email = [
@@ -177,8 +178,13 @@ def send_email(data, monks, mandatory_recipients, additional_recipients):
         for additional_recipient in additional_recipients
     ]
     recipients_emails = mandatory_recipients_email + additional_recipients_emails
-    subject = 'AVIS D\'ABSENCE'
-    body = write_body(data, monks)
+    if action == 'update':
+        subject = 'AVIS D\'ABSENCE *MODIFIÉ*'
+        body = '!!! AVIS D\'ABSENCE MODIFIÉ !!!\n\n'
+    else:
+        subject = 'AVIS D\'ABSENCE'
+        body = ''
+    body += write_body(data, monks)
     body += '\n\n{}'.format(''.join(['-'] * 72))
     body += '\nCe message vous a été envoyé depuis http://python.asj.com:8080/absences.'
     body += '\n{}'.format(''.join(['-'] * 72))
