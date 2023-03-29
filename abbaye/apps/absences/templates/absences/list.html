@@ -74,7 +74,7 @@
                         {{ ticket.back_date }}
                     </td>
                     <td class="col-2">{{ ticket.destination }}</td>
-                    <td class="col-2" title="{{ ticket.monks_as_string }}">{{ ticket.monks_as_string|truncatewords:6 }}</td>
+                    <td class="col-2" title="{{ ticket.monks_as_string }}">{{ ticket.monks_as_string|truncatewords:5 }}</td>
                     <td class="col-1"><span type='button' class='fas fa-tools bg-secondary white border rounded p-2 button_details' data-bs-toggle='modal' data-bs-target='#ticket_details' id="details_{{ ticket.pk }}" title="Voir les détails, modifier, supprimer"></span></td>
                 </tr>
             {% endfor %}
