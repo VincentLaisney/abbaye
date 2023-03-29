@@ -31,7 +31,7 @@
 
         <tbody>
             {% for ticket in tickets %}
-                <tr>
+                <tr {% if ticket.is_past %} style="opacity:0.5" {% endif %}>
                     <td class="col-1">
                         <table class="d-flex justify-content-center">
                             <tr>
