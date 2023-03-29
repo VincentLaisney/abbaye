@@ -1,5 +1,7 @@
 """ apps/absences/models.py """
 
+import datetime
+
 from django.db import models
 
 from apps.moines.models import Monk
@@ -81,6 +83,10 @@ class Ticket(models.Model):
                 .values('name')
             )
         )
+
+    def is_past(self):
+        """ Boolean: Is the ticket in the past? """
+        return self.back_date < datetime.date.today()
 
     def __str__(self):
         dates = '{:02}/{:02}/{}-{:02}/{:02}/{}'.format(
