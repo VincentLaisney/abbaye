@@ -112,7 +112,37 @@ def delete(request, *args, **kwargs):
     ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
 
     if request.method == 'POST':
+        data = ticket.__dict__
+        # TODO: No other solution that formatting dates?
+        data['go_date'] = '{:02}/{:02}/{:04}'.format(
+            data['go_date'].day,
+            data['go_date'].month,
+            data['go_date'].year
+        )
+        data['back_date'] = '{:02}/{:02}/{:04}'.format(
+            data['back_date'].day,
+            data['back_date'].month,
+            data['back_date'].year
+        )
+        monks = ticket.monks.all() \
+            .order_by('entry', 'rank') \
+            .values_list('pk', flat=True)
+        mandatory_recipients = Monk.objects \
+            .filter(absences_recipient=True) \
+            .filter(is_active=True) \
+            .order_by('absolute_rank', 'entry', 'rank')
+        additional_recipients = ticket.additional_recipients.all() \
+            .order_by('entry', 'rank') \
+            .values_list('pk', flat=True)
         form = TicketForm(request.POST, instance=ticket)
+        # TODO: How to delete ticket before sending mail without losing data?
+        send_email(
+            data,
+            monks,
+            mandatory_recipients,
+            additional_recipients,
+            'delete'
+        )
         ticket.delete()
         return HttpResponseRedirect(reverse('absences:list'))
 
@@ -140,12 +170,15 @@ def send_email(data, monks, mandatory_recipients, additional_recipients, action=
     ]
     recipients_emails = mandatory_recipients_email + additional_recipients_emails
     if action == 'update':
-        subject = 'AVIS D\'ABSENCE *MODIFIÉ*'
+        subject = 'AVIS D\'ABSENCE ***MODIFIÉ***'
         body = '!!! AVIS D\'ABSENCE MODIFIÉ !!!\n\n'
+    elif action == 'delete':
+        subject = 'AVIS D\'ABSENCE ***SUPPRIMÉ***'
+        body = 'CET AVIS D\'ABSENCE EST SUPPRIMÉ :\n\n'
     else:
         subject = 'AVIS D\'ABSENCE'
         body = ''
-    body += write_body(data, monks)
+    body += write_body(data, monks, action)
     body += '\n\n{}'.format(''.join(['-'] * 72))
     body += '\nCe message vous a été envoyé depuis http://python.asj.com:8080/absences.'
     body += '\n{}'.format(''.join(['-'] * 72))
@@ -158,11 +191,12 @@ def send_email(data, monks, mandatory_recipients, additional_recipients, action=
     )
 
 
-def write_body(data, monks):
+def write_body(data, monks, action):
     """ Write the body of the mail. """
     body = ''
     # Monks
-    body += 'Les moines suivants vont s\'absenter :\n{}'.format(monks)
+    body += 'Les moines suivants vont s\'absenter : {}'.format(monks) \
+        if action != 'delete' else 'Moines concernés : {}'.format(monks)
 
     # Destination:
     body += '\n\nDestination : {}' \
