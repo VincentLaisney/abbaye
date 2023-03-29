@@ -14,22 +14,6 @@
 {% block content %}
     <h1 class="my-3">Billets d'absence</h1>
 
-    {% if message %}
-        {% if message == "success" %}
-            <div class="d-flex fade_out btn btn-warning my-3 w-50 py-2">
-                <span class="me-auto"></span>
-                <p class="m-0 grey-dark fw-bold">Félicitations ! Votre billet a été envoyé avec succès.</p>
-                <span class="fas fa-close grey-dark ms-auto mr-1"></span>
-            </div>
-        {% else %}
-            <div class="d-flex fade_out btn btn-warning my-3 w-50 py-2">
-                <span class="me-auto"></span>
-                <div class="fade_out btn btn-danger my-3 w-50">Une erreur s'est produite lors de l'envoi de votre billet.</div>
-                <span class="fas fa-close grey-dark ms-auto mr-1"></span>
-            </div>
-        {% endif %}
-    {% endif %}
-
     <a href={% url 'absences:create' %} class="btn btn-primary btn-sm mb-4 w-25">Créer un nouveau billet d'absence</a>
 
     <table id="table-tickets" class="cell-border order-column hover w-100">

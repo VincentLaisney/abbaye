@@ -13,13 +13,11 @@ from .models import Monk, Ticket
 def list(request, *args, **kwargs):
     """ List of Tickets (home page of Absences). """
     tickets = Ticket.objects.all().order_by('-go_date', '-back_date')
-    message = kwargs['message'] if kwargs else ''
     return render(
         request,
         'absences/list.html',
         {
             'tickets': tickets,
-            'message': message,
         },
     )
 
@@ -38,28 +36,13 @@ def create(request):
             if 'additional_recipients' in dict(data).keys() else []
         if form.is_valid():
             form.save()
-            if send_email(
+            send_email(
                 data,
                 dict(data)['monks'],
                 mandatory_recipients,
                 additional_recipients,
-            ):
-                return HttpResponseRedirect(
-                    reverse(
-                        'absences:list',
-                        kwargs={
-                            'message': 'success'
-                        },
-                    )
-                )
-            return HttpResponseRedirect(
-                reverse(
-                    'absences:list',
-                    kwargs={
-                        'message': 'failure'
-                    },
-                )
             )
+            return HttpResponseRedirect(reverse('absences:list'))
 
     else:
         form = TicketForm()
@@ -101,29 +84,14 @@ def update(request, *args, **kwargs):
             if 'additional_recipients' in dict(data).keys() else []
         if form.is_valid():
             form.save()
-            if send_email(
+            send_email(
                 data,
                 dict(data)['monks'],
                 mandatory_recipients,
                 additional_recipients,
                 'update'
-            ):
-                return HttpResponseRedirect(
-                    reverse(
-                        'absences:list',
-                        kwargs={
-                            'message': 'success'
-                        },
-                    )
-                )
-            return HttpResponseRedirect(
-                reverse(
-                    'absences:list',
-                    kwargs={
-                        'message': 'failure'
-                    },
-                )
             )
+            return HttpResponseRedirect(reverse('absences:list'))
 
     else:
         form = TicketForm(instance=ticket)
@@ -146,14 +114,7 @@ def delete(request, *args, **kwargs):
     if request.method == 'POST':
         form = TicketForm(request.POST, instance=ticket)
         ticket.delete()
-        return HttpResponseRedirect(
-            reverse(
-                'absences:list',
-                kwargs={
-                    'message': 'success'
-                },
-            )
-        )
+        return HttpResponseRedirect(reverse('absences:list'))
 
     form = TicketForm(instance=ticket)
 
