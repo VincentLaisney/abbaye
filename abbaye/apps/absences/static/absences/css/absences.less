@@ -42,7 +42,6 @@ body {
             font-family: 'LucidaHW',
         }
 
-
         #table-tickets_wrapper {
             font-size: 0.9em;
             margin-bottom: 50px;
@@ -77,34 +76,44 @@ body {
             }
         }
 
-        #id_monks {
-            column-width: 15vw;
-            font-size: 0.95em;
-
-            label {
-                .list-unstyled {
-                    margin: 5px 8px 5px 0px;
+        .modal {
+            table {
+                td {
+                    font-size: 0.9em;
                 }
             }
         }
 
-        #id_additional_recipients {
-            column-width: 30vw;
-        }
+        form {
+            #id_monks {
+                column-width: 15vw;
+                font-size: 0.95em;
 
-        #id_go_date,
-        #id_back_date,
-        #id_go_hour,
-        #id_back_hour {
-            color: @grey-dark;
-            font-weight: bold;
-            text-align: center;
-            width: 125px;
-        }
+                label {
+                    .list-unstyled {
+                        margin: 5px 8px 5px 0px;
+                    }
+                }
+            }
 
-        .recipients {
-            column-width: 30vw;
-            font-size: 0.95em;
+            #id_additional_recipients {
+                column-width: 30vw;
+            }
+
+            #id_go_date,
+            #id_back_date,
+            #id_go_hour,
+            #id_back_hour {
+                color: @grey-dark;
+                font-weight: bold;
+                text-align: center;
+                width: 125px;
+            }
+
+            .recipients {
+                column-width: 30vw;
+                font-size: 0.95em;
+            }
         }
     }
 }
