@@ -24,10 +24,7 @@ def list(request, *args, **kwargs):
 
 def create(request):
     """ Create ticket. """
-    mandatory_recipients = Monk.objects \
-        .filter(absences_recipient=True) \
-        .filter(is_active=True) \
-        .order_by('absolute_rank', 'entry', 'rank')
+    mandatory_recipients = mandatory_recipients_queryset()
 
     if request.method == 'POST':
         data = request.POST
@@ -72,10 +69,7 @@ def details(request, *args, **kwargs):
 def update(request, *args, **kwargs):
     """ Update a ticket. """
     ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
-    mandatory_recipients = Monk.objects \
-        .filter(absences_recipient=True) \
-        .filter(is_active=True) \
-        .order_by('absolute_rank', 'entry', 'rank')
+    mandatory_recipients = mandatory_recipients_queryset()
 
     if request.method == 'POST':
         data = request.POST
@@ -127,10 +121,7 @@ def delete(request, *args, **kwargs):
         monks = ticket.monks.all() \
             .order_by('entry', 'rank') \
             .values_list('pk', flat=True)
-        mandatory_recipients = Monk.objects \
-            .filter(absences_recipient=True) \
-            .filter(is_active=True) \
-            .order_by('absolute_rank', 'entry', 'rank')
+        mandatory_recipients = mandatory_recipients_queryset()
         additional_recipients = ticket.additional_recipients.all() \
             .order_by('entry', 'rank') \
             .values_list('pk', flat=True)
@@ -156,6 +147,14 @@ def delete(request, *args, **kwargs):
             'ticket': ticket,
         },
     )
+
+
+def mandatory_recipients_queryset():
+    """ Queryset: all the mandatory recipients. """
+    return Monk.objects \
+        .filter(absences_recipient=True) \
+        .filter(is_active=True) \
+        .order_by('absolute_rank', 'entry', 'rank')
 
 
 def send_email(data, monks, mandatory_recipients, additional_recipients, action=''):
