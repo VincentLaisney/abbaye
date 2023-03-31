@@ -81,6 +81,13 @@ class Ticket(models.Model):
             .order_by('entry', 'rank')
             .values('name')
         )
+
+    def additional_recipients_as_string(self):
+        """ String containing all the additional recipients of this ticket. """
+        return ', '.join(
+            monk['name'] for monk in self.additional_recipients.all()
+            .order_by('entry', 'rank')
+            .values('name')
         )
 
     def is_past(self):
