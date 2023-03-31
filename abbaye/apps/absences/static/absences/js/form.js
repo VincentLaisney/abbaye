@@ -1,3 +1,5 @@
+// absences/form.js
+
 $(document).ready(function () {
     // Voiture/train: on change, display or hide group_train:
     $("#id_go_by").change(function () {
@@ -30,7 +32,7 @@ $(document).ready(function () {
     });
 
     // Additional recipients: set name in bold:
-    $("[id^=id_additional_recipients_]").each(function (element) {
+    $('[id^=id_additional_recipients_]').each(function (element) {
         $(this).parent().html($(this).parent().html().replace('&lt;b&gt;', '<b>').replace('&lt;/b&gt;', '</b>'));
     });
 });
