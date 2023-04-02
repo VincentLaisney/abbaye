@@ -104,10 +104,13 @@ def update(request, **kwargs):
 
 def delete(request, **kwargs):
     """ Delete a monk. """
+    monk = get_object_or_404(Monk, pk=kwargs['pk'])
     return render(
         request,
         'moines/delete.html',
-        {}
+        {
+            'monk': monk,
+        }
     )
 
 
