@@ -1,7 +1,7 @@
-{% extends 'main.html' %}
+{% extends 'agenda/main_agenda.html' %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href={% url 'agenda:home' %}>Agenda</a></li>
+    {{ block.super }}
     <li class="breadcrumb-item active">{{ event.name }}</li>
 {% endblock breadcrumbs %}
 

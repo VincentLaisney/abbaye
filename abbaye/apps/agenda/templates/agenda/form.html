@@ -1,10 +1,10 @@
-{% extends 'main.html' %}
+{% extends 'agenda/main_agenda.html' %}
 
 {% load static %}
 {% load widget_tweaks %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href={% url 'agenda:home' %}>Agenda</a></li>
+    {{ block.super }}
 
     {% if event %}
         <li class="breadcrumb-item"><a href={% url 'agenda:details' event.id %}>{{ event.name }}</a></li>
