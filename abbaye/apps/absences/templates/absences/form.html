@@ -9,7 +9,7 @@
 {% endblock css %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href={% url 'absences:list' %}>Absences</a></li>
+    {{ block.super }}
     {% if ticket %}
         <li class="breadcrumb-item active">Modifier le billet {{ ticket }}</li>
     {% else %}
