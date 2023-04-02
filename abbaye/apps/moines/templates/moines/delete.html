@@ -1,8 +1,9 @@
 {% extends 'moines/main_moines.html' %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href={% url 'moines:list' %}>Moines</a></li>
-    <li class="breadcrumb-item active"></li>
+    {{ block.super }}
+    <li class="breadcrumb-item"><a href={% url 'moines:details' monk.pk %}>{{ monk }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
