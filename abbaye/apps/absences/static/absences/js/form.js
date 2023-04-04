@@ -22,12 +22,12 @@ $(document).ready(function () {
         if ($(this).prop('checked')) {
             $('#id_additional_recipients').find(':checkbox').each(function () {
                 $(this).prop('checked', true);
-            })
+            });
         }
         else {
             $('#id_additional_recipients').find(':checkbox').each(function () {
                 $(this).prop('checked', false);
-            })
+            });
         }
     });
 
