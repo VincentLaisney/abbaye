@@ -9,7 +9,7 @@
 {% endblock css %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href={% url 'moines:list' %}>Moines</a></li>
+    {{ block.super }}
     {% if monk %}
         <li class="breadcrumb-item"><a href={% url 'moines:details' monk.pk %}>{{ monk }}</a></li>
         <li class="breadcrumb-item active">Modifier</li>

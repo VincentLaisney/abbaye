@@ -1,7 +1,7 @@
 {% extends 'moines/main_moines.html' %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href={% url 'moines:list' %}>Moines</a></li>
+    {{ block.super }}
     <li class="breadcrumb-item active">{{ monk }}</li>
 {% endblock breadcrumbs %}
 
@@ -104,6 +104,8 @@
     </div >
 
     <a href={% url 'moines:update' monk.pk %}>Modifier</a>
-    <a href={% url 'moines:delete' monk.pk %}>Supprimer</a>
+    {% if advanced_user %}
+        <a href={% url 'moines:delete' monk.pk %}>Supprimer</a>
+    {% endif %}
     <a href={% url 'moines:list' %}>Retour à la liste des moines</a>
 {% endblock content %}

@@ -65,11 +65,13 @@ def create(request):
 def details(request, **kwargs):
     """ Details of a monk. """
     monk = get_object_or_404(Monk, pk=kwargs['pk'])
+    advanced_user = check_advanced_user(request)
     return render(
         request,
         'moines/details.html',
         {
             'monk': monk,
+            'advanced_user': advanced_user,
         }
     )
 
@@ -102,10 +104,13 @@ def update(request, **kwargs):
 
 def delete(request, **kwargs):
     """ Delete a monk. """
+    monk = get_object_or_404(Monk, pk=kwargs['pk'])
     return render(
         request,
         'moines/delete.html',
-        {}
+        {
+            'monk': monk,
+        }
     )
 
 
