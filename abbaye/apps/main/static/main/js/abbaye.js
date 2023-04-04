@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    // Fade out '.fade_out' elements on clik:
+    // Fade out all the '.fade_out' elements on click.
     $('.fade_out').click(function () {
         $(this).fadeOut('slow', function () {
             $(this).remove();
@@ -8,6 +8,7 @@ $(document).ready(function () {
 });
 
 function first_letter_uppercase(string) {
+    // Uppercase first letter of a string.
     return string.substring(0, 1).toUpperCase() + string.substring(1)
 }
 
