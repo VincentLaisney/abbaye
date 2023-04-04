@@ -32,16 +32,10 @@
             <td class="details_date">
                 {{ ticket.go_date|date:"l j F Y" }}
                 {% if ticket.go_moment %}
-                     {{ ticket.go_moment }}
+                    ({{ ticket.go_moment }})
                 {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-            </td>
-            <td>
                 {% if ticket.go_by %}
-                    En {{ ticket.go_by|lower }}
+                    </br>En {{ ticket.go_by|lower }}
                 {% endif %}
                 {% if ticket.go_station %}
                      : {{ ticket.go_station }}
@@ -49,35 +43,23 @@
                 {% if ticket.go_hour %}
                      à {{ ticket.go_hour }}
                 {% endif %}
+                {% if ticket.servants %}
+                    </br>Repas avec les serveurs.
+                {% endif %}
+                {% if ticket.picnic %}
+                    </br>Casse-croûte.
+                {% endif %}
             </td>
         </tr>
-        {% if ticket.servants %}
-            <tr>
-                <td></td>
-                <td>Repas avec les serveurs.</td>
-            </tr>
-        {% endif %}
-        {% if ticket.picnic %}
-            <tr>
-                <td></td>
-                <td>Casse-croûte.</td>
-            </tr>
-        {% endif %}
         <tr>
             <td class="fw-bold">Retour :</td>
             <td class="details_date">
                 {{ ticket.back_date|date:"l j F Y" }}
                 {% if ticket.back_moment %}
-                     {{ ticket.back_moment }}
+                    ({{ ticket.back_moment }})
                 {% endif %}
-            </td>
-        </tr>
-        <tr>
-            <td>
-            </td>
-            <td>
                 {% if ticket.back_by %}
-                    En {{ ticket.back_by|lower }}
+                    </br>En {{ ticket.back_by|lower }}
                 {% endif %}
                 {% if ticket.back_station %}
                      : {{ ticket.back_station }}
@@ -85,14 +67,11 @@
                 {% if ticket.back_hour %}
                      à {{ ticket.go_hour }}
                 {% endif %}
+                {% if ticket.keep_hot %}
+                    </br>Garder du chaud.
+                {% endif %}
             </td>
         </tr>
-        {% if ticket.keep_hot %}
-            <tr>
-                <td></td>
-                <td>Garder du chaud.</td>
-            </tr>
-        {% endif %}
         {% if ticket.ordinary_form %}
             <tr>
                 <td class="fw-bold">Forme ordinaire :</td>
@@ -107,11 +86,11 @@
         {% endif %}
         <tr>
             <td class="fw-bold">Destinataires obligatoires :</td>
-            <td>{{ mandatory_recipients }}</td>
+            <td>{{ mandatory_recipients|safe }}</td>
         </tr>
         <tr>
             <td class="fw-bold">Destinataires supplémentaires :</td>
-            <td>{{ additional_recipients|default_if_none:'' }}</td>
+            <td>{{ additional_recipients|safe }}</td>
         </tr>
     </table>
 </div>
