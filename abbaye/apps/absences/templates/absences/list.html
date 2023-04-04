@@ -92,6 +92,7 @@
 {% endblock content%}
 
 {% block javascript %}
+    {{ block.super }}
     <script src={% static 'main/datatables/datatables.min.js'%}></script>
     <script src={% static 'absences/js/datatable-tickets.js' %}></script>
 {% endblock javascript %}
