@@ -13,23 +13,18 @@ from .models import Monk, Ticket
 def list(request, *args, **kwargs):
     """ List of Tickets (home page of Absences). """
     tickets = Ticket.objects.all().order_by('-go_date', '-back_date')
-    message = kwargs['message'] if kwargs else ''
     return render(
         request,
         'absences/list.html',
         {
             'tickets': tickets,
-            'message': message,
         },
     )
 
 
 def create(request):
     """ Create ticket. """
-    mandatory_recipients = Monk.objects \
-        .filter(absences_recipient=True) \
-        .filter(is_active=True) \
-        .order_by('absolute_rank', 'entry', 'rank')
+    mandatory_recipients = mandatory_recipients_queryset()
 
     if request.method == 'POST':
         data = request.POST
@@ -38,28 +33,13 @@ def create(request):
             if 'additional_recipients' in dict(data).keys() else []
         if form.is_valid():
             form.save()
-            if send_email(
+            send_email(
                 data,
                 dict(data)['monks'],
                 mandatory_recipients,
                 additional_recipients,
-            ):
-                return HttpResponseRedirect(
-                    reverse(
-                        'absences:list',
-                        kwargs={
-                            'message': 'success'
-                        },
-                    )
-                )
-            return HttpResponseRedirect(
-                reverse(
-                    'absences:list',
-                    kwargs={
-                        'message': 'failure'
-                    },
-                )
             )
+            return HttpResponseRedirect(reverse('absences:list'))
 
     else:
         form = TicketForm()
@@ -77,11 +57,18 @@ def create(request):
 def details(request, *args, **kwargs):
     """ Details of a ticket. """
     ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
+    mandatory_recipients = '</br>'.join(
+        monk.name + ' (' + monk.email + ')'
+        for monk in mandatory_recipients_queryset()
+    )
+    additional_recipients = ticket.additional_recipients_as_string()
     return render(
         request,
         'absences/details.html',
         {
             'ticket': ticket,
+            'mandatory_recipients': mandatory_recipients,
+            'additional_recipients': additional_recipients,
         },
     )
 
@@ -89,10 +76,7 @@ def details(request, *args, **kwargs):
 def update(request, *args, **kwargs):
     """ Update a ticket. """
     ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
-    mandatory_recipients = Monk.objects \
-        .filter(absences_recipient=True) \
-        .filter(is_active=True) \
-        .order_by('absolute_rank', 'entry', 'rank')
+    mandatory_recipients = mandatory_recipients_queryset()
 
     if request.method == 'POST':
         data = request.POST
@@ -101,28 +85,14 @@ def update(request, *args, **kwargs):
             if 'additional_recipients' in dict(data).keys() else []
         if form.is_valid():
             form.save()
-            if send_email(
+            send_email(
                 data,
                 dict(data)['monks'],
                 mandatory_recipients,
                 additional_recipients,
-            ):
-                return HttpResponseRedirect(
-                    reverse(
-                        'absences:list',
-                        kwargs={
-                            'message': 'success'
-                        },
-                    )
-                )
-            return HttpResponseRedirect(
-                reverse(
-                    'absences:list',
-                    kwargs={
-                        'message': 'failure'
-                    },
-                )
+                'update'
             )
+            return HttpResponseRedirect(reverse('absences:list'))
 
     else:
         form = TicketForm(instance=ticket)
@@ -143,16 +113,36 @@ def delete(request, *args, **kwargs):
     ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
 
     if request.method == 'POST':
-        form = TicketForm(request.POST, instance=ticket)
-        ticket.delete()
-        return HttpResponseRedirect(
-            reverse(
-                'absences:list',
-                kwargs={
-                    'message': 'success'
-                },
-            )
+        data = ticket.__dict__
+        # TODO: No other solution that formatting dates?
+        data['go_date'] = '{:02}/{:02}/{:04}'.format(
+            data['go_date'].day,
+            data['go_date'].month,
+            data['go_date'].year
         )
+        data['back_date'] = '{:02}/{:02}/{:04}'.format(
+            data['back_date'].day,
+            data['back_date'].month,
+            data['back_date'].year
+        )
+        monks = ticket.monks.all() \
+            .order_by('entry', 'rank') \
+            .values_list('pk', flat=True)
+        mandatory_recipients = mandatory_recipients_queryset()
+        additional_recipients = ticket.additional_recipients.all() \
+            .order_by('entry', 'rank') \
+            .values_list('pk', flat=True)
+        form = TicketForm(request.POST, instance=ticket)
+        # TODO: How to delete ticket before sending mail without losing data?
+        send_email(
+            data,
+            monks,
+            mandatory_recipients,
+            additional_recipients,
+            'delete'
+        )
+        ticket.delete()
+        return HttpResponseRedirect(reverse('absences:list'))
 
     form = TicketForm(instance=ticket)
 
@@ -166,7 +156,15 @@ def delete(request, *args, **kwargs):
     )
 
 
-def send_email(data, monks, mandatory_recipients, additional_recipients):
+def mandatory_recipients_queryset():
+    """ Queryset: all the mandatory recipients. """
+    return Monk.objects \
+        .filter(absences_recipient=True) \
+        .filter(is_active=True) \
+        .order_by('absolute_rank', 'entry', 'rank')
+
+
+def send_email(data, monks, mandatory_recipients, additional_recipients, action=''):
     """ Send email with data. """
     monks = ', '.join([Monk.objects.get(pk=monk).__str__() for monk in monks])
     mandatory_recipients_email = [
@@ -177,8 +175,16 @@ def send_email(data, monks, mandatory_recipients, additional_recipients):
         for additional_recipient in additional_recipients
     ]
     recipients_emails = mandatory_recipients_email + additional_recipients_emails
-    subject = 'AVIS D\'ABSENCE'
-    body = write_body(data, monks)
+    if action == 'update':
+        subject = 'AVIS D\'ABSENCE ***MODIFIÉ***'
+        body = '!!! AVIS D\'ABSENCE MODIFIÉ !!!\n\n'
+    elif action == 'delete':
+        subject = 'AVIS D\'ABSENCE ***SUPPRIMÉ***'
+        body = 'CET AVIS D\'ABSENCE EST SUPPRIMÉ :\n\n'
+    else:
+        subject = 'AVIS D\'ABSENCE'
+        body = ''
+    body += write_body(data, monks, action)
     body += '\n\n{}'.format(''.join(['-'] * 72))
     body += '\nCe message vous a été envoyé depuis http://python.asj.com:8080/absences.'
     body += '\n{}'.format(''.join(['-'] * 72))
@@ -191,11 +197,12 @@ def send_email(data, monks, mandatory_recipients, additional_recipients):
     )
 
 
-def write_body(data, monks):
+def write_body(data, monks, action):
     """ Write the body of the mail. """
     body = ''
     # Monks
-    body += 'Les moines suivants vont s\'absenter :\n{}'.format(monks)
+    body += 'Les moines suivants vont s\'absenter : {}'.format(monks) \
+        if action != 'delete' else 'Moines concernés : {}'.format(monks)
 
     # Destination:
     body += '\n\nDestination : {}' \

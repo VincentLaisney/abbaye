@@ -47,7 +47,7 @@ const clock = {
             date: false,
             hours: true,
             minutes: true,
-            seconds: false
+            seconds: false,
         },
         theme: 'light',
         viewMode: 'clock',
@@ -65,6 +65,7 @@ const clock = {
         toggleMeridiem: 'Basculer AM-PM',
         selectTime: "Sélectionner l'heure",
         locale: 'fr',
+        hourCycle: 'h23',
         dateFormats: {
             LT: 'HH:mm',
         },

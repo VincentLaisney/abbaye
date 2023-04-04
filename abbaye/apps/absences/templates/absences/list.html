@@ -14,22 +14,6 @@
 {% block content %}
     <h1 class="my-3">Billets d'absence</h1>
 
-    {% if message %}
-        {% if message == "success" %}
-            <div class="d-flex fade_out btn btn-warning my-3 w-50 py-2">
-                <span class="me-auto"></span>
-                <p class="m-0 grey-dark fw-bold">Félicitations ! Votre billet a été envoyé avec succès.</p>
-                <span class="fas fa-close grey-dark ms-auto mr-1"></span>
-            </div>
-        {% else %}
-            <div class="d-flex fade_out btn btn-warning my-3 w-50 py-2">
-                <span class="me-auto"></span>
-                <div class="fade_out btn btn-danger my-3 w-50">Une erreur s'est produite lors de l'envoi de votre billet.</div>
-                <span class="fas fa-close grey-dark ms-auto mr-1"></span>
-            </div>
-        {% endif %}
-    {% endif %}
-
     <a href={% url 'absences:create' %} class="btn btn-primary btn-sm mb-4 w-25">Créer un nouveau billet d'absence</a>
 
     <table id="table-tickets" class="cell-border order-column hover w-100">
@@ -47,7 +31,7 @@
 
         <tbody>
             {% for ticket in tickets %}
-                <tr>
+                <tr {% if ticket.is_past %} style="opacity:0.5" {% endif %}>
                     <td class="col-1">
                         <table class="d-flex justify-content-center">
                             <tr>
@@ -83,17 +67,22 @@
                         </span><!-- Span not displayed, only to be able to sort dates. -->
                         {{ ticket.go_date }}
                     </td>
-                    <td class="col-3 text-center fw-bold">{{ ticket.back_date }}</td>
+                    <td class="col-3 text-center fw-bold">
+                        <span class="d-none">
+                            {{ ticket.back_date|date:"Ymd" }}
+                        </span><!-- Span not displayed, only to be able to sort dates. -->
+                        {{ ticket.back_date }}
+                    </td>
                     <td class="col-2">{{ ticket.destination }}</td>
-                    <td class="col-2" title="{{ ticket.monks_as_string }}">{{ ticket.monks_as_string|truncatewords:6 }}</td>
-                    <td class="col-1"><span type='button' class='btn btn-primary p-2 text-decoration-none button_details' data-bs-toggle='modal' data-bs-target='#ticket_details' id="details_{{ ticket.pk }}">Détails</span></td>
+                    <td class="col-2" title="{{ ticket.monks_as_string }}">{{ ticket.monks_as_string|truncatewords:5 }}</td>
+                    <td class="col-1">{% if not ticket.is_past %} <span type='button' class='fas fa-tools bg-secondary white border rounded p-2 button_details' data-bs-toggle='modal' data-bs-target='#ticket_details' id="details_{{ ticket.pk }}" title="Voir les détails, modifier, supprimer"></span>{% endif %}</td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
     <!-- Modal containing the details of a ticket.
-    Will be filled by Ajax (datatable-tickets.js) -->
+    Will be filled by Ajax (datatable-tickets.js). -->
     <div class="modal fade" id="ticket_details" tabindex="-1" aria-labelledby="ticket_details" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">

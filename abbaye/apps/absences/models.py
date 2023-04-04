@@ -1,5 +1,7 @@
 """ apps/absences/models.py """
 
+import datetime
+
 from django.db import models
 
 from apps.moines.models import Monk
@@ -75,12 +77,22 @@ class Ticket(models.Model):
     def monks_as_string(self):
         """ String containing all the monks of this ticket. """
         return ', '.join(
-            monk['name'] for monk in list(
-                self.monks.all()
-                .order_by('entry', 'rank')
-                .values('name')
-            )
+            monk['name'] for monk in self.monks.all()
+            .order_by('entry', 'rank')
+            .values('name')
         )
+
+    def additional_recipients_as_string(self):
+        """ String containing all the additional recipients of this ticket. """
+        return '</br>'.join(
+            (monk.name + ' (' + monk.email + ')')
+            for monk in self.additional_recipients.all()
+            .order_by('entry', 'rank')
+        )
+
+    def is_past(self):
+        """ Boolean: Is the ticket in the past? """
+        return self.back_date < datetime.date.today()
 
     def __str__(self):
         dates = '{:02}/{:02}/{}-{:02}/{:02}/{}'.format(

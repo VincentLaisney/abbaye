@@ -2,11 +2,10 @@ $(document).ready(function () {
     function formatted_date(data) {
         // Break line after first-letter-uppercased weekday:
         const weekdays = ['dimanche', 'lundi', 'mardi', 'mercredi', 'jeudi', 'vendredi', 'samedi'];
-        for (w = 0; w < weekdays.length; w++) {
-            const weekday = weekdays[w];
+        for (const weekday of weekdays) {
             data = data.replace(
                 weekday,
-                weekday.substring(0, 1).toUpperCase() + weekday.substring(1) + '</br>'
+                first_letter_uppercase(weekday) + '</br>'
             );
         }
         return data;

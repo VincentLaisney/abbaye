@@ -6,6 +6,6 @@
     <link rel="stylesheet/less" href={% static 'absences/css/absences.less' %}>
 {% endblock css %}
 
-{% block javascript %}
-    <script src={% static 'absences/js/absences.js' %}></script>
-{% endblock javascript %}
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'absences:list' %}>Absences</a></li>
+{% endblock breadcrumbs %}

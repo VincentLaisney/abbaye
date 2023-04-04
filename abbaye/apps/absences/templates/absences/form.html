@@ -9,7 +9,7 @@
 {% endblock css %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href={% url 'absences:list' %}>Absences</a></li>
+    {{ block.super }}
     {% if ticket %}
         <li class="breadcrumb-item active">Modifier le billet {{ ticket }}</li>
     {% else %}
@@ -23,9 +23,9 @@
 
         <h1 class="text-center mt-2">
             {% if ticket %}
-                Modifier le billet</br>{{ ticket }}
+                Modifier le billet d'absence</br>{{ ticket }}
             {% else %}
-                Créer un billet
+                Créer un billet d'absence
             {% endif %}
         </h1>
 
@@ -472,7 +472,7 @@
             <h4 class="mt-5">Ce message sera envoyé <i>ex officio</i> aux moines suivants :</h4>
             <div class="recipients">
                 {% for recipient in mandatory_recipients %}
-                    <b>{{ recipient }}</b> ({{ recipient.email }})<br>
+                    <b>{{ recipient }}</b> ({{ recipient.email }})</br>
                 {% endfor %}
             </div>
 
@@ -504,18 +504,82 @@
                 </div>
             </div>
 
+            <!-- Modal containing the summary of the ticket before sending email.
+            Will be filled by programmation (form.js). -->
+            <div class="modal fade" id="ticket_summary" tabindex="-1" aria-labelledby="ticket_summary" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="title_ticket">On récapitule…</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+                        </div>
+
+                        <div class="modal-body">
+                            <table class="table table-borderless table-sm">
+                                <!-- Moines -->
+                                <tr>
+                                    <td class="fw-bold">Moines :</td>
+                                    <td class="col-8" id="monks"></td>
+                                </tr>
+                                <!-- Destination -->
+                                <tr>
+                                    <td class="fw-bold">Destination :</td>
+                                    <td class="col-8" id="destination"></td>
+                                </tr>
+                                <!-- Départ -->
+                                <tr>
+                                    <td class="fw-bold">Départ :</td>
+                                    <td class="col-8" id="go"></td>
+                                </tr>
+                                <!-- Retour -->
+                                <tr>
+                                    <td class="fw-bold">Retour :</td>
+                                    <td class="col-8" id="back"></td>
+                                </tr>
+                                <!-- Forme ordinaire -->
+                                <tr>
+                                    <td class="fw-bold">Forme ordinaire :</td>
+                                    <td class="col-8" id="ordinary"></td>
+                                </tr>
+                                <!-- Commentaire -->
+                                <tr>
+                                    <td class="fw-bold">Commentaire :</td>
+                                    <td class="col-8" id="comment"></td>
+                                </tr>
+                                <!-- Destinataires obligatoires -->
+                                <tr>
+                                    <td class="fw-bold">Destinataires obligatoires :</td>
+                                    <td class="col-8" id="mandatory"></td>
+                                </tr>
+                                <!-- Destinataires supplémentaires -->
+                                <tr>
+                                    <td class="fw-bold">Destinataires supplémentaires :</td>
+                                    <td class="col-8" id="additional"></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <button type="submit" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Envoyer</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!-- VALIDATION -->
-            <div class="w-100 d-flex flex-column align-items-center">
-                <button type="submit" id="btn_validate_billet" class="btn btn-primary mt-5">Envoyer le message maintenant</button>
+            <div class="w-100 d-flex flex-column align-items-center my-5">
+                <div class="btn btn-primary" id='ticket_validation' data-bs-toggle='modal' data-bs-target='#ticket_summary'>Valider</div>
             </div>
         </div>
     </form>
 {% endblock content %}
 
 {% block javascript %}
+    {{ block.super }}
     <script src={% static 'main/js/popper.min.js' %}></script>
     <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
     <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
     <script src={% static 'absences/js/tempusdominus-absences.js' %}></script>
-    {{ block.super }}
+    <script src={% static 'absences/js/form.js' %}></script>
 {% endblock javascript %}

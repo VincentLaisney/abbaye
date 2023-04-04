@@ -1,7 +1,7 @@
 {% extends 'absences/main_absences.html' %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href={% url 'absences:list' %}>Absences</a></li>
+    {{ block.super }}
     <li class="breadcrumb-item active">Supprimer</li>
 {% endblock breadcrumbs %}
 
