@@ -568,8 +568,9 @@
             </div>
 
             <!-- VALIDATION -->
-            <div class="w-100 d-flex flex-column align-items-center my-5">
-                <div class="btn btn-primary" id='ticket_validation' data-bs-toggle='modal' data-bs-target='#ticket_summary'>Valider</div>
+            <div class="w-100 d-flex justify-content-center align-items-between my-5">
+                <a class="btn btn-secondary mx-1" href={% url 'absences:list' %}>Annuler</a>
+                <div class="btn btn-primary mx-1" id='ticket_validation' data-bs-toggle='modal' data-bs-target='#ticket_summary'>Valider</div>
             </div>
         </div>
     </form>
