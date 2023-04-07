@@ -486,20 +486,20 @@
                     <input type="checkbox" id="checkbox_all_additional_recipients" class="my-0 ms-auto"></input>
                     <label for="checkbox_all_additional_recipients" class="green fw-boldmy-0 ms-1" style="font-size:0.9em;">Cocher tous les destinataires supplémentaires</input>
                 </div>
-                <div class="d-flex my-2">
+                <div class="recipients my-2">
                     {% if form.is_bound %}
                         {% if form.additional_recipients.errors %}
-                            {% render_field form.additional_recipients class="list-unstyled border rounded p-2 mb-0 is-invalid" %}
+                            {% render_field form.additional_recipients class="list-unstyled mb-0 is-invalid" %}
                             {% for error in form.additional_recipients.errors %}
                                 <div class="invalid-feedback d-block">
                                     {{ error }}
                                 </div>
                             {% endfor %}
                         {% else %}
-                            {% render_field form.additional_recipients class="list-unstyled border rounded p-2 mb-0 is-valid" %}
+                            {% render_field form.additional_recipients class="list-unstyled mb-0 is-valid" %}
                         {% endif %}
                     {% else %}
-                        {% render_field form.additional_recipients class="list-unstyled border rounded p-2 mb-0" %}
+                        {% render_field form.additional_recipients class="list-unstyled mb-0" %}
                     {% endif %}
                 </div>
             </div>
