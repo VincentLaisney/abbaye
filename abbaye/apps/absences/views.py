@@ -32,7 +32,14 @@ def create(request):
         additional_recipients = dict(data)['additional_recipients'] \
             if 'additional_recipients' in dict(data).keys() else []
         if form.is_valid():
-            form.save()
+            ticket = form.save(commit=False)
+            if ticket.go_by != 'Train':
+                ticket.go_station = None
+                ticket.go_hour = None
+            if ticket.back_by != 'Train':
+                ticket.back_station = None
+                ticket.back_hour = None
+            ticket.save()
             send_email(
                 data,
                 dict(data)['monks'],
@@ -84,7 +91,14 @@ def update(request, *args, **kwargs):
         additional_recipients = dict(data)['additional_recipients'] \
             if 'additional_recipients' in dict(data).keys() else []
         if form.is_valid():
-            form.save()
+            ticket = form.save(commit=False)
+            if ticket.go_by != 'Train':
+                ticket.go_station = None
+                ticket.go_hour = None
+            if ticket.back_by != 'Train':
+                ticket.back_station = None
+                ticket.back_hour = None
+            ticket.save()
             send_email(
                 data,
                 dict(data)['monks'],
