@@ -41,6 +41,7 @@ $(document).ready(function () {
         // Monks:
         let monks = "";
         $("input[id^='id_monks']:checked").each(function (i, monk) {
+            i != 0 ? monks += ', ' : '';
             monks += $(this).parent().text();
         });
         $('#monks').html(monks);
@@ -97,7 +98,7 @@ $(document).ready(function () {
         );
 
         // Commentaire:
-        $('#comment').html($("#id_commentary").html().replace(/\n/g, '</br>'));
+        $('#comment').html($("#id_commentary").val().replace(/\n/g, '</br>'));
 
         // Destinataires obligatoires:
         $('#mandatory').html($(".recipients").html().replace(/<b>/g, '').replace(/<\/b>/g, ''));
