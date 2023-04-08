@@ -9,7 +9,7 @@ class Monk(models.Model):
         max_length=255,
     )
     absolute_rank = models.IntegerField(
-        default=3,
+        default=4,
     )
     feast_day = models.IntegerField()
     feast_month = models.IntegerField()

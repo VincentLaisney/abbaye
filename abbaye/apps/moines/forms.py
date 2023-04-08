@@ -13,6 +13,10 @@ class MonkForm(forms.ModelForm):
         label='Nom',
         label_suffix=' :',
     )
+    absolute_rank = forms.IntegerField(
+        label='Rang absolu',
+        label_suffix=' :',
+    )
     feast_day = forms.ChoiceField(
         choices=[(i+1, i+1) for i in range(31)],
     )
