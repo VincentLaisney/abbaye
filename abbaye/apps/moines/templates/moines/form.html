@@ -135,6 +135,34 @@
             </div>
         </div>
 
+        <!-- Numéro de téléphone -->
+        <div class="row justify-content-start ml-0">
+            <div class="form-group">
+                {{ form.phone_number.label_tag }}
+
+                {% if form.is_bound %}
+                    {% if form.phone_number.errors %}
+                        {% render_field form.phone_number class="form-control is-invalid" %}
+                        {% for error in form.phone_number.errors %}
+                            <div class="invalid-feedback" style="display: block;">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.phone_number class="form-control is-valid" %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.phone_number class="form-control" %}
+                {% endif %}
+
+                {% if form.phone_number.help_text %}
+                    <small class="form-text text-muted">
+                        {{ form.phone_number.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+        </div>
+
         <!-- Date de naissance -->
         <div class="row justify-content-start ml-0">
             <div class="form-group">
