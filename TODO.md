@@ -6,6 +6,7 @@ GÉNÉRAL:
 
 ABSENCES:
 - Models: check dates are consistent (birthday < entry < habit etc.).
+- Faire une page "details" (en plus du modal), cf. monks.
 
 AGENDA:
 - Fetcher les retraites et leurs nombres dans la page du P. Savio.
