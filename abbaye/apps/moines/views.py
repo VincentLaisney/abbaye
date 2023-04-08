@@ -76,6 +76,20 @@ def details(request, **kwargs):
     )
 
 
+def details_modal(request, **kwargs):
+    """ Modal details of a monk. """
+    monk = get_object_or_404(Monk, pk=kwargs['pk'])
+    advanced_user = check_advanced_user(request)
+    return render(
+        request,
+        'moines/details_modal.html',
+        {
+            'monk': monk,
+            'advanced_user': advanced_user,
+        }
+    )
+
+
 def update(request, **kwargs):
     """ Update a monk. """
     advanced_user = check_advanced_user(request)

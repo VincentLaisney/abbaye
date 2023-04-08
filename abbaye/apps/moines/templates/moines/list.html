@@ -14,8 +14,10 @@
 {% block content %}
     <h1>Moines de l'Abbaye Saint-Joseph</h1>
 
-    <a href={% url 'moines:create' %} class="btn btn-sm btn-primary mt-3">Créer un nouveau moine</a>
-    <a href={% url 'moines:statistiques' %} class="btn btn-sm btn-primary my-3">Voir les statistiques</a>
+    <div class="d-flex flex-column col-2">
+        <a href={% url 'moines:statistiques' %} class="btn btn-sm btn-primary my-1">Voir les statistiques</a>
+        <a href={% url 'moines:create' %} class="btn btn-sm btn-outline-primary my-1">Créer un nouveau moine</a>
+    </div >
 
     <table id="table-monks" class="cell-border order-column hover w-100">
         <thead>
@@ -37,7 +39,7 @@
             {% for monk in monks %}
                 <tr>
                     <td class="col-2 fw-bold">
-                        <a href={% url 'moines:details' monk.pk %}>{{ monk }}</a>
+                        <a class="button_details" data-bs-toggle='modal' data-bs-target='#monk_details' id="details_{{ monk.pk }}" title="Voir les détails, modifier, supprimer">{{ monk }}</a>
                     </td>
 
                     <td class="col-1">
@@ -99,9 +101,19 @@
             {% endfor %}
         </tbody>
     </table>
+
+    <!-- Modal containing the details of a monk.
+    Will be filled by Ajax (datatable-monks.js). -->
+    <div class="modal fade" id="monk_details" tabindex="-1" aria-labelledby="monk_details" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
 {% endblock content %}
 
 {% block javascript %}
     {{ block.super }}
     <script src={% static 'main/datatables/datatables.min.js'%}></script>
+    <script src={% static 'moines/js/datatable-monks.js' %}></script>
 {% endblock javascript %}
