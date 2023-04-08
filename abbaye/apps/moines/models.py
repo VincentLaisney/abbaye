@@ -8,19 +8,7 @@ class Monk(models.Model):
     name = models.CharField(
         max_length=255,
     )
-    absolute_rank = models.IntegerField(
-        default=4,
-    )
-    feast_day = models.IntegerField()
-    feast_month = models.IntegerField()
-    laundry_number = models.IntegerField(
-        blank=True,
-        null=True,
-    )
-    phone_number = models.IntegerField(
-        blank=True,
-        null=True,
-    )
+    # Dates:
     birthday = models.DateField(
         blank=True,
         null=True,
@@ -49,6 +37,17 @@ class Monk(models.Model):
         blank=True,
         null=True,
     )
+    feast_day = models.IntegerField()
+    feast_month = models.IntegerField()
+    # Informations:
+    laundry_number = models.IntegerField(
+        blank=True,
+        null=True,
+    )
+    phone_number = models.IntegerField(
+        blank=True,
+        null=True,
+    )
     email = models.EmailField(
         blank=True,
         null=True,
@@ -57,8 +56,9 @@ class Monk(models.Model):
         blank=True,
         null=True,
     )
-    is_active = models.BooleanField(
-        default=True,
+    # Admin fields:
+    absolute_rank = models.IntegerField(
+        default=4,
     )
     is_abbot = models.BooleanField(
         default=False,
@@ -68,6 +68,9 @@ class Monk(models.Model):
     )
     is_abbot_emerite = models.BooleanField(
         default=False,
+    )
+    is_active = models.BooleanField(
+        default=True,
     )
     absences_recipient = models.BooleanField(
         default=False,

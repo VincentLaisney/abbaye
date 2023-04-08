@@ -72,24 +72,6 @@
             </tr>
 
             <tr>
-                <td class="col-5 green fw-bold">Email :</td>
-                <td class="col-7">
-                    {% if monk.email %}
-                        {{ monk.email }}
-                    {% endif %}
-                </td>
-            </tr>
-
-            <tr>
-                <td class="col-5 green fw-bold">Email supplémentaire :</td>
-                <td class="col-7">
-                    {% if monk.additional_email %}
-                        {{ monk.additional_email }}
-                    {% endif %}
-                </td>
-            </tr>
-
-            <tr>
                 <td class="col-5 green fw-bold">Fête le :</td>
                 <td class="col-7">
                     {{ monk.feast_day }} / {{ monk.feast_month }}
@@ -107,6 +89,24 @@
                 <td class="col-5 green fw-bold">Numéro de téléphone :</td>
                 <td class="col-7">
                     {{ monk.phone_number }}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Email :</td>
+                <td class="col-7">
+                    {% if monk.email %}
+                        {{ monk.email }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Email supplémentaire :</td>
+                <td class="col-7">
+                    {% if monk.additional_email %}
+                        {{ monk.additional_email }}
+                    {% endif %}
                 </td>
             </tr>
         </table>

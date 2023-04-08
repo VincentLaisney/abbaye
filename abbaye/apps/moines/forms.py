@@ -13,37 +13,7 @@ class MonkForm(forms.ModelForm):
         label='Nom',
         label_suffix=' :',
     )
-    absolute_rank = forms.IntegerField(
-        label='Rang absolu',
-        label_suffix=' :',
-    )
-    feast_day = forms.ChoiceField(
-        choices=[(i+1, i+1) for i in range(31)],
-    )
-    feast_month = forms.ChoiceField(
-        choices=[
-            (1, 'janvier'),
-            (2, 'février'),
-            (3, 'mars'),
-            (4, 'avril'),
-            (5, 'mai'),
-            (6, 'juin'),
-            (7, 'juillet'),
-            (8, 'août'),
-            (9, 'septembre'),
-            (10, 'octobre'),
-            (11, 'novembre'),
-            (12, 'décembre'),
-        ],
-    )
-    laundry_number = forms.IntegerField(
-        label='Numéro de linge',
-        label_suffix=' :',
-    )
-    phone_number = forms.IntegerField(
-        label='Numéro de téléphone',
-        label_suffix=' :',
-    )
+    # Dates:
     birthday = forms.DateField(
         required=False,
         input_formats=[
@@ -106,6 +76,34 @@ class MonkForm(forms.ModelForm):
         label='Date de décès',
         label_suffix=' :',
     )
+    feast_day = forms.ChoiceField(
+        choices=[(i+1, i+1) for i in range(31)],
+    )
+    feast_month = forms.ChoiceField(
+        choices=[
+            (1, 'janvier'),
+            (2, 'février'),
+            (3, 'mars'),
+            (4, 'avril'),
+            (5, 'mai'),
+            (6, 'juin'),
+            (7, 'juillet'),
+            (8, 'août'),
+            (9, 'septembre'),
+            (10, 'octobre'),
+            (11, 'novembre'),
+            (12, 'décembre'),
+        ],
+    )
+    # Informations:
+    laundry_number = forms.IntegerField(
+        label='Numéro de linge',
+        label_suffix=' :',
+    )
+    phone_number = forms.IntegerField(
+        label='Numéro de téléphone',
+        label_suffix=' :',
+    )
     email = forms.EmailField(
         required=False,
         label='Email',
@@ -116,6 +114,26 @@ class MonkForm(forms.ModelForm):
         label='Email supplémentaire',
         label_suffix=' :',
     )
+    # Admin fields:
+    absolute_rank = forms.IntegerField(
+        label='Rang absolu',
+        label_suffix=' :',
+    )
+    is_abbot = forms.BooleanField(
+        required=False,
+        label='Est le TRP Abbé.',
+        label_suffix='',
+    )
+    is_prior = forms.BooleanField(
+        required=False,
+        label='Est le RP Prieur.',
+        label_suffix='',
+    )
+    is_abbot_emerite = forms.BooleanField(
+        required=False,
+        label='Est le TRP Abbé émérite.',
+        label_suffix='',
+    )
     is_active = forms.BooleanField(
         required=False,
         label='Est actif.',
@@ -123,7 +141,7 @@ class MonkForm(forms.ModelForm):
     )
     absences_recipient = forms.BooleanField(
         required=False,
-        label='Destinataire <i>ex officio</i> des avis d\'absence.',
+        label='Est un destinataire <i>ex officio</i> des avis d\'absence.',
         label_suffix='',
     )
 
