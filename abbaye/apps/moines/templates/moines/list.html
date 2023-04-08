@@ -14,8 +14,10 @@
 {% block content %}
     <h1>Moines de l'Abbaye Saint-Joseph</h1>
 
-    <a href={% url 'moines:create' %} class="btn btn-sm btn-primary mt-3">Créer un nouveau moine</a>
-    <a href={% url 'moines:statistiques' %} class="btn btn-sm btn-primary my-3">Voir les statistiques</a>
+    <div class="d-flex flex-column col-2">
+        <a href={% url 'moines:statistiques' %} class="btn btn-sm btn-primary my-1">Voir les statistiques</a>
+        <a href={% url 'moines:create' %} class="btn btn-sm btn-outline-primary my-1">Créer un nouveau moine</a>
+    </div >
 
     <table id="table-monks" class="cell-border order-column hover w-100">
         <thead>
