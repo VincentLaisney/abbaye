@@ -10,8 +10,8 @@ from .forms import EventForm
 from .models import Event
 
 
-def home(request):
-    """ Home page of Agenda. """
+def list(request):
+    """ List of events. """
     today = date.today()
     days = {}
     for i in range(15):
@@ -26,7 +26,7 @@ def home(request):
         }
     return render(
         request,
-        'agenda/home.html',
+        'agenda/list.html',
         {
             'days': days,
         },
@@ -41,7 +41,7 @@ def create(request):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('agenda:home'))
+            return HttpResponseRedirect(reverse('agenda:list'))
 
     form = EventForm()
 
@@ -95,7 +95,7 @@ def delete(request, **kwargs):
     if request.method == 'POST':
         form = EventForm(request.POST, instance=event)
         event.delete()
-        return HttpResponseRedirect(reverse('agenda:home'))
+        return HttpResponseRedirect(reverse('agenda:list'))
 
     form = EventForm(instance=event)
 

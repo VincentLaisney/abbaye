@@ -168,7 +168,7 @@
             {% if agenda %}
                 <a href={% url 'agenda:details' event.id %} class="btn btn-primary mx-3">Annuler</a>
             {% else %}
-                <a href={% url 'agenda:home' %} class="btn btn-primary mx-3">Annuler</a>
+                <a href={% url 'agenda:list' %} class="btn btn-primary mx-3">Annuler</a>
             {% endif %}
             <button type="submit" class="btn btn-success mx-3">Valider</button>
         </div>
