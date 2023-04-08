@@ -36,8 +36,14 @@ class MonkForm(forms.ModelForm):
             (12, 'décembre'),
         ],
     )
-    laundry_number = forms.IntegerField()
-    phone_number = forms.IntegerField()
+    laundry_number = forms.IntegerField(
+        label='Numéro de linge',
+        label_suffix=' :',
+    )
+    phone_number = forms.IntegerField(
+        label='Numéro de téléphone',
+        label_suffix=' :',
+    )
     birthday = forms.DateField(
         required=False,
         input_formats=[
@@ -112,12 +118,12 @@ class MonkForm(forms.ModelForm):
     )
     is_active = forms.BooleanField(
         required=False,
-        label='Est actif',
+        label='Est actif.',
         label_suffix='',
     )
     absences_recipient = forms.BooleanField(
         required=False,
-        label='Destinataire ex officio des avis d\'absence',
+        label='Destinataire <i>ex officio</i> des avis d\'absence.',
         label_suffix='',
     )
 

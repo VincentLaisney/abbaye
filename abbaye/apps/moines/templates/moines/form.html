@@ -548,6 +548,7 @@
 {% endblock content %}
 
 {% block javascript %}
+    {{ block.super }}
     <script src={% static 'main/js/popper.min.js' %}></script>
     <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
     <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
