@@ -617,6 +617,15 @@
                     {{ form.absences_recipient.label_tag }}
                 </div>
             </div>
+        {% else %}
+            <!-- Display reserved fields, elsewhere form will not validate,
+            but hide them, because user is not advanced. -->
+            {% render_field form.absolute_rank hidden="True" %}
+            {% render_field form.is_active hidden="True" %}
+            {% render_field form.is_abbot hidden="True" %}
+            {% render_field form.is_prior hidden="True" %}
+            {% render_field form.is_abbot_emerite hidden="True" %}
+            {% render_field form.additional_recipients hidden="True" %}
         {% endif %}
 
         <!-- Validation -->
