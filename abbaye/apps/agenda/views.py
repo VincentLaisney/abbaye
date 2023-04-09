@@ -6,6 +6,8 @@ from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
 from apps.main.decorators import group_required
+from apps.absences.models import Ticket
+from apps.moines.models import Monk
 from .forms import EventForm
 from .models import Event
 
@@ -15,17 +17,33 @@ def list(request):
     advanced_user = check_advanced_user(request)
     today = date.today()
     days = {}
+
     for i in range(15):
         day = today + timedelta(i)
+
+        # Events of this day:
         events = Event.objects.filter(
             date_from__lte=day
         ) & Event.objects.filter(
             date_to__gte=day
         )
+
+        # Feasts of this day:
+        feasts = Monk.objects.filter(
+            feast_month=day.month
+        ) & Monk.objects.filter(
+            feast_day=day.day
+        ).order_by('absolute_rank', 'entry', 'rank')
+
+        # Absences of this day:
+        # TODO.
+
         days[day] = {
-            'events': events,
             'date': day,
+            'events': events,
+            'feasts': feasts,
         }
+
     return render(
         request,
         'agenda/list.html',

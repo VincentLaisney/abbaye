@@ -15,6 +15,15 @@
             {% for day in days.values %}
                 <h4 class="date text-center red-dark mt-4 mb-3">{{ day.date }}</h4>
 
+                {% if day.feast %}
+                    <div class="text-center">
+                        <p class="green fw-bold m-0" style="font-family:LucidaHW">
+                            N'oubliez pas de souhaiter une bonne fête à :
+                        </p>
+                        <b>{{ day.feast|join:", " }}</b>
+                    </div >
+                {% endif %}
+
                 <div class="d-flex flex-column align-items-start">
                     {% for event in day.events %}
                         <div class="d-flex align-items-center mt-4">
