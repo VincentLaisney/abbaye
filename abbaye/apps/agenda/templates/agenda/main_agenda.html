@@ -3,7 +3,6 @@
 {% load static %}
 
 {% block css %}
-    {{ block.super }}
     <link rel="stylesheet/less" href={% static 'agenda/css/agenda.less' %}>
 {% endblock css %}
 
@@ -12,6 +11,5 @@
 {% endblock breadcrumbs %}
 
 {% block javascript %}
-    {{ block.super }}
     <script src={% static 'agenda/js/agenda.js' %}></script>
 {% endblock javascript %}
