@@ -15,30 +15,25 @@
             {% for day in days.values %}
                 <h4 class="date text-center red-dark mt-4 mb-3">{{ day.date }}</h4>
 
-                <div class="col-12 d-flex flex-column align-items-start">
+                <div class="d-flex flex-column align-items-start">
                     {% for event in day.events %}
-                    <div class="mb-3">
-                        <table>
-                            <tr>
-                                <td>
-                                    <span class="fas fa-circle {{ event.category.color }} mr-2"></span>
-                                </td>
-                                {% if advanced_user %}
-                                    <td>
-                                        {{ event.name }}
-                                        <a href={% url 'agenda:details' event.pk %}>
-                                            <span class="fas fa-toolsbg-secondary white border rounded ms-2 p-2 button_details" title="Voir les détails, modifier, supprimer"></span>
-                                        </a>
-                                    </td>
-                                {% endif %}
-                            </tr>
-                            {% if event.comment %}
-                                <tr>
-                                    <td colspan="2"><small><div class="ml-5">{{ event.comment }}</div></small></td>
-                                </tr>
+                        <div class="d-flex align-items-center mt-4">
+                            <span class="fas fa-circle {{ event.category.color }} me-2"></span>
+
+                            {% if advanced_user %}
+                                <a href={% url 'agenda:details' event.pk %}>
+                                    <p class="fw-bold mb-0">{{ event.name }}<p >
+                                </a>
+                            {% else %}
+                                <p class="fw-bold grey-dark mb-0">{{ event.name }}<p >
                             {% endif %}
-                        </table>
-                    </div>
+                        </div>
+
+                        <div class="ms-4 mt-1 small">
+                            {% if event.comment %}
+                                    {{ event.comment }}
+                            {% endif %}
+                        </div>
                     {% endfor %}
                 </div>
             {% endfor %}
