@@ -12,6 +12,7 @@ from .models import Event
 
 def list(request):
     """ List of events. """
+    advanced_user = check_advanced_user(request)
     today = date.today()
     days = {}
     for i in range(15):
@@ -22,12 +23,14 @@ def list(request):
             date_to__gte=day
         )
         days[day] = {
-            'events': list(events),
+            'events': events,
+            'date': day,
         }
     return render(
         request,
         'agenda/list.html',
         {
+            'advanced_user': advanced_user,
             'days': days,
         },
     )
@@ -103,3 +106,13 @@ def delete(request, **kwargs):
         'form': form,
         'event': event,
     })
+
+
+def check_advanced_user(request):
+    """ Check if a user is advanced, i.e. is in group 'Agenda'
+    and thus can access advanced options (create an event, modifying it, etc.). """
+    advanced_user = False
+    if request.user.is_authenticated:
+        if bool(request.user.groups.filter(name='Agenda')) or request.user.is_superuser:
+            advanced_user = True
+    return advanced_user
