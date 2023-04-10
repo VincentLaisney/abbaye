@@ -12,48 +12,29 @@ from .forms import EventForm
 from .models import Event
 
 
-def list(request):
-    """ List of events. """
+def agenda_as_list(request):
+    """ Agenda as list. """
     advanced_user = check_advanced_user(request)
     today = date.today()
-    days = {}
-
-    for i in range(15):
-        day = today + timedelta(i)
-
-        # Events of this day:
-        events = Event.objects.filter(
-            date_from__lte=day
-        ) & Event.objects.filter(
-            date_to__gte=day
-        ).order_by('category')
-
-        # Feasts of this day:
-        feasts = Monk.objects.filter(
-            feast_month=day.month
-        ) & Monk.objects.filter(
-            feast_day=day.day
-        ).order_by('absolute_rank', 'entry', 'rank')
-
-        # Absences of this day:
-        absences = Ticket.objects \
-            .filter(
-                go_date__lte=day
-            ) & Ticket.objects.filter(
-                back_date__gte=day
-            ) \
-            .order_by('go_date', 'back_date')
-
-        days[day] = {
-            'date': day,
-            'events': events,
-            'feasts': feasts,
-            'absences': absences,
-        }
-
+    days = fetch_data(today)
     return render(
         request,
         'agenda/list.html',
+        {
+            'advanced_user': advanced_user,
+            'days': days,
+        },
+    )
+
+
+def agenda_as_calendar(request):
+    """ Agenda as calendar. """
+    advanced_user = check_advanced_user(request)
+    today = date.today()
+    days = fetch_data(today)
+    return render(
+        request,
+        'agenda/calendar.html',
         {
             'advanced_user': advanced_user,
             'days': days,
@@ -141,3 +122,42 @@ def check_advanced_user(request):
         if bool(request.user.groups.filter(name='Agenda')) or request.user.is_superuser:
             advanced_user = True
     return advanced_user
+
+
+def fetch_data(today):
+    """ Fetch everything from today. """
+    days = {}
+    for i in range(15):
+        day = today + timedelta(i)
+
+        # Events of this day:
+        events = Event.objects.filter(
+            date_from__lte=day
+        ) & Event.objects.filter(
+            date_to__gte=day
+        ).order_by('category')
+
+        # Feasts of this day:
+        feasts = Monk.objects.filter(
+            feast_month=day.month
+        ) & Monk.objects.filter(
+            feast_day=day.day
+        ).order_by('absolute_rank', 'entry', 'rank')
+
+        # Absences of this day:
+        absences = Ticket.objects \
+            .filter(
+                go_date__lte=day
+            ) & Ticket.objects.filter(
+                back_date__gte=day
+            ) \
+            .order_by('go_date', 'back_date')
+
+        days[day] = {
+            'date': day,
+            'events': events,
+            'feasts': feasts,
+            'absences': absences,
+        }
+
+    return days
