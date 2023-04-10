@@ -14,6 +14,11 @@
     {% endif %}
 {% endblock breadcrumbs %}
 
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/tempusdominus/tempus-dominus.min.css' %}>
+{% endblock css %}
+
 {% block content %}
     {% if event %}
         <h2>{{ event }}</h2>
@@ -176,5 +181,9 @@
 {% endblock %}
 
 {% block javascript %}
-    {{ form.media }}
+    {{ block.super }}
+    <script src={% static 'main/js/popper.min.js' %}></script>
+    <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
+    <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
+    <script src={% static 'agenda/js/tempusdominus-agenda.js' %}></script>
 {% endblock javascript %}
