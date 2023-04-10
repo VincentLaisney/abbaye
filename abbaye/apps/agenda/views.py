@@ -26,7 +26,7 @@ def list(request):
             date_from__lte=day
         ) & Event.objects.filter(
             date_to__gte=day
-        )
+        ).order_by('category')
 
         # Feasts of this day:
         feasts = Monk.objects.filter(

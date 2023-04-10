@@ -37,9 +37,11 @@ class Category(models.Model):
     color = models.CharField(
         max_length=255,
     )
+    priority = models.IntegerField()
 
     def __str__(self):
-        return '{} ({})'.format(self.name, self.color)
+        return self.name
 
     class Meta:
+        ordering = ['priority']
         verbose_name_plural = 'categories'
