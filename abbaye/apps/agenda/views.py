@@ -36,12 +36,19 @@ def list(request):
         ).order_by('absolute_rank', 'entry', 'rank')
 
         # Absences of this day:
-        # TODO.
+        absences = Ticket.objects \
+            .filter(
+                go_date__lte=day
+            ) & Ticket.objects.filter(
+                back_date__gte=day
+            ) \
+            .order_by('go_date', 'back_date')
 
         days[day] = {
             'date': day,
             'events': events,
             'feasts': feasts,
+            'absences': absences,
         }
 
     return render(
