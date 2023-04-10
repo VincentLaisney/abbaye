@@ -85,9 +85,9 @@
 
         <!-- Date from -->
         <div class="row justify-content-start ml-0">
-            {{ form.date_from.label_tag }}
-
             <div class="form-group">
+                {{ form.date_from.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.date_from.errors %}
                         {% render_field form.date_from class="form-control is-invalid" %}
@@ -113,9 +113,9 @@
 
         <!-- Date to -->
         <div class="row justify-content-start ml-0">
-            {{ form.date_to.label_tag }}
-
             <div class="form-group">
+                {{ form.date_to.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.date_to.errors %}
                         {% render_field form.date_to class="form-control is-invalid" %}
@@ -142,9 +142,9 @@
 
         <!-- Comment -->
         <div class="row justify-content-start ml-0">
-            {{ form.comment.label_tag }}
-
             <div class="form-group">
+                {{ form.comment.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.comment.errors %}
                         {% render_field form.comment class="form-control is-invalid" %}
