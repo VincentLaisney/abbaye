@@ -1,49 +1,76 @@
 {% extends 'agenda/main_agenda.html' %}
 
+{% load static %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item active">Agenda</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
     <div class="d-flex flex-column align-items-center">
-        <h1>Bienvenue sur l'agenda de l'Abbaye Saint-Joseph !</h1>
+        <h1 class="my-2">Bienvenue sur l'agenda</br>de l'Abbaye Saint-Joseph !</h1>
         {% if advanced_user %}
-            <a href={% url 'agenda:create' %} class="btn btn-sm btn-outline-primary">Ajouter un événement</a>
+            <a href={% url 'agenda:create' %} class="btn btn-sm btn-outline-primary my-4">Ajouter un événement</a>
         {% endif %}
 
-        <div class="col-8">
+        <div class="col-11 mt-2">
             {% for day in days.values %}
-                <h4 class="date text-center red-dark mt-4 mb-3">{{ day.date }}</h4>
+                <div class="border border-warning rounded mb-3 p-3">
+                    <h4 class="date text-center red-dark fw-bold mt-2 mb-3">{{ day.date }}</h4>
 
-                {% if day.feast %}
-                    <div class="text-center">
-                        <p class="green fw-bold m-0" style="font-family:LucidaHW">
-                            N'oubliez pas de souhaiter une bonne fête à :
-                        </p>
-                        <b>{{ day.feast|join:", " }}</b>
-                    </div >
-                {% endif %}
+                    {% if day.feasts %}
+                        <div class="text-center mb-4">
+                            <img class="mb-2" src={% static 'agenda/img/fleur.gif' %} alt="flower">
+                            <h6 class="blue fw-bold my-1" style="font-family:LucidaHW">
+                                N'oubliez pas de souhaiter une bonne fête à :
+                            </h6>
+                            <b class="red-dark">{{ day.feasts|join:", " }}</b>
+                        </div >
+                    {% endif %}
 
-                <div class="d-flex flex-column align-items-start">
-                    {% for event in day.events %}
-                        <div class="d-flex align-items-center mt-4">
-                            <span class="fas fa-circle {{ event.category.color }} me-2"></span>
+                    <div class="text-center my-5">
+                        <h5 class="green fw-bold m-0" style="font-family:LucidaHW">Absences</h5>
 
-                            {% if advanced_user %}
-                                <a href={% url 'agenda:details' event.pk %}>
-                                    <p class="fw-bold mb-0">{{ event.name }}<p >
-                                </a>
-                            {% else %}
-                                <p class="fw-bold grey-dark mb-0">{{ event.name }}<p >
-                            {% endif %}
-                        </div>
+                        {% if day.absences %}
+                            <ul class="list-unstyled">
+                                {% for absence in day.absences %}
+                                    <li class="text-start">
+                                        <a href={% url 'absences:details' absence.pk %}>{{ absence|cut:'"' }}</a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% else %}
+                            <div class="blue fw-bold fs-italic">Pas d'absences aujourd'hui !</div>
+                        {% endif %}
+                    </div>
 
-                        <div class="ms-4 mt-1 small">
-                            {% if event.comment %}
-                                    {{ event.comment }}
-                            {% endif %}
-                        </div>
-                    {% endfor %}
+                    <div class="text-center my-5">
+                        <h5 class="text-center green fw-bold m-0 w-100" style="font-family:LucidaHW">Événements</h5>
+
+                        {% if day.events %}
+                            {% for event in day.events %}
+                                <div class="d-flex align-items-center mt-2">
+                                    <span class="fas fa-circle {{ event.category.color }} me-2" title={{ event.category }}></span>
+
+                                    {% if advanced_user %}
+                                        <a href={% url 'agenda:details' event.pk %}>
+                                            <p class="fw-bold mb-0">{{ event.name }}<p >
+                                        </a>
+                                    {% else %}
+                                        <p class="fw-bold grey-dark mb-0">{{ event.name }}<p >
+                                    {% endif %}
+                                </div>
+
+                                <div class="text-start ms-4 mt-1 small">
+                                    {% if event.comment %}
+                                            {{ event.comment }}
+                                    {% endif %}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            <div class="blue fw-bold fs-italic">Pas d'événement aujourd'hui !</div>
+                        {% endif %}
+                    </div>
                 </div>
             {% endfor %}
         </div>
