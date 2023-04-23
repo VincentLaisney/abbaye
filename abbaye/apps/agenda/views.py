@@ -12,11 +12,14 @@ from .forms import EventForm
 from .models import Event
 
 
-def agenda_as_list(request):
+def agenda_as_list(request, *args, **kwargs):
     """ Agenda as list. """
     advanced_user = check_advanced_user(request)
-    today = date.today()
-    days = fetch_data(today)
+    if 'date' in kwargs.keys():
+        day = date.fromisoformat(kwargs['date'])
+    else:
+        day = date.today()
+    days = fetch_data(day)
     return render(
         request,
         'agenda/list.html',

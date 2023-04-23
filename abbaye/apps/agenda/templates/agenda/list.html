@@ -6,6 +6,11 @@
     <li class="breadcrumb-item active">Liste</li>
 {% endblock breadcrumbs %}
 
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/tempusdominus/tempus-dominus.min.css' %}>
+{% endblock css %}
+
 {% block content %}
     <div class="d-flex flex-column align-items-center w-100">
         <div class="d-flex justify-content-between align-items-center my-2 w-100">
@@ -14,6 +19,12 @@
             <a class="col-3 ms-5" href={% url 'agenda:calendar' %}>
                 <span class="fas fa-calendar-alt btn btn-outline-primary mb-3" title="Passer en mode calendrier"></span>
             </a>
+        </div>
+
+        <div class="d-flex align-items-center">
+            <span class="fas fa-arrow-left mx-3"></span>
+            <input id="date" class="form-control input-date text-center" style="width:120px">
+            <span class="fas fa-arrow-right mx-3"></span>
         </div>
 
         {% if advanced_user %}
@@ -83,3 +94,13 @@
         </div>
     </div>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'main/js/popper.min.js' %}></script>
+    <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
+    <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
+    <script>
+        new tempusDominus.TempusDominus(document.getElementById('date'), calendar);
+    </script>
+{% endblock javascript %}
