@@ -7,7 +7,7 @@ import os
 import re
 
 from reportlab.lib.pagesizes import A4
-from reportlab.pdfgen import canvas
+# from reportlab.pdfgen import canvas
 
 from django.conf import settings
 from django.http import FileResponse
@@ -320,100 +320,101 @@ def cuisine(request):
 
 def hotellerie(request):
     """ Listing hotellerie. """
-    buffer = io.BytesIO()
-    # Settings:
-    width, height = A4
-    pdf = canvas.Canvas(buffer, pagesize=A4, bottomup=0)
-    pdf.setFont("Helvetica", 10)
-    pdf.saveState()
-    pdf.setLineWidth(0.2)
+    pass
+    # buffer = io.BytesIO()
+    # # Settings:
+    # width, height = A4
+    # pdf = canvas.Canvas(buffer, pagesize=A4, bottomup=0)
+    # pdf.setFont("Helvetica", 10)
+    # pdf.saveState()
+    # pdf.setLineWidth(0.2)
 
-    # Title:
-    coord_y = 50
-    pdf.drawCentredString(width/2.0, coord_y, "+")
-    coord_y += 15
-    pdf.drawCentredString(width/2.0, coord_y, "PAX")
-    coord_y += 15
-    pdf.drawCentredString(width/2.0, coord_y, "LISTING HÔTELLERIE")
+    # # Title:
+    # coord_y = 50
+    # pdf.drawCentredString(width/2.0, coord_y, "+")
+    # coord_y += 15
+    # pdf.drawCentredString(width/2.0, coord_y, "PAX")
+    # coord_y += 15
+    # pdf.drawCentredString(width/2.0, coord_y, "LISTING HÔTELLERIE")
 
-    # Parloirs:
-    parloirs = Parloir.objects.filter(
-        date__gte=TODAY
-    ) & Parloir.objects.filter(
-        date__lte=TODAY + timedelta(days=15)
-    ).order_by('date')
-    if parloirs:
-        coord_y += 35
-        pdf.drawCentredString(width/2.0, coord_y, "PARLOIRS")
-        coord_y += 10
-        for index, parloir in enumerate(parloirs):
-            coord_y += 15
-            line = ''
-            line += '- {}'.format(parloir.date)
-            line += ' ({})'.format(parloir.repas) if parloir.repas else ''
-            line += ' : {}'.format(parloir.moines_string())
-            line += ' + {}'.format(parloir.nombre) if parloir.nombre else ''
-            line += ' (repas apporté)' if parloir.repas_apporte else ''
-            pdf.drawString(40, coord_y, line)
-            line = 'Parloir : {}'.format(
-                parloir.parloir) if parloir.parloir and parloir.parloir != 'Non défini' else ''
-            if line:
-                coord_y += 15
-                pdf.drawString(60, coord_y, line)
+    # # Parloirs:
+    # parloirs = Parloir.objects.filter(
+    #     date__gte=TODAY
+    # ) & Parloir.objects.filter(
+    #     date__lte=TODAY + timedelta(days=15)
+    # ).order_by('date')
+    # if parloirs:
+    #     coord_y += 35
+    #     pdf.drawCentredString(width/2.0, coord_y, "PARLOIRS")
+    #     coord_y += 10
+    #     for index, parloir in enumerate(parloirs):
+    #         coord_y += 15
+    #         line = ''
+    #         line += '- {}'.format(parloir.date)
+    #         line += ' ({})'.format(parloir.repas) if parloir.repas else ''
+    #         line += ' : {}'.format(parloir.moines_string())
+    #         line += ' + {}'.format(parloir.nombre) if parloir.nombre else ''
+    #         line += ' (repas apporté)' if parloir.repas_apporte else ''
+    #         pdf.drawString(40, coord_y, line)
+    #         line = 'Parloir : {}'.format(
+    #             parloir.parloir) if parloir.parloir and parloir.parloir != 'Non défini' else ''
+    #         if line:
+    #             coord_y += 15
+    #             pdf.drawString(60, coord_y, line)
 
-    # Hôtes:
-    coord_y += 35
-    pdf.drawCentredString(width/2.0, coord_y, "HÔTES")
-    coord_y += 10
-    sejours = ((Sejour.objects.filter(
-        sejour_du__lte=TODAY
-    ) & Sejour.objects.filter(
-        sejour_au__gte=TODAY
-    )) | (Sejour.objects.filter(
-        sejour_du__lte=TODAY
-    ) & Sejour.objects.filter(
-        sejour_au=TODAY
-    )) | (Sejour.objects.filter(
-        sejour_du=TODAY
-    ) & Sejour.objects.filter(
-        sejour_au__gte=TODAY
-    )) | (Sejour.objects.filter(
-        sejour_du__gte=TODAY
-    ) & Sejour.objects.filter(
-        sejour_du__lte=TODAY + timedelta(days=15)
-    ))).order_by('sejour_du', 'sejour_au')
-    for index, sejour in enumerate(sejours):
-        coord_y += 20
-        line = ''
-        line += '- {}'.format(sejour.personne.__str__())
-        pdf.drawString(40, coord_y, line)
-        coord_y += 13
-        line = 'Du {} ({}) au {} ({})'.format(
-            sejour.sejour_du,
-            sejour.repas_du,
-            sejour.sejour_au,
-            sejour.repas_au,
-        )
-        pdf.drawString(60, coord_y, line)
-        coord_y += 13
-        line = 'Chambre(s) : {}'.format(sejour.chambres_string())
-        pdf.drawString(60, coord_y, line)
-        if sejour.dit_messe:
-            coord_y += 13
-            if sejour.oratoire:
-                line = 'Oratoire : {} {}'.format(
-                    sejour.oratoire,
-                    sejour.tour_messe
-                )
-            else:
-                line = 'Oratoire non défini.'
-            pdf.drawString(60, coord_y, line)
-        if coord_y > 800:
-            pdf.showPage()
-            pdf.setFont("Helvetica", 10)
-            coord_y = 0
+    # # Hôtes:
+    # coord_y += 35
+    # pdf.drawCentredString(width/2.0, coord_y, "HÔTES")
+    # coord_y += 10
+    # sejours = ((Sejour.objects.filter(
+    #     sejour_du__lte=TODAY
+    # ) & Sejour.objects.filter(
+    #     sejour_au__gte=TODAY
+    # )) | (Sejour.objects.filter(
+    #     sejour_du__lte=TODAY
+    # ) & Sejour.objects.filter(
+    #     sejour_au=TODAY
+    # )) | (Sejour.objects.filter(
+    #     sejour_du=TODAY
+    # ) & Sejour.objects.filter(
+    #     sejour_au__gte=TODAY
+    # )) | (Sejour.objects.filter(
+    #     sejour_du__gte=TODAY
+    # ) & Sejour.objects.filter(
+    #     sejour_du__lte=TODAY + timedelta(days=15)
+    # ))).order_by('sejour_du', 'sejour_au')
+    # for index, sejour in enumerate(sejours):
+    #     coord_y += 20
+    #     line = ''
+    #     line += '- {}'.format(sejour.personne.__str__())
+    #     pdf.drawString(40, coord_y, line)
+    #     coord_y += 13
+    #     line = 'Du {} ({}) au {} ({})'.format(
+    #         sejour.sejour_du,
+    #         sejour.repas_du,
+    #         sejour.sejour_au,
+    #         sejour.repas_au,
+    #     )
+    #     pdf.drawString(60, coord_y, line)
+    #     coord_y += 13
+    #     line = 'Chambre(s) : {}'.format(sejour.chambres_string())
+    #     pdf.drawString(60, coord_y, line)
+    #     if sejour.dit_messe:
+    #         coord_y += 13
+    #         if sejour.oratoire:
+    #             line = 'Oratoire : {} {}'.format(
+    #                 sejour.oratoire,
+    #                 sejour.tour_messe
+    #             )
+    #         else:
+    #             line = 'Oratoire non défini.'
+    #         pdf.drawString(60, coord_y, line)
+    #     if coord_y > 800:
+    #         pdf.showPage()
+    #         pdf.setFont("Helvetica", 10)
+    #         coord_y = 0
 
-    pdf.showPage()
-    pdf.save()
-    buffer.seek(0)
-    return FileResponse(buffer, filename='listing_hotellerie.pdf')
+    # pdf.showPage()
+    # pdf.save()
+    # buffer.seek(0)
+    # return FileResponse(buffer, filename='listing_hotellerie.pdf')
