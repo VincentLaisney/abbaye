@@ -138,7 +138,7 @@ def fetch_data(today):
             date_from__lte=day
         ) & Event.objects.filter(
             date_to__gte=day
-        ).order_by('category')
+        ).order_by('category', 'name')
 
         # Feasts of this day:
         feasts = Monk.objects.filter(
