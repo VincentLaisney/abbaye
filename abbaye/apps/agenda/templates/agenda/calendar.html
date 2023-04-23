@@ -1,0 +1,19 @@
+{% extends 'agenda/main_agenda.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Calendrier</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <div class="d-flex flex-column align-items-center">
+        <h1 class="my-2">Bienvenue sur l'agenda</br>de l'Abbaye Saint-Joseph !</h1>
+        <a href={% url 'agenda:list' %}>
+            <span class="fas fa-list btn btn-outline-primary mb-3" title="Passer en mode liste"></span>
+        </a>
+        {% if advanced_user %}
+            <a href={% url 'agenda:create' %} class="btn btn-sm btn-outline-primary my-4">Ajouter un événement</a>
+        {% endif %}
+    </div>
+{% endblock content %}

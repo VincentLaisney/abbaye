@@ -14,6 +14,11 @@
     {% endif %}
 {% endblock breadcrumbs %}
 
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/tempusdominus/tempus-dominus.min.css' %}>
+{% endblock css %}
+
 {% block content %}
     {% if event %}
         <h2>{{ event }}</h2>
@@ -80,9 +85,9 @@
 
         <!-- Date from -->
         <div class="row justify-content-start ml-0">
-            {{ form.date_from.label_tag }}
-
             <div class="form-group">
+                {{ form.date_from.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.date_from.errors %}
                         {% render_field form.date_from class="form-control is-invalid" %}
@@ -108,9 +113,9 @@
 
         <!-- Date to -->
         <div class="row justify-content-start ml-0">
-            {{ form.date_to.label_tag }}
-
             <div class="form-group">
+                {{ form.date_to.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.date_to.errors %}
                         {% render_field form.date_to class="form-control is-invalid" %}
@@ -137,9 +142,9 @@
 
         <!-- Comment -->
         <div class="row justify-content-start ml-0">
-            {{ form.comment.label_tag }}
-
             <div class="form-group">
+                {{ form.comment.label_tag }}
+
                 {% if form.is_bound %}
                     {% if form.comment.errors %}
                         {% render_field form.comment class="form-control is-invalid" %}
@@ -164,11 +169,11 @@
         </div>
 
         <!-- Validation -->
-        <div class="d-flex justify-content-center">
+        <div class="d-flex justify-content-center my-5">
             {% if agenda %}
                 <a href={% url 'agenda:details' event.id %} class="btn btn-primary mx-3">Annuler</a>
             {% else %}
-                <a href={% url 'agenda:home' %} class="btn btn-primary mx-3">Annuler</a>
+                <a href={% url 'agenda:list' %} class="btn btn-primary mx-3">Annuler</a>
             {% endif %}
             <button type="submit" class="btn btn-success mx-3">Valider</button>
         </div>
@@ -176,5 +181,9 @@
 {% endblock %}
 
 {% block javascript %}
-    {{ form.media }}
+    {{ block.super }}
+    <script src={% static 'main/js/popper.min.js' %}></script>
+    <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
+    <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
+    <script src={% static 'agenda/js/tempusdominus-agenda.js' %}></script>
 {% endblock javascript %}
