@@ -6,6 +6,8 @@ $(document).ready(function () {
         if ($("#id_go_by option:selected").text() == "Train") {
             $("#group_train_go").attr("class", "d-flex");
         } else {
+            $("#id_go_station").val(null);
+            $("#id_go_hour").val(null);
             $("#group_train_go").attr("class", "d-none");
         }
     }).trigger('change');
@@ -13,6 +15,8 @@ $(document).ready(function () {
         if ($("#id_back_by option:selected").text() == "Train") {
             $("#group_train_back").attr("class", "d-flex");
         } else {
+            $("#id_back_station").val(null);
+            $("#id_back_hour").val(null);
             $("#group_train_back").attr("class", "d-none");
         }
     }).trigger('change');
