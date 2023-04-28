@@ -58,7 +58,10 @@ $(document).ready(function () {
         const go_date = date_to_french_string(
             string_to_date_object($("#id_go_date").val())
         );
-        const go_moment = $("#id_go_moment").val().toLowerCase();
+        let go_moment = '';
+        if ($("#id_go_moment").val() != '') {
+            go_moment = '(' + $("#id_go_moment").val().toLowerCase() + ')';
+        }
         let go_by = '';
         if ($("#id_go_by").val() != '') {
             go_by = '</br> En ' + $("#id_go_by").val().toLowerCase();
@@ -71,7 +74,7 @@ $(document).ready(function () {
         }
         const go_servants = $("#id_servants").is(':checked') ? '</br>Repas avec les serveurs' : '';
         const go_picnic = $("#id_picnic").is(':checked') ? '</br>Casse-croûte' : '';
-        go = go_date + ' (' + go_moment + ') ' + go_by + go_train + go_servants + go_picnic;
+        go = go_date + go_moment + go_by + go_train + go_servants + go_picnic;
         $('#go').html(go);
 
         // Back:
@@ -79,7 +82,10 @@ $(document).ready(function () {
         const back_date = date_to_french_string(
             string_to_date_object($("#id_back_date").val())
         );
-        const back_moment = $("#id_back_moment").val().toLowerCase();
+        let back_moment = '';
+        if ($("#id_back_moment").val() != '') {
+            back_moment = '(' + $("#id_back_moment").val().toLowerCase() + ')';
+        }
         let back_by = '';
         if ($("#id_back_by").val() != '') {
             back_by = '</br> En ' + $("#id_back_by").val().toLowerCase();
@@ -91,7 +97,7 @@ $(document).ready(function () {
             back_train = back_station + back_hour;
         }
         const back_keep_hot = $("#id_keep_hot").is(':checked') ? '</br>Garder du chaud' : '';
-        back = back_date + ' (' + back_moment + ') ' + back_by + back_train + back_keep_hot;
+        back = back_date + back_moment + back_by + back_train + back_keep_hot;
         $('#back').html(back);
 
         // Forme ordinaire:
