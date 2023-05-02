@@ -6,7 +6,6 @@ GÉNÉRAL:
 - Everywhere in the site: when create and update, put an "else:" corresponding to the "if request.method == 'POST':" before "form = …".
 
 ABSENCES:
-- Models: check dates are consistent (birthday < entry < habit etc.).
 - Faire une page "details" (en plus du modal), cf. monks.
 
 AGENDA:
@@ -22,6 +21,9 @@ MÉMO:
 - Rafraîchir les fichiers de conf. à partir des fichiers actuels, et vérifier qu'ils y sont tous.
 - Taskwarrior: + 'verbose=off'.
 - Installation : MySQL : Pour Debian11: '…0.8.22-1_all.deb'
+
+MOINES:
+- Models: check dates are consistent (birthday < entry < habit etc.).
 
 POLYGLOTTE:
 - Table de correspondance des versets.
