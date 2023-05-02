@@ -40,8 +40,17 @@ $(document).ready(function () {
         $(this).parent().html($(this).parent().html().replace('&lt;b&gt;', '<b>').replace('&lt;/b&gt;', '</b>'));
     });
 
-    // Validation: fill summary (modal) on validation:
-    $('#ticket_validation').click(function () {
+    // On document ready, fill summary:
+    refresh_summary();
+
+    // On change: refresh summary:
+    $("input, select, .form-control").on(
+        'change keyup', function () {
+            refresh_summary();
+        }
+    );
+
+    function refresh_summary() {
         // Monks:
         let monks = "";
         $("input[id^='id_monks']:checked").each(function (i, monk) {
@@ -55,9 +64,12 @@ $(document).ready(function () {
 
         // Go:
         let go = "";
-        const go_date = date_to_french_string(
-            string_to_date_object($("#id_go_date").val())
-        );
+        let go_date = "";
+        if ($("#id_go_date").val()) {
+            go_date = date_to_french_string(
+                string_to_date_object($("#id_go_date").val())
+            );
+        }
         let go_moment = '';
         if ($("#id_go_moment").val() != '') {
             go_moment = '(' + $("#id_go_moment").val().toLowerCase() + ')';
@@ -79,9 +91,12 @@ $(document).ready(function () {
 
         // Back:
         let back = "";
-        const back_date = date_to_french_string(
-            string_to_date_object($("#id_back_date").val())
-        );
+        let back_date = "";
+        if ($("#id_go_date").val()) {
+            back_date = date_to_french_string(
+                string_to_date_object($("#id_back_date").val())
+            );
+        }
         let back_moment = '';
         if ($("#id_back_moment").val() != '') {
             back_moment = '(' + $("#id_back_moment").val().toLowerCase() + ')';
@@ -119,5 +134,5 @@ $(document).ready(function () {
             additionals += $(this).parent().text().replace(/\n /, '') + '</br>';
         });
         $('#additional').html(additionals);
-    });
+    }
 });

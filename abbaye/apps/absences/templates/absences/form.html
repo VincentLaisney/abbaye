@@ -91,17 +91,12 @@
                 <!-- GO -->
                 <div id="go_block" class="col-5 m-2 border rounded p-2">
                     <h2 class="text-center">DÉPART</h2>
-                    <div class="d-flex align-items-center mb-3">
+                    <div class="d-flex align-items-center">
                         <label class="green fw-bold">Date :</label>
                         <div class="d-flex my-2">
                             {% if form.is_bound %}
                                 {% if form.go_date.errors %}
                                     {% render_field form.go_date class="form-control is-invalid mx-2" %}
-                                    {% for error in form.go_date.errors %}
-                                        <div class="invalid-feedback d-block">
-                                            {{ error }}
-                                        </div>
-                                    {% endfor %}
                                 {% else %}
                                     {% render_field form.go_date class="form-control is-valid mx-2" %}
                                 {% endif %}
@@ -137,6 +132,15 @@
                                 </small>
                             {% endif %}
                         </div>
+                    </div>
+                    <div class="mb-1">
+                        {% if form.go_date.errors %}
+                            {% for error in form.go_date.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
 
                     <div class="ml-3">
@@ -265,17 +269,12 @@
                 <!-- BACK -->
                 <div id="back_block" class="col-5 m-2 border rounded p-2">
                     <h2 class="text-center">RETOUR</h2>
-                    <div class="d-flex align-items-center mb-3">
+                    <div class="d-flex align-items-center">
                         <label class="green fw-bold">Date :</label>
                         <div class="d-flex my-2">
                             {% if form.is_bound %}
                                 {% if form.back_date.errors %}
                                     {% render_field form.back_date class="custom-select form-control is-invalid mx-2" %}
-                                    {% for error in form.back_date.errors %}
-                                        <div class="invalid-feedback d-block">
-                                            {{ error }}
-                                        </div>
-                                    {% endfor %}
                                 {% else %}
                                     {% render_field form.back_date class="custom-select form-control is-valid mx-2" %}
                                 {% endif %}
@@ -311,6 +310,15 @@
                                 </small>
                             {% endif %}
                         </div>
+                    </div>
+                    <div class="mb-1">
+                        {% if form.back_date.errors %}
+                            {% for error in form.back_date.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% endif %}
                     </div>
 
                     <div class="ml-3">
@@ -504,73 +512,61 @@
                 </div>
             </div>
 
-            <!-- Modal containing the summary of the ticket before sending email.
-            Will be filled by programmation (form.js). -->
-            <div class="modal fade" id="ticket_summary" tabindex="-1" aria-labelledby="ticket_summary" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="title_ticket">On récapitule…</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
-                        </div>
-
-                        <div class="modal-body">
-                            <table class="table table-borderless table-sm">
-                                <!-- Moines -->
-                                <tr>
-                                    <td class="fw-bold">Moines :</td>
-                                    <td class="col-8" id="monks"></td>
-                                </tr>
-                                <!-- Destination -->
-                                <tr>
-                                    <td class="fw-bold">Destination :</td>
-                                    <td class="col-8" id="destination"></td>
-                                </tr>
-                                <!-- Départ -->
-                                <tr>
-                                    <td class="fw-bold">Départ :</td>
-                                    <td class="col-8" id="go"></td>
-                                </tr>
-                                <!-- Retour -->
-                                <tr>
-                                    <td class="fw-bold">Retour :</td>
-                                    <td class="col-8" id="back"></td>
-                                </tr>
-                                <!-- Forme ordinaire -->
-                                <tr>
-                                    <td class="fw-bold">Forme ordinaire :</td>
-                                    <td class="col-8" id="ordinary"></td>
-                                </tr>
-                                <!-- Commentaire -->
-                                <tr>
-                                    <td class="fw-bold">Commentaire :</td>
-                                    <td class="col-8" id="comment"></td>
-                                </tr>
-                                <!-- Destinataires obligatoires -->
-                                <tr>
-                                    <td class="fw-bold">Destinataires obligatoires :</td>
-                                    <td class="col-8" id="mandatory"></td>
-                                </tr>
-                                <!-- Destinataires supplémentaires -->
-                                <tr>
-                                    <td class="fw-bold">Destinataires supplémentaires :</td>
-                                    <td class="col-8" id="additional"></td>
-                                </tr>
-                            </table>
-                        </div>
-
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                            <button type="submit" class="btn btn-primary"><span class="fas fa-paper-plane"></span> Envoyer</button>
-                        </div>
-                    </div>
+            <!-- SUMMARY of the ticket before sending email. Will be filled by programmation (form.js). -->
+            <div class="bg-danger bg-opacity-10 border rounded my-5 p-4">
+                <h4 class="lucida-hw red-dark text-center">On récapitule…</h4>
+                <hr>
+                <div id="ticket_summary">
+                    <table class="table table-borderless table-sm">
+                        <!-- Moines -->
+                        <tr>
+                            <td class="fw-bold">Moines :</td>
+                            <td class="col-8" id="monks"></td>
+                        </tr>
+                        <!-- Destination -->
+                        <tr>
+                            <td class="fw-bold">Destination :</td>
+                            <td class="col-8" id="destination"></td>
+                        </tr>
+                        <!-- Départ -->
+                        <tr>
+                            <td class="fw-bold">Départ :</td>
+                            <td class="col-8" id="go"></td>
+                        </tr>
+                        <!-- Retour -->
+                        <tr>
+                            <td class="fw-bold">Retour :</td>
+                            <td class="col-8" id="back"></td>
+                        </tr>
+                        <!-- Forme ordinaire -->
+                        <tr>
+                            <td class="fw-bold">Forme ordinaire :</td>
+                            <td class="col-8" id="ordinary"></td>
+                        </tr>
+                        <!-- Commentaire -->
+                        <tr>
+                            <td class="fw-bold">Commentaire :</td>
+                            <td class="col-8" id="comment"></td>
+                        </tr>
+                        <!-- Destinataires obligatoires -->
+                        <tr>
+                            <td class="fw-bold">Destinataires obligatoires :</td>
+                            <td class="col-8" id="mandatory"></td>
+                        </tr>
+                        <!-- Destinataires supplémentaires -->
+                        <tr>
+                            <td class="fw-bold">Destinataires supplémentaires :</td>
+                            <td class="col-8" id="additional"></td>
+                        </tr>
+                    </table>
                 </div>
-            </div>
 
-            <!-- VALIDATION -->
-            <div class="w-100 d-flex justify-content-center align-items-between my-5">
-                <a class="btn btn-secondary mx-1" href={% url 'absences:list' %}>Annuler</a>
-                <div class="btn btn-primary mx-1" id='ticket_validation' data-bs-toggle='modal' data-bs-target='#ticket_summary'>Valider</div>
+                <!-- VALIDATION -->
+                <hr>
+                <div class="w-100 d-flex justify-content-center align-items-between">
+                    <a class="btn btn-secondary mx-1" href={% url 'absences:list' %}>Annuler</a>
+                    <button type="submit" class="btn btn-primary mx-1"><span class="fas fa-paper-plane"></span> Envoyer</button>
+                </div>
             </div>
         </div>
     </form>
