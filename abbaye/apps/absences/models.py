@@ -110,6 +110,6 @@ class Ticket(models.Model):
             if len(self.monks.all()) == 1 \
             else '{} et alii'.format(self.monks_as_string().split(',')[0])
         return '"{} ({})"'.format(
+            monks,
             dates,
-            monks
         )
