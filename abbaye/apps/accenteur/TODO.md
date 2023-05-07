@@ -58,7 +58,7 @@ peccaminosam
 plenarie
 præconcepto
 præfigurativa
-prægustus
+prægustus (ú)
 productrix
 pulchriter
 recollectionem
