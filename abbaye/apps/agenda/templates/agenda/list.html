@@ -48,12 +48,14 @@
 
                     <div class="text-center my-5">
                         <h5 class="green fw-bold m-0" style="font-family:LucidaHW">Absences</h5>
-
                         {% if day.absences %}
                             <ul class="list-unstyled">
                                 {% for absence in day.absences %}
-                                    <li class="text-start">
-                                        <a href={% url 'absences:details' absence.pk %}>{{ absence|cut:'"' }}</a>
+                                    <li class="d-flex align-items-center text-start">
+                                        <a type='button' class='ms-2 p-2 button_details' data-bs-toggle='modal' data-bs-target='#ticket_details' id="details_{{ absence.pk }}" title="Voir les détails, modifier, supprimer">
+                                            <span class="fas fa-paper-plane me-2"></span>
+                                            {{ absence|cut:'"' }}
+                                        </a>
                                     </li>
                                 {% endfor %}
                             </ul>
@@ -91,6 +93,15 @@
                     </div>
                 </div>
             {% endfor %}
+        </div>
+
+        <!-- Modal containing the details of a ticket.
+        Will be filled by Ajax (datatable-tickets.js). -->
+        <div class="modal fade" id="ticket_details" tabindex="-1" aria-labelledby="ticket_details" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                </div>
+            </div>
         </div>
     </div>
 {% endblock content %}
