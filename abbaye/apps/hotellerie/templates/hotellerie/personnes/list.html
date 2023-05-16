@@ -1,0 +1,54 @@
+{% extends 'hotellerie/main_hotellerie.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:main_home' %}>Hôtellerie</a></li>
+    <li class="breadcrumb-item active">Personnes</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <div class="d-flex flex-column justify-content-between align-items-center">
+        <!-- Title -->
+        <div id="title" class="form-inline">
+            <h1>Personnes</h1>
+        </div>
+
+        <div class="text-center mb-4"><a href={% url 'hotellerie:personnes_create' %}>Ajouter une personne</a></div>
+
+        <div id="tools" class="d-flex">
+            <!-- Letters -->
+            <ul id="letters" class="list-inline row mx-5 my-0">
+                {% for letter in letters %}
+                    {% if letter == current or letter == 'D' and current == 'd' %}
+                        <span><li class="mx-1 full-red">{{ letter }}</li></span>
+                    {% else %}
+                        <li class="mx-1"><a href={% url 'hotellerie:personnes_list' letter %}>{{ letter }}</a></li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        </div>
+
+        <div>
+            <!-- Filter -->
+            <form action="{% url 'hotellerie:personnes_list' current %}" method="post" class="mb-2">
+                {% csrf_token %}
+                <input
+                    id="filter"
+                    name="filter"
+                    type="text"
+                    placeholder="Rechercher"
+                    {% if filter != '' %}
+                        value={{ filter }}
+                    {% endif %}
+                >
+                <script>window.onload = document.getElementById('filter').select();</script>
+            </form>
+        </div>
+    </div>
+
+    <!-- Liste -->
+    <ul class="list-inline">
+        {% for personne in personnes %}
+            <li><a href={% url 'hotellerie:personnes_details' personne.id %}>{{ personne }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

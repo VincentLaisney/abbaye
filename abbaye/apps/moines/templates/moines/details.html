@@ -1,0 +1,131 @@
+{% extends 'moines/main_moines.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    {{ block.super }}
+    <li class="breadcrumb-item active">{{ monk }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h3 class="my-5">{{ monk }}</h3>
+
+    <div class="col-5 mb-5">
+        <table class="table table-borderless table-sm">
+            <tr>
+                <td class="col-5 green fw-bold">Naissance :</td>
+                <td class="details_date col-7">
+                    {% if monk.birthday %}
+                        {{ monk.birthday }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Entrée :</td>
+                <td class="details_date col-7">{{ monk.entry }}</td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Prise d'habit :</td>
+                <td class="details_date col-7">
+                    {% if monk.habit %}
+                        {{ monk.habit }}
+                    {% endif %}
+                </td>
+            </tr>
+
+               <tr>
+                <td class="col-5 green fw-bold">Profession temporaire :</td>
+                <td class="details_date col-7">
+                    {% if monk.profession_temp %}
+                        {{ monk.profession_temp }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Profession perpétuelle :</td>
+                <td class="details_date col-7">
+                    {% if monk.profession_perp %}
+                        {{ monk.profession_perp }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Ordination sacerdotale :</td>
+                <td class="details_date col-7">
+                    {% if monk.priest %}
+                        {{ monk.priest }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Décès :</td>
+                <td class="details_date col-7">
+                    {% if monk.death %}
+                        {{ monk.death }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Fête le :</td>
+                <td class="col-7">
+                    {{ monk.feast_day }} / {{ monk.feast_month }}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Numéro de linge :</td>
+                <td class="col-7">
+                    {{ monk.laundry_number }}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Numéro de téléphone :</td>
+                <td class="col-7">
+                    {{ monk.phone_number }}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Email :</td>
+                <td class="col-7">
+                    {% if monk.email %}
+                        {{ monk.email }}
+                    {% endif %}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-5 green fw-bold">Email supplémentaire :</td>
+                <td class="col-7">
+                    {% if monk.additional_email %}
+                        {{ monk.additional_email }}
+                    {% endif %}
+                </td>
+            </tr>
+        </table>
+    </div >
+
+    <div class="d-flex">
+        <a href={% url 'moines:list' %} type="button" class="btn btn-secondary mx-1">
+            <span class="fas fa-arrow-left"></span>
+            Retour à la liste des moines
+        </a>
+        {% if advanced_user %}
+            <a href={% url 'moines:delete' monk.pk %} type="button" class="btn btn-danger mx-1">Supprimer</a>
+        {% endif %}
+        <a href={% url 'moines:update' monk.pk %} type="button" class="btn btn-primary mx-1">Modifier</a>
+    </div>
+{% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'moines/js/details.js' %}></script>
+{% endblock javascript %}
+

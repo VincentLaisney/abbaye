@@ -1,0 +1,119 @@
+{% extends 'moines/main_moines.html' %}
+
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/datatables/datatables.min.css'%}>
+{% endblock css %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Moines</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>Moines de l'Abbaye Saint-Joseph</h1>
+
+    <div class="d-flex flex-column col-2">
+        <a href={% url 'moines:statistiques' %} class="btn btn-sm btn-primary my-1">Voir les statistiques</a>
+        <a href={% url 'moines:create' %} class="btn btn-sm btn-outline-primary my-1">Créer un nouveau moine</a>
+    </div >
+
+    <table id="table-monks" class="cell-border order-column hover w-100">
+        <thead>
+            <tr class="red-dark">
+                <th>Moine</th>
+                <th>Naissance</th>
+                <th>Entrée</th>
+                <th>Prise d'habit</th>
+                <th>Prof. temp.</th>
+                <th>Prof. perp.</th>
+                <th>Ordination</th>
+                <th>Fête</th>
+                <th>N° linge</th>
+                <th>Tél.</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            {% for monk in monks %}
+                <tr>
+                    <td class="col-2 fw-bold">
+                        <a class="button_details" data-bs-toggle='modal' data-bs-target='#monk_details' id="details_{{ monk.pk }}" title="Voir les détails, modifier, supprimer">{{ monk }}</a>
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.birthday %}
+                            <span class="d-none">{{ monk.birthday|date:'Ymd' }}</span><!-- Span not displayed, only to be able to sort dates. -->
+                            {{ monk.birthday|date:'d/m/Y' }}
+                        {% endif %}
+                    </td>
+
+                    <td class="col-1">
+                        <span class="d-none">{{ monk.entry|date:'Ymd' }}</span><!-- Span not displayed, only to be able to sort dates. -->
+                        {{ monk.entry|date:'d/m/Y' }}
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.habit %}
+                            <span class="d-none">{{ monk.habit|date:'Ymd' }}</span><!-- Span not displayed, only to be able to sort dates. -->
+                            {{ monk.habit|date:'d/m/Y' }}
+                        {% endif %}
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.profession_temp %}
+                            <span class="d-none">{{ monk.profession_temp|date:'Ymd' }}</span><!-- Span not displayed, only to be able to sort dates. -->
+                            {{ monk.profession_temp|date:'d/m/Y' }}
+                        {% endif %}
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.profession_perp %}
+                            <span class="d-none">{{ monk.profession_perp|date:'Ymd' }}</span><!-- Span not displayed, only to be able to sort dates. -->
+                            {{ monk.profession_perp|date:'d/m/Y' }}
+                        {% endif %}
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.priest %}
+                            <span class="d-none">{{ monk.priest|date:'Ymd' }}</span><!-- Span not displayed, only to be able to sort dates. -->
+                            {{ monk.priest|date:'d/m/Y' }}
+                        {% endif %}
+                    </td>
+
+                    <td class="col-1">
+                        {{ monk.feast_date }}
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.laundry_number %}
+                            {{ monk.laundry_number }}
+                        {% endif %}
+                    </td>
+
+                    <td class="col-1">
+                        {% if monk.phone_number %}
+                            {{ monk.phone_number }}
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <!-- Modal containing the details of a monk.
+    Will be filled by Ajax (datatable-monks.js). -->
+    <div class="modal fade" id="monk_details" tabindex="-1" aria-labelledby="monk_details" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+{% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'main/datatables/datatables.min.js'%}></script>
+    <script src={% static 'moines/js/datatable-monks.js' %}></script>
+{% endblock javascript %}

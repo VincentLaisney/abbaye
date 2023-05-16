@@ -1,0 +1,123 @@
+@import url("/statics/main/css/colors.less");
+
+body {
+    background-image: url('../img/avion.jpg');
+    background-attachment: fixed;
+    background-size: cover;
+
+    select {
+        height: 35px;
+    }
+
+    nav {
+
+        a,
+        a:hover {
+            color: whitesmoke;
+        }
+
+        #logo {
+            #title {
+                color: @orange;
+                font-family: LucidaHW;
+                font-size: 2.2em;
+            }
+
+            #logo {
+                font-size: 1.5em;
+            }
+        }
+    }
+
+    #content {
+
+        h1,
+        h2,
+        h3 {
+            color: @green;
+        }
+
+        h1 {
+            font-family: 'LucidaHW',
+        }
+
+        #table-tickets_wrapper {
+            font-size: 0.9em;
+            margin-bottom: 50px;
+            width: 90%;
+
+            th,
+            td {
+                text-align: center;
+                vertical-align: middle;
+            }
+
+            th {
+                color: @red;
+            }
+
+            td table td {
+                border: none;
+                margin: 0;
+                padding: 0;
+            }
+
+            #table-tickets_filter,
+            #table-tickets_info,
+            #table-tickets_length,
+            #table-tickets_paginate {
+                color: @green;
+
+                a,
+                label {
+                    font-weight: bold;
+                }
+
+                input {
+                    background-color: white;
+                    border-radius: 7px;
+                }
+            }
+        }
+
+        .modal {
+            table {
+                td {
+                    font-size: 0.9em;
+                }
+            }
+        }
+
+        form {
+            #id_monks {
+                column-width: 15vw;
+                font-size: 0.95em;
+
+                label {
+                    .list-unstyled {
+                        margin: 5px 8px 5px 0px;
+                    }
+                }
+            }
+
+            #id_additional_recipients {
+                column-width: 30vw;
+            }
+
+            #id_go_date,
+            #id_back_date,
+            #id_go_hour,
+            #id_back_hour {
+                color: @grey-dark;
+                font-weight: bold;
+                text-align: center;
+                width: 125px;
+            }
+
+            .recipients {
+                column-width: 30vw;
+                font-size: 0.95em;
+            }
+        }
+    }
+}

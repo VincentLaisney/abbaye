@@ -1,7 +1,6 @@
 """ apps/agenda/forms.py """
 
 from django import forms
-from tempus_dominus.widgets import DatePicker
 
 from .models import Category, Event
 
@@ -27,9 +26,6 @@ class EventForm(forms.ModelForm):
         input_formats=[
             '%d/%m/%Y',
         ],
-        widget=DatePicker(options={
-            'format': 'DD/MM/YYYY',
-        }),
         error_messages={
             'required': 'Ce champ est obligatoire.',
         },
@@ -39,9 +35,6 @@ class EventForm(forms.ModelForm):
         input_formats=[
             '%d/%m/%Y',
         ],
-        widget=DatePicker(options={
-            'format': 'DD/MM/YYYY',
-        }),
         error_messages={
             'required': 'Ce champ est obligatoire.',
         },

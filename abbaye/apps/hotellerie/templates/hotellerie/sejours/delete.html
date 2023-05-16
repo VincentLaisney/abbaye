@@ -1,0 +1,24 @@
+{% extends 'hotellerie/main_hotellerie.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:main_home' %}>Hôtellerie</a></li>
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:sejours_list' %}>Séjours</a></li>
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:sejours_details' sejour.id %}>{{ sejour }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+
+        <h6>Êtes-vous sûr de vouloir supprimer ce séjour ?</h6>
+
+        <!-- Validation -->
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-success mx-3">Oui</button>
+            <a href={% url 'hotellerie:sejours_details' sejour.id %} class="btn btn-primary mx-3">Non</a>
+        </div>
+    </form>
+{% endblock %}

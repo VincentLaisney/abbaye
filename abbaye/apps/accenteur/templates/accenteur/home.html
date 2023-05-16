@@ -1,0 +1,53 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet/less" href={% static 'accenteur/css/accenteur.less' %}>
+{% endblock css %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Accenteur</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h2 class="text-center grey-dark mb-2">
+            Accenteur
+        </h2>
+
+        <h4 class="text-center grey-dark mb-3">
+            Numericum instrumentum ad latinos textus accentizandos
+        </h4>
+
+        <div id="input_output" class="d-flex mt-3">
+            <div id="input" contenteditable="true" spellcheck="false" class="text_area"><span style="color: grey;">Hic scribe textum tuum…</span></div>
+            <div id="output" contenteditable="true" spellcheck="false" class="text_area"></div>
+        </div>
+
+        <div id="overlay">
+            <img src={% static 'accenteur/img/wait.gif' %} style="margin-bottom:20px"></br>
+            <p>Afferuntur elementa…</p>
+        </div>
+
+        <div class="modal fade" id="choice_dialog" tabindex="-1" aria-labelledby="choice_dialog" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="choice_dialog">Elige tibi formam</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Claudere"></button>
+                </div>
+                <div class="modal-body"></div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Claude</button>
+                    <button type="button" id="validate_choice" class="btn btn-primary">Confirma</button>
+                </div>
+                </div>
+            </div>
+        </div>
+{% endblock content %}
+
+{% block javascript %}
+    <script src={% static 'accenteur/js/data.js' %}></script>
+    <script src={% static 'accenteur/js/accenteur_core.js' %}></script>
+    <script src={% static 'accenteur/js/accenteur_main.js' %}></script>
+{% endblock javascript %}

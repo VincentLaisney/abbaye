@@ -1,0 +1,12 @@
+{% extends 'imprimerie/main_imprimerie.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
+    <li class="breadcrumb-item active">Papiers</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h4>List of papers</h4>
+
+    <a href={% url 'imprimerie:papers_create' %}>Créer un nouveau paper</a>
+{% endblock content %}

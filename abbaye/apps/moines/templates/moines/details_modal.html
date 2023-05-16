@@ -1,0 +1,116 @@
+{% load static %}
+
+<div class="modal-header">
+    <h5 class="modal-title" id="title_monk">{{ monk }}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+</div>
+
+<div class="modal-body">
+    <table class="table table-borderless table-sm">
+        <tr>
+            <td class="col-5 green fw-bold">Naissance :</td>
+            <td class="details_date col-7">
+                {% if monk.birthday %}
+                    {{ monk.birthday }}
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-5 green fw-bold">Entrée :</td>
+            <td class="details_date col-7">{{ monk.entry }}</td>
+        </tr>
+
+        <tr>
+            <td class="col-5 green fw-bold">Prise d'habit :</td>
+            <td class="details_date col-7">
+                {% if monk.habit %}
+                    {{ monk.habit }}
+                {% endif %}
+            </td>
+        </tr>
+
+            <tr>
+            <td class="col-5 green fw-bold">Profession temporaire :</td>
+            <td class="details_date col-7">
+                {% if monk.profession_temp %}
+                    {{ monk.profession_temp }}
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-5 green fw-bold">Profession perpétuelle :</td>
+            <td class="details_date col-7">
+                {% if monk.profession_perp %}
+                    {{ monk.profession_perp }}
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-5 green fw-bold">Ordination sacerdotale :</td>
+            <td class="details_date col-7">
+                {% if monk.priest %}
+                    {{ monk.priest }}
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-5 green fw-bold">Décès :</td>
+            <td class="details_date col-7">
+                {% if monk.death %}
+                    {{ monk.death }}
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-5 green fw-bold">Fête le :</td>
+            <td class="col-7">
+                {{ monk.feast_day }} / {{ monk.feast_month }}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-5 green fw-bold">Numéro de linge :</td>
+            <td class="col-7">
+                {{ monk.laundry_number }}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-5 green fw-bold">Numéro de téléphone :</td>
+            <td class="col-7">
+                {{ monk.phone_number }}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-5 green fw-bold">Email :</td>
+            <td class="col-7">
+                {% if monk.email %}
+                    {{ monk.email }}
+                {% endif %}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="col-5 green fw-bold">Email supplémentaire :</td>
+            <td class="col-7">
+                {% if monk.additional_email %}
+                    {{ monk.additional_email }}
+                {% endif %}
+            </td>
+        </tr>
+    </table>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary me-auto" data-bs-dismiss="modal">Annuler</button>
+    <a href={% url 'moines:delete' monk.pk %} type="button" class="btn btn-danger">Supprimer</a>
+    <a href={% url 'moines:update' monk.pk %} type="button" class="btn btn-primary">Modifier</a>
+</div>
+
+<script src={% static 'moines/js/details.js' %}></script>

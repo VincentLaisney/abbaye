@@ -1,0 +1,70 @@
+body {
+    font-family: RobotoRegular;
+
+    #page {
+        h2 {
+            color: rgba(0, 0, 0, 0.7);
+            font-size: 24pt;
+            margin: 40px 0px 40px 0px;
+            text-align: center;
+        }
+
+        label {
+            vertical-align: baseline;
+        }
+
+        #options {
+            display: inline;
+
+            select {
+                margin: 0px 30px 0px 0px;
+            }
+        }
+
+        #sentence {
+            background-color: white;
+            border: 1px solid grey;
+            border-radius: 3px;
+            font-family: monospace;
+            font-size: 18pt;
+            margin: 10px 0px 10px 0px;
+            padding: 0px 10px 0px 10px;
+
+            .char_normal {
+                background-color: white;
+                color: black;
+            }
+
+            .char_current {
+                border: 1px solid grey;
+                background-color: grey;
+                color: white;
+            }
+
+            .char_success {
+                background-color: green;
+                color: white;
+            }
+
+            .char_error {
+                background-color: red;
+                color: black;
+            }
+        }
+    }
+
+    #result {
+        font-size: 14pt;
+        display: none;
+        margin-top: 50px;
+
+        p {
+            margin: 0px;
+        }
+
+        #time,
+        #errors {
+            font-weight: bold;
+        }
+    }
+}

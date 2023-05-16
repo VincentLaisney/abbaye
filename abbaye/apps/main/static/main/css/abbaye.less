@@ -1,73 +1,45 @@
-@blue: rgb(0, 0, 128);
-@brown: rgb(92, 52, 0);
-@dark-grey: rgb(61, 61, 61);
-@dark-red: rgb(145, 0, 0);
-@full-red: rgb(255, 0, 0);
-@green: rgb(0, 100, 0);
-@grey: rgb(182, 182, 182);
-@light-green: rgb(0, 255, 0);
-@light-grey: rgb(220, 220, 220);
-@orange: rgb(255, 145, 0);
-
+@import url("/statics/main/css/colors.less");
 
 a:hover {
     text-decoration: none;
 }
 
-.bg-danger {
-    background-color: @full-red !important;
+.btn-danger {
+    background-color: rgba(@red, 0.85) !important;
 }
 
-.blue {
-    color: @blue;
+.danger {
+    color: @red;
 }
 
-.brown {
-    color: @brown;
+.lucida-hw {
+    font-family: LucidaHW;
 }
 
-.dark-grey {
-    color: @dark-grey;
+.modal-title {
+    color: @red-dark;
+    font-family: LucidaHW;
 }
 
-.dark-red {
-    color: @dark-red;
-}
+.tempus-dominus-widget.show {
+    width: fit-content;
 
+    .date-container {
+        width: 400px;
+    }
 
-.full-red {
-    color: @full-red;
-}
-
-.green {
-    color: @green;
-}
-
-.grey {
-    color: @grey;
-}
-
-.light-green {
-    color: @light-green;
-}
-
-.light-grey {
-    color: @light-grey;
-}
-
-.orange {
-    color: @orange;
-}
-
-
-.white {
-    color: white;
+    .time-container {
+        width: 120px;
+    }
 }
 
 body {
-    background-color: whitesmoke;
+    background-color: rgba(0, 0, 0, 0);
 
-    // Nav:
+    a {
+        text-decoration: none;
+    }
+
     nav {
 
         a,
@@ -84,53 +56,11 @@ body {
         }
     }
 
-    // Breadcrumbs:
-
     #breadcrumbs {
-        .dropdown {
-            .dropdown_button {
-                cursor: pointer;
-                font-size: 1em;
-            }
-
-            .dropdown {
-                display: inline-block;
-                position: relative;
-            }
-
-            .dropdown_content {
-                background-color: whitesmoke;
-                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-                display: none;
-                min-width: 200px;
-                position: absolute;
-                z-index: 3;
-            }
-
-            .dropdown_content a {
-                color: black;
-                display: block;
-                padding: 8px 16px;
-                text-decoration: none;
-            }
-
-            .dropdown_content a:hover {
-                background-color: @light-grey;
-            }
-
-            .dropdown:hover .dropdown_content {
-                display: block;
-            }
-
-            .dropdown:hover .dropbtn {
-                background-color: green;
-            }
-        }
+        background-color: @grey-light;
     }
 
-    // Content:
     #content {
-
         h1 {
             color: @green;
             font-family: LucidaHW;
@@ -140,8 +70,26 @@ body {
             vertical-align: top;
         }
 
-        #validation {
+        .form-group {
+            margin: 5px 0 5px 0;
 
+            label {
+                color: @green;
+                font-weight: bold;
+                margin: 2px 0px 5px 0px;
+            }
+        }
+
+        .input-group {
+            position: static !important;
+        }
+
+        .invalid-feedback {
+            color: @red;
+            font-weight: bold;
+        }
+
+        #validation {
             .btn {
                 width: 100px;
             }

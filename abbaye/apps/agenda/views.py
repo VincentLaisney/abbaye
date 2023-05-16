@@ -5,32 +5,41 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
-from modules.dates import date_to_french_string
-
 from apps.main.decorators import group_required
+from apps.absences.models import Ticket
+from apps.moines.models import Monk
 from .forms import EventForm
 from .models import Event
 
 
-def home(request):
-    """ Home page of Agenda. """
-    today = date.today()
-    days = {}
-    for i in range(15):
-        day = today + timedelta(i)
-        events = Event.objects.filter(
-            date_from__lte=day
-        ) & Event.objects.filter(
-            date_to__gte=day
-        )
-        days[day] = {
-            'date_string': date_to_french_string(day),
-            'events': list(events),
-        }
+def agenda_as_list(request, *args, **kwargs):
+    """ Agenda as list. """
+    advanced_user = check_advanced_user(request)
+    if 'date' in kwargs.keys():
+        day = date.fromisoformat(kwargs['date'])
+    else:
+        day = date.today()
+    days = fetch_data(day)
     return render(
         request,
-        'agenda/home.html',
+        'agenda/list.html',
         {
+            'advanced_user': advanced_user,
+            'days': days,
+        },
+    )
+
+
+def agenda_as_calendar(request):
+    """ Agenda as calendar. """
+    advanced_user = check_advanced_user(request)
+    today = date.today()
+    days = fetch_data(today)
+    return render(
+        request,
+        'agenda/calendar.html',
+        {
+            'advanced_user': advanced_user,
             'days': days,
         },
     )
@@ -44,7 +53,7 @@ def create(request):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('agenda:home'))
+            return HttpResponseRedirect(reverse('agenda:list'))
 
     form = EventForm()
 
@@ -98,7 +107,7 @@ def delete(request, **kwargs):
     if request.method == 'POST':
         form = EventForm(request.POST, instance=event)
         event.delete()
-        return HttpResponseRedirect(reverse('agenda:home'))
+        return HttpResponseRedirect(reverse('agenda:list'))
 
     form = EventForm(instance=event)
 
@@ -106,3 +115,52 @@ def delete(request, **kwargs):
         'form': form,
         'event': event,
     })
+
+
+def check_advanced_user(request):
+    """ Check if a user is advanced, i.e. is in group 'Agenda'
+    and thus can access advanced options (create an event, modifying it, etc.). """
+    advanced_user = False
+    if request.user.is_authenticated:
+        if bool(request.user.groups.filter(name='Agenda')) or request.user.is_superuser:
+            advanced_user = True
+    return advanced_user
+
+
+def fetch_data(today):
+    """ Fetch everything from today. """
+    days = {}
+    for i in range(15):
+        day = today + timedelta(i)
+
+        # Events of this day:
+        events = Event.objects.filter(
+            date_from__lte=day
+        ) & Event.objects.filter(
+            date_to__gte=day
+        ).order_by('category', 'name')
+
+        # Feasts of this day:
+        feasts = Monk.objects.filter(
+            feast_month=day.month
+        ) & Monk.objects.filter(
+            feast_day=day.day
+        ).order_by('absolute_rank', 'entry', 'rank')
+
+        # Absences of this day:
+        absences = Ticket.objects \
+            .filter(
+                go_date__lte=day
+            ) & Ticket.objects.filter(
+                back_date__gte=day
+            ) \
+            .order_by('go_date', 'back_date')
+
+        days[day] = {
+            'date': day,
+            'events': events,
+            'feasts': feasts,
+            'absences': absences,
+        }
+
+    return days

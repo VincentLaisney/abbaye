@@ -6,11 +6,9 @@
     <head>
         <meta charset="UTF-8">
         <title>Abbaye Saint-Joseph</title>
-        <link rel="icon" href={% static 'main/img/abbaye.png' %}>
-        <link rel="stylesheet" href={% static 'main/js/jquery-ui-1.12.1/jquery-ui.min.css' %}>
-        <link rel="stylesheet" href={% static 'main/css/fontawesome-free-5.15.1-web/css/all.min.css' %}>
-        <link rel="stylesheet" href={% static 'main/css/bootstrap-4.0.0-dist/css/bootstrap.min.css' %}>
-        <link rel="stylesheet" href={% static 'main/css/tempusdominus-bootstrap-4.min.css' %}>
+        <link rel="icon" href={% static 'main/img/saint_joseph.png' %}>
+        <link rel="stylesheet" href={% static 'main/bootstrap-5.2.3-dist/css/bootstrap.min.css' %}>
+        <link rel="stylesheet" href={% static 'main/fontawesome-free-6.3.0-web/css/all.min.css' %}>
         <link rel="stylesheet/less" href={% static 'main/css/abbaye.less' %}>
         {% block css %}{% endblock css %}
 
@@ -18,63 +16,66 @@
     </head>
 
     <body>
-        <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-            <div class="container mx-0">
-                <div id="logo" class="col-6 mr-auto d-flex">
-                    <a href={% url 'main:home' %}>
-                        <img src={% static 'main/img/abbaye.png' %} class="mr-2 align-middle" style="width: 40px;">
-                        <span id="title" class="my-0 align-middle">Abbaye Saint-Joseph</span>
-                    </a>
-                </div>
-            </div>
-
-            <div class="d-flex ml-auto" id="menu">
-                {% if user.is_authenticated %}
-                    <p class="white">{{ user.last_name }}</p>
-                    {% if user.is_superuser %}
-                        <a class="ml-3" href={% url 'admin:index' %}><span class="fas fa-tools" title="Aller vers le site d'administration du site"></span></a>
-                    {% endif %}
-
-                    <a class="ml-3" href={% url 'accounts:logout' %}?next={{ request.get_full_path }}>
-                        <span class="fas fa-sign-out-alt" title="Déconnexion"></span>
-                    </a>
-                {% else %}
-                    <a class="ml-3" href={% url 'accounts:login' %}?next={{ request.get_full_path }}>
-                        <span class="fas fa-sign-in-alt fa-flip-horizontal" title="Connexion"></span>
-                    </a>
-                {% endif %}
-            </div>
-        </nav>
-
-        <div id="breadcrumbs">
-            <ol class="breadcrumb">
-                <div class="dropdown breadcrumb-item ml-3">
-                    <div class="dropdown">
-                        <a href={% url 'main:home' %}><li class="dropdown_button"><span class="fas fa-home"></span></li></a>
-                        <div class="dropdown_content">
-                            <a href={% url 'main:home' %}>Home</a>
-                        </div>
+        <div class="position-fixed top-0 w-100" style="z-index: 1;">
+            <nav class="navbar navbar-expand-sm navbar-dark bg-dark d-flex justify-content-between">
+                <div class="container mx-0">
+                    <div id="logo" class="col-6 mr-auto d-flex">
+                        <a href={% url 'main:home' %} class="text-decoration-none">
+                            <img src={% static 'main/img/saint_joseph.png' %} class="mr-2 align-middle" style="width: 40px;">
+                            <span id="title" class="my-0 align-middle">Abbaye Saint-Joseph</span>
+                        </a>
                     </div>
                 </div>
 
-                {% block breadcrumbs %}
-                {% endblock breadcrumbs %}
-            </ol>
+                <div class="d-flex me-5">
+                    <div class="dropdown">
+                        <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false" style="min-width: 200px;">
+                            {% if user.is_authenticated %}
+                                {{ user.last_name }}
+                            {% else %}
+                                Utilisateur anonyme
+                            {% endif %}
+                        </a>
+
+                        <ul class="dropdown-menu dropdown-menu-end w-100" aria-labelledby="dropdownMenuLink">
+                            {% if user.is_authenticated %}
+                                <li><a class="dropdown-item" href="#">Mon compte</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                            {% endif %}
+                            {% if user.is_authenticated %}
+                                {% if user.is_superuser %}
+                                    <li><a class="dropdown-item" href={% url 'admin:index' %}>Site d'administration</a></li>
+                                {% endif %}
+                                <li><a class="dropdown-item" href={% url 'accounts:logout' %}>Déconnexion</a></li>
+                            {% else %}
+                                <li><a class="dropdown-item" href={% url 'accounts:login' %}?next={{ request.get_full_path }}>Connexion</a></li>
+                                <li><a class="dropdown-item" href="#">Créer un compte</a></li>
+                            {% endif %}
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <div id="breadcrumbs">
+                <ol class="breadcrumb m-0 p-2 ps-3">
+                    <li class="breadcrumb-item active"><a href={% url 'main:home' %} class="m-0" title="Accueil"><span class="fas fa-house"></span></a></li>
+
+                    {% block breadcrumbs %}
+                    {% endblock breadcrumbs %}
+                </ol>
+            </div>
         </div>
 
-        <div id="content" class="d-flex flex-column align-items-center mx-5 my-3">
+        <div id="content" class="d-flex flex-column align-items-center mx-5" style="margin-top: 130px;">
             {% block content %}
             {% endblock content %}
         </div>
     </body>
 
-    <script src="{% static 'main/js/jquery-3.3.1.min.js' %}"></script>
-    <script src="{% static 'main/js/jquery-ui-1.12.1/jquery-ui.min.js' %}"></script>
-    <script src="{% static 'main/css/bootstrap-4.0.0-dist/js/bootstrap.bundle.min.js' %}"></script>
-    <script src="{% static 'main/js/less.min.js' %}"></script>
-    <script src="{% static 'main/js/moment.min.js' %}"></script>
-    <script src="{% static 'main/js/moment-locale-fr.js' %}"></script>
-    <script src="{% static 'main/js/tempusdominus-bootstrap-4.min.js' %}"></script>
-    <script src="{% static 'main/js/abbaye.js' %}"></script>
+    <script src={% static 'main/js/jquery-3.6.0.min.js' %}></script>
+    <script src={% static 'main/bootstrap-5.2.3-dist/js/bootstrap.bundle.min.js' %}></script>
+    <script src={% static 'main/fontawesome-free-6.3.0-web/js/all.min.js' %}></script>
+    <script src={% static 'main/js/less.min.js' %}></script>
+    <script src={% static 'main/js/abbaye.js' %}></script>
     {% block javascript %}{% endblock javascript %}
 </html>

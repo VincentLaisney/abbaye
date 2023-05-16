@@ -1,0 +1,29 @@
+{% extends 'hotellerie/main_hotellerie.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:main_home' %}>Hôtellerie</a></li>
+    <li class="breadcrumb-item active">Séjours</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1 class="mb-3">Séjours</h1>
+
+    <div class="col-9">
+        <div class="text-center mb-4">
+            <a href={% url 'hotellerie:sejours_create' %}>Ajouter un séjour</a>
+        </div>
+
+        <table class="table table-sm table-bordered">
+            {% for sejour in sejours %}
+                <tr>
+                    <td>{{ sejour }}</td>
+                    <td class="text-center">
+                        <a href={% url 'hotellerie:sejours_details' sejour.id %}>
+                            <span class="fas fa-eye" title="Voir les détails"></span>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock content %}

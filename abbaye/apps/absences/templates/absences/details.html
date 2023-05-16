@@ -1,0 +1,106 @@
+{% load static %}
+
+<div class="modal-header">
+    <h5 class="modal-title" id="title_ticket">Avis d'absence</br>{{ ticket }}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+</div>
+
+<div class="modal-body">
+    <table class="table table-sm table-borderless">
+        <tr>
+            <td class="fw-bold green">
+                Créé le  :</br>
+                Modifié le :</td>
+            <td class="green">
+                {{ ticket.created_at|date:"d/m/Y" }} à {{ ticket.created_at|time:"H:i:s" }}</br>
+                {{ ticket.last_modified|date:"d/m/Y" }} à {{ ticket.last_modified|time:"H:i:s" }}
+            </td>
+        </tr>
+        <tr><td></td><td></td></tr>
+        <tr>
+            <td class="fw-bold">Moines qui partent :</td>
+            <td>{{ ticket.monks_as_string }}</td>
+        </tr>
+        {% if ticket.destination %}
+            <tr>
+                <td class="fw-bold">Destination :</td>
+                <td class="details_date">
+                    {{ ticket.destination }}
+                </td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="fw-bold">Départ :</td>
+            <td class="details_date">
+                {{ ticket.go_date|date:"l j F Y" }}
+                {% if ticket.go_moment %}
+                    ({{ ticket.go_moment }})
+                {% endif %}
+                {% if ticket.go_by %}
+                    </br>En {{ ticket.go_by|lower }}
+                {% endif %}
+                {% if ticket.go_station %}
+                     : {{ ticket.go_station }}
+                {% endif %}
+                {% if ticket.go_hour %}
+                     à {{ ticket.go_hour }}
+                {% endif %}
+                {% if ticket.servants %}
+                    </br>Repas avec les serveurs.
+                {% endif %}
+                {% if ticket.picnic %}
+                    </br>Casse-croûte.
+                {% endif %}
+            </td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Retour :</td>
+            <td class="details_date">
+                {{ ticket.back_date|date:"l j F Y" }}
+                {% if ticket.back_moment %}
+                    ({{ ticket.back_moment }})
+                {% endif %}
+                {% if ticket.back_by %}
+                    </br>En {{ ticket.back_by|lower }}
+                {% endif %}
+                {% if ticket.back_station %}
+                     : {{ ticket.back_station }}
+                {% endif %}
+                {% if ticket.back_hour %}
+                     à {{ ticket.go_hour }}
+                {% endif %}
+                {% if ticket.keep_hot %}
+                    </br>Garder du chaud.
+                {% endif %}
+            </td>
+        </tr>
+        {% if ticket.ordinary_form %}
+            <tr>
+                <td class="fw-bold">Forme ordinaire :</td>
+                <td>{{ ticket.ordinary_form|yesno:"Oui,Non" }}</td>
+            </tr>
+        {% endif %}
+        {% if ticket.commentary %}
+            <tr>
+                <td class="fw-bold">Commentaire :</td>
+                <td>{{ ticket.commentary|linebreaks }}</td>
+            </tr>
+        {% endif %}
+        <tr>
+            <td class="fw-bold">Destinataires obligatoires :</td>
+            <td>{{ mandatory_recipients|safe }}</td>
+        </tr>
+        <tr>
+            <td class="fw-bold">Destinataires supplémentaires :</td>
+            <td>{{ additional_recipients|safe }}</td>
+        </tr>
+    </table>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary me-auto" data-bs-dismiss="modal">Annuler</button>
+    <a href={% url 'absences:delete' ticket.pk %} type="button" class="btn btn-danger">Supprimer</a>
+    <a href={% url 'absences:update' ticket.pk %} type="button" class="btn btn-primary">Modifier</a>
+</div>
+
+<script src={% static 'absences/js/details.js' %}></script>

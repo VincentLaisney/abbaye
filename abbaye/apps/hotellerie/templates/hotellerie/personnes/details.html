@@ -1,0 +1,86 @@
+{% extends 'hotellerie/main_hotellerie.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'hotellerie:main_home' %}>Hôtellerie</a></li>
+    <li class="breadcrumb-item active"><a href={% url 'hotellerie:personnes_list' first_letter %}>Personnes</a></li>
+    <li class="breadcrumb-item active">{{ personne }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h3>{{ personne }}</h3>
+
+    <div class="row">
+        <a href={% url 'hotellerie:personnes_update' personne.id %} class="mx-1">Modifier</a>
+        <a href={% url 'hotellerie:personnes_delete' personne.id %} class="mx-1">Supprimer</a>
+        <a href={% url 'hotellerie:personnes_list' first_letter %} class="mx-1">Retour à la liste</a>
+    </div>
+
+    <div class="col-6">
+        <table class="table table-sm">
+            <tr>
+                <td>Est un moine de Flavigny :</td>
+                <td>{{ personne.moine_flav|yesno:"oui,non" }}</td>
+            </tr>
+
+            <tr>
+                <td>Est Père suiveur :</td>
+                <td>{{ personne.moine_flav|yesno:"oui,non" }}</td>
+            </tr>
+
+            <tr>
+                <td>Son Père suiveur :</td>
+                <td>{{ personne.pere_suiveur|default_if_none:"" }}</td>
+            </tr>
+
+            <tr>
+                <td>Mails :</td>
+                <td>{{ mails|join:' <br> ' }}</td>
+            </tr>
+
+            <tr>
+                <td>Téléphones :</td>
+                <td>{{ tels|join:' <br> ' }}</td>
+            </tr>
+
+            <tr>
+                <td>Adresses postales :</td>
+                <td>{{ adresses|join:' <br> ' }}</td>
+            </tr>
+
+            <tr>
+                <td>Est un prêtre :</td>
+                <td>{{ personne.pretre|yesno:"oui,non" }}</td>
+            </tr>
+
+            <tr>
+                <td>Messe forme :</td>
+                <td>{{ personne.messe_forme }}</td>
+            </tr>
+
+            <tr>
+                <td>Messe langue :</td>
+                <td>{{ personne.messe_langue }}</td>
+            </tr>
+
+            <tr>
+                <td>Commentaire :</td>
+                <td class="col-6">{{ personne.commentaire }}</td>
+            </tr>
+        </table>
+    </div>
+
+    <h4>Séjours</h4>
+    <table class="col-3">
+        <tr>
+            <td>Du</td>
+            <td>Au</td>
+        </tr>
+
+        {% for sejour in personne.sejour_set.all %}
+            <tr>
+                <td>{{ sejour.sejour_du|default_if_none:"" }}</td>
+                <td>{{ sejour.sejour_au|default_if_none:"" }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet/less" href={% static 'agenda/css/agenda.less' %}>
+{% endblock css %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'agenda:list' %}>Agenda</a></li>
+{% endblock breadcrumbs %}
+
+{% block javascript %}
+    <script src={% static 'agenda/js/agenda.js' %}></script>
+{% endblock javascript %}

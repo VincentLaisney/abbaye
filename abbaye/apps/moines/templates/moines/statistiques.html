@@ -1,0 +1,42 @@
+{% extends 'moines/main_moines.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Statistiques</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>Les moines de Flavigny en chiffres</h1>
+
+    <a href={% url 'moines:list' %} class="btn btn-sm btn-primary my-3">Voir la liste des moines</a>
+
+    <table id="table-statistiques" class="table table-bordered w-25 mt-5">
+        <tr>
+            <td class="title">Nombre de moines :</td>
+            <td class="value">{{ monks }}</td>
+        </tr>
+        <tr>
+            <td class="title">Prêtres :</td>
+            <td class="value">{{ priests }}</td>
+        </tr>
+        <tr>
+            <td class="title">Profès perpétuels :</td>
+            <td class="value">{{ perpetual }}</td>
+        </tr>
+        <tr>
+            <td class="title">Profès temporaires :</td>
+            <td class="value">{{ tempo }}</td>
+        </tr>
+        <tr>
+            <td class="title">Novices :</td>
+            <td class="value">{{ novices }}</td>
+        </tr>
+        <tr>
+            <td class="title">Postulants :</td>
+            <td class="value">{{ postulants }}</td>
+        </tr>
+    </table>
+
+    <img src="{{ MEDIA_URL }}moines/histogram.svg" alt="Missing histogram" class="mb-3">
+{% endblock content %}

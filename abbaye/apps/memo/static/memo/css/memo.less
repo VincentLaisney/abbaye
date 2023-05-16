@@ -1,0 +1,90 @@
+@import url("/statics/main/css/colors.less");
+
+h1 {
+    color: @green;
+    text-align: center;
+}
+
+h4 {
+    color: @red;
+    margin: 50px 0px 30px 0px;
+    text-align: start;
+    width: 100%;
+}
+
+.group {
+    margin: 0px 0px 30px 40px;
+
+    .descr,
+    .file,
+    .terminal {
+        overflow-wrap: break-word;
+        padding: 7px;
+    }
+
+    .descr {
+        background-color: lightgrey;
+        border: 1px solid grey;
+        border-radius: 4px;
+        font-family: sans-serif;
+        font-size: 12pt;
+        margin: 20px;
+        text-align: justify;
+    }
+
+    .file,
+    .terminal {
+        margin: 10px 40px 0px 40px;
+    }
+
+    .file {
+        background-color: rgb(234, 255, 221);
+        border: 1px solid lightgrey;
+        border-radius: 4px;
+        color: black;
+        font-family: 'Courier New', Courier, monospace;
+        font-size: 12pt;
+    }
+
+    .terminal {
+        background-color: black;
+        border-radius: 4px;
+        color: white;
+        font-family: monospace;
+        font-size: 10pt;
+    }
+}
+
+table {
+    width: 100%;
+
+    td {
+        padding: 7px;
+        vertical-align: text-bottom;
+    }
+
+    .descr,
+    .terminal {
+        padding: 7px;
+    }
+
+    .descr {
+        background-color: lightgrey;
+        border: 1px solid grey;
+        border-radius: 4px;
+        font-family: sans-serif;
+        font-size: 12pt;
+        text-align: justify;
+        width: 500px;
+    }
+
+    .terminal {
+        background-color: black;
+        border-radius: 4px;
+        color: white;
+        font-family: monospace;
+        font-size: 10pt;
+        padding: 7px;
+        width: 400px;
+    }
+}
