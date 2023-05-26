@@ -92,3 +92,7 @@ class Monk(models.Model):
     def feast_date(self):
         """ Feast date. """
         return '{:02}/{:02}'.format(self.feast_day, self.feast_month)
+
+    def feast_date_inverted(self):
+        """ Feast date inverted (for sorting). """
+        return '{:02}/{:02}'.format(self.feast_month, self.feast_day)
