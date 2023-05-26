@@ -46,13 +46,13 @@
                         </div >
                     {% endif %}
 
-                    <div class="text-center my-5">
-                        <h5 class="green fw-bold m-0" style="font-family:LucidaHW">Absences</h5>
+                    <div class="text-center m-5">
+                        <h5 class="green fw-bold" style="font-family:LucidaHW">Absences</h5>
                         {% if day.absences %}
                             <ul class="list-unstyled">
                                 {% for absence in day.absences %}
                                     <li class="d-flex align-items-center text-start">
-                                        <a type='button' class='ms-2 p-2 button_details' data-bs-toggle='modal' data-bs-target='#modal_details' id="details_{{ absence.pk }}" title="Voir les détails, modifier, supprimer">
+                                        <a type='button' class='button_details' data-bs-toggle='modal' data-bs-target='#modal_details' id="absence_{{ absence.pk }}" title="Voir les détails, modifier, supprimer">
                                             <span class="fas fa-paper-plane me-2"></span>
                                             {{ absence|cut:'"' }}
                                         </a>
@@ -64,8 +64,8 @@
                         {% endif %}
                     </div>
 
-                    <div class="text-center my-5">
-                        <h5 class="text-center green fw-bold m-0 w-100" style="font-family:LucidaHW">Événements</h5>
+                    <div class="text-center m-5">
+                        <h5 class="text-center green fw-bold w-100" style="font-family:LucidaHW">Événements</h5>
 
                         {% if day.events %}
                             {% for event in day.events %}
@@ -73,15 +73,15 @@
                                     <span class="fas fa-circle {{ event.category.color }} me-2" title={{ event.category }}></span>
 
                                     {% if advanced_user %}
-                                        <a href={% url 'agenda:details' event.pk %}>
-                                            <p class="fw-bold mb-0">{{ event.name }}<p >
+                                        <a type='button' class='ms-2 button_details' data-bs-toggle='modal' data-bs-target='#modal_details' id="event_{{ event.pk }}" title="Voir les détails, modifier, supprimer">
+                                            {{ event.name }}
                                         </a>
                                     {% else %}
                                         <p class="fw-bold grey-dark mb-0">{{ event.name }}<p >
                                     {% endif %}
                                 </div>
 
-                                <div class="text-start ms-4 mt-1 small">
+                                <div class="text-start ms-5 small">
                                     {% if event.comment %}
                                             {{ event.comment }}
                                     {% endif %}
