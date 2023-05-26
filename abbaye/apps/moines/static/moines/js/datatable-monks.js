@@ -1,8 +1,7 @@
 $(document).ready(function () {
     $('#table-monks').DataTable({
         order: [[2, 'asc']],
-        // info: false,
-        paging: 5,
+        pageLength: 100,
         'language': {
             'info': 'Page <b>_PAGE_</b> sur <b>_PAGES_</b> - Total : <b>_MAX_</b> moines',
             'infoFiltered': ' - Affichés : moines <b>_START_</b> à <b>_END_</b> parmi <b>_TOTAL_</b> moines trouvés',// TODO: Remplacer "1 moines trouvés" par "1 moine trouvé":
@@ -69,7 +68,7 @@ $(document).ready(function () {
             '.button_details',
             function () {
                 const id = $(this).attr('id').split('_')[1];
-                $.get('/moines/' + id + '/modal/', function (data) {
+                $.get('/abbaye/moines/' + id + '/modal/', function (data) {
                     $('.modal-content').html(data);
                 });
             }
