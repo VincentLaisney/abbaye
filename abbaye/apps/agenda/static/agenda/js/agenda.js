@@ -24,7 +24,7 @@ $(document).ready(function () {
             function () {
                 const id = $(this).attr('id').split('_')[1];
                 console.log(id);
-                $.get('/absences/' + id, function (data) {
+                $.get('/abbaye/absences/' + id, function (data) {
                     $('.modal-content').html(data);
                 });
             }
