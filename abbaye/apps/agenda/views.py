@@ -60,6 +60,7 @@ def create(request):
     return render(request, 'agenda/form.html', {'form': form})
 
 
+@group_required('Agenda')
 def details(request, **kwargs):
     """ Details of an event. """
     event = get_object_or_404(Event, id=kwargs['pk'])
@@ -84,10 +85,7 @@ def update(request, **kwargs):
             form.save()
             return HttpResponseRedirect(
                 reverse(
-                    'agenda:details',
-                    kwargs={
-                        'pk': event.pk,
-                    }
+                    'agenda:list',
                 )
             )
 
