@@ -17,15 +17,15 @@
             <div class="col-3"></div>
             <h3 class="col-6 text-center green lucida-hw">Bienvenue sur l'agenda communautaire</br>de l'Abbaye Saint-Joseph de Clairval !</h1>
             <a class="col-3 ms-5" href={% url 'agenda:calendar' %}>
-                <span class="fas fa-calendar-alt btn btn-outline-primary mb-3" title="Passer en mode calendrier"></span>
+                {% comment %} <span class="fas fa-calendar-alt btn btn-outline-primary mb-3" title="Passer en mode calendrier"></span> {% endcomment %}
             </a>
         </div>
 
-        <div class="d-flex align-items-center">
+        {% comment %} <div class="d-flex align-items-center">
             <span class="fas fa-arrow-left mx-3"></span>
             <input id="date" class="form-control input-date text-center" style="width:120px">
             <span class="fas fa-arrow-right mx-3"></span>
-        </div>
+        </div> {% endcomment %}
 
         {% if advanced_user %}
             <a href={% url 'agenda:create' %} class="btn btn-sm btn-outline-primary my-4">Ajouter un événement</a>
