@@ -22,11 +22,18 @@ $(document).ready(function () {
             'click',
             '.button_details',
             function () {
+                const category = $(this).attr('id').split('_')[0];
                 const id = $(this).attr('id').split('_')[1];
-                console.log(id);
-                $.get('/absences/' + id, function (data) {
-                    $('.modal-content').html(data);
-                });
+                if (category == "absence") {
+                    $.get('/abbaye/absences/' + id, function (data) {
+                        $('.modal-content').html(data);
+                    });
+                }
+                else if (category == "event") {
+                    $.get('/abbaye/agenda/' + id, function (data) {
+                        $('.modal-content').html(data);
+                    });
+                }
             }
         );
 });

@@ -1,12 +1,49 @@
-{% extends 'agenda/main_agenda.html' %}
+{% load static %}
 
-{% block breadcrumbs %}
-    {{ block.super }}
-    <li class="breadcrumb-item active">{{ event.name }}</li>
-{% endblock breadcrumbs %}
+<div class="modal-header">
+    <h5 class="modal-title" id="title_event">{{ event }}</h5>
+    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
+</div>
 
-{% block content %}
-    <h1>{{ event.name }}</h1>
-    <a href={% url 'agenda:update' event.pk %}>Modifier</a>
-    <a href={% url 'agenda:delete' event.pk %}>Supprimer</a>
-{% endblock content %}
+<div class="modal-body">
+    <table class="table table-sm table-borderless">
+        <tr>
+            <td class="fw-bold green">
+                Créé le  :</br>
+                Modifié le :</td>
+            <td class="green">
+                {{ event.created_at|date:"d/m/Y" }} à {{ event.created_at|time:"H:i:s" }}</br>
+                {{ event.last_modified|date:"d/m/Y" }} à {{ event.last_modified|time:"H:i:s" }}
+            </td>
+        </tr>
+        <tr><td></td><td></td></tr>
+        <tr>
+            <td>Nom :</td>
+            <td>{{ event.name }}</td>
+        </tr>
+        <tr>
+            <td>Catégorie :</td>
+            <td>{{ event.category }}</td>
+        </tr>
+        <tr>
+            <td>Du :</td>
+            <td>{{ event.date_from }}</td>
+        </tr>
+        <tr>
+            <td>Au :</td>
+            <td>{{ event.date_to }}</td>
+        </tr>
+        <tr>
+            <td>Commentaire :</td>
+            <td>{{ event.comment }}</td>
+        </tr>
+    </table>
+</div>
+
+<div class="modal-footer">
+    <button type="button" class="btn btn-secondary me-auto" data-bs-dismiss="modal">Annuler</button>
+    <a href={% url 'agenda:delete' event.pk %} type="button" class="btn btn-danger">Supprimer</a>
+    <a href={% url 'agenda:update' event.pk %} type="button" class="btn btn-primary">Modifier</a>
+</div>
+
+<script src={% static 'agenda/js/details.js' %}></script>
