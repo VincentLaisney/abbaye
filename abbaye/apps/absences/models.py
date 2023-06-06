@@ -84,7 +84,7 @@ class Ticket(models.Model):
     def additional_recipients_as_string(self):
         """ String containing all the additional recipients of this ticket. """
         return '</br>'.join(
-            (monk.name + ' (' + monk.email + ')')
+            (monk.__str__() + ' (' + monk.email + ')')
             for monk in self.additional_recipients.all()
             .order_by('entry', 'rank')
         )
