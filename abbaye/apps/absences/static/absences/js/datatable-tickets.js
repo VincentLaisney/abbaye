@@ -80,7 +80,7 @@ $(document).ready(function () {
             '.button_details',
             function () {
                 const id = $(this).attr('id').split('_')[1];
-                $.get('/absences/' + id, function (data) {
+                $.get('/abbaye/absences/' + id, function (data) {
                     $('.modal-content').html(data);
                 });
             }
