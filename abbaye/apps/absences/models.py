@@ -77,9 +77,8 @@ class Ticket(models.Model):
     def monks_as_string(self):
         """ String containing all the monks of this ticket. """
         return ', '.join(
-            monk['name'] for monk in self.monks.all()
+            monk.__str__() for monk in self.monks.all()
             .order_by('entry', 'rank')
-            .values('name')
         )
 
     def additional_recipients_as_string(self):
