@@ -74,10 +74,10 @@
 
                                     {% if advanced_user %}
                                         <a type='button' class='ms-2 button_details' data-bs-toggle='modal' data-bs-target='#modal_details' id="event_{{ event.pk }}" title="Voir les détails, modifier, supprimer">
-                                            {{ event.name }}
+                                            {{ event }}
                                         </a>
                                     {% else %}
-                                        <p class="fw-bold grey-dark mb-0">{{ event.name }}<p >
+                                        <p class="fw-bold grey-dark mb-0">{{ event }}<p >
                                     {% endif %}
                                 </div>
 
