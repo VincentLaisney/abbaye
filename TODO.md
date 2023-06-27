@@ -1,13 +1,17 @@
 GÉNÉRAL:
 - Accueil : "Vous êtes (n'êtes pas) connecté comme…" / Login / Signup.
 - Page de login : ajouter signup.
-- User: Préférences: affichage liste/calendrier.
+- User: Préférences:
+  - Affichage liste/calendrier.
+  - Recevoir mail fêtes moines ("la veille", "le jour même", "jamais").
 - Boutons "Annuler" : ajouter une flèche gauche avant le mot "Annuler".
 - Everywhere in the site: when create and update, put an "else:" corresponding to the "if request.method == 'POST':" before "form = …".
 
 AGENDA:
 - Calendrier.
 - Fetcher les retraites et leurs nombres dans la page du P. Savio.
+- Empêcher date_to < date_from.
+- On change date_from: date_to = date_from.
 
 HÔTELLERIE:
 - Jours de promenades, retraites.
