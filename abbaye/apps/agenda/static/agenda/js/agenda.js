@@ -15,6 +15,9 @@ $(document).ready(function () {
         $(this).html($(this).html().replace(" 1 ", " 1er "));
     });
 
+    $('#id_date_from').on('change', function () {
+        $('#id_date_to').val($('#id_date_from').val());
+    });
 
     $('#days_list')
         // Details: fill modal when clicked on a button "Détails":
