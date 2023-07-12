@@ -21,11 +21,9 @@
             </a>
         </div>
 
-        {% comment %} <div class="d-flex align-items-center">
-            <span class="fas fa-arrow-left mx-3"></span>
-            <input id="date" class="form-control input-date text-center" style="width:120px">
-            <span class="fas fa-arrow-right mx-3"></span>
-        </div> {% endcomment %}
+        <div class="d-flex align-items-center">
+            <input id="datepicker" class="form-control input-date text-center" style="border-color: green; border-width: 3px; width:120px" placeholder={{ day_as_string }}>
+        </div>
 
         {% if advanced_user %}
             <a href={% url 'agenda:create' %} class="btn btn-sm btn-outline-primary my-4">Ajouter un événement</a>
@@ -46,12 +44,12 @@
                         </div >
                     {% endif %}
 
-                    <div class="text-center m-5">
+                    <div class="m-5">
                         <h5 class="green fw-bold" style="font-family:LucidaHW">Absences</h5>
                         {% if day.absences %}
                             <ul class="list-unstyled">
                                 {% for absence in day.absences %}
-                                    <li class="d-flex align-items-center text-start">
+                                    <li class="d-flex align-items-start text-start">
                                         <a type='button' class='button_details' data-bs-toggle='modal' data-bs-target='#modal_details' id="absence_{{ absence.pk }}" title="Voir les détails, modifier, supprimer">
                                             <span class="fas fa-paper-plane me-2"></span>
                                             {{ absence|cut:'"' }}
@@ -64,19 +62,19 @@
                         {% endif %}
                     </div>
 
-                    <div class="text-center m-5">
+                    <div class="m-5">
                         <h5 class="text-center green fw-bold w-100" style="font-family:LucidaHW">Événements</h5>
 
                         {% if day.events %}
                             {% for event in day.events %}
-                                <div class="d-flex align-items-center mt-2">
-                                    <span class="fas fa-circle {{ event.category.color }} me-2" title={{ event.category }}></span>
-
+                                <div class="d-flex align-items-start mt-2">
                                     {% if advanced_user %}
                                         <a type='button' class='ms-2 button_details' data-bs-toggle='modal' data-bs-target='#modal_details' id="event_{{ event.pk }}" title="Voir les détails, modifier, supprimer">
+                                            <span class="fas fa-circle {{ event.category.color }} me-2 pt-1" title={{ event.category }}></span>
                                             {{ event }}
                                         </a>
                                     {% else %}
+                                        <span class="fas fa-circle {{ event.category.color }} me-2 pt-1" title={{ event.category }}></span>
                                         <p class="fw-bold grey-dark mb-0">{{ event }}<p >
                                     {% endif %}
                                 </div>
@@ -111,7 +109,5 @@
     <script src={% static 'main/js/popper.min.js' %}></script>
     <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
     <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
-    <script>
-        new tempusDominus.TempusDominus(document.getElementById('date'), calendar);
-    </script>
+    <script src={% static 'agenda/js/tempusdominus-agenda.js' %}></script>
 {% endblock javascript %}

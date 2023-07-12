@@ -56,7 +56,7 @@
 
                 <tr>
                     <td><p class="terminal">passwd USERNAME</p></td>
-                    <td><p class="descr">Changer le pw d'un autre utilisateur.</p></td>
+                    <td><p class="descr">Changer le pw d'un autre utilisateur. Se mettre en su pour éviter les contraintes de longueur et complexité.</p></td>
                 </tr>
 
                 <tr>
@@ -469,6 +469,11 @@
                 <tr>
                     <td><p class="terminal">apt-get dist-upgrade</p></td>
                     <td><p class="descr">Mise à jour des paquets, se charge de gérer les changements de paquets dépendants (cf. aptitude full-upgrade).</p></td>
+                </tr>
+
+                <tr>
+                    <td><p class="terminal">apt-get update; apt-get upgrade; apt-get dist-upgrade; apt autoremove</p></td>
+                    <td><p class="descr">Full update.</p></td>
                 </tr>
 
                 <tr>
