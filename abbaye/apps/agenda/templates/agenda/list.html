@@ -21,11 +21,9 @@
             </a>
         </div>
 
-        {% comment %} <div class="d-flex align-items-center">
-            <span class="fas fa-arrow-left mx-3"></span>
-            <input id="date" class="form-control input-date text-center" style="width:120px">
-            <span class="fas fa-arrow-right mx-3"></span>
-        </div> {% endcomment %}
+        <div class="d-flex align-items-center">
+            <input id="datepicker" class="form-control input-date text-center" style="border-color: green; border-width: 3px; width:120px" placeholder={{ day_as_string }}>
+        </div>
 
         {% if advanced_user %}
             <a href={% url 'agenda:create' %} class="btn btn-sm btn-outline-primary my-4">Ajouter un événement</a>
@@ -111,7 +109,5 @@
     <script src={% static 'main/js/popper.min.js' %}></script>
     <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
     <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
-    <script>
-        new tempusDominus.TempusDominus(document.getElementById('date'), calendar);
-    </script>
+    <script src={% static 'agenda/js/tempusdominus-agenda.js' %}></script>
 {% endblock javascript %}
