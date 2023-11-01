@@ -26,7 +26,21 @@ class Event(models.Model):
     )
 
     def __str__(self):
-        return self.name
+        dates = '{:02}/{:02}/{}-{:02}/{:02}/{}'.format(
+            self.date_from.day,
+            self.date_from.month,
+            self.date_from.year,
+            self.date_to.day,
+            self.date_to.month,
+            self.date_to.year
+        )
+        dates = dates.split('-')[0] \
+            if self.date_to == self.date_from \
+            else dates
+        return '{} ({})'.format(
+            self.name,
+            dates,
+        )
 
 
 class Category(models.Model):
