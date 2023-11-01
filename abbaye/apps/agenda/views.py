@@ -85,10 +85,7 @@ def update(request, **kwargs):
             form.save()
             return HttpResponseRedirect(
                 reverse(
-                    'agenda:details',
-                    kwargs={
-                        'pk': event.pk,
-                    }
+                    'agenda:list',
                 )
             )
 
