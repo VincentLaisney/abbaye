@@ -3,6 +3,7 @@
 
 from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
+from django.conf import settings
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
@@ -191,7 +192,7 @@ def send_email(data, monks, mandatory_recipients, additional_recipients, action=
     return send_mail(
         subject,
         body,
-        'noreply@python.asj.com',
+        settings.DEFAULT_FROM_EMAIL,
         recipients_emails,
         fail_silently=False,
     )
