@@ -17,7 +17,8 @@
                     <a href={% url 'moines:statistiques' %}>STATISTIQUES</a><p>Statistiques communautaires.</p>
                     <a href={% url 'agenda:list' %}>AGENDA COMMUNAUTAIRE (P. Prieur)</a><p>Conférences, retraites, promenades, fêtes des moines…</p>
                     <a href="https://docs.google.com/spreadsheets/d/14BfFLTsF54yjQVkQhylWuqB65ag2LhMYe08ubXkvlYE/edit#gid=0">TABLEAU DES SERVICES</a><p>Sur GoogleSheets (P. Louis).</p>
-                    <a href={% url 'hotellerie:listings_cuisine' %}>LISTE DES HÔTES</a><p>Listing de la cuisine.</p>
+                    <!-- TODO -->
+                    <a href="http://python.asj.com:8003/hotellerie/listings/cuisine/">LISTE DES HÔTES</a><p>Listing de la cuisine.</p>
                     <a href="http://192.168.1.146/Liste_retraites.html">LISTE DES RETRAITES ET DES RETRAITANTS</a><p>Générée par 4D (P. Dominique Savio).</p>
                     <a href="https://clairval.com/horaires-reglages/">HORAIRES SITE <span class="red-full">*</span></a><p>Réglages des horaires du site de l'Abbaye.</p>
                     <a href="http://www.asj.com/info/">INFOS</a><p>Liste des adresses mail, téléphone etc. (P. Stanislas).</p>
@@ -28,28 +29,36 @@
             <div class="col-4">
                 <h3>Absences</h3>
                     <a href={% url 'absences:list' %}>ABSENCES</a><p>Avis d'absence en ligne.</p>
-                    <a href={% url 'courses:home' %}>COURSES</a><p>Calendrier des absences (P. Ignace).</p>
+                    <!-- TODO -->
+                    <a href="http://services.asj.com/courses">COURSES</a><p>Calendrier des absences (P. Ignace).</p>
 
                 <h3>Sites de gestion d'obédiences</h3>
-                    <a href={% url 'hotellerie:main_home' %}>HÔTELLERIE (P. Martin) <span class="red-full">*</span></a><p></p>
-                    <a href={% url 'infirmerie:home' %}>INFIRMERIE (P. Thomas) <span class="red-full">*</span></a><p></p>
+                    <!-- TODO -->
+                    <a href="http://python.asj.com:8003/hotellerie/">HÔTELLERIE (P. Martin) <span class="red-full">*</span></a><p></p>
+                    <!-- TODO -->
+                    <a href="http://python.asj.com:8001/infirmerie/">INFIRMERIE (P. Thomas) <span class="red-full">*</span></a><p></p>
                     <a href={% url 'imprimerie:home' %}>IMPRIMERIE <span class="red-full">*</span></a><p></p>
-                    <a href={% url 'editor:home' %}>ÉDITIONS (P. Martin)</a><p></p>
+                    <!-- TODO -->
+                    <a href="http://python.asj.com:8004/editor/">ÉDITIONS (P. Martin)</a><p></p>
 
                     <p class="text-justify border rounded border-dark p-2 m-0"><span class="red-full">*</span> Sites à accès protégé par un mot de passe autre que "moines".</p>
                 </div>
 
             <div class="col-4">
                 <h3>Outils</h3>
-                    <a href={% url 'ordomatic:home' %}>ORDOMATIC</a><p>Créez votre ordo en ligne.</p>
-                    <a href={% url 'livrets:home' %}>LIVRETS</a><p>Livrets de messe pour les retraites.</p>
+                    <!-- TODO -->
+                    <a href="http://services.asj.com/ordomatic-php">ORDOMATIC</a><p>Créez votre ordo en ligne.</p>
+                    <!-- TODO -->
+                    <a href="http://services.asj.com/livrets">LIVRETS</a><p>Livrets de messe pour les retraites.</p>
                     <a href={% url 'accenteur:home' %}>ACCENTEUR</a><p>Numéricum instruméntum ad latínos textus accentizándos.</p>
-                    <a href={% url 'barcode:home' %}>BARCODE</a><p>Un petit générateur de codes barres sympa.</p>
+                    <!-- TODO -->
+                    <a href="http://python.asj.com:8007/barcode/">BARCODE</a><p>Un petit générateur de codes barres sympa.</p>
 
                 <h3>Gregorio</h3>
                     <a href="http://gregorio-doc.asj.com">GREGORIO-DOC</a><p>Offline official doc of Gregorio.</p>
                     <a href="http://gregorio-doc.asj.com/gabc/summary-gabc.pdf">MEMO</a><p>A short Summary of GABC notations.</p>
-                    <a href={% url 'jgabc:home' %}>GREGORIO-SCORES</a><p>Create your Gregorio scores online.</p>
+                    <!-- TODO -->
+                    <a href="http://services.asj.com/jgabc">GREGORIO-SCORES</a><p>Create your Gregorio scores online.</p>
 
                 <h3>Divers</h3>
                     <a href={% url 'polyglotte:home' %}>POLYGLOTTE</a><p>Bible en hébreu, grec et latin.</p>
