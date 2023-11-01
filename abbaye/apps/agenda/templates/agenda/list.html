@@ -32,7 +32,7 @@
         <div id="days_list" class="col-7 mt-2">
             {% for day in days.values %}
                 <div class="border border-warning rounded mb-3 p-3">
-                    <h4 class="date text-center red-dark fw-bold mt-2 mb-3">{{ day.date }}</h4>
+                    <h4 class="date text-center red-dark fw-bold mt-2 mb-3">{{ day.date|date:"l j F Y" }}</h4>
 
                     {% if day.feasts %}
                         <div class="text-center mb-4">
