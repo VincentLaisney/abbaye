@@ -58,7 +58,7 @@ def details(request, *args, **kwargs):
     """ Details of a ticket. """
     ticket = get_object_or_404(Ticket, pk=kwargs['pk'])
     mandatory_recipients = '</br>'.join(
-        monk.name + ' (' + monk.email + ')'
+        monk.__str__() + ' (' + monk.email + ')'
         for monk in mandatory_recipients_queryset()
     )
     additional_recipients = ticket.additional_recipients_as_string()
