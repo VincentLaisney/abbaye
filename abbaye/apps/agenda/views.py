@@ -26,6 +26,7 @@ def agenda_as_list(request, *args, **kwargs):
         {
             'advanced_user': advanced_user,
             'days': days,
+            'day_as_string': day.strftime("%d/%m/%Y"),
         },
     )
 
