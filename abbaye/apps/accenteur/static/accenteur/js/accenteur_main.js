@@ -1,1 +1,0 @@
-/media/frromain/DATA/Sites/accenteur/static/js/accenteur_main.js

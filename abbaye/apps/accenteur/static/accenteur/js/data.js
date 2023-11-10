@@ -1,1 +1,0 @@
-/media/frromain/DATA/Sites/accenteur/static/js/data.js

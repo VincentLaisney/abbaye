@@ -1,0 +1,3 @@
+[submodule "abbaye/apps/accenteur/static/accenteur/accenteur-github"]
+	path = abbaye/apps/accenteur/static/accenteur/accenteur-github
+	url = https://github.com/BrRoman/accenteur
