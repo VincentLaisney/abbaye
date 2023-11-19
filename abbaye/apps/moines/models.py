@@ -14,7 +14,7 @@ class Monk(models.Model):
         null=True,
     )
     entry = models.DateField()
-    rank = models.SmallIntegerField(
+    rank_entry = models.SmallIntegerField(
         default=1,
     )
     habit = models.DateField(

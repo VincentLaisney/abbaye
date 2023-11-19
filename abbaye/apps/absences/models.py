@@ -78,7 +78,7 @@ class Ticket(models.Model):
         """ String containing all the monks of this ticket. """
         return ', '.join(
             monk.__str__() for monk in self.monks.all()
-            .order_by('absolute_rank', 'entry', 'rank')
+            .order_by('absolute_rank', 'entry', 'rank_entry')
         )
 
     def additional_recipients_as_string(self):
@@ -86,7 +86,7 @@ class Ticket(models.Model):
         return '</br>'.join(
             (monk.__str__() + ' (' + monk.email + ')')
             for monk in self.additional_recipients.all()
-            .order_by('entry', 'rank')
+            .order_by('entry', 'rank_entry')
         )
 
     def is_past(self):

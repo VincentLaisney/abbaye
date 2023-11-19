@@ -29,7 +29,7 @@ class MonkForm(forms.ModelForm):
         label='Date d\'entrée',
         label_suffix=' :',
     )
-    rank = forms.IntegerField(
+    rank_entry = forms.IntegerField(
         required=False,
         label='Rang',
         label_suffix=' :',
