@@ -1,6 +1,5 @@
 """ apps/imprimerie/views_memo.py """
 
-import markdown as md
 
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
@@ -14,16 +13,12 @@ from .forms import MemoForm
 @group_required('Imprimerie')
 def memo(request):
     """ Memo imprimerie. """
-    markdown = Memo.objects.first().content
-    html = md.markdown(
-        markdown,
-        extensions=['markdown.extensions.fenced_code']
-    )
+    quill = Memo.objects.first()
     return render(
         request,
         'imprimerie/memo/memo.html',
         {
-            'html': html,
+            'quill': quill,
         },
     )
 
