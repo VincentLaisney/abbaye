@@ -127,11 +127,11 @@ def delete(request, *args, **kwargs):
             data['back_date'].year
         )
         monks = ticket.monks.all() \
-            .order_by('entry', 'rank') \
+            .order_by('entry', 'rank_entry') \
             .values_list('pk', flat=True)
         mandatory_recipients = mandatory_recipients_queryset()
         additional_recipients = ticket.additional_recipients.all() \
-            .order_by('entry', 'rank') \
+            .order_by('entry', 'rank_entry') \
             .values_list('pk', flat=True)
         form = TicketForm(request.POST, instance=ticket)
         # TODO: How to delete ticket before sending mail without losing data?
@@ -162,7 +162,7 @@ def mandatory_recipients_queryset():
     return Monk.objects \
         .filter(absences_recipient=True) \
         .filter(is_active=True) \
-        .order_by('absolute_rank', 'entry', 'rank')
+        .order_by('absolute_rank', 'entry', 'rank_entry')
 
 
 def send_email(data, monks, mandatory_recipients, additional_recipients, action=''):

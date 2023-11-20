@@ -28,7 +28,7 @@ def home(request):
 
 def list(request):
     """ List of monks. """
-    monks = Monk.objects.all().order_by('entry', 'rank')
+    monks = Monk.objects.all().order_by('entry', 'rank_entry')
     return render(
         request,
         'moines/list.html',

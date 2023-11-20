@@ -144,7 +144,7 @@ def fetch_data(today):
             feast_month=day.month
         ) & Monk.objects.filter(
             feast_day=day.day
-        ).order_by('absolute_rank', 'entry', 'rank')
+        ).order_by('absolute_rank', 'entry', 'rank_entry')
 
         # Absences of this day:
         absences = Ticket.objects \

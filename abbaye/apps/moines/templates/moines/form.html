@@ -108,28 +108,28 @@
             <!-- Rang -->
             <div class="d-flex justify-content-between align-items-end">
                 <div class="form-group col-2 ms-5">
-                    {{ form.rank.label_tag }}
+                    {{ form.rank_entry.label_tag }}
 
                     {% if form.is_bound %}
-                        {% if form.rank.errors %}
-                            {% render_field form.rank class="form-control is-invalid" %}
-                            {% for error in form.rank.errors %}
+                        {% if form.rank_entry.errors %}
+                            {% render_field form.rank_entry class="form-control is-invalid" %}
+                            {% for error in form.rank_entry.errors %}
                                 <div class="invalid-feedback" style="display: block;">
                                     {{ error }}
                                 </div>
                             {% endfor %}
                         {% else %}
-                            {% render_field form.rank class="form-control is-valid" %}
+                            {% render_field form.rank_entry class="form-control is-valid" %}
                         {% endif %}
                     {% else %}
-                        {% render_field form.rank class="form-control" %}
+                        {% render_field form.rank_entry class="form-control" %}
                     {% endif %}
                 </div>
 
                 <div class="ms-2">
-                    {% if form.rank.help_text %}
+                    {% if form.rank_entry.help_text %}
                         <small class="form-text text-muted">
-                            {{ form.rank.help_text }}
+                            {{ form.rank_entry.help_text }}
                         </small>
                     {% endif %}
                 </div>
