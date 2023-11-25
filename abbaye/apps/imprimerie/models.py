@@ -50,7 +50,7 @@ class Client(models.Model):
     )
 
     def __str__(self):
-        return '{} {} {}'.format(self.quality, self.first_name, self.last_name).lstrip()
+        return '{} {}'.format(self.first_name, self.last_name).lstrip()
 
 
 class Paper(models.Model):
