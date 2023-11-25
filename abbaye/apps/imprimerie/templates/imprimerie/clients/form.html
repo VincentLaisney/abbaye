@@ -1,13 +1,226 @@
 {% extends 'imprimerie/main_imprimerie.html' %}
 
+{% load widget_tweaks %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item"><a href={% url 'imprimerie:clients_list' %}>Clients</a></li>
-    <li class="breadcrumb-item active">Form</li>
+    {% if client %}
+        <li class="breadcrumb-item active">Modifier</li>
+    {% else %}
+        <li class="breadcrumb-item active">Créer</li>
+    {% endif %}
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h4>Form for client</h4>
+    <div class="d-flex flex-column align-items-center">
+        <form method="post" novalidate class="d-flex flex-column align-items-center">
+            {% csrf_token %}
 
-    <a href={% url 'imprimerie:clients_list' %}>Retour à la liste</a>
+            <!-- Qualité -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.quality.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.quality.errors %}
+                        {% render_field form.quality class='is-invalid' %}
+                        {% for error in form.quality.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.quality class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.quality %}
+                {% endif %}
+                {% if form.quality.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.quality.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Prénom -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.first_name.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.first_name.errors %}
+                        {% render_field form.first_name class='is-invalid' %}
+                        {% for error in form.first_name.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.first_name class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.first_name %}
+                {% endif %}
+                {% if form.first_name.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.first_name.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Nom -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.last_name.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.last_name.errors %}
+                        {% render_field form.last_name class='is-invalid' %}
+                        {% for error in form.last_name.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.last_name class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.last_name %}
+                {% endif %}
+                {% if form.last_name.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.last_name.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Adresse 1 -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.address1.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.address1.errors %}
+                        {% render_field form.address1 class='is-invalid' %}
+                        {% for error in form.address1.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.address1 class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.address1 %}
+                {% endif %}
+                {% if form.address1.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.address1.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Adresse 2 -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.address2.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.address2.errors %}
+                        {% render_field form.address2 class='is-invalid' %}
+                        {% for error in form.address2.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.address2 class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.address2 %}
+                {% endif %}
+                {% if form.address2.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.address2.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Adresse 3 -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.address3.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.address3.errors %}
+                        {% render_field form.address3 class='is-invalid' %}
+                        {% for error in form.address3.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.address3 class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.address3 %}
+                {% endif %}
+                {% if form.address3.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.address3.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Code postal -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.zip.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.zip.errors %}
+                        {% render_field form.zip class='is-invalid' %}
+                        {% for error in form.zip.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.zip class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.zip %}
+                {% endif %}
+                {% if form.zip.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.zip.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Ville -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.city.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.city.errors %}
+                        {% render_field form.city class='is-invalid' %}
+                        {% for error in form.city.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.city class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.city %}
+                {% endif %}
+                {% if form.city.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.city.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <div class='invalid-feedback d-block'>
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <div class="d-flex">
+                <button type="submit" class="btn btn-primary btn-block mt-3 mx-1">Valider</button>
+                <button class="btn btn-secondary mt-3 mx-1">Annuler</button>
+            </div>
+        </form>
+    </div>
 {% endblock content %}

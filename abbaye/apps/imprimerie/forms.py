@@ -2,7 +2,7 @@
 
 from django import forms
 
-from .models import Memo
+from .models import Client, Memo
 
 
 class MemoForm(forms.ModelForm):
@@ -12,3 +12,52 @@ class MemoForm(forms.ModelForm):
         fields = [
             'content',
         ]
+
+
+class ClientForm(forms.ModelForm):
+    """ Form for Client. """
+    quality = forms.CharField(
+        label='Qualité :',
+        required=False,
+    )
+    first_name = forms.CharField(
+        label='Prénom :',
+        widget=forms.TextInput(),
+        required=False,
+    )
+    last_name = forms.CharField(
+        label='Nom :',
+        error_messages={
+            'required': 'Ce champ est obligatoire.',
+        },
+        widget=forms.TextInput(),
+    )
+    address1 = forms.CharField(
+        label='Adresse 1 :',
+        widget=forms.TextInput(),
+        required=False,
+    )
+    address2 = forms.CharField(
+        label='Adresse 2 :',
+        widget=forms.TextInput(),
+        required=False,
+    )
+    address3 = forms.CharField(
+        label='Adresse 3 :',
+        widget=forms.TextInput(),
+        required=False,
+    )
+    zip = forms.CharField(
+        label='Code postal :',
+        widget=forms.TextInput(),
+        required=False,
+    )
+    city = forms.CharField(
+        label='Ville :',
+        widget=forms.TextInput(),
+        required=False,
+    )
+
+    class Meta:
+        model = Client
+        fields = '__all__'

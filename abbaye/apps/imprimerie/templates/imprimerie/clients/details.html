@@ -3,11 +3,49 @@
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item"><a href={% url 'imprimerie:clients_list' %}>Clients</a></li>
-    <li class="breadcrumb-item active">Details</li>
+    <li class="breadcrumb-item active">Détails</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h4>Details of client</h4>
+    <h4 class="mb-3">{{ client }}</h4>
 
+    <div class="w-25">
+        <table class="table table-borderless table-sm">
+            <tr>
+                <td class="fw-bold">Qualité :</td>
+                <td>{{ client.quality }}</td>
+            </tr>
+            <tr>
+                <td class="fw-bold">Prénom :</td>
+                <td>{{ client.first_name }}</td>
+            </tr>
+            <tr>
+                <td class="fw-bold">Nom :</td>
+                <td>{{ client.last_name }}</td>
+            </tr>
+            <tr>
+                <td class="fw-bold">Adresse 1 :</td>
+                <td>{{ client.address1 }}</td>
+            </tr>
+            <tr>
+                <td class="fw-bold">Adresse 2 :</td>
+                <td>{{ client.address2 }}</td>
+            </tr>
+            <tr>
+                <td class="fw-bold">Adresse 3 :</td>
+                <td>{{ client.address3 }}</td>
+            </tr>
+            <tr>
+                <td class="fw-bold">Code postal :</td>
+                <td>{{ client.zip }}</td>
+            </tr>
+            <tr>
+                <td class="fw-bold">Ville :</td>
+                <td>{{ client.city }}</td>
+            </tr>
+        </table>
+    </div>
+    <a href={% url 'imprimerie:clients_update' client.pk %}>Modifier</a>
+    <a href={% url 'imprimerie:clients_delete' client.pk %}>Supprimer</a>
     <a href={% url 'imprimerie:clients_list' %}>Retour à la liste</a>
 {% endblock content %}
