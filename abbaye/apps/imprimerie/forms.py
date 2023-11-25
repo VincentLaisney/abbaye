@@ -2,7 +2,7 @@
 
 from django import forms
 
-from .models import Client, Memo
+from .models import Client, Memo, Paper
 
 
 class MemoForm(forms.ModelForm):
@@ -60,4 +60,29 @@ class ClientForm(forms.ModelForm):
 
     class Meta:
         model = Client
+        fields = '__all__'
+
+
+class PaperForm(forms.ModelForm):
+    """ Form for Client. """
+    name = forms.CharField(
+        label='Nom (marque) :',
+    )
+    dim1 = forms.CharField(
+        label='Dimension 1 :',
+    )
+    dim2 = forms.CharField(
+        label='Dimension 2 :',
+        help_text='Rappel: cette dimension donne le sens des fibres.'
+    )
+    weight = forms.IntegerField(
+        label='Grammage :',
+    )
+    price = forms.DecimalField(
+        label='Prix au mille :',
+        required=False,
+    )
+
+    class Meta:
+        model = Paper
         fields = '__all__'
