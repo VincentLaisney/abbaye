@@ -65,7 +65,7 @@ class ClientForm(forms.ModelForm):
 
 
 class PaperForm(forms.ModelForm):
-    """ Form for Client. """
+    """ Form for Paper. """
     name = forms.CharField(
         label='Nom (marque) :',
     )
