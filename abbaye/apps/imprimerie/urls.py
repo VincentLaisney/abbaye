@@ -19,6 +19,11 @@ urlpatterns = [
     path('clients/<int:pk>/', views_clients.details, name='clients_details'),
     path('clients/<int:pk>/update/', views_clients.update, name='clients_update'),
     path('clients/<int:pk>/delete/', views_clients.delete, name='clients_delete'),
+    path(
+        'clients/autocomplete/',
+        views_clients.ClientAutocompleteView.as_view(),
+        name='clients_autocomplete'
+    ),
     path('papers/', views_papers.list, name='papers_list'),
     path('papers/create/', views_papers.create, name='papers_create'),
     path('papers/<int:pk>/', views_papers.details, name='papers_details'),

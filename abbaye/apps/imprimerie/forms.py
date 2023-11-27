@@ -1,8 +1,9 @@
 """ apps/imprimerie/forms.py """
 
 from django import forms
+from dal import autocomplete
 
-from .models import Client, Memo, Paper
+from .models import Client, Memo, Paper, Project
 
 
 class MemoForm(forms.ModelForm):
@@ -85,4 +86,26 @@ class PaperForm(forms.ModelForm):
 
     class Meta:
         model = Paper
+        fields = '__all__'
+
+
+class ProjectForm(forms.ModelForm):
+    """ Form for Project. """
+    name = forms.CharField(
+        label='Nom :',
+    )
+    client = forms.ModelChoiceField(
+        label='Client :',
+        queryset=Client.objects.all().order_by('last_name', 'first_name'),
+        widget=autocomplete.ModelSelect2(
+            url='imprimerie:clients_autocomplete'
+        ),
+    )
+    notes = forms.CharField(
+        label='Notes :',
+        required=False,
+    )
+
+    class Meta:
+        model = Project
         fields = '__all__'

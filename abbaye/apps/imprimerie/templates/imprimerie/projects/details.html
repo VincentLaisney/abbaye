@@ -3,11 +3,30 @@
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_list' %}>Projets</a></li>
-    <li class="breadcrumb-item active">Details</li>
+    <li class="breadcrumb-item active">Détails</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h4>Details of project</h4>
+    <h4>{{ project }}</h4>
 
+    <div class="w-25">
+        <table class="table table-borderless table-sm">
+            <tr>
+                <td class="fw-bold">Nom :</td>
+                <td>{{ project.name }}</td>
+            </tr>
+            <tr>
+                <td class="fw-bold">Client :</td>
+                <td>{{ project.client }}</td>
+            </tr>
+            <tr>
+                <td class="fw-bold">Notes :</td>
+                <td>{{ project.notes }}</td>
+            </tr>
+        <table>
+    <div>
+
+    <a href={% url 'imprimerie:projects_update' project.pk %}>Modifier</a>
+    <a href={% url 'imprimerie:projects_delete' project.pk %}>Supprimer</a>
     <a href={% url 'imprimerie:projects_list' %}>Retour à la liste</a>
 {% endblock content %}

@@ -1,5 +1,7 @@
 """ apps/imprimerie/views_clients.py """
 
+from dal import autocomplete
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -94,3 +96,11 @@ def delete(request, **kwargs):
             'client': client,
         }
     )
+
+
+class ClientAutocompleteView(autocomplete.Select2QuerySetView):
+    """ Return a set of Clients according to the user search value. """
+
+    def get_queryset(self):
+        clients = Client.objects.filter(last_name__icontains=self.q)
+        return clients.order_by('last_name', 'first_name')
