@@ -3,7 +3,7 @@
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item"><a href={% url 'imprimerie:papers_list' %}>Papiers</a></li>
-    <li class="breadcrumb-item active">Détails</li>
+    <li class="breadcrumb-item active">{{ paper }}</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
