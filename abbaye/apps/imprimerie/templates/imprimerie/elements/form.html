@@ -8,7 +8,8 @@
     <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_list' %}>Projets</a></li>
     <li class="breadcrumb-item"><a href={% url 'imprimerie:project_details' project.pk %}>{{ project }}</a></li>
     {% if element %}
-        <li class="breadcrumb-item active">Modifier un élément</li>
+        <li class="breadcrumb-item"><a href={% url 'imprimerie:element_details' project.pk element.pk %}>{{ element }}</a></li>
+        <li class="breadcrumb-item active">Modifier</li>
     {% else %}
         <li class="breadcrumb-item active">Créer un élément</li>
     {% endif %}
