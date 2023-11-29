@@ -46,6 +46,54 @@
                 {% endif %}
             </div>
 
+            <!-- Quantité -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.quantity.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.quantity.errors %}
+                        {% render_field form.quantity class='is-invalid' %}
+                        {% for error in form.quantity.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.quantity class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.quantity %}
+                {% endif %}
+                {% if form.quantity.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.quantity.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Couleur -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.color.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.color.errors %}
+                        {% render_field form.color class='is-invalid' %}
+                        {% for error in form.color.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.color class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.color %}
+                {% endif %}
+                {% if form.color.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.color.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
             <!-- Papier -->
             <div class='form-group d-flex flex-column align-items-start'>
                 {{ form.paper.label_tag }}
@@ -66,6 +114,222 @@
                 {% if form.paper.help_text %}
                     <small class='form-text text-muted'>
                         {{ form.paper.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Papier coupé en… -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.paper_cut_into.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.paper_cut_into.errors %}
+                        {% render_field form.paper_cut_into class='is-invalid' %}
+                        {% for error in form.paper_cut_into.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.paper_cut_into class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.paper_cut_into %}
+                {% endif %}
+                {% if form.paper_cut_into.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.paper_cut_into.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Papier dim. 1 machine -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.paper_dim1_machine.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.paper_dim1_machine.errors %}
+                        {% render_field form.paper_dim1_machine class='is-invalid' %}
+                        {% for error in form.paper_dim1_machine.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.paper_dim1_machine class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.paper_dim1_machine %}
+                {% endif %}
+                {% if form.paper_dim1_machine.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.paper_dim1_machine.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Papier dim. 2 machine -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.paper_dim2_machine.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.paper_dim2_machine.errors %}
+                        {% render_field form.paper_dim2_machine class='is-invalid' %}
+                        {% for error in form.paper_dim2_machine.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.paper_dim2_machine class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.paper_dim2_machine %}
+                {% endif %}
+                {% if form.paper_dim2_machine.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.paper_dim2_machine.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Largeur du fichier -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.file_width.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.file_width.errors %}
+                        {% render_field form.file_width class='is-invalid' %}
+                        {% for error in form.file_width.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.file_width class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.file_width %}
+                {% endif %}
+                {% if form.file_width.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.file_width.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Longueur du fichier -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.file_height.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.file_height.errors %}
+                        {% render_field form.file_height class='is-invalid' %}
+                        {% for error in form.file_height.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.file_height class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.file_height %}
+                {% endif %}
+                {% if form.file_height.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.file_height.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Imposition -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.imposition.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.imposition.errors %}
+                        {% render_field form.imposition class='is-invalid' %}
+                        {% for error in form.imposition.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.imposition class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.imposition %}
+                {% endif %}
+                {% if form.imposition.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.imposition.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Nombre de pages -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.number_of_sheets_doc.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.number_of_sheets_doc.errors %}
+                        {% render_field form.number_of_sheets_doc class='is-invalid' %}
+                        {% for error in form.number_of_sheets_doc.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.number_of_sheets_doc class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.number_of_sheets_doc %}
+                {% endif %}
+                {% if form.number_of_sheets_doc.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.number_of_sheets_doc.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Recto-verso -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.recto_verso.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.recto_verso.errors %}
+                        {% render_field form.recto_verso class='is-invalid' %}
+                        {% for error in form.recto_verso.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.recto_verso class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.recto_verso %}
+                {% endif %}
+                {% if form.recto_verso.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.recto_verso.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Notes -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.notes.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.notes.errors %}
+                        {% render_field form.notes class='is-invalid' %}
+                        {% for error in form.notes.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.notes class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.notes %}
+                {% endif %}
+                {% if form.notes.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.notes.help_text }}
                     </small>
                 {% endif %}
             </div>
