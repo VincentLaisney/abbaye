@@ -129,12 +129,26 @@ def update_element(request, **kwargs):
     """ Update an element for a project. """
     element = get_object_or_404(Element, pk=kwargs['pk'])
     project = get_object_or_404(Project, pk=kwargs['pk_project'])
+
+    if request.method == 'POST':
+        form = ElementForm(request.POST, instance=element)
+
+        if form.is_valid():
+            element = form.save(commit=False)
+            element.project = project
+            element.save()
+            return HttpResponseRedirect(reverse('imprimerie:projects_details', args=[project.pk]))
+
+    else:
+        form = ElementForm(instance=element)
+
     return render(
         request,
         'imprimerie/elements/form.html',
         {
-            'project': project,
+            'form': form,
             'element': element,
+            'project': project,
         }
     )
 
