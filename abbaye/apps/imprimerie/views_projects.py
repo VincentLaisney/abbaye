@@ -106,9 +106,9 @@ def create_element(request, **kwargs):
         form = ElementForm(request.POST)
 
         if form.is_valid():
-            form.save(commit=False)
-            form.cleaned_data['project'] = project
-            form.save()
+            element = form.save(commit=False)
+            element.project = project
+            element.save()
             return HttpResponseRedirect(reverse('imprimerie:projects_details', args=[project.pk]))
 
     else:
