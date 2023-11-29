@@ -1,8 +1,9 @@
 """ apps/imprimerie/forms.py """
 
 from django import forms
+from dal import autocomplete
 
-from .models import Memo
+from .models import Client, Element, Memo, Paper, Project
 
 
 class MemoForm(forms.ModelForm):
@@ -12,3 +13,147 @@ class MemoForm(forms.ModelForm):
         fields = [
             'content',
         ]
+
+
+class ClientForm(forms.ModelForm):
+    """ Form for Client. """
+    quality = forms.CharField(
+        label='Qualité :',
+        required=False,
+    )
+    first_name = forms.CharField(
+        label='Prénom :',
+        widget=forms.TextInput(),
+        required=False,
+    )
+    last_name = forms.CharField(
+        label='Nom :',
+        error_messages={
+            'required': 'Ce champ est obligatoire.',
+        },
+        widget=forms.TextInput(),
+    )
+    address1 = forms.CharField(
+        label='Adresse 1 :',
+        widget=forms.TextInput(),
+        required=False,
+    )
+    address2 = forms.CharField(
+        label='Adresse 2 :',
+        widget=forms.TextInput(),
+        required=False,
+    )
+    address3 = forms.CharField(
+        label='Adresse 3 :',
+        widget=forms.TextInput(),
+        required=False,
+    )
+    zip = forms.CharField(
+        label='Code postal :',
+        widget=forms.TextInput(),
+        required=False,
+    )
+    city = forms.CharField(
+        label='Ville :',
+        widget=forms.TextInput(),
+        required=False,
+    )
+
+    class Meta:
+        model = Client
+        fields = '__all__'
+
+
+class PaperForm(forms.ModelForm):
+    """ Form for Paper. """
+    name = forms.CharField(
+        label='Nom (marque) :',
+    )
+    dim1 = forms.CharField(
+        label='Dimension 1 :',
+    )
+    dim2 = forms.CharField(
+        label='Dimension 2 :',
+        help_text='Rappel: cette dimension donne le sens des fibres.'
+    )
+    weight = forms.IntegerField(
+        label='Grammage :',
+    )
+    price = forms.DecimalField(
+        label='Prix au mille :',
+        required=False,
+    )
+
+    class Meta:
+        model = Paper
+        fields = '__all__'
+
+
+class ProjectForm(forms.ModelForm):
+    """ Form for Project. """
+    name = forms.CharField(
+        label='Nom :',
+    )
+    client = forms.ModelChoiceField(
+        label='Client :',
+        queryset=Client.objects.all().order_by('last_name', 'first_name'),
+        widget=autocomplete.ModelSelect2(
+            url='imprimerie:clients_autocomplete'
+        ),
+    )
+    notes = forms.CharField(
+        label='Notes :',
+        required=False,
+    )
+
+    class Meta:
+        model = Project
+        fields = '__all__'
+
+
+class ElementForm(forms.ModelForm):
+    """ Form for Element. """
+    name = forms.CharField(
+        label='Nom :',
+    )
+    quantity = forms.IntegerField(
+        required=False,
+    )
+    color = forms.CharField(
+        required=False,
+    )
+    paper = forms.ModelChoiceField(
+        label='Papier :',
+        queryset=Paper.objects.all().order_by('name'),
+        widget=autocomplete.ModelSelect2(
+            url='imprimerie:papers_autocomplete'
+        ),
+        required=False,
+    )
+    paper_cut_into = forms.IntegerField(
+        required=False,
+    )
+    paper_dim1_machine = forms.FloatField(
+        required=False,
+    )
+    paper_dim2_machine = forms.FloatField(
+        required=False,
+    )
+    file_width = forms.FloatField(
+        required=False,
+    )
+    file_height = forms.FloatField(
+        required=False,
+    )
+    # imposition = forms.IntegerField()
+    number_of_sheets_doc = forms.IntegerField(
+        required=False,
+    )
+    # recto_verso = forms.BooleanField()
+    notes = forms.CharField(
+        required=False,
+    )
+
+    class Meta:
+        model = Element
+        fields = '__all__'

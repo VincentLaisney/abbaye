@@ -6,15 +6,17 @@
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_list' %}>Projets</a></li>
-    {% if project %}
-        <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_details' project.pk %}>{{ project }}</a></li>
-        <li class="breadcrumb-item active">Modifier</li>
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_details' project.pk %}>{{ project }}</a></li>
+    {% if element %}
+        <li class="breadcrumb-item active">Modifier un élément</li>
     {% else %}
-        <li class="breadcrumb-item active">Créer</li>
+        <li class="breadcrumb-item active">Créer un élément</li>
     {% endif %}
 {% endblock breadcrumbs %}
 
 {% block content %}
+<h4>{{ project }}</h4>
+
 <div class="d-flex flex-column align-items-center">
     <form method="post" novalidate class="d-flex flex-column align-items-center">
         {% csrf_token %}
@@ -43,50 +45,26 @@
             {% endif %}
         </div>
 
-        <!-- Client -->
+        <!-- Papier -->
         <div class='form-group d-flex flex-column align-items-start'>
-            {{ form.client.label_tag }}
+            {{ form.paper.label_tag }}
             {% if form.is_bound %}
-                {% if form.client.errors %}
-                    {% render_field form.client class='is-invalid' %}
-                    {% for error in form.client.errors %}
+                {% if form.paper.errors %}
+                    {% render_field form.paper class='is-invalid' %}
+                    {% for error in form.paper.errors %}
                         <div class='invalid-feedback d-block'>
                             {{ error }}
                         </div>
                     {% endfor %}
                 {% else %}
-                    {% render_field form.client class='is-valid' %}
+                    {% render_field form.paper class='is-valid' %}
                 {% endif %}
             {% else %}
-                {% render_field form.client %}
+                {% render_field form.paper %}
             {% endif %}
-            {% if form.client.help_text %}
+            {% if form.paper.help_text %}
                 <small class='form-text text-muted'>
-                    {{ form.client.help_text }}
-                </small>
-            {% endif %}
-        </div>
-
-        <!-- Notes -->
-        <div class='form-group d-flex flex-column align-items-start'>
-            {{ form.notes.label_tag }}
-            {% if form.is_bound %}
-                {% if form.notes.errors %}
-                    {% render_field form.notes class='is-invalid' %}
-                    {% for error in form.notes.errors %}
-                        <div class='invalid-feedback d-block'>
-                            {{ error }}
-                        </div>
-                    {% endfor %}
-                {% else %}
-                    {% render_field form.notes class='is-valid' %}
-                {% endif %}
-            {% else %}
-                {% render_field form.notes %}
-            {% endif %}
-            {% if form.notes.help_text %}
-                <small class='form-text text-muted'>
-                    {{ form.notes.help_text }}
+                    {{ form.paper.help_text }}
                 </small>
             {% endif %}
         </div>
