@@ -3,11 +3,12 @@
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_list' %}>Projets</a></li>
-    <li class="breadcrumb-item active">Delete</li>
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:project_details' project.pk %}>{{ project }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h4>Delete a project</h4>
+    <h4>Supprimer un projet</h4>
 
     <a href={% url 'imprimerie:project_details' project.pk %}>Annuler</a>
 {% endblock content %}
