@@ -3,7 +3,7 @@
 from django import forms
 from dal import autocomplete
 
-from .models import Client, Memo, Paper, Project
+from .models import Client, Element, Memo, Paper, Project
 
 
 class MemoForm(forms.ModelForm):
@@ -108,4 +108,52 @@ class ProjectForm(forms.ModelForm):
 
     class Meta:
         model = Project
+        fields = '__all__'
+
+
+class ElementForm(forms.ModelForm):
+    """ Form for Element. """
+    name = forms.CharField(
+        label='Nom :',
+    )
+    quantity = forms.IntegerField(
+        required=False,
+    )
+    color = forms.CharField(
+        required=False,
+    )
+    paper = forms.ModelChoiceField(
+        label='Papier :',
+        queryset=Paper.objects.all().order_by('name'),
+        widget=autocomplete.ModelSelect2(
+            url='imprimerie:papers_autocomplete'
+        ),
+        required=False,
+    )
+    paper_cut_into = forms.IntegerField(
+        required=False,
+    )
+    paper_dim1_machine = forms.FloatField(
+        required=False,
+    )
+    paper_dim2_machine = forms.FloatField(
+        required=False,
+    )
+    file_width = forms.FloatField(
+        required=False,
+    )
+    file_height = forms.FloatField(
+        required=False,
+    )
+    # imposition = forms.IntegerField()
+    number_of_sheets_doc = forms.IntegerField(
+        required=False,
+    )
+    # recto_verso = forms.BooleanField()
+    notes = forms.CharField(
+        required=False,
+    )
+
+    class Meta:
+        model = Element
         fields = '__all__'

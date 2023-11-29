@@ -3,7 +3,7 @@
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_list' %}>Projets</a></li>
-    <li class="breadcrumb-item active">Détails</li>
+    <li class="breadcrumb-item active">{{ project }}</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
@@ -26,7 +26,25 @@
         <table>
     <div>
 
-    <a href={% url 'imprimerie:projects_update' project.pk %}>Modifier</a>
-    <a href={% url 'imprimerie:projects_delete' project.pk %}>Supprimer</a>
-    <a href={% url 'imprimerie:projects_list' %}>Retour à la liste</a>
+    <div class="d-flex flex-column align-items-center">
+        <a href={% url 'imprimerie:projects_update' project.pk %}>Modifier</a>
+        <a href={% url 'imprimerie:projects_delete' project.pk %}>Supprimer</a>
+        <a href={% url 'imprimerie:projects_list' %}>Retour à la liste</a>
+    </div>
+
+    <hr class="mt-5">
+    <div class="border border-dark rounded text-center my-5 mx-auto p-2 w-100">
+        <h4>Éléments</h4>
+
+        {% if elements %}
+            {% for element in elements %}
+                <ul>
+                    <li><a href={% url 'imprimerie:update_element' %}>{{ element }}<p></li>
+                </ul>
+            {% endfor %}
+        {% else %}
+            <h5>Pas d'éléments dans ce projet</h5>
+        {% endif %}
+        <a href={% url 'imprimerie:create_element' project.pk %}>Ajouter un élément</a>
+    </div>
 {% endblock content %}

@@ -6,8 +6,8 @@ from django.urls import reverse
 
 from apps.main.decorators import group_required
 
-from .models import Project
-from .forms import ProjectForm
+from .models import Element, Project
+from .forms import ElementForm, ProjectForm
 
 
 @group_required('Imprimerie')
@@ -49,11 +49,13 @@ def create(request):
 def details(request, **kwargs):
     """ Details of project. """
     project = get_object_or_404(Project, pk=kwargs['pk'])
+    elements = Element.objects.filter(project=project)
     return render(
         request,
         'imprimerie/projects/details.html',
         {
             'project': project,
+            'elements': elements,
         }
     )
 
@@ -92,5 +94,61 @@ def delete(request, **kwargs):
         'imprimerie/projects/delete.html',
         {
             'project': project,
+        }
+    )
+
+
+@group_required('Imprimerie')
+def create_element(request, **kwargs):
+    """ Create an element for a project. """
+    project = get_object_or_404(Project, pk=kwargs['pk_project'])
+    if request.method == 'POST':
+        form = ElementForm(request.POST)
+
+        if form.is_valid():
+            form.save(commit=False)
+            form.cleaned_data['project'] = project
+            form.save()
+            return HttpResponseRedirect(reverse('imprimerie:projects_details', args=[project.pk]))
+
+    else:
+        form = ElementForm()
+
+    return render(
+        request,
+        'imprimerie/elements/form.html',
+        {
+            'form': form,
+            'project': project,
+        }
+    )
+
+
+@group_required('Imprimerie')
+def update_element(request, **kwargs):
+    """ Update an element for a project. """
+    element = get_object_or_404(Element, pk=kwargs['pk'])
+    project = get_object_or_404(Project, pk=kwargs['pk_project'])
+    return render(
+        request,
+        'imprimerie/elements/form.html',
+        {
+            'project': project,
+            'element': element,
+        }
+    )
+
+
+@group_required('Imprimerie')
+def delete_element(request, **kwargs):
+    """ Delete an element for a project. """
+    element = get_object_or_404(Element, pk=kwargs['pk'])
+    project = get_object_or_404(Project, pk=kwargs['pk_project'])
+    return render(
+        request,
+        'imprimerie/elements/delete.html',
+        {
+            'project': project,
+            'element': element,
         }
     )

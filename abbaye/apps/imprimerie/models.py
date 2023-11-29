@@ -115,27 +115,55 @@ class Element(models.Model):
     name = models.CharField(
         max_length=255,
     )
-    quantity = models.IntegerField()
+    quantity = models.IntegerField(
+        null=True,
+        blank=True,
+    )
     color = models.CharField(
         max_length=255,
         choices=[
             ('CMYN', 'CMYN'),
             ('B&W', 'B&W'),
         ],
+        null=True,
+        blank=True,
     )
     paper = models.ForeignKey(
         Paper,
         on_delete=CASCADE,
+        null=True,
+        blank=True,
     )
-    paper_cut_into = models.IntegerField()
-    paper_dim1_machine = models.FloatField()
-    paper_dim2_machine = models.FloatField()
-    file_width = models.FloatField()
-    file_heigth = models.FloatField()
+    paper_cut_into = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    paper_dim1_machine = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    paper_dim2_machine = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    file_width = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    file_height = models.FloatField(
+        null=True,
+        blank=True,
+    )
     #imposition = models.IntegerField()
-    number_of_sheets_doc = models.IntegerField()
+    number_of_sheets_doc = models.IntegerField(
+        null=True,
+        blank=True,
+    )
     #recto_verso = models.BooleanField()
-    notes = models.TextField()
+    notes = models.TextField(
+        null=True,
+        blank=True,
+    )
 
     def __str__(self):
         return self.name

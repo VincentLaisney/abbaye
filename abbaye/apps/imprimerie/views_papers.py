@@ -1,5 +1,7 @@
 """ apps/imprimerie/views_papers.py """
 
+from dal import autocomplete
+
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
@@ -95,3 +97,11 @@ def delete(request, **kwargs):
             'paper': paper,
         }
     )
+
+
+class PaperAutocompleteView(autocomplete.Select2QuerySetView):
+    """ Return a set of Papers according to the user search value. """
+
+    def get_queryset(self):
+        papers = Paper.objects.filter(name__icontains=self.q)
+        return papers .order_by('name')
