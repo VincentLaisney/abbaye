@@ -6,7 +6,7 @@
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_list' %}>Projets</a></li>
-    <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_details' project.pk %}>{{ project }}</a></li>
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:project_details' project.pk %}>{{ project }}</a></li>
     {% if element %}
         <li class="breadcrumb-item active">Modifier un élément</li>
     {% else %}

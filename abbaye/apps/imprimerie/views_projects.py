@@ -31,7 +31,7 @@ def create(request):
 
         if form.is_valid():
             project = form.save()
-            return HttpResponseRedirect(reverse('imprimerie:projects_details', args=[project.pk]))
+            return HttpResponseRedirect(reverse('imprimerie:project_details', args=[project.pk]))
 
     else:
         form = ProjectForm()
@@ -70,7 +70,7 @@ def update(request, **kwargs):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('imprimerie:projects_details', args=[project.pk]))
+            return HttpResponseRedirect(reverse('imprimerie:project_details', args=[project.pk]))
 
     else:
         form = ProjectForm(instance=project)

@@ -33,7 +33,7 @@ def create(request):
 
         if form.is_valid():
             paper = form.save()
-            return HttpResponseRedirect(reverse('imprimerie:papers_details', args=[paper.pk]))
+            return HttpResponseRedirect(reverse('imprimerie:paper_details', args=[paper.pk]))
 
     else:
         form = PaperForm()
@@ -70,7 +70,7 @@ def update(request, **kwargs):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('imprimerie:papers_details', args=[paper.pk]))
+            return HttpResponseRedirect(reverse('imprimerie:paper_details', args=[paper.pk]))
 
     else:
         form = PaperForm(instance=paper)

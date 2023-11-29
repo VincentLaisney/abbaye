@@ -33,7 +33,7 @@ def create(request):
 
         if form.is_valid():
             client = form.save()
-            return HttpResponseRedirect(reverse('imprimerie:clients_details', args=[client.pk]))
+            return HttpResponseRedirect(reverse('imprimerie:client_details', args=[client.pk]))
 
     else:
         form = ClientForm()
@@ -70,7 +70,7 @@ def update(request, **kwargs):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('imprimerie:clients_details', args=[client.pk]))
+            return HttpResponseRedirect(reverse('imprimerie:client_details', args=[client.pk]))
 
     else:
         form = ClientForm(instance=client)

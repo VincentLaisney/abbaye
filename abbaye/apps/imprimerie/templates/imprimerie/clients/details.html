@@ -45,7 +45,7 @@
             </tr>
         </table>
     </div>
-    <a href={% url 'imprimerie:clients_update' client.pk %}>Modifier</a>
-    <a href={% url 'imprimerie:clients_delete' client.pk %}>Supprimer</a>
+    <a href={% url 'imprimerie:client_update' client.pk %}>Modifier</a>
+    <a href={% url 'imprimerie:client_delete' client.pk %}>Supprimer</a>
     <a href={% url 'imprimerie:clients_list' %}>Retour à la liste</a>
 {% endblock content %}
