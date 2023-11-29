@@ -39,7 +39,7 @@
         {% if elements %}
             {% for element in elements %}
                 <ul>
-                    <li><a href={% url 'imprimerie:update_element' %}>{{ element }}<p></li>
+                    <li><a href={% url 'imprimerie:update_element' project.pk element.pk %}>{{ element }}<p></li>
                 </ul>
             {% endfor %}
         {% else %}
