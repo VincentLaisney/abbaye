@@ -60,7 +60,7 @@
             </div>
 
             <!-- DESTINATION -->
-            <div>
+            <div class="my-5">
                 <h4 class="mt-5">Destination (facultatif) :</h4>
                 <div class="d-flex my-2">
                     {% if form.is_bound %}
@@ -86,8 +86,10 @@
                 </div>
             </div>
 
+            <p id="warning_language" class="border border-danger rounded px-3 py-2 danger fw-bold" style="text-justify: inter-word;" hidden>Attention ! La langue de votre navigateur est "<span id="browser_language"></span>". Il est vivement recommandé de la changer en "Français" (voir dans les paramètres de votre navigateur) pour éviter des erreurs de dates.</p>
+
             <!-- GO AND BACK -->
-            <div id="go_and_back" class="d-flex justify-content-between mt-5">
+            <div id="go_and_back" class="d-flex justify-content-between">
                 <!-- GO -->
                 <div id="go_block" class="col-5 m-2 border rounded p-2">
                     <h2 class="text-center">DÉPART</h2>
