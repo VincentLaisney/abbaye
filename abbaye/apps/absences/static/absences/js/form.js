@@ -1,12 +1,6 @@
 // absences/form.js
 
 $(document).ready(function () {
-    // If browser is not set in French: display a warning, because of the datepickers:
-    if (!navigator.language.includes('fr')) {
-        $('#browser_language').text(navigator.language);
-        $('#warning_language').attr('hidden', false);
-    }
-
     // Voiture/train: on change, display or hide group_train:
     $("#id_go_by").change(function () {
         if ($("#id_go_by option:selected").text() == "Train") {
