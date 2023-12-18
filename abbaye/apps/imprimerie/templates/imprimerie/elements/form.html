@@ -117,6 +117,9 @@
                     </small>
                 {% endif %}
             </div>
+            <div>
+                <p class="small">Prix du mille : <span id="prix_mille"></span> €<p>
+            </div>
 
             <!-- Papier coupé en… -->
             <div class='form-group d-flex flex-column align-items-start'>
@@ -140,6 +143,9 @@
                         {{ form.paper_cut_into.help_text }}
                     </small>
                 {% endif %}
+            </div>
+            <div>
+                <p class="small">Prix de la feuille : <span id="prix_feuille"></span> €<p>
             </div>
 
             <!-- Papier dim. 1 machine -->
@@ -343,5 +349,6 @@
 {% endblock content %}
 
 {% block javascript %}
+    {{ block.super }}
     {{ form.media }}
 {% endblock javascript %}

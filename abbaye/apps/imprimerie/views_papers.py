@@ -2,7 +2,8 @@
 
 from dal import autocomplete
 
-from django.http import HttpResponseRedirect
+from django.core.serializers import serialize
+from django.http import HttpResponseRedirect, JsonResponse
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 
@@ -105,3 +106,12 @@ class PaperAutocompleteView(autocomplete.Select2QuerySetView):
     def get_queryset(self):
         papers = Paper.objects.filter(name__icontains=self.q)
         return papers .order_by('name')
+
+
+def fetch_paper_data(request, **kwargs):
+    """ Returns the data of a Paper as an array, for Ajax. """
+    paper = serialize(
+        'json',
+        Paper.objects.filter(pk=kwargs['id_paper'])
+    )
+    return JsonResponse(paper, safe=False)

@@ -35,6 +35,8 @@ urlpatterns = [
     path('papers/autocomplete/',
          views_papers.PaperAutocompleteView.as_view(),
          name='papers_autocomplete'),
+    path('papers/fetch_paper_data/<int:id_paper>/',
+         views_papers.fetch_paper_data),
     # Projects:
     path('projects/', views_projects.list, name='projects_list'),
     path('projects/create/', views_projects.create, name='project_create'),
