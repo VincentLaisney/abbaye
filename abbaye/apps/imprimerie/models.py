@@ -154,15 +154,27 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
-    #imposition = models.IntegerField()
+    imposition = models.IntegerField(
+        null=True,
+        blank=True,
+    )
     number_of_sheets_doc = models.IntegerField(
         null=True,
         blank=True,
     )
-    #recto_verso = models.BooleanField()
+    recto_verso = models.BooleanField(
+        null=True,
+        blank=True,
+    )
     notes = models.TextField(
         null=True,
         blank=True,
+    )
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    modified = models.DateTimeField(
+        auto_now=True,
     )
 
     def __str__(self):

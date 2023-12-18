@@ -6,6 +6,7 @@
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item"><a href={% url 'imprimerie:clients_list' %}>Clients</a></li>
     {% if client %}
+        <li class="breadcrumb-item"><a href={% url 'imprimerie:client_details' client.pk %}>{{ client }}</a></li>
         <li class="breadcrumb-item active">Modifier</li>
     {% else %}
         <li class="breadcrumb-item active">Créer</li>
@@ -217,9 +218,13 @@
                 {% endfor %}
             {% endif %}
 
-            <div class="d-flex">
-                <button class="btn btn-secondary mt-3 mx-1">Annuler</button>
-                <button type="submit" class="btn btn-primary btn-block mt-3 mx-1">Valider</button>
+            <div class="w-100 d-flex justify-content-center align-items-between">
+                {% if client %}
+                    <a class="btn btn-secondary mx-1" href={% url 'imprimerie:client_details' client.pk %}>Annuler</a>
+                {% else %}
+                    <a class="btn btn-secondary mx-1" href={% url 'imprimerie:clients_list' %}>Annuler</a>
+                {% endif %}
+                <button type="submit" class="btn btn-primary mx-1">Valider</button>
             </div>
         </form>
     </div>

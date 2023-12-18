@@ -6,6 +6,7 @@
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item"><a href={% url 'imprimerie:papers_list' %}>Papiers</a></li>
     {% if paper %}
+        <li class="breadcrumb-item"><a href={% url 'imprimerie:paper_details' paper.pk %}>{{ paper }}</a></li>
         <li class="breadcrumb-item active">Modifier</li>
     {% else %}
         <li class="breadcrumb-item active">Créer</li>
@@ -13,142 +14,146 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-<div class="d-flex flex-column align-items-center">
-    <form method="post" novalidate class="d-flex flex-column align-items-center">
-        {% csrf_token %}
+    <div class="d-flex flex-column align-items-center">
+        <form method="post" novalidate class="d-flex flex-column align-items-center">
+            {% csrf_token %}
 
-        <!-- Nom -->
-        <div class='form-group d-flex flex-column align-items-start'>
-            {{ form.name.label_tag }}
-            {% if form.is_bound %}
-                {% if form.name.errors %}
-                    {% render_field form.name class='is-invalid' %}
-                    {% for error in form.name.errors %}
-                        <div class='invalid-feedback d-block'>
-                            {{ error }}
-                        </div>
-                    {% endfor %}
+            <!-- Nom -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.name.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.name.errors %}
+                        {% render_field form.name class='is-invalid' %}
+                        {% for error in form.name.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.name class='is-valid' %}
+                    {% endif %}
                 {% else %}
-                    {% render_field form.name class='is-valid' %}
+                    {% render_field form.name %}
                 {% endif %}
-            {% else %}
-                {% render_field form.name %}
-            {% endif %}
-            {% if form.name.help_text %}
-                <small class='form-text text-muted'>
-                    {{ form.name.help_text }}
-                </small>
-            {% endif %}
-        </div>
+                {% if form.name.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.name.help_text }}
+                    </small>
+                {% endif %}
+            </div>
 
-        <!-- Dimension 1 -->
-        <div class='form-group d-flex flex-column align-items-start'>
-            {{ form.dim1.label_tag }}
-            {% if form.is_bound %}
-                {% if form.dim1.errors %}
-                    {% render_field form.dim1 class='is-invalid' %}
-                    {% for error in form.dim1.errors %}
-                        <div class='invalid-feedback d-block'>
-                            {{ error }}
-                        </div>
-                    {% endfor %}
+            <!-- Dimension 1 -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.dim1.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.dim1.errors %}
+                        {% render_field form.dim1 class='is-invalid' %}
+                        {% for error in form.dim1.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.dim1 class='is-valid' %}
+                    {% endif %}
                 {% else %}
-                    {% render_field form.dim1 class='is-valid' %}
+                    {% render_field form.dim1 %}
                 {% endif %}
-            {% else %}
-                {% render_field form.dim1 %}
-            {% endif %}
-            {% if form.dim1.help_text %}
-                <small class='form-text text-muted'>
-                    {{ form.dim1.help_text }}
-                </small>
-            {% endif %}
-        </div>
+                {% if form.dim1.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.dim1.help_text }}
+                    </small>
+                {% endif %}
+            </div>
 
-        <!-- Dimension 2 -->
-        <div class='form-group d-flex flex-column align-items-start'>
-            {{ form.dim2.label_tag }}
-            {% if form.is_bound %}
-                {% if form.dim2.errors %}
-                    {% render_field form.dim2 class='is-invalid' %}
-                    {% for error in form.dim2.errors %}
-                        <div class='invalid-feedback d-block'>
-                            {{ error }}
-                        </div>
-                    {% endfor %}
+            <!-- Dimension 2 -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.dim2.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.dim2.errors %}
+                        {% render_field form.dim2 class='is-invalid' %}
+                        {% for error in form.dim2.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.dim2 class='is-valid' %}
+                    {% endif %}
                 {% else %}
-                    {% render_field form.dim2 class='is-valid' %}
+                    {% render_field form.dim2 %}
                 {% endif %}
-            {% else %}
-                {% render_field form.dim2 %}
-            {% endif %}
-            {% if form.dim2.help_text %}
-                <small class='form-text text-muted'>
-                    {{ form.dim2.help_text }}
-                </small>
-            {% endif %}
-        </div>
+                {% if form.dim2.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.dim2.help_text }}
+                    </small>
+                {% endif %}
+            </div>
 
-        <!-- Grammage -->
-        <div class='form-group d-flex flex-column align-items-start'>
-            {{ form.weight.label_tag }}
-            {% if form.is_bound %}
-                {% if form.weight.errors %}
-                    {% render_field form.weight class='is-invalid' %}
-                    {% for error in form.weight.errors %}
-                        <div class='invalid-feedback d-block'>
-                            {{ error }}
-                        </div>
-                    {% endfor %}
+            <!-- Grammage -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.weight.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.weight.errors %}
+                        {% render_field form.weight class='is-invalid' %}
+                        {% for error in form.weight.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.weight class='is-valid' %}
+                    {% endif %}
                 {% else %}
-                    {% render_field form.weight class='is-valid' %}
+                    {% render_field form.weight %}
                 {% endif %}
-            {% else %}
-                {% render_field form.weight %}
-            {% endif %}
-            {% if form.weight.help_text %}
-                <small class='form-text text-muted'>
-                    {{ form.weight.help_text }}
-                </small>
-            {% endif %}
-        </div>
+                {% if form.weight.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.weight.help_text }}
+                    </small>
+                {% endif %}
+            </div>
 
-        <!-- Prix -->
-        <div class='form-group d-flex flex-column align-items-start'>
-            {{ form.price.label_tag }}
-            {% if form.is_bound %}
-                {% if form.price.errors %}
-                    {% render_field form.price class='is-invalid' %}
-                    {% for error in form.price.errors %}
-                        <div class='invalid-feedback d-block'>
-                            {{ error }}
-                        </div>
-                    {% endfor %}
+            <!-- Prix -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.price.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.price.errors %}
+                        {% render_field form.price class='is-invalid' %}
+                        {% for error in form.price.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.price class='is-valid' %}
+                    {% endif %}
                 {% else %}
-                    {% render_field form.price class='is-valid' %}
+                    {% render_field form.price %}
                 {% endif %}
-            {% else %}
-                {% render_field form.price %}
-            {% endif %}
-            {% if form.price.help_text %}
-                <small class='form-text text-muted'>
-                    {{ form.price.help_text }}
-                </small>
-            {% endif %}
-        </div>
+                {% if form.price.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.price.help_text }}
+                    </small>
+                {% endif %}
+            </div>
 
-        {% if form.non_field_errors %}
-            {% for error in form.non_field_errors %}
-                <div class='invalid-feedback d-block'>
-                    {{ error }}
-                </div>
-            {% endfor %}
-        {% endif %}
+            {% if form.non_field_errors %}
+                {% for error in form.non_field_errors %}
+                    <div class='invalid-feedback d-block'>
+                        {{ error }}
+                    </div>
+                {% endfor %}
+            {% endif %}
 
-        <div class="d-flex">
-            <button class="btn btn-secondary mt-3 mx-1">Annuler</button>
-            <button type="submit" class="btn btn-primary btn-block mt-3 mx-1">Valider</button>
-        </div>
-    </form>
-</div>
+            <div class="w-100 d-flex justify-content-center align-items-between">
+                {% if paper %}
+                    <a class="btn btn-secondary mx-1" href={% url 'imprimerie:paper_details' paper.pk %}>Annuler</a>
+                {% else %}
+                    <a class="btn btn-secondary mx-1" href={% url 'imprimerie:papers_list' %}>Annuler</a>
+                {% endif %}
+                <button type="submit" class="btn btn-primary mx-1">Valider</button>
+            </div>
+        </form>
+    </div>
 {% endblock content %}

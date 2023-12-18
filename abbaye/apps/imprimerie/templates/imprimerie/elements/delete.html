@@ -1,1 +1,15 @@
-Delete an element.
+{% extends 'imprimerie/main_imprimerie.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_list' %}>Projets</a></li>
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:project_details' project.pk %}>{{ project }}</a></li>
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:element_details' project.pk element.pk %}>{{ element }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h4>Supprimer un élément</h4>
+
+    <a href={% url 'imprimerie:project_details' project.pk %}>Annuler</a>
+{% endblock content %}
