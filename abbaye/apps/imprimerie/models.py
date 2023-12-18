@@ -154,6 +154,14 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
+    margins = models.FloatField(
+        null=True,
+        blank=True,
+    )
+    gutters = models.FloatField(
+        null=True,
+        blank=True,
+    )
     imposition = models.IntegerField(
         null=True,
         blank=True,
@@ -163,6 +171,26 @@ class Element(models.Model):
         blank=True,
     )
     recto_verso = models.BooleanField(
+        null=True,
+        blank=True,
+    )
+    massicot = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    pelliculage = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    rainage = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    encollage = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    agrafage = models.IntegerField(
         null=True,
         blank=True,
     )
