@@ -7,7 +7,7 @@
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_list' %}>Projets</a></li>
     {% if project %}
-        <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_details' project.pk %}>{{ project }}</a></li>
+        <li class="breadcrumb-item"><a href={% url 'imprimerie:project_details' project.pk %}>{{ project }}</a></li>
         <li class="breadcrumb-item active">Modifier</li>
     {% else %}
         <li class="breadcrumb-item active">Créer</li>
@@ -15,88 +15,92 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-<div class="d-flex flex-column align-items-center">
-    <form method="post" novalidate class="d-flex flex-column align-items-center">
-        {% csrf_token %}
+    <div class="d-flex flex-column align-items-center">
+        <form method="post" novalidate class="d-flex flex-column align-items-center">
+            {% csrf_token %}
 
-        <!-- Nom -->
-        <div class='form-group d-flex flex-column align-items-start'>
-            {{ form.name.label_tag }}
-            {% if form.is_bound %}
-                {% if form.name.errors %}
-                    {% render_field form.name class='is-invalid' %}
-                    {% for error in form.name.errors %}
-                        <div class='invalid-feedback d-block'>
-                            {{ error }}
-                        </div>
-                    {% endfor %}
+            <!-- Nom -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.name.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.name.errors %}
+                        {% render_field form.name class='is-invalid' %}
+                        {% for error in form.name.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.name class='is-valid' %}
+                    {% endif %}
                 {% else %}
-                    {% render_field form.name class='is-valid' %}
+                    {% render_field form.name %}
                 {% endif %}
-            {% else %}
-                {% render_field form.name %}
-            {% endif %}
-            {% if form.name.help_text %}
-                <small class='form-text text-muted'>
-                    {{ form.name.help_text }}
-                </small>
-            {% endif %}
-        </div>
+                {% if form.name.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.name.help_text }}
+                    </small>
+                {% endif %}
+            </div>
 
-        <!-- Client -->
-        <div class='form-group d-flex flex-column align-items-start'>
-            {{ form.client.label_tag }}
-            {% if form.is_bound %}
-                {% if form.client.errors %}
-                    {% render_field form.client class='is-invalid' %}
-                    {% for error in form.client.errors %}
-                        <div class='invalid-feedback d-block'>
-                            {{ error }}
-                        </div>
-                    {% endfor %}
+            <!-- Client -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.client.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.client.errors %}
+                        {% render_field form.client class='is-invalid' %}
+                        {% for error in form.client.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.client class='is-valid' %}
+                    {% endif %}
                 {% else %}
-                    {% render_field form.client class='is-valid' %}
+                    {% render_field form.client %}
                 {% endif %}
-            {% else %}
-                {% render_field form.client %}
-            {% endif %}
-            {% if form.client.help_text %}
-                <small class='form-text text-muted'>
-                    {{ form.client.help_text }}
-                </small>
-            {% endif %}
-        </div>
+                {% if form.client.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.client.help_text }}
+                    </small>
+                {% endif %}
+            </div>
 
-        <!-- Notes -->
-        <div class='form-group d-flex flex-column align-items-start'>
-            {{ form.notes.label_tag }}
-            {% if form.is_bound %}
-                {% if form.notes.errors %}
-                    {% render_field form.notes class='is-invalid' %}
-                    {% for error in form.notes.errors %}
-                        <div class='invalid-feedback d-block'>
-                            {{ error }}
-                        </div>
-                    {% endfor %}
+            <!-- Notes -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.notes.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.notes.errors %}
+                        {% render_field form.notes class='is-invalid' %}
+                        {% for error in form.notes.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.notes class='is-valid' %}
+                    {% endif %}
                 {% else %}
-                    {% render_field form.notes class='is-valid' %}
+                    {% render_field form.notes %}
                 {% endif %}
-            {% else %}
-                {% render_field form.notes %}
-            {% endif %}
-            {% if form.notes.help_text %}
-                <small class='form-text text-muted'>
-                    {{ form.notes.help_text }}
-                </small>
-            {% endif %}
-        </div>
+                {% if form.notes.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.notes.help_text }}
+                    </small>
+                {% endif %}
+            </div>
 
-        <div class="d-flex">
-            <button class="btn btn-secondary mt-3 mx-1">Annuler</button>
-            <button type="submit" class="btn btn-primary btn-block mt-3 mx-1">Valider</button>
-        </div>
-    </form>
-</div>
+            <div class="w-100 d-flex justify-content-center align-items-between">
+                {% if project %}
+                    <a class="btn btn-secondary mx-1" href={% url 'imprimerie:project_details' project.pk %}>Annuler</a>
+                {% else %}
+                    <a class="btn btn-secondary mx-1" href={% url 'imprimerie:projects_list' %}>Annuler</a>
+                {% endif %}
+                <button type="submit" class="btn btn-primary mx-1">Valider</button>
+            </div>
+        </form>
+    </div>
 {% endblock content %}
 
 {% block javascript %}

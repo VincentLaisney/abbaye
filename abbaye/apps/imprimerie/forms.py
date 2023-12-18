@@ -119,7 +119,12 @@ class ElementForm(forms.ModelForm):
     quantity = forms.IntegerField(
         required=False,
     )
-    color = forms.CharField(
+    color = forms.ChoiceField(
+        label='Couleur / Noir :',
+        choices=[
+            ('CMYN', 'CMYN'),
+            ('B&W', 'B&W'),
+        ],
         required=False,
     )
     paper = forms.ModelChoiceField(
@@ -131,26 +136,39 @@ class ElementForm(forms.ModelForm):
         required=False,
     )
     paper_cut_into = forms.IntegerField(
+        label='Papier coupé en :',
         required=False,
     )
     paper_dim1_machine = forms.FloatField(
+        label='Papier dim. 1 machine :',
         required=False,
     )
     paper_dim2_machine = forms.FloatField(
+        label='Papier dim. 2 machine :',
         required=False,
     )
     file_width = forms.FloatField(
+        label='Largeur du fichier :',
         required=False,
     )
     file_height = forms.FloatField(
+        label='Hauteur du fichier :',
         required=False,
     )
-    # imposition = forms.IntegerField()
+    imposition = forms.IntegerField(
+        label='Imposition :',
+        required=False,
+    )
     number_of_sheets_doc = forms.IntegerField(
+        label='Nombre de pages :',
         required=False,
     )
-    # recto_verso = forms.BooleanField()
+    recto_verso = forms.BooleanField(
+        label='Recto-verso :',
+        required=False,
+    )
     notes = forms.CharField(
+        label='Notes :',
         required=False,
     )
 

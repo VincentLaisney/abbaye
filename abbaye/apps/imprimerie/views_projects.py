@@ -7,7 +7,7 @@ from django.urls import reverse
 from apps.main.decorators import group_required
 
 from .models import Element, Project
-from .forms import ElementForm, ProjectForm
+from .forms import ProjectForm
 
 
 @group_required('Imprimerie')
@@ -31,7 +31,7 @@ def create(request):
 
         if form.is_valid():
             project = form.save()
-            return HttpResponseRedirect(reverse('imprimerie:projects_details', args=[project.pk]))
+            return HttpResponseRedirect(reverse('imprimerie:project_details', args=[project.pk]))
 
     else:
         form = ProjectForm()
@@ -70,7 +70,7 @@ def update(request, **kwargs):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('imprimerie:projects_details', args=[project.pk]))
+            return HttpResponseRedirect(reverse('imprimerie:project_details', args=[project.pk]))
 
     else:
         form = ProjectForm(instance=project)
@@ -94,61 +94,5 @@ def delete(request, **kwargs):
         'imprimerie/projects/delete.html',
         {
             'project': project,
-        }
-    )
-
-
-@group_required('Imprimerie')
-def create_element(request, **kwargs):
-    """ Create an element for a project. """
-    project = get_object_or_404(Project, pk=kwargs['pk_project'])
-    if request.method == 'POST':
-        form = ElementForm(request.POST)
-
-        if form.is_valid():
-            form.save(commit=False)
-            form.cleaned_data['project'] = project
-            form.save()
-            return HttpResponseRedirect(reverse('imprimerie:projects_details', args=[project.pk]))
-
-    else:
-        form = ElementForm()
-
-    return render(
-        request,
-        'imprimerie/elements/form.html',
-        {
-            'form': form,
-            'project': project,
-        }
-    )
-
-
-@group_required('Imprimerie')
-def update_element(request, **kwargs):
-    """ Update an element for a project. """
-    element = get_object_or_404(Element, pk=kwargs['pk'])
-    project = get_object_or_404(Project, pk=kwargs['pk_project'])
-    return render(
-        request,
-        'imprimerie/elements/form.html',
-        {
-            'project': project,
-            'element': element,
-        }
-    )
-
-
-@group_required('Imprimerie')
-def delete_element(request, **kwargs):
-    """ Delete an element for a project. """
-    element = get_object_or_404(Element, pk=kwargs['pk'])
-    project = get_object_or_404(Project, pk=kwargs['pk_project'])
-    return render(
-        request,
-        'imprimerie/elements/delete.html',
-        {
-            'project': project,
-            'element': element,
         }
     )

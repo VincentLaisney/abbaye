@@ -1,0 +1,33 @@
+{% extends 'imprimerie/main_imprimerie.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_list' %}>Projets</a></li>
+    <li class="breadcrumb-item active"><a href={% url 'imprimerie:project_details' project.pk %}>{{ project }}</a></li>
+    <li class="breadcrumb-item active">{{ element }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h4>Projet "{{ project }}"</h4>
+    <h4>{{ element }}</h4>
+
+    <div class="w-25">
+        <table class="table table-borderless table-sm">
+            <tr>
+                <td class="fw-bold">Nom :</td>
+                <td>{{ element.name }}</td>
+            </tr>
+            <tr>
+                <td class="fw-bold">Notes :</td>
+                <td>{{ project.notes }}</td>
+            </tr>
+        <table>
+    <div>
+
+    <div class="d-flex flex-column align-items-center">
+        <a href={% url 'imprimerie:element_update' project.pk element.pk %}>Modifier</a>
+        <a href={% url 'imprimerie:element_delete' project.pk element.pk %}>Supprimer</a>
+        <a href={% url 'imprimerie:project_details' project.pk %}>Retour au projet</a>
+    </div>
+{% endblock content %}
+
