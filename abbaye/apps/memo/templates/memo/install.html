@@ -555,7 +555,11 @@
                 <p class="terminal">apt update</p>
                 <p class="terminal">apt install mysql-server</p>
 
-                <p class="descr">Puis :</p>
+                <p class="descr">En cas de clé inexistante, la télécharger (remplacer &lt;KEY&gt; par la clé) :</p>
+                <p class="terminal">apt-key adv --keyserver keyserver.ubuntu.com --keyserver-options http-proxy=http://192.168.1.250:8080 --recv-keys &lt;KEY&gt;</p>
+                <p class="terminal">apt-get update --allow-releaseinfo-change</p>
+
+                <p class="descr">Une fois l'installation achevée, procéder à l'installation sécurisée :</p>
                 <p class="terminal">mysql_secure_installation</p>
 
                 <p class="descr">Enfin dans une console MySQL :</p>
