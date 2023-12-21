@@ -104,6 +104,7 @@ class ProjectForm(forms.ModelForm):
     notes = forms.CharField(
         label='Notes :',
         required=False,
+        widget=forms.Textarea(),
     )
 
     class Meta:
@@ -114,18 +115,25 @@ class ProjectForm(forms.ModelForm):
 class ElementForm(forms.ModelForm):
     """ Form for Element. """
     name = forms.CharField(
-        label='Nom :',
+        label='Nom de l\'élément :',
     )
     quantity = forms.IntegerField(
+        label='Quantité :',
         required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
     )
-    color = forms.ChoiceField(
-        label='Couleur / Noir :',
-        choices=[
-            ('CMYN', 'CMYN'),
-            ('B&W', 'B&W'),
-        ],
+    notes = forms.CharField(
+        label='Notes :',
         required=False,
+        widget=forms.Textarea(
+            attrs={
+                'rows': 4,
+            },
+        ),
     )
     paper = forms.ModelChoiceField(
         label='Papier :',
@@ -138,38 +146,151 @@ class ElementForm(forms.ModelForm):
     paper_cut_into = forms.IntegerField(
         label='Papier coupé en :',
         required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
     )
     paper_dim1_machine = forms.FloatField(
-        label='Papier dim. 1 machine :',
+        label='Papier dim. 1 (mm) :',
         required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
     )
     paper_dim2_machine = forms.FloatField(
-        label='Papier dim. 2 machine :',
+        label='Papier dim. 2 (mm) :',
         required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
     )
     file_width = forms.FloatField(
-        label='Largeur du fichier :',
+        label='Largeur du fichier (mm) :',
         required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
     )
     file_height = forms.FloatField(
-        label='Hauteur du fichier :',
+        label='Hauteur du fichier (mm) :',
         required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
+    )
+    margins = forms.FloatField(
+        label='Marges (mm) :',
+        required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
+    )
+    gutters = forms.FloatField(
+        label='Gouttières (mm) :',
+        required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
     )
     imposition = forms.IntegerField(
         label='Imposition :',
         required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
     )
     number_of_sheets_doc = forms.IntegerField(
         label='Nombre de pages :',
         required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
     )
     recto_verso = forms.BooleanField(
-        label='Recto-verso :',
+        label='Recto-verso',
+        label_suffix='',
         required=False,
+        widget=forms.CheckboxInput(
+            attrs={
+                'style': 'margin: 0 5px 0 0;'
+            },
+        ),
     )
-    notes = forms.CharField(
-        label='Notes :',
+    color = forms.ChoiceField(
+        label='Couleur :',
+        choices=[
+            ('B&W', 'Noir'),
+            ('CMYN', 'CMJN'),
+        ],
         required=False,
+        widget=forms.Select(
+            attrs={
+                'style': 'margin: 0 0 0 5px;'
+            },
+        ),
+    )
+    massicot = forms.IntegerField(
+        label='Massicot (min) :',
+        required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
+    )
+    pelliculage = forms.IntegerField(
+        label='Pelliculage (min) :',
+        required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
+    )
+    rainage = forms.IntegerField(
+        label='Rainage (min) :',
+        required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
+    )
+    encollage = forms.IntegerField(
+        label='Encollage (min) :',
+        required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
+    )
+    agrafage = forms.IntegerField(
+        label='Agrafage (min) :',
+        required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
     )
 
     class Meta:

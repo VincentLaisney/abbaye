@@ -1,354 +1,558 @@
-{% extends 'imprimerie/main_imprimerie.html' %}
+{% extends "imprimerie/main_imprimerie.html" %}
 
 {% load static %}
 {% load widget_tweaks %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
-    <li class="breadcrumb-item"><a href={% url 'imprimerie:projects_list' %}>Projets</a></li>
-    <li class="breadcrumb-item"><a href={% url 'imprimerie:project_details' project.pk %}>{{ project }}</a></li>
+    <li class="breadcrumb-item"><a href={% url "imprimerie:home" %}>Imprimerie</a></li>
+    <li class="breadcrumb-item"><a href={% url "imprimerie:projects_list" %}>Projets</a></li>
+    <li class="breadcrumb-item"><a href={% url "imprimerie:project_details" project.pk %}>{{ project }}</a></li>
     {% if element %}
-        <li class="breadcrumb-item"><a href={% url 'imprimerie:element_details' project.pk element.pk %}>{{ element }}</a></li>
+        <li class="breadcrumb-item"><a href={% url "imprimerie:element_details" project.pk element.pk %}>{{ element }}</a></li>
         <li class="breadcrumb-item active">Modifier</li>
     {% else %}
         <li class="breadcrumb-item active">Créer un élément</li>
     {% endif %}
 {% endblock breadcrumbs %}
 
+{% block css %}
+    <link rel="stylesheet/less" href={% static "imprimerie/css/devis.less" %}>
+{% endblock css %}
+
 {% block content %}
-    <h4>{{ project }}</h4>
+    <h4> Projet : "{{ project }}"</h4>
 
-    <div class="d-flex flex-column align-items-center">
-        <form method="post" novalidate class="d-flex flex-column align-items-center">
-            {% csrf_token %}
+    <form method="post" novalidate class="d-flex flex-column align-items-center w-100">
+        {% csrf_token %}
 
-            <!-- Nom -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.name.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.name.errors %}
-                        {% render_field form.name class='is-invalid' %}
-                        {% for error in form.name.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
+        <!-- Nom -->
+        <div class="d-flex justify-content-between bg-light w-auto mb-3 p-3">
+            <div class="d-flex flex-column align-items-start">
+                <div class="form-group d-flex flex-column align-items-start">
+                    {{ form.name.label_tag }}
+                    {% if form.is_bound %}
+                        {% if form.name.errors %}
+                            {% render_field form.name class="is-invalid" %}
+                            {% for error in form.name.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.name class="is-valid" %}
+                        {% endif %}
                     {% else %}
-                        {% render_field form.name class='is-valid' %}
+                        {% render_field form.name %}
                     {% endif %}
-                {% else %}
-                    {% render_field form.name %}
-                {% endif %}
-                {% if form.name.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.name.help_text }}
-                    </small>
-                {% endif %}
-            </div>
+                    {% if form.name.help_text %}
+                        <small class="form-text text-muted">
+                            {{ form.name.help_text }}
+                        </small>
+                    {% endif %}
+                </div>
 
-            <!-- Quantité -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.quantity.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.quantity.errors %}
-                        {% render_field form.quantity class='is-invalid' %}
-                        {% for error in form.quantity.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
+                <!-- Quantité -->
+                <div class="form-group d-flex flex-column align-items-start">
+                    {{ form.quantity.label_tag }}
+                    {% if form.is_bound %}
+                        {% if form.quantity.errors %}
+                            {% render_field form.quantity class="is-invalid" %}
+                            {% for error in form.quantity.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.quantity class="is-valid" %}
+                        {% endif %}
                     {% else %}
-                        {% render_field form.quantity class='is-valid' %}
+                        {% render_field form.quantity %}
                     {% endif %}
-                {% else %}
-                    {% render_field form.quantity %}
-                {% endif %}
-                {% if form.quantity.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.quantity.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Couleur -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.color.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.color.errors %}
-                        {% render_field form.color class='is-invalid' %}
-                        {% for error in form.color.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.color class='is-valid' %}
+                    {% if form.quantity.help_text %}
+                        <small class="form-text text-muted">
+                            {{ form.quantity.help_text }}
+                        </small>
                     {% endif %}
-                {% else %}
-                    {% render_field form.color %}
-                {% endif %}
-                {% if form.color.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.color.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Papier -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.paper.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.paper.errors %}
-                        {% render_field form.paper class='is-invalid' %}
-                        {% for error in form.paper.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.paper class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.paper %}
-                {% endif %}
-                {% if form.paper.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.paper.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-            <div>
-                <p class="small">Prix du mille : <span id="prix_mille"></span> €<p>
-            </div>
-
-            <!-- Papier coupé en… -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.paper_cut_into.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.paper_cut_into.errors %}
-                        {% render_field form.paper_cut_into class='is-invalid' %}
-                        {% for error in form.paper_cut_into.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.paper_cut_into class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.paper_cut_into %}
-                {% endif %}
-                {% if form.paper_cut_into.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.paper_cut_into.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-            <div>
-                <p class="small">Prix de la feuille : <span id="prix_feuille"></span> €<p>
-            </div>
-
-            <!-- Papier dim. 1 machine -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.paper_dim1_machine.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.paper_dim1_machine.errors %}
-                        {% render_field form.paper_dim1_machine class='is-invalid' %}
-                        {% for error in form.paper_dim1_machine.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.paper_dim1_machine class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.paper_dim1_machine %}
-                {% endif %}
-                {% if form.paper_dim1_machine.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.paper_dim1_machine.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Papier dim. 2 machine -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.paper_dim2_machine.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.paper_dim2_machine.errors %}
-                        {% render_field form.paper_dim2_machine class='is-invalid' %}
-                        {% for error in form.paper_dim2_machine.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.paper_dim2_machine class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.paper_dim2_machine %}
-                {% endif %}
-                {% if form.paper_dim2_machine.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.paper_dim2_machine.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Largeur du fichier -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.file_width.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.file_width.errors %}
-                        {% render_field form.file_width class='is-invalid' %}
-                        {% for error in form.file_width.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.file_width class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.file_width %}
-                {% endif %}
-                {% if form.file_width.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.file_width.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Longueur du fichier -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.file_height.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.file_height.errors %}
-                        {% render_field form.file_height class='is-invalid' %}
-                        {% for error in form.file_height.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.file_height class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.file_height %}
-                {% endif %}
-                {% if form.file_height.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.file_height.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Imposition -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.imposition.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.imposition.errors %}
-                        {% render_field form.imposition class='is-invalid' %}
-                        {% for error in form.imposition.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.imposition class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.imposition %}
-                {% endif %}
-                {% if form.imposition.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.imposition.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Nombre de pages -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.number_of_sheets_doc.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.number_of_sheets_doc.errors %}
-                        {% render_field form.number_of_sheets_doc class='is-invalid' %}
-                        {% for error in form.number_of_sheets_doc.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.number_of_sheets_doc class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.number_of_sheets_doc %}
-                {% endif %}
-                {% if form.number_of_sheets_doc.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.number_of_sheets_doc.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Recto-verso -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.recto_verso.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.recto_verso.errors %}
-                        {% render_field form.recto_verso class='is-invalid' %}
-                        {% for error in form.recto_verso.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.recto_verso class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.recto_verso %}
-                {% endif %}
-                {% if form.recto_verso.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.recto_verso.help_text }}
-                    </small>
-                {% endif %}
+                </div>
             </div>
 
             <!-- Notes -->
-            <div class='form-group d-flex flex-column align-items-start'>
+            <div class="form-group d-flex flex-column align-items-start ms-5">
                 {{ form.notes.label_tag }}
                 {% if form.is_bound %}
                     {% if form.notes.errors %}
-                        {% render_field form.notes class='is-invalid' %}
+                        {% render_field form.notes class="is-invalid" %}
                         {% for error in form.notes.errors %}
-                            <div class='invalid-feedback d-block'>
+                            <div class="invalid-feedback d-block">
                                 {{ error }}
                             </div>
                         {% endfor %}
                     {% else %}
-                        {% render_field form.notes class='is-valid' %}
+                        {% render_field form.notes class="is-valid" %}
                     {% endif %}
                 {% else %}
                     {% render_field form.notes %}
                 {% endif %}
                 {% if form.notes.help_text %}
-                    <small class='form-text text-muted'>
+                    <small class="form-text text-muted">
                         {{ form.notes.help_text }}
                     </small>
                 {% endif %}
             </div>
+        </div>
 
-            <div class="w-100 d-flex justify-content-center align-items-between">
-                <a class="btn btn-secondary mx-1" href={% url 'imprimerie:project_details' project.pk %}>Annuler</a>
-                <button type="submit" class="btn btn-primary mx-1">Valider</button>
+        <div class="d-flex w-100 mb-3">
+            <div class="col-4 p-3">
+                <!-- Papier -->
+                <div class="form-group d-flex flex-column align-items-start m-2">
+                    {{ form.paper.label_tag }}
+                    {% if form.is_bound %}
+                        {% if form.paper.errors %}
+                            {% render_field form.paper class="is-invalid" %}
+                            {% for error in form.paper.errors %}
+                                <div class="invalid-feedback d-block">
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.paper class="is-valid" %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field form.paper %}
+                    {% endif %}
+                    {% if form.paper.help_text %}
+                        <small class="form-text text-muted">
+                            {{ form.paper.help_text }}
+                        </small>
+                    {% endif %}
+                </div>
+                <div class="m-2">
+                    <p class="small">Prix du mille : <span id="prix_mille"></span> €<p>
+                </div>
+
+                <!-- Papier coupé en… -->
+                <div class="d-flex m-2">
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.paper_cut_into.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.paper_cut_into.errors %}
+                                {% render_field form.paper_cut_into class="is-invalid" %}
+                                {% for error in form.paper_cut_into.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.paper_cut_into class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.paper_cut_into %}
+                        {% endif %}
+                        {% if form.paper_cut_into.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.paper_cut_into.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                    <div class="d-flex flex-column justify-content-end col-6">
+                        <p class="small m-0 p-0">Prix de la feuille :</p>
+                        <p class="small m-0 p-0"><span id="prix_feuille"></span> €</p>
+                    </div>
+                </div>
+
+                <div class="d-flex m-2">
+                    <!-- Papier dim. 1 machine -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.paper_dim1_machine.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.paper_dim1_machine.errors %}
+                                {% render_field form.paper_dim1_machine class="is-invalid" %}
+                                {% for error in form.paper_dim1_machine.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.paper_dim1_machine class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.paper_dim1_machine %}
+                        {% endif %}
+                        {% if form.paper_dim1_machine.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.paper_dim1_machine.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Papier dim. 2 machine -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.paper_dim2_machine.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.paper_dim2_machine.errors %}
+                                {% render_field form.paper_dim2_machine class="is-invalid" %}
+                                {% for error in form.paper_dim2_machine.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.paper_dim2_machine class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.paper_dim2_machine %}
+                        {% endif %}
+                        {% if form.paper_dim2_machine.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.paper_dim2_machine.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
-        </form>
-    </div>
+
+            <div class="col-4 p-3">
+                <div class="d-flex m-2">
+                    <!-- Largeur du fichier -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.file_width.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.file_width.errors %}
+                                {% render_field form.file_width class="is-invalid" %}
+                                {% for error in form.file_width.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.file_width class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.file_width %}
+                        {% endif %}
+                        {% if form.file_width.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.file_width.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Longueur du fichier -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.file_height.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.file_height.errors %}
+                                {% render_field form.file_height class="is-invalid" %}
+                                {% for error in form.file_height.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.file_height class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.file_height %}
+                        {% endif %}
+                        {% if form.file_height.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.file_height.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="d-flex m-2">
+                    <!-- Marges -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.margins.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.margins.errors %}
+                                {% render_field form.margins class="is-invalid" %}
+                                {% for error in form.margins.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.margins class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.margins %}
+                        {% endif %}
+                        {% if form.margins.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.margins.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Gouttières -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.gutters.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.gutters.errors %}
+                                {% render_field form.gutters class="is-invalid" %}
+                                {% for error in form.gutters.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.gutters class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.gutters %}
+                        {% endif %}
+                        {% if form.gutters.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.gutters.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="d-flex m-2">
+                    <!-- Nombre de pages -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.number_of_sheets_doc.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.number_of_sheets_doc.errors %}
+                                {% render_field form.number_of_sheets_doc class="is-invalid" %}
+                                {% for error in form.number_of_sheets_doc.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.number_of_sheets_doc class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.number_of_sheets_doc %}
+                        {% endif %}
+                        {% if form.number_of_sheets_doc.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.number_of_sheets_doc.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Imposition -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.imposition.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.imposition.errors %}
+                                {% render_field form.imposition class="is-invalid" %}
+                                {% for error in form.imposition.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.imposition class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.imposition %}
+                        {% endif %}
+                        {% if form.imposition.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.imposition.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="d-flex m-2">
+                    <!-- Recto-verso -->
+                    <div class="form-group d-flex align-items-center col-6">
+                        {% if form.is_bound %}
+                            {% if form.recto_verso.errors %}
+                                {% render_field form.recto_verso class="is-invalid" %}
+                                {% for error in form.recto_verso.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.recto_verso class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.recto_verso %}
+                        {% endif %}
+                        {% if form.recto_verso.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.recto_verso.help_text }}
+                            </small>
+                        {% endif %}
+                        {{ form.recto_verso.label_tag }}
+                    </div>
+
+                    <!-- Couleur -->
+                    <div class="form-group d-flex align-items-center col-6">
+                        {{ form.color.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.color.errors %}
+                                {% render_field form.color class="is-invalid" %}
+                                {% for error in form.color.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.color class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.color %}
+                        {% endif %}
+                        {% if form.color.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.color.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-4 p-3">
+                <div class="d-flex m-2">
+                    <!-- Massicot -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.massicot.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.massicot.errors %}
+                                {% render_field form.massicot class="is-invalid" %}
+                                {% for error in form.massicot.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.massicot class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.massicot %}
+                        {% endif %}
+                        {% if form.massicot.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.massicot.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Pelliculage -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.pelliculage.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.pelliculage.errors %}
+                                {% render_field form.pelliculage class="is-invalid" %}
+                                {% for error in form.pelliculage.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.pelliculage class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.pelliculage %}
+                        {% endif %}
+                        {% if form.pelliculage.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.pelliculage.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="d-flex m-2">
+                    <!-- Rainage -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.rainage.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.rainage.errors %}
+                                {% render_field form.rainage class="is-invalid" %}
+                                {% for error in form.rainage.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.rainage class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.rainage %}
+                        {% endif %}
+                        {% if form.rainage.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.rainage.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Encollage -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.encollage.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.encollage.errors %}
+                                {% render_field form.encollage class="is-invalid" %}
+                                {% for error in form.encollage.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.encollage class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.encollage %}
+                        {% endif %}
+                        {% if form.encollage.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.encollage.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Agrafage -->
+                <div class="d-flex m-2">
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.agrafage.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.agrafage.errors %}
+                                {% render_field form.agrafage class="is-invalid" %}
+                                {% for error in form.agrafage.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.agrafage class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.agrafage %}
+                        {% endif %}
+                        {% if form.agrafage.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.agrafage.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="total" class="d-flex justify-content-end align-items-center border rounded fw-bold w-100 mb-3 p-2">TOTAL : <span class="ms-2 me-1">0</span> €</div>
+
+        <div class="w-100 d-flex justify-content-center align-items-between">
+            <a class="btn btn-secondary mx-1" href={% url "imprimerie:project_details" project.pk %}>Annuler</a>
+            <button type="submit" class="btn btn-primary mx-1">Valider</button>
+        </div>
+    </form>
 {% endblock content %}
 
 {% block javascript %}
     {{ block.super }}
     {{ form.media }}
+    <script src={% static "imprimerie/js/devis.js" %}></script>
 {% endblock javascript %}
