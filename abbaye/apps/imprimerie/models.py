@@ -119,12 +119,7 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
-    color = models.CharField(
-        max_length=255,
-        choices=[
-            ('CMYN', 'CMYN'),
-            ('B&W', 'B&W'),
-        ],
+    notes = models.TextField(
         null=True,
         blank=True,
     )
@@ -174,6 +169,15 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
+    color = models.CharField(
+        max_length=255,
+        choices=[
+            ('B&W', 'Noir'),
+            ('CMYN', 'CMJN'),
+        ],
+        null=True,
+        blank=True,
+    )
     massicot = models.IntegerField(
         null=True,
         blank=True,
@@ -191,10 +195,6 @@ class Element(models.Model):
         blank=True,
     )
     agrafage = models.IntegerField(
-        null=True,
-        blank=True,
-    )
-    notes = models.TextField(
         null=True,
         blank=True,
     )
