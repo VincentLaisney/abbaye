@@ -119,12 +119,13 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
-    color = models.CharField(
-        max_length=255,
-        choices=[
-            ('CMYN', 'CMYN'),
-            ('B&W', 'B&W'),
-        ],
+    fixed = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=7,
+        decimal_places=2,
+    )
+    notes = models.TextField(
         null=True,
         blank=True,
     )
@@ -162,15 +163,24 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
-    imposition = models.IntegerField(
-        null=True,
-        blank=True,
-    )
     number_of_sheets_doc = models.IntegerField(
         null=True,
         blank=True,
     )
+    imposition = models.IntegerField(
+        null=True,
+        blank=True,
+    )
     recto_verso = models.BooleanField(
+        null=True,
+        blank=True,
+    )
+    color = models.CharField(
+        max_length=255,
+        choices=[
+            ('B&W', 'Noir'),
+            ('CMYN', 'CMJN'),
+        ],
         null=True,
         blank=True,
     )
@@ -191,10 +201,6 @@ class Element(models.Model):
         blank=True,
     )
     agrafage = models.IntegerField(
-        null=True,
-        blank=True,
-    )
-    notes = models.TextField(
         null=True,
         blank=True,
     )

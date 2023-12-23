@@ -8,26 +8,115 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h4>Projet "{{ project }}"</h4>
-    <h4>{{ element }}</h4>
+    <h4>Projet <span class="project">{{ project }}</span></h4>
+    <h4>Élément <span class="element">{{ element }}</span></h4>
 
-    <div class="w-25">
-        <table class="table table-borderless table-sm">
-            <tr>
-                <td class="fw-bold">Nom :</td>
-                <td>{{ element.name }}</td>
-            </tr>
-            <tr>
-                <td class="fw-bold">Notes :</td>
-                <td>{{ project.notes }}</td>
-            </tr>
-        <table>
+    <div class="d-flex flex-column align-items-center w-100 mt-3">
+        <div class="w-50">
+            <table class="table table-borderless table-sm">
+                <tr>
+                    <td class="label col-2">Nom :</td>
+                    <td class="value">{{ element.name }}</td>
+                </tr>
+                <tr>
+                    <td class="label col-2">Quantité :</td>
+                    <td class="value">{{ element.quantity|default_if_none:0 }}</td>
+                </tr>
+                <tr>
+                    <td class="label col-2">Frais fixes :</td>
+                    <td class="value">{{ element.fixed|default_if_none:0 }} €</td>
+                </tr>
+                <tr>
+                    <td class="label col-2">Notes :</td>
+                    <td class="value">{{ element.notes }}</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="d-flex w-100 mb-3">
+            <table class="table table-borderless table-sm m-1">
+                <tr>
+                    <td class="label">Papier :</td>
+                    <td class="value">{{ element.paper }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Coupé en :</td>
+                    <td class="value">{{ element.paper_cut_into }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Papier dim. 1 :</td>
+                    <td class="value">{{ element.paper_dim1_machine }} mm</td>
+                </tr>
+                <tr>
+                    <td class="label">Papier dim. 2 :</td>
+                    <td class="value">{{ element.paper_dim2_machine }} mm</td>
+                </tr>
+            </table>
+
+            <table class="table table-borderless table-sm m-1">
+                <tr>
+                    <td class="label">Largeur fichier :</td>
+                    <td class="value">{{ element.file_width }} mm</td>
+                </tr>
+                <tr>
+                    <td class="label">Hauteur fichier :</td>
+                    <td class="value">{{ element.file_height }} mm</td>
+                </tr>
+                <tr>
+                    <td class="label">Marges :</td>
+                    <td class="value">{{ element.margins|default_if_none:0 }} mm</td>
+                </tr>
+                <tr>
+                    <td class="label">Gouttières :</td>
+                    <td class="value">{{ element.gutters|default_if_none:0 }} mm</td>
+                </tr>
+                <tr>
+                    <td class="label">Nb de feuilles du doc. :</td>
+                    <td class="value">{{ element.number_of_sheets_doc }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Imposition :</td>
+                    <td class="value">{{ element.imposition }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Recto-verso :</td>
+                    <td class="value">{{ element.recto_verso|yesno:"Oui, Non" }}</td>
+                </tr>
+                <tr>
+                    <td class="label">Couleur :</td>
+                    <td class="value">{{ element.color }}</td>
+                </tr>
+            </table>
+
+            <table class="table table-borderless table-sm m-1">
+                <tr>
+                    <td class="label">Massicot :</td>
+                    <td class="value">{{ element.massicot|default_if_none:0 }} min</td>
+                </tr>
+                <tr>
+                    <td class="label">Pelliculage :</td>
+                    <td class="value">{{ element.pelliculage|default_if_none:0 }} min</td>
+                </tr>
+                <tr>
+                    <td class="label">Rainage :</td>
+                    <td class="value">{{ element.rainage|default_if_none:0 }} min</td>
+                </tr>
+                <tr>
+                    <td class="label">Encollage :</td>
+                    <td class="value">{{ element.encollage|default_if_none:0 }} min</td>
+                </tr>
+                <tr>
+                    <td class="label">Agrafage :</td>
+                    <td class="value">{{ element.agrafage|default_if_none:0  }} min</td>
+                </tr>
+            </table>
+        </div>
     <div>
 
-    <div class="d-flex flex-column align-items-center">
-        <a href={% url 'imprimerie:element_update' project.pk element.pk %}>Modifier</a>
-        <a href={% url 'imprimerie:element_delete' project.pk element.pk %}>Supprimer</a>
-        <a href={% url 'imprimerie:project_details' project.pk %}>Retour au projet</a>
+    <div class="d-flex my-3">
+        <a href={% url 'imprimerie:project_details' project.pk %} class="btn btn-warning m-1"><span class="fas fa-arrow-left"></span> Retour au projet</a>
+        <a href={% url 'imprimerie:element_update' project.pk element.pk %} class="btn btn-primary m-1">Modifier</a>
+        <a href={% url 'imprimerie:element_delete' project.pk element.pk %} class="btn btn-danger m-1">Supprimer</a>
     </div>
 {% endblock content %}
 
