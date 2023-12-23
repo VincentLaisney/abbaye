@@ -16,11 +16,18 @@
 {% endblock breadcrumbs %}
 
 {% block css %}
+    {{ block.super }}
     <link rel="stylesheet/less" href={% static "imprimerie/css/devis.less" %}>
 {% endblock css %}
 
 {% block content %}
-    <h4> Projet : "{{ project }}"</h4>
+    <h4> Projet : « <span class="project">{{ project }}</span> »</h4>
+
+    {% if element %}
+        <h6>Modifier l'élément « <span class="element">{{ element }}</span> »</h6>
+    {% else %}
+        <h6>Ajouter un élément</h6>
+    {% endif %}
 
     <form method="post" novalidate class="d-flex flex-column align-items-center w-100">
         {% csrf_token %}
@@ -339,7 +346,7 @@
                 </div>
 
                 <div class="d-flex m-2">
-                    <!-- Nombre de pages -->
+                    <!-- Nombre de feuilles -->
                     <div class="form-group d-flex flex-column align-items-start col-6">
                         {{ form.number_of_sheets_doc.label_tag }}
                         {% if form.is_bound %}
