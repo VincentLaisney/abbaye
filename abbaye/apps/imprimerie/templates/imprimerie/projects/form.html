@@ -16,6 +16,12 @@
 
 {% block content %}
     <div class="d-flex flex-column align-items-center">
+        {% if project %}
+            <h6>Modifier le projet <span class="project">{{ project }}</span></h6>
+        {% else %}
+            <h6>Ajouter un projet</h6>
+        {% endif %}
+
         <form method="post" novalidate class="d-flex flex-column align-items-center">
             {% csrf_token %}
 
@@ -91,7 +97,7 @@
                 {% endif %}
             </div>
 
-            <div class="w-100 d-flex justify-content-center align-items-between">
+            <div class="d-flex justify-content-center align-items-between w-100">
                 {% if project %}
                     <a class="btn btn-secondary mx-1" href={% url 'imprimerie:project_details' project.pk %}>Annuler</a>
                 {% else %}

@@ -1,9 +1,15 @@
 {% extends 'imprimerie/main_imprimerie.html' %}
 
+{% load static %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item active">Mémo</li>
 {% endblock breadcrumbs %}
+
+{% block css %}
+    <link rel="stylesheet/less" href={% static 'imprimerie/css/memo.less' %}>
+{% endblock css %}
 
 {% block content %}
     <div class="d-flex flex-column align-items-center">

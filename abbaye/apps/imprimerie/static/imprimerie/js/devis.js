@@ -1,4 +1,4 @@
-// imprimerie.js
+// imprimerie/devis.js
 
 $(document).ready(function () {
     refresh_calculations();
