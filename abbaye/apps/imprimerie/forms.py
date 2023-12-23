@@ -126,6 +126,15 @@ class ElementForm(forms.ModelForm):
             },
         )
     )
+    fixed = forms.FloatField(
+        label='Frais fixes (€) :',
+        required=False,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
+    )
     notes = forms.CharField(
         label='Notes :',
         required=False,

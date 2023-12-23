@@ -119,6 +119,12 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
+    fixed = models.DecimalField(
+        null=True,
+        blank=True,
+        max_digits=7,
+        decimal_places=2,
+    )
     notes = models.TextField(
         null=True,
         blank=True,

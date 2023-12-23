@@ -25,10 +25,10 @@
     <form method="post" novalidate class="d-flex flex-column align-items-center w-100">
         {% csrf_token %}
 
-        <!-- Nom -->
         <div class="d-flex justify-content-between bg-light w-auto mb-3 p-3">
             <div class="d-flex flex-column align-items-start">
-                <div class="form-group d-flex flex-column align-items-start">
+                <!-- Nom -->
+                <div class="form-group d-flex flex-column align-items-start m-2">
                     {{ form.name.label_tag }}
                     {% if form.is_bound %}
                         {% if form.name.errors %}
@@ -51,28 +51,54 @@
                     {% endif %}
                 </div>
 
-                <!-- Quantité -->
-                <div class="form-group d-flex flex-column align-items-start">
-                    {{ form.quantity.label_tag }}
-                    {% if form.is_bound %}
-                        {% if form.quantity.errors %}
-                            {% render_field form.quantity class="is-invalid" %}
-                            {% for error in form.quantity.errors %}
-                                <div class="invalid-feedback d-block">
-                                    {{ error }}
-                                </div>
-                            {% endfor %}
+                <div class="d-flex w-100 m-2">
+                    <!-- Quantité -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.quantity.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.quantity.errors %}
+                                {% render_field form.quantity class="is-invalid" %}
+                                {% for error in form.quantity.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.quantity class="is-valid" %}
+                            {% endif %}
                         {% else %}
-                            {% render_field form.quantity class="is-valid" %}
+                            {% render_field form.quantity %}
                         {% endif %}
-                    {% else %}
-                        {% render_field form.quantity %}
-                    {% endif %}
-                    {% if form.quantity.help_text %}
-                        <small class="form-text text-muted">
-                            {{ form.quantity.help_text }}
-                        </small>
-                    {% endif %}
+                        {% if form.quantity.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.quantity.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+    
+                    <!-- Frais fixes -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.fixed.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.fixed.errors %}
+                                {% render_field form.fixed class="is-invalid" %}
+                                {% for error in form.fixed.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.fixed class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.fixed %}
+                        {% endif %}
+                        {% if form.fixed.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.fixed.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
 
