@@ -215,8 +215,8 @@ class ElementForm(forms.ModelForm):
             },
         )
     )
-    imposition = forms.IntegerField(
-        label='Imposition :',
+    number_of_sheets_doc = forms.IntegerField(
+        label='Nb de feuilles du doc. :',
         required=False,
         widget=forms.NumberInput(
             attrs={
@@ -224,8 +224,8 @@ class ElementForm(forms.ModelForm):
             },
         )
     )
-    number_of_sheets_doc = forms.IntegerField(
-        label='Nombre de pages :',
+    imposition = forms.IntegerField(
+        label='Imposition :',
         required=False,
         widget=forms.NumberInput(
             attrs={

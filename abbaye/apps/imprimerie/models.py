@@ -163,11 +163,11 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
-    imposition = models.IntegerField(
+    number_of_sheets_doc = models.IntegerField(
         null=True,
         blank=True,
     )
-    number_of_sheets_doc = models.IntegerField(
+    imposition = models.IntegerField(
         null=True,
         blank=True,
     )
