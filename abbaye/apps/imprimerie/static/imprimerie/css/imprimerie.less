@@ -13,6 +13,16 @@ table {
     font-weight: bold;
 }
 
+.project::before,
+.element::before {
+    content: "« ";
+}
+
+.project::after,
+.element::after {
+    content: " »";
+}
+
 .element {
     color: @green-light;
 }
