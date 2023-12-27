@@ -1,0 +1,34 @@
+{% extends 'imprimerie/main_imprimerie.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block css %}
+    {{ form.media }}
+{% endblock css %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:work' %}>Travaux</a></li>
+    <li class="breadcrumb-item active">Éditer</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h2>Modifier les travaux de l'imprimerie</h2>
+
+    <form method="post" novalidate class="w-75 mb-3">
+        {% csrf_token %}
+
+        {{ form.content }}
+
+        <!-- Validation -->
+        <div class="d-flex justify-content-center mt-3">
+            <a href={% url 'imprimerie:work' %} class="btn btn-primary mx-3">Annuler</a>
+            <button type="submit" class="btn btn-success mx-3">Valider</button>
+        </div>
+    </form>
+{% endblock %}
+
+{% block javascript %}
+    {{ form.media }}
+{% endblock javascript %}

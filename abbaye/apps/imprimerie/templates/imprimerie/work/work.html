@@ -1,0 +1,22 @@
+{% extends 'imprimerie/main_imprimerie.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
+    <li class="breadcrumb-item active">Mémo</li>
+{% endblock breadcrumbs %}
+
+{% block css %}
+    <link rel="stylesheet/less" href={% static 'imprimerie/css/work.less' %}>
+{% endblock css %}
+
+{% block content %}
+    <div class="d-flex flex-column align-items-center">
+        <h1>Travaux de l'atelier imprimerie</h1>
+    </div>
+
+    <a href={% url 'imprimerie:work_update' %} class="btn btn-primary btn-sm">Modifier</a>
+
+    <div id="work" class="col-8 d-flex flex-column align-items-center border border-dark rounded p-2 my-3">{{ quill.content.html|safe }}</div>
+{% endblock content %}

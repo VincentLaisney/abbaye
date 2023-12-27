@@ -5,6 +5,17 @@ from django.db import models
 from django_quill.fields import QuillField
 
 
+class Work(models.Model):
+    """ Work model. """
+    content = QuillField()
+    created = models.DateTimeField(
+        auto_now_add=True,
+    )
+    modified = models.DateTimeField(
+        auto_now=True,
+    )
+
+
 class Memo(models.Model):
     """ Memo model. """
     content = QuillField()
