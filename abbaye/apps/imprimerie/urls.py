@@ -3,6 +3,7 @@
 from django.urls import path
 
 from . import views_main
+from . import views_work
 from . import views_memo
 from . import views_clients
 from . import views_papers
@@ -12,6 +13,9 @@ from . import views_elements
 app_name = 'imprimerie'
 urlpatterns = [
     path('', views_main.home, name='home'),
+    # Work:
+    path('work/', views_work.work, name='work'),
+    path('work/update/', views_work.work_update, name='work_update'),
     # Memo:
     path('memo/', views_memo.memo, name='memo'),
     path('memo/update/', views_memo.memo_update, name='memo_update'),
