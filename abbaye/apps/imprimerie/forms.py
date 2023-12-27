@@ -3,7 +3,16 @@
 from django import forms
 from dal import autocomplete
 
-from .models import Client, Element, Memo, Paper, Project
+from .models import Work, Memo, Client, Paper, Project, Element
+
+
+class WorkForm(forms.ModelForm):
+    """ Form for Work. """
+    class Meta:
+        model = Work
+        fields = [
+            'content',
+        ]
 
 
 class MemoForm(forms.ModelForm):
