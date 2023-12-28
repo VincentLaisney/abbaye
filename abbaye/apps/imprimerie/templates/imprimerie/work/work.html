@@ -18,5 +18,7 @@
 
     <a href={% url 'imprimerie:work_update' %} class="btn btn-primary btn-sm">Modifier</a>
 
+    <small class="mt-3">Dernière modification: {{ quill.modified|date:'d/m/Y à H:i' }}</small>
+
     <div id="work" class="col-8 d-flex flex-column align-items-center border border-dark rounded p-2 my-3">{{ quill.content.html|safe }}</div>
 {% endblock content %}
