@@ -548,14 +548,18 @@
             <div class="group">
                 <p class="descr">MySQL8 n'est pas dispo dans les paquets Debian. Il faut l'installer manuellement à partir d'un dépôt distant :</p>
                 <p class="terminal">cd /tmp</p>
-                <p class="terminal">wget https://dev.mysql.com/get/mysql-apt-config_0.8.13-1_all.deb</p>
-                <p class="terminal">dpkg -i mysql-apt-config_0.8.13-1_all.deb</p>
+                <p class="terminal">wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb</p>
+                <p class="terminal">dpkg -i mysql-apt-config_0.8.22-1_all.deb</p>
 
                 <p class="descr">Puis :</p>
                 <p class="terminal">apt update</p>
                 <p class="terminal">apt install mysql-server</p>
 
-                <p class="descr">Puis :</p>
+                <p class="descr">En cas de clé inexistante, la télécharger (remplacer &lt;KEY&gt; par la clé) :</p>
+                <p class="terminal">apt-key adv --keyserver keyserver.ubuntu.com --keyserver-options http-proxy=http://192.168.1.250:8080 --recv-keys &lt;KEY&gt;</p>
+                <p class="terminal">apt-get update --allow-releaseinfo-change</p>
+
+                <p class="descr">Une fois l'installation achevée, procéder à l'installation sécurisée :</p>
                 <p class="terminal">mysql_secure_installation</p>
 
                 <p class="descr">Enfin dans une console MySQL :</p>
@@ -569,6 +573,15 @@
     [mysqldump]
     user=root
     password=my_super_password</pre>
+            </div>
+
+        <h4>Python :</h4>
+            <div class="group">
+                <p class="descr">Installer pip, l'installateur de packages Python :</p>
+                <p class="terminal">aptitude install python3-pip</p>
+
+                <p class="descr">Avec pip installer virtualenv :</p>
+                <p class="terminal">pip3 install virtualenv</p>
             </div>
 
         <h4>PHP7.3 + modules php7.3-mysql et php7.3-gd (ce dernier pour les statistiques).</h4>
