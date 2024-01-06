@@ -1,3 +1,6 @@
 [submodule "abbaye/apps/accenteur/static/accenteur/accenteur-github"]
 	path = abbaye/apps/accenteur/static/accenteur/accenteur-github
 	url = https://github.com/BrRoman/accenteur
+[submodule "abbaye/apps/ordomatic/static/ordomatic/ordomatic-github"]
+	path = abbaye/apps/ordomatic/static/ordomatic/ordomatic-github
+	url = https://github.com/BrRoman/ordomatic
