@@ -1,0 +1,117 @@
+@import url("/statics/main/css/colors.less");
+
+ul {
+    list-style-type: "- ";
+    margin: 0;
+}
+
+.title {
+    font-family: LucidaHW;
+    font-size: 3em;
+}
+
+.subtitle {
+    color: @brown;
+}
+
+.year {
+    font-family: LucidaHW;
+    font-size: 2em;
+    font-weight: bold;
+    padding: 1% 0 1% 0;
+    text-align: center;
+    width: 100%;
+}
+
+.year::before {
+    content: 'Annus Domini '
+}
+
+.month {
+    font-size: 1.5em;
+    font-weight: bold;
+    padding: 5px 0 5px 0;
+    text-align: center;
+    width: 100%;
+}
+
+.fa-square {
+    margin: 3px 0 0 0;
+}
+
+.fa-square.white {
+    border: solid 1px grey;
+    border-radius: 3px;
+}
+
+.fa-square:not(.white) {
+    border: solid 1px white;
+    border-radius: 3px;
+}
+
+.small-caps {
+    font-variant: small-caps;
+}
+
+.text-justify {
+    text-align: justify;
+}
+
+.before,
+.after {
+    color: @grey-dark;
+    font-style: italic;
+    text-align: center;
+}
+
+.before {
+    margin: 4% 0 2% 0;
+}
+
+.after {
+    margin: 2% 0 2% 0;
+}
+
+.before-large,
+.after-large {
+    font-size: 1.3em;
+    font-weight: bold;
+}
+
+.before-small,
+.after-small {
+    font-size: 0.9em;
+}
+
+.body {
+    font-size: 0.92em;
+}
+
+.solemnitas-major {
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+.solemnitas-minor {
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+.festum,
+.memoria-major,
+.memoria-minor {
+    color: @grey-dark;
+}
+
+.festum {
+    font-variant: small-caps;
+    font-weight: bold;
+}
+
+.memoria-major {
+    font-weight: bold;
+}
+
+.memoria-minor {
+    font-style: italic;
+}
