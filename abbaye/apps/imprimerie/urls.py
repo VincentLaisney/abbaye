@@ -50,12 +50,12 @@ urlpatterns = [
     path('projects/<int:pk>/delete/',
          views_projects.delete, name='project_delete'),
     # Elements:
-    path('projects/<int:pk_project>/element_create/',
+    path('projects/<int:pk_project>/elements/create/',
          views_elements.create, name='element_create'),
-    path('projects/<int:pk_project>/element_details/<int:pk>/',
+    path('projects/<int:pk_project>/elements/<int:pk>/',
          views_elements.details, name='element_details'),
-    path('projects/<int:pk_project>/element_update/<int:pk>/',
+    path('projects/<int:pk_project>/elements/<int:pk>/update/',
          views_elements.update, name='element_update'),
-    path('projects/<int:pk_project>/element_delete/<int:pk>',
+    path('projects/<int:pk_project>/elements/<int:pk>/delete/',
          views_elements.delete, name='element_delete')
 ]
