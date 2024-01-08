@@ -35,14 +35,30 @@ function refresh(data_paper) {
   // Prix fixe :
   var prix_fixe = Number.parseFloat($('#id_fixed').val());
 
-  // Price of paper :
+  // Prix du papier :
   var prix_mille = Number.parseFloat(data_paper['price']);
   $('#prix_mille').text(prix_mille.toFixed(2));
   var paper_cut_into = Number.parseInt($('#id_paper_cut_into').val());
   var prix_feuille = prix_mille / 1000 / paper_cut_into;
   $('#prix_feuille').text(prix_feuille.toFixed(3));
   var number_of_sheets_doc = Number.parseInt($('#id_number_of_sheets_doc').val());
-  var prix_papier = number_of_sheets_doc * prix_feuille * quantity;
+  var prix_papier = (number_of_sheets_doc / $('#id_imposition').val()) * prix_feuille * quantity;
+  $('#prix_papier').html((prix_papier * 1.2).toFixed(2) + ' €');
+
+  // Prix des clics :
+  var nb_clics = number_of_sheets_doc;
+  nb_clics /= $('#id_imposition').val();
+  if ($('#id_recto_verso').prop('checked')) {
+    nb_clics *= 2;
+  }
+  nb_clics *= quantity;
+  var prix_clics;
+  if ($('#id_color').val() == "CMYN") {
+    prix_clics = nb_clics * 0.06;
+  } else if ($('#id_color').val() == "B&W") {
+    prix_clics = nb_clics * 0.012;
+  }
+  $('#prix_clics').html(prix_clics.toFixed(2) + ' €');
 
   // Massicot etc.:
   var prix_massicot = Number.parseInt($('#id_massicot').val());
@@ -52,12 +68,21 @@ function refresh(data_paper) {
   var prix_agrafage = Number.parseInt($('#id_agrafage').val());
   // On compte 1€ la minute :
   var prix_finition = prix_massicot + prix_pelliculage + prix_rainage + prix_encollage + prix_agrafage;
+  $('#prix_finition').html(prix_finition.toFixed(2) + ' €');
 
   // Total :
-  $('#total span').html(
+  $('#prix_total').html(
     (prix_fixe
       + prix_papier
+      + prix_clics
       + prix_finition)
       .toFixed(2)
+    + ' €'
+  );
+
+  // Prix unitaire :
+  var total = Number.parseFloat($('#prix_total').text());
+  $('#prix_unitaire').html(
+    (total / quantity).toFixed(2) + ' €'
   );
 }

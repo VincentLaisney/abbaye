@@ -32,105 +32,135 @@
     <form method="post" novalidate class="d-flex flex-column align-items-center w-100">
         {% csrf_token %}
 
-        <div class="d-flex justify-content-between bg-light w-auto mb-3 p-3">
-            <div class="d-flex flex-column align-items-start">
-                <!-- Nom -->
-                <div class="form-group d-flex flex-column align-items-start m-2">
-                    {{ form.name.label_tag }}
+        <div class="d-flex w-100 my-3">
+            <div class="col-3 p-3">
+                <div class="d-flex flex-column align-items-start">
+                    <!-- Nom -->
+                    <div class="form-group d-flex flex-column align-items-start m-2">
+                        {{ form.name.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.name.errors %}
+                                {% render_field form.name class="is-invalid" %}
+                                {% for error in form.name.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.name class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.name %}
+                        {% endif %}
+                        {% if form.name.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.name.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+    
+                    <div class="d-flex w-100 m-2">
+                        <!-- Quantité -->
+                        <div class="form-group d-flex flex-column align-items-start col-6">
+                            {{ form.quantity.label_tag }}
+                            {% if form.is_bound %}
+                                {% if form.quantity.errors %}
+                                    {% render_field form.quantity class="is-invalid" %}
+                                    {% for error in form.quantity.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field form.quantity class="is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field form.quantity %}
+                            {% endif %}
+                            {% if form.quantity.help_text %}
+                                <small class="form-text text-muted">
+                                    {{ form.quantity.help_text }}
+                                </small>
+                            {% endif %}
+                        </div>
+        
+                        <!-- Frais fixes -->
+                        <div class="form-group d-flex flex-column align-items-start col-6">
+                            {{ form.fixed.label_tag }}
+                            {% if form.is_bound %}
+                                {% if form.fixed.errors %}
+                                    {% render_field form.fixed class="is-invalid" %}
+                                    {% for error in form.fixed.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field form.fixed class="is-valid" %}
+                                {% endif %}
+                            {% else %}
+                                {% render_field form.fixed %}
+                            {% endif %}
+                            {% if form.fixed.help_text %}
+                                <small class="form-text text-muted">
+                                    {{ form.fixed.help_text }}
+                                </small>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 d-flex justify-content-center p-3">
+                <!-- Notes -->
+                <div class="form-group d-flex flex-column align-items-start">
+                    {{ form.notes.label_tag }}
                     {% if form.is_bound %}
-                        {% if form.name.errors %}
-                            {% render_field form.name class="is-invalid" %}
-                            {% for error in form.name.errors %}
+                        {% if form.notes.errors %}
+                            {% render_field form.notes class="is-invalid" %}
+                            {% for error in form.notes.errors %}
                                 <div class="invalid-feedback d-block">
                                     {{ error }}
                                 </div>
                             {% endfor %}
                         {% else %}
-                            {% render_field form.name class="is-valid" %}
+                            {% render_field form.notes class="is-valid" %}
                         {% endif %}
                     {% else %}
-                        {% render_field form.name %}
+                        {% render_field form.notes %}
                     {% endif %}
-                    {% if form.name.help_text %}
+                    {% if form.notes.help_text %}
                         <small class="form-text text-muted">
-                            {{ form.name.help_text }}
+                            {{ form.notes.help_text }}
                         </small>
                     {% endif %}
                 </div>
-
-                <div class="d-flex w-100 m-2">
-                    <!-- Quantité -->
-                    <div class="form-group d-flex flex-column align-items-start col-6">
-                        {{ form.quantity.label_tag }}
-                        {% if form.is_bound %}
-                            {% if form.quantity.errors %}
-                                {% render_field form.quantity class="is-invalid" %}
-                                {% for error in form.quantity.errors %}
-                                    <div class="invalid-feedback d-block">
-                                        {{ error }}
-                                    </div>
-                                {% endfor %}
-                            {% else %}
-                                {% render_field form.quantity class="is-valid" %}
-                            {% endif %}
-                        {% else %}
-                            {% render_field form.quantity %}
-                        {% endif %}
-                        {% if form.quantity.help_text %}
-                            <small class="form-text text-muted">
-                                {{ form.quantity.help_text }}
-                            </small>
-                        {% endif %}
-                    </div>
-    
-                    <!-- Frais fixes -->
-                    <div class="form-group d-flex flex-column align-items-start col-6">
-                        {{ form.fixed.label_tag }}
-                        {% if form.is_bound %}
-                            {% if form.fixed.errors %}
-                                {% render_field form.fixed class="is-invalid" %}
-                                {% for error in form.fixed.errors %}
-                                    <div class="invalid-feedback d-block">
-                                        {{ error }}
-                                    </div>
-                                {% endfor %}
-                            {% else %}
-                                {% render_field form.fixed class="is-valid" %}
-                            {% endif %}
-                        {% else %}
-                            {% render_field form.fixed %}
-                        {% endif %}
-                        {% if form.fixed.help_text %}
-                            <small class="form-text text-muted">
-                                {{ form.fixed.help_text }}
-                            </small>
-                        {% endif %}
-                    </div>
-                </div>
             </div>
-
-            <!-- Notes -->
-            <div class="form-group d-flex flex-column align-items-start ms-5">
-                {{ form.notes.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.notes.errors %}
-                        {% render_field form.notes class="is-invalid" %}
-                        {% for error in form.notes.errors %}
-                            <div class="invalid-feedback d-block">
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.notes class="is-valid" %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.notes %}
-                {% endif %}
-                {% if form.notes.help_text %}
-                    <small class="form-text text-muted">
-                        {{ form.notes.help_text }}
-                    </small>
-                {% endif %}
+    
+            <!-- Total -->
+            <div id="total" class="col-3 border rounded p-3">
+                <table class="table table-sm table-borderless ms-auto">
+                    <tr>
+                        <td class="label">Coût du papier :</td>
+                        <td id="prix_papier" class="value"></td>
+                    </tr>
+                    <tr>
+                        <td class="label">Coût de l'impression :</td>
+                        <td id="prix_clics" class="value"></td>
+                    </tr>
+                    <tr>
+                        <td class="label">Coût du façonnage :</td>
+                        <td id="prix_finition" class="value"></td>
+                    </tr>
+                    <tr class="red">
+                        <td class="label">Total :</td>
+                        <td id="prix_total" class="value"></td>
+                    </tr>
+                    <tr class="red">
+                        <td class="label">Prix unitaire :</td>
+                        <td id="prix_unitaire" class="value"></td>
+                    </tr>
+                </table>
             </div>
         </div>
 
@@ -575,8 +605,7 @@
             </div>
         </div>
 
-        <div id="total" class="d-flex justify-content-end align-items-center border rounded fw-bold w-100 mb-3 p-2">TOTAL : <span class="ms-2 me-1">0</span> €</div>
-
+        <!-- Validation -->
         <div class="d-flex justify-content-center align-items-between w-100 my-3">
             <a class="btn btn-secondary mx-1" href={% url "imprimerie:project_details" project.pk %}>Annuler</a>
             <button type="submit" class="btn btn-primary mx-1">Valider</button>
