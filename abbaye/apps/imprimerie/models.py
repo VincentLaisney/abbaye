@@ -70,10 +70,10 @@ class Paper(models.Model):
         max_length=255,
     )
     dim1 = models.CharField(
-        max_length=3,
+        max_length=4,
     )
     dim2 = models.CharField(
-        max_length=3,
+        max_length=4,
     )
     weight = models.IntegerField()
     price = models.DecimalField(
