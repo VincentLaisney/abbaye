@@ -269,6 +269,7 @@ class ElementForm(forms.ModelForm):
         label='Recto-verso',
         label_suffix='',
         required=False,
+        initial=True,
         widget=forms.CheckboxInput(
             attrs={
                 'style': 'margin: 0 5px 0 0;'
