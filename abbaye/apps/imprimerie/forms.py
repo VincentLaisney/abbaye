@@ -157,7 +157,7 @@ class ElementForm(forms.ModelForm):
         label='Papier :',
         queryset=Paper.objects.all().order_by('name'),
         widget=autocomplete.ModelSelect2(
-            url='imprimerie:papers_autocomplete'
+            url='imprimerie:papers_autocomplete',
         ),
         required=False,
     )
@@ -224,7 +224,7 @@ class ElementForm(forms.ModelForm):
             },
         )
     )
-    number_of_sheets_doc = forms.IntegerField(
+    number_of_pages_doc = forms.IntegerField(
         label='Nb de feuilles du doc. :',
         required=False,
         widget=forms.NumberInput(
