@@ -197,7 +197,7 @@ class ElementForm(forms.ModelForm):
     margins = forms.FloatField(
         label='Marges non impr. (mm) :',
         required=False,
-        initial=20,
+        initial=10,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
