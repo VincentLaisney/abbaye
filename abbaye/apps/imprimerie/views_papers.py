@@ -104,7 +104,15 @@ class PaperAutocompleteView(autocomplete.Select2QuerySetView):
     """ Return a set of Papers according to the user search value. """
 
     def get_queryset(self):
-        papers = Paper.objects.filter(name__icontains=self.q)
+        papers = Paper.objects.filter(
+            name__icontains=self.q
+        ) | Paper.objects.filter(
+            weight__icontains=self.q
+        ) | Paper.objects.filter(
+            dim1__icontains=self.q
+        ) | Paper.objects.filter(
+            dim2__icontains=self.q
+        )
         return papers .order_by('name')
 
 
