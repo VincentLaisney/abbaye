@@ -22,6 +22,7 @@
                 <th class="grey-dark">Modifié</th>
                 <th class="red">Client</th>
                 <th>Notes</th>
+                <th></th>
             </tr>
         </thead>
 
@@ -30,8 +31,9 @@
                 <tr>
                     <td>{{ client.created|date:"d/m/Y" }} à {{ client.created|time:"H:i:s" }}</td>
                     <td>{{ client.modified|date:"d/m/Y" }} à {{ client.modified|time:"H:i:s" }}</td>
-                    <td class="fw-bold"><a href={% url 'imprimerie:client_details' client.pk %}>{{ client }}</a></td>
+                    <td class="fw-bold">{{ client }}</td>
                     <td>{{ client.notes }}</td>
+                    <td><a href={% url 'imprimerie:client_details' client.pk %}>Détails</a></td>
                 </tr>
             {% endfor %}
         </tbody>
