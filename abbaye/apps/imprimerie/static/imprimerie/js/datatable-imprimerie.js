@@ -36,17 +36,4 @@ $(document).ready(function () {
             },
         ],
     });
-
-    $('#table-tickets')
-        // Details: fill modal when clicked on a button "Détails":
-        .on(
-            'click',
-            '.button_details',
-            function () {
-                const id = $(this).attr('id').split('_')[1];
-                $.get('/abbaye/absences/' + id, function (data) {
-                    $('.modal-content').html(data);
-                });
-            }
-        );
 });
