@@ -129,6 +129,7 @@ class ElementForm(forms.ModelForm):
     quantity = forms.IntegerField(
         label='Quantité :',
         required=False,
+        initial=1,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -138,6 +139,7 @@ class ElementForm(forms.ModelForm):
     fixed = forms.FloatField(
         label='Frais fixes (€) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -157,13 +159,14 @@ class ElementForm(forms.ModelForm):
         label='Papier :',
         queryset=Paper.objects.all().order_by('name'),
         widget=autocomplete.ModelSelect2(
-            url='imprimerie:papers_autocomplete'
+            url='imprimerie:papers_autocomplete',
         ),
         required=False,
     )
     paper_cut_into = forms.IntegerField(
         label='Papier coupé en :',
         required=False,
+        initial=1,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -173,6 +176,7 @@ class ElementForm(forms.ModelForm):
     paper_dim1_machine = forms.FloatField(
         label='Papier dim. 1 (mm) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -182,6 +186,18 @@ class ElementForm(forms.ModelForm):
     paper_dim2_machine = forms.FloatField(
         label='Papier dim. 2 (mm) :',
         required=False,
+        initial=0,
+        help_text='Rappel: cette dimension donne le sens des fibres.',
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
+    )
+    margins = forms.FloatField(
+        label='Marges non impr. (mm) :',
+        required=False,
+        initial=20,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -191,6 +207,7 @@ class ElementForm(forms.ModelForm):
     file_width = forms.FloatField(
         label='Largeur du fichier (mm) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -200,42 +217,58 @@ class ElementForm(forms.ModelForm):
     file_height = forms.FloatField(
         label='Hauteur du fichier (mm) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
             },
         )
     )
-    margins = forms.FloatField(
-        label='Marges (mm) :',
+    gutters_width = forms.FloatField(
+        label='Gouttières larg. (mm) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
             },
         )
     )
-    gutters = forms.FloatField(
-        label='Gouttières (mm) :',
+    gutters_height = forms.FloatField(
+        label='Gouttières haut. (mm) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
             },
         )
     )
-    number_of_sheets_doc = forms.IntegerField(
-        label='Nb de feuilles du doc. :',
+    number_of_pages_doc = forms.IntegerField(
+        label='Nb de pages du doc. :',
         required=False,
+        initial=1,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
             },
         )
+    )
+    fibers = forms.BooleanField(
+        label='Sens des fibres',
+        label_suffix='',
+        required=False,
+        initial=True,
+        widget=forms.CheckboxInput(
+            attrs={
+                'style': 'margin: 0 5px 0 0;'
+            },
+        ),
     )
     imposition = forms.IntegerField(
         label='Imposition :',
         required=False,
+        initial=1,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -246,6 +279,7 @@ class ElementForm(forms.ModelForm):
         label='Recto-verso',
         label_suffix='',
         required=False,
+        initial=True,
         widget=forms.CheckboxInput(
             attrs={
                 'style': 'margin: 0 5px 0 0;'
@@ -268,6 +302,7 @@ class ElementForm(forms.ModelForm):
     massicot = forms.IntegerField(
         label='Massicot (min) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -277,6 +312,7 @@ class ElementForm(forms.ModelForm):
     pelliculage = forms.IntegerField(
         label='Pelliculage (min) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -286,6 +322,7 @@ class ElementForm(forms.ModelForm):
     rainage = forms.IntegerField(
         label='Rainage (min) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -295,6 +332,7 @@ class ElementForm(forms.ModelForm):
     encollage = forms.IntegerField(
         label='Encollage (min) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -304,6 +342,7 @@ class ElementForm(forms.ModelForm):
     agrafage = forms.IntegerField(
         label='Agrafage (min) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
