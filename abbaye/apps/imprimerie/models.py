@@ -98,12 +98,6 @@ class Project(models.Model):
         null=True,
         blank=True,
     )
-    # quantity_client = models.IntegerField()
-    # finition = models.CharField(
-    #     max_length=255,
-    # )
-    # width_finished = models.FloatField()
-    # length_finished = models.FloatField()
     created = models.DateTimeField(
         auto_now_add=True,
     )
