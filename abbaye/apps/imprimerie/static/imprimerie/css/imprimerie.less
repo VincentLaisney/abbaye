@@ -26,3 +26,42 @@ table {
 .element {
     color: @green-light;
 }
+
+#table-clients_wrapper {
+    font-size: 0.9em;
+    margin-bottom: 50px;
+    width: 70%;
+
+    th,
+    td {
+        text-align: center;
+        vertical-align: middle;
+    }
+
+    th {
+        color: @red;
+    }
+
+    td table td {
+        border: none;
+        margin: 0;
+        padding: 0;
+    }
+
+    #table-clients_filter,
+    #table-clients_info,
+    #table-clients_length,
+    #table-clients_paginate {
+        color: @green;
+
+        a,
+        label {
+            font-weight: bold;
+        }
+
+        input {
+            background-color: white;
+            border-radius: 7px;
+        }
+    }
+}

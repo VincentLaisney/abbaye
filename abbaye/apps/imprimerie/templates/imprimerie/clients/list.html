@@ -1,5 +1,12 @@
 {% extends 'imprimerie/main_imprimerie.html' %}
 
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/datatables/datatables.min.css'%}>
+{% endblock css %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item active">Clients</li>
@@ -8,11 +15,31 @@
 {% block content %}
     <h4>Liste des clients</h4>
 
-    {% for client in clients %}
-        <ul>
-            <li><a href={% url 'imprimerie:client_details' client.pk %}>{{ client }}<a ></li>
-        </ul>
-    {% endfor %}
+    <table id="table-clients" class="cell-border order-column hover w-100">
+        <thead>
+            <tr class="text-center">
+                <th class="col-2 grey-dark">Créé</th>
+                <th class="col-2 grey-dark">Modifié</th>
+                <th class="col-8 red">Client</th>
+            </tr>
+        </thead>
 
-    <a href={% url 'imprimerie:client_create' %}>Créer un nouveau client</a>
+        <tbody>
+            {% for client in clients %}
+                <tr>
+                    <td>{{ client.created }}</td>
+                    <td>{{ client.modified }}</td>
+                    <td class="fw-bold"><a href={% url 'imprimerie:client_details' client.pk %}>{{ client }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href={% url 'imprimerie:client_create' %} class="btn btn-primary">Créer un nouveau client</a>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'main/datatables/datatables.min.js'%}></script>
+    <script src={% static 'imprimerie/js/datatable-imprimerie.js' %}></script>
+{% endblock javascript %}
