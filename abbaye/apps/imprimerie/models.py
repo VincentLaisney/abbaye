@@ -29,29 +29,12 @@ class Memo(models.Model):
 
 class Client(models.Model):
     """ Client model. """
-    quality = models.CharField(
-        max_length=25,
-    )
-    first_name = models.CharField(
+    name = models.CharField(
         max_length=255,
     )
-    last_name = models.CharField(
-        max_length=255,
-    )
-    address1 = models.CharField(
-        max_length=255,
-    )
-    address2 = models.CharField(
-        max_length=255,
-    )
-    address3 = models.CharField(
-        max_length=255,
-    )
-    zip = models.CharField(
-        max_length=255,
-    )
-    city = models.CharField(
-        max_length=255,
+    notes = models.TextField(
+        null=True,
+        blank=True,
     )
     created = models.DateTimeField(
         auto_now_add=True,
@@ -61,7 +44,7 @@ class Client(models.Model):
     )
 
     def __str__(self):
-        return '{} {}'.format(self.first_name, self.last_name).lstrip()
+        return '{}'.format(self.name).lstrip()
 
 
 class Paper(models.Model):

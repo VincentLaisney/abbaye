@@ -18,194 +18,50 @@
         <form method="post" novalidate class="d-flex flex-column align-items-center">
             {% csrf_token %}
 
-            <!-- Qualité -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.quality.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.quality.errors %}
-                        {% render_field form.quality class='is-invalid' %}
-                        {% for error in form.quality.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.quality class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.quality %}
-                {% endif %}
-                {% if form.quality.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.quality.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Prénom -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.first_name.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.first_name.errors %}
-                        {% render_field form.first_name class='is-invalid' %}
-                        {% for error in form.first_name.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.first_name class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.first_name %}
-                {% endif %}
-                {% if form.first_name.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.first_name.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
             <!-- Nom -->
             <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.last_name.label_tag }}
+                {{ form.name.label_tag }}
                 {% if form.is_bound %}
-                    {% if form.last_name.errors %}
-                        {% render_field form.last_name class='is-invalid' %}
-                        {% for error in form.last_name.errors %}
+                    {% if form.name.errors %}
+                        {% render_field form.name class='is-invalid' %}
+                        {% for error in form.name.errors %}
                             <div class='invalid-feedback d-block'>
                                 {{ error }}
                             </div>
                         {% endfor %}
                     {% else %}
-                        {% render_field form.last_name class='is-valid' %}
+                        {% render_field form.name class='is-valid' %}
                     {% endif %}
                 {% else %}
-                    {% render_field form.last_name %}
+                    {% render_field form.name %}
                 {% endif %}
-                {% if form.last_name.help_text %}
+                {% if form.name.help_text %}
                     <small class='form-text text-muted'>
-                        {{ form.last_name.help_text }}
+                        {{ form.name.help_text }}
                     </small>
                 {% endif %}
             </div>
 
-            <!-- Adresse 1 -->
+            <!-- Notes -->
             <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.address1.label_tag }}
+                {{ form.notes.label_tag }}
                 {% if form.is_bound %}
-                    {% if form.address1.errors %}
-                        {% render_field form.address1 class='is-invalid' %}
-                        {% for error in form.address1.errors %}
+                    {% if form.notes.errors %}
+                        {% render_field form.notes class='is-invalid' %}
+                        {% for error in form.notes.errors %}
                             <div class='invalid-feedback d-block'>
                                 {{ error }}
                             </div>
                         {% endfor %}
                     {% else %}
-                        {% render_field form.address1 class='is-valid' %}
+                        {% render_field form.notes class='is-valid' %}
                     {% endif %}
                 {% else %}
-                    {% render_field form.address1 %}
+                    {% render_field form.notes %}
                 {% endif %}
-                {% if form.address1.help_text %}
+                {% if form.notes.help_text %}
                     <small class='form-text text-muted'>
-                        {{ form.address1.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Adresse 2 -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.address2.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.address2.errors %}
-                        {% render_field form.address2 class='is-invalid' %}
-                        {% for error in form.address2.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.address2 class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.address2 %}
-                {% endif %}
-                {% if form.address2.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.address2.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Adresse 3 -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.address3.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.address3.errors %}
-                        {% render_field form.address3 class='is-invalid' %}
-                        {% for error in form.address3.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.address3 class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.address3 %}
-                {% endif %}
-                {% if form.address3.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.address3.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Code postal -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.zip.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.zip.errors %}
-                        {% render_field form.zip class='is-invalid' %}
-                        {% for error in form.zip.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.zip class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.zip %}
-                {% endif %}
-                {% if form.zip.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.zip.help_text }}
-                    </small>
-                {% endif %}
-            </div>
-
-            <!-- Ville -->
-            <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.city.label_tag }}
-                {% if form.is_bound %}
-                    {% if form.city.errors %}
-                        {% render_field form.city class='is-invalid' %}
-                        {% for error in form.city.errors %}
-                            <div class='invalid-feedback d-block'>
-                                {{ error }}
-                            </div>
-                        {% endfor %}
-                    {% else %}
-                        {% render_field form.city class='is-valid' %}
-                    {% endif %}
-                {% else %}
-                    {% render_field form.city %}
-                {% endif %}
-                {% if form.city.help_text %}
-                    <small class='form-text text-muted'>
-                        {{ form.city.help_text }}
+                        {{ form.notes.help_text }}
                     </small>
                 {% endif %}
             </div>

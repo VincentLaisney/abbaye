@@ -15,7 +15,7 @@ from .forms import ClientForm
 @group_required('Imprimerie')
 def list(request):
     """ List of clients. """
-    clients = Client.objects.all().order_by('last_name', 'first_name')
+    clients = Client.objects.all().order_by('name')
     return render(
         request,
         'imprimerie/clients/list.html',
@@ -102,5 +102,9 @@ class ClientAutocompleteView(autocomplete.Select2QuerySetView):
     """ Return a set of Clients according to the user search value. """
 
     def get_queryset(self):
-        clients = Client.objects.filter(last_name__icontains=self.q)
-        return clients.order_by('last_name', 'first_name')
+        clients = Client.objects.filter(
+            name__icontains=self.q
+        ) | Client.objects.filter(
+            notes__icontains=self.q
+        )
+        return clients.order_by('name')
