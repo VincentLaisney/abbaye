@@ -129,6 +129,7 @@ class ElementForm(forms.ModelForm):
     quantity = forms.IntegerField(
         label='Quantité :',
         required=False,
+        initial=1,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -138,6 +139,7 @@ class ElementForm(forms.ModelForm):
     fixed = forms.FloatField(
         label='Frais fixes (€) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -164,6 +166,7 @@ class ElementForm(forms.ModelForm):
     paper_cut_into = forms.IntegerField(
         label='Papier coupé en :',
         required=False,
+        initial=1,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -173,6 +176,7 @@ class ElementForm(forms.ModelForm):
     paper_dim1_machine = forms.FloatField(
         label='Papier dim. 1 (mm) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -182,6 +186,7 @@ class ElementForm(forms.ModelForm):
     paper_dim2_machine = forms.FloatField(
         label='Papier dim. 2 (mm) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -191,6 +196,7 @@ class ElementForm(forms.ModelForm):
     file_width = forms.FloatField(
         label='Largeur du fichier (mm) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -200,6 +206,7 @@ class ElementForm(forms.ModelForm):
     file_height = forms.FloatField(
         label='Hauteur du fichier (mm) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -209,6 +216,7 @@ class ElementForm(forms.ModelForm):
     margins = forms.FloatField(
         label='Marges (mm) :',
         required=False,
+        initial=20,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -218,6 +226,7 @@ class ElementForm(forms.ModelForm):
     gutters = forms.FloatField(
         label='Gouttières (mm) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -227,6 +236,7 @@ class ElementForm(forms.ModelForm):
     number_of_pages_doc = forms.IntegerField(
         label='Nb de feuilles du doc. :',
         required=False,
+        initial=1,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -236,6 +246,7 @@ class ElementForm(forms.ModelForm):
     imposition = forms.IntegerField(
         label='Imposition :',
         required=False,
+        initial=1,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -268,6 +279,7 @@ class ElementForm(forms.ModelForm):
     massicot = forms.IntegerField(
         label='Massicot (min) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -277,6 +289,7 @@ class ElementForm(forms.ModelForm):
     pelliculage = forms.IntegerField(
         label='Pelliculage (min) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -286,6 +299,7 @@ class ElementForm(forms.ModelForm):
     rainage = forms.IntegerField(
         label='Rainage (min) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -295,6 +309,7 @@ class ElementForm(forms.ModelForm):
     encollage = forms.IntegerField(
         label='Encollage (min) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -304,6 +319,7 @@ class ElementForm(forms.ModelForm):
     agrafage = forms.IntegerField(
         label='Agrafage (min) :',
         required=False,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
