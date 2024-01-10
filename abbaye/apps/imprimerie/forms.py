@@ -235,7 +235,7 @@ class ElementForm(forms.ModelForm):
         )
     )
     number_of_pages_doc = forms.IntegerField(
-        label='Nb de feuilles du doc. :',
+        label='Nb de pages du doc. :',
         required=False,
         initial=1,
         widget=forms.NumberInput(
