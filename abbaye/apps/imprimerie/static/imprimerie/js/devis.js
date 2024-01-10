@@ -11,7 +11,7 @@ $(document).ready(function () {
       get_paper_and_refresh();
     }
   );
-  $('#id_recto_verso').click(function () {
+  $('#id_recto_verso, #id_fibers').click(function () {
     get_paper_and_refresh();
   });
 });
@@ -46,6 +46,12 @@ function refresh(data_paper) {
     recto_verso = 2;
   }
 
+  // Fibres:
+  var fibers = true;
+  if (!$('#id_fibers').prop('checked')) {
+    fibers = false;
+  }
+
   // Prix du papier :
   var prix_mille = Number.parseFloat(data_paper['price']);
   $('#prix_mille').text(prix_mille.toFixed(2));
@@ -55,6 +61,34 @@ function refresh(data_paper) {
   var number_of_pages_doc = Number.parseInt($('#id_number_of_pages_doc').val());
   var prix_papier = (number_of_pages_doc / $('#id_imposition').val() / recto_verso) * prix_feuille * quantity;
   $('#prix_papier').html((prix_papier * marge_papier).toFixed(2) + ' €');
+
+  // Meilleure imposition :
+  // TODO: Gouttières.
+  var paper_dim1_machine = Number.parseInt($('#id_paper_dim1_machine').val());
+  var paper_dim2_machine = Number.parseInt($('#id_paper_dim2_machine').val());
+  var file_width = Number.parseInt($('#id_file_width').val());
+  var file_height = Number.parseInt($('#id_file_height').val());
+  var margins = Number.parseInt($('#id_margins').val());
+  var paper_dim1 = paper_dim1_machine - (margins * 2);
+  var paper_dim2 = paper_dim2_machine - (margins * 2);
+  var gutters = Number.parseInt($('#id_gutters').val());
+  var prop_according_fibers, prop_against_fibers, best_imposition;
+  // Proposition dans le sens des fibres:
+  var file_width_in_dim1 = Math.floor(paper_dim1 / file_width);
+  var file_height_in_dim2 = Math.floor(paper_dim2 / file_height);
+  prop_according_fibers = file_width_in_dim1 * file_height_in_dim2;
+  best_imposition = prop_according_fibers;
+  if (!fibers) {
+    // Proposition contre le sens des fibres:
+    var file_width_in_dim2 = Math.floor(paper_dim2 / file_width);
+    var file_height_in_dim1 = Math.floor(paper_dim1 / file_height);
+    prop_against_fibers = file_width_in_dim2 * file_height_in_dim1;
+    if (prop_against_fibers > prop_according_fibers) {
+      best_imposition = prop_against_fibers;
+    }
+  }
+  $('#id_imposition').val(best_imposition);
+
 
   // Prix des clics :
   var nb_clics = number_of_pages_doc;
