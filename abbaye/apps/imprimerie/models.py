@@ -152,6 +152,10 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
+    margins = models.FloatField(
+        null=True,
+        blank=True,
+    )
     file_width = models.FloatField(
         null=True,
         blank=True,
@@ -160,11 +164,11 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
-    margins = models.FloatField(
+    gutters_width = models.FloatField(
         null=True,
         blank=True,
     )
-    gutters = models.FloatField(
+    gutters_height = models.FloatField(
         null=True,
         blank=True,
     )

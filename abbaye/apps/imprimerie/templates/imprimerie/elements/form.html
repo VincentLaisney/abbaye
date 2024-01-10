@@ -272,6 +272,32 @@
                         {% endif %}
                     </div>
                 </div>
+
+                <div class="d-flex m-2">
+                    <!-- Marges -->
+                    <div class="form-group d-flex flex-column align-items-start col-6">
+                        {{ form.margins.label_tag }}
+                        {% if form.is_bound %}
+                            {% if form.margins.errors %}
+                                {% render_field form.margins class="is-invalid" %}
+                                {% for error in form.margins.errors %}
+                                    <div class="invalid-feedback d-block">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.margins class="is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.margins %}
+                        {% endif %}
+                        {% if form.margins.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.margins.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
             </div>
 
             <div class="col-4 p-3">
@@ -326,50 +352,50 @@
                 </div>
 
                 <div class="d-flex m-2">
-                    <!-- Marges -->
+                    <!-- Gouttières largeur -->
                     <div class="form-group d-flex flex-column align-items-start col-6">
-                        {{ form.margins.label_tag }}
+                        {{ form.gutters_width.label_tag }}
                         {% if form.is_bound %}
-                            {% if form.margins.errors %}
-                                {% render_field form.margins class="is-invalid" %}
-                                {% for error in form.margins.errors %}
+                            {% if form.gutters_width.errors %}
+                                {% render_field form.gutters_width class="is-invalid" %}
+                                {% for error in form.gutters_width.errors %}
                                     <div class="invalid-feedback d-block">
                                         {{ error }}
                                     </div>
                                 {% endfor %}
                             {% else %}
-                                {% render_field form.margins class="is-valid" %}
+                                {% render_field form.gutters_width class="is-valid" %}
                             {% endif %}
                         {% else %}
-                            {% render_field form.margins %}
+                            {% render_field form.gutters_width %}
                         {% endif %}
-                        {% if form.margins.help_text %}
+                        {% if form.gutters_width.help_text %}
                             <small class="form-text text-muted">
-                                {{ form.margins.help_text }}
+                                {{ form.gutters_width.help_text }}
                             </small>
                         {% endif %}
                     </div>
 
-                    <!-- Gouttières -->
+                    <!-- Gouttières hauteur -->
                     <div class="form-group d-flex flex-column align-items-start col-6">
-                        {{ form.gutters.label_tag }}
+                        {{ form.gutters_height.label_tag }}
                         {% if form.is_bound %}
-                            {% if form.gutters.errors %}
-                                {% render_field form.gutters class="is-invalid" %}
-                                {% for error in form.gutters.errors %}
+                            {% if form.gutters_height.errors %}
+                                {% render_field form.gutters_height class="is-invalid" %}
+                                {% for error in form.gutters_height.errors %}
                                     <div class="invalid-feedback d-block">
                                         {{ error }}
                                     </div>
                                 {% endfor %}
                             {% else %}
-                                {% render_field form.gutters class="is-valid" %}
+                                {% render_field form.gutters_height class="is-valid" %}
                             {% endif %}
                         {% else %}
-                            {% render_field form.gutters %}
+                            {% render_field form.gutters_height %}
                         {% endif %}
-                        {% if form.gutters.help_text %}
+                        {% if form.gutters_height.help_text %}
                             <small class="form-text text-muted">
-                                {{ form.gutters.help_text }}
+                                {{ form.gutters_height.help_text }}
                             </small>
                         {% endif %}
                     </div>

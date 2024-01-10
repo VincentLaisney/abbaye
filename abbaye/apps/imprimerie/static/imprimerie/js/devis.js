@@ -63,7 +63,6 @@ function refresh(data_paper) {
   $('#prix_papier').html((prix_papier * marge_papier).toFixed(2) + ' €');
 
   // Meilleure imposition :
-  // TODO: Gouttières.
   var paper_dim1_machine = Number.parseInt($('#id_paper_dim1_machine').val());
   var paper_dim2_machine = Number.parseInt($('#id_paper_dim2_machine').val());
   var file_width = Number.parseInt($('#id_file_width').val());
@@ -71,17 +70,18 @@ function refresh(data_paper) {
   var margins = Number.parseInt($('#id_margins').val());
   var paper_dim1 = paper_dim1_machine - (margins * 2);
   var paper_dim2 = paper_dim2_machine - (margins * 2);
-  var gutters = Number.parseInt($('#id_gutters').val());
+  var gutters_width = Number.parseInt($('#id_gutters_width').val());
+  var gutters_height = Number.parseInt($('#id_gutters_height').val());
   var prop_according_fibers, prop_against_fibers, best_imposition;
   // Proposition dans le sens des fibres:
-  var file_width_in_dim1 = Math.floor(paper_dim1 / file_width);
-  var file_height_in_dim2 = Math.floor(paper_dim2 / file_height);
+  var file_width_in_dim1 = Math.floor((paper_dim1 + gutters_width) / (file_width + gutters_width));
+  var file_height_in_dim2 = Math.floor((paper_dim2 + gutters_height) / (file_height + gutters_height));
   prop_according_fibers = file_width_in_dim1 * file_height_in_dim2;
   best_imposition = prop_according_fibers;
   if (!fibers) {
     // Proposition contre le sens des fibres:
-    var file_width_in_dim2 = Math.floor(paper_dim2 / file_width);
-    var file_height_in_dim1 = Math.floor(paper_dim1 / file_height);
+    var file_width_in_dim2 = Math.floor((paper_dim2 + gutters_width) / (file_width + gutters_width));
+    var file_height_in_dim1 = Math.floor((paper_dim1 + gutters_height) / (file_height + gutters_height));
     prop_against_fibers = file_width_in_dim2 * file_height_in_dim1;
     if (prop_against_fibers > prop_according_fibers) {
       best_imposition = prop_against_fibers;

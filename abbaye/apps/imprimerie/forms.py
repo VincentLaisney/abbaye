@@ -194,6 +194,16 @@ class ElementForm(forms.ModelForm):
             },
         )
     )
+    margins = forms.FloatField(
+        label='Marges non impr. (mm) :',
+        required=False,
+        initial=20,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
+    )
     file_width = forms.FloatField(
         label='Largeur du fichier (mm) :',
         required=False,
@@ -214,18 +224,18 @@ class ElementForm(forms.ModelForm):
             },
         )
     )
-    margins = forms.FloatField(
-        label='Marges (mm) :',
+    gutters_width = forms.FloatField(
+        label='Gouttières larg. (mm) :',
         required=False,
-        initial=20,
+        initial=0,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
             },
         )
     )
-    gutters = forms.FloatField(
-        label='Gouttières (mm) :',
+    gutters_height = forms.FloatField(
+        label='Gouttières haut. (mm) :',
         required=False,
         initial=0,
         widget=forms.NumberInput(
