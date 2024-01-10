@@ -26,46 +26,17 @@ class MemoForm(forms.ModelForm):
 
 class ClientForm(forms.ModelForm):
     """ Form for Client. """
-    quality = forms.CharField(
-        label='Qualité :',
-        required=False,
-    )
-    first_name = forms.CharField(
-        label='Prénom :',
-        widget=forms.TextInput(),
-        required=False,
-    )
-    last_name = forms.CharField(
+    name = forms.CharField(
         label='Nom :',
         error_messages={
             'required': 'Ce champ est obligatoire.',
         },
         widget=forms.TextInput(),
     )
-    address1 = forms.CharField(
-        label='Adresse 1 :',
-        widget=forms.TextInput(),
+    notes = forms.CharField(
+        label='Notes :',
         required=False,
-    )
-    address2 = forms.CharField(
-        label='Adresse 2 :',
-        widget=forms.TextInput(),
-        required=False,
-    )
-    address3 = forms.CharField(
-        label='Adresse 3 :',
-        widget=forms.TextInput(),
-        required=False,
-    )
-    zip = forms.CharField(
-        label='Code postal :',
-        widget=forms.TextInput(),
-        required=False,
-    )
-    city = forms.CharField(
-        label='Ville :',
-        widget=forms.TextInput(),
-        required=False,
+        widget=forms.Textarea(),
     )
 
     class Meta:
@@ -105,7 +76,7 @@ class ProjectForm(forms.ModelForm):
     )
     client = forms.ModelChoiceField(
         label='Client :',
-        queryset=Client.objects.all().order_by('last_name', 'first_name'),
+        queryset=Client.objects.all().order_by('name'),
         widget=autocomplete.ModelSelect2(
             url='imprimerie:clients_autocomplete'
         ),
@@ -197,7 +168,7 @@ class ElementForm(forms.ModelForm):
     margins = forms.FloatField(
         label='Marges non impr. (mm) :',
         required=False,
-        initial=20,
+        initial=10,
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
