@@ -36,4 +36,52 @@ $(document).ready(function () {
             },
         ],
     });
+
+    $('#table-papers').DataTable({
+        order: [
+            [0, 'asc'],
+            [1, 'asc'],
+            [2, 'asc'],
+            [3, 'asc'],
+        ],
+        pageLength: 100,
+        'language': {
+            'info': 'Page <b>_PAGE_</b> sur <b>_PAGES_</b> - Total : <b>_MAX_</b> papiers',
+            'infoFiltered': ' - Affichés : papiers <b>_START_</b> à <b>_END_</b> parmi <b>_TOTAL_</b> papiers trouvés',// TODO: Remplacer "1 papiers trouvés" par "1 papier trouvé":
+            'infoEmpty': 'Aucun papier trouvé',// TODO: Du coup supprimer le bloc 'infoFiltered', ainsi que "Page précédente" et "Page suivante".
+            'lengthMenu': 'Montrer _MENU_ papiers par page',
+            'paginate': {
+                'previous': 'Page précédente',
+                'next': 'Page suivante',
+            },
+            'search': 'Rechercher un papier :',
+            'zeroRecords': 'Aucun papier trouvé',
+        },
+        columnDefs: [
+            // Nom :
+            {
+                target: 0,
+            },
+            // Grammage :
+            {
+                target: 1,
+            },
+            // Dimension 1 :
+            {
+                target: 2,
+                searchable: true,
+            },
+            // Dimension 2 :
+            {
+                target: 3,
+                searchable: true,
+            },
+            // Détails:
+            {
+                target: 4,
+                orderable: false,
+                searchable: false,
+            },
+        ],
+    });
 });

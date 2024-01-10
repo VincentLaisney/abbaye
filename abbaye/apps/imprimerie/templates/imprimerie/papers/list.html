@@ -1,18 +1,49 @@
 {% extends 'imprimerie/main_imprimerie.html' %}
 
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/datatables/datatables.min.css'%}>
+{% endblock css %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item active">Papiers</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
-<h4>Liste des papiers</h4>
+    <h4>Liste des papiers</h4>
 
-{% for paper in papers %}
-    <ul>
-        <li><a href={% url 'imprimerie:paper_details' paper.pk %}>{{ paper }}<a ></li>
-    </ul>
-{% endfor %}
+    <table id="table-papers" class="cell-border order-column hover w-100">
+        <thead>
+            <tr class="text-center">
+                <th>Nom</th>
+                <th>Grammage</th>
+                <th>Dim. 1</th>
+                <th>Dim. 2</th>
+                <th></th>
+            </tr>
+        </thead>
 
-<a href={% url 'imprimerie:paper_create' %}>Créer un nouveau papier</a>
+        <tbody>
+            {% for paper in papers %}
+                <tr>
+                    <td>{{ paper.name }}</td>
+                    <td>{{ paper.weight }}</td>
+                    <td>{{ paper.dim1 }}</td>
+                    <td>{{ paper.dim2 }}</td>
+                    <td class="fw-bold"><a href={% url 'imprimerie:paper_details' paper.pk %}>Modifier</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href={% url 'imprimerie:paper_create' %} class="btn btn-primary">Créer un nouveau papier</a>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'main/datatables/datatables.min.js'%}></script>
+    <script src={% static 'imprimerie/js/datatable-imprimerie.js' %}></script>
+{% endblock javascript %}
