@@ -187,6 +187,7 @@ class ElementForm(forms.ModelForm):
         label='Papier dim. 2 (mm) :',
         required=False,
         initial=0,
+        help_text='Rappel: cette dimension donne le sens des fibres.',
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
@@ -242,6 +243,17 @@ class ElementForm(forms.ModelForm):
                 'class': 'number',
             },
         )
+    )
+    fibers = forms.BooleanField(
+        label='Sens des fibres',
+        label_suffix='',
+        required=False,
+        initial=True,
+        widget=forms.CheckboxInput(
+            attrs={
+                'style': 'margin: 0 5px 0 0;'
+            },
+        ),
     )
     imposition = forms.IntegerField(
         label='Imposition :',

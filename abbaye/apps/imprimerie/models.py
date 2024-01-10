@@ -172,6 +172,10 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
+    fibers = models.BooleanField(
+        null=True,
+        blank=True,
+    )
     imposition = models.IntegerField(
         null=True,
         blank=True,
