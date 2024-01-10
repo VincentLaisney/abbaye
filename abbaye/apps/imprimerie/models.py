@@ -98,12 +98,6 @@ class Project(models.Model):
         null=True,
         blank=True,
     )
-    # quantity_client = models.IntegerField()
-    # finition = models.CharField(
-    #     max_length=255,
-    # )
-    # width_finished = models.FloatField()
-    # length_finished = models.FloatField()
     created = models.DateTimeField(
         auto_now_add=True,
     )
@@ -158,6 +152,10 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
+    margins = models.FloatField(
+        null=True,
+        blank=True,
+    )
     file_width = models.FloatField(
         null=True,
         blank=True,
@@ -166,15 +164,19 @@ class Element(models.Model):
         null=True,
         blank=True,
     )
-    margins = models.FloatField(
+    gutters_width = models.FloatField(
         null=True,
         blank=True,
     )
-    gutters = models.FloatField(
+    gutters_height = models.FloatField(
         null=True,
         blank=True,
     )
-    number_of_sheets_doc = models.IntegerField(
+    number_of_pages_doc = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    fibers = models.BooleanField(
         null=True,
         blank=True,
     )
