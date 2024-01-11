@@ -1,5 +1,12 @@
 {% extends 'imprimerie/main_imprimerie.html' %}
 
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/datatables/datatables.min.css'%}>
+{% endblock css %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'imprimerie:home' %}>Imprimerie</a></li>
     <li class="breadcrumb-item active">Projets</li>
@@ -8,11 +15,47 @@
 {% block content %}
     <h4>Liste des projets</h4>
 
-    {% for project in projects %}
-        <ul>
-            <li><a href={% url 'imprimerie:project_details' project.pk %}>{{ project }}<a></li>
-        </ul>
-    {% endfor %}
+    <table id="table-projects" class="cell-border order-column hover w-100">
+        <thead>
+            <tr class="text-center">
+                <th class="grey-dark">Créé</th>
+                <th class="grey-dark">Modifié</th>
+                <th class="red">Nom</th>
+                <th>Client</th>
+                <th>Notes</th>
+                <th></th>
+            </tr>
+        </thead>
 
-    <a href={% url 'imprimerie:project_create' %}>Créer un nouveau projet</a>
+        <tbody>
+            {% for project in projects %}
+                <tr>
+                    <td>
+                        <span class="d-none">
+                            {{ project.created|date:"Ymd" }}{{ project.created|time:"His" }}
+                        </span><!-- Span not displayed, only to be able to sort dates. -->
+                        {{ project.created|date:"d/m/Y" }} à {{ project.created|time:"H:i:s" }}
+                    </td>
+                    <td>
+                        <span class="d-none">
+                            {{ project.created|date:"Ymd" }}{{ project.created|time:"His" }}
+                        </span><!-- Span not displayed, only to be able to sort dates. -->
+                        {{ project.modified|date:"d/m/Y" }} à {{ project.modified|time:"H:i:s" }}
+                    </td>
+                    <td class="fw-bold">{{ project }}</td>
+                    <td>{{ project.client }}</td>
+                    <td>{{ project.notes|truncatechars:50 }}</td>
+                    <td><a href={% url 'imprimerie:project_details' project.pk %}>Détails</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <a href={% url 'imprimerie:project_create' %} class="btn btn-primary mb-5">Créer un nouveau projet</a>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'main/datatables/datatables.min.js'%}></script>
+    <script src={% static 'imprimerie/js/datatable-imprimerie.js' %}></script>
+{% endblock javascript %}
