@@ -49,15 +49,15 @@ class PaperForm(forms.ModelForm):
     name = forms.CharField(
         label='Nom (marque) :',
     )
+    weight = forms.IntegerField(
+        label='Grammage :',
+    )
     dim1 = forms.CharField(
         label='Dimension 1 :',
     )
     dim2 = forms.CharField(
         label='Dimension 2 :',
         help_text='Rappel: cette dimension donne le sens des fibres.'
-    )
-    weight = forms.IntegerField(
-        label='Grammage :',
     )
     price = forms.DecimalField(
         label='Prix au mille :',

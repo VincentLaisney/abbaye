@@ -18,24 +18,28 @@
     <table id="table-clients" class="cell-border order-column hover w-100">
         <thead>
             <tr class="text-center">
-                <th class="col-2 grey-dark">Créé</th>
-                <th class="col-2 grey-dark">Modifié</th>
-                <th class="col-8 red">Client</th>
+                <th class="grey-dark">Créé</th>
+                <th class="grey-dark">Modifié</th>
+                <th class="red">Client</th>
+                <th>Notes</th>
+                <th></th>
             </tr>
         </thead>
 
         <tbody>
             {% for client in clients %}
                 <tr>
-                    <td>{{ client.created }}</td>
-                    <td>{{ client.modified }}</td>
-                    <td class="fw-bold"><a href={% url 'imprimerie:client_details' client.pk %}>{{ client }}</a></td>
+                    <td>{{ client.created|date:"d/m/Y" }} à {{ client.created|time:"H:i:s" }}</td>
+                    <td>{{ client.modified|date:"d/m/Y" }} à {{ client.modified|time:"H:i:s" }}</td>
+                    <td class="fw-bold">{{ client }}</td>
+                    <td>{{ client.notes|truncatechars:50 }}</td>
+                    <td><a href={% url 'imprimerie:client_details' client.pk %}>Détails</a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <a href={% url 'imprimerie:client_create' %} class="btn btn-primary">Créer un nouveau client</a>
+    <a href={% url 'imprimerie:client_create' %} class="btn btn-primary mb-5">Créer un nouveau client</a>
 {% endblock content %}
 
 {% block javascript %}

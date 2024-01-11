@@ -52,13 +52,13 @@ class Paper(models.Model):
     name = models.CharField(
         max_length=255,
     )
+    weight = models.IntegerField()
     dim1 = models.CharField(
         max_length=4,
     )
     dim2 = models.CharField(
         max_length=4,
     )
-    weight = models.IntegerField()
     price = models.DecimalField(
         decimal_places=2,
         max_digits=7,
