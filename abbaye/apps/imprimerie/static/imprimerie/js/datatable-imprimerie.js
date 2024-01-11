@@ -1,7 +1,7 @@
 $(document).ready(function () {
     $('#table-clients').DataTable({
         order: [
-            [2, 'desc'],
+            [2, 'asc'],
         ],
         pageLength: 25,
         'language': {
@@ -17,22 +17,31 @@ $(document).ready(function () {
             'zeroRecords': 'Aucun client trouvé',
         },
         columnDefs: [
-            // Créé le:
+            // Créé le :
             {
                 target: 0,
                 orderable: false,
                 searchable: false,
             },
-            // Modifié le:
+            // Modifié le :
             {
                 target: 1,
                 orderable: false,
                 searchable: false,
             },
-            // Client:
+            // Nom :
             {
                 target: 2,
-                searchable: true,
+            },
+            // Notes :
+            {
+                target: 3,
+            },
+            // Détails :
+            {
+                target: 4,
+                orderable: false,
+                searchable: false,
             },
         ],
     });
@@ -69,16 +78,63 @@ $(document).ready(function () {
             // Dimension 1 :
             {
                 target: 2,
-                searchable: true,
             },
             // Dimension 2 :
             {
                 target: 3,
-                searchable: true,
             },
             // Détails:
             {
                 target: 4,
+                orderable: false,
+                searchable: false,
+            },
+        ],
+    });
+
+    $('#table-projects').DataTable({
+        order: [
+            [1, 'desc'],
+        ],
+        pageLength: 50,
+        'language': {
+            'info': 'Page <b>_PAGE_</b> sur <b>_PAGES_</b> - Total : <b>_MAX_</b> projets',
+            'infoFiltered': ' - Affichés : projets <b>_START_</b> à <b>_END_</b> parmi <b>_TOTAL_</b> projets trouvés',// TODO: Remplacer "1 projets trouvés" par "1 projet trouvé":
+            'infoEmpty': 'Aucun projet trouvé',// TODO: Du coup supprimer le bloc 'infoFiltered', ainsi que "Page précédente" et "Page suivante".
+            'lengthMenu': 'Montrer _MENU_ projets par page',
+            'paginate': {
+                'previous': 'Page précédente',
+                'next': 'Page suivante',
+            },
+            'search': 'Rechercher un projet :',
+            'zeroRecords': 'Aucun projet trouvé',
+        },
+        columnDefs: [
+            // Créé le:
+            {
+                target: 0,
+                searchable: false,
+            },
+            // Modifié le:
+            {
+                target: 1,
+                searchable: false,
+            },
+            // Nom:
+            {
+                target: 2,
+            },
+            // Client:
+            {
+                target: 3,
+            },
+            // Notes:
+            {
+                target: 4,
+            },
+            // Détails:
+            {
+                target: 5,
                 orderable: false,
                 searchable: false,
             },

@@ -32,14 +32,14 @@
                     <td>{{ client.created|date:"d/m/Y" }} à {{ client.created|time:"H:i:s" }}</td>
                     <td>{{ client.modified|date:"d/m/Y" }} à {{ client.modified|time:"H:i:s" }}</td>
                     <td class="fw-bold">{{ client }}</td>
-                    <td>{{ client.notes }}</td>
+                    <td>{{ client.notes|truncatechars:50 }}</td>
                     <td><a href={% url 'imprimerie:client_details' client.pk %}>Détails</a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
 
-    <a href={% url 'imprimerie:client_create' %} class="btn btn-primary">Créer un nouveau client</a>
+    <a href={% url 'imprimerie:client_create' %} class="btn btn-primary mb-5">Créer un nouveau client</a>
 {% endblock content %}
 
 {% block javascript %}
