@@ -50,12 +50,16 @@ def details(request, **kwargs):
     """ Details of project. """
     project = get_object_or_404(Project, pk=kwargs['pk'])
     elements = Element.objects.filter(project=project)
+    total_price = 0
+    for elem in elements:
+        total_price += (elem.total if elem.total else 0)
     return render(
         request,
         'imprimerie/projects/details.html',
         {
             'project': project,
             'elements': elements,
+            'total_price': total_price,
         }
     )
 
