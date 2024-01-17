@@ -59,8 +59,8 @@ function refresh(data_paper) {
   var prix_feuille = prix_mille / 1000 / paper_cut_into;
   $('#prix_feuille').text(prix_feuille.toFixed(3));
   var number_of_pages_doc = Number.parseInt($('#id_number_of_pages_doc').val());
-  var prix_papier = (number_of_pages_doc / $('#id_imposition').val() / recto_verso) * prix_feuille * quantity;
-  $('#prix_papier').html((prix_papier * marge_papier).toFixed(2) + ' €');
+  var prix_papier = (number_of_pages_doc / $('#id_imposition').val() / recto_verso) * prix_feuille * quantity * marge_papier;
+  $('#prix_papier').html(prix_papier.toFixed(2) + ' €');
 
   // Meilleure imposition :
   var paper_dim1_machine = Number.parseInt($('#id_paper_dim1_machine').val());
@@ -89,7 +89,6 @@ function refresh(data_paper) {
   }
   $('#id_imposition').val(best_imposition);
 
-
   // Prix des clics :
   var nb_clics = number_of_pages_doc;
   nb_clics /= $('#id_imposition').val();
@@ -112,17 +111,12 @@ function refresh(data_paper) {
   $('#prix_finition').html(prix_finition.toFixed(2) + ' €');
 
   // Total :
-  $('#prix_total').html(
-    (prix_fixe
-      + prix_papier
-      + prix_clics
-      + prix_finition)
-      .toFixed(2)
-    + ' €'
+  var total = prix_fixe + prix_papier + prix_clics + prix_finition;
+  $('#id_total').val(
+    total.toFixed(2)
   );
 
   // Prix unitaire :
-  var total = Number.parseFloat($('#prix_total').text());
   $('#prix_unitaire').html(
     (total / quantity).toFixed(2) + ' €'
   );

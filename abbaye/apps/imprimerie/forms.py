@@ -320,6 +320,14 @@ class ElementForm(forms.ModelForm):
             },
         )
     )
+    total = forms.FloatField(
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'red fw-bold',
+                'style': 'text-align: right; width: 90px;',
+            },
+        )
+    )
 
     class Meta:
         model = Element
