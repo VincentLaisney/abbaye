@@ -9,32 +9,36 @@
 {% block content %}
     <h4 class="mb-3">{{ paper }}</h4>
 
-    <div class="w-25">
-        <table class="table table-borderless table-sm">
-            <tr>
-                <td class="fw-bold">Nom :</td>
-                <td>{{ paper.name }}</td>
-            </tr>
-            <tr>
-                <td class="fw-bold">Grammage :</td>
-                <td>{{ paper.weight }}</td>
-            </tr>
-            <tr>
-                <td class="fw-bold">Dimension 1 :</td>
-                <td>{{ paper.dim1 }}</td>
-            </tr>
-            <tr>
-                <td class="fw-bold">Dimension 2 :</td>
-                <td>{{ paper.dim2 }}</td>
-            </tr>
-            <tr>
-                <td class="fw-bold">Prix au mille :</td>
-                <td>{{ paper.price }}</td>
-            </tr>
-        </table>
+    <div class="d-flex flex-column align-items-center w-100">
+        <div class="d-flex flex-column align-items-center w-50">
+            <table class="table table-borderless table-sm w-75">
+                <tr>
+                    <td class="fw-bold">Nom :</td>
+                    <td>{{ paper.name }}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold">Grammage :</td>
+                    <td>{{ paper.weight }}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold">Dimension 1 :</td>
+                    <td>{{ paper.dim1 }}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold">Dimension 2 :</td>
+                    <td>{{ paper.dim2 }}</td>
+                </tr>
+                <tr>
+                    <td class="fw-bold">Prix au mille :</td>
+                    <td>{{ paper.price }}</td>
+                </tr>
+            </table>
+        </div>
     </div>
 
-    <a href={% url 'imprimerie:paper_update' paper.pk %}>Modifier</a>
-    <a href={% url 'imprimerie:paper_delete' paper.pk %}>Supprimer</a>
-    <a href={% url 'imprimerie:papers_list' %}>Retour à la liste</a>
+    <div class="d-flex">
+        <a href={% url 'imprimerie:papers_list' %} class="btn btn-warning m-1"><span class="fas fa-arrow-left"></span> Retour à la liste</a>
+        <a href={% url 'imprimerie:paper_update' paper.pk %} class="btn btn-primary m-1">Modifier</a>
+        <a href={% url 'imprimerie:paper_delete' paper.pk %} class="btn btn-danger m-1">Supprimer</a>
+    </div>
 {% endblock content %}
