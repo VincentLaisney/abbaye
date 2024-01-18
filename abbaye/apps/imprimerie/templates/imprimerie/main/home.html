@@ -5,13 +5,35 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <div class="d-flex flex-column align-items-center">
+    <div class="d-flex flex-column align-items-center mt-5">
         <h1>Bienvenue sur Imprimerie !</h1>
     </div>
 
-    <a href={% url 'imprimerie:work' %}>Travail</a>
-    <a href={% url 'imprimerie:memo' %}>Mémo</a>
-    <a href={% url 'imprimerie:clients_list' %}>Clients</a>
-    <a href={% url 'imprimerie:papers_list' %}>Papiers</a>
-    <a href={% url 'imprimerie:projects_list' %}>Projets</a>
+    <div id="home" class="d-flex flex-column align-items-center mt-5">
+        <div class="d-flex my-4">
+            <a href={% url 'imprimerie:clients_list' %} class="mx-5">
+                <span class="fas fa-user"></span>
+                <p>Clients</p>
+            </a>
+            <a href={% url 'imprimerie:papers_list' %} class="mx-5">
+                <span class="fas fa-align-justify"></span>
+                <p>Papiers</p>
+            </a>
+            <a href={% url 'imprimerie:projects_list' %} class="mx-5">
+                <span class="fas fa-cubes"></span>
+                <p>Projets</p>
+            </a>
+        </div>
+
+        <div class="d-flex my-4">
+            <a href={% url 'imprimerie:work' %} class="mx-3">
+                <span class="fas fa-tools"></span>
+                <p>Travail au programme</p>
+            </a>
+            <a href={% url 'imprimerie:memo' %} class="mx-3">
+                <span class="fas fa-question"></span>
+                <p>Mémo de l'imprimeur</p>
+            </a>
+        </div>
+    </div>
 {% endblock content %}
