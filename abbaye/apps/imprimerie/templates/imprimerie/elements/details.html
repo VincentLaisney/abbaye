@@ -9,29 +9,29 @@
 
 {% block content %}
     <h4>Projet <span class="project">{{ project }}</span></h4>
+    <h5 class="fst-italic">- {{ project.client }} -</h5>
     <h4>Élément <span class="element">{{ element }}</span></h4>
 
     <div class="d-flex flex-column align-items-center w-100 mt-3">
-        <div class="w-50">
-            <table class="table table-borderless table-sm">
-                <tr>
-                    <td class="label col-2">Nom :</td>
-                    <td class="value">{{ element.name }}</td>
-                </tr>
-                <tr>
-                    <td class="label col-2">Quantité :</td>
-                    <td class="value">{{ element.quantity|default_if_none:0 }}</td>
-                </tr>
-                <tr>
-                    <td class="label col-2">Frais fixes :</td>
-                    <td class="value">{{ element.fixed|default_if_none:0 }} €</td>
-                </tr>
-                <tr>
-                    <td class="label col-2">Notes :</td>
-                    <td class="value">{{ element.notes }}</td>
-                </tr>
-            </table>
+        <div class="d-flex w-50">
+            <div class="col-6">
+                <table class="table table-borderless table-sm">
+                    <tr>
+                        <td class="label col-4">Quantité :</td>
+                        <td class="value">{{ element.quantity|default_if_none:0 }}</td>
+                    </tr>
+                    <tr>
+                        <td class="label red col-4">Total :</td>
+                        <td class="value red fw-bold">{{ element.total }} €</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="col-6">
+                <span class="label fw-bold">Notes :</span>
+                <span class="value">{{ element.notes }}</span>
+            </div>
         </div>
+    </div>
 
         <div class="d-flex w-100 mb-3">
             <table class="table table-borderless table-sm m-1">
