@@ -15,16 +15,16 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <div class="d-flex flex-column align-items-center">
-        {% if project %}
-            <h6>Modifier le projet <span class="project">{{ project }}</span></h6>
-        {% else %}
-            <h6>Ajouter un projet</h6>
-        {% endif %}
+    {% if project %}
+        <h6>Modifier le projet <span class="project">{{ project }}</span></h6>
+    {% else %}
+        <h6>Ajouter un projet</h6>
+    {% endif %}
 
-        <form method="post" novalidate class="d-flex flex-column align-items-center">
-            {% csrf_token %}
+    <form method="post" novalidate class="d-flex flex-column align-items-center">
+        {% csrf_token %}
 
+        <div class="d-flex flex-column w-100 my-3">
             <!-- Nom -->
             <div class='form-group d-flex flex-column align-items-start'>
                 {{ form.name.label_tag }}
@@ -96,17 +96,17 @@
                     </small>
                 {% endif %}
             </div>
+        </div>
 
-            <div class="d-flex justify-content-center align-items-between w-100">
-                {% if project %}
-                    <a class="btn btn-secondary mx-1" href={% url 'imprimerie:project_details' project.pk %}>Annuler</a>
-                {% else %}
-                    <a class="btn btn-secondary mx-1" href={% url 'imprimerie:projects_list' %}>Annuler</a>
-                {% endif %}
-                <button type="submit" class="btn btn-primary mx-1">Valider</button>
-            </div>
-        </form>
-    </div>
+        <div class="d-flex justify-content-center align-items-between w-100">
+            {% if project %}
+                <a class="btn btn-secondary mx-1" href={% url 'imprimerie:project_details' project.pk %}>Annuler</a>
+            {% else %}
+                <a class="btn btn-secondary mx-1" href={% url 'imprimerie:projects_list' %}>Annuler</a>
+            {% endif %}
+            <button type="submit" class="btn btn-primary mx-1">Valider</button>
+        </div>
+    </form>
 {% endblock content %}
 
 {% block javascript %}
