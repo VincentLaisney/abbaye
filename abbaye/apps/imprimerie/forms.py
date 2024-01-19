@@ -50,17 +50,17 @@ class PaperForm(forms.ModelForm):
         label='Nom (marque) :',
     )
     weight = forms.IntegerField(
-        label='Grammage :',
+        label='Grammage (g/m2) :',
     )
     dim1 = forms.CharField(
-        label='Dimension 1 :',
+        label='Dimension 1 (mm) :',
     )
     dim2 = forms.CharField(
-        label='Dimension 2 :',
+        label='Dimension 2 (mm) :',
         help_text='Rappel: cette dimension donne le sens des fibres.'
     )
     price = forms.DecimalField(
-        label='Prix au mille :',
+        label='Prix au mille (€) :',
         required=False,
     )
 

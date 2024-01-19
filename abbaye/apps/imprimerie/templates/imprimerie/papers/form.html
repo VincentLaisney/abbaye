@@ -14,10 +14,10 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <div class="d-flex flex-column align-items-center">
-        <form method="post" novalidate class="d-flex flex-column align-items-center">
+    <form method="post" novalidate class="d-flex flex-column align-items-center">
             {% csrf_token %}
-
+        
+        <div class="d-flex flex-column w-100 my-3">
             <!-- Nom -->
             <div class='form-group d-flex flex-column align-items-start'>
                 {{ form.name.label_tag }}
@@ -145,15 +145,15 @@
                     </div>
                 {% endfor %}
             {% endif %}
+        </div>
 
-            <div class="w-100 d-flex justify-content-center align-items-between">
-                {% if paper %}
-                    <a class="btn btn-secondary mx-1" href={% url 'imprimerie:paper_details' paper.pk %}>Annuler</a>
-                {% else %}
-                    <a class="btn btn-secondary mx-1" href={% url 'imprimerie:papers_list' %}>Annuler</a>
-                {% endif %}
-                <button type="submit" class="btn btn-primary mx-1">Valider</button>
-            </div>
-        </form>
-    </div>
+        <div class="w-100 d-flex justify-content-center align-items-between">
+            {% if paper %}
+                <a class="btn btn-secondary mx-1" href={% url 'imprimerie:paper_details' paper.pk %}>Annuler</a>
+            {% else %}
+                <a class="btn btn-secondary mx-1" href={% url 'imprimerie:papers_list' %}>Annuler</a>
+            {% endif %}
+            <button type="submit" class="btn btn-primary mx-1">Valider</button>
+        </div>
+    </form>
 {% endblock content %}
