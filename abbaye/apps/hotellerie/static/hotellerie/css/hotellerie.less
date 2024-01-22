@@ -265,6 +265,60 @@ nav {
         }
     }
 
+    #table-personnes_wrapper,
+    #table-sejours_wrapper,
+    #table-parloirs_wrapper,
+    #table-retreats_wrapper {
+        font-size: 0.9em;
+        margin-bottom: 50px;
+        width: 70%;
+
+        th,
+        td {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        th {
+            color: @red;
+        }
+
+        td table td {
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #table-personnes_filter,
+        #table-personnes_info,
+        #table-personnes_length,
+        #table-personnes_paginate,
+        #table-sejours_filter,
+        #table-sejours_info,
+        #table-sejours_length,
+        #table-sejours_paginate,
+        #table-parloirs_filter,
+        #table-parloirs_info,
+        #table-parloirs_length,
+        #table-parloirs_paginate,
+        #table-retreats_filter,
+        #table-retreats_info,
+        #table-retreats_length,
+        #table-retreats_paginate {
+            color: @green;
+
+            a,
+            label {
+                font-weight: bold;
+            }
+
+            input {
+                background-color: white;
+                border-radius: 7px;
+            }
+        }
+    }
+
     form {
         input[type='checkbox'] {
             margin: 0px 5px 0px 0px;
