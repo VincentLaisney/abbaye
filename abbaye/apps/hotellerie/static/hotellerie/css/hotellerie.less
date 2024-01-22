@@ -1,276 +1,293 @@
 @import url("/statics/main/css/colors.less");
 
-body {
-    h1 {
-        color: @green;
+h1 {
+    color: @green;
+}
+
+input,
+input:focus,
+select,
+select:focus,
+textarea,
+textarea:focus,
+.form-control,
+.form-control:focus {
+    color: @grey-dark;
+}
+
+th {
+    text-align: center;
+}
+
+td {
+    vertical-align: top;
+}
+
+nav {
+    #logo {
+        img {
+            width: 50px;
+        }
+
+        p {
+            color: @orange;
+            font-family: LucidaHW;
+            font-size: 2em;
+        }
     }
 
-    input,
-    input:focus,
-    select,
-    select:focus,
-    textarea,
-    textarea:focus,
-    .form-control,
-    .form-control:focus {
-        color: @grey-dark;
+    #menu {
+        font-size: 1.3em;
+    }
+}
+
+#content {
+    .dropdown {
+        .dropdown_button {
+            background-color: green;
+            color: white;
+            padding: 5px;
+            font-size: 10px;
+            border: 1px solid @grey-light;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown_content {
+            display: none;
+            position: absolute;
+            background-color: whitesmoke;
+            min-width: 200px;
+            box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+            z-index: 3;
+        }
+
+        .dropdown_content a {
+            color: black;
+            padding: 8px 16px;
+            text-decoration: none;
+            display: block;
+        }
+
+        .dropdown_content a:hover {
+            background-color: @grey-light;
+        }
+
+        .dropdown:hover .dropdown_content {
+            display: block;
+        }
+
+        .dropdown:hover .dropbtn {
+            background-color: green;
+        }
     }
 
-    th {
-        text-align: center;
-    }
-
-    td {
-        vertical-align: top;
-    }
-
-    nav {
-        #logo {
-            img {
-                width: 50px;
-            }
+    #home {
+        a {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
 
             p {
-                color: @orange;
-                font-family: LucidaHW;
-                font-size: 2em;
+                font-weight: bold;
+                font-size: 1.2em;
             }
-        }
 
-        #menu {
-            font-size: 1.3em;
+            svg {
+                color: @orange;
+                font-size: 4em;
+                margin: 0 0 10px 0;
+            }
         }
     }
 
-    #content {
-        .dropdown {
-            .dropdown_button {
-                background-color: green;
-                color: white;
-                padding: 5px;
-                font-size: 10px;
-                border: 1px solid @grey-light;
-                border-radius: 4px;
-                cursor: pointer;
-            }
+    #tools {
+        margin: 0px 10px 20px 10px;
 
-            .dropdown {
-                position: relative;
-                display: inline-block;
-            }
+        ul {
+            font-size: 1em;
+            vertical-align: middle;
+        }
 
-            .dropdown_content {
-                display: none;
-                position: absolute;
-                background-color: whitesmoke;
-                min-width: 200px;
-                box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-                z-index: 3;
-            }
+        a,
+        span {
+            margin: 0px 10px 0px 10px;
+        }
 
-            .dropdown_content a {
-                color: black;
-                padding: 8px 16px;
-                text-decoration: none;
-                display: block;
-            }
+        a,
+        .fas {
+            color: @green;
+            cursor: pointer;
+        }
 
-            .dropdown_content a:hover {
-                background-color: @grey-light;
-            }
+        a {
+            font-size: 1em;
+        }
 
-            .dropdown:hover .dropdown_content {
-                display: block;
-            }
+        .fas {
+            font-size: 1.3em;
+            margin-top: 20px;
+        }
+    }
 
-            .dropdown:hover .dropbtn {
-                background-color: green;
+    #calendar {
+        text-align: center;
+        width: 100%;
+
+        .calendar_lines {
+            position: absolute;
+            z-index: 1;
+
+            .vertical_line {
+                border-right: 1px solid @grey-light;
+
+                &.zero {
+                    border-left: 2px solid gray;
+                }
+
+                &.bold {
+                    border-right: 2px solid gray;
+                }
             }
         }
 
-        #tools {
-            margin: 0px 10px 20px 10px;
+        .calendar_bars {
+            display: grid;
+            grid-template-columns: repeat(21, 100% / 21);
+            grid-auto-flow: row dense;
+            position: relative;
+            z-index: 2;
 
-            ul {
-                font-size: 1em;
-                vertical-align: middle;
-            }
-
-            a,
-            span {
-                margin: 0px 10px 0px 10px;
-            }
-
-            a,
-            .fas {
-                color: @green;
-                cursor: pointer;
+            .bar {
+                background-color: @green;
+                border-radius: 3px;
+                color: white;
+                font-size: 10pt;
+                height: 20px;
+                overflow: hidden;
+                text-align: left;
+                text-overflow: ellipsis;
+                vertical-align: top;
+                white-space: nowrap;
             }
 
             a {
-                font-size: 1em;
+                color: white;
+                font-size: 9pt;
+                vertical-align: middle;
             }
 
-            .fas {
-                font-size: 1.3em;
-                margin-top: 20px;
+            .arrow-left {
+                border-top-left-radius: 12px;
+                border-bottom-left-radius: 12px;
+            }
+
+            .arrow-right {
+                border-top-right-radius: 12px;
+                border-bottom-right-radius: 12px;
             }
         }
 
-        #calendar {
-            text-align: center;
-            width: 100%;
+        #calendar_dates {
+            .date {
+                width: 100% / 7;
 
-            .calendar_lines {
-                position: absolute;
-                z-index: 1;
+                .weekday,
+                .date,
+                .current_weekday,
+                .current_date {
+                    background-color: gray;
+                    color: @grey-light;
+                    font-weight: bold;
+                    width: 100%;
+                }
 
-                .vertical_line {
-                    border-right: 1px solid @grey-light;
-
-                    &.zero {
-                        border-left: 2px solid gray;
-                    }
-
-                    &.bold {
-                        border-right: 2px solid gray;
-                    }
+                .current_weekday,
+                .current_date {
+                    color: rgb(37, 204, 255);
                 }
             }
+        }
 
-            .calendar_bars {
-                display: grid;
-                grid-template-columns: repeat(21, 100% / 21);
-                grid-auto-flow: row dense;
-                position: relative;
-                z-index: 2;
+        #calendar_retreats {
+            border-bottom: 1px solid grey;
+            position: relative;
 
-                .bar {
-                    background-color: @green;
-                    border-radius: 3px;
-                    color: white;
-                    font-size: 10pt;
-                    height: 20px;
-                    overflow: hidden;
-                    text-align: left;
-                    text-overflow: ellipsis;
-                    vertical-align: top;
-                    white-space: nowrap;
+            .retreat_bar {
+                background-color: @orange;
+
+                a {
+                    color: black;
                 }
+            }
+        }
+
+        #calendar_sejours {
+            border-bottom: 1px solid grey;
+            position: relative;
+
+            .pretre {
+                background-color: blue;
 
                 a {
                     color: white;
-                    font-size: 9pt;
-                    vertical-align: middle;
-                }
-
-                .arrow-left {
-                    border-top-left-radius: 12px;
-                    border-bottom-left-radius: 12px;
-                }
-
-                .arrow-right {
-                    border-top-right-radius: 12px;
-                    border-bottom-right-radius: 12px;
                 }
             }
 
-            #calendar_dates {
-                .date {
-                    width: 100% / 7;
+            .groupe {
+                background-color: @red-full;
 
-                    .weekday,
-                    .date,
-                    .current_weekday,
-                    .current_date {
-                        background-color: gray;
-                        color: @grey-light;
-                        font-weight: bold;
-                        width: 100%;
-                    }
-
-                    .current_weekday,
-                    .current_date {
-                        color: rgb(37, 204, 255);
-                    }
+                a {
+                    color: white;
                 }
             }
 
-            #calendar_retreats {
-                border-bottom: 1px solid grey;
-                position: relative;
-
-                .retreat_bar {
-                    background-color: @orange;
-
-                    a {
-                        color: black;
-                    }
-                }
-            }
-
-            #calendar_sejours {
-                border-bottom: 1px solid grey;
-                position: relative;
-
-                .pretre {
-                    background-color: blue;
-
-                    a {
-                        color: white;
-                    }
-                }
-
-                .groupe {
-                    background-color: @red-full;
-
-                    a {
-                        color: white;
-                    }
-                }
-
-                .pretre.groupe {
-                    background-color: rgb(190, 0, 190);
-                }
-            }
-
-            #calendar_parloirs {
-                position: relative;
-
-                .parloir_bar {
-                    background-color: yellow;
-
-                    a {
-                        color: black;
-                    }
-                }
+            .pretre.groupe {
+                background-color: rgb(190, 0, 190);
             }
         }
 
-        form {
-            input[type='checkbox'] {
-                margin: 0px 5px 0px 0px;
-                width: auto;
-            }
+        #calendar_parloirs {
+            position: relative;
 
-            label {
-                color: @green;
-                font-weight: bold;
-                margin: 0px 5px 0px 0px;
-                padding: 8px 0px 0px 0px;
-            }
+            .parloir_bar {
+                background-color: yellow;
 
-            .custom-select {
-                max-width: 200px;
+                a {
+                    color: black;
+                }
             }
+        }
+    }
 
-            .text-muted {
-                text-align: center;
-            }
+    form {
+        input[type='checkbox'] {
+            margin: 0px 5px 0px 0px;
+            width: auto;
+        }
 
-            .select2-selection--single {
-                height: 40px !important;
-            }
+        label {
+            color: @green;
+            font-weight: bold;
+            margin: 0px 5px 0px 0px;
+            padding: 8px 0px 0px 0px;
+        }
+
+        .custom-select {
+            max-width: 200px;
+        }
+
+        .text-muted {
+            text-align: center;
+        }
+
+        .select2-selection--single {
+            height: 40px !important;
         }
     }
 }
