@@ -39,6 +39,7 @@ function refresh(data_paper) {
 
   // Prix fixe :
   var prix_fixe = Number.parseFloat($('#id_fixed').val());
+  $('#frais_fixes').html(prix_fixe.toFixed(2) + ' €');
 
   // Recto-verso :
   var recto_verso = 1;
