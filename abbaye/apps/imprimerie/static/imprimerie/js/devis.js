@@ -39,6 +39,7 @@ function refresh(data_paper) {
 
   // Prix fixe :
   var prix_fixe = Number.parseFloat($('#id_fixed').val());
+  $('#frais_fixes').html(prix_fixe.toFixed(2) + ' €');
 
   // Recto-verso :
   var recto_verso = 1;
@@ -59,7 +60,9 @@ function refresh(data_paper) {
   var prix_feuille = prix_mille / 1000 / paper_cut_into;
   $('#prix_feuille').text(prix_feuille.toFixed(3));
   var number_of_pages_doc = Number.parseInt($('#id_number_of_pages_doc').val());
-  var prix_papier = (number_of_pages_doc / $('#id_imposition').val() / recto_verso) * prix_feuille * quantity * marge_papier;
+  var nb_feuilles_machine = (number_of_pages_doc / $('#id_imposition').val() / recto_verso) * quantity;
+  $('#nb_feuilles_machine').html(nb_feuilles_machine);
+  var prix_papier = nb_feuilles_machine * prix_feuille * marge_papier;
   $('#prix_papier').html(prix_papier.toFixed(2) + ' €');
 
   // Meilleure imposition :
@@ -93,6 +96,7 @@ function refresh(data_paper) {
   var nb_clics = number_of_pages_doc;
   nb_clics /= $('#id_imposition').val();
   nb_clics *= quantity;
+  $('#nb_clics').html(nb_clics);
   var prix_clics;
   if ($('#id_color').val() == "CMYN") {
     prix_clics = nb_clics * cout_clic_cmjn;
