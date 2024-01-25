@@ -58,7 +58,7 @@
                             </small>
                         {% endif %}
                     </div>
-    
+
                     <div class="d-flex w-100 m-2">
                         <!-- Quantité -->
                         <div class="form-group d-flex flex-column align-items-start col-6">
@@ -136,10 +136,14 @@
                     {% endif %}
                 </div>
             </div>
-    
+
             <!-- Total -->
             <div id="total" class="col-3 border rounded p-3">
                 <table class="table table-sm table-borderless ms-auto">
+                    <tr>
+                        <td class="label">Frais fixes :</td>
+                        <td id="frais_fixes" class="value"></td>
+                    </tr>
                     <tr>
                         <td class="label">Coût du papier :</td>
                         <td id="prix_papier" class="value"></td>
@@ -297,6 +301,11 @@
                             </small>
                         {% endif %}
                     </div>
+
+                    <!-- Nombre de feuilles machine : -->
+                    <div class="form-group d-flex align-items-center col-6">
+                        <p class="small m-0 p-0">Nombre de feuilles machines utilisées : <span id="nb_feuilles_machine"></span></p>
+                    </div>
                 </div>
             </div>
 
@@ -450,7 +459,7 @@
                             {% endif %}
                             {{ form.recto_verso.label_tag }}
                         </div>
-    
+
                         <!-- Couleur -->
                         <div class="form-group d-flex align-items-center">
                             {{ form.color.label_tag }}
@@ -524,6 +533,13 @@
                                 {{ form.imposition.help_text }}
                             </small>
                         {% endif %}
+                    </div>
+                </div>
+
+                <div>
+                    <!-- Nombre de clics : -->
+                    <div class="form-group d-flex align-items-center col-6 ms-auto">
+                        <p class="small m-0 p-0">Nombre de clics : <span id="nb_clics"></span></p>
                     </div>
                 </div>
             </div>
