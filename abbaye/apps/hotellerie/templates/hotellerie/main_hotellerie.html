@@ -3,9 +3,11 @@
 {% load static %}
 
 {% block css %}
-    <link rel="stylesheet/less" href={% static "hotellerie/css/hotellerie.less" %}/>
+    {{ block.super }}
+    <link rel="stylesheet/less" href={% static 'hotellerie/css/hotellerie.less' %}/>
 {% endblock css %}
 
 {% block javascript %}
+    {{ block.super }}
     <script src={% static 'hotellerie/js/hotellerie.js' %}></script>
 {% endblock javascript %}
