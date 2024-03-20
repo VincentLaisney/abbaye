@@ -16,10 +16,7 @@ urlpatterns = [
     re_path(r'^calendar/(?P<day>\d{2})/(?P<month>\d{2})/(?P<year>\d{4})/$',
             views_main.calendar, name='main_calendar'),
 
-    path('personnes/list/<str:letter>/',
-         views_personnes.list, name='personnes_list'),
-    path('personnes/list/<str:letter>/<str:search>/',
-         views_personnes.list, name='personnes_list'),
+    path('personnes/list/', views_personnes.list, name='personnes_list'),
     path('personnes/create/', views_personnes.create, name='personnes_create'),
     path('personnes/<int:pk>/', views_personnes.details, name='personnes_details'),
     path('personnes/<int:pk>/update/',

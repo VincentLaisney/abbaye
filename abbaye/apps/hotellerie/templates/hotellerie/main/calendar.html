@@ -2,19 +2,24 @@
 
 {% load static %}
 
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/tempusdominus/tempus-dominus.min.css' %}>
+{% endblock css %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'hotellerie:main_home' %}>Hôtellerie</a></li>
     <li class="breadcrumb-item active">Calendrier</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <div class="d-flex align-self-stretch align-items-center ml-5">
+    <div class="d-flex align-self-stretch align-items-center ms-5">
         <!-- Title -->
-        <div id="title" class="form-inline mr-auto">
+        <div id="title" class="d-flex align-items-center">
             <h1>Calendrier</h1>
 
             <!-- Add -->
-            <div class="dropdown ml-3">
+            <div class="dropdown ms-3">
                 <div class="dropdown">
                     <button class="dropdown_button fas fa-plus"></button>
                     <div class="dropdown_content">
@@ -27,7 +32,7 @@
         </div>
 
         <!-- Tools -->
-        <div id="tools" class="d-flex align-items-center ml-auto">
+        <div id="tools" class="d-flex align-items-center ms-auto">
             <span id="previous_week" class="fas fa-angle-double-left" title="Semaine précédente"></span>
 
             <div class="input-group" id="datepicker">
@@ -197,3 +202,12 @@ chambre(s): {{ sejour_data.chambres_string }}
         </div>
     </div>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'main/js/popper.min.js' %}></script>
+    <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
+    <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
+    <script src={% static 'main/js/warning-language.js' %}></script>
+    <script src={% static 'hotellerie/js/tempusdominus-hotellerie.js' %}></script>
+{% endblock javascript %}

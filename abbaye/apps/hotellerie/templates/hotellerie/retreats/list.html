@@ -1,5 +1,12 @@
 {% extends 'hotellerie/main_hotellerie.html' %}
 
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/datatables/datatables.min.css'%}>
+{% endblock css %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'hotellerie:main_home' %}>Hôtellerie</a></li>
     <li class="breadcrumb-item active">Retraites</li>
@@ -8,22 +15,35 @@
 {% block content %}
     <h1 class="mb-3">Retraites</h1>
 
-    <div class="col-6">
-        <div class="text-center mb-4">
-            <a href={% url 'hotellerie:retreats_create' %}>Ajouter une retraite</a>
-        </div>
+    <table id="table-retreats" class="cell-border order-column hover w-100">
+        <thead>
+            <tr class="text-center">
+                <th>Créé</th>
+                <th>Modifié</th>
+                <th>Du</th>
+                <th>Durée</th>
+                <th></th>
+            </tr>
+        </thead>
 
-        <table class="table table-sm table-bordered">
+        <tbody>
             {% for retreat in retreats %}
                 <tr>
-                    <td>Retraite du {{ retreat.date_from }} au {{ retreat.date_to }}</td>
-                    <td class="text-center">
-                        <a href={% url 'hotellerie:retreats_details' retreat.id %}>
-                            <span class="fas fa-eye" title="Voir les détails"></span>
-                        </a>
-                    </td>
+                    <td>{{ retreat.created_at }}</td>
+                    <td>{{ retreat.last_modified }}</td>
+                    <td>{{ retreat.date_from }}</td>
+                    <td>{{ retreat.duration }}</td>
+                    <td class="fw-bold"><a href={% url 'hotellerie:retreats_details' retreat.pk %}>Détails</a></td>
                 </tr>
             {% endfor %}
-        </table>
-    </div>
+        </tbody>
+    </table>
+
+    <a href={% url 'hotellerie:retreats_create' %} class="btn btn-primary mb-5">Ajouter une retreat</a>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'main/datatables/datatables.min.js'%}></script>
+    <script src={% static 'hotellerie/js/datatable-hotellerie.js' %}></script>
+{% endblock javascript %}

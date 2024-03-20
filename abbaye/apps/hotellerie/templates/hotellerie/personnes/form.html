@@ -11,7 +11,7 @@
         <li class="breadcrumb-item"><a href={% url 'hotellerie:personnes_details' personne.id %}>{{ personne }}</a></li>
         <li class="breadcrumb-item active">Modifier</li>
     {% else %}
-        <li class="breadcrumb-item active"><a href={% url 'hotellerie:personnes_list' 'A' %}>Personnes</a></li>
+        <li class="breadcrumb-item active"><a href={% url 'hotellerie:personnes_list' %}>Personnes</a></li>
         <li class="breadcrumb-item active">Créer</li>
     {% endif %}
 {% endblock breadcrumbs %}
@@ -413,7 +413,7 @@
             {% if personne %}
                 <a href={% url 'hotellerie:personnes_details' personne.id %} class="btn btn-primary mx-3">Annuler</a>
             {% else %}
-                <a href={% url 'hotellerie:personnes_list' 'A' %} class="btn btn-primary mx-3">Annuler</a>
+                <a href={% url 'hotellerie:personnes_list' %} class="btn btn-primary mx-3">Annuler</a>
             {% endif %}
             <button type="submit" class="btn btn-success mx-3">Valider</button>
         </div>

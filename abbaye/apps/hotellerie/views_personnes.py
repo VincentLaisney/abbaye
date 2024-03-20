@@ -15,35 +15,18 @@ from .models import Adresse, Mail, Personne, Telephone
 
 
 @group_required('Hôtellerie')
-def list(request, letter, search=''):
+def list(request):
     """ List of Personnes. """
-    if letter == '-':
-        personnes = Personne.objects.filter(nom='')
-    elif (len(letter) == 1) and (re.fullmatch(r'[A-Zd]', letter)):
-        personnes = Personne.objects.filter(nom__istartswith=letter)
 
-    try:
-        personnes
-    except NameError:
-        raise Http404()
+    personnes = Personne.objects.all().order_by('nom', 'prenom')
 
-    if request.method == 'POST':
-        search = request.POST['filter']
-
-    if search != '':
-        personnes = (
-            personnes.filter(nom__icontains=search) |
-            personnes.filter(prenom__icontains=search)
-        )
-
-    personnes = personnes.order_by('nom', 'prenom')
-
-    return render(request, 'hotellerie/personnes/list.html', {
-        'letters': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z', '-'],
-        'personnes': personnes,
-        'current': letter,
-        'filter': search,
-    })
+    return render(
+        request,
+        'hotellerie/personnes/list.html',
+        {
+            'personnes': personnes,
+        }
+    )
 
 
 @group_required('Hôtellerie')
@@ -140,10 +123,8 @@ def create(request):
 def details(request, **kwargs):
     """ Details of a Personne. """
     personne = get_object_or_404(Personne, pk=kwargs['pk'])
-    first_letter = personne.nom[0] if personne.nom else '-'
     return render(request, 'hotellerie/personnes/details.html', {
         'personne': personne,
-        'first_letter': first_letter,
         'mails': Mail.objects.filter(personne=personne),
         'tels': Telephone.objects.filter(personne=personne),
         'adresses': Adresse.objects.filter(personne=personne),
