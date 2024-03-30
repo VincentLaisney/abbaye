@@ -9,11 +9,31 @@
         <h1>Bienvenue sur Hôtellerie !</h1>
     </div>
 
-    <div class="d-flex flex-column text-center">
-        <a href={% url 'hotellerie:main_calendar' %}>Calendrier</a>
-        <a href={% url 'hotellerie:personnes_list' 'A' %}>Personnes</a>
-        <a href={% url 'hotellerie:sejours_list' %}>Séjours</a>
-        <a href={% url 'hotellerie:parloirs_list' %}>Parloirs</a>
-        <a href={% url 'hotellerie:retreats_list' %}>Retraites</a>
+    <div id="home" class="d-flex flex-column align-items-center mt-5">
+        <div class="d-flex my-4">
+            <a href={% url 'hotellerie:main_calendar' %} class="mx-5">
+                <span class="fas fa-calendar-alt"></span>
+                <p>Calendrier</p>
+            </a>
+            <a href={% url 'hotellerie:personnes_list' %} class="mx-5">
+                <span class="fas fa-user"></span>
+                <p>Personnes</p>
+            </a>
+            <a href={% url 'hotellerie:sejours_list' %} class="mx-5">
+                <span class="fas fa-home"></span>
+                <p>Séjours</p>
+            </a>
+        </div>
+
+        <div class="d-flex my-4">
+            <a href={% url 'hotellerie:parloirs_list' %} class="mx-5">
+                <span class="fas fa-users"></span>
+                <p>Parloirs</p>
+            </a>
+            <a href={% url 'hotellerie:retreats_list' %} class="mx-5">
+                <span class="fas fa-pray"></span>
+                <p>Retraites</p>
+            </a>
+        </div>
     </div>
 {% endblock content %}

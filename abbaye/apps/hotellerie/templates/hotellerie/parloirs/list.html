@@ -1,4 +1,11 @@
-{% extends 'main.html' %}
+{% extends 'hotellerie/main_hotellerie.html' %}
+
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/datatables/datatables.min.css'%}>
+{% endblock css %}
 
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'hotellerie:main_home' %}>Hôtellerie</a></li>
@@ -8,22 +15,39 @@
 {% block content %}
     <h1 class="mb-3">Parloirs</h1>
 
-    <div class="col-6">
-        <div class="text-center mb-4">
-            <a href={% url 'hotellerie:parloirs_create' %}>Ajouter un parloir</a>
-        </div>
+    <table id="table-parloirs" class="cell-border order-column hover w-100">
+        <thead>
+            <tr class="text-center">
+                <th>Créé</th>
+                <th>Modifié</th>
+                <th>Personne</th>
+                <th>Le</th>
+                <th>Repas</th>
+                <th>Parloir</th>
+                <th></th>
+            </tr>
+        </thead>
 
-        <table class="table table-sm table-bordered">
+        <tbody>
             {% for parloir in parloirs %}
                 <tr>
-                    <td>{{ parloir.moines_string }} ({{ parloir.date }})</td>
-                    <td class="text-center">
-                        <a href={% url 'hotellerie:parloirs_details' parloir.id %}>
-                            <span class="fas fa-eye" title="Voir les détails"></span>
-                        </a>
-                    </td>
+                    <td>{{ parloir.created_at }}</td>
+                    <td>{{ parloir.last_modified }}</td>
+                    <td>{{ parloir.moines_string }}</td>
+                    <td>{{ parloir.date }}</td>
+                    <td>{{ parloir.repas }}</td>
+                    <td>{{ parloir.parloir }}</td>
+                    <td class="fw-bold"><a href={% url 'hotellerie:parloirs_details' parloir.pk %}>Détails</a></td>
                 </tr>
             {% endfor %}
-        </table>
-    </div>
+        </tbody>
+    </table>
+
+    <a href={% url 'hotellerie:parloirs_create' %} class="btn btn-primary mb-5">Ajouter un parloir</a>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'main/datatables/datatables.min.js'%}></script>
+    <script src={% static 'hotellerie/js/datatable-hotellerie.js' %}></script>
+{% endblock javascript %}
