@@ -13,6 +13,7 @@ from django.conf import settings
 from django.http import FileResponse
 from django.shortcuts import render
 
+from modules.dates import date_to_french_string
 from .models import Parloir
 from .models import Sejour
 
@@ -24,6 +25,7 @@ def cuisine(request):
     """ Listing cuisine. """
     for i in range(15):
         day = TODAY + timedelta(days=i)
+        day_string = date_to_french_string(day)
         hote = is_first_repas = is_last_repas = is_monorepas = ''
         table_hotes_midi, \
             table_hotes_soir, \
@@ -246,6 +248,7 @@ def cuisine(request):
 
         # On compile le tout pour le jour concerné :
         DAYS[day] = {
+            'day_string': day_string,
             'midi': {
                 'table_hotes': table_hotes_midi,
                 'total_table_hotes_midi': total_table_hotes_midi,
