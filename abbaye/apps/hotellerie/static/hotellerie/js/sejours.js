@@ -17,14 +17,14 @@ $(document).ready(function () {
   // On start:
   refresh_rooms();
   // On modif datepickers:
-  $('.sejour_date_row .datetimepicker-input').on({
-    focusout: function () {
+  $('body').on(
+    'click', '.day:not(.new)', function () {
       if ($('#id_sejour_au').val() == '') {
         $('#id_sejour_au').val($('#id_sejour_du').val());
       }
       refresh_rooms();
     },
-  });
+  );
   // On modif repas (selects):
   $('.sejour_date_row select').on({
     change: function () {
