@@ -231,17 +231,17 @@
         <div class="d-flex my-2">
             {% if form.is_bound %}
                 {% if form.repas_apporte.errors %}
-                    {% render_field form.repas_apporte class="form-control is-invalid" %}
+                    {% render_field form.repas_apporte class="is-invalid" %}
                     {% for error in form.repas_apporte.errors %}
                         <div class="invalid-feedback" style="display: block;">
                             {{ error }}
                         </div>
                     {% endfor %}
                 {% else %}
-                    {% render_field form.repas_apporte class="form-control is-valid" %}
+                    {% render_field form.repas_apporte class="is-valid" %}
                 {% endif %}
             {% else %}
-                {% render_field form.repas_apporte class="form-control" %}
+                {% render_field form.repas_apporte %}
             {% endif %}
 
             {% if form.repas_apporte.help_text %}
