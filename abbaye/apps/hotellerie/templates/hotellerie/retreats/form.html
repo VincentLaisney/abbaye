@@ -3,6 +3,11 @@
 {% load static %}
 {% load widget_tweaks %}
 
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet" href={% static 'main/tempusdominus/tempus-dominus.min.css' %}>
+{% endblock css %}
+
 {% block breadcrumbs %}
     <li class="breadcrumb-item"><a href={% url 'hotellerie:main_home' %}>Hôtellerie</a></li>
     <li class="breadcrumb-item"><a href={% url 'hotellerie:retreats_list' %}>Retraites</a></li>
@@ -94,5 +99,11 @@
 {% endblock %}
 
 {% block javascript %}
+    {{ block.super }}
     {{ form.media }}
+    <script src={% static 'main/js/popper.min.js' %}></script>
+    <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
+    <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
+    <script src={% static 'main/js/warning-language.js' %}></script>
+    <script src={% static 'hotellerie/js/tempusdominus-hotellerie.js' %}></script>
 {% endblock javascript %}
