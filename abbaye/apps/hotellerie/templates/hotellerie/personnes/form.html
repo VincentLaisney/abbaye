@@ -7,7 +7,7 @@
     <li class="breadcrumb-item"><a href={% url 'hotellerie:main_home' %}>Hôtellerie</a></li>
 
     {% if personne %}
-        <li class="breadcrumb-item"><a href={% url 'hotellerie:personnes_list' first_letter %}>Personnes</a></li>
+        <li class="breadcrumb-item"><a href={% url 'hotellerie:personnes_list' %}>Personnes</a></li>
         <li class="breadcrumb-item"><a href={% url 'hotellerie:personnes_details' personne.id %}>{{ personne }}</a></li>
         <li class="breadcrumb-item active">Modifier</li>
     {% else %}
@@ -111,17 +111,17 @@
         <div class="d-flex my-2">
             {% if form.is_bound %}
                 {% if form.moine_flav.errors %}
-                    {% render_field form.moine_flav class="form-control is-invalid" style="width: auto;" %}
+                    {% render_field form.moine_flav class="is-invalid" style="width: auto;" %}
                     {% for error in form.moine_flav.errors %}
                         <div class="invalid-feedback" style="display: block;">
                             {{ error }}
                         </div>
                     {% endfor %}
                 {% else %}
-                    {% render_field form.moine_flav class="form-control is-valid" style="width: auto;" %}
+                    {% render_field form.moine_flav class="is-valid" style="width: auto;" %}
                 {% endif %}
             {% else %}
-                {% render_field form.moine_flav class="form-control" style="width: auto;" %}
+                {% render_field form.moine_flav style="width: auto;" %}
             {% endif %}
 
             {% if form.moine_flav.help_text %}
@@ -138,17 +138,17 @@
         <div class="d-flex my-2">
             {% if form.is_bound %}
                 {% if form.est_pere_suiveur.errors %}
-                    {% render_field form.est_pere_suiveur class="form-control is-invalid" style="width: auto;" %}
+                    {% render_field form.est_pere_suiveur class="is-invalid" style="width: auto;" %}
                     {% for error in form.est_pere_suiveur.errors %}
                         <div class="invalid-feedback" style="display: block;">
                             {{ error }}
                         </div>
                     {% endfor %}
                 {% else %}
-                    {% render_field form.est_pere_suiveur class="form-control is-valid" style="width: auto;" %}
+                    {% render_field form.est_pere_suiveur class="is-valid" style="width: auto;" %}
                 {% endif %}
             {% else %}
-                {% render_field form.est_pere_suiveur class="form-control" style="width: auto;" %}
+                {% render_field form.est_pere_suiveur style="width: auto;" %}
             {% endif %}
             
             {% if form.est_pere_suiveur.help_text %}
@@ -304,17 +304,17 @@
         <div class="d-flex my-2">
             {% if form.is_bound %}
                 {% if form.pretre.errors %}
-                    {% render_field form.pretre class="form-control is-invalid" style="width: auto;" %}
+                    {% render_field form.pretre class="is-invalid" style="width: auto;" %}
                     {% for error in form.pretre.errors %}
                         <div class="invalid-feedback" style="display: block;">
                             {{ error }}
                         </div>
                     {% endfor %}
                 {% else %}
-                    {% render_field form.pretre class="form-control is-valid" style="width: auto;" %}
+                    {% render_field form.pretre class="is-valid" style="width: auto;" %}
                 {% endif %}
             {% else %}
-                {% render_field form.pretre class="form-control" style="width: auto;" %}
+                {% render_field form.pretre style="width: auto;" %}
             {% endif %}
             
             {% if form.pretre.help_text %}

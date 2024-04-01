@@ -54,7 +54,7 @@
                     <div class="{% if day_data.current %}current_weekday{% else %}weekday{% endif %}">{% cycle 'Dimanche' 'Lundi' 'Mardi' 'Mercredi' 'Jeudi' 'Vendredi' 'Samedi' %}</div>
 
                     <!-- Date-->
-                    <div class="{% if day_data.current %}current_date{% else %}date{% endif %}">{{ day }}</div>
+                    <div class="{% if day_data.current %}current_date{% else %}date{% endif %}">{{ day|date:'j F Y' }}</div>
                 </div>
             {% endfor %}
         </div>
