@@ -86,10 +86,13 @@ SET o.Interprete = i.Interprete;</pre>
             <div class="group">
             <p class="descr">Créer une clé étrangère :</p>
                 <pre class="terminal">
->>> ALTER TABLE Billets ADD CONSTRAINT fk_billets_users FOREIGN KEY (author) REFERENCES Users(ID);</pre>
+>>> ALTER TABLE &lt;table1&gt; ADD CONSTRAINT &lt;fk_name&gt; FOREIGN KEY (&lt;column1&gt;) REFERENCES &lt;table2&gt;(&lt;column2&gt;);</pre>
+            <p class="descr">Voir les clés étrangères d'une table :</p>
+                <pre class="terminal">
+>>> SHOW CREATE TABLE &lt;table&gt;\G;</pre>
             <p class="descr">Supprimer une clé étrangère :</p>
                 <pre class="terminal">
->>> ALTER TABLE Billets DROP FOREIGN KEY fk_absences_absents;</pre>
+>>> ALTER TABLE &lt;table&gt; DROP FOREIGN KEY &lt;fk_name&gt;;</pre>
             <p class="descr">Voir les clés étrangères de toutes les tables :</p>
                 <pre class="terminal">
 >>> SELECT TABLE_NAME, COLUMN_NAME, CONSTRAINT_NAME, REFERENCED_TABLE_NAME, REFERENCED_COLUMN_NAME FROM INFORMATION_SCHEMA.KEY_COLUMN_USAGE WHERE CONSTRAINT_NAME LIKE "%fk_%";</pre>
