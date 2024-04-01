@@ -26,7 +26,7 @@ def create(request):
         if form.is_valid():
             form.save()
             date = form.cleaned_data['date']
-            return HttpResponseRedirect(reverse('hotellerie:calendar', kwargs={
+            return HttpResponseRedirect(reverse('hotellerie:main_calendar', kwargs={
                 'day': '{:%d}'.format(date),
                 'month': '{:%m}'.format(date),
                 'year': '{:%Y}'.format(date),
