@@ -400,6 +400,7 @@ class ParloirForm(forms.ModelForm):
         ],
     )
     nombre = forms.IntegerField(
+        initial=0,
         help_text="Nombre de personnes en plus des personnes ci-dessus",
         widget=forms.NumberInput(
             attrs={

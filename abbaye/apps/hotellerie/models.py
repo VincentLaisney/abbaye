@@ -263,7 +263,9 @@ class Parloir(models.Model):
         max_length=50,
         choices=REPAS_NAMES,
     )
-    nombre = models.IntegerField()
+    nombre = models.IntegerField(
+        null=True,
+    )
     PARLOIRS_NAMES = [
         ('Non défini', '---------'),
         ('Saint-Benoît', 'Saint-Benoît'),
