@@ -59,7 +59,7 @@ urlpatterns = [
     path('retreats/<int:pk>/delete/',
          views_retraites.delete, name='retreats_delete'),
 
-    path('listings/cuisine/', views_listings.cuisine, name='listings_cuisine'),
+    path('listings/cuisine/', views_listings.cuisine, name='listing_cuisine'),
     path('listings/hotellerie/', views_listings.hotellerie,
-         name='listings_hotellerie'),
+         name='listing_hotellerie'),
 ]

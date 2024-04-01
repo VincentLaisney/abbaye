@@ -6,3 +6,10 @@
     {{ block.super }}
     <link rel="stylesheet/less" href={% static 'hotellerie/css/hotellerie.less' %}>
 {% endblock css %}
+
+{% block dropdown %}
+    <li><a class="dropdown-item" href={% url 'hotellerie:main_calendar' %}>Calendrier</a></li>
+    <li><a class="dropdown-item" href={% url 'hotellerie:listing_cuisine' %}>Listing cuisine</a></li>
+    <li><a class="dropdown-item" href={% url 'hotellerie:listing_hotellerie' %}>Listing hôtellerie</a></li>
+    <li><hr class="dropdown-divider"></li>
+{% endblock dropdown %}
