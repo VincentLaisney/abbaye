@@ -49,10 +49,6 @@
                     {{ form.personne_1.help_text }}
                 </small>
             {% endif %}
-
-            {% if sejour %}
-                <small class="form-text text-muted"><a href={% url 'hotellerie:personnes_details' sejour.personne.id %}>Voir la fiche de cette personne</a></small>
-            {% endif %}
         </div>
 
 
@@ -80,10 +76,6 @@
                     {{ form.personne_2.help_text }}
                 </small>
             {% endif %}
-
-            {% if sejour %}
-                <small class="form-text text-muted"><a href={% url 'hotellerie:personnes_details' sejour.personne.id %}>Voir la fiche de cette personne</a></small>
-            {% endif %}
         </div>
 
 
@@ -110,10 +102,6 @@
                 <small class="form-text text-muted">
                     {{ form.personne_3.help_text }}
                 </small>
-            {% endif %}
-
-            {% if sejour %}
-                <small class="form-text text-muted"><a href={% url 'hotellerie:personnes_details' sejour.personne.id %}>Voir la fiche de cette personne</a></small>
             {% endif %}
         </div>
 
