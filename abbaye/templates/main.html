@@ -42,6 +42,9 @@
                                 <li><a class="dropdown-item" href="#">Mon compte</a></li>
                                 <li><hr class="dropdown-divider"></li>
                             {% endif %}
+
+                            {% block dropdown %}{% endblock dropdown %}
+
                             {% if user.is_authenticated %}
                                 {% if user.is_superuser %}
                                     <li><a class="dropdown-item" href={% url 'admin:index' %}>Site d'administration</a></li>
