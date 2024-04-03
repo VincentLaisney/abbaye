@@ -78,6 +78,11 @@
                 <td>Commentaire sacristie :</td>
                 <td>{{ sejour.commentaire_sacristie|default_if_none:'' }}</td>
             </tr>
+            
+            <tr>
+                <td>Commentaire listing :</td>
+                <td>{{ sejour.commentaire_listing|default_if_none:'' }}</td>
+            </tr>
         </table>
     </div>
 {% endblock %}
