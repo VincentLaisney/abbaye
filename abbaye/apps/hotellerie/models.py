@@ -177,8 +177,15 @@ class Sejour(models.Model):
         max_length=50,
         null=True,
     )
-    commentaire_cuisine = models.TextField()
-    commentaire_sacristie = models.TextField()
+    commentaire_cuisine = models.TextField(
+        null=True,
+    )
+    commentaire_sacristie = models.TextField(
+        null=True,
+    )
+    commentaire_listing = models.TextField(
+        null=True,
+    )
     mail_sacristie = models.BooleanField(
         default=False,
     )
