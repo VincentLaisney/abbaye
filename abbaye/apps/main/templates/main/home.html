@@ -23,8 +23,8 @@
                     <a href="https://www.clairval.com/index.php/fr/horaires/">HORAIRES DES OFFICES</a><p>Lien à communiquer aux personnes qui demandent nos horaires. Affiche les horaires du jour et du lendemain, ainsi que les heures des Messes conventuelles et basses pour les 15 jours à venir. Contient également un lien vers les horaires des Offices de Noël et de la Semaine Sainte.</p>
                     <a href="https://clairval.com/horaires-reglages/">RÉGLAGE DES HORAIRES DES OFFICES <span class="red-full">*</span></a><p>Réglages des horaires affichés sur le site de l'Abbaye.</p>
                     <a href="http://www.asj.com/info/">INFOS</a><p>Liste des adresses mail, téléphone etc. (P. Stanislas).</p>
-                    <a href="http://pmb.asj.com/pmb-bibli/opac_css">BIBLI</a><p>Accès à la base de données de la bibliothèque (Fr. Matthieu).</p>
-                    <a href="http://192.168.1.144:5000/webman/index.cgi">DOCUMENTS</a><p>Documents sur Saint-Jérôme (Fr. Matthieu).</p>
+                    <a href="http://pmb.asj.com/pmb-bibli/opac_css">BIBLI</a><p>Accès à la base de données de la bibliothèque (Bibliothécaire).</p>
+                    <a href="http://192.168.1.144:5000/webman/index.cgi">DOCUMENTS</a><p>Documents sur Saint-Jérôme (Bibliothécaire).</p>
             </div>
 
             <div class="col-4">
@@ -38,8 +38,7 @@
                     <!-- TODO -->
                     <a href="http://python.asj.com:8001/infirmerie/">INFIRMERIE (P. Thomas) <span class="red-full">*</span></a><p></p>
                     <a href={% url 'imprimerie:home' %}>IMPRIMERIE <span class="red-full">*</span></a><p></p>
-                    <!-- TODO -->
-                    <a href="http://python.asj.com:8004/editor/">ÉDITIONS (P. Martin)</a><p></p>
+                    <a href={% url 'editor:home' %}>ÉDITIONS (P. Martin)</a><p></p>
 
                     <p class="text-justify border rounded border-dark p-2 m-0"><span class="red-full">*</span> Sites à accès protégé par un mot de passe autre que "moines".</p>
                 </div>
