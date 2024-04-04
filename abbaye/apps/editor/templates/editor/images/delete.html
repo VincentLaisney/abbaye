@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'editor:images_list' %}>Images</a></li>
+    <li class="breadcrumb-item"><a href={% url 'editor:image_details' image.id %}>{{ image }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h2 class="mb-4 red font-weight-bold">Êtes-vous sûr de vouloir supprimer cette image ?</h2>
+    {{ image }}
+{% endblock content %}

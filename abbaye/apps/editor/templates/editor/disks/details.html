@@ -1,0 +1,130 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'editor:disks_list' %}>CD</a></li>
+    <li class="breadcrumb-item active">{{ disk }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center w-100 mb-5">
+        <div class="col-3 mr-auto">
+            <img src={% static visual_path %} alt="Missing visual" class="border" style="width: 100px;" title="Clic droit pour enregistrer le visuel">
+        </div>
+
+        <div class="col-6 mb-3">
+            <h2 class="mb-4 green font-weight-bold text-center">{{ disk.title|default_if_none:'' }}</h2>
+            <h4 class="mb-4 green font-weight-bold text-center">{{ disk.sub_title|default_if_none:'' }}</h4>
+            {% if disk.interpreter %}
+                <h6 class="mb-4 green font-weight-bold text-center">par : {{ disk.interpreter.name }}</h6>
+            {% endif %}
+        </div>
+
+        <div class="col-3 text-right" title="Clic droit pour enregistrer le code barre">
+            <img src={% static barcode_path %} alt="Missing barcode" style="width: 150px;">
+        </div>
+    </div>
+
+    <div class="d-flex w-100 mb-3">
+        <div class="col-6 d-flex flex-column">
+            <div class="border border-success rounded p-2 mb-2">
+                <h5 class="green font-weight-bold">Données générales</h5>
+                <table class="table table-sm table-borderless mb-0">
+                    <tr>
+                        <td class="font-weight-bold col-3">Titre</td>
+                        <td>{{ disk.title|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Sous-titre</td>
+                        <td>{{ disk.sub_title|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Interprète</td>
+                        <td>
+                            {% if disk.interpreter %}
+                                {{ disk.interpreter.name|default_if_none:'?' }}
+                            {% endif %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Réf. TM</td>
+                        <td>{{ disk.ref_tm|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">EAN</td>
+                        <td>{{ disk.ean|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Date de parution</td>
+                        <td>{{ disk.publication|default_if_none:'?'|date:'d/m/Y' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Remarques</td>
+                        <td>{{ disk.remarques|default_if_none:''|linebreaks }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-6 d-flex flex-column">
+            <div class="border border-success rounded p-2 mb-2">
+                <h5 class="green font-weight-bold">Caractéristiques physiques</h5>
+                <table class="table table-sm table-borderless mb-0">
+                    <tr>
+                        <td class="font-weight-bold col-3">Poids</td>
+                        <td>{{ disk.weight|default_if_none:'?' }} g</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="border border-success rounded p-2 mb-2">
+                <h5 class="green font-weight-bold">Prix</h5>
+                <table class="table table-sm table-borderless mb-0">
+                    <tr>
+                        <td class="font-weight-bold col-3">Charges</td>
+                        <td id="charges">
+                            {% for charge in charges %}
+                                <div class="d-flex">
+                                    <p class="font-weight-bold col-6 form-text m-0 p-0">{{ charge.name }} :</p>
+                                    <p class="col-6 form-text m-0 p-0">{{ charge.amount }} €</p>
+                                </div>
+                            {% endfor %}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Total charges</td>
+                        <td>{{ total_charges|default_if_none:'?' }} €</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Tirage</td>
+                        <td>{{ disk.circulation|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Prix de revient</td>
+                        <td>{{ cost|default_if_none:'?' }} €</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Coefficient</td>
+                        <td>{{ disk.coefficient|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Prix théorique</td>
+                        <td>{{ theorical_price|default_if_none:'?' }} €</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">PGHT</td>
+                        <td>{{ disk.pght|default_if_none:'?' }} €</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        <a href={% url 'editor:disk_update' disk.id %}>Modifier ce CD</a>
+        <a href={% url 'editor:disk_delete' disk.id %}>Supprimer ce CD</a>
+    {% endif %}
+    
+    <a href={% url 'editor:disks_list' %}>Retour à la liste des CD</a>
+{% endblock content %}

@@ -1,0 +1,75 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'editor:images_list' %}>Images</a></li>
+    <li class="breadcrumb-item active">{{ image }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <div class="d-flex justify-content-between align-items-center w-100 mb-5">
+        <div class="col-3 mr-auto">
+            <img src={% static visual_path %} alt="Missing visual" class="border" style="width: 100px;" title="Clic droit pour enregistrer le visuel">
+        </div>
+
+        <div class="col-6">
+            <h2 class="green font-weight-bold text-center">{{ image }}</h2>
+            {% if image.recto_img %}
+                <h6 class="green font-weight-bold text-center">Recto : {{ image.recto_img }}</h6>
+            {% endif %}
+            {% if image.verso_img %}
+                <h6 class="mb-4 green font-weight-bold text-center">Verso : {{ image.verso_img }}</h6>
+            {% endif %}
+        </div>
+
+        <div class="col-3 text-right" title="Clic droit pour enregistrer le code barre">
+            <img src={% static barcode_path %} alt="Missing barcode" style="width: 150px;">
+        </div>
+    </div>
+
+    <div class="d-flex w-100 mb-3">
+        <div class="col-6 d-flex flex-column">
+            <div class="border border-success rounded p-2 mb-2">
+                <h5 class="green font-weight-bold">Données générales</h5>
+                <table class="table table-sm table-borderless mb-0">
+                    <tr>
+                        <td class="font-weight-bold col-3">Recto</td>
+                        <td>{{ image.recto_img|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Verso</td>
+                        <td>{{ image.verso_img|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">Réf. TM</td>
+                        <td>{{ image.ref_tm|default_if_none:'?' }}</td>
+                    </tr>
+                    <tr>
+                        <td class="font-weight-bold col-3">EAN</td>
+                        <td>{{ image.ean|default_if_none:'?' }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="col-6 d-flex flex-column">
+            <div class="border border-success rounded p-2 mb-2">
+                <h5 class="green font-weight-bold">Caractéristiques physiques</h5>
+                <table class="table table-sm table-borderless mb-0">
+                    <tr>
+                        <td class="font-weight-bold col-3">Dimensions</td>
+                        <td>{{ image.width|default_if_none:'?' }} x {{ image.height|default_if_none:'?' }} mm</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    {% if user.is_authenticated %}
+        <a href={% url 'editor:image_update' image.id %}>Modifier cette image</a>
+        <a href={% url 'editor:image_delete' image.id %}>Supprimer cette image</a>
+    {% endif %}
+
+    <a href={% url 'editor:images_list' %}>Retour à la liste des images</a>
+{% endblock content %}

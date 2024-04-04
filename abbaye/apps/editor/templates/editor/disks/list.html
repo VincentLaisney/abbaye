@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">CD</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h2 class="mb-4 green font-weight-bold">CD</h2>
+
+    {% if user.is_authenticated %}
+        <a href={% url 'editor:disk_create' %} class="mb-3">Créer un nouveau CD</a>
+    {% endif %}
+
+    <div class="col-10">
+        <table class="table table-sm table-bordered">
+            {% for disk in disks %}
+                <tr>
+                    <td>{{ disk.ref_tm|default_if_none:'' }}</td>
+                    <td>{{ disk.ean|default_if_none:'' }}</td>
+                    <td>{{ disk.title|default_if_none:'' }}</td>
+                    <td>{{ disk.sub_title|default_if_none:'' }}</td>
+                    <td>{{ disk.interpreter.name|default_if_none:'' }}</td>
+                    <td><a href={% url 'editor:disk_details' disk.pk %}><span class="fas fa-eye" title="Voir les détails"></span></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock content %}

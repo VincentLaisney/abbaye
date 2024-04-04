@@ -1,7 +1,20 @@
 {% extends 'main.html' %}
 
 {% block content %}
-    <div class="d-flex flex-column align-items-center">
-        <h1>Bienvenue sur Editor !</h1>
+    <h1 class="blue">Bienvenue sur Editor!</h1>
+
+    <div id="home" class="row mt-5">
+        <a href={% url 'editor:books_list' %} class="d-flex flex-column align-items-center orange">
+            <span class="fas fa-book mx-5 my-3" title="Livres"></span>
+            <p>Livres</p>
+        </a>
+        <a href={% url 'editor:disks_list' %} class="d-flex flex-column align-items-center blue">
+            <span class="fas fa-compact-disc mx-5 my-3" title="CD"></span>
+            <p>CD</p>
+        </a>
+        <a href={% url 'editor:images_list' %} class="d-flex flex-column align-items-center green">
+            <span class="fas fa-image mx-5 my-3" title="Images"></span>
+            <p>Images</p>
+        </a>
     </div>
 {% endblock content %}

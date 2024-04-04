@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'editor:books_list' %}>Livres</a></li>
+    <li class="breadcrumb-item"><a href={% url 'editor:book_details' book.id %}>{{ book }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h2 class="mb-4 red font-weight-bold">Êtes-vous sûr de vouloir supprimer ce livre ?</h2>
+    {{ book }}
+{% endblock content %}

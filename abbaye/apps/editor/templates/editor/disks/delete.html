@@ -1,0 +1,12 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'editor:disks_list' %}>CD</a></li>
+    <li class="breadcrumb-item"><a href={% url 'editor:disk_details' disk.id %}>{{ disk }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h2 class="mb-4 red font-weight-bold">Êtes-vous sûr de vouloir supprimer ce CD ?</h2>
+    {{ disk }}
+{% endblock content %}
