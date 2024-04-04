@@ -30,11 +30,53 @@
         <tbody>
             {% for sejour in sejours %}
                 <tr>
-                    <td>{{ sejour.created_at }}</td>
-                    <td>{{ sejour.last_modified }}</td>
+                    <td>
+                        <table class="d-flex justify-content-center">
+                            <tr>
+                                <td class="orange fw-bold text-end pe-1">
+                                    Le
+                                    <span class="d-none">
+                                        {{ sejour.created_at|date:"Ymd" }}{{ sejour.created_at|time:"His" }}
+                                    </span><!-- Span not displayed, only to be able to sort dates. -->
+                                </td>
+                                <td class="text-start ps-1">{{ sejour.created_at|date:"d/m/Y" }}</td>
+                            </tr>
+                            <tr>
+                                <td class="orange fw-bold text-end pe-1">à</span>
+                                <td class="text-start ps-1">{{ sejour.created_at|time:"H:i:s" }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    <td>
+                        <table class="d-flex justify-content-center">
+                            <tr>
+                                <td class="orange fw-bold text-end pe-1">
+                                    Le
+                                    <span class="d-none">
+                                        {{ sejour.last_modified|date:"Ymd" }}{{ sejour.last_modified|time:"His" }}
+                                    </span><!-- Span not displayed, only to be able to sort dates. -->
+                                </td>
+                                <td class="text-start ps-1">{{ sejour.last_modified|date:"d/m/Y" }}</td>
+                            </tr>
+                            <tr>
+                                <td class="orange fw-bold text-end pe-1">à</span>
+                                <td class="text-start ps-1">{{ sejour.last_modified|time:"H:i:s" }}</td>
+                            </tr>
+                        </table>
+                    </td>
                     <td>{{ sejour.personne }}</td>
-                    <td>{{ sejour.from }}</td>
-                    <td>{{ sejour.to }}</td>
+                    <td>
+                        <span class="d-none">
+                            {{ sejour.sejour_du|date:"Ymd" }}
+                        </span><!-- Span not displayed, only to be able to sort dates. -->
+                        {{ sejour.sejour_du }}
+                    </td>
+                    <td>
+                        <span class="d-none">
+                            {{ sejour.sejour_au|date:"Ymd" }}
+                        </span><!-- Span not displayed, only to be able to sort dates. -->
+                        {{ sejour.sejour_au }}
+                    </td>
                     <td class="fw-bold"><a href={% url 'hotellerie:sejours_details' sejour.pk %}>Détails</a></td>
                 </tr>
             {% endfor %}
