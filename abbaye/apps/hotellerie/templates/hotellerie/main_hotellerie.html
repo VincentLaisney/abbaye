@@ -9,6 +9,10 @@
 
 {% block dropdown %}
     <li><a class="dropdown-item" href={% url 'hotellerie:main_calendar' %}>Calendrier</a></li>
+    <li><a class="dropdown-item" href={% url 'hotellerie:personnes_list' %}>Personnes</a></li>
+    <li><a class="dropdown-item" href={% url 'hotellerie:sejours_list' %}>Séjours</a></li>
+    <li><a class="dropdown-item" href={% url 'hotellerie:parloirs_list' %}>Parloirs</a></li>
+    <li><a class="dropdown-item" href={% url 'hotellerie:retreats_list' %}>Retraites</a></li>
     <li><a class="dropdown-item" href={% url 'hotellerie:listing_cuisine' %}>Listing cuisine</a></li>
     <li><a class="dropdown-item" href={% url 'hotellerie:listing_hotellerie' %}>Listing hôtellerie</a></li>
     <li><hr class="dropdown-divider"></li>
