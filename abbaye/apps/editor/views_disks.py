@@ -2,10 +2,11 @@
 
 import os
 
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+
+from apps.main.decorators import group_required
 
 from .forms import DiskForm
 from .models import Charge, Product
@@ -24,7 +25,7 @@ def disks_list(request):
     )
 
 
-@login_required
+@group_required('Editor')
 def disk_create(request):
     """ Create a disk. """
     if request.method == 'POST':
@@ -90,7 +91,7 @@ def disk_details(request, **kwargs):
     )
 
 
-@login_required
+@group_required('Editor')
 def disk_update(request, **kwargs):
     """ Update a disk. """
     disk = Product.objects.get(pk=kwargs['pk'])
@@ -121,7 +122,7 @@ def disk_update(request, **kwargs):
     )
 
 
-@login_required
+@group_required('Editor')
 def disk_delete(request, **kwargs):
     """ Delete a disk. """
     disk = Product.objects.get(pk=kwargs['pk'])

@@ -2,10 +2,11 @@
 
 import os
 
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+
+from apps.main.decorators import group_required
 
 from .forms import ImageForm
 from .models import Product
@@ -24,7 +25,7 @@ def images_list(request):
     )
 
 
-@login_required
+@group_required('Editor')
 def image_create(request):
     """ Create an image. """
     if request.method == 'POST':
@@ -78,7 +79,7 @@ def image_details(request, **kwargs):
     )
 
 
-@login_required
+@group_required('Editor')
 def image_update(request, **kwargs):
     """ Update an image. """
     image = Product.objects.get(pk=kwargs['pk'])
@@ -109,7 +110,7 @@ def image_update(request, **kwargs):
     )
 
 
-@login_required
+@group_required('Editor')
 def image_delete(request, **kwargs):
     """ Delete a image. """
     image = Product.objects.get(pk=kwargs['pk'])

@@ -3,10 +3,11 @@
 import os
 
 from django import forms
-from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseRedirect
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+
+from apps.main.decorators import group_required
 
 from .forms import BookForm, ChargeForm
 from .models import Charge, Product
@@ -25,7 +26,7 @@ def books_list(request):
     )
 
 
-@login_required
+@group_required('Editor')
 def book_create(request):
     """ Create a book. """
     if request.method == 'POST':
@@ -92,7 +93,7 @@ def book_details(request, **kwargs):
     )
 
 
-@login_required
+@group_required('Editor')
 def book_update(request, **kwargs):
     """ Update a book. """
     book = Product.objects.get(pk=kwargs['pk'])
@@ -151,7 +152,7 @@ def book_update(request, **kwargs):
     )
 
 
-@login_required
+@group_required('Editor')
 def book_delete(request, **kwargs):
     """ Delete a book. """
     book = Product.objects.get(pk=kwargs['pk'])
