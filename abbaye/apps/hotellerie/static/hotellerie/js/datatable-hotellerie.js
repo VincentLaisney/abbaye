@@ -53,8 +53,8 @@ $(document).ready(function () {
 
   $('#table-sejours').DataTable({
     order: [
-      [3, 'asc'],
-      [4, 'asc'],
+      [3, 'desc'],
+      [4, 'desc'],
     ],
     pageLength: 100,
     'language': {
