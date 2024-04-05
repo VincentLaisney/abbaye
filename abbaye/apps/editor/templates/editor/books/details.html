@@ -3,6 +3,7 @@
 {% load static %}
 
 {% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'editor:home' %}>Editor</a></li>
     <li class="breadcrumb-item"><a href={% url 'editor:books_list' %}>Livres</a></li>
     <li class="breadcrumb-item active">{{ book }}</li>
 {% endblock breadcrumbs %}

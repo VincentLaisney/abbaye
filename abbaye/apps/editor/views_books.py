@@ -71,10 +71,10 @@ def book_details(request, **kwargs):
         if not os.path.exists('{}.png'.format(book.ean)):
             # Create the png:
             os.system(
-                "barcode -b {0} -e 'ean13' -u mm -g 100x50 -S -o /home/frromain/Sites/editor/editor/static/img/barcodes/barcode.svg; \
-                convert /home/frromain/Sites/editor/editor/static/img/barcodes/barcode.svg -transparent '#FFFFFF' -trim /home/frromain/Sites/editor/editor/static/img/barcodes/{0}.png; \
-                rm /home/frromain/Sites/editor/editor/static/img/barcodes/*.svg; \
-                cp /home/frromain/Sites/editor/editor/static/img/barcodes/{0}.png /home/frromain/Sites/editor/editor/static_files/img/barcodes/{0}.png"
+                "barcode -b {0} -e 'ean13' -u mm -g 100x50 -S -o /home/frromain/Sites/abbaye/abbaye/apps/editor/static/editor/img/barcodes/barcode.svg; \
+                convert /home/frromain/Sites/abbaye/abbaye/apps/editor/static/editor/img/barcodes/barcode.svg -transparent '#FFFFFF' -trim /home/frromain/Sites/abbaye/abbaye/apps/editor/static/editor/img/barcodes/{0}.png; \
+                rm /home/frromain/Sites/abbaye/abbaye/apps/editor/static/editor/img/barcodes/*.svg; \
+                cp /home/frromain/Sites/abbaye/abbaye/apps/editor/static/editor/img/barcodes/{0}.png /home/frromain/Sites/abbaye/abbaye/apps/editor/static/editor_files/img/barcodes/{0}.png"
                 .format(book.ean)
             )
 
@@ -87,8 +87,8 @@ def book_details(request, **kwargs):
             'total_charges': total_charges,
             'cost': '{:.2f}'.format(cost),
             'theorical_price': '{:.2f}'.format(theorical_price),
-            'visual_path': '/img/visuals/{}.jpg'.format(book.ref_tm),
-            'barcode_path': '/img/barcodes/{}.png'.format(book.ean),
+            'visual_path': '/editor/img/visuals/{}.jpg'.format(book.ref_tm),
+            'barcode_path': '/editor/img/barcodes/{}.png'.format(book.ean),
         },
     )
 

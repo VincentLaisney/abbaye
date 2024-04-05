@@ -18,7 +18,7 @@ def images_list(request):
         'ref_tm', 'ean', 'recto_img', 'verso_img')
     return render(
         request,
-        'editorimages/list.html',
+        'editor/images/list.html',
         {
             'images': images
         }
@@ -46,7 +46,7 @@ def image_create(request):
 
     return render(
         request,
-        'editorimages/form.html',
+        'editor/images/form.html',
         {
             'form': form,
         }
@@ -62,19 +62,20 @@ def image_details(request, **kwargs):
         if not os.path.exists('{}.png'.format(image.ean)):
             # Create the png:
             os.system(
-                "barcode -b {0} -e 'ean13' -u mm -g 100x50 -S -o static/img/barcodes/barcode.svg; \
-                convert static/img/barcodes/barcode.svg -transparent '#FFFFFF' -trim static/img/barcodes/{0}.png; \
-                rm static/img/barcodes/*.svg"
+                "barcode -b {0} -e 'ean13' -u mm -g 100x50 -S -o /home/frromain/Sites/abbaye/abbaye/apps/editor/static/editor/img/barcodes/barcode.svg; \
+                convert /home/frromain/Sites/abbaye/abbaye/apps/editor/static/editor/img/barcodes/barcode.svg -transparent '#FFFFFF' -trim /home/frromain/Sites/abbaye/abbaye/apps/editor/static/editor/img/barcodes/{0}.png; \
+                rm /home/frromain/Sites/abbaye/abbaye/apps/editor/static/editor/img/barcodes/*.svg; \
+                cp /home/frromain/Sites/abbaye/abbaye/apps/editor/static/editor/img/barcodes/{0}.png /home/frromain/Sites/abbaye/abbaye/apps/editor/static/editor_files/img/barcodes/{0}.png"
                 .format(image.ean)
             )
 
     return render(
         request,
-        'editorimages/details.html',
+        'editor/images/details.html',
         {
             'image': image,
-            'visual_path': '/img/visuals/{}.jpg'.format(image.ref_tm),
-            'barcode_path': '/img/barcodes/{}.png'.format(image.ean),
+            'visual_path': '/editor/img/visuals/{}.jpg'.format(image.ref_tm),
+            'barcode_path': '/editor/img/barcodes/{}.png'.format(image.ean),
         },
     )
 
@@ -102,7 +103,7 @@ def image_update(request, **kwargs):
 
     return render(
         request,
-        'editorimages/form.html',
+        'editor/images/form.html',
         {
             'form': form,
             'image': image,
@@ -114,4 +115,4 @@ def image_update(request, **kwargs):
 def image_delete(request, **kwargs):
     """ Delete a image. """
     image = Product.objects.get(pk=kwargs['pk'])
-    return render(request, 'editorimages/delete.html', {'image': image})
+    return render(request, 'editor/images/delete.html', {'image': image})
