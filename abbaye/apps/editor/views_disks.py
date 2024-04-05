@@ -18,7 +18,7 @@ def disks_list(request):
         category='disk').order_by('ref_tm', 'ean', 'title')
     return render(
         request,
-        'products/disks/list.html',
+        'editor/disks/list.html',
         {
             'disks': disks
         }
@@ -34,7 +34,7 @@ def disk_create(request):
             disk = form.save()
             return HttpResponseRedirect(
                 reverse(
-                    'products:disk_details',
+                    'editor:disk_details',
                     kwargs={
                         'pk': disk.pk,
                     }
@@ -46,7 +46,7 @@ def disk_create(request):
 
     return render(
         request,
-        'products/disks/form.html',
+        'editor/disks/form.html',
         {
             'form': form,
         }
@@ -78,7 +78,7 @@ def disk_details(request, **kwargs):
 
     return render(
         request,
-        'products/disks/details.html',
+        'editor/disks/details.html',
         {
             'disk': disk,
             'charges': charges,
@@ -102,7 +102,7 @@ def disk_update(request, **kwargs):
             form.save()
             return HttpResponseRedirect(
                 reverse(
-                    'products:disk_details',
+                    'editor:disk_details',
                     kwargs={
                         'pk': disk.pk,
                     }
@@ -114,7 +114,7 @@ def disk_update(request, **kwargs):
 
     return render(
         request,
-        'products/disks/form.html',
+        'editor/disks/form.html',
         {
             'form': form,
             'disk': disk,
@@ -126,4 +126,4 @@ def disk_update(request, **kwargs):
 def disk_delete(request, **kwargs):
     """ Delete a disk. """
     disk = Product.objects.get(pk=kwargs['pk'])
-    return render(request, 'products/disks/delete.html', {'disk': disk})
+    return render(request, 'editor/disks/delete.html', {'disk': disk})

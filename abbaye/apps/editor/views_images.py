@@ -34,7 +34,7 @@ def image_create(request):
             image = form.save()
             return HttpResponseRedirect(
                 reverse(
-                    'products:image_details',
+                    'editor:image_details',
                     kwargs={
                         'pk': image.pk,
                     }
@@ -90,7 +90,7 @@ def image_update(request, **kwargs):
             form.save()
             return HttpResponseRedirect(
                 reverse(
-                    'products:image_details',
+                    'editor:image_details',
                     kwargs={
                         'pk': image.pk,
                     }

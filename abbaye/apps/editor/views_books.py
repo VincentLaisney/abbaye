@@ -19,7 +19,7 @@ def books_list(request):
         category='book').order_by('ref_tm', 'ean', 'title')
     return render(
         request,
-        'products/books/list.html',
+        'editor/books/list.html',
         {
             'books': books
         }
@@ -35,7 +35,7 @@ def book_create(request):
             book = form.save()
             return HttpResponseRedirect(
                 reverse(
-                    'products:book_details',
+                    'editor:book_details',
                     kwargs={
                         'pk': book.pk,
                     }
@@ -47,7 +47,7 @@ def book_create(request):
 
     return render(
         request,
-        'products/books/form.html',
+        'editor/books/form.html',
         {
             'form': form,
         }
@@ -80,7 +80,7 @@ def book_details(request, **kwargs):
 
     return render(
         request,
-        'products/books/details.html',
+        'editor/books/details.html',
         {
             'book': book,
             'charges': charges,
@@ -128,7 +128,7 @@ def book_update(request, **kwargs):
 
             return HttpResponseRedirect(
                 reverse(
-                    'products:book_details',
+                    'editor:book_details',
                     kwargs={
                         'pk': book.pk,
                     }
@@ -143,7 +143,7 @@ def book_update(request, **kwargs):
 
     return render(
         request,
-        'products/books/form.html',
+        'editor/books/form.html',
         {
             'form': form,
             'book': book,
@@ -156,4 +156,4 @@ def book_update(request, **kwargs):
 def book_delete(request, **kwargs):
     """ Delete a book. """
     book = Product.objects.get(pk=kwargs['pk'])
-    return render(request, 'products/books/delete.html', {'book': book})
+    return render(request, 'editor/books/delete.html', {'book': book})
