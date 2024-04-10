@@ -156,4 +156,15 @@ def book_update(request, **kwargs):
 def book_delete(request, **kwargs):
     """ Delete a book. """
     book = Product.objects.get(pk=kwargs['pk'])
-    return render(request, 'editor/books/delete.html', {'book': book})
+
+    if request.method == 'POST':
+        form = BookForm(request.POST, instance=book)
+        book.delete()
+        return HttpResponseRedirect(reverse('editor:books_list'))
+
+    form = BookForm(instance=book)
+
+    return render(request, 'editor/books/delete.html', {
+        'form': form,
+        'book': book,
+    })

@@ -7,6 +7,15 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h2 class="mb-4 red font-weight-bold">Êtes-vous sûr de vouloir supprimer cette image ?</h2>
-    {{ image }}
+    <form method="post">
+        {% csrf_token %}
+
+        <h6>Êtes-vous sûr de vouloir supprimer cette image ?</h6>
+
+        <!-- Validation -->
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-success mx-3">Oui</button>
+            <a href={% url 'editor:image_details' image.id %} class="btn btn-primary mx-3">Non</a>
+        </div>
+    </form>
 {% endblock content %}

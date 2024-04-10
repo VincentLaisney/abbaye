@@ -115,4 +115,15 @@ def image_update(request, **kwargs):
 def image_delete(request, **kwargs):
     """ Delete a image. """
     image = Product.objects.get(pk=kwargs['pk'])
-    return render(request, 'editor/images/delete.html', {'image': image})
+
+    if request.method == 'POST':
+        form = ImageForm(request.POST, instance=image)
+        image.delete()
+        return HttpResponseRedirect(reverse('editor:images_list'))
+
+    form = ImageForm(instance=image)
+
+    return render(request, 'editor/images/delete.html', {
+        'form': form,
+        'image': image,
+    })

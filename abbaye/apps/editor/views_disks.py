@@ -127,4 +127,15 @@ def disk_update(request, **kwargs):
 def disk_delete(request, **kwargs):
     """ Delete a disk. """
     disk = Product.objects.get(pk=kwargs['pk'])
-    return render(request, 'editor/disks/delete.html', {'disk': disk})
+
+    if request.method == 'POST':
+        form = DiskForm(request.POST, instance=disk)
+        disk.delete()
+        return HttpResponseRedirect(reverse('editor:disks_list'))
+
+    form = DiskForm(instance=disk)
+
+    return render(request, 'editor/disks/delete.html', {
+        'form': form,
+        'disk': disk,
+    })
