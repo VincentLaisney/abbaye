@@ -73,6 +73,7 @@ def cuisine(request):
         for index, sejour in enumerate(sejours_midi):
             hote = sejour.personne.__str__()
             nombre = len(sejour.chambres_string().split(', '))
+            commentaire_cuisine = sejour.commentaire_cuisine
             is_first_repas = (
                 sejour.sejour_du == day
             ) and ((
@@ -97,6 +98,7 @@ def cuisine(request):
                 table_hotes_midi.append({
                     'hote': hote,
                     'nombre': nombre,
+                    'commentaire_cuisine': commentaire_cuisine,
                     'is_first_repas': is_first_repas,
                     'is_last_repas': is_last_repas,
                     'is_monorepas': is_monorepas,
@@ -108,6 +110,7 @@ def cuisine(request):
                 table_abbatiale_midi.append({
                     'hote': hote,
                     'nombre': nombre,
+                    'commentaire_cuisine': commentaire_cuisine,
                     'is_first_repas': is_first_repas,
                     'is_last_repas': is_last_repas,
                     'is_monorepas': is_monorepas,
@@ -119,6 +122,7 @@ def cuisine(request):
                 table_moines_midi.append({
                     'hote': hote,
                     'nombre': nombre,
+                    'commentaire_cuisine': commentaire_cuisine,
                     'is_first_repas': is_first_repas,
                     'is_last_repas': is_last_repas,
                     'is_monorepas': is_monorepas,
@@ -130,6 +134,7 @@ def cuisine(request):
                 table_parloirs_midi.append({
                     'hote': hote,
                     'nombre': nombre,
+                    'commentaire_cuisine': commentaire_cuisine,
                     'is_first_repas': is_first_repas,
                     'is_last_repas': is_last_repas,
                     'is_monorepas': is_monorepas,
@@ -170,6 +175,7 @@ def cuisine(request):
         for index, sejour in enumerate(sejours_soir):
             hote = sejour.personne.__str__()
             nombre = len(sejour.chambres_string().split(', '))
+            commentaire_cuisine = sejour.commentaire_cuisine
             is_first_repas = (
                 sejour.sejour_du == day
             ) and (
@@ -196,6 +202,7 @@ def cuisine(request):
                 table_hotes_soir.append({
                     'hote': hote,
                     'nombre': nombre,
+                    'commentaire_cuisine': commentaire_cuisine,
                     'is_first_repas': is_first_repas,
                     'is_last_repas': is_last_repas,
                     'is_monorepas': is_monorepas,
@@ -207,6 +214,7 @@ def cuisine(request):
                 table_abbatiale_soir.append({
                     'hote': hote,
                     'nombre': nombre,
+                    'commentaire_cuisine': commentaire_cuisine,
                     'is_first_repas': is_first_repas,
                     'is_last_repas': is_last_repas,
                     'is_monorepas': is_monorepas,
@@ -218,6 +226,7 @@ def cuisine(request):
                 table_moines_soir.append({
                     'hote': hote,
                     'nombre': nombre,
+                    'commentaire_cuisine': commentaire_cuisine,
                     'is_first_repas': is_first_repas,
                     'is_last_repas': is_last_repas,
                     'is_monorepas': is_monorepas,
@@ -229,6 +238,7 @@ def cuisine(request):
                 table_parloirs_soir.append({
                     'hote': hote,
                     'nombre': nombre,
+                    'commentaire_cuisine': commentaire_cuisine,
                     'is_first_repas': is_first_repas,
                     'is_last_repas': is_last_repas,
                     'is_monorepas': is_monorepas,
