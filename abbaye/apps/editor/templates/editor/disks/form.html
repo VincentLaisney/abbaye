@@ -1,0 +1,340 @@
+{% extends 'main.html' %}
+
+{% load widget_tweaks %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'editor:disks_list' %}>CD</a></li>
+
+    {% if disk %}
+        <li class="breadcrumb-item"><a href={% url 'editor:disk_details' disk.id %}>{{ disk }}</a></li>
+        <li class="breadcrumb-item active">Modifier</li>
+    {% else %}
+        <li class="breadcrumb-item active">Créer</li>
+    {% endif %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+    {% if disk %}
+        <h2 class="mb-4 green font-weight-bold">Modifier un CD</h2>
+    {% else %}
+        <h2 class="mb-4 green font-weight-bold">Créer un nouveau CD</h2>
+    {% endif %}
+
+    <form class="d-flex flex-column align-items-center w-100 mb-3" method="post" novalidate>
+        <div class="d-flex w-100">
+            <div class="col-6 d-flex flex-column">
+                <div class="border border-success rounded p-2 mb-2">
+                    <h5 class="green font-weight-bold">Données générales</h5>
+                    {% csrf_token %}
+
+                    <!-- Catégorie = disk -->
+                    {{ form.category }}
+
+                    <!-- Réf. TM -->
+                    <div class="form-group">
+                        {{ form.ref_tm.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if form.ref_tm.errors %}
+                                {% render_field form.ref_tm class="form-control is-invalid" %}
+                                {% for error in form.ref_tm.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.ref_tm class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.ref_tm class="form-control" %}
+                        {% endif %}
+
+                        {% if form.ref_tm.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.ref_tm.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- EAN -->
+                    <div class="form-group">
+                        {{ form.ean.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if form.ean.errors %}
+                                {% render_field form.ean class="form-control is-invalid" %}
+                                {% for error in form.ean.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.ean class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.ean class="form-control" %}
+                        {% endif %}
+
+                        {% if form.ean.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.ean.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Titre -->
+                    <div class="form-group">
+                        {{ form.title.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if form.title.errors %}
+                                {% render_field form.title class="form-control is-invalid" %}
+                                {% for error in form.title.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.title class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.title class="form-control" %}
+                        {% endif %}
+
+                        {% if form.title.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.title.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Sous-titre -->
+                    <div class="form-group">
+                        {{ form.sub_title.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if form.sub_title.errors %}
+                                {% render_field form.sub_title class="form-control is-invalid" %}
+                                {% for error in form.sub_title.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.sub_title class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.sub_title class="form-control" %}
+                        {% endif %}
+
+                        {% if form.sub_title.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.sub_title.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Interprète -->
+                    <div class="form-group">
+                        {{ form.interpreter.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if form.interpreter.errors %}
+                                {% render_field form.interpreter class="form-control is-invalid" %}
+                                {% for error in form.interpreter.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.interpreter class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.interpreter class="form-control" %}
+                        {% endif %}
+
+                        {% if form.interpreter.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.interpreter.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Tirage -->
+                    <div class="form-group">
+                        {{ form.circulation.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if form.circulation.errors %}
+                                {% render_field form.circulation class="form-control is-invalid" %}
+                                {% for error in form.circulation.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.circulation class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.circulation class="form-control" %}
+                        {% endif %}
+
+                        {% if form.circulation.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.circulation.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Date de parution -->
+                    <div class="form-group">
+                        {{ form.publication.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if form.publication.errors %}
+                                {% render_field form.publication class="form-control is-invalid" %}
+                                {% for error in form.publication.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.publication class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.publication class="form-control" %}
+                        {% endif %}
+
+                        {% if form.publication.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.publication.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- Remarques -->
+                    <div class="form-group">
+                        {{ form.remarques.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if form.remarques.errors %}
+                                {% render_field form.remarques class="form-control is-invalid" %}
+                                {% for error in form.remarques.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.remarques class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.remarques class="form-control" %}
+                        {% endif %}
+
+                        {% if form.remarques.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.remarques.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6 d-flex flex-column">
+                <div class="border border-success rounded p-2 mb-2">
+                    <h5 class="green font-weight-bold">Caractéristiques physiques</h5>
+                    <!-- Poids -->
+                    <div class="form-group">
+                        {{ form.weight.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if form.weight.errors %}
+                                {% render_field form.weight class="form-control is-invalid" %}
+                                {% for error in form.weight.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.weight class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.weight class="form-control" %}
+                        {% endif %}
+
+                        {% if form.weight.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.weight.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <div class="border border-success rounded p-2 mb-2">
+                    <h5 class="green font-weight-bold">Prix</h5>
+                    <!-- Coefficient -->
+                    <div class="form-group">
+                        {{ form.coefficient.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if form.coefficient.errors %}
+                                {% render_field form.coefficient class="form-control is-invalid" %}
+                                {% for error in form.coefficient.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.coefficient class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.coefficient class="form-control" %}
+                        {% endif %}
+
+                        {% if form.coefficient.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.coefficient.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+
+                    <!-- PGHT -->
+                    <div class="form-group">
+                        {{ form.pght.label_tag }}
+
+                        {% if form.is_bound %}
+                            {% if form.pght.errors %}
+                                {% render_field form.pght class="form-control is-invalid" %}
+                                {% for error in form.pght.errors %}
+                                    <div class="invalid-feedback" style="display: block;">
+                                        {{ error }}
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% render_field form.pght class="form-control is-valid" %}
+                            {% endif %}
+                        {% else %}
+                            {% render_field form.pght class="form-control" %}
+                        {% endif %}
+
+                        {% if form.pght.help_text %}
+                            <small class="form-text text-muted">
+                                {{ form.pght.help_text }}
+                            </small>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Validation -->
+        <div class="d-flex justify-content-center">
+            {% if personne %}
+                <a href={% url 'editor:disk_details' disk.id %} class="btn btn-primary mx-3">Annuler</a>
+            {% else %}
+                <a href={% url 'editor:disks_list' %} class="btn btn-primary mx-3">Annuler</a>
+            {% endif %}
+            <button type="submit" class="btn btn-success mx-3">Valider</button>
+        </div>
+    </form>
+{% endblock content %}
