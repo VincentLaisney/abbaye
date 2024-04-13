@@ -1,0 +1,13 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block css %}
+    {{ block.super }}
+    <link rel="stylesheet/less" href={% static 'editor/css/editor.less' %}>
+{% endblock css %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src="{% static 'editor/js/editor.js' %}"></script>
+{% endblock javascript %}

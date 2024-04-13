@@ -1,0 +1,21 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'editor:images_list' %}>Images</a></li>
+    <li class="breadcrumb-item"><a href={% url 'editor:image_details' image.id %}>{{ image }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <form method="post">
+        {% csrf_token %}
+
+        <h6>Êtes-vous sûr de vouloir supprimer cette image ?</h6>
+
+        <!-- Validation -->
+        <div class="d-flex justify-content-center">
+            <button type="submit" class="btn btn-success mx-3">Oui</button>
+            <a href={% url 'editor:image_details' image.id %} class="btn btn-primary mx-3">Non</a>
+        </div>
+    </form>
+{% endblock content %}

@@ -1,0 +1,29 @@
+{% extends 'main.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'editor:home' %}>Editor</a></li>
+    <li class="breadcrumb-item active">Livres</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h2 class="mb-4 green font-weight-bold">Livres</h2>
+
+    <a href={% url 'editor:book_create' %} class="mb-3">Créer un nouveau livre</a>
+
+    <div class="col-10">
+        <table class="table table-sm table-bordered">
+            {% for book in books %}
+                <tr>
+                    <td>{{ book.ref_tm|default_if_none:'' }}</td>
+                    <td>{{ book.ean|default_if_none:'' }}</td>
+                    <td>{{ book.title|default_if_none:'' }}</td>
+                    <td>{{ book.sub_title|default_if_none:'' }}</td>
+                    <td><a href={% url 'editor:book_details' book.pk %}><span class="fas fa-eye" title="Voir les détails"></span></a></td>
+                </tr>
+            {% endfor %}
+        </table>
+    </div>
+{% endblock content %}

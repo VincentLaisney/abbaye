@@ -1,0 +1,74 @@
+@import url("/statics/main/css/colors.less");
+
+a:hover {
+    text-decoration: none;
+}
+
+body {
+    background-color: whitesmoke;
+
+    // Nav:
+    nav {
+        a {
+            color: whitesmoke;
+        }
+
+        #logo {
+            #title {
+                color: @orange;
+                font-family: LucidaHW;
+                font-size: 2.2em;
+            }
+
+            #logo {
+                color: @green-light;
+                font-size: 1.5em;
+            }
+        }
+
+        #menu {
+            a {
+                font-size: 1.2em;
+            }
+        }
+    }
+
+    // Breadcrumbs:
+    .breadcrumb {
+        padding: 5px 0px 5px 50px;
+    }
+
+    // Content:
+    #content {
+
+        h1,
+        h2,
+        h3,
+        h4 {
+            font-family: LucidaHW;
+        }
+
+        .delete-row {
+            color: @red-full;
+            margin-top: 5px;
+        }
+
+        .table-borderless td {
+            border: 0px;
+        }
+
+        #home {
+            a {
+                font-size: 36pt;
+            }
+
+            p {
+                font-size: 18pt;
+            }
+        }
+
+        #charges {
+            font-size: 0.9em;
+        }
+    }
+}
