@@ -122,10 +122,9 @@
         </div>
     </div>
 
-    {% if user.is_authenticated %}
-        <a href={% url 'editor:disk_update' disk.id %}>Modifier ce CD</a>
-        <a href={% url 'editor:disk_delete' disk.id %}>Supprimer ce CD</a>
-    {% endif %}
-    
-    <a href={% url 'editor:disks_list' %}>Retour à la liste des CD</a>
+    <div class="d-flex">
+        <a href={% url 'editor:disks_list' %} class="btn btn-warning m-1"><span class="fas fa-arrow-left"></span> Retour à la liste</a>
+        <a href={% url 'editor:disk_update' disk.id %} class="btn btn-primary m-1">Modifier</a>
+        <a href={% url 'editor:disk_delete' disk.id %} class="btn btn-danger m-1">Supprimer</a>
+    </div>
 {% endblock content %}
