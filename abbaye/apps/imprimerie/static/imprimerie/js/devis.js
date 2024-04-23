@@ -29,7 +29,7 @@ function get_paper_and_refresh() {
 }
 
 function refresh(data_paper) {
-  var marge_papier = 1.2;
+  var marge_papier = 1.3;
   var cout_clic_noir = 0.012;
   var cout_clic_cmjn = 0.06;
   var cout_heure = 60;
