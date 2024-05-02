@@ -1,7 +1,61 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href={% static 'main/tempusdominus/tempus-dominus.min.css' %}>
+    <link rel="stylesheet/less" href={% static 'livrets/css/livrets.less'%}>
+{% endblock css %}
+
 {% block content %}
     <div class="d-flex flex-column align-items-center">
-        <h1>Bienvenue sur Livrets !</h1>
+        <h1 class="mb-3">Livrets pour les retraites</h1>
+
+        <div class="d-flex flex-column align-items-center">
+            <div class="d-flex align-items-center mt-3 mb-5">
+                <label for="start_date" class="red-dark fs-5 me-2">Date de départ : </label>
+                <input id="start_date" class="form-control" type="text" style="width: 120px;">
+            </div>
+
+            <div id="lines" class="d-flex flex-column">
+                {% for i in lines %}
+                    <label id="DATE_{{ forloop.counter }}" class="text-center red-dark fs-5 my-2">--</label>
+
+                    <table class="line mb-5">
+                        <tr>
+                            <th class="green">IN</th>
+                            <th class="green">GR</th>
+                            <th class="green">AL</th>
+                            <th class="green">OF</th>
+                            <th class="green">CO</th>
+                            <th class="green">KY</th>
+                            <th class="green">GL</th>
+                            <th class="green">SA</th>
+                            <th class="green">CR</th>
+                        </tr>
+                        <tr>
+                            <td><input type="text" id="IN_{{ forloop.counter }}" class="score form-control"></td>
+                            <td><input type="text" id="GR_{{ forloop.counter }}" class="score form-control"></td>
+                            <td><input type="text" id="AL_{{ forloop.counter }}" class="score form-control"></td>
+                            <td><input type="text" id="OF_{{ forloop.counter }}" class="score form-control"></td>
+                            <td><input type="text" id="CO_{{ forloop.counter }}" class="score form-control"></td>
+                            <td><input type="text" id="KY_{{ forloop.counter }}" class="score form-control"></td>
+                            <td><input type="text" id="GL_{{ forloop.counter }}" class="score form-control"></td>
+                            <td><input type="text" id="SA_{{ forloop.counter }}" class="score form-control"></td>
+                            <td><input type="text" id="CR_{{ forloop.counter }}" class="score form-control"></td>
+                        </tr>
+                    </table>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 {% endblock content %}
+
+{% block javascript %}
+    <script src={% static 'main/js/popper.min.js' %}></script>
+    <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
+    <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
+    <script src={% static 'main/js/warning-language.js' %}></script>
+    <script src={% static 'livrets/js/tempusdominus-livrets.js' %}></script>
+    <script src={% static 'livrets/js/livrets.js'%}></script>
+{% endblock javascript %}
