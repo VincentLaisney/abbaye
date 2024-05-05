@@ -10,4 +10,5 @@ def date_to_french_string(date):
     weekday = weekdays[date.weekday()]
     day = date.day
     month = months[date.month - 1]
-    return '{} {} {}'.format(weekday, day, month)
+    year = date.year
+    return '{} {} {} {}'.format(weekday, day, month, year)
