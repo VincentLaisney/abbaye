@@ -2,20 +2,34 @@
 
 import datetime
 
+from django import forms
 from django.http import JsonResponse
 from django.shortcuts import render
 
 from modules.dates import date_to_french_string
 
+from .forms import LineForm
+
 
 def home(request):
     """ Home page of Livrets. """
+    Lines = forms.formset_factory(LineForm, extra=5)
+
+    if request.method == 'POST':
+        lines = Lines(request.POST)
+
+        if lines.is_valid():
+            print(lines.cleaned_data)
+
+    else:
+        lines = Lines()
+
     return render(
         request,
         'livrets/home.html',
         {
-            'lines': range(5),
-        },
+            'lines': lines,
+        }
     )
 
 
