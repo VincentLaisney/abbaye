@@ -4,8 +4,7 @@
 {% load widget_tweaks %}
 
 {% block css %}
-    {{ block.super }}
-    <link rel="stylesheet" href={% static 'main/tempusdominus/tempus-dominus.min.css' %}>
+    <link rel="stylesheet" href={% static 'main/jquery-ui-1.12.1/jquery-ui.min.css' %}>
 {% endblock css %}
 
 {% block breadcrumbs %}
@@ -292,11 +291,7 @@
 {% endblock %}
 
 {% block javascript %}
-    {{ block.super }}
     {{ form.media }}
-    <script src={% static 'main/js/popper.min.js' %}></script>
-    <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
-    <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
-    <script src={% static 'main/js/warning-language.js' %}></script>
-    <script src={% static 'hotellerie/js/tempusdominus-hotellerie.js' %}></script>
+    <script src={% static 'main/jquery-ui-1.12.1/jquery-ui.min.js' %}></script>
+    <script src={% static 'hotellerie/js/datepickers.js' %}></script>
 {% endblock javascript %}

@@ -26,9 +26,7 @@ function date_to_french_string(date) {
                 {
                     dateStyle: 'full',
                 }
-            )
-                .format(date)
-        )
-            .replace(' 1 ', ' 1er ')
+            ).format(date)
+        ).replace(' 1 ', ' 1er ')
     );
 }
