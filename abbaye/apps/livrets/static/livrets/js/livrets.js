@@ -1,6 +1,20 @@
 $(document).ready(function () {
   url = new URL(window.location);
 
+  // Lier le datepicker à l'input date :
+  $(function () {
+    var values = {
+      dateFormat: "dd/mm/yy",
+      minDate: null,
+      dayNames: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+      dayNamesMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+      monthNames: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+      monthNamesShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"]
+    }
+    $("#id_date").datepicker(values);
+  });
+
+
   $("input").change(function () {
     refresh();
   });
@@ -12,9 +26,10 @@ $(document).ready(function () {
   })
 });
 
+
 // Fonction pour rafraîchir les dates :
 function refresh() {
-  splitted_date = $('#start_date').val().split('/');
+  splitted_date = $('#id_date').val().split('/');
   start_date = [splitted_date[2], splitted_date[1], splitted_date[0]].join('-');
   $.get(
     url['href'] + 'get_dates/' + start_date + '/',
