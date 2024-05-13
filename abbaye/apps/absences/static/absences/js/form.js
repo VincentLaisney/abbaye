@@ -1,6 +1,21 @@
 // absences/form.js
 
 $(document).ready(function () {
+    // Lier le datepicker aux inputs date :
+    $(function () {
+        var values = {
+            dateFormat: "dd/mm/yy",
+            minDate: null,
+            dayNames: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+            dayNamesMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+            monthNames: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+            monthNamesShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"]
+        }
+        $("#id_go_date").datepicker(values);
+        $("#id_back_date").datepicker(values);
+    });
+
+
     // Voiture/train: on change, display or hide group_train:
     $("#id_go_by").change(function () {
         if ($("#id_go_by option:selected").text() == "Train") {
@@ -92,7 +107,7 @@ $(document).ready(function () {
         // Back:
         let back = "";
         let back_date = "";
-        if ($("#id_go_date").val()) {
+        if ($("#id_back_date").val()) {
             back_date = date_to_french_string(
                 string_to_date_object($("#id_back_date").val())
             );
