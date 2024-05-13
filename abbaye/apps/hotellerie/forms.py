@@ -210,16 +210,10 @@ class SejourForm(forms.ModelForm):
     )
     sejour_du = forms.DateField(
         label='Du :',
-        input_formats=[
-            '%d/%m/%Y',
-        ],
     )
     sejour_au = forms.DateField(
         label='Au :',
         required=False,
-        input_formats=[
-            '%d/%m/%Y',
-        ],
     )
     repas_du = forms.ChoiceField(
         choices=[
@@ -396,9 +390,6 @@ class ParloirForm(forms.ModelForm):
     )
     date = forms.DateField(
         label='Date :',
-        input_formats=[
-            '%d/%m/%Y',
-        ],
     )
     repas = forms.ChoiceField(
         choices=[
@@ -449,9 +440,6 @@ class RetreatForm(forms.ModelForm):
     """ Form for Personnes. """
     date_from = forms.DateField(
         label='Date :',
-        input_formats=[
-            '%d/%m/%Y',
-        ],
     )
     duration = forms.IntegerField(
         label='Durée :',
