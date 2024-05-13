@@ -8,7 +8,7 @@ from django.shortcuts import render
 
 from modules.dates import date_to_french_string
 
-from .forms import LineForm
+from .forms import LivretForm, LineForm
 
 
 def home(request):
@@ -16,18 +16,22 @@ def home(request):
     Lines = forms.formset_factory(LineForm, extra=5)
 
     if request.method == 'POST':
+        form = LivretForm(request.POST)
         lines = Lines(request.POST)
 
-        if lines.is_valid():
+        if form.is_valid() and lines.is_valid():
+            print(form.cleaned_data)
             print(lines.cleaned_data)
 
     else:
+        form = LivretForm()
         lines = Lines()
 
     return render(
         request,
         'livrets/home.html',
         {
+            'form': form,
             'lines': lines,
         }
     )

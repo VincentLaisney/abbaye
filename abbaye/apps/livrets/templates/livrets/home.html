@@ -1,6 +1,7 @@
 {% extends 'main.html' %}
 
 {% load static %}
+{% load widget_tweaks %}
 
 {% block css %}
     <link rel="stylesheet" href={% static 'main/tempusdominus/tempus-dominus.min.css' %}>
@@ -14,11 +15,13 @@
         <form  method="post" class="d-flex flex-column align-items-center">
             {% csrf_token %}
 
-            <div class="d-flex align-items-center mt-3 mb-5">
-                <label for="start_date" class="red-dark fs-5 me-2">Date de départ : </label>
-                <input id="start_date" class="form-control" type="text" style="width: 120px;">
+            <!-- Date de départ -->
+            <div class="d-flex align-items-center form-group my-5">
+                {{ form.date.label_tag }}
+                {% render_field form.date class="form-control ms-3" style="width: 120px;" %}
             </div>
 
+            <!-- Lignes Graduel -->
             {{ lines.management_form }}
             <div id="graduel" class="d-flex flex-column">
                 {% for line in lines %}

@@ -3,6 +3,13 @@
 from django import forms
 
 
+class LivretForm(forms.Form):
+    """ Form for Livret. """
+    date = forms.DateField(
+        label='Date de départ',
+    )
+
+
 class LineForm(forms.Form):
     """ Form for Line. """
     IN = forms.CharField(
