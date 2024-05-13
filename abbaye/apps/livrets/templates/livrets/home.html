@@ -1,7 +1,49 @@
 {% extends 'main.html' %}
 
+{% load static %}
+{% load widget_tweaks %}
+
+{% block css %}
+    <link rel="stylesheet" href={% static 'main/jquery-ui-1.12.1/jquery-ui.min.css' %}>
+    <link rel="stylesheet/less" href={% static 'livrets/css/livrets.less'%}>
+{% endblock css %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Livrets</li>
+{% endblock breadcrumbs %}
+
 {% block content %}
     <div class="d-flex flex-column align-items-center">
-        <h1>Bienvenue sur Livrets !</h1>
+        <h1 class="mb-3">Livrets pour les retraites</h1>
+
+        <form  method="post" class="d-flex flex-column align-items-center">
+            {% csrf_token %}
+
+            <!-- Date de départ -->
+            <div class="d-flex align-items-center form-group my-5">
+                {{ form.date.label_tag }}
+                {% render_field form.date class="form-control ms-3" style="width: 120px;" %}
+            </div>
+
+            <!-- Lignes Graduel -->
+            {{ lines.management_form }}
+            <div id="graduel" class="d-flex flex-column">
+                {% for line in lines %}
+                    <div class="d-flex">
+                            {{ line.as_p }}
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- VALIDATION -->
+            <div class="w-100 d-flex justify-content-center align-items-between">
+                <button type="submit" class="btn btn-primary d-flex align-items-center justify-content-center mx-1 my-5"><span class="fas fa-file-pdf fs-3 me-3"></span> Voir le PDF</button>
+            </div>
+        </form>
     </div>
 {% endblock content %}
+
+{% block javascript %}
+    <script src={% static 'main/jquery-ui-1.12.1/jquery-ui.min.js' %}></script>
+    <script src={% static 'livrets/js/livrets.js' %}></script>
+{% endblock javascript %}
