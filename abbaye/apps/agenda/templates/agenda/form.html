@@ -15,8 +15,8 @@
 {% endblock breadcrumbs %}
 
 {% block css %}
-    {{ block.super }}
-    <link rel="stylesheet" href={% static 'main/tempusdominus/tempus-dominus.min.css' %}>
+    <link rel="stylesheet" href={% static 'main/jquery-ui-1.12.1/jquery-ui.min.css' %}>
+    <link rel="stylesheet/less" href={% static 'agenda/css/agenda.less'%}>
 {% endblock css %}
 
 {% block content %}
@@ -181,9 +181,6 @@
 {% endblock %}
 
 {% block javascript %}
-    {{ block.super }}
-    <script src={% static 'main/js/popper.min.js' %}></script>
-    <script src={% static 'main/tempusdominus/tempus-dominus.min.js' %}></script>
-    <script src={% static 'main/js/tempusdominus-abbaye.js' %}></script>
-    <script src={% static 'agenda/js/tempusdominus-agenda.js' %}></script>
+    <script src={% static 'main/jquery-ui-1.12.1/jquery-ui.min.js' %}></script>
+    <script src={% static 'agenda/js/agenda.js' %}></script>
 {% endblock javascript %}
