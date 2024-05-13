@@ -1,6 +1,23 @@
 $(document).ready(function () {
   url = new URL(window.location);
 
+  // Lier le datepicker à l'input date:
+  $(function () {
+    var values = {
+      dateFormat: "dd/mm/yy",
+      minDate: null,
+      dayNames: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+      dayNamesMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+      monthNames: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+      monthNamesShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"],
+      onSelect: function () {
+        window.location.href = '/abbaye/hotellerie/calendar/' + $(this).val();
+      },
+    }
+    $("#datepicker").datepicker(values);
+  });
+
+
   // Set lines height to bars height:
   // SetTimeout(200) is required to be sure the js is fired after the css.
   // TODO: setTimeout(200) is a very dirty solution…
@@ -71,11 +88,11 @@ $(document).ready(function () {
 
   // Datepicker:
   // TODO: ':not(.new)' = not days in grey in the datepicker. Elsewhere bug! (displays an aberrant date).
-  $('body').on('click', '.day:not(.new)', function (e) {
-    date = e.target.dataset.value.split('-');
-    day = date[2];
-    month = date[1];
-    year = date[0];
-    window.location.href = '/abbaye/hotellerie/calendar/' + day + '/' + month + '/' + year;
-  });
+  // $('body').on('click', '.day:not(.new)', function (e) {
+  //   date = e.target.dataset.value.split('-');
+  //   day = date[2];
+  //   month = date[1];
+  //   year = date[0];
+  //   window.location.href = '/abbaye/hotellerie/calendar/' + day + '/' + month + '/' + year;
+  // });
 });
