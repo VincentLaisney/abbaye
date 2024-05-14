@@ -23,18 +23,12 @@ class EventForm(forms.ModelForm):
     )
     date_from = forms.DateField(
         label='Du :',
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         error_messages={
             'required': 'Ce champ est obligatoire.',
         },
     )
     date_to = forms.DateField(
         label='Au :',
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         error_messages={
             'required': 'Ce champ est obligatoire.',
         },
