@@ -69,17 +69,17 @@
                 <div class="form-group">
                     {% if form.is_bound %}
                         {% if form.sejour_du.errors %}
-                            {% render_field form.sejour_du class="form-control is-invalid" %}
+                            {% render_field form.sejour_du class="form-control input-date is-invalid" %}
                             {% for error in form.sejour_du.errors %}
                                 <div class="invalid-feedback" style="display: block;">
                                     {{ error }}
                                 </div>
                             {% endfor %}
                         {% else %}
-                            {% render_field form.sejour_du class="form-control is-valid" %}
+                            {% render_field form.sejour_du class="form-control input-date is-valid" %}
                         {% endif %}
                     {% else %}
-                        {% render_field form.sejour_du class="form-control" %}
+                        {% render_field form.sejour_du class="form-control input-date" %}
                     {% endif %}
 
                     {% if form.sejour_du.help_text %}
@@ -125,17 +125,17 @@
                 <div class="form-group">
                     {% if form.is_bound %}
                         {% if form.sejour_au.errors %}
-                            {% render_field form.sejour_au class="form-control is-invalid" %}
+                            {% render_field form.sejour_au class="form-control input-date is-invalid" %}
                             {% for error in form.sejour_au.errors %}
                                 <div class="invalid-feedback" style="display: block;">
                                     {{ error }}
                                 </div>
                             {% endfor %}
                         {% else %}
-                            {% render_field form.sejour_au class="form-control is-valid" %}
+                            {% render_field form.sejour_au class="form-control input-date is-valid" %}
                         {% endif %}
                     {% else %}
-                        {% render_field form.sejour_au class="form-control" %}
+                        {% render_field form.sejour_au class="form-control input-date" %}
                     {% endif %}
 
                     {% if form.sejour_au.help_text %}
