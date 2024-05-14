@@ -9,13 +9,11 @@
 {% endblock css %}
 
 {% block breadcrumbs %}
-    <li class="breadcrumb-item active">Livrets</li>
+    <li class="breadcrumb-item active">Livrets pour les retraites</li>
 {% endblock breadcrumbs %}
 
 {% block content %}
     <div class="d-flex flex-column align-items-center">
-        <h1 class="mb-3">Livrets pour les retraites</h1>
-
         <form  method="post" class="d-flex flex-column align-items-center">
             {% csrf_token %}
 
