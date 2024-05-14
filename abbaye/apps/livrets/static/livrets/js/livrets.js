@@ -34,9 +34,8 @@ function refresh() {
   $.get(
     url['href'] + 'get_dates/' + start_date + '/',
     function (dates) {
-      console.log(dates);
       for (i = 0; i < 5; i++) {
-        $('#DATE_' + (i + 1).toString()).text(dates[i]);
+        $('#date_' + (i + 1).toString()).text(dates[i]);
       }
     },
     'json',
