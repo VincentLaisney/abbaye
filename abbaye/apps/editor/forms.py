@@ -76,9 +76,6 @@ class BookForm(forms.ModelForm):
         required=False,
         label='Date de parution :',
         label_suffix='',
-        input_formats=[
-            '%d/%m/%Y',
-        ],
     )
     width = forms.IntegerField(
         required=False,
@@ -248,9 +245,6 @@ class DiskForm(forms.ModelForm):
         required=False,
         label='Date de parution :',
         label_suffix='',
-        input_formats=[
-            '%d/%m/%Y',
-        ],
     )
     weight = forms.IntegerField(
         required=False,

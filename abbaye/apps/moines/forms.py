@@ -16,16 +16,10 @@ class MonkForm(forms.ModelForm):
     # Dates:
     birthday = forms.DateField(
         required=False,
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         label='Date de naissance',
         label_suffix=' :',
     )
     entry = forms.DateField(
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         label='Date d\'entrée',
         label_suffix=' :',
     )
@@ -38,41 +32,26 @@ class MonkForm(forms.ModelForm):
     )
     habit = forms.DateField(
         required=False,
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         label='Date de prise d\'habit',
         label_suffix=' :',
     )
     profession_temp = forms.DateField(
         required=False,
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         label='Date de profession temporaire',
         label_suffix=' :',
     )
     profession_perp = forms.DateField(
         required=False,
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         label='Date de profession perpétuelle',
         label_suffix=' :',
     )
     priest = forms.DateField(
         required=False,
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         label='Date d\'ordination sacerdotale',
         label_suffix=' :',
     )
     death = forms.DateField(
         required=False,
-        input_formats=[
-            '%d/%m/%Y',
-        ],
         label='Date de décès',
         label_suffix=' :',
     )
