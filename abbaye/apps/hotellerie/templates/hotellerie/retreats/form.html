@@ -36,17 +36,17 @@
             <div class="form-group">
                 {% if form.is_bound %}
                     {% if form.date_from.errors %}
-                        {% render_field form.date_from class="form-control is-invalid" %}
+                        {% render_field form.date_from class="form-control input-date is-invalid" %}
                         {% for error in form.date_from.errors %}
                             <div class="invalid-feedback" style="display: block;">
                                 {{ error }}
                             </div>
                         {% endfor %}
                     {% else %}
-                        {% render_field form.date_from class="form-control is-valid" %}
+                        {% render_field form.date_from class="form-control input-date is-valid" %}
                     {% endif %}
                 {% else %}
-                    {% render_field form.date_from class="form-control" %}
+                    {% render_field form.date_from class="form-control input-date" %}
                 {% endif %}
 
                 {% if form.date_from.help_text %}
