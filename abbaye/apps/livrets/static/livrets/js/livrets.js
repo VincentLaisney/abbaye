@@ -11,15 +11,20 @@ $(document).ready(function () {
       monthNames: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
       monthNamesShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"]
     }
-    $("#id_date").datepicker(values);
+    $('#id_date').datepicker(values);
   });
 
+  // Initaliser l'input date à la date du jour:
+  $('#id_date').val(new Date().toISOString().substring(0, 10).split('-').reverse().join('/'));
+  refresh()
 
-  $("input").change(function () {
+  // On change input date:
+  $('input').change(function () {
     refresh();
   });
 
-  $(".score").keyup(function () {
+  // On change page, replace "." by ",":
+  $('.score').keyup(function () {
     var page = $(this).val();
     page = page.replace(".", ",");
     $(this).val(page);
@@ -29,15 +34,9 @@ $(document).ready(function () {
 
 // Fonction pour rafraîchir les dates :
 function refresh() {
-  splitted_date = $('#id_date').val().split('/');
-  start_date = [splitted_date[2], splitted_date[1], splitted_date[0]].join('-');
-  $.get(
-    url['href'] + 'get_dates/' + start_date + '/',
-    function (dates) {
-      for (i = 0; i < 5; i++) {
-        $('#date_' + (i + 1).toString()).text(dates[i]);
-      }
-    },
-    'json',
-  )
+  const start = new Date($('#id_date').val().split('/')[2], $('#id_date').val().split('/')[1] - 1, $('#id_date').val().split('/')[0]);
+  for (var i = 0; i < 6; i++) {
+    var date = new Date(start.getTime() + (i * 24 * 3600 * 1000));
+    $('#date_' + (i + 1)).text(date_to_french_string(date));
+  }
 }
