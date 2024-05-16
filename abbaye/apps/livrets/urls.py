@@ -7,4 +7,5 @@ from . import views
 app_name = 'livrets'
 urlpatterns = [
     path('', views.home, name='home'),
+    path('pdf/', views.pdf, name='pdf'),
 ]
