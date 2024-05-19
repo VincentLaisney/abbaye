@@ -34,10 +34,17 @@ $(document).ready(function () {
   $('#pdf').click(function () {
     const data = {
       'start': $('#start').val(),
-      'in_1': '235',
-      'ky_1': 'XVI',
-      'in_2': '397',
-      'ky_2': 'X',
+    };
+    for (i = 1; i < 6; i++) {
+      data['date_' + String(i)] = $('#date_' + String(i)).text();
+      data['in_' + String(i)] = $('#in_' + String(i)).val();
+      data['gr_' + String(i)] = $('#gr_' + String(i)).val();
+      data['al_' + String(i)] = $('#al_' + String(i)).val();
+      data['of_' + String(i)] = $('#of_' + String(i)).val();
+      data['ky_' + String(i)] = $('#ky_' + String(i)).val();
+      data['gl_' + String(i)] = $('#gl_' + String(i)).val();
+      data['sa_' + String(i)] = $('#sa_' + String(i)).val();
+      data['cr_' + String(i)] = $('#cr_' + String(i)).val();
     }
     $.get(
       url['href'] + 'pdf/',
