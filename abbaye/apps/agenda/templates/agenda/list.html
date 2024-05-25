@@ -104,6 +104,7 @@
 {% endblock content %}
 
 {% block javascript %}
+    {{ block.super }}
     <script src={% static 'main/jquery-ui-1.12.1/jquery-ui.min.js' %}></script>
     <script src={% static 'agenda/js/agenda-list.js' %}></script>
 {% endblock javascript %}
