@@ -218,54 +218,64 @@
                         </div>
                     </div>
 
-                    <div id="group_train_go" class="d-flex">
-                        <div class="d-flex align-items-center my-2">
-                            <label class="green fw-bold me-2">Gare :</label>
-                            {% if form.is_bound %}
-                                {% if form.go_station.errors %}
-                                    {% render_field form.go_station class="custom-select is-invalid" %}
-                                    {% for error in form.go_station.errors %}
-                                        <div class="invalid-feedback d-block">
-                                            {{ error }}
-                                        </div>
-                                    {% endfor %}
+                    <table id="group_train_go" class="d-flex">
+                        <tr>
+                            <td class="align-middle"><label class="green fw-bold me-2">Gare :</label></td>
+                            <td>
+                                {% if form.is_bound %}
+                                    {% if form.go_station.errors %}
+                                        {% render_field form.go_station class="custom-select is-invalid" %}
+                                        {% for error in form.go_station.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% render_field form.go_station class="custom-select is-valid" %}
+                                    {% endif %}
                                 {% else %}
-                                    {% render_field form.go_station class="custom-select is-valid" %}
+                                    {% render_field form.go_station class="custom-select" %}
                                 {% endif %}
-                            {% else %}
-                                {% render_field form.go_station class="custom-select" %}
-                            {% endif %}
-            
-                            {% if form.go_station.help_text %}
-                                <small class="form-text text-muted">
-                                    {{ form.go_station.help_text }}
-                                </small>
-                            {% endif %}
-                        </div>
-                        <div class="d-flex align-items-center my-2">
-                            <label class="green fw-bold mx-2">à :</label>
-                            {% if form.is_bound %}
-                                {% if form.go_hour.errors %}
-                                    {% render_field form.go_hour class="form-control is-invalid" %}
-                                    {% for error in form.go_hour.errors %}
-                                        <div class="invalid-feedback d-block">
-                                            {{ error }}
-                                        </div>
-                                    {% endfor %}
+                
+                                {% if form.go_station.help_text %}
+                                    <small class="form-text text-muted">
+                                        {{ form.go_station.help_text }}
+                                    </small>
+                                {% endif %}
+                            </td>
+
+                            <td class="align-middle"><label class="green fw-bold mx-2">à :</label></td>
+                            <td>
+                                {% if form.is_bound %}
+                                    {% if form.go_hour.errors %}
+                                        {% render_field form.go_hour class="form-control is-invalid" %}
+                                        {% for error in form.go_hour.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% render_field form.go_hour class="form-control is-valid" %}
+                                    {% endif %}
                                 {% else %}
-                                    {% render_field form.go_hour class="form-control is-valid" %}
+                                    {% render_field form.go_hour class="form-control" %}
                                 {% endif %}
-                            {% else %}
-                                {% render_field form.go_hour class="form-control" %}
-                            {% endif %}
-            
-                            {% if form.go_hour.help_text %}
-                                <small class="form-text text-muted">
-                                    {{ form.go_hour.help_text }}
-                                </small>
-                            {% endif %}
-                        </div>
-                    </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                {% if form.go_hour.help_text %}
+                                    <small class="form-text text-muted">
+                                        {{ form.go_hour.help_text }}
+                                    </small>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
                 </div>
 
                 <!-- BACK -->
@@ -375,54 +385,64 @@
                         </div>
                     </div>
 
-                    <div id="group_train_back" class="d-flex">
-                        <div class="d-flex align-items-center my-2">
-                            <label class="green fw-bold me-2">Gare :</label>
-                            {% if form.is_bound %}
-                                {% if form.back_station.errors %}
-                                    {% render_field form.back_station class="custom-select is-invalid" %}
-                                    {% for error in form.back_station.errors %}
-                                        <div class="invalid-feedback d-block">
-                                            {{ error }}
-                                        </div>
-                                    {% endfor %}
+                    <table id="group_train_back" class="d-flex">
+                        <tr>
+                            <td class="align-middle"><label class="green fw-bold me-2">Gare :</label></td>
+                            <td>
+                                {% if form.is_bound %}
+                                    {% if form.back_station.errors %}
+                                        {% render_field form.back_station class="custom-select is-invalid" %}
+                                        {% for error in form.back_station.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% render_field form.back_station class="custom-select is-valid" %}
+                                    {% endif %}
                                 {% else %}
-                                    {% render_field form.back_station class="custom-select is-valid" %}
+                                    {% render_field form.back_station class="custom-select" %}
                                 {% endif %}
-                            {% else %}
-                                {% render_field form.back_station class="custom-select" %}
-                            {% endif %}
-            
-                            {% if form.back_station.help_text %}
-                                <small class="form-text text-muted">
-                                    {{ form.back_station.help_text }}
-                                </small>
-                            {% endif %}
-                        </div>
-                        <div class="d-flex align-items-center my-2">
-                            <label class="green fw-bold mx-2">à :</label>
-                            {% if form.is_bound %}
-                                {% if form.back_hour.errors %}
-                                    {% render_field form.back_hour class="form-control is-invalid" %}
-                                    {% for error in form.back_hour.errors %}
-                                        <div class="invalid-feedback d-block">
-                                            {{ error }}
-                                        </div>
-                                    {% endfor %}
+                
+                                {% if form.back_station.help_text %}
+                                    <small class="form-text text-muted">
+                                        {{ form.back_station.help_text }}
+                                    </small>
+                                {% endif %}
+                            </td>
+
+                            <td class="align-middle"><label class="green fw-bold mx-2">à :</label></td>
+                            <td>
+                                {% if form.is_bound %}
+                                    {% if form.back_hour.errors %}
+                                        {% render_field form.back_hour class="form-control is-invalid" %}
+                                        {% for error in form.back_hour.errors %}
+                                            <div class="invalid-feedback d-block">
+                                                {{ error }}
+                                            </div>
+                                        {% endfor %}
+                                    {% else %}
+                                        {% render_field form.back_hour class="form-control is-valid" %}
+                                    {% endif %}
                                 {% else %}
-                                    {% render_field form.back_hour class="form-control is-valid" %}
+                                    {% render_field form.back_hour class="form-control" %}
                                 {% endif %}
-                            {% else %}
-                                {% render_field form.back_hour class="form-control" %}
-                            {% endif %}
-            
-                            {% if form.back_hour.help_text %}
-                                <small class="form-text text-muted">
-                                    {{ form.back_hour.help_text }}
-                                </small>
-                            {% endif %}
-                        </div>
-                    </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td></td>
+                            <td></td>
+                            <td></td>
+                            <td>
+                                {% if form.back_hour.help_text %}
+                                    <small class="form-text text-muted">
+                                        {{ form.back_hour.help_text }}
+                                    </small>
+                                {% endif %}
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
 
