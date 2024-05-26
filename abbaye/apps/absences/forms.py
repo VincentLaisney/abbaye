@@ -80,6 +80,7 @@ class TicketForm(forms.ModelForm):
         input_formats=[
             '%H:%M',
         ],
+        help_text='Format : HH:MM, merci.',
     )
     ordinary_form = forms.BooleanField(
         required=False,
@@ -116,6 +117,7 @@ class TicketForm(forms.ModelForm):
         input_formats=[
             '%H:%M',
         ],
+        help_text='Format : HH:MM, merci.',
     )
     commentary = forms.CharField(
         required=False,
