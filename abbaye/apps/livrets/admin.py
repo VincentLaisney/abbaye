@@ -1,3 +1,10 @@
-from django.contrib import admin
+""" apps/livrets/admin.py """
 
-# Register your models here.
+from django.contrib import admin
+from .models import Day, BMV, Preface, Score, Tierce
+
+admin.site.register(Day)
+admin.site.register(BMV)
+admin.site.register(Preface)
+admin.site.register(Score)
+admin.site.register(Tierce)

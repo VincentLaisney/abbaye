@@ -13,33 +13,52 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
+    <h1>Messe conventuelle</h1>
+    <h2 class="red-dark">Livret pour les retraitants</h2>
+
     <div class="d-flex flex-column align-items-center">
-        <h1 class="mb-3">Livrets pour les retraites</h1>
+        <!-- Date de départ -->
+        <div class="d-flex align-items-end my-3">
+            <h5 class="blue fw-bold">Date de départ : </h5>
+            <input id="start" class="form-control" type="text" style="margin-left: 20px; width: 120px;">
+        </div>
 
-        <form  method="post" class="d-flex flex-column align-items-center">
-            {% csrf_token %}
-
-            <!-- Date de départ -->
-            <div class="d-flex align-items-center form-group my-5">
-                {{ form.date.label_tag }}
-                {% render_field form.date class="form-control ms-3" style="width: 120px;" %}
-            </div>
-
-            <!-- Lignes Graduel -->
-            {{ lines.management_form }}
-            <div id="graduel" class="d-flex flex-column">
-                {% for line in lines %}
-                    <div class="d-flex">
-                        {{ line.as_p }}
-                    </div>
+        <!-- Lignes Graduel -->
+        <table id="graduel" class="table table-borderless">
+            <tr>
+                <th class="green text-center"></th>
+                <th class="green text-center">IN</th>
+                <th class="green text-center">GR</th>
+                <th class="green text-center">AL</th>
+                <th class="green text-center">OF</th>
+                <th class="green text-center">CO</th>
+                <th class="green text-center">KY</th>
+                <th class="green text-center">GL</th>
+                <th class="green text-center">SA</th>
+                <th class="green text-center">CR</th>
+            </tr>
+            {% with count="12345" %}
+                {% for i in count|make_list %}
+                    <tr>
+                        <td id="date_{{ i }}" class="date fw-bold"></td>
+                        <td><input type="text" id="in_{{ forloop.counter }}" class="score form-control"></td>
+                        <td><input type="text" id="gr_{{ forloop.counter }}" class="score form-control"></td>
+                        <td><input type="text" id="al_{{ forloop.counter }}" class="score form-control"></td>
+                        <td><input type="text" id="of_{{ forloop.counter }}" class="score form-control"></td>
+                        <td><input type="text" id="co_{{ forloop.counter }}" class="score form-control"></td>
+                        <td><input type="text" id="ky_{{ forloop.counter }}" class="score form-control"></td>
+                        <td><input type="text" id="gl_{{ forloop.counter }}" class="score form-control"></td>
+                        <td><input type="text" id="sa_{{ forloop.counter }}" class="score form-control"></td>
+                        <td><input type="text" id="cr_{{ forloop.counter }}" class="score form-control"></td>
+                    </tr>
                 {% endfor %}
-            </div>
+            {% endwith %}
+        </table>
 
-            <!-- VALIDATION -->
-            <div class="w-100 d-flex justify-content-center align-items-between">
-                <button type="submit" class="btn btn-primary d-flex align-items-center justify-content-center mx-1 my-5"><span class="fas fa-file-pdf fs-3 me-3"></span> Voir le PDF</button>
-            </div>
-        </form>
+        <!-- VIEW PDF -->
+        <div class="w-100 d-flex justify-content-center align-items-between">
+            <button id="pdf" class="btn btn-outline-primary d-flex align-items-center justify-content-center fw-bold fs-5 mx-1 my-5"><span class="fas fa-file-pdf red-dark fs-3 me-3"></span> Voir le PDF</button>
+        </div>
     </div>
 {% endblock content %}
 
