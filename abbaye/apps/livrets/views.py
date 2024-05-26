@@ -55,6 +55,7 @@ def pdf(request):
 
 def get_tempo(date):
     """ Return the tempo of the given date. """
+    weekday = (date.weekday() + 1) if date.weekday() != 6 else 0
     first_sunday_of_advent = get_first_sunday_of_advent(date.year)
     liturgical_year = \
         date.year if date < first_sunday_of_advent\
@@ -75,16 +76,28 @@ def get_tempo(date):
     pentecost = easter + datetime.timedelta(days=49)
     first_sunday_of_next_advent = get_first_sunday_of_advent(liturgical_year)
     christ_king = first_sunday_of_next_advent - datetime.timedelta(days=7)
-    if date >= first_sunday_of_advent and date < christmas:
-        tempo = "adv"
-    elif date >= christmas and date < baptism_of_christ:
-        tempo = "noel"
-    elif date >= baptism_of_christ and date < ash:
-        tempo = "pa_before_ash"
-    elif date >= ash and date < easter:
-        tempo = "lent"
-    elif date >= easter and date <= pentecost:
-        tempo = "tp"
-    elif date >= pentecost and date < first_sunday_of_next_advent:
-        tempo = "pa_after_pentecost"
-    return(tempo)
+    if first_sunday_of_advent <= date < christmas:
+        tempo = 'adv'
+    elif christmas <= date < baptism_of_christ:
+        tempo = 'noel'
+    elif baptism_of_christ <= date < ash:
+        tempo = 'pa_before_ash'
+    elif ash <= date < easter:
+        tempo = 'lent'
+    elif easter <= date <= pentecost:
+        tempo = 'tp'
+    elif pentecost <= date < first_sunday_of_next_advent:
+        if date == pentecost + datetime.timedelta(days=7):
+            tempo = 'trinite'
+        elif date == pentecost + datetime.timedelta(days=11):
+            tempo = 'fete_dieu'
+        elif date == pentecost + datetime.timedelta(days=19):
+            tempo = 'sacre_coeur'
+        elif date == christ_king:
+            tempo = 'christ_roi'
+        else:
+            days = (first_sunday_of_next_advent - date).days
+            week = 35 - round(days / 7)
+            tempo = 'pa_{}_{}'.format(week, weekday)
+
+    return tempo
