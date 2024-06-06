@@ -100,10 +100,7 @@ class Score(models.Model):
     name = models.CharField(
         max_length=250,
     )
-    page = models.SmallIntegerField(
-        null=True,
-        blank=True,
-    )
+    page = models.SmallIntegerField()
 
     def __str__(self):
         return '{}_{} ({})'.format(self.type, self.ref, self.name)
