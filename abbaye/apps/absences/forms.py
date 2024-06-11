@@ -6,6 +6,14 @@ from django.core.exceptions import ValidationError
 from apps.moines.models import Monk
 from .models import Ticket
 
+MOMENTS = [
+    ('', ''),
+    ('Matin', 'Matin'),
+    ('Déjeuner', 'Déjeuner'),
+    ('Après-midi', 'Après-midi'),
+    ('Dîner', 'Dîner'),
+    ('Soirée', 'Soirée'),
+]
 BY = [
     ('', ''),
     ('Voiture', 'Voiture'),
@@ -32,6 +40,18 @@ class AdditionalRecipients(forms.ModelMultipleChoiceField):
 
 class TicketForm(forms.ModelForm):
     """ Ticket form Ticket. """
+    type = forms.ChoiceField(
+        choices=[
+            ('out', 'Billet d\'absence = Je pars de Flavigny puis je reviens à Flavigny.'),
+            ('in', 'Billet de présence = Je passe à Flavigny puis je repars.'),
+        ],
+        widget=forms.RadioSelect(
+            attrs={
+                'id': 'id_type',
+                'class': 'list-unstyled d-flex flex-column align-items-start mx-auto',
+            }
+        ),
+    )
     monks = forms.ModelMultipleChoiceField(
         queryset=Monk.objects.filter(
             is_active=True
@@ -53,11 +73,7 @@ class TicketForm(forms.ModelForm):
     )
     go_moment = forms.ChoiceField(
         required=False,
-        choices=[
-            ('', ''),
-            ('Matin', 'Matin'),
-            ('Après-midi', 'Après-midi'),
-        ],
+        choices=MOMENTS,
     )
     servants = forms.BooleanField(
         required=False,
@@ -92,12 +108,7 @@ class TicketForm(forms.ModelForm):
     )
     back_moment = forms.ChoiceField(
         required=False,
-        choices=[
-            ('', ''),
-            ('Déjeuner', 'Déjeuner'),
-            ('Dîner', 'Dîner'),
-            ('Soirée', 'Soirée'),
-        ],
+        choices=MOMENTS,
     )
     keep_hot = forms.BooleanField(
         required=False,
