@@ -609,9 +609,12 @@
 
                 <!-- VALIDATION -->
                 <hr>
-                <div class="w-100 d-flex justify-content-center align-items-between">
-                    <a class="btn btn-secondary mx-1" href={% url 'absences:list' %}>Annuler</a>
-                    <button type="submit" class="btn btn-primary mx-1"><span class="fas fa-paper-plane"></span> Envoyer</button>
+                <div class="d-flex flex-column">
+                    <div class="w-100 d-flex justify-content-center align-items-between">
+                        <a class="btn btn-secondary mx-1" href={% url 'absences:list' %}>Annuler</a>
+                        <button type="submit" class="btn btn-primary mx-1"><span class="fas fa-paper-plane"></span> Envoyer</button>
+                    </div>
+                    <small class="text-center w-75 mx-auto mt-3">Remarque : il faut parfois un délai de quelques secondes avant que le billet soit enregistré sur le serveur</br>et que vous soyez redirigé vers la page principale.</small>
                 </div>
             </div>
         </div>
