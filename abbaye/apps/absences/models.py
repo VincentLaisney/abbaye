@@ -9,6 +9,9 @@ from apps.moines.models import Monk
 
 class Ticket(models.Model):
     """ Ticket class. """
+    type = models.CharField(
+        max_length=25,
+    )
     monks = models.ManyToManyField(
         Monk,
         related_name='monks',

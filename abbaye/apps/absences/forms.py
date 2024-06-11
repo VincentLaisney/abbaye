@@ -32,6 +32,18 @@ class AdditionalRecipients(forms.ModelMultipleChoiceField):
 
 class TicketForm(forms.ModelForm):
     """ Ticket form Ticket. """
+    type = forms.ChoiceField(
+        choices=[
+            ('out', 'Billet d\'absence = Je pars de Flavigny puis je reviens à Flavigny.'),
+            ('in', 'Billet de présence = Je passe à Flavigny puis je repars.'),
+        ],
+        widget=forms.RadioSelect(
+            attrs={
+                'id': 'id_type',
+                'class': 'list-unstyled d-flex flex-column align-items-start mx-auto',
+            }
+        ),
+    )
     monks = forms.ModelMultipleChoiceField(
         queryset=Monk.objects.filter(
             is_active=True

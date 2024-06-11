@@ -23,17 +23,41 @@
 
         <h1 class="text-center mt-2">
             {% if ticket %}
-                Modifier le billet d'absence</br>{{ ticket }}
+                Modifier le billet</br>{{ ticket }}
             {% else %}
-                Créer un billet d'absence
+                Créer un billet
             {% endif %}
         </h1>
 
         <div class="w-100">
+            <!-- TYPE -->
+            <div class="d-flex my-5">
+                {% if form.is_bound %}
+                    {% if form.type.errors %}
+                        {% render_field form.type class="is-invalid" %}
+                        {% for error in form.type.errors %}
+                            <div class="invalid-feedback d-block">
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.type class="is-valid" %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.type %}
+                {% endif %}
+
+                {% if form.type.help_text %}
+                    <small class="form-text text-muted">
+                        {{ form.type.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
             <!-- MONKS -->
             <div>
                 <h4 class="mt-5">
-                    Cochez les moines qui vont s'absenter :
+                    Cochez les moines concernés :
                 </h4>
                 <div>
                     {% if form.is_bound %}
@@ -61,7 +85,7 @@
 
             <!-- DESTINATION -->
             <div class="my-5">
-                <h4 class="mt-5">Destination (facultatif) :</h4>
+                <h4 id="id_label_destination" class="mt-5">Destination (facultatif) :</h4>
                 <div class="d-flex my-2">
                     {% if form.is_bound %}
                         {% if form.destination.errors %}
@@ -145,7 +169,7 @@
                         {% endif %}
                     </div>
 
-                    <div class="ml-3">
+                    <div id="group_servants_picnic" class="ml-3">
                         <div class="d-flex my-2">
                             {% if form.is_bound %}
                                 {% if form.servants.errors %}
@@ -333,7 +357,7 @@
                         {% endif %}
                     </div>
 
-                    <div class="ml-3">
+                    <div id="group_keep_hot" class="ml-3">
                         <div class="d-flex my-2">
                             {% if form.is_bound %}
                                 {% if form.keep_hot.errors %}
@@ -552,12 +576,12 @@
                         </tr>
                         <!-- Départ -->
                         <tr>
-                            <td class="fw-bold">Départ :</td>
+                            <td id="id_summary_label_go" class="fw-bold">Départ :</td>
                             <td class="col-8" id="go"></td>
                         </tr>
                         <!-- Retour -->
                         <tr>
-                            <td class="fw-bold">Retour :</td>
+                            <td id="id_summary_label_back" class="fw-bold">Retour :</td>
                             <td class="col-8" id="back"></td>
                         </tr>
                         <!-- Forme ordinaire -->
