@@ -177,13 +177,13 @@ def send_email(data, monks, mandatory_recipients, additional_recipients, action=
     ]
     recipients_emails = mandatory_recipients_email + additional_recipients_emails
     if action == 'update':
-        subject = 'AVIS D\'ABSENCE ***MODIFIÉ***'
-        body = '!!! AVIS D\'ABSENCE MODIFIÉ !!!\n\n'
+        subject = 'BILLET ***MODIFIÉ***'
+        body = '!!! BILLET MODIFIÉ !!!\n\n'
     elif action == 'delete':
-        subject = 'AVIS D\'ABSENCE ***SUPPRIMÉ***'
-        body = 'CET AVIS D\'ABSENCE EST SUPPRIMÉ :\n\n'
+        subject = 'BILLET ***SUPPRIMÉ***'
+        body = 'CE BILLET EST SUPPRIMÉ :\n\n'
     else:
-        subject = 'AVIS D\'ABSENCE'
+        subject = 'BILLET'
         body = ''
     body += write_body(data, monks, action)
     body += '\n\n{}'.format(''.join(['-'] * 72))
@@ -202,8 +202,7 @@ def write_body(data, monks, action):
     """ Write the body of the mail. """
     body = ''
     # Monks
-    body += 'Les moines suivants vont s\'absenter : {}'.format(monks) \
-        if action != 'delete' else 'Moines concernés : {}'.format(monks)
+    body += 'Moines concernés : {}'.format(monks)
 
     # Destination:
     body += '\n\nDestination : {}' \
