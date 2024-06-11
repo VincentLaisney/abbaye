@@ -6,6 +6,14 @@ from django.core.exceptions import ValidationError
 from apps.moines.models import Monk
 from .models import Ticket
 
+MOMENTS = [
+    ('', ''),
+    ('Matin', 'Matin'),
+    ('Déjeuner', 'Déjeuner'),
+    ('Après-midi', 'Après-midi'),
+    ('Dîner', 'Dîner'),
+    ('Soirée', 'Soirée'),
+]
 BY = [
     ('', ''),
     ('Voiture', 'Voiture'),
@@ -65,11 +73,7 @@ class TicketForm(forms.ModelForm):
     )
     go_moment = forms.ChoiceField(
         required=False,
-        choices=[
-            ('', ''),
-            ('Matin', 'Matin'),
-            ('Après-midi', 'Après-midi'),
-        ],
+        choices=MOMENTS,
     )
     servants = forms.BooleanField(
         required=False,
@@ -104,12 +108,7 @@ class TicketForm(forms.ModelForm):
     )
     back_moment = forms.ChoiceField(
         required=False,
-        choices=[
-            ('', ''),
-            ('Déjeuner', 'Déjeuner'),
-            ('Dîner', 'Dîner'),
-            ('Soirée', 'Soirée'),
-        ],
+        choices=MOMENTS,
     )
     keep_hot = forms.BooleanField(
         required=False,
