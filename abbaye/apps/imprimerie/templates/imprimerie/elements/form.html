@@ -411,29 +411,38 @@
                 </div>
 
                 <div class="d-flex align-items-start m-2">
-                    <!-- Nombre de pages -->
-                    <div class="form-group d-flex flex-column align-items-start col-6">
-                        {{ form.number_of_pages_doc.label_tag }}
-                        {% if form.is_bound %}
-                            {% if form.number_of_pages_doc.errors %}
-                                {% render_field form.number_of_pages_doc class="is-invalid" %}
-                                {% for error in form.number_of_pages_doc.errors %}
-                                    <div class="invalid-feedback d-block">
-                                        {{ error }}
-                                    </div>
-                                {% endfor %}
+                    <div class="d-flex flex-column col-6">
+                        <!-- Nombre de pages -->
+                        <div class="form-group d-flex flex-column align-items-start">
+                            {{ form.number_of_pages_doc.label_tag }}
+                            {% if form.is_bound %}
+                                {% if form.number_of_pages_doc.errors %}
+                                    {% render_field form.number_of_pages_doc class="is-invalid" %}
+                                    {% for error in form.number_of_pages_doc.errors %}
+                                        <div class="invalid-feedback d-block">
+                                            {{ error }}
+                                        </div>
+                                    {% endfor %}
+                                {% else %}
+                                    {% render_field form.number_of_pages_doc class="is-valid" %}
+                                {% endif %}
                             {% else %}
-                                {% render_field form.number_of_pages_doc class="is-valid" %}
+                                {% render_field form.number_of_pages_doc %}
                             {% endif %}
-                        {% else %}
-                            {% render_field form.number_of_pages_doc %}
-                        {% endif %}
-                        {% if form.number_of_pages_doc.help_text %}
-                            <small class="form-text text-muted">
-                                {{ form.number_of_pages_doc.help_text }}
-                            </small>
-                        {% endif %}
+                            {% if form.number_of_pages_doc.help_text %}
+                                <small class="form-text text-muted">
+                                    {{ form.number_of_pages_doc.help_text }}
+                                </small>
+                            {% endif %}
+                        </div>
+                        <!-- Épaisseur théorique : -->
+                        <div class="text-start">
+                            <div class="d-flex flex-column">
+                                <p class="small m-0 p-0">Épaisseur théorique : <span id="thickness"></span></p>
+                            </div>
+                        </div>
                     </div>
+    
 
                     <div class="d-flex flex-column">
                         <!-- Recto-verso -->

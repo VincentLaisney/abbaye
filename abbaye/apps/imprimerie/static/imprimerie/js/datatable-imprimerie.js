@@ -83,9 +83,13 @@ $(document).ready(function () {
       {
         target: 3,
       },
-      // Détails:
+      // Prix au mille :
       {
         target: 4,
+      },
+      // Détails:
+      {
+        target: 5,
         orderable: false,
         searchable: false,
       },

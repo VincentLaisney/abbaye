@@ -22,6 +22,7 @@
                 <th>Grammage</th>
                 <th>Dim. 1</th>
                 <th>Dim. 2</th>
+                <th>Prix au mille</th>
                 <th></th>
             </tr>
         </thead>
@@ -33,6 +34,7 @@
                     <td>{{ paper.weight }}</td>
                     <td>{{ paper.dim1 }}</td>
                     <td>{{ paper.dim2 }}</td>
+                    <td>{{ paper.price }}</td>
                     <td class="fw-bold"><a href={% url 'imprimerie:paper_details' paper.pk %}>Détails</a></td>
                 </tr>
             {% endfor %}

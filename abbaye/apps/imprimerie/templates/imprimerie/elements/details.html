@@ -21,6 +21,10 @@
                         <td class="value">{{ element.quantity|default_if_none:0 }}</td>
                     </tr>
                     <tr>
+                        <td class="label col-4">Frais fixes :</td>
+                        <td class="value">{{ element.fixed }} €</td>
+                    </tr>
+                    <tr>
                         <td class="label red col-4">Total :</td>
                         <td class="value red fw-bold">{{ element.total }} €</td>
                     </tr>
@@ -67,12 +71,16 @@
                     <td class="value">{{ element.margins|default_if_none:0 }} mm</td>
                 </tr>
                 <tr>
-                    <td class="label">Gouttières :</td>
-                    <td class="value">{{ element.gutters|default_if_none:0 }} mm</td>
+                    <td class="label">Gouttières largeur :</td>
+                    <td class="value">{{ element.gutters_width|default_if_none:0 }} mm</td>
+                </tr>
+                <tr>
+                    <td class="label">Gouttières hauteur :</td>
+                    <td class="value">{{ element.gutters_height|default_if_none:0 }} mm</td>
                 </tr>
                 <tr>
                     <td class="label">Nb de feuilles du doc. :</td>
-                    <td class="value">{{ element.number_of_sheets_doc }}</td>
+                    <td class="value">{{ element.number_of_pages_doc }}</td>
                 </tr>
                 <tr>
                     <td class="label">Imposition :</td>

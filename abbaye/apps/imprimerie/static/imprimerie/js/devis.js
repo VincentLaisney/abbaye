@@ -65,6 +65,11 @@ function refresh(data_paper) {
   var prix_papier = nb_feuilles_machine * prix_feuille * marge_papier;
   $('#prix_papier').html(prix_papier.toFixed(2) + ' €');
 
+  // Épaisseur théorique :
+  var thickness_paper = Number.parseFloat(data_paper['thickness']);
+  var thickness = thickness_paper * number_of_pages_doc / recto_verso / 1000;
+  $('#thickness').text(thickness.toFixed(1) + ' mm');
+
   // Meilleure imposition :
   var paper_dim1_machine = Number.parseInt($('#id_paper_dim1_machine').val());
   var paper_dim2_machine = Number.parseInt($('#id_paper_dim2_machine').val());

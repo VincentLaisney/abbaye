@@ -59,6 +59,7 @@ class Paper(models.Model):
     dim2 = models.CharField(
         max_length=4,
     )
+    thickness = models.IntegerField()
     price = models.DecimalField(
         decimal_places=2,
         max_digits=7,
