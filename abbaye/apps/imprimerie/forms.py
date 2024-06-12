@@ -59,6 +59,9 @@ class PaperForm(forms.ModelForm):
         label='Dimension 2 (mm) :',
         help_text='Rappel: cette dimension donne le sens des fibres.'
     )
+    thickness = forms.IntegerField(
+        label='Épaisseur (µ) :'
+    )
     price = forms.DecimalField(
         label='Prix au mille (€) :',
         required=False,
