@@ -30,7 +30,7 @@
             </tr>
         {% endif %}
         <tr>
-            <td class="fw-bold">Départ :</td>
+            <td class="fw-bold">Du :</td>
             <td class="details_date">
                 {{ ticket.go_date|date:"l j F Y" }}
                 {% if ticket.go_moment %}
@@ -54,7 +54,7 @@
             </td>
         </tr>
         <tr>
-            <td class="fw-bold">Retour :</td>
+            <td class="fw-bold">Au :</td>
             <td class="details_date">
                 {{ ticket.back_date|date:"l j F Y" }}
                 {% if ticket.back_moment %}
