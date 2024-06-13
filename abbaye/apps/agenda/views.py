@@ -19,7 +19,7 @@ def agenda_as_list(request, *args, **kwargs):
         day = date.fromisoformat(kwargs['date'])
     else:
         day = date.today()
-    days = fetch_data(day)
+    days = fetch_data(day, 30)
     return render(
         request,
         'agenda/list.html',
@@ -38,7 +38,8 @@ def agenda_as_calendar(request, *args, **kwargs):
         day = date.fromisoformat(kwargs['date'])
     else:
         day = date.today()
-    days = fetch_data(day)
+    day = day - (timedelta((day.weekday() + 1) if day.weekday() != 6 else 0))
+    days = fetch_data(day, 7)
     return render(
         request,
         'agenda/calendar.html',
@@ -130,11 +131,11 @@ def check_advanced_user(request):
     return advanced_user
 
 
-def fetch_data(today):
+def fetch_data(initial, length):
     """ Fetch everything from today. """
     days = {}
-    for i in range(15):
-        day = today + timedelta(i)
+    for i in range(length):
+        day = initial + timedelta(i)
 
         # Events of this day:
         events = Event.objects.filter(
