@@ -31,6 +31,25 @@
             <a href={% url 'agenda:create' %} class="btn btn-sm btn-outline-primary my-4">Ajouter un événement</a>
         {% endif %}
 
+        <!-- Calendar -->
+        <div id="calendar">
+            <!-- DATES -->
+            <div id="calendar_dates" class="d-flex">
+                {% for day, day_data in days.items %}
+                    <div class="date d-flex flex-column align-items-start">
+                        <!-- Weekday -->
+                        <div class="{% if day_data.current %}current_weekday{% else %}weekday{% endif %}">{% cycle 'Dimanche' 'Lundi' 'Mardi' 'Mercredi' 'Jeudi' 'Vendredi' 'Samedi' %}</div>
+    
+                        <!-- Date-->
+                        <div class="{% if day_data.current %}current_date{% else %}date{% endif %}">{{ day|date:'j F Y' }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- ABSENCES -->
+            <!-- ÉVÉNEMENTS -->
+        </div>
+
         <!-- Modal containing the details of a ticket.
         Will be filled by Ajax (datatable-tickets.js). -->
         <div class="modal fade" id="modal_details" tabindex="-1" aria-labelledby="modal_details" aria-hidden="true">
