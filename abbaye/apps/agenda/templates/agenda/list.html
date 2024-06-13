@@ -14,14 +14,17 @@
 {% block content %}
     <div class="d-flex flex-column align-items-center w-100">
         <div class="d-flex justify-content-between align-items-center my-2 w-100">
-            <div class="col-3"></div>
-            <h3 class="col-6 text-center green lucida-hw">Bienvenue sur l'agenda communautaire</br>de l'Abbaye Saint-Joseph de Clairval !</h1>
-            <a class="col-3 ms-5" href={% url 'agenda:calendar' %}>
+            <a class="col-2 d-flex align-items-center btn btn-outline-primary mx-auto" href={% url 'agenda:calendar' %}>
+                <span class="fas fa-chart-gantt fs-1"></span>
+                <p class="m-0 p-0">Passer en mode calendrier</p>
             </a>
-        </div>
 
-        <div class="d-flex align-items-center">
-            <input id="datepicker" class="form-control input-date text-center" style="border-color: green; border-width: 3px; width:120px" placeholder={{ day_as_string }}>
+            <h3 class="col-8 text-center green lucida-hw">Bienvenue sur l'agenda communautaire</br>de l'Abbaye Saint-Joseph de Clairval !</h3>
+
+            <div class="col-2 form-group">
+                <label class="me-2">Date :</label>
+                <input id="datepicker" class="form-control input-date text-center" style="border-color: green; border-width: 3px; width:120px" placeholder={{ day_as_string }}>
+            </div>
         </div>
 
         {% if advanced_user %}

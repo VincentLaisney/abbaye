@@ -31,17 +31,21 @@ def agenda_as_list(request, *args, **kwargs):
     )
 
 
-def agenda_as_calendar(request):
+def agenda_as_calendar(request, *args, **kwargs):
     """ Agenda as calendar. """
     advanced_user = check_advanced_user(request)
-    today = date.today()
-    days = fetch_data(today)
+    if 'date' in kwargs.keys():
+        day = date.fromisoformat(kwargs['date'])
+    else:
+        day = date.today()
+    days = fetch_data(day)
     return render(
         request,
         'agenda/calendar.html',
         {
             'advanced_user': advanced_user,
             'days': days,
+            'day_as_string': day.strftime("%d/%m/%Y"),
         },
     )
 

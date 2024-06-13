@@ -6,14 +6,44 @@
     <li class="breadcrumb-item active">Agenda calendrier</li>
 {% endblock breadcrumbs %}
 
+{% block css %}
+    <link rel="stylesheet" href={% static 'main/jquery-ui-1.12.1/jquery-ui.min.css' %}>
+    <link rel="stylesheet/less" href={% static 'agenda/css/agenda.less'%}>
+{% endblock css %}
+
 {% block content %}
-    <div class="d-flex flex-column align-items-center">
-        <h1 class="my-2">Bienvenue sur l'agenda</br>de l'Abbaye Saint-Joseph !</h1>
-        <a href={% url 'agenda:list' %}>
-            <span class="fas fa-list btn btn-outline-primary mb-3" title="Passer en mode liste"></span>
-        </a>
+    <div class="d-flex flex-column align-items-center w-100">
+        <div class="d-flex justify-content-between align-items-center my-2 w-100">
+            <a class="col-2 d-flex align-items-center btn btn-outline-primary mx-auto" href={% url 'agenda:list' %}>
+                <span class="fas fa-chart-gantt fs-1"></span>
+                <p class="m-0 p-0">Passer en mode liste</p>
+            </a>
+
+            <h3 class="col-8 text-center green lucida-hw">Bienvenue sur l'agenda communautaire</br>de l'Abbaye Saint-Joseph de Clairval !</h3>
+
+            <div class="col-2 form-group">
+                <label class="me-2">Date :</label>
+                <input id="datepicker" class="form-control input-date text-center" style="border-color: green; border-width: 3px; width:120px" placeholder={{ day_as_string }}>
+            </div>
+        </div>
+
         {% if advanced_user %}
             <a href={% url 'agenda:create' %} class="btn btn-sm btn-outline-primary my-4">Ajouter un événement</a>
         {% endif %}
+
+        <!-- Modal containing the details of a ticket.
+        Will be filled by Ajax (datatable-tickets.js). -->
+        <div class="modal fade" id="modal_details" tabindex="-1" aria-labelledby="modal_details" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'main/jquery-ui-1.12.1/jquery-ui.min.js' %}></script>
+    <script src={% static 'agenda/js/agenda-calendar.js' %}></script>
+{% endblock javascript %}
