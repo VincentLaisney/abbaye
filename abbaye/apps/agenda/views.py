@@ -35,12 +35,12 @@ def agenda_as_calendar(request, *args, **kwargs):
     """ Agenda as calendar. """
     advanced_user = check_advanced_user(request)
     if 'date' in kwargs.keys():
-        initial = date.fromisoformat(kwargs['date'])
+        arg_date = date.fromisoformat(kwargs['date'])
     else:
-        initial = date.today()
-    initial = initial - (
+        arg_date = date.today()
+    initial = arg_date - (
         timedelta(
-            (initial.weekday() + 1) if initial.weekday() != 6
+            (arg_date.weekday() + 1) if arg_date.weekday() != 6
             else 0
         )
     )
@@ -128,7 +128,7 @@ def agenda_as_calendar(request, *args, **kwargs):
         {
             'advanced_user': advanced_user,
             'days': days,
-            'day_as_string': initial.strftime("%d/%m/%Y"),
+            'day_as_string': arg_date.strftime("%d/%m/%Y"),
         },
     )
 
