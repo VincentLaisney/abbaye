@@ -35,18 +35,100 @@ def agenda_as_calendar(request, *args, **kwargs):
     """ Agenda as calendar. """
     advanced_user = check_advanced_user(request)
     if 'date' in kwargs.keys():
-        day = date.fromisoformat(kwargs['date'])
+        initial = date.fromisoformat(kwargs['date'])
     else:
-        day = date.today()
-    day = day - (timedelta((day.weekday() + 1) if day.weekday() != 6 else 0))
-    days = fetch_data(day, 7)
+        initial = date.today()
+    initial = initial - (
+        timedelta(
+            (initial.weekday() + 1) if initial.weekday() != 6
+            else 0
+        )
+    )
+    data = fetch_data(initial, 7)
+    days = {}
+    for index, item in enumerate(data):
+        day = data[item]['date']
+        days[day] = {}
+        days[day]['current'] = (item == date.today())
+        days[day]['events'] = {}
+        days[day]['feasts'] = {}
+        days[day]['absences'] = {}
+        days[day]['presences'] = {}
+
+        for event in data[item]['events']:
+            if event.date_from == item or (index == 0 and event.date_from < item <= event.date_to):
+                arrow_left = arrow_right = False
+                if index == 0 and event.date_from < item <= event.date_to:
+                    length = (event.date_to - initial).days + 1
+                    arrow_left = True
+                else:
+                    length = (event.date_to - event.date_from).days + 1
+                if length > (7 - index):
+                    length = 7 - index
+                    arrow_right = True
+
+                days[day]['events'][event] = {
+                    'x': index + 1,
+                    'length': length,
+                    'event': event,
+                    'arrow_left': arrow_left,
+                    'arrow_right': arrow_right,
+                }
+
+        for feast in data[item]['feasts']:
+            days[day]['feasts'][feast] = {
+                'x': index + 1,
+                'length': 1,
+                'feast': feast,
+            }
+
+        for absence in data[item]['absences']:
+            if absence.go_date == item or (index == 0 and absence.go_date < item <= absence.back_date):
+                arrow_left = arrow_right = False
+                if index == 0 and absence.go_date < item <= absence.back_date:
+                    length = (absence.back_date - initial).days + 1
+                    arrow_left = True
+                else:
+                    length = (absence.back_date - absence.go_date).days + 1
+                if length > (7 - index):
+                    length = 7 - index
+                    arrow_right = True
+
+                days[day]['absences'][absence] = {
+                    'x': index + 1,
+                    'length': length,
+                    'absence': absence,
+                    'arrow_left': arrow_left,
+                    'arrow_right': arrow_right,
+                }
+
+        for presence in data[item]['presences']:
+            if presence.go_date == item or (index == 0 and presence.go_date < item <= presence.back_date):
+                arrow_left = arrow_right = False
+                if index == 0 and presence.go_date < item <= presence.back_date:
+                    length = (presence.back_date - initial).days + 1
+                    arrow_left = True
+                else:
+                    length = (presence.back_date - presence.go_date).days + 1
+                if length > (7 - index):
+                    length = 7 - index
+                    arrow_right = True
+
+                days[day]['presences'][presence] = {
+                    'x': index + 1,
+                    'length': length,
+                    'presence': presence,
+                    'arrow_left': arrow_left,
+                    'arrow_right': arrow_right,
+                }
+
     return render(
         request,
         'agenda/calendar.html',
         {
             'advanced_user': advanced_user,
             'days': days,
-            'day_as_string': day.strftime("%d/%m/%Y"),
+            'day_as_string': initial.strftime("%d/%m/%Y"),
         },
     )
 

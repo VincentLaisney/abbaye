@@ -17,4 +17,35 @@ $(document).ready(function () {
     }
     $("#datepicker").datepicker(values);
   });
+
+  // Details: fill modal when clicked on a bar:
+  $('#calendar')
+    .on(
+      'click',
+      '.event_bar',
+      function () {
+        const id = $(this).attr('id').split('_')[1];
+        $.get('/abbaye/agenda/' + id, function (data) {
+          $('.modal-content').html(data);
+        });
+      }
+    ).on(
+      'click',
+      '.absence_bar',
+      function () {
+        const id = $(this).attr('id').split('_')[1];
+        $.get('/abbaye/absences/' + id, function (data) {
+          $('.modal-content').html(data);
+        });
+      }
+    ).on(
+      'click',
+      '.presence_bar',
+      function () {
+        const id = $(this).attr('id').split('_')[1];
+        $.get('/abbaye/absences/' + id, function (data) {
+          $('.modal-content').html(data);
+        });
+      }
+    )
 });

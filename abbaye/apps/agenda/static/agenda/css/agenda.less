@@ -7,34 +7,16 @@
     width: 100%;
     z-index: 0;
 
-    .calendar_lines {
-        position: absolute;
-        z-index: 1;
-
-        .vertical_line {
-            border-right: 1px solid @grey-light;
-
-            &.zero {
-                border-left: 2px solid gray;
-            }
-
-            &.bold {
-                border-right: 2px solid gray;
-            }
-        }
-    }
-
     .calendar_bars {
         display: grid;
-        grid-template-columns: repeat(21, 1fr);
+        grid-template-columns: repeat(7, 1fr);
         grid-auto-flow: row dense;
         position: relative;
         z-index: 2;
 
         .bar {
-            background-color: @green;
             border-radius: 3px;
-            color: white;
+            cursor: pointer;
             font-size: 10pt;
             height: 20px;
             overflow: hidden;
@@ -77,57 +59,66 @@
 
             .current_weekday,
             .current_date {
-                color: rgb(37, 204, 255);
+                color: @red-full;
             }
         }
     }
 
-    #calendar_retreats {
-        border-bottom: 1px solid grey;
+    #calendar_events {
         position: relative;
 
-        .retreat_bar {
-            background-color: @orange;
-
-            a {
-                color: black;
-            }
-        }
-    }
-
-    #calendar_sejours {
-        border-bottom: 1px solid grey;
-        position: relative;
-
-        .pretre {
-            background-color: blue;
-
-            a {
-                color: white;
-            }
-        }
-
-        .groupe {
-            background-color: @red-full;
-
-            a {
-                color: white;
-            }
-        }
-
-        .pretre.groupe {
-            background-color: rgb(190, 0, 190);
-        }
-    }
-
-    #calendar_parloirs {
-        position: relative;
-
-        .parloir_bar {
+        .abbaye {
             background-color: yellow;
+        }
+
+        .conference {
+            background-color: @orange;
+        }
+
+        .promenade {
+            background-color: @brown;
+        }
+
+        .retraite {
+            background-color: @red-full;
+            color: white;
+        }
+    }
+
+    #calendar_feasts {
+        position: relative;
+
+        .feast_bar {
+            background-color: @violet;
 
             a {
                 color: black;
+            }
+        }
+    }
+
+    #calendar_absences {
+        color: white;
+        position: relative;
+
+        .absence_bar {
+            background-color: @green;
+
+            a {
+                color: white;
+            }
+        }
+    }
+
+    #calendar_presences {
+        color: white;
+        position: relative;
+
+        .presence_bar {
+            background-color: @blue;
+
+            a {
+                color: white;
             }
         }
     }
