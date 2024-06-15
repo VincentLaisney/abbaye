@@ -10,6 +10,7 @@ from .models import Memo
 from .forms import MemoForm
 
 
+@group_required('Imprimerie')
 def memo(request):
     """ Memo imprimerie. """
     quill = Memo.objects.first()

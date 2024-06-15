@@ -1,96 +1,102 @@
 @import url("/statics/main/css/colors.less");
 
-#home {
-    a {
-        align-items: center;
-        display: flex;
-        flex-direction: column;
+body {
+    background-image: url('../img/imprimerie.jpg');
+    background-attachment: fixed;
+    background-size: cover;
 
-        p {
-            font-weight: bold;
-            font-size: 1.2em;
-        }
+    #home {
+        a {
+            align-items: center;
+            display: flex;
+            flex-direction: column;
 
-        svg {
-            color: @orange;
-            font-size: 4em;
-            margin: 0 0 10px 0;
+            p {
+                font-weight: bold;
+                font-size: 1.2em;
+            }
+
+            svg {
+                color: @orange;
+                font-size: 4em;
+                margin: 0 0 10px 0;
+            }
         }
     }
-}
 
-table {
-    height: 0;
+    table {
+        height: 0;
 
-    td.label {
+        td.label {
+            font-weight: bold;
+        }
+    }
+
+    .project {
+        color: @brown;
         font-weight: bold;
     }
-}
 
-.project {
-    color: @brown;
-    font-weight: bold;
-}
-
-.project::before,
-.element::before {
-    content: "« ";
-}
-
-.project::after,
-.element::after {
-    content: " »";
-}
-
-.element {
-    color: @green-light;
-}
-
-#table-clients_wrapper,
-#table-papers_wrapper,
-#table-projects_wrapper {
-    font-size: 0.9em;
-    margin-bottom: 50px;
-    width: 70%;
-
-    th,
-    td {
-        text-align: center;
-        vertical-align: middle;
+    .project::before,
+    .element::before {
+        content: "« ";
     }
 
-    th {
-        color: @red;
+    .project::after,
+    .element::after {
+        content: " »";
     }
 
-    td table td {
-        border: none;
-        margin: 0;
-        padding: 0;
+    .element {
+        color: @green-light;
     }
 
-    #table-clients_filter,
-    #table-clients_info,
-    #table-clients_length,
-    #table-clients_paginate,
-    #table-papers_filter,
-    #table-papers_info,
-    #table-papers_length,
-    #table-papers_paginate,
-    #table-projects_filter,
-    #table-projects_info,
-    #table-projects_length,
-    #table-projects_paginate {
-        color: @green;
+    #table-clients_wrapper,
+    #table-papers_wrapper,
+    #table-projects_wrapper {
+        font-size: 0.9em;
+        margin-bottom: 50px;
+        width: 70%;
 
-        a,
-        label {
-            font-weight: bold;
+        th,
+        td {
+            text-align: center;
+            vertical-align: middle;
         }
 
-        input {
-            background-color: white;
-            border-radius: 7px;
+        th {
+            color: @red;
+        }
+
+        td table td {
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #table-clients_filter,
+        #table-clients_info,
+        #table-clients_length,
+        #table-clients_paginate,
+        #table-papers_filter,
+        #table-papers_info,
+        #table-papers_length,
+        #table-papers_paginate,
+        #table-projects_filter,
+        #table-projects_info,
+        #table-projects_length,
+        #table-projects_paginate {
+            color: @green;
+
+            a,
+            label {
+                font-weight: bold;
+            }
+
+            input {
+                background-color: white;
+                border-radius: 7px;
+            }
         }
     }
 }
