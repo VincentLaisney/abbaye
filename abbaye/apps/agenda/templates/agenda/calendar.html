@@ -12,14 +12,14 @@
 {% endblock css %}
 
 {% block content %}
-    <div class="d-flex flex-column align-items-center w-100">
-        <div class="d-flex justify-content-between align-items-center my-2 w-100">
+    <div class="d-flex flex-column align-items-center w-100 mt-1">
+        <div class="d-flex justify-content-between align-items-center my-3 w-100">
             <a class="col-2 d-flex align-items-center btn btn-outline-primary mx-auto" href={% url 'agenda:list' %}>
                 <span class="fas fa-list fs-1"></span>
                 <p class="m-0 p-0">Passer en mode liste</p>
             </a>
 
-            <h3 class="col-8 text-center green lucida-hw">Bienvenue sur l'agenda communautaire</br>de l'Abbaye Saint-Joseph de Clairval !</h3>
+            <h2 class="col-8 text-center green lucida-hw">Bienvenue sur l'agenda communautaire</br>de l'Abbaye Saint-Joseph de Clairval !</h3>
 
             <div class="col-2 form-group">
                 <label class="me-2">Date :</label>
@@ -79,7 +79,7 @@
                                         {{ event.category|slugify }}
                                         event_bar"
                                     style="grid-column: {{ event_data.x }} / span {{ event_data.length }};"
-                                    title="{{ event.comment }}"
+                                    title="{% if event.comment %}{{ event }} : {{ event.comment }}{% else %}{{ event }}{% endif %}"
                                 >
                                     <span class="fas fa-pen"></span>
                                     <span>{{ event }}</span>
@@ -120,7 +120,7 @@
                                         {% endif %}
                                         feast_bar"
                                     style="grid-column: {{ feast_data.x }} / span {{ feast_data.length }};"
-                                    title="{{ feast }}"
+                                    title="Bonne fête {{ feast }} !"
                                 >
                                     <span class="fas fa-star white"></span>
                                     <span>{{ feast }}</span>
@@ -163,7 +163,7 @@
                                         {% endif %}
                                         absence_bar"
                                     style="grid-column: {{ absence_data.x }} / span {{ absence_data.length }};"
-                                    title="{{ absence }}"
+                                    title="{% if absence.destination %}{{ absence }} ({{ absence.destination }}){% else %}{{ absence }}{% endif %}"
                                 >
                                     <span class="fas fa-plane-departure white"></span>
                                     <span>{{ absence.monks_as_string }}</span>
@@ -206,7 +206,7 @@
                                         {% endif %}
                                         presence_bar"
                                     style="grid-column: {{ presence_data.x }} / span {{ presence_data.length }};"
-                                    title="{{ presence }}"
+                                    title="Passage à Flavigny : {{ presence }}"
                                 >
                                     <span class="fas fa-plane-arrival white"></span>
                                     <span class="presence_text white">
