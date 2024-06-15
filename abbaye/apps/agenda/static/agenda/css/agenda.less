@@ -1,0 +1,125 @@
+@import url("/statics/main/css/colors.less");
+
+#calendar {
+
+    display: block;
+    text-align: center;
+    width: 100%;
+    z-index: 0;
+
+    .calendar_bars {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        grid-auto-flow: row dense;
+        position: relative;
+        z-index: 2;
+
+        .bar {
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 10pt;
+            height: 20px;
+            overflow: hidden;
+            text-align: left;
+            text-overflow: ellipsis;
+            vertical-align: top;
+            white-space: nowrap;
+        }
+
+        a {
+            color: white;
+            font-size: 9pt;
+            vertical-align: middle;
+        }
+
+        .arrow-left {
+            border-top-left-radius: 12px;
+            border-bottom-left-radius: 12px;
+        }
+
+        .arrow-right {
+            border-top-right-radius: 12px;
+            border-bottom-right-radius: 12px;
+        }
+    }
+
+    #calendar_dates {
+        .date {
+            width: 100%;
+
+            .weekday,
+            .date,
+            .current_weekday,
+            .current_date {
+                background-color: gray;
+                color: @grey-light;
+                font-weight: bold;
+                width: 100%;
+            }
+
+            .current_weekday,
+            .current_date {
+                color: @red-full;
+            }
+        }
+    }
+
+    #calendar_events {
+        position: relative;
+
+        .abbaye {
+            background-color: yellow;
+        }
+
+        .conference {
+            background-color: @orange;
+        }
+
+        .promenade {
+            background-color: @brown;
+        }
+
+        .retraite {
+            background-color: @red-full;
+            color: white;
+        }
+    }
+
+    #calendar_feasts {
+        position: relative;
+
+        .feast_bar {
+            background-color: @violet;
+
+            a {
+                color: black;
+            }
+        }
+    }
+
+    #calendar_absences {
+        color: white;
+        position: relative;
+
+        .absence_bar {
+            background-color: @green;
+
+            a {
+                color: white;
+            }
+        }
+    }
+
+    #calendar_presences {
+        color: white;
+        position: relative;
+
+        .presence_bar {
+            background-color: @blue;
+
+            a {
+                color: white;
+            }
+        }
+    }
+}

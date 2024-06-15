@@ -6,14 +6,233 @@
     <li class="breadcrumb-item active">Agenda calendrier</li>
 {% endblock breadcrumbs %}
 
+{% block css %}
+    <link rel="stylesheet" href={% static 'main/jquery-ui-1.12.1/jquery-ui.min.css' %}>
+    <link rel="stylesheet/less" href={% static 'agenda/css/agenda.less'%}>
+{% endblock css %}
+
 {% block content %}
-    <div class="d-flex flex-column align-items-center">
-        <h1 class="my-2">Bienvenue sur l'agenda</br>de l'Abbaye Saint-Joseph !</h1>
-        <a href={% url 'agenda:list' %}>
-            <span class="fas fa-list btn btn-outline-primary mb-3" title="Passer en mode liste"></span>
-        </a>
+    <div class="d-flex flex-column align-items-center w-100">
+        <div class="d-flex justify-content-between align-items-center my-2 w-100">
+            <a class="col-2 d-flex align-items-center btn btn-outline-primary mx-auto" href={% url 'agenda:list' %}>
+                <span class="fas fa-list fs-1"></span>
+                <p class="m-0 p-0">Passer en mode liste</p>
+            </a>
+
+            <h3 class="col-8 text-center green lucida-hw">Bienvenue sur l'agenda communautaire</br>de l'Abbaye Saint-Joseph de Clairval !</h3>
+
+            <div class="col-2 form-group">
+                <label class="me-2">Date :</label>
+                <input id="datepicker" class="form-control input-date text-center" style="border-color: green; border-width: 3px; width:120px" placeholder={{ day_as_string }}>
+            </div>
+        </div>
+
         {% if advanced_user %}
             <a href={% url 'agenda:create' %} class="btn btn-sm btn-outline-primary my-4">Ajouter un événement</a>
         {% endif %}
+
+        <!-- Calendar -->
+        <div id="calendar">
+            <!-- DATES -->
+            <div id="calendar_dates" class="d-flex">
+                {% for day, day_data in days.items %}
+                    <div class="date d-flex flex-column align-items-start">
+                        <!-- Weekday -->
+                        <div class="{% if day_data.current %}current_weekday{% else %}weekday{% endif %}">{% cycle 'Dimanche' 'Lundi' 'Mardi' 'Mercredi' 'Jeudi' 'Vendredi' 'Samedi' %}</div>
+    
+                        <!-- Date-->
+                        <div class="{% if day_data.current %}current_date{% else %}date{% endif %}">{{ day|date:'j F Y' }}</div>
+                    </div>
+                {% endfor %}
+            </div>
+
+            <!-- ÉVÉNEMENTS -->
+            <div id="calendar_events" class="pb-1">
+                <!-- Vertical lines -->
+                <div class="calendar_lines d-flex align-items-stretch w-100">
+                    {% for line in lines %}
+                        {% if line == 0 %}
+                            <div class="vertical_line zero w-100 flex-grow"></div>
+                        {% elif line in bold_lines %}
+                            <div class="vertical_line bold w-100"></div>
+                        {% else %}
+                            <div class="vertical_line w-100"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <!-- Bars -->
+                <div class="calendar_bars w-100 ">
+                    {% for day, day_data in days.items %}
+                        {% for event, event_data in day_data.events.items %}
+                            {% if event_data.length > 0 %}
+                                <div
+                                    data-bs-toggle='modal' data-bs-target='#modal_details'
+                                    id="event_{{ event.pk }}"
+                                    class="bar px-1 mt-1 mx-1
+                                        {% if event_data.arrow_left %}
+                                            arrow-left
+                                        {% endif %}
+                                        {% if event_data.arrow_right %}
+                                            arrow-right
+                                        {% endif %}
+                                        {{ event.category|slugify }}
+                                        event_bar"
+                                    style="grid-column: {{ event_data.x }} / span {{ event_data.length }};"
+                                    title="{{ event.comment }}"
+                                >
+                                    <span class="fas fa-pen"></span>
+                                    <span>{{ event }}</span>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- FÊTES -->
+            <div id="calendar_feasts" class="pb-1">
+                <!-- Vertical lines -->
+                <div class="calendar_lines d-flex align-items-stretch w-100">
+                    {% for line in lines %}
+                        {% if line == 0 %}
+                            <div class="vertical_line zero w-100 flex-grow"></div>
+                        {% elif line in bold_lines %}
+                            <div class="vertical_line bold w-100"></div>
+                        {% else %}
+                            <div class="vertical_line w-100"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <!-- Bars -->
+                <div class="calendar_bars w-100 ">
+                    {% for day, day_data in days.items %}
+                        {% for feast, feast_data in day_data.feasts.items %}
+                            {% if feast_data.length > 0 %}
+                                <div
+                                    class="bar px-1 mt-1 mx-1
+                                        {% if feast_data.arrow_left %}
+                                            arrow-left
+                                        {% endif %}
+                                        {% if feast_data.arrow_right %}
+                                            arrow-right
+                                        {% endif %}
+                                        feast_bar"
+                                    style="grid-column: {{ feast_data.x }} / span {{ feast_data.length }};"
+                                    title="{{ feast }}"
+                                >
+                                    <span class="fas fa-star white"></span>
+                                    <span>{{ feast }}</span>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- ABSENCES -->
+            <div id="calendar_absences" class="pb-1">
+                <!-- Vertical lines -->
+                <div class="calendar_lines d-flex align-items-stretch w-100">
+                    {% for line in lines %}
+                        {% if line == 0 %}
+                            <div class="vertical_line zero w-100 flex-grow"></div>
+                        {% elif line in bold_lines %}
+                            <div class="vertical_line bold w-100"></div>
+                        {% else %}
+                            <div class="vertical_line w-100"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <!-- Bars -->
+                <div class="calendar_bars w-100 ">
+                    {% for day, day_data in days.items %}
+                        {% for absence, absence_data in day_data.absences.items %}
+                            {% if absence_data.length > 0 %}
+                                <div
+                                    data-bs-toggle='modal' data-bs-target='#modal_details'
+                                    id="absence_{{ absence.pk }}"
+                                    class="bar px-1 mt-1 mx-1
+                                        {% if absence_data.arrow_left %}
+                                            arrow-left
+                                        {% endif %}
+                                        {% if absence_data.arrow_right %}
+                                            arrow-right
+                                        {% endif %}
+                                        absence_bar"
+                                    style="grid-column: {{ absence_data.x }} / span {{ absence_data.length }};"
+                                    title="{{ absence }}"
+                                >
+                                    <span class="fas fa-plane-departure white"></span>
+                                    <span>{{ absence.monks_as_string }}</span>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- PRÉSENCES -->
+            <div id="calendar_presences" class="pb-1">
+                <!-- Vertical lines -->
+                <div class="calendar_lines d-flex align-items-stretch w-100">
+                    {% for line in lines %}
+                        {% if line == 0 %}
+                            <div class="vertical_line zero w-100 flex-grow"></div>
+                        {% elif line in bold_lines %}
+                            <div class="vertical_line bold w-100"></div>
+                        {% else %}
+                            <div class="vertical_line w-100"></div>
+                        {% endif %}
+                    {% endfor %}
+                </div>
+
+                <!-- Bars -->
+                <div class="calendar_bars w-100 ">
+                    {% for day, day_data in days.items %}
+                        {% for presence, presence_data in day_data.presences.items %}
+                            {% if presence_data.length > 0 %}
+                                <div
+                                    data-bs-toggle='modal' data-bs-target='#modal_details'
+                                    id="presence_{{ presence.pk }}"
+                                    class="bar px-1 mt-1 mx-1
+                                        {% if presence_data.arrow_left %}
+                                            arrow-left
+                                        {% endif %}
+                                        {% if presence_data.arrow_right %}
+                                            arrow-right
+                                        {% endif %}
+                                        presence_bar"
+                                    style="grid-column: {{ presence_data.x }} / span {{ presence_data.length }};"
+                                    title="{{ presence }}"
+                                >
+                                    <span class="fas fa-plane-arrival white"></span>
+                                    <span class="presence_text white">
+                                        {{ presence.monks_as_string }}
+                                    </span>
+                                </div>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal containing the details of a bar.
+        Will be filled by Ajax (agenda-calendar.js). -->
+        <div class="modal fade" id="modal_details" tabindex="-1" aria-labelledby="modal_details" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                </div>
+            </div>
+        </div>
     </div>
 {% endblock content %}
+
+{% block javascript %}
+    {{ block.super }}
+    <script src={% static 'main/jquery-ui-1.12.1/jquery-ui.min.js' %}></script>
+    <script src={% static 'agenda/js/agenda-calendar.js' %}></script>
+{% endblock javascript %}
