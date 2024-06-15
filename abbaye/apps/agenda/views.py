@@ -154,6 +154,19 @@ def fetch_data(initial, length):
         # Absences of this day:
         absences = Ticket.objects \
             .filter(
+                type='out'
+            ) & Ticket.objects.filter(
+                go_date__lte=day
+            ) & Ticket.objects.filter(
+                back_date__gte=day
+            ) \
+            .order_by('go_date', 'back_date')
+
+        # Presences of this day:
+        presences = Ticket.objects \
+            .filter(
+                type='in'
+            ) & Ticket.objects.filter(
                 go_date__lte=day
             ) & Ticket.objects.filter(
                 back_date__gte=day
@@ -165,6 +178,7 @@ def fetch_data(initial, length):
             'events': events,
             'feasts': feasts,
             'absences': absences,
+            'presences': presences,
         }
 
     return days
