@@ -141,7 +141,7 @@ def create(request):
 
         if form.is_valid():
             form.save()
-            return HttpResponseRedirect(reverse('agenda:list'))
+            return HttpResponseRedirect(reverse('agenda:calendar'))
 
     form = EventForm()
 
@@ -172,7 +172,7 @@ def update(request, **kwargs):
             form.save()
             return HttpResponseRedirect(
                 reverse(
-                    'agenda:list',
+                    'agenda:calendar',
                 )
             )
 
@@ -192,7 +192,7 @@ def delete(request, **kwargs):
     if request.method == 'POST':
         form = EventForm(request.POST, instance=event)
         event.delete()
-        return HttpResponseRedirect(reverse('agenda:list'))
+        return HttpResponseRedirect(reverse('agenda:calendar'))
 
     form = EventForm(instance=event)
 
