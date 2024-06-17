@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet/less" href={% static "ordomatic/css/ordomatic.less" %}>
+
+    <style>@font-face{font-family: "FlavGaramond"; src: url("{% static 'main/fonts/FlavGaramondRegular.ttf' %}")}</style>
+    <style>@font-face{font-family: "GregPlantin"; src: url("{% static 'main/fonts/GregPlantin-Regular.ttf' %}")}</style>
+{% endblock css %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Ordomatic+</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <div class="col-1 pe-3">
+        <input id="select_year" type="number" class="col-2 form-control form-control-sm">
+    </div>
+
+    <div id="ordo" class="d-flex flex-column align-items-center"></div>
+{% endblock content %}
+
+{% block javascript %}
+    <script src={% static "ordomatic/ordomatic-github/static/js/data_tempo.js" %}></script>
+    <script src={% static "ordomatic/ordomatic-github/static/js/data_sancto.js" %}></script>
+    <script src={% static "ordomatic/ordomatic-github/static/js/functions.js" %}></script>
+    <script src={% static "ordomatic/ordomatic-github/static/js/refresh.js" %}></script>
+    <script src={% static "ordomatic/ordomatic-github/static/js/replace.js" %}></script>
+    <script src={% static "ordomatic/ordomatic-github/static/js/ordomatic.js" %}></script>
+{% endblock javascript %}
