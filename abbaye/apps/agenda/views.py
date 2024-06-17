@@ -44,6 +44,8 @@ def agenda_as_calendar(request, *args, **kwargs):
             else 0
         )
     )
+    url_previous_week = str(initial - timedelta(7))
+    url_next_week = str(initial + timedelta(7))
     data = fetch_data(initial, 7)
     days = {}
     for index, item in enumerate(data):
@@ -129,6 +131,8 @@ def agenda_as_calendar(request, *args, **kwargs):
             'advanced_user': advanced_user,
             'days': days,
             'day_as_string': arg_date.strftime("%d/%m/%Y"),
+            'url_previous_week': url_previous_week,
+            'url_next_week': url_next_week,
         },
     )
 
