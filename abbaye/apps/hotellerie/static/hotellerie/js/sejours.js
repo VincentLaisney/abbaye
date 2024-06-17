@@ -1,6 +1,26 @@
 $(document).ready(function () {
   url = new URL(window.location);
 
+  // Lier le datepicker aux input date :
+  $(function () {
+    var values = {
+      dateFormat: "dd/mm/yy",
+      minDate: null,
+      dayNames: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+      dayNamesMin: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+      monthNames: ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"],
+      monthNamesShort: ["Jan", "Fév", "Mar", "Avr", "Mai", "Juin", "Juil", "Aoû", "Sep", "Oct", "Nov", "Déc"],
+      onSelect: function () {
+        if ($("#id_sejour_au").val() == "") {
+          $("#id_sejour_au").val($("#id_sejour_du").val());
+        }
+        refresh_rooms();
+      },
+    }
+    $("#id_sejour_du").datepicker(values);
+    $("#id_sejour_au").datepicker(values);
+  });
+
   // Sejours: has the personne a pere_suiveur?
   // On start (if we are on the right page,
   // elsewhere it raises an error on the server):
@@ -16,15 +36,6 @@ $(document).ready(function () {
   // Sejours: manage rooms (checkboxes) and selects:
   // On start:
   refresh_rooms();
-  // On modif datepickers:
-  $('body').on(
-    'click', '.day:not(.new)', function () {
-      if ($('#id_sejour_au').val() == '') {
-        $('#id_sejour_au').val($('#id_sejour_du').val());
-      }
-      refresh_rooms();
-    },
-  );
   // On modif repas (selects):
   $('.sejour_date_row select').on({
     change: function () {
