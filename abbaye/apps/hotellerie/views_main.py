@@ -161,7 +161,7 @@ def calendar(request, *args, **kwargs):
             else:
                 length = 0
 
-            if length >= max_length:
+            if length > max_length:
                 length = max_length
             else:
                 length = length - length_to_subtract_du - length_to_subtract_au
