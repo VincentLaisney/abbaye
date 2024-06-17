@@ -21,9 +21,10 @@
 
             <h2 class="col-8 text-center green lucida-hw">Bienvenue sur l'agenda communautaire</br>de l'Abbaye Saint-Joseph de Clairval !</h3>
 
-            <div class="col-2 form-group">
-                <label class="me-2">Date :</label>
+            <div class="col-2 d-flex align-items-center form-group">
+                <a href="/abbaye/agenda/calendar/{{ url_previous_week }}"><span class="fas fa-chevron-left green fw-bold fs-3 me-2" title="Semaine précédente"></span></a>
                 <input id="datepicker" class="form-control input-date text-center" style="border-color: green; border-width: 3px; width:120px" placeholder={{ day_as_string }}>
+                <a href="/abbaye/agenda/calendar/{{ url_next_week }}"><span class="fas fa-chevron-right green fw-bold fs-3 ms-2" title="Semaine suivante"></span></a>
             </div>
         </div>
 
