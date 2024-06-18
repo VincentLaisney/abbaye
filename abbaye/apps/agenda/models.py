@@ -51,6 +51,9 @@ class Category(models.Model):
     color = models.CharField(
         max_length=255,
     )
+    icon = models.CharField(
+        max_length=255,
+    )
     priority = models.IntegerField()
 
     def __str__(self):
