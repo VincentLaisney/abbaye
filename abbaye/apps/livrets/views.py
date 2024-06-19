@@ -183,7 +183,7 @@ def pdf(request):
             data['readings'],
         )
         if data['readings'].startswith('pa_') and not data['readings'].endswith('_0'):
-            tex += "_ev}\n"
+            tex += "_ev}\\par\n"
         elif data['readings_cycle'] == 3:
             tex += "_{}_ev}}\\par\n".format(
                 year_cycle,
@@ -330,19 +330,24 @@ def get_data(date):
     if sancto:
         sancto_values = sancto.values()[0]
         if sancto_values['precedence'] > data['precedence']:
+            data['precedence'] = sancto_values['precedence']
             data['id'] = sancto_values['id']
             data['ref'] = sancto_values['ref']
             data['title'] = sancto_values['title']
             data['rang'] = sancto_values['rang']
-            data['tierce'] = sancto_values['tierce']
+            if sancto_values['tierce']:
+                data['tierce'] = sancto_values['tierce']
             data['prayers_mg'] = sancto_values['prayers_mg']
             data['proper_readings'] = sancto_values['proper_readings']
-            data['readings'] = sancto_ref
-            data['readings_cycle'] = sancto_values['readings_cycle']
-            data['preface_id'] = sancto_values['preface_id']
-            data['preface_name_latin'] = sancto_values['preface_name_latin']
-            data['preface_name_french'] = sancto_values['preface_name_french']
-            data['sequence'] = sancto_values['sequence']
+            if sancto_values['proper_readings']:
+                data['readings'] = sancto_ref
+                data['readings_cycle'] = sancto_values['readings_cycle']
+            if sancto_values['preface_id']:
+                data['preface_id'] = sancto_values['preface_id']
+                data['preface_name_latin'] = sancto_values['preface_name_latin']
+                data['preface_name_french'] = sancto_values['preface_name_french']
+            if sancto_values['sequence']:
+                data['sequence'] = sancto_values['sequence']
 
     elif weekday == 6 and data['precedence'] < 30:
         ref_bmv = 'icm' if day < 8 \
