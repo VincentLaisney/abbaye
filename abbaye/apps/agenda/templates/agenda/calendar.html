@@ -82,7 +82,7 @@
                                     style="grid-column: {{ event_data.x }} / span {{ event_data.length }};"
                                     title="{% if event.comment %}{{ event }} : {{ event.comment }}{% else %}{{ event }}{% endif %}"
                                 >
-                                    <span class="fas fa-pen"></span>
+                                    <span class="fas fa-{{ event.category.icon }}"></span>
                                     <span>{{ event }}</span>
                                 </div>
                             {% endif %}
