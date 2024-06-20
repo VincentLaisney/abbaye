@@ -14,8 +14,12 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <div class="col-1 pe-3">
-        <input id="select_year" type="number" class="col-2 form-control form-control-sm">
+    <div class="d-flex justify-content-between">
+        <div class="col-4"></div>
+        <div class="col-4">
+            <input id="select_year" type="number" class="col-2 form-control form-control-sm">
+        </div>
+        <div class="col-4 text-end w-100"><span id="pdf" class="btn btn-primary">Voir le PDF</span></div>
     </div>
 
     <div id="ordo" class="d-flex flex-column align-items-center"></div>
@@ -28,4 +32,5 @@
     <script src={% static "ordomatic/js/preview/refresh.js" %}></script>
     <script src={% static "ordomatic/js/preview/replace.js" %}></script>
     <script src={% static "ordomatic/js/preview/ordomatic.js" %}></script>
+    <script src={% static "ordomatic/js/pdf.js" %}></script>
 {% endblock javascript %}

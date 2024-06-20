@@ -1,6 +1,8 @@
 """ apps/ordomatic/views.py """
 
 from datetime import date
+
+from django.http import JsonResponse
 from django.shortcuts import render
 
 
@@ -13,4 +15,16 @@ def home(request):
         {
             'year': year,
         },
+    )
+
+
+def pdf(request, *args, **kwargs):
+    """ Create the PDF of the ordo. """
+    year = kwargs['year']
+    return (
+        JsonResponse(
+            {
+                'status': 'ready',
+            },
+        )
     )
