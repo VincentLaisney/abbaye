@@ -15,11 +15,17 @@
 
 {% block content %}
     <div class="col-1 pe-3">
-        <input id="select_year" type="number" class="col-2 form-control form-control-sm" placeholder={{ year }}>
+        <input id="select_year" type="number" class="col-2 form-control form-control-sm">
     </div>
 
     <div id="ordo" class="d-flex flex-column align-items-center"></div>
 {% endblock content %}
 
 {% block javascript %}
+    <script src={% static "ordomatic/ordomatic-github/static/js/data_tempo.js" %}></script>
+    <script src={% static "ordomatic/ordomatic-github/static/js/data_sancto.js" %}></script>
+    <script src={% static "ordomatic/ordomatic-github/static/js/functions.js" %}></script>
+    <script src={% static "ordomatic/ordomatic-github/static/js/refresh.js" %}></script>
+    <script src={% static "ordomatic/ordomatic-github/static/js/replace.js" %}></script>
+    <script src={% static "ordomatic/ordomatic-github/static/js/ordomatic.js" %}></script>
 {% endblock javascript %}

@@ -14,12 +14,3 @@ def home(request):
             'year': year,
         },
     )
-
-
-def home_new(request):
-    """ Home page of new Ordomatic. """
-    return render(
-        request,
-        'ordomatic/home_new.html',
-        {},
-    )
