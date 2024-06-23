@@ -430,7 +430,9 @@ def get_data(date):
             tempo_ref = 'christ_roi'
         else:
             days = (first_sunday_of_next_advent - date).days
-            week = 35 - floor((days / 7) + 1)
+            week = 35 - floor(
+                (days / 7) + (1 if weekday != 0 else 0)
+            )
             tempo_ref = 'pa_{}_{}'.format(week, weekday)
     data = Day.objects.filter(ref=tempo_ref).values()[0]
     data['readings'] = tempo_ref
