@@ -158,7 +158,7 @@ def pdf(request):
                 year_even,
             )
         elif data['readings_cycle'] == 1:
-            tex += "_1}}\\par\n"
+            tex += "_1}\\par\n"
 
         # Graduel:
         grid_gr = request_get['gr_' + str(i + 1)]
@@ -196,7 +196,7 @@ def pdf(request):
                         year_even,
                     )
                 elif data['readings_cycle'] == 1:
-                    tex += "_2}}\\par\n"
+                    tex += "_2}\\par\n"
 
             # Alleluia:
             alleluia = Score.objects.filter(
