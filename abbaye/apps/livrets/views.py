@@ -204,7 +204,7 @@ def pdf(request):
                 )
 
         # Gospel:
-        tex += '\\Lecture{{Évangile~:}}{{{}'.format(
+        tex += '\\Lecture{{Évangile}}{{{}'.format(
             data['readings'],
         )
         if data['readings'].startswith('pa_') and not data['readings'].endswith('_0'):
