@@ -193,7 +193,7 @@ def pdf(request):
                 ref=grid_al
             ).first()
             if alleluia:
-                tex += '\\TitreB{{Alléluia~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\n'.format(
+                tex += '\\TitreB{{Alléluia~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
                     alleluia.name,
                     alleluia.page,
                 )
