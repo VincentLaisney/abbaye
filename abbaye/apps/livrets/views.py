@@ -4,6 +4,7 @@ from math import ceil, floor
 import os
 import datetime
 from pathlib import Path
+import re
 
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -74,7 +75,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Antienne d\'Introït~:}\\par\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/introit/{}}}\\par\n'.format(
-                    grid_in,
+                    re.sub(',', '_', grid_in),
                 )
 
         # Ouverture:
@@ -139,7 +140,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Graduel~:}\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/graduel/{}}}\\par\n'.format(
-                    grid_gr,
+                    re.sub(',', '_', grid_gr),
                 )
 
         # Second reading (if gr) and alleluia:
@@ -175,7 +176,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Alléluia~:}\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/alleluia/{}}}\n'.format(
-                    grid_al,
+                    re.sub(',', '_', grid_al),
                 )
 
         # Gospel:
@@ -194,6 +195,25 @@ def pdf(request):
             )
         elif data['readings_cycle'] == 1:
             tex += "_ev}\\par\n"
+
+        # Offertoire:
+        grid_of = request_get['of_' + str(i + 1)]
+        if grid_of:
+            offertoire = Score.objects.filter(
+                type='OF',
+            ).filter(
+                ref=grid_of
+            ).first()
+            if offertoire:
+                tex += '\\TitreB{{Antienne d\'offertoiire~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                    offertoire.name,
+                    offertoire.page,
+                )
+            else:
+                tex += '\\TitreB{Antienne d\'offertoire~:}\\par\\par\n'
+                tex += '\\PartocheWithTraduction{{GR/offertoire/{}}}\\par\n'.format(
+                    re.sub(',', '_', grid_of),
+                )
 
         # Prayer Super oblata:
         if data['prayers_mg']:
@@ -221,6 +241,26 @@ def pdf(request):
         # Canon:
         tex += "\\TitreB{Prière eucharistique n. 1}\\Normal{(p. 22).}\\par\n"
         tex += "\\TitreB{Rites de communion~:}\\Normal{p. 41.}\\par\n"
+
+
+        # Communion:
+        grid_co = request_get['co_' + str(i + 1)]
+        if grid_co:
+            communion = Score.objects.filter(
+                type='CO',
+            ).filter(
+                ref=grid_co
+            ).first()
+            if communion:
+                tex += '\\TitreB{{Antienne de Communion~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                    communion.name,
+                    communion.page,
+                )
+            else:
+                tex += '\\TitreB{Antienne de Communion~:}\\par\\par\n'
+                tex += '\\PartocheWithTraduction{{GR/communion/{}}}\\par\n'.format(
+                    re.sub(',', '_', grid_co),
+                )
 
         # Prayer Postcommunion:
         if data['prayers_mg']:
