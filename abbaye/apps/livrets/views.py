@@ -125,7 +125,7 @@ def pdf(request):
 
         # Prayer Collecte:
         if data['prayers_mg']:
-            tex += "\\TitreB{{Oraison~:}}\\Normal{{p. {}}}\\par\n".format(
+            tex += "\\TitreB{{Oraison~:}}\\Normal{{p. {}.}}\\par\n".format(
                 data['prayers_mg'].split('/')[0]
             )
         else:
@@ -254,7 +254,7 @@ def pdf(request):
 
         # Prayer Super oblata:
         if data['prayers_mg']:
-            tex += "\\TitreB{{Prière sur les offrandes~:}}\\Normal{{p. {}}}\\par\n".format(
+            tex += "\\TitreB{{Prière sur les offrandes~:}}\\Normal{{p. {}.}}\\par\n".format(
                 data['prayers_mg'].split('/')[0],
             )
         else:
@@ -335,7 +335,7 @@ def pdf(request):
 
         # Prayer Postcommunion:
         if data['prayers_mg']:
-            tex += "\\TitreB{{Prière après la Communion~:}}\\Normal{{p. {}}}\\par\n".format(
+            tex += "\\TitreB{{Prière après la Communion~:}}\\Normal{{p. {}.}}\\par\n".format(
                 data['prayers_mg'].split('/')[0],
             )
         else:
