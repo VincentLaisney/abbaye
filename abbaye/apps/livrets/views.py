@@ -271,10 +271,18 @@ def pdf(request):
                 preface.page,
             )
         else:
-            tex += "\\Preface{{{}}}{{{}}}\\par\n".format(
-                preface.name,
-                preface.ref,
-            )
+            if data['preface_name_latin']:
+                tex += "\\PrefaceWithName{{{}}}{{{}}}{{{}}}{{{}}}\\par\n".format(
+                    preface.name,
+                    preface.ref,
+                    data['preface_name_latin'],
+                    data['preface_name_french'],
+                )
+            else:
+                tex += "\\Preface{{{}}}{{{}}}\\par\n".format(
+                    preface.name,
+                    preface.ref,
+                )
 
         # Sanctus:
         grid_sa = request_get['sa_' + str(i + 1)]
