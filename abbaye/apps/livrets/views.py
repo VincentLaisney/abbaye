@@ -105,16 +105,10 @@ def pdf(request):
             ).filter(
                 ref=grid_ky
             ).first()
-            if introit:
-                tex += '\\TitreB{{Kyrie~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
-                    kyrie.name,
-                    kyrie.page,
-                )
-            else:
-                tex += '\\TitreB{Kyrie~:}\\par\\par\n'
-                tex += '\\PartocheWithTraduction{{GR/kyrie/{}}}\\par\n'.format(
-                    grid_ky,
-                )
+            tex += '\\TitreB{{Kyrie~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                kyrie.name,
+                kyrie.page,
+            )
 
         # Gloria:
         grid_gl = request_get['gl_' + str(i + 1)]
@@ -124,16 +118,10 @@ def pdf(request):
             ).filter(
                 ref=grid_gl
             ).first()
-            if gloria:
-                tex += '\\TitreB{{Gloria~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
-                    gloria.name,
-                    gloria.page,
-                )
-            else:
-                tex += '\\TitreB{Gloria~:}\\par\\par\n'
-                tex += '\\PartocheWithTraduction{{GR/gloria/{}}}\\par\n'.format(
-                    grid_gl,
-                )
+            tex += '\\TitreB{{Gloria~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                gloria.name,
+                gloria.page,
+            )
 
         # Prayer Collecte:
         if data['prayers_mg']:
@@ -283,16 +271,10 @@ def pdf(request):
             ).filter(
                 ref=grid_sa
             ).first()
-            if sanctus:
-                tex += '\\TitreB{{Sanctus~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
-                    sanctus.name,
-                    sanctus.page,
-                )
-            else:
-                tex += '\\TitreB{Sanctus~:}\\par\\par\n'
-                tex += '\\PartocheWithTraduction{{GR/gloria/{}}}\\par\n'.format(
-                    grid_sa,
-                )
+            tex += '\\TitreB{{Sanctus~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                sanctus.name,
+                sanctus.page,
+            )
 
         # Canon:
         tex += "\\TitreB{Prière eucharistique n. 1}\\Normal{(p. 22).}\\par\n"
@@ -306,16 +288,10 @@ def pdf(request):
             ).filter(
                 ref=grid_sa
             ).first()
-            if agnus:
-                tex += '\\TitreB{{Agnus Dei~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
-                    agnus.name,
-                    agnus.page,
-                )
-            else:
-                tex += '\\TitreB{Agnus Dei~:}\\par\\par\n'
-                tex += '\\PartocheWithTraduction{{GR/agnus/{}}}\\par\n'.format(
-                    grid_sa,
-                )
+            tex += '\\TitreB{{Agnus Dei~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                agnus.name,
+                agnus.page,
+            )
 
         # Communion:
         grid_co = request_get['co_' + str(i + 1)]
