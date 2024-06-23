@@ -4,6 +4,7 @@ from math import ceil, floor
 import os
 import datetime
 from pathlib import Path
+import re
 
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -25,7 +26,6 @@ def home(request):
 def pdf(request):
     """ Create the PDF of the booklet. """
     request_get = request.GET
-    # print(request_get)
     start = request_get['start'].split('/')
     start = datetime.date(int(start[2]), int(start[1]), int(start[0]))
 
@@ -47,7 +47,6 @@ def pdf(request):
         year_cycle = ['A', 'B', 'C'][(date.year - 2020) % 3]
         year_even = 2 if date.year % 2 == 0 else 1
         data = get_data(date)
-        print(data)
 
         # Liturgical day:
         tex += "\n\\section{{{}}}\n".format(
@@ -74,7 +73,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Antienne d\'Introït~:}\\par\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/introit/{}}}\\par\n'.format(
-                    grid_in,
+                    re.sub(',', '_', grid_in),
                 )
 
         # Ouverture:
@@ -98,9 +97,35 @@ def pdf(request):
             tierce_page,
         )
 
+        # Kyrie:
+        grid_ky = request_get['ky_' + str(i + 1)]
+        if grid_ky:
+            kyrie = Score.objects.filter(
+                type='KY',
+            ).filter(
+                ref=grid_ky
+            ).first()
+            tex += '\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n'.format(
+                kyrie.name,
+                kyrie.page,
+            )
+
+        # Gloria:
+        grid_gl = request_get['gl_' + str(i + 1)]
+        if grid_gl:
+            gloria = Score.objects.filter(
+                type='GL',
+            ).filter(
+                ref=grid_gl
+            ).first()
+            tex += '\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n'.format(
+                gloria.name,
+                gloria.page,
+            )
+
         # Prayer Collecte:
         if data['prayers_mg']:
-            tex += "\\TitreB{{Oraison~:}}\\Normal{{p. {}}}\\par\n".format(
+            tex += "\\TitreB{{Oraison~:}}\\Normal{{p. {}.}}\\par\n".format(
                 data['prayers_mg'].split('/')[0]
             )
         else:
@@ -121,7 +146,7 @@ def pdf(request):
                 year_even,
             )
         elif data['readings_cycle'] == 1:
-            tex += "_1}}\\par\n"
+            tex += "_1}\\par\n"
 
         # Graduel:
         grid_gr = request_get['gr_' + str(i + 1)]
@@ -139,7 +164,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Graduel~:}\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/graduel/{}}}\\par\n'.format(
-                    grid_gr,
+                    re.sub(',', '_', grid_gr),
                 )
 
         # Second reading (if gr) and alleluia:
@@ -159,7 +184,7 @@ def pdf(request):
                         year_even,
                     )
                 elif data['readings_cycle'] == 1:
-                    tex += "_2}}\\par\n"
+                    tex += "_2}\\par\n"
 
             # Alleluia:
             alleluia = Score.objects.filter(
@@ -168,18 +193,18 @@ def pdf(request):
                 ref=grid_al
             ).first()
             if alleluia:
-                tex += '\\TitreB{{Alléluia~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\n'.format(
+                tex += '\\TitreB{{Alléluia~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
                     alleluia.name,
                     alleluia.page,
                 )
             else:
                 tex += '\\TitreB{Alléluia~:}\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/alleluia/{}}}\n'.format(
-                    grid_al,
+                    re.sub(',', '_', grid_al),
                 )
 
         # Gospel:
-        tex += '\\Lecture{{Évangile~:}}{{{}'.format(
+        tex += '\\Lecture{{Évangile}}{{{}'.format(
             data['readings'],
         )
         if data['readings'].startswith('pa_') and not data['readings'].endswith('_0'):
@@ -195,9 +220,41 @@ def pdf(request):
         elif data['readings_cycle'] == 1:
             tex += "_ev}\\par\n"
 
+        # Credo:
+        grid_cr = request_get['cr_' + str(i + 1)]
+        if grid_cr:
+            credo = Score.objects.filter(
+                type='CR',
+            ).filter(
+                ref=grid_cr
+            ).first()
+            tex += '\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n'.format(
+                credo.name,
+                credo.page,
+            )
+
+        # Offertoire:
+        grid_of = request_get['of_' + str(i + 1)]
+        if grid_of:
+            offertoire = Score.objects.filter(
+                type='OF',
+            ).filter(
+                ref=grid_of
+            ).first()
+            if offertoire:
+                tex += '\\TitreB{{Antienne d\'offertoiire~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                    offertoire.name,
+                    offertoire.page,
+                )
+            else:
+                tex += '\\TitreB{Antienne d\'offertoire~:}\\par\\par\n'
+                tex += '\\PartocheWithTraduction{{GR/offertoire/{}}}\\par\n'.format(
+                    re.sub(',', '_', grid_of),
+                )
+
         # Prayer Super oblata:
         if data['prayers_mg']:
-            tex += "\\TitreB{{Prière sur les offrandes~:}}\\Normal{{p. {}}}\\par\n".format(
+            tex += "\\TitreB{{Prière sur les offrandes~:}}\\Normal{{p. {}.}}\\par\n".format(
                 data['prayers_mg'].split('/')[0],
             )
         else:
@@ -206,6 +263,7 @@ def pdf(request):
             )
 
         # Preface:
+        # TODO: Prefaces propres BMV samedi.
         preface = Preface.objects.get(pk=data['preface_id'])
         if preface.page:
             tex += "\\TitreB{{{}~:}}\\Normal{{p. {}.}}\\par\n".format(
@@ -213,18 +271,71 @@ def pdf(request):
                 preface.page,
             )
         else:
-            tex += "\\Preface{{{}}}{{{}}}\\par\n".format(
-                preface.name,
-                preface.ref,
+            if data['preface_name_latin']:
+                tex += "\\PrefaceWithName{{{}}}{{{}}}{{{}}}{{{}}}\\par\n".format(
+                    preface.name,
+                    preface.ref,
+                    data['preface_name_latin'],
+                    data['preface_name_french'],
+                )
+            else:
+                tex += "\\Preface{{{}}}{{{}}}\\par\n".format(
+                    preface.name,
+                    preface.ref,
+                )
+
+        # Sanctus:
+        grid_sa = request_get['sa_' + str(i + 1)]
+        if grid_sa:
+            sanctus = Score.objects.filter(
+                type='SA',
+            ).filter(
+                ref=grid_sa
+            ).first()
+            tex += '\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n'.format(
+                sanctus.name,
+                sanctus.page,
             )
 
         # Canon:
         tex += "\\TitreB{Prière eucharistique n. 1}\\Normal{(p. 22).}\\par\n"
         tex += "\\TitreB{Rites de communion~:}\\Normal{p. 41.}\\par\n"
 
+        # Agnus:
+        grid_sa = request_get['sa_' + str(i + 1)]
+        if grid_sa:
+            agnus = Score.objects.filter(
+                type='AG',
+            ).filter(
+                ref=grid_sa
+            ).first()
+            tex += '\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n'.format(
+                agnus.name,
+                agnus.page,
+            )
+
+        # Communion:
+        grid_co = request_get['co_' + str(i + 1)]
+        if grid_co:
+            communion = Score.objects.filter(
+                type='CO',
+            ).filter(
+                ref=grid_co
+            ).first()
+            if communion:
+                tex += '\\TitreB{{Antienne de Communion~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                    communion.name,
+                    communion.page,
+                )
+            else:
+                tex += '\\TitreB{Antienne de Communion~:}\\par\\par\n'
+                tex += '\\PartocheWithTraduction{{GR/communion/{}}}\\par\n'.format(
+                    re.sub(',', '_', grid_co),
+                )
+
         # Prayer Postcommunion:
         if data['prayers_mg']:
-            tex += "\\TitreB{{Prière après la Communion~:}}\\Normal{{p. {}}}\\par\n".format(
+            tex += "\\TitreB{{Prière après la Communion~:}}\\Normal{{p. {}.}}\\par\n".format(
                 data['prayers_mg'].split('/')[0],
             )
         else:
@@ -317,7 +428,9 @@ def get_data(date):
             tempo_ref = 'christ_roi'
         else:
             days = (first_sunday_of_next_advent - date).days
-            week = 35 - floor((days / 7) + 1)
+            week = 35 - floor(
+                (days / 7) + (1 if weekday != 0 else 0)
+            )
             tempo_ref = 'pa_{}_{}'.format(week, weekday)
     data = Day.objects.filter(ref=tempo_ref).values()[0]
     data['readings'] = tempo_ref
@@ -349,17 +462,19 @@ def get_data(date):
             if sancto_values['sequence']:
                 data['sequence'] = sancto_values['sequence']
 
-    elif weekday == 6 and data['precedence'] < 30:
+    # BMV samedi:
+    if weekday == 6 and data['precedence'] < 30:
         ref_bmv = 'icm' if day < 8 \
             else '{}_{}'.format(
                 date.month,
                 ceil(date.day / 7),
             )
         bmv = BMV.objects.filter(ref=ref_bmv).values()[0]
+        data['ref'] = 'bmv_{}'.format(bmv['cm'])
         data['title'] = bmv['title']
         data['rang'] = 'Mémoire majeure'
         data['tierce'] = 'laeva_ejus'
-        data['prayers_mg'] = 'bmv_{}'.format(bmv['cm'])
+        data['prayers_mg'] = None
         data['proper_readings'] = False
         data['preface_id'] = Preface.objects.get(ref='marie_1').id
 
