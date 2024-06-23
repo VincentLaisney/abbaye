@@ -262,6 +262,7 @@ def pdf(request):
             )
 
         # Preface:
+        # TODO: Prefaces propres BMV samedi.
         preface = Preface.objects.get(pk=data['preface_id'])
         if preface.page:
             tex += "\\TitreB{{{}~:}}\\Normal{{p. {}.}}\\par\n".format(
@@ -464,17 +465,19 @@ def get_data(date):
             if sancto_values['sequence']:
                 data['sequence'] = sancto_values['sequence']
 
-    elif weekday == 6 and data['precedence'] < 30:
+    # BMV samedi:
+    if weekday == 6 and data['precedence'] < 30:
         ref_bmv = 'icm' if day < 8 \
             else '{}_{}'.format(
                 date.month,
                 ceil(date.day / 7),
             )
         bmv = BMV.objects.filter(ref=ref_bmv).values()[0]
+        data['ref'] = 'bmv_{}'.format(bmv['cm'])
         data['title'] = bmv['title']
         data['rang'] = 'Mémoire majeure'
         data['tierce'] = 'laeva_ejus'
-        data['prayers_mg'] = 'bmv_{}'.format(bmv['cm'])
+        data['prayers_mg'] = None
         data['proper_readings'] = False
         data['preface_id'] = Preface.objects.get(ref='marie_1').id
 
