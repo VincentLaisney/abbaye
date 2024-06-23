@@ -220,6 +220,19 @@ def pdf(request):
         elif data['readings_cycle'] == 1:
             tex += "_ev}\\par\n"
 
+        # Credo:
+        grid_cr = request_get['cr_' + str(i + 1)]
+        if grid_cr:
+            credo = Score.objects.filter(
+                type='CR',
+            ).filter(
+                ref=grid_cr
+            ).first()
+            tex += '\\TitreB{{{}}} (p. {}).}}\\par\n'.format(
+                credo.name,
+                credo.page,
+            )
+
         # Offertoire:
         grid_of = request_get['of_' + str(i + 1)]
         if grid_of:
