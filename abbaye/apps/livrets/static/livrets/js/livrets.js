@@ -41,6 +41,7 @@ $(document).ready(function () {
       data['gr_' + String(i)] = $('#gr_' + String(i)).val();
       data['al_' + String(i)] = $('#al_' + String(i)).val();
       data['of_' + String(i)] = $('#of_' + String(i)).val();
+      data['co_' + String(i)] = $('#co_' + String(i)).val();
       data['ky_' + String(i)] = $('#ky_' + String(i)).val();
       data['gl_' + String(i)] = $('#gl_' + String(i)).val();
       data['sa_' + String(i)] = $('#sa_' + String(i)).val();
