@@ -97,6 +97,44 @@ def pdf(request):
             tierce_page,
         )
 
+        # Kyrie:
+        grid_ky = request_get['ky_' + str(i + 1)]
+        if grid_ky:
+            kyrie = Score.objects.filter(
+                type='KY',
+            ).filter(
+                ref=grid_ky
+            ).first()
+            if introit:
+                tex += '\\TitreB{{Kyrie~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                    kyrie.name,
+                    kyrie.page,
+                )
+            else:
+                tex += '\\TitreB{Kyrie~:}\\par\\par\n'
+                tex += '\\PartocheWithTraduction{{GR/kyrie/{}}}\\par\n'.format(
+                    grid_ky,
+                )
+
+        # Gloria:
+        grid_gl = request_get['gl_' + str(i + 1)]
+        if grid_gl:
+            gloria = Score.objects.filter(
+                type='GL',
+            ).filter(
+                ref=grid_gl
+            ).first()
+            if gloria:
+                tex += '\\TitreB{{Gloria~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                    gloria.name,
+                    gloria.page,
+                )
+            else:
+                tex += '\\TitreB{Gloria~:}\\par\\par\n'
+                tex += '\\PartocheWithTraduction{{GR/gloria/{}}}\\par\n'.format(
+                    grid_gl,
+                )
+
         # Prayer Collecte:
         if data['prayers_mg']:
             tex += "\\TitreB{{Oraison~:}}\\Normal{{p. {}}}\\par\n".format(
@@ -236,10 +274,47 @@ def pdf(request):
                 preface.ref,
             )
 
+        # Sanctus:
+        grid_sa = request_get['sa_' + str(i + 1)]
+        if grid_sa:
+            sanctus = Score.objects.filter(
+                type='SA',
+            ).filter(
+                ref=grid_sa
+            ).first()
+            if sanctus:
+                tex += '\\TitreB{{Sanctus~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                    sanctus.name,
+                    sanctus.page,
+                )
+            else:
+                tex += '\\TitreB{Sanctus~:}\\par\\par\n'
+                tex += '\\PartocheWithTraduction{{GR/gloria/{}}}\\par\n'.format(
+                    grid_sa,
+                )
+
         # Canon:
         tex += "\\TitreB{Prière eucharistique n. 1}\\Normal{(p. 22).}\\par\n"
         tex += "\\TitreB{Rites de communion~:}\\Normal{p. 41.}\\par\n"
 
+        # Agnus:
+        grid_sa = request_get['sa_' + str(i + 1)]
+        if grid_sa:
+            agnus = Score.objects.filter(
+                type='AG',
+            ).filter(
+                ref=grid_sa
+            ).first()
+            if agnus:
+                tex += '\\TitreB{{Agnus Dei~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                    agnus.name,
+                    agnus.page,
+                )
+            else:
+                tex += '\\TitreB{Agnus Dei~:}\\par\\par\n'
+                tex += '\\PartocheWithTraduction{{GR/agnus/{}}}\\par\n'.format(
+                    grid_sa,
+                )
 
         # Communion:
         grid_co = request_get['co_' + str(i + 1)]
