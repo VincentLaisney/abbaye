@@ -26,7 +26,6 @@ def home(request):
 def pdf(request):
     """ Create the PDF of the booklet. """
     request_get = request.GET
-    # print(request_get)
     start = request_get['start'].split('/')
     start = datetime.date(int(start[2]), int(start[1]), int(start[0]))
 
@@ -48,7 +47,6 @@ def pdf(request):
         year_cycle = ['A', 'B', 'C'][(date.year - 2020) % 3]
         year_even = 2 if date.year % 2 == 0 else 1
         data = get_data(date)
-        print(data)
 
         # Liturgical day:
         tex += "\n\\section{{{}}}\n".format(
