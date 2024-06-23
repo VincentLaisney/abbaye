@@ -105,7 +105,7 @@ def pdf(request):
             ).filter(
                 ref=grid_ky
             ).first()
-            tex += '\\TitreB{{Kyrie~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+            tex += '\\TitreB{{{}}} (p. {}).}}\\par\n'.format(
                 kyrie.name,
                 kyrie.page,
             )
@@ -118,7 +118,7 @@ def pdf(request):
             ).filter(
                 ref=grid_gl
             ).first()
-            tex += '\\TitreB{{Gloria~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+            tex += '\\TitreB{{{}}} (p. {}).}}\\par\n'.format(
                 gloria.name,
                 gloria.page,
             )
@@ -271,7 +271,7 @@ def pdf(request):
             ).filter(
                 ref=grid_sa
             ).first()
-            tex += '\\TitreB{{Sanctus~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+            tex += '\\TitreB{{{}}} (p. {}).}}\\par\n'.format(
                 sanctus.name,
                 sanctus.page,
             )
@@ -288,7 +288,7 @@ def pdf(request):
             ).filter(
                 ref=grid_sa
             ).first()
-            tex += '\\TitreB{{Agnus Dei~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+            tex += '\\TitreB{{{}}} (p. {}).}}\\par\n'.format(
                 agnus.name,
                 agnus.page,
             )
