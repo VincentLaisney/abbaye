@@ -79,6 +79,18 @@ def pdf(request):
         # Ouverture:
         tex += "\\TitreB{Ouverture de la célébration~:}\\Normal{p. 7.}\\par\n"
 
+        # Asperges me:
+        print(data['ref'], data['rang'])
+        if date.weekday() == 6:
+            if re.search('^tp_', data['ref']):
+                tex += "\\TitreB{Vidi aquam}\\Normal{(p. 71).}\\par\n"
+            elif re.search('^adv_', data['ref']) or re.search('^qua_', data['ref']):
+                tex += "\\TitreB{Asperges me II}\\Normal{(p. 71).}\\par\n"
+            elif date.day < 8 or data['rang'] in ['Fête', 'Solennité']:
+                tex += "\\TitreB{Asperges me}\\Normal{(p. 70).}\\par\n"
+            else:
+                tex += "\\TitreB{Asperges me I}\\Normal{(p. 71).}\\par\n"
+
         # Tierce:
         tierce_antiphon = \
             data['tierce'] if data['tierce'] \
