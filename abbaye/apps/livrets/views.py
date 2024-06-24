@@ -451,6 +451,8 @@ def get_data(date):
     month = date.strftime('%m')
     day = date.day
     sancto_ref = '{}{}'.format(month, day)
+    if weekday == 0 and sancto_ref in ['0202', '0806', '0914', '1109']:
+        sancto_ref = sancto_ref + '_dim'
     sancto = Day.objects.filter(ref=sancto_ref)
     if sancto:
         sancto_values = sancto.values()[0]
