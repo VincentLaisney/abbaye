@@ -80,7 +80,6 @@ def pdf(request):
         tex += "\\TitreB{Ouverture de la célébration~:}\\Normal{p. 7.}\\par\n"
 
         # Asperges me:
-        print(data['ref'], data['rang'])
         if date.weekday() == 6:
             if re.search('^tp_', data['ref']):
                 tex += "\\TitreB{Vidi aquam}\\Normal{(p. 71).}\\par\n"
@@ -214,6 +213,13 @@ def pdf(request):
                 tex += '\\PartocheWithTraduction{{GR/alleluia/{}}}\n'.format(
                     re.sub(',', '_', grid_al),
                 )
+
+        # Sequence:
+        if data['sequence']:
+            tex += '\\TitreB{Séquence~:}\\par\n'
+            tex += '\\PartocheWithTraduction{{GR/sequences/{}}}\n'.format(
+                data['sequence']
+            )
 
         # Gospel:
         tex += '\\Lecture{{Évangile}}{{{}'.format(
