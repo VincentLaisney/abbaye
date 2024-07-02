@@ -188,7 +188,7 @@ def send_email(data, monks, mandatory_recipients, additional_recipients, action=
         body = ''
     body += write_body(data, monks, action)
     body += '\n\n{}'.format(''.join(['-'] * 72))
-    body += '\nCe message vous a été envoyé depuis http://python.asj.com:8080/absences.'
+    body += '\nCe message vous a été envoyé depuis http://python.asj.com:8011/abbaye/absences/.'
     body += '\n{}'.format(''.join(['-'] * 72))
     return send_mail(
         subject,
