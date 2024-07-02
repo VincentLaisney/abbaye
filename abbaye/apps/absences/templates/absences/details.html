@@ -1,21 +1,16 @@
 {% load static %}
 
 <div class="modal-header">
-    <h5 class="modal-title" id="title_ticket">Billet</br>{{ ticket }}</h5>
+    <h5 class="modal-title" id="title_ticket">
+        {% if ticket.type == 'out' %}
+        Avis d'absence
+        {% else %}Avis de retour{% endif %}
+    </br>{{ ticket }}</h5>
     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fermer"></button>
 </div>
 
 <div class="modal-body">
     <table class="table table-sm table-borderless">
-        <tr>
-            <td class="fw-bold green">
-                Créé le  :</br>
-                Modifié le :</td>
-            <td class="green">
-                {{ ticket.created_at|date:"d/m/Y" }} à {{ ticket.created_at|time:"H:i:s" }}</br>
-                {{ ticket.last_modified|date:"d/m/Y" }} à {{ ticket.last_modified|time:"H:i:s" }}
-            </td>
-        </tr>
         <tr><td></td><td></td></tr>
         <tr>
             <td class="fw-bold">Moines concernés :</td>
@@ -40,10 +35,12 @@
                     </br>En {{ ticket.go_by|lower }}
                 {% endif %}
                 {% if ticket.go_station %}
-                     : {{ ticket.go_station }}
-                {% endif %}
-                {% if ticket.go_hour %}
-                     à {{ ticket.go_hour }}
+                    (
+                    {{ ticket.go_station }}
+                    {% if ticket.go_hour %}
+                        à {{ ticket.go_hour }}
+                    {% endif %}
+                    )
                 {% endif %}
                 {% if ticket.servants %}
                     </br>Repas avec les serveurs.
@@ -64,10 +61,12 @@
                     </br>En {{ ticket.back_by|lower }}
                 {% endif %}
                 {% if ticket.back_station %}
-                     : {{ ticket.back_station }}
-                {% endif %}
-                {% if ticket.back_hour %}
-                     à {{ ticket.go_hour }}
+                    (
+                    {{ ticket.back_station }}
+                    {% if ticket.back_hour %}
+                        à {{ ticket.go_hour }}
+                    {% endif %}
+                    )
                 {% endif %}
                 {% if ticket.keep_hot %}
                     </br>Garder du chaud.
@@ -86,14 +85,6 @@
                 <td>{{ ticket.commentary|linebreaks }}</td>
             </tr>
         {% endif %}
-        <tr>
-            <td class="fw-bold">Destinataires obligatoires :</td>
-            <td>{{ mandatory_recipients|safe }}</td>
-        </tr>
-        <tr>
-            <td class="fw-bold">Destinataires supplémentaires :</td>
-            <td>{{ additional_recipients|safe }}</td>
-        </tr>
     </table>
 </div>
 

@@ -176,18 +176,19 @@ def send_email(data, monks, mandatory_recipients, additional_recipients, action=
         for additional_recipient in additional_recipients
     ]
     recipients_emails = mandatory_recipients_email + additional_recipients_emails
+    avis = 'AVIS D\'ABSENCE' if data['type'] == 'out' else 'AVIS DE RETOUR'
     if action == 'update':
-        subject = 'BILLET ***MODIFIÉ***'
-        body = '!!! BILLET MODIFIÉ !!!\n\n'
+        subject = '{} ***MODIFIÉ***'.format(avis)
+        body = '!!! {} MODIFIÉ !!!\n\n'.format(avis)
     elif action == 'delete':
-        subject = 'BILLET ***SUPPRIMÉ***'
-        body = 'CE BILLET EST SUPPRIMÉ :\n\n'
+        subject = '{} ***SUPPRIMÉ***'.format(avis)
+        body = 'CET {} EST SUPPRIMÉ :\n\n'.format(avis)
     else:
-        subject = 'BILLET'
+        subject = '{}'.format(avis)
         body = ''
     body += write_body(data, monks, action)
     body += '\n\n{}'.format(''.join(['-'] * 72))
-    body += '\nCe message vous a été envoyé depuis http://python.asj.com:8080/absences.'
+    body += '\nCe message vous a été envoyé depuis http://python.asj.com:8011/abbaye/absences/.'
     body += '\n{}'.format(''.join(['-'] * 72))
     return send_mail(
         subject,
@@ -209,8 +210,10 @@ def write_body(data, monks, action):
         .format(data['destination']) if data['destination'] else ''
 
     # Go:
-    body += '\n\nDÉPART : {}' \
-        .format(data['go_date'])
+    go = 'DÉPART' if data['type'] == 'out' else 'RETOUR'
+    back = 'RETOUR' if data['type'] == 'out' else 'DÉPART'
+    body += '\n\n{} : {}' \
+        .format(go, data['go_date'])
     body += ' ({})' \
         .format(data['go_moment'].lower()) if data['go_moment'] else ''
     body += ' en {}.' \
@@ -225,8 +228,8 @@ def write_body(data, monks, action):
         if 'picnic' in data and data['picnic'] else ''
 
     # Back:
-    body += '\n\nRETOUR : {}' \
-        .format(data['back_date'])
+    body += '\n\n{} : {}' \
+        .format(back, data['back_date'])
     body += ' ({})' \
         .format(data['back_moment'].lower()) if data['back_moment'] else ''
     body += ' en {}.' \
