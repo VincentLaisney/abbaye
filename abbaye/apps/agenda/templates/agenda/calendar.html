@@ -164,7 +164,7 @@
                                         {% endif %}
                                         absence_bar"
                                     style="grid-column: {{ absence_data.x }} / span {{ absence_data.length }};"
-                                    title="{% if absence.destination %}{{ absence }} ({{ absence.destination }}){% else %}{{ absence }}{% endif %}"
+                                    title="Absence : {% if absence.destination %}{{ absence }} ({{ absence.destination }}){% else %}{{ absence }}{% endif %}"
                                 >
                                     <span class="fas fa-plane-departure white"></span>
                                     <span>{{ absence.monks_as_string }}</span>
@@ -207,7 +207,7 @@
                                         {% endif %}
                                         presence_bar"
                                     style="grid-column: {{ presence_data.x }} / span {{ presence_data.length }};"
-                                    title="Passage à Flavigny : {{ presence }}"
+                                    title="Retour : {{ presence }}"
                                 >
                                     <span class="fas fa-plane-arrival white"></span>
                                     <span class="presence_text white">

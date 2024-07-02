@@ -260,7 +260,7 @@ def pdf(request):
                 ref=grid_of
             ).first()
             if offertoire:
-                tex += '\\TitreB{{Antienne d\'offertoiire~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                tex += '\\TitreB{{Antienne d\'offertoire~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
                     offertoire.name,
                     offertoire.page,
                 )
