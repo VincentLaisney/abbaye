@@ -81,6 +81,7 @@ $(document).ready(function () {
   function refresh_type() {
     // Si c'est un départ :
     if ($('#id_type_0').prop('checked')) {
+      $('#label_check_monks').text('Sélectionnez le(s) moine(s) qui part(ent)')
       $('#go_block h2').text('DÉPART');
       $('#back_block h2').text('RETOUR');
       if ($('#id_destination').val() == "FLAVIGNY") {
@@ -96,6 +97,7 @@ $(document).ready(function () {
     }
     // Si c'est un retour:
     if ($('#id_type_1').prop('checked')) {
+      $('#label_check_monks').text('Sélectionnez le(s) moine(s) qui arrive(nt)')
       $('#go_block h2').text('ARRIVÉE');
       $('#back_block h2').text('DÉPART');
       $('#id_destination').val('FLAVIGNY');
