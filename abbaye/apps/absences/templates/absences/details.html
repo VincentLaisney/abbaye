@@ -11,15 +11,6 @@
 
 <div class="modal-body">
     <table class="table table-sm table-borderless">
-        <tr>
-            <td class="fw-bold green">
-                Créé le  :</br>
-                Modifié le :</td>
-            <td class="green">
-                {{ ticket.created_at|date:"d/m/Y" }} à {{ ticket.created_at|time:"H:i:s" }}</br>
-                {{ ticket.last_modified|date:"d/m/Y" }} à {{ ticket.last_modified|time:"H:i:s" }}
-            </td>
-        </tr>
         <tr><td></td><td></td></tr>
         <tr>
             <td class="fw-bold">Moines concernés :</td>
@@ -94,14 +85,6 @@
                 <td>{{ ticket.commentary|linebreaks }}</td>
             </tr>
         {% endif %}
-        <tr>
-            <td class="fw-bold">Destinataires obligatoires :</td>
-            <td>{{ mandatory_recipients|safe }}</td>
-        </tr>
-        <tr>
-            <td class="fw-bold">Destinataires supplémentaires :</td>
-            <td>{{ additional_recipients|safe }}</td>
-        </tr>
     </table>
 </div>
 
