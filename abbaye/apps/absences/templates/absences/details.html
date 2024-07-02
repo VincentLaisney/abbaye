@@ -13,7 +13,13 @@
     <table class="table table-sm table-borderless">
         <tr><td></td><td></td></tr>
         <tr>
-            <td class="fw-bold">Moines concernés :</td>
+            <td class="fw-bold">
+                {% if ticket.type == 'out' %}
+                    Moines qui partent :
+                {% else %}
+                    Moines qui arrivent :
+                {% endif %}
+            </td>
             <td>{{ ticket.monks_as_string }}</td>
         </tr>
         {% if ticket.destination %}
