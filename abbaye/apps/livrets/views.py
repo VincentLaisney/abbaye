@@ -1,8 +1,7 @@
 """ apps/livrets/views.py """
 
-from math import ceil, floor
-import os
 import datetime
+from math import ceil
 import os
 from pathlib import Path
 import re
@@ -94,6 +93,20 @@ def pdf(request):
                     data['readings_cycle'] = data_tempo['readings_cycle']
                 if not data['preface_id']:
                     data['preface_id'] = data_tempo['preface_id']
+        # BMV samedi:
+        if date.weekday() == 5 and data['precedence'] < 30:
+            ref_bmv = 'icm' if date.day < 8 \
+                else '{}_{}'.format(
+                    date.month,
+                    ceil(date.day / 7),
+                )
+            bmv = BMV.objects.filter(ref=ref_bmv).values()[0]
+            data['ref'] = 'bmv_{}'.format(bmv['cm'])
+            data['title'] = bmv['title']
+            data['rang'] = 'Mémoire majeure'
+            data['tierce'] = 'laeva_ejus'
+            data['prayers_mg'] = None
+            data['preface_id'] = 'cm_{}'.format(bmv['cm'])
 
         # Liturgical day:
         tex += "\n\\section{{{}}}\n".format(
@@ -328,26 +341,30 @@ def pdf(request):
             )
 
         # Preface:
-        # TODO: Prefaces propres BMV samedi.
-        preface = Preface.objects.get(pk=data['preface_id'])
-        if preface.page:
-            tex += "\\TitreB{{{}~:}}\\Normal{{p. {}.}}\\par\n".format(
-                preface.name,
-                preface.page,
+        if str(data['preface_id']).startswith('cm_'):
+            tex += "\\Preface{{Préface propre}}{{{}}}\\par\n".format(
+                data['preface_id']
             )
         else:
-            if data['preface_name_latin']:
-                tex += "\\PrefaceWithName{{{}}}{{{}}}{{{}}}{{{}}}\\par\n".format(
+            preface = Preface.objects.get(pk=data['preface_id'])
+            if preface.page:
+                tex += "\\TitreB{{{}~:}}\\Normal{{p. {}.}}\\par\n".format(
                     preface.name,
-                    preface.ref,
-                    data['preface_name_latin'],
-                    data['preface_name_french'],
+                    preface.page,
                 )
             else:
-                tex += "\\Preface{{{}}}{{{}}}\\par\n".format(
-                    preface.name,
-                    preface.ref,
-                )
+                if data['preface_name_latin']:
+                    tex += "\\PrefaceWithName{{{}}}{{{}}}{{{}}}{{{}}}\\par\n".format(
+                        preface.name,
+                        preface.ref,
+                        data['preface_name_latin'],
+                        data['preface_name_french'],
+                    )
+                else:
+                    tex += "\\Preface{{{}}}{{{}}}\\par\n".format(
+                        preface.name,
+                        preface.ref,
+                    )
 
         # Sanctus:
         grid_sa = request_get['sa_' + str(i + 1)]
