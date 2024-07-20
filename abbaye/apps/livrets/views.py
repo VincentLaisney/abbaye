@@ -11,7 +11,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render
 
-from modules.dates import get_first_sunday_of_advent, get_easter
+from modules.calendar import get_liturgical_day
 
 from .models import BMV, Day, Preface, Score
 
@@ -80,7 +80,20 @@ def pdf(request):
         date = start + datetime.timedelta(days=i)
         year_cycle = ['A', 'B', 'C'][(date.year - 2020) % 3]
         year_even = 2 if date.year % 2 == 0 else 1
-        data = get_data(date)
+        data_tempo, data_sancto, liturgical_day = get_data(date)
+        data = data_tempo
+        data['readings'] = data['ref']
+        if data_sancto:
+            if liturgical_day == data_sancto['ref']:
+                data = data_sancto
+                if data['proper_readings']:
+                    data['readings'] = data_sancto['ref']
+                else:
+                    data['readings'] = data_tempo['ref']
+                if not data['readings_cycle']:
+                    data['readings_cycle'] = data_tempo['readings_cycle']
+                if not data['preface_id']:
+                    data['preface_id'] = data_tempo['preface_id']
 
         # Liturgical day:
         tex += "\n\\section{{{}}}\n".format(
@@ -439,99 +452,8 @@ def pdf(request):
 
 def get_data(date):
     """ Return the data of the given date. """
-    # tempo_ref:
-    weekday = (date.weekday() + 1) if date.weekday() != 6 else 0
-    first_sunday_of_advent = get_first_sunday_of_advent(date.year)
-    liturgical_year = date.year if date < first_sunday_of_advent\
-        else (date.year + 1)
-    first_sunday_of_advent = get_first_sunday_of_advent(liturgical_year - 1)
-    christmas = datetime.date(liturgical_year - 1, 12, 25)
-    if christmas.weekday() == 6:
-        holy_family = datetime.date(liturgical_year - 1, 12, 30)
-        baptism_of_christ = datetime.date(liturgical_year, 1, 7)
-    else:
-        holy_family = christmas + \
-            datetime.timedelta(days=(6 - christmas.weekday()))
-        baptism_of_christ = holy_family + datetime.timedelta(days=14) if christmas.weekday() != 0 \
-            else datetime.date(liturgical_year, 1, 7)
-    easter = get_easter(liturgical_year)
-    ash = easter - datetime.timedelta(days=46)
-    pentecost = easter + datetime.timedelta(days=49)
-    first_sunday_of_next_advent = get_first_sunday_of_advent(liturgical_year)
-    christ_king = first_sunday_of_next_advent - datetime.timedelta(days=7)
-    if first_sunday_of_advent <= date < christmas:
-        tempo_ref = 'adv'
-    elif christmas <= date < baptism_of_christ:
-        tempo_ref = 'noel'
-    elif baptism_of_christ <= date < ash:
-        tempo_ref = 'pa_before_ash'
-    elif ash <= date < easter:
-        tempo_ref = 'lent'
-    elif easter <= date <= pentecost:
-        tempo_ref = 'tp'
-    elif pentecost <= date < first_sunday_of_next_advent:
-        if date == pentecost + datetime.timedelta(days=7):
-            tempo_ref = 'trinite'
-        elif date == pentecost + datetime.timedelta(days=11):
-            tempo_ref = 'fete_dieu'
-        elif date == pentecost + datetime.timedelta(days=19):
-            tempo_ref = 'sacre_coeur'
-        elif date == christ_king:
-            tempo_ref = 'christ_roi'
-        else:
-            days = (first_sunday_of_next_advent - date).days
-            week = 35 - floor(
-                (days / 7) + (1 if weekday != 0 else 0)
-            )
-            tempo_ref = 'pa_{}_{}'.format(week, weekday)
-    data = Day.objects.filter(ref=tempo_ref).values()[0]
-    data['readings'] = tempo_ref
-
-    # Sancto:
-    month = date.strftime('%m')
-    day = date.day
-    sancto_ref = '{}{}'.format(month, day)
-    if weekday == 0 and sancto_ref in ['0202', '0806', '0914', '1109']:
-        sancto_ref = sancto_ref + '_dim'
-    if sancto_ref == '0716':
-        sancto_ref = '0716_sam' if weekday == 6 else '0716_fer'
-    sancto = Day.objects.filter(ref=sancto_ref)
-    if sancto:
-        sancto_values = sancto.values()[0]
-        if sancto_values['precedence'] > data['precedence']:
-            data['precedence'] = sancto_values['precedence']
-            data['id'] = sancto_values['id']
-            data['ref'] = sancto_values['ref']
-            data['title'] = sancto_values['title']
-            data['rang'] = sancto_values['rang']
-            if sancto_values['tierce']:
-                data['tierce'] = sancto_values['tierce']
-            data['prayers_mg'] = sancto_values['prayers_mg']
-            data['proper_readings'] = sancto_values['proper_readings']
-            if sancto_values['proper_readings']:
-                data['readings'] = sancto_ref
-                data['readings_cycle'] = sancto_values['readings_cycle']
-            if sancto_values['preface_id']:
-                data['preface_id'] = sancto_values['preface_id']
-                data['preface_name_latin'] = sancto_values['preface_name_latin']
-                data['preface_name_french'] = sancto_values['preface_name_french']
-            if sancto_values['sequence']:
-                data['sequence'] = sancto_values['sequence']
-
-    # BMV samedi:
-    if weekday == 6 and data['precedence'] < 30:
-        ref_bmv = 'icm' if day < 8 \
-            else '{}_{}'.format(
-                date.month,
-                ceil(date.day / 7),
-            )
-        bmv = BMV.objects.filter(ref=ref_bmv).values()[0]
-        data['ref'] = 'bmv_{}'.format(bmv['cm'])
-        data['title'] = bmv['title']
-        data['rang'] = 'Mémoire majeure'
-        data['tierce'] = 'laeva_ejus'
-        data['prayers_mg'] = None
-        data['proper_readings'] = False
-        data['preface_id'] = Preface.objects.get(ref='marie_1').id
-
-    return data
+    tempo, sancto, liturgical_day = get_liturgical_day(date)
+    data_tempo = Day.objects.filter(ref=tempo).values()[0]
+    data_sancto = Day.objects.filter(ref=sancto).values()[
+        0] if sancto else {}
+    return (data_tempo, data_sancto, liturgical_day)
