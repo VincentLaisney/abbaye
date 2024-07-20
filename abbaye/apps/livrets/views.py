@@ -3,8 +3,10 @@
 from math import ceil, floor
 import os
 import datetime
+import os
 from pathlib import Path
 import re
+from django.conf import settings
 
 from django.http import JsonResponse
 from django.shortcuts import render
@@ -20,6 +22,38 @@ def home(request):
         request,
         'livrets/home.html',
         {},
+    )
+
+
+def score(request):
+    """ Check that score exists and where. """
+    request_get = request.GET
+    TYPES = {
+        'IN': 'introit',
+        'GR': 'graduel',
+        'AL': 'alleluia',
+        'OF': 'offertoire',
+        'CO': 'communion',
+    }
+    path = '{}/apps/livrets/static/livrets/data/GR/{}/{}.gabc'.format(
+        settings.BASE_DIR,
+        TYPES[request_get['type']],
+        request_get['score'],
+    )
+    if Score.objects.filter(type=request_get['type'], ref=request_get['score']):
+        color = 'green'
+        title = "Cette partition se trouve dans le Missel grégorien."
+    elif os.path.isfile(path):
+        color = 'blue'
+        title = "Cette partition se trouve dans les fichiers Gregorio."
+    else:
+        color = 'red'
+        title = "Cette partition n'existe pas et va devoir être créée dans les fichiers Gregorio."
+    return JsonResponse(
+        {
+            'color': color,
+            'title': title,
+        }
     )
 
 

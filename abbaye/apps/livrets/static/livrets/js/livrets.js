@@ -28,7 +28,26 @@ $(document).ready(function () {
     var page = $(this).val();
     page = page.replace(".", ",");
     $(this).val(page);
-  })
+  });
+
+  $('.score').focusout(function () {
+    var input = $(this);
+    var type = $(this).attr('id').toUpperCase().substring(0, 2);
+    var score = $(this).val();
+    if (['IN', 'GR', 'AL', 'OF', 'CO'].indexOf(type) != -1 && score != '') {
+      $.get(
+        url['href'] + 'score/',
+        {
+          'type': type,
+          'score': score,
+        },
+        function (back) {
+          input.css('color', back['color']);
+          input.attr('title', back['title']);
+        }
+      )
+    }
+  });
 
   // View PDF:
   $('#pdf').click(function () {
