@@ -35,6 +35,7 @@ $(document).ready(function () {
     $(this).val(page);
   });
 
+  // Check score exists:
   $('.score').focusout(function () {
     var input = $(this);
     var type = $(this).attr('id').toUpperCase().substring(0, 2);
