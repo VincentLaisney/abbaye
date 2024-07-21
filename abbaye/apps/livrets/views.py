@@ -20,7 +20,9 @@ def home(request):
     return render(
         request,
         'livrets/home.html',
-        {},
+        {
+            'number_of_days': range(1, 8),
+        },
     )
 
 
@@ -61,6 +63,7 @@ def pdf(request):
     request_get = request.GET
     start = request_get['start'].split('/')
     start = datetime.date(int(start[2]), int(start[1]), int(start[0]))
+    number_of_days = int(request_get['number_of_days'])
 
     tex = ''
     tex = '\\input{config.tex}\n\n'
@@ -75,7 +78,7 @@ def pdf(request):
     tex += '\\TitreB{Abbaye Saint-Joseph de Clairval}\n'
     tex += '\\end{center}\n\n'
     tex += '\\TitreA{Messe conventuelle}\n'
-    for i in range(5):
+    for i in range(number_of_days):
         date = start + datetime.timedelta(days=i)
         year_cycle = ['A', 'B', 'C'][(date.year - 2020) % 3]
         year_even = 2 if date.year % 2 == 0 else 1

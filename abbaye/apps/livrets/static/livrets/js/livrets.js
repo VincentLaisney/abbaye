@@ -18,6 +18,11 @@ $(document).ready(function () {
   $('#start').val(new Date().toISOString().substring(0, 10).split('-').reverse().join('/'));
   refresh()
 
+  // On change number of days:
+  $('#number_of_days').click(function () {
+    refresh();
+  });
+
   // On change input date:
   $('#start').change(function () {
     refresh();
@@ -53,8 +58,9 @@ $(document).ready(function () {
   $('#pdf').click(function () {
     const data = {
       'start': $('#start').val(),
+      'number_of_days': $('#number_of_days').val(),
     };
-    for (i = 1; i < 6; i++) {
+    for (i = 1; i <= Number($('#number_of_days').val()); i++) {
       data['date_' + String(i)] = $('#date_' + String(i)).text();
       data['in_' + String(i)] = $('#in_' + String(i)).val();
       data['gr_' + String(i)] = $('#gr_' + String(i)).val();
@@ -76,10 +82,19 @@ $(document).ready(function () {
   });
 });
 
-// Fonction pour rafraîchir les dates :
+// Refresh the grid:
 function refresh() {
+  // Hide/show rows:
+  for (var i = Number($('#number_of_days').val()); i < 8; i++) {
+    $('#row_' + (i + 1)).hide();
+  }
+  for (var i = 1; i <= Number($('#number_of_days').val()); i++) {
+    $('#row_' + i).show();
+  }
+
+  // Display dates:
   const start = new Date($('#start').val().split('/')[2], $('#start').val().split('/')[1] - 1, $('#start').val().split('/')[0]);
-  for (var i = 0; i < 6; i++) {
+  for (var i = 0; i < Number($('#number_of_days').val()); i++) {
     var date = new Date(start.getTime() + (i * 24 * 3600 * 1000));
     $('#date_' + (i + 1)).text(date_to_french_string(date));
   }
