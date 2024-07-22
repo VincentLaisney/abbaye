@@ -1,15 +1,16 @@
 """ apps/livrets/views.py """
 
-from math import ceil, floor
-import os
 import datetime
+from math import ceil
+import os
 from pathlib import Path
 import re
+from django.conf import settings
 
 from django.http import JsonResponse
 from django.shortcuts import render
 
-from modules.dates import get_first_sunday_of_advent, get_easter
+from modules.calendar import get_liturgical_day
 
 from .models import BMV, Day, Preface, Score
 
@@ -19,7 +20,41 @@ def home(request):
     return render(
         request,
         'livrets/home.html',
-        {},
+        {
+            'number_of_days': range(1, 8),
+        },
+    )
+
+
+def score(request):
+    """ Check that score exists and where. """
+    request_get = request.GET
+    TYPES = {
+        'IN': 'introit',
+        'GR': 'graduel',
+        'AL': 'alleluia',
+        'OF': 'offertoire',
+        'CO': 'communion',
+    }
+    path = '{}/apps/livrets/static/livrets/data/GR/{}/{}.gabc'.format(
+        settings.BASE_DIR,
+        TYPES[request_get['type']],
+        request_get['score'],
+    )
+    if Score.objects.filter(type=request_get['type'], ref=request_get['score']):
+        color = 'green'
+        title = "Cette partition se trouve dans le Missel grégorien."
+    elif os.path.isfile(path):
+        color = 'blue'
+        title = "Cette partition se trouve dans les fichiers Gregorio."
+    else:
+        color = 'red'
+        title = "Cette partition n'existe pas et va devoir être créée dans les fichiers Gregorio."
+    return JsonResponse(
+        {
+            'color': color,
+            'title': title,
+        }
     )
 
 
@@ -28,6 +63,7 @@ def pdf(request):
     request_get = request.GET
     start = request_get['start'].split('/')
     start = datetime.date(int(start[2]), int(start[1]), int(start[0]))
+    number_of_days = int(request_get['number_of_days'])
 
     tex = ''
     tex = '\\input{config.tex}\n\n'
@@ -42,11 +78,38 @@ def pdf(request):
     tex += '\\TitreB{Abbaye Saint-Joseph de Clairval}\n'
     tex += '\\end{center}\n\n'
     tex += '\\TitreA{Messe conventuelle}\n'
-    for i in range(5):
+    for i in range(number_of_days):
         date = start + datetime.timedelta(days=i)
         year_cycle = ['A', 'B', 'C'][(date.year - 2020) % 3]
         year_even = 2 if date.year % 2 == 0 else 1
-        data = get_data(date)
+        data_tempo, data_sancto, liturgical_day = get_data(date)
+        data = data_tempo
+        data['readings'] = data['ref']
+        if data_sancto:
+            if liturgical_day == data_sancto['ref']:
+                data = data_sancto
+                if data['proper_readings']:
+                    data['readings'] = data_sancto['ref']
+                else:
+                    data['readings'] = data_tempo['ref']
+                if not data['readings_cycle']:
+                    data['readings_cycle'] = data_tempo['readings_cycle']
+                if not data['preface_id']:
+                    data['preface_id'] = data_tempo['preface_id']
+        # BMV samedi:
+        if date.weekday() == 5 and data['precedence'] < 30:
+            ref_bmv = 'icm' if date.day < 8 \
+                else '{}_{}'.format(
+                    date.month,
+                    ceil(date.day / 7),
+                )
+            bmv = BMV.objects.filter(ref=ref_bmv).values()[0]
+            data['ref'] = 'bmv_{}'.format(bmv['cm'])
+            data['title'] = bmv['title']
+            data['rang'] = 'Mémoire majeure'
+            data['tierce'] = 'laeva_ejus'
+            data['prayers_mg'] = None
+            data['preface_id'] = 'cm_{}'.format(bmv['cm'])
 
         # Liturgical day:
         tex += "\n\\section{{{}}}\n".format(
@@ -73,7 +136,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Antienne d\'Introït~:}\\par\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/introit/{}}}\\par\n'.format(
-                    re.sub(',', '_', grid_in),
+                    grid_in,
                 )
 
         # Ouverture:
@@ -175,7 +238,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Graduel~:}\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/graduel/{}}}\\par\n'.format(
-                    re.sub(',', '_', grid_gr),
+                    grid_gr,
                 )
 
         # Second reading (if gr) and alleluia:
@@ -211,7 +274,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Alléluia~:}\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/alleluia/{}}}\n'.format(
-                    re.sub(',', '_', grid_al),
+                    grid_al,
                 )
 
         # Sequence:
@@ -267,7 +330,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Antienne d\'offertoire~:}\\par\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/offertoire/{}}}\\par\n'.format(
-                    re.sub(',', '_', grid_of),
+                    grid_of,
                 )
 
         # Prayer Super oblata:
@@ -281,26 +344,30 @@ def pdf(request):
             )
 
         # Preface:
-        # TODO: Prefaces propres BMV samedi.
-        preface = Preface.objects.get(pk=data['preface_id'])
-        if preface.page:
-            tex += "\\TitreB{{{}~:}}\\Normal{{p. {}.}}\\par\n".format(
-                preface.name,
-                preface.page,
+        if str(data['preface_id']).startswith('cm_'):
+            tex += "\\Preface{{Préface propre}}{{{}}}\\par\n".format(
+                data['preface_id']
             )
         else:
-            if data['preface_name_latin']:
-                tex += "\\PrefaceWithName{{{}}}{{{}}}{{{}}}{{{}}}\\par\n".format(
+            preface = Preface.objects.get(pk=data['preface_id'])
+            if preface.page:
+                tex += "\\TitreB{{{}~:}}\\Normal{{p. {}.}}\\par\n".format(
                     preface.name,
-                    preface.ref,
-                    data['preface_name_latin'],
-                    data['preface_name_french'],
+                    preface.page,
                 )
             else:
-                tex += "\\Preface{{{}}}{{{}}}\\par\n".format(
-                    preface.name,
-                    preface.ref,
-                )
+                if data['preface_name_latin']:
+                    tex += "\\PrefaceWithName{{{}}}{{{}}}{{{}}}{{{}}}\\par\n".format(
+                        preface.name,
+                        preface.ref,
+                        data['preface_name_latin'],
+                        data['preface_name_french'],
+                    )
+                else:
+                    tex += "\\Preface{{{}}}{{{}}}\\par\n".format(
+                        preface.name,
+                        preface.ref,
+                    )
 
         # Sanctus:
         grid_sa = request_get['sa_' + str(i + 1)]
@@ -348,7 +415,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Antienne de Communion~:}\\par\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/communion/{}}}\\par\n'.format(
-                    re.sub(',', '_', grid_co),
+                    grid_co,
                 )
 
         # Prayer Postcommunion:
@@ -405,97 +472,8 @@ def pdf(request):
 
 def get_data(date):
     """ Return the data of the given date. """
-    # tempo_ref:
-    weekday = (date.weekday() + 1) if date.weekday() != 6 else 0
-    first_sunday_of_advent = get_first_sunday_of_advent(date.year)
-    liturgical_year = date.year if date < first_sunday_of_advent\
-        else (date.year + 1)
-    first_sunday_of_advent = get_first_sunday_of_advent(liturgical_year - 1)
-    christmas = datetime.date(liturgical_year - 1, 12, 25)
-    if christmas.weekday() == 6:
-        holy_family = datetime.date(liturgical_year - 1, 12, 30)
-        baptism_of_christ = datetime.date(liturgical_year, 1, 7)
-    else:
-        holy_family = christmas + \
-            datetime.timedelta(days=(6 - christmas.weekday()))
-        baptism_of_christ = holy_family + datetime.timedelta(days=14) if christmas.weekday() != 0 \
-            else datetime.date(liturgical_year, 1, 7)
-    easter = get_easter(liturgical_year)
-    ash = easter - datetime.timedelta(days=46)
-    pentecost = easter + datetime.timedelta(days=49)
-    first_sunday_of_next_advent = get_first_sunday_of_advent(liturgical_year)
-    christ_king = first_sunday_of_next_advent - datetime.timedelta(days=7)
-    if first_sunday_of_advent <= date < christmas:
-        tempo_ref = 'adv'
-    elif christmas <= date < baptism_of_christ:
-        tempo_ref = 'noel'
-    elif baptism_of_christ <= date < ash:
-        tempo_ref = 'pa_before_ash'
-    elif ash <= date < easter:
-        tempo_ref = 'lent'
-    elif easter <= date <= pentecost:
-        tempo_ref = 'tp'
-    elif pentecost <= date < first_sunday_of_next_advent:
-        if date == pentecost + datetime.timedelta(days=7):
-            tempo_ref = 'trinite'
-        elif date == pentecost + datetime.timedelta(days=11):
-            tempo_ref = 'fete_dieu'
-        elif date == pentecost + datetime.timedelta(days=19):
-            tempo_ref = 'sacre_coeur'
-        elif date == christ_king:
-            tempo_ref = 'christ_roi'
-        else:
-            days = (first_sunday_of_next_advent - date).days
-            week = 35 - floor(
-                (days / 7) + (1 if weekday != 0 else 0)
-            )
-            tempo_ref = 'pa_{}_{}'.format(week, weekday)
-    data = Day.objects.filter(ref=tempo_ref).values()[0]
-    data['readings'] = tempo_ref
-
-    # Sancto:
-    month = date.strftime('%m')
-    day = date.day
-    sancto_ref = '{}{}'.format(month, day)
-    if weekday == 0 and sancto_ref in ['0202', '0806', '0914', '1109']:
-        sancto_ref = sancto_ref + '_dim'
-    sancto = Day.objects.filter(ref=sancto_ref)
-    if sancto:
-        sancto_values = sancto.values()[0]
-        if sancto_values['precedence'] > data['precedence']:
-            data['precedence'] = sancto_values['precedence']
-            data['id'] = sancto_values['id']
-            data['ref'] = sancto_values['ref']
-            data['title'] = sancto_values['title']
-            data['rang'] = sancto_values['rang']
-            if sancto_values['tierce']:
-                data['tierce'] = sancto_values['tierce']
-            data['prayers_mg'] = sancto_values['prayers_mg']
-            data['proper_readings'] = sancto_values['proper_readings']
-            if sancto_values['proper_readings']:
-                data['readings'] = sancto_ref
-                data['readings_cycle'] = sancto_values['readings_cycle']
-            if sancto_values['preface_id']:
-                data['preface_id'] = sancto_values['preface_id']
-                data['preface_name_latin'] = sancto_values['preface_name_latin']
-                data['preface_name_french'] = sancto_values['preface_name_french']
-            if sancto_values['sequence']:
-                data['sequence'] = sancto_values['sequence']
-
-    # BMV samedi:
-    if weekday == 6 and data['precedence'] < 30:
-        ref_bmv = 'icm' if day < 8 \
-            else '{}_{}'.format(
-                date.month,
-                ceil(date.day / 7),
-            )
-        bmv = BMV.objects.filter(ref=ref_bmv).values()[0]
-        data['ref'] = 'bmv_{}'.format(bmv['cm'])
-        data['title'] = bmv['title']
-        data['rang'] = 'Mémoire majeure'
-        data['tierce'] = 'laeva_ejus'
-        data['prayers_mg'] = None
-        data['proper_readings'] = False
-        data['preface_id'] = Preface.objects.get(ref='marie_1').id
-
-    return data
+    tempo, sancto, liturgical_day = get_liturgical_day(date)
+    data_tempo = Day.objects.filter(ref=tempo).values()[0]
+    data_sancto = Day.objects.filter(ref=sancto).values()[
+        0] if sancto else {}
+    return (data_tempo, data_sancto, liturgical_day)

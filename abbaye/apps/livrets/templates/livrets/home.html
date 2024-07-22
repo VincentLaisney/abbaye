@@ -17,11 +17,32 @@
     <h2 class="red-dark">Livret pour les retraitants</h2>
 
     <div class="d-flex flex-column align-items-center">
-        <!-- Date de départ -->
-        <div class="d-flex align-items-end my-3">
-            <h5 class="blue fw-bold">Date de départ : </h5>
-            <input id="start" class="form-control" type="text" style="margin-left: 20px; width: 120px;">
-        </div>
+        <!-- Options -->
+        <table id="options">
+            <tr>
+                <!-- Date de départ -->
+                <td class="align-middle">
+                    <h5 class="blue fw-bold m-0">Date de départ : </h5>
+                </td>
+                <td class="align-middle">
+                    <input id="start" class="form-control" type="text" style="width: 120px;">
+                </td>
+            </tr>
+
+            <tr>
+                <!-- Nombre de jours -->
+                <td class="align-middle">
+                    <h5 class="blue fw-bold m-0">Nombre de jours :</h5>
+                </td>
+                <td class="align-middle">
+                    <select name="number_of_days" id="number_of_days" style="width: 120px;">
+                        {% for i in number_of_days %}
+                            <option value={{ i }} {% if i == 5 %}selected{% endif %}>{{ i }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+        </table>
 
         <!-- Lignes Graduel -->
         <table id="graduel" class="table table-borderless">
@@ -37,22 +58,20 @@
                 <th class="green text-center">SA</th>
                 <th class="green text-center">CR</th>
             </tr>
-            {% with count="12345" %}
-                {% for i in count|make_list %}
-                    <tr>
-                        <td id="date_{{ i }}" class="date fw-bold"></td>
-                        <td><input type="text" id="in_{{ forloop.counter }}" class="score form-control"></td>
-                        <td><input type="text" id="gr_{{ forloop.counter }}" class="score form-control"></td>
-                        <td><input type="text" id="al_{{ forloop.counter }}" class="score form-control"></td>
-                        <td><input type="text" id="of_{{ forloop.counter }}" class="score form-control"></td>
-                        <td><input type="text" id="co_{{ forloop.counter }}" class="score form-control"></td>
-                        <td><input type="text" id="ky_{{ forloop.counter }}" class="score form-control"></td>
-                        <td><input type="text" id="gl_{{ forloop.counter }}" class="score form-control"></td>
-                        <td><input type="text" id="sa_{{ forloop.counter }}" class="score form-control"></td>
-                        <td><input type="text" id="cr_{{ forloop.counter }}" class="score form-control"></td>
-                    </tr>
-                {% endfor %}
-            {% endwith %}
+            {% for i in number_of_days %}
+                <tr id="row_{{ i }}">
+                    <td id="date_{{ i }}" class="date fw-bold"></td>
+                    <td><input type="text" id="in_{{ forloop.counter }}" class="score form-control"></td>
+                    <td><input type="text" id="gr_{{ forloop.counter }}" class="score form-control"></td>
+                    <td><input type="text" id="al_{{ forloop.counter }}" class="score form-control"></td>
+                    <td><input type="text" id="of_{{ forloop.counter }}" class="score form-control"></td>
+                    <td><input type="text" id="co_{{ forloop.counter }}" class="score form-control"></td>
+                    <td><input type="text" id="ky_{{ forloop.counter }}" class="score form-control"></td>
+                    <td><input type="text" id="gl_{{ forloop.counter }}" class="score form-control"></td>
+                    <td><input type="text" id="sa_{{ forloop.counter }}" class="score form-control"></td>
+                    <td><input type="text" id="cr_{{ forloop.counter }}" class="score form-control"></td>
+                </tr>
+            {% endfor %}
         </table>
 
         <!-- VIEW PDF -->
