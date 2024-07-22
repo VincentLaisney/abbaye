@@ -28,10 +28,10 @@ $(document).ready(function () {
     refresh();
   });
 
-  // On change page, replace "." by ",":
+  // On change page, replace "." by "_":
   $('.score').keyup(function () {
     var page = $(this).val();
-    page = page.replace(".", ",");
+    page = page.replace(".", "_");
     $(this).val(page);
   });
 

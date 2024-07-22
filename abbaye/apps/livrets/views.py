@@ -136,7 +136,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Antienne d\'Introït~:}\\par\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/introit/{}}}\\par\n'.format(
-                    re.sub(',', '_', grid_in),
+                    grid_in,
                 )
 
         # Ouverture:
@@ -238,7 +238,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Graduel~:}\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/graduel/{}}}\\par\n'.format(
-                    re.sub(',', '_', grid_gr),
+                    grid_gr,
                 )
 
         # Second reading (if gr) and alleluia:
@@ -274,7 +274,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Alléluia~:}\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/alleluia/{}}}\n'.format(
-                    re.sub(',', '_', grid_al),
+                    grid_al,
                 )
 
         # Sequence:
@@ -330,7 +330,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Antienne d\'offertoire~:}\\par\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/offertoire/{}}}\\par\n'.format(
-                    re.sub(',', '_', grid_of),
+                    grid_of,
                 )
 
         # Prayer Super oblata:
@@ -415,7 +415,7 @@ def pdf(request):
             else:
                 tex += '\\TitreB{Antienne de Communion~:}\\par\\par\n'
                 tex += '\\PartocheWithTraduction{{GR/communion/{}}}\\par\n'.format(
-                    re.sub(',', '_', grid_co),
+                    grid_co,
                 )
 
         # Prayer Postcommunion:
