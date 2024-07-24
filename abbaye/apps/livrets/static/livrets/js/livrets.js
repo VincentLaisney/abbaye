@@ -55,8 +55,14 @@ $(document).ready(function () {
     }
   });
 
-  // View PDF:
+  // Create PDF:
   $('#pdf').click(function () {
+    $('#overlay_wait').css({
+      'display': 'flex',
+      'flex-direction': 'column',
+      'align-items': 'center',
+      'justify-content': 'center',
+    });
     const data = {
       'start': $('#start').val(),
       'number_of_days': $('#number_of_days').val(),
@@ -77,9 +83,23 @@ $(document).ready(function () {
       url['href'] + 'pdf/',
       data,
       function (back) {
-        console.log(back);
+        if (back['back'] == "OK") {
+          $('#overlay_wait').css('display', 'none');
+          $('#overlay_ready').css({
+            'display': 'flex',
+            'flex-direction': 'column',
+            'align-items': 'center',
+            'justify-content': 'center',
+          });
+        }
       }
     )
+  });
+
+  // View PDF:
+  $('#display_pdf').click(function () {
+    $('#overlay_ready').css('display', 'none');
+    window.open(url['origin'] + '/media/livrets/livret.pdf');
   });
 });
 
