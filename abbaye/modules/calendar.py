@@ -637,8 +637,11 @@ def get_sancto(date):
     day = date.strftime('%d')
     sancto = '{}{}'.format(month, day)
     weekday = (date.weekday() + 1) if date.weekday() != 6 else 0
-    if weekday == 0 and sancto in ['0202', '0806', '0914', '1109']:
-        sancto = sancto + '_dim'
+    if sancto in ['0202', '0806', '0914', '1109']:
+        if weekday == 0:
+            sancto += '_dim'
+        else:
+            sancto += '_fer'
     return sancto
 
 
