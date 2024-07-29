@@ -465,11 +465,11 @@ def pdf(request):
 
     with open(os.path.join(Path(__file__).resolve().parent, 'tex/livret.tex'), 'w') as tex_file:
         tex_file.write(tex)
-        os.system(
-            "cd apps/livrets/tex; lualatex --shell-escape livret.tex; cp livret.pdf {}/livrets".format(
-                settings.MEDIA_ROOT,
-            )
+        command = "cd {base_dir}/apps/livrets/tex; lualatex --shell-escape livret.tex; cp livret.pdf {media_dir}/livrets".format(
+            base_dir=settings.BASE_DIR,
+            media_dir=settings.MEDIA_ROOT,
         )
+        os.system(command)
     return JsonResponse(
         {'back': 'OK'},
     )
