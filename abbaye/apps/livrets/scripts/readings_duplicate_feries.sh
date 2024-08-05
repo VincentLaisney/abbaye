@@ -5,7 +5,7 @@
 #+ et en vidant le fichier.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-cd "$SCRIPT_DIR/../static/data/lectures"
+cd "$SCRIPT_DIR/../static/livrets/data/lectures"
 find . -name 'pa_10_3_*' | sort | while read
 #find . -name 'pa_14_*_1_2*' | sort | while read
 #find . -name 'pa_14_6_ev*' | sort | while read
