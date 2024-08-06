@@ -74,9 +74,24 @@
             {% endfor %}
         </table>
 
-        <!-- VIEW PDF -->
-        <div class="w-100 d-flex justify-content-center align-items-between">
-            <button id="pdf" class="btn btn-outline-primary d-flex align-items-center justify-content-center fw-bold fs-5 mx-1 my-5"><span class="fas fa-file-pdf red-dark fs-3 me-3"></span> Voir le PDF</button>
+        <!-- Button "View PDF" -->
+        <div>
+            <div class="d-flex flex-column align-items-center">
+                <input type="button" id="pdf" class="btn btn-primary" value="Voir le PDF">
+            </div>
+        </div>
+
+        <!-- Screen "Wait please…" -->
+        <div id="overlay_wait">
+            <img src={% static 'livrets/img/wait.gif' %} class="mx-auto mb-5" style="height: 30px; width:30px;">
+            <p>Votre livret est en cours de préparation…</p>
+            <p>Veuillez patienter quelques instants…</p>
+        </div>
+
+        <!-- Screen "Ready!" -->
+        <div id="overlay_ready">
+            <p>Votre livret est prêt !</p>
+            <div id="display_pdf" class="btn btn-outline-secondary text-light">Afficher</div>
         </div>
     </div>
 {% endblock content %}

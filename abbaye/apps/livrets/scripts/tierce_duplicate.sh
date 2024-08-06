@@ -4,7 +4,7 @@
 #+ en remplaçant le nom du fichier par la référence voulue.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-cd "$SCRIPT_DIR/../static/data/tierce/antiennes"
+cd "$SCRIPT_DIR/../static/livrets/data/tierce/antiennes"
 find . -type f -name 'adjuva_me*' | while read
 do
 	f=`echo "$REPLY"`
