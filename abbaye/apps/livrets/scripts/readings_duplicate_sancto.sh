@@ -5,11 +5,11 @@
 #+ et en vidant le fichier.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-cd "$SCRIPT_DIR/..//static/data/lectures/"
+cd "$SCRIPT_DIR/../static/livrets/data/lectures/"
 find . -name '0908_*' | sort | while read
 do
 	f=`echo "$REPLY"`
-	fn=`echo "$REPLY" | sed 's/0908_/0121_/g'`
+	fn=`echo "$REPLY" | sed 's/0908_/0810_/g'`
     #echo "$fn"
     cp "$f" "$fn"
     echo "" > "$fn"

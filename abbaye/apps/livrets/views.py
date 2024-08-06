@@ -211,7 +211,12 @@ def pdf(request):
         tex += '\\Lecture{{Première lecture}}{{{}'.format(
             data['readings'],
         )
-        if data['readings_cycle'] == 3:
+        if data['readings_cycle'] == 6:
+            tex += "_1_{}_{}}}\\par\n".format(
+                year_cycle,
+                year_even,
+            )
+        elif data['readings_cycle'] == 3:
             tex += "_{}_1}}\\par\n".format(
                 year_cycle,
             )
@@ -249,7 +254,12 @@ def pdf(request):
                 tex += '\\Lecture{{Deuxième lecture}}{{{}'.format(
                     data['readings'],
                 )
-                if data['readings_cycle'] == 3:
+                if data['readings_cycle'] == 6:
+                    tex += "_2_{}_{}}}\\par\n".format(
+                        year_cycle,
+                        year_even,
+                    )
+                elif data['readings_cycle'] == 3:
                     tex += "_{}_2}}\\par\n".format(
                         year_cycle,
                     )
@@ -290,6 +300,11 @@ def pdf(request):
         )
         if data['readings'].startswith('pa_') and not data['readings'].endswith('_0'):
             tex += "_ev}\\par\n"
+        elif data['readings_cycle'] == 6:
+            tex += "_ev_{}_{}}}\\par\n".format(
+                year_cycle,
+                year_even,
+            )
         elif data['readings_cycle'] == 3:
             tex += "_{}_ev}}\\par\n".format(
                 year_cycle,
@@ -465,6 +480,11 @@ def pdf(request):
 
     with open(os.path.join(Path(__file__).resolve().parent, 'tex/livret.tex'), 'w') as tex_file:
         tex_file.write(tex)
+        command = "cd {base_dir}/apps/livrets/tex; lualatex --shell-escape livret.tex; cp livret.pdf {media_dir}/livrets".format(
+            base_dir=settings.BASE_DIR,
+            media_dir=settings.MEDIA_ROOT,
+        )
+        os.system(command)
     return JsonResponse(
         {'back': 'OK'},
     )

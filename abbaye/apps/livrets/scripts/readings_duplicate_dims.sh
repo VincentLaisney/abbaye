@@ -5,7 +5,7 @@
 #+ et en vidant le fichier.
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
-cd "$SCRIPT_DIR/..//static/data/lectures/"
+cd "$SCRIPT_DIR/../static/livrets/data/lectures/"
 find . -name 'adv_1_0_B_*' | sort | while read
 do
 	f=`echo "$REPLY"`
