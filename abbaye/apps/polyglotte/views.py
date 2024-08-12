@@ -44,16 +44,12 @@ def verses_list(request, **kwargs):
         if not item['chapter'] in chapters:
             chapters.append(item['chapter'])
 
-    # Is Gospel? (=> Syriac font instead of Hebrew):
-    gospel = kwargs['book'] in ['Mt', 'Mc', 'Lc', 'Jo']
-
     return render(request, 'polyglotte/list.html', {
         'verses': verses,
         'books': books,
         'chapters': chapters,
         'current_book': kwargs['book'],
         'current_chapter': kwargs['chapter'],
-        'gospel': gospel,
     })
 
 
