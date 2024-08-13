@@ -41,6 +41,10 @@ function refresh(data_paper) {
   var prix_fixe = Number.parseFloat($('#id_fixed').val());
   $('#frais_fixes').html(prix_fixe.toFixed(2) + ' €');
 
+  // Dimensions document :
+  var file_width = Number.parseInt($('#id_file_width').val());
+  var file_height = Number.parseInt($('#id_file_height').val());
+
   // Recto-verso :
   var recto_verso = 1;
   if ($('#id_recto_verso').prop('checked')) {
@@ -70,11 +74,24 @@ function refresh(data_paper) {
   var thickness = thickness_paper * number_of_pages_doc / recto_verso / 1000;
   $('#thickness').text(thickness.toFixed(1) + ' mm');
 
+  // Poids théorique :
+  var weight_paper = Number.parseFloat(data_paper['weight']);
+  var surface_page_doc = file_width * file_height / 1000000;
+  var weight = surface_page_doc * weight_paper * number_of_pages_doc / recto_verso;
+  if (weight < 10) {
+    decimals = 2;
+  }
+  else if (weight < 100) {
+    decimals = 1;
+  }
+  else {
+    decimals = 0;
+  }
+  $('#weight').text(weight.toFixed(decimals) + ' g');
+
   // Meilleure imposition :
   var paper_dim1_machine = Number.parseInt($('#id_paper_dim1_machine').val());
   var paper_dim2_machine = Number.parseInt($('#id_paper_dim2_machine').val());
-  var file_width = Number.parseInt($('#id_file_width').val());
-  var file_height = Number.parseInt($('#id_file_height').val());
   var margins = Number.parseInt($('#id_margins').val());
   var paper_dim1 = paper_dim1_machine - (margins * 2);
   var paper_dim2 = paper_dim2_machine - (margins * 2);
