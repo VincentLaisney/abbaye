@@ -23,3 +23,8 @@ class Verse(models.Model):
                 'verse': self.verse
             }
         )
+
+    def gospel(self):
+        """ Return True if verse is in Gospels
+        (=> Syriac font instead of Hebrew in templates). """
+        return self.book in ['Mt', 'Mc', 'Lc', 'Jo']
