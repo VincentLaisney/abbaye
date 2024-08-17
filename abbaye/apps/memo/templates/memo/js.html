@@ -16,12 +16,12 @@
             <div class="group">
                 <p class="descr">Récupérer l'installateur, puis installer Node et npm (remplacer NN par le numéro de la dernière version) :</p>
                 <pre class="terminal">
-    curl --proxy http://192.168.1.11:8080 -sL https://deb.nodesource.com/setup_NN.x | bash -
+    curl --proxy http://192.168.1.250:8080 -sL https://deb.nodesource.com/setup_NN.x | bash -
     apt-get install -y nodejs</pre>
                 <p class="descr">Configuration de npm (dans le dossier home) :</p>
                 <pre class="terminal">
-    npm config set proxy http://192.168.1.11:8080
-    npm config set https-proxy http://192.168.1.11:8080
+    npm config set proxy http://192.168.1.250:8080
+    npm config set https-proxy http://192.168.1.250:8080
     npm config set strict-ssl false</pre>
                 <p class="descr">Liste des config de npm :</p>
                 <pre class="terminal">
@@ -173,7 +173,7 @@
             <div class="group">
                 <p class="descr">Installation :</p>
                 <pre class="terminal">
-    ELECTRON_GET_USE_PROXY=true GLOBAL_AGENT_HTTPS_PROXY=http://192.168.1.11:8080 npm install --save-dev electron</pre>
+    ELECTRON_GET_USE_PROXY=true GLOBAL_AGENT_HTTPS_PROXY=http://192.168.1.250:8080 npm install --save-dev electron</pre>
             </div>
 
 
@@ -181,11 +181,11 @@
             <div class="group">
                 <p class="descr">Installation (sudo) :</p>
                 <pre class="terminal">
-    curl --proxy http://192.168.1.11:8080 https://install.meteor.com | sh</pre>
+    curl --proxy http://192.168.1.250:8080 https://install.meteor.com | sh</pre>
                 <p class="descr">Meteor behind a proxy :</p>
                 <pre class="terminal">
-    export HTTP_PROXY=http://192.168.1.11:8080
-    export HTTPS_PROXY=http://192.168.1.11:8080
+    export HTTP_PROXY=http://192.168.1.250:8080
+    export HTTPS_PROXY=http://192.168.1.250:8080
     meteor update</pre>
 
                 <p class="descr">Créer une application :</p>

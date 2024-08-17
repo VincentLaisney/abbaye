@@ -227,14 +227,14 @@
         <h4>Configurer le proxy pour root :</h4>
             <div class="group">
                 <p class="descr">Dans ~/.bashrc :</p>
-                <p class="terminal">export HTTP_PROXY=http://192.168.1.11:8080</p>
-                <p class="terminal">export HTTPS_PROXY=http://192.168.1.11:8080</p>
+                <p class="terminal">export HTTP_PROXY=http://192.168.1.250:8080</p>
+                <p class="terminal">export HTTPS_PROXY=http://192.168.1.250:8080</p>
             </div>
 
             <div class="group">
                 <p class="descr">Dans ~/.wgetrc :</p>
-                <p class="terminal">HTTP_PROXY=http://192.168.1.11:8080</p>
-                <p class="terminal">HTTPS_PROXY=http://192.168.1.11:8080</p>
+                <p class="terminal">HTTP_PROXY=http://192.168.1.250:8080</p>
+                <p class="terminal">HTTPS_PROXY=http://192.168.1.250:8080</p>
             </div>
 
         <h4>Virtualbox :</h4>
@@ -699,9 +699,9 @@ NameVirtualHost *:8012
     [core]
     editor = vim
     [http]
-    proxy = http://192.168.1.11:8080
+    proxy = http://192.168.1.250:8080
     [https]
-    proxy = http://192.168.1.11:8080</pre>
+    proxy = http://192.168.1.250:8080</pre>
                 <p class="descr">Fichier ~/.netrc :</p>
                 <pre class="file">machine github.com login BrRoman password my_super_password</pre>
             </div>
@@ -719,7 +719,7 @@ NameVirtualHost *:8012
         <h4>VSCode :</h4>
             <div class="group">
                 <p class="descr">Clé :</p>
-                <p class="terminal">curl --proxy http://192.168.1.11:8080 https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg</p>
+                <p class="terminal">curl --proxy http://192.168.1.250:8080 https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg</p>
                 <p class="terminal">install -o root -g root -m 644 microsoft.gpg /etc/apt/trusted.gpg.d/</p>
                 <p class="descr">Dépôt :</p>
                 <p class="terminal">echo "deb [arch=amd64] https://packages.microsoft.com/repos/vscode stable main" > /etc/apt/sources.list.d/vscode.list</p>
