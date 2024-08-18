@@ -42,14 +42,14 @@ def score(request):
         request_get['score'],
     )
     if Score.objects.filter(type=request_get['type'], ref=request_get['score']):
-        color = 'green'
+        color = 'blue'
         title = "Cette partition se trouve dans le Missel grégorien."
     elif os.path.isfile(path):
-        color = 'blue'
-        title = "Cette partition se trouve dans les fichiers Gregorio."
+        color = 'green'
+        title = "Cette partition ne se trouve pas dans le Missel grégorien mais existe au format Gregorio."
     else:
         color = 'red'
-        title = "Cette partition n'existe pas et va devoir être créée dans les fichiers Gregorio."
+        title = "Cette partition ne se trouve ni dans le Missel grégorien ni au format Gregorio."
     return JsonResponse(
         {
             'color': color,
