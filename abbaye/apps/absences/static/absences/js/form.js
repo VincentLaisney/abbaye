@@ -77,6 +77,11 @@ $(document).ready(function () {
     }
   );
 
+  // On validation: deactivate submit:
+  $("#submit").click(function () {
+    $(this).attr('disabled', 'True');
+  });
+
   // Refresh DOM according to type (in or out):
   function refresh_type() {
     // Si c'est un départ :
