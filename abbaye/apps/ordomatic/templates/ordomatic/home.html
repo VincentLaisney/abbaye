@@ -5,7 +5,8 @@
 {% block css %}
     <link rel="stylesheet/less" href={% static "ordomatic/css/ordomatic.less" %}>
 
-    <style>@font-face{font-family: "FlavGaramond"; src: url("{% static 'main/fonts/FlavGaramondRegular.ttf' %}")}</style>
+    <!-- TODO: FlavGaramond not loaded in browser. -->
+    <style>@font-face{font-family: "FlavGaramond"; src: url("{% static 'main/fonts/FlavGaramond-Regular.ttf' %}")}</style>
     <style>@font-face{font-family: "GregPlantin"; src: url("{% static 'main/fonts/GregPlantin-Regular.ttf' %}")}</style>
 {% endblock css %}
 
