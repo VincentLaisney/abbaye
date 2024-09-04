@@ -31,13 +31,17 @@ def home(request):
 def pdf(request, *args, **kwargs):
     """ Create the PDF of the ordo. """
     year = kwargs['year']
-    write_pdf(year)
-    command = "cd {base_dir}/apps/ordomatic/tex; lualatex --shell-escape ordo.tex; cp ordo.pdf {media_dir}/ordomatic/{year}.pdf".format(
-        base_dir=settings.BASE_DIR,
+    path = '{media_dir}/ordomatic/{year}.pdf'.format(
         media_dir=settings.MEDIA_ROOT,
         year=year,
     )
-    os.system(command)
+    if not os.path.exists(path):
+        write_pdf(year)
+        command = "cd {base_dir}/apps/ordomatic/tex; lualatex --shell-escape ordo.tex; cp ordo.pdf {path}".format(
+            base_dir=settings.BASE_DIR,
+            path=path,
+        )
+        os.system(command)
 
     return (
         JsonResponse(
