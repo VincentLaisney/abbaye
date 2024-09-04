@@ -30,8 +30,7 @@
             <div class="col-4">
                 <h3>Absences</h3>
                     <a href={% url 'absences:list' %}>ABSENCES</a><p>Avis d'absence <span class="fas fa-plane-departure blue"></span>… ou de présence <span class="fas fa-plane-arrival blue"></span>.</p>
-                    <!-- TODO -->
-                    <a href="http://services.asj.com/courses">COURSES</a><p>Calendrier des courses (P. Ignace).</p>
+                    <a href={% url 'courses:home' %}>COURSES</a><p>Calendrier des courses (P. Ignace).</p>
 
                 <h3>Sites de gestion d'obédiences</h3>
                     <a href={% url 'hotellerie:main_home' %}>HÔTELLERIE (P. Martin)<span class="red-full">*</span></a><p></p>
