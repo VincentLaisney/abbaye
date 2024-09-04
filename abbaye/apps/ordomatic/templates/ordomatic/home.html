@@ -5,7 +5,8 @@
 {% block css %}
     <link rel="stylesheet/less" href={% static "ordomatic/css/ordomatic.less" %}>
 
-    <style>@font-face{font-family: "FlavGaramond"; src: url("{% static 'main/fonts/FlavGaramondRegular.ttf' %}")}</style>
+    <!-- TODO: FlavGaramond not loaded in browser. -->
+    <style>@font-face{font-family: "FlavGaramond"; src: url("{% static 'main/fonts/FlavGaramond-Regular.ttf' %}")}</style>
     <style>@font-face{font-family: "GregPlantin"; src: url("{% static 'main/fonts/GregPlantin-Regular.ttf' %}")}</style>
 {% endblock css %}
 
@@ -15,13 +16,30 @@
 
 {% block content %}
     <div class="d-flex justify-content-between">
+        <!-- Button "Select year"-->
         <div class="col-4"></div>
         <div class="col-4">
             <input id="select_year" type="number" class="col-2 form-control form-control-sm">
         </div>
+
+        <!-- Button "View PDF"-->
         <div class="col-4 text-end w-100"><span id="pdf" class="btn btn-primary">Voir le PDF</span></div>
     </div>
 
+    <!-- Screen "Wait please…" -->
+    <div id="overlay_wait">
+        <img src={% static 'main/img/wait.gif' %} class="mx-auto mb-5" style="height: 30px; width:30px;">
+        <p>Votre Ordo est en cours de préparation…</p>
+        <p>Veuillez patienter quelques instants…</p>
+    </div>
+
+    <!-- Screen "Ready!" -->
+    <div id="overlay_ready">
+        <p>Votre Ordo est prêt !</p>
+        <div id="display_pdf" class="btn btn-outline-secondary text-light">Afficher</div>
+    </div>
+
+    <!-- Zone "Ordo preview" (pure JS) -->
     <div id="ordo" class="d-flex flex-column align-items-center"></div>
 {% endblock content %}
 

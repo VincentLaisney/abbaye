@@ -13,5 +13,6 @@ function replace() {
   $('#pascha').html(date_pascha.getDate() + ' ' + month_pascha);
 
   // Explicit annus liturgicus (=> <pa_34_6>)
+  // TODO: If pa_34_6 == "Saint André": nothing happens.
   $('#explicit').html(year);
 }
