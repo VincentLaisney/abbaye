@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 from datetime import date
 
+from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render
 
@@ -24,6 +25,13 @@ def pdf(request, *args, **kwargs):
     """ Create the PDF of the ordo. """
     year = kwargs['year']
     write_pdf(year)
+    command = "cd {base_dir}/apps/ordomatic/tex; lualatex --shell-escape ordo.tex; cp ordo.pdf {media_dir}/ordomatic/{year}.pdf".format(
+        base_dir=settings.BASE_DIR,
+        media_dir=settings.MEDIA_ROOT,
+        year=year,
+    )
+    os.system(command)
+
     return (
         JsonResponse(
             {
