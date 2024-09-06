@@ -17,32 +17,45 @@
     <h2 class="red-dark">Livret pour les retraitants</h2>
 
     <div class="d-flex flex-column align-items-center">
-        <!-- Options -->
-        <table id="options">
-            <tr>
-                <!-- Date de départ -->
-                <td class="align-middle">
-                    <h5 class="blue fw-bold m-0">Date de départ : </h5>
-                </td>
-                <td class="align-middle">
-                    <input id="start" class="form-control" type="text" style="width: 120px;">
-                </td>
-            </tr>
+        <div id="options">
+            <div>
+                <!-- Mode -->
+                <div class="form-check-inline mx-2">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="mode_mg" checked>
+                    <label class="form-check-label" for="mode_mg">Missel grégorien</label>
+                </div>
+                <div class="form-check-inline mx-2">
+                    <input class="form-check-input" type="radio" name="flexRadioDefault" id="mode_full">
+                    <label class="form-check-label" for="mode_full">Livret complet</label>
+                </div>
+            </div>
 
-            <tr>
-                <!-- Nombre de jours -->
-                <td class="align-middle">
-                    <h5 class="blue fw-bold m-0">Nombre de jours :</h5>
-                </td>
-                <td class="align-middle">
-                    <select name="number_of_days" id="number_of_days" style="width: 120px;">
-                        {% for i in number_of_days %}
-                            <option value={{ i }} {% if i == 5 %}selected{% endif %}>{{ i }}</option>
-                        {% endfor %}
-                    </select>
-                </td>
-            </tr>
-        </table>
+            <table class="table table-borderless">
+                <tr>
+                    <!-- Date de départ -->
+                    <td class="align-middle">
+                        <p class="blue fw-bold m-0">Date de départ : </p>
+                    </td>
+                    <td class="align-middle">
+                        <input id="start" class="form-control" type="text" style="width: 120px;">
+                    </td>
+                </tr>
+    
+                <tr>
+                    <!-- Nombre de jours -->
+                    <td class="align-middle">
+                        <p class="blue fw-bold m-0">Nombre de jours :</p>
+                    </td>
+                    <td class="align-middle">
+                        <select name="number_of_days" id="number_of_days" style="width: 120px;">
+                            {% for i in number_of_days %}
+                                <option value={{ i }} {% if i == 5 %}selected{% endif %}>{{ i }}</option>
+                            {% endfor %}
+                        </select>
+                    </td>
+                </tr>
+            </table>
+        </div>
 
         <!-- Lignes Graduel -->
         <table id="graduel" class="table table-borderless">
