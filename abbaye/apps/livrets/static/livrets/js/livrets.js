@@ -1,6 +1,16 @@
 $(document).ready(function () {
   url = new URL(window.location);
 
+  // On change "mode":
+  $('#mode_mg').click(function () {
+    $('#number_of_days').removeAttr('disabled');
+  });
+  $('#mode_full').click(function () {
+    $('#number_of_days').attr('disabled', 'true');
+    $('#number_of_days').val('1');
+    refresh();
+  });
+
   // Lier le datepicker à l'input date :
   $(function () {
     var values = {
