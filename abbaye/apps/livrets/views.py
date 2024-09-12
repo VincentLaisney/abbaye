@@ -70,19 +70,19 @@ def pdf(request):
     start = datetime.date(int(start[2]), int(start[1]), int(start[0]))
     number_of_days = int(request_get['number_of_days'])
 
-    tex = ''
-    tex = '\\input{config.tex}\n\n'
-    tex += '\\begin{document}\n\n'
-    tex += '\\setlength{\\columnseprule}{0.5pt}\n'
-    tex += '\\colseprulecolor{rougeliturgique}\n\n'
-    tex += '\\thispagestyle{empty}\n\n'
-    tex += '\\begin{center}\n'
-    tex += '+\\par\n'
-    tex += 'PAX\\par\n'
-    tex += '\\vspace{.5cm}\n'
-    tex += '\\TitreB{Abbaye Saint-Joseph de Clairval}\n'
-    tex += '\\end{center}\n\n'
-    tex += '\\TitreA{Messe conventuelle}\n'
+    tex = ""
+    tex = "\\input{config.tex}\n\n"
+    tex += "\\begin{document}\n\n"
+    tex += "\\setlength{\\columnseprule}{0.5pt}\n"
+    tex += "\\colseprulecolor{rougeliturgique}\n\n"
+    tex += "\\thispagestyle{empty}\n\n"
+    tex += "\\begin{center}\n"
+    tex += "+\\par\n"
+    tex += "PAX\\par\n"
+    tex += "\\vspace{.5cm}\n"
+    tex += "\\TitreB{Abbaye Saint-Joseph de Clairval}\n"
+    tex += "\\end{center}\n\n"
+    tex += "\\TitreA{Messe conventuelle}\n"
     for i in range(number_of_days):
         date = start + datetime.timedelta(days=i)
         year_cycle = ['A', 'B', 'C'][(date.year - 2020) % 3]
@@ -134,13 +134,13 @@ def pdf(request):
                 ref=grid_in
             ).first()
             if introit:
-                tex += '\\TitreB{{Antienne d\'Introït~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                tex += "\\TitreB{{Antienne d\'Introït~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
                     introit.name,
                     introit.page,
                 )
             else:
-                tex += '\\TitreB{Antienne d\'Introït~:}\\par\\par\n'
-                tex += '\\PartocheWithTraduction{{GR/introit/{}}}\\par\n'.format(
+                tex += "\\TitreB{Antienne d\'Introït~:}\\par\\par\n"
+                tex += "\\PartocheWithTraduction{{GR/introit/{}}}\\par\n".format(
                     grid_in,
                 )
 
@@ -213,7 +213,7 @@ def pdf(request):
             )
 
         # First reading:
-        tex += '\\Lecture{{Première lecture}}{{{}'.format(
+        tex += "\\Lecture{{Première lecture}}{{{}".format(
             data['readings'],
         )
         if data['readings_cycle'] == 6:
@@ -241,13 +241,13 @@ def pdf(request):
                 ref=grid_gr
             ).first()
             if graduel:
-                tex += '\\TitreB{{Graduel~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                tex += "\\TitreB{{Graduel~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
                     graduel.name,
                     graduel.page,
                 )
             else:
-                tex += '\\TitreB{Graduel~:}\\par\n'
-                tex += '\\PartocheWithTraduction{{GR/graduel/{}}}\\par\n'.format(
+                tex += "\\TitreB{Graduel~:}\\par\n"
+                tex += "\\PartocheWithTraduction{{GR/graduel/{}}}\\par\n".format(
                     grid_gr,
                 )
 
@@ -256,7 +256,7 @@ def pdf(request):
         if grid_al:
             if grid_gr:
                 # Second reading:
-                tex += '\\Lecture{{Deuxième lecture}}{{{}'.format(
+                tex += "\\Lecture{{Deuxième lecture}}{{{}".format(
                     data['readings'],
                 )
                 if data['readings_cycle'] == 6:
@@ -282,25 +282,25 @@ def pdf(request):
                 ref=grid_al
             ).first()
             if alleluia:
-                tex += '\\TitreB{{Alléluia~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                tex += "\\TitreB{{Alléluia~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
                     alleluia.name,
                     alleluia.page,
                 )
             else:
-                tex += '\\TitreB{Alléluia~:}\\par\n'
-                tex += '\\PartocheWithTraduction{{GR/alleluia/{}}}\n'.format(
+                tex += "\\TitreB{Alléluia~:}\\par\n"
+                tex += "\\PartocheWithTraduction{{GR/alleluia/{}}}\n".format(
                     grid_al,
                 )
 
         # Sequence:
         if data['sequence']:
-            tex += '\\TitreB{Séquence~:}\\par\n'
-            tex += '\\PartocheWithTraduction{{GR/sequences/{}}}\n'.format(
+            tex += "\\TitreB{Séquence~:}\\par\n"
+            tex += "\\PartocheWithTraduction{{GR/sequences/{}}}\n".format(
                 data['sequence']
             )
 
         # Gospel:
-        tex += '\\Lecture{{Évangile}}{{{}'.format(
+        tex += "\\Lecture{{Évangile}}{{{}".format(
             data['readings'],
         )
         if data['readings'].startswith('pa_') and not data['readings'].endswith('_0'):
@@ -343,13 +343,13 @@ def pdf(request):
                 ref=grid_of
             ).first()
             if offertoire:
-                tex += '\\TitreB{{Antienne d\'offertoire~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                tex += "\\TitreB{{Antienne d\'offertoire~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
                     offertoire.name,
                     offertoire.page,
                 )
             else:
-                tex += '\\TitreB{Antienne d\'offertoire~:}\\par\\par\n'
-                tex += '\\PartocheWithTraduction{{GR/offertoire/{}}}\\par\n'.format(
+                tex += "\\TitreB{Antienne d\'offertoire~:}\\par\\par\n"
+                tex += "\\PartocheWithTraduction{{GR/offertoire/{}}}\\par\n".format(
                     grid_of,
                 )
 
@@ -428,13 +428,13 @@ def pdf(request):
                 ref=grid_co
             ).first()
             if communion:
-                tex += '\\TitreB{{Antienne de Communion~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n'.format(
+                tex += "\\TitreB{{Antienne de Communion~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
                     communion.name,
                     communion.page,
                 )
             else:
-                tex += '\\TitreB{Antienne de Communion~:}\\par\\par\n'
-                tex += '\\PartocheWithTraduction{{GR/communion/{}}}\\par\n'.format(
+                tex += "\\TitreB{Antienne de Communion~:}\\par\\par\n"
+                tex += "\\PartocheWithTraduction{{GR/communion/{}}}\\par\n".format(
                     grid_co,
                 )
 
@@ -481,7 +481,7 @@ def pdf(request):
     tex += "\\textbf{Acte de Reconnaissance et d’Amour.} – Très doux Jésus, Dieu d’infinie bonté, je vous remercie de tout mon cœur, pour la grâce insigne que vous venez de me faire. Que vous rendrai-je pour un tel bienfait~? Je voudrais vous aimer, autant que vous êtes aimable, et vous servir, autant que vous méritez de l’être. Ô Dieu, qui êtes tout amour, apprenez-moi à vous aimer, d’une affection véritable et fidèle, et enseignez-moi à faire votre sainte volonté. Je m’offre tout entier à vous: mon corps, afin qu’il soit chaste; mon âme, afin qu’elle soit pure de tout péché; mon cœur, afin qu’il ne cesse de vous aimer. Vous vous êtes donné à moi, je me donne à vous pour toujours.\n"
     tex += "\\textbf{Acte de Demande.} – Vous êtes en moi, ô Jésus, vous qui avez dit: «~Demandez et vous recevrez~». Vous y êtes, rempli de bonté pour moi, les mains pleines de grâces~; daignez les répandre sur mon âme, qui en a tant besoin. Ôtez de mon cœur tout ce qui vous déplaît, mettez-y tout ce qui peut le rendre agréable à vos yeux. Appliquez-moi les mérites de votre vie et de votre mort, unissez-moi à vous, vivez en moi, faites que je vive par vous et pour vous. Accordez aussi, Dieu infiniment bon, les mêmes grâces à toutes les personnes pour lesquelles j’ai le devoir de prier, ou à qui j’ai promis particulièrement de le faire. – Cœur miséricordieux de Jésus, ayez pitié des pauvres âmes du purgatoire, et donnez-leur le repos éternel.\n"
 
-    tex += '\n\\end{document}\n\n'
+    tex += "\n\\end{document}\n\n"
 
     with open(os.path.join(Path(__file__).resolve().parent, 'tex/livret.tex'), 'w') as tex_file:
         tex_file.write(tex)
