@@ -66,9 +66,20 @@ def score(request):
 def pdf(request):
     """ Create the PDF of the booklet. """
     request_get = request.GET
+    mode = request_get['mode']
     start = request_get['start'].split('/')
     start = datetime.date(int(start[2]), int(start[1]), int(start[0]))
     number_of_days = int(request_get['number_of_days'])
+
+    tierce_psaumes = {
+        '2': '0',
+        '4': '1',
+        '6': '2',
+        '9': '3',
+        '12': '4',
+        '15': '5',
+        '17': '6',
+    }
 
     tex = ""
     tex = "\\input{config.tex}\n\n"
@@ -133,7 +144,7 @@ def pdf(request):
             ).filter(
                 ref=grid_in
             ).first()
-            if introit:
+            if introit and mode == 'mg':
                 tex += "\\TitreB{{Antienne d\'Introït~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
                     introit.name,
                     introit.page,
@@ -145,10 +156,16 @@ def pdf(request):
                 )
 
         # Ouverture:
-        tex += "\\TitreB{Ouverture de la célébration~:}\\Normal{p. 7.}\\par\n"
+        if mode == 'mg':
+            tex += "\\TitreB{Ouverture de la célébration~:}\\Normal{p. 7.}\\par\n"
+        else:
+            tex += "\\TitreB{{Ouverture de la célébration~:}}\\input{{{}livrets/data/ordinaire/ouverture.tex}}\n".format(
+                settings.STATIC_ROOT,
+            )
 
         # Asperges me:
         if date.weekday() == 6:
+            # TODO: if mode 'full'…
             if re.search('^tp_', data['ref']):
                 tex += "\\TitreB{Vidi aquam}\\Normal{(p. 71).}\\par\n"
             elif re.search('^adv_', data['ref']) or re.search('^qua_', data['ref']):
@@ -171,10 +188,16 @@ def pdf(request):
                 'alleluia_dim_per_annum',
             ][date.weekday()]
         tierce_page = ['4', '6', '9', '12', '15', '17', '2'][date.weekday()]
-        tex += "\\TierceMG{{{}}}{{{}}}\\par\n".format(
-            tierce_antiphon,
-            tierce_page,
-        )
+        if mode == 'mg':
+            tex += "\\TierceMG{{{}}}{{{}}}\\par\n".format(
+                tierce_antiphon,
+                tierce_page,
+            )
+        else:
+            tex += "\\TierceComplet{{{tierce_antiphon}}}{{{tierce_psaumes}}}\n".format(
+                tierce_antiphon=tierce_antiphon,
+                tierce_psaumes=tierce_psaumes[tierce_page],
+            )
 
         # Kyrie:
         grid_ky = request_get['ky_' + str(i + 1)]
@@ -184,10 +207,19 @@ def pdf(request):
             ).filter(
                 ref=grid_ky
             ).first()
-            tex += '\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n'.format(
-                kyrie.name,
-                kyrie.page,
-            )
+            if kyrie:
+                if mode == 'mg':
+                    tex += "\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n".format(
+                        kyrie.name,
+                        kyrie.page,
+                    )
+                else:
+                    tex += "\\Partoche{{/GR/kyrie/{}}}\n".format(
+                        grid_ky,
+                    )
+                    tex += "\\Traduction{{2cm}}{{\\input{{{}livrets/data/GR/ordinaire/kyrie.tex}}}}\n".format(
+                        settings.STATIC_ROOT,
+                    )
 
         # Gloria:
         grid_gl = request_get['gl_' + str(i + 1)]
@@ -197,13 +229,22 @@ def pdf(request):
             ).filter(
                 ref=grid_gl
             ).first()
-            tex += '\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n'.format(
-                gloria.name,
-                gloria.page,
-            )
+            if gloria:
+                if mode == 'mg':
+                    tex += "\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n".format(
+                        gloria.name,
+                        gloria.page,
+                    )
+                else:
+                    tex += "\\Partoche{{/GR/gloria/{}}}\n".format(
+                        grid_gl,
+                    )
+                    tex += "\\Traduction{{2cm}}{{\\input{{{}livrets/data/GR/ordinaire/gloria.tex}}}}\n".format(
+                        settings.STATIC_ROOT,
+                    )
 
         # Prayer Collecte:
-        if data['prayers_mg']:
+        if data['prayers_mg'] and mode == 'mg':
             tex += "\\TitreB{{Oraison~:}}\\Normal{{p. {}.}}\\par\n".format(
                 data['prayers_mg'].split('/')[0]
             )
@@ -240,7 +281,7 @@ def pdf(request):
             ).filter(
                 ref=grid_gr
             ).first()
-            if graduel:
+            if graduel and mode == 'mg':
                 tex += "\\TitreB{{Graduel~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
                     graduel.name,
                     graduel.page,
@@ -281,7 +322,7 @@ def pdf(request):
             ).filter(
                 ref=grid_al
             ).first()
-            if alleluia:
+            if alleluia and mode == 'mg':
                 tex += "\\TitreB{{Alléluia~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
                     alleluia.name,
                     alleluia.page,
@@ -294,6 +335,7 @@ def pdf(request):
 
         # Sequence:
         if data['sequence']:
+            # TODO: if mode 'full'…
             tex += "\\TitreB{Séquence~:}\\par\n"
             tex += "\\PartocheWithTraduction{{GR/sequences/{}}}\n".format(
                 data['sequence']
@@ -329,10 +371,19 @@ def pdf(request):
             ).filter(
                 ref=grid_cr
             ).first()
-            tex += '\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n'.format(
-                credo.name,
-                credo.page,
-            )
+            if credo:
+                if mode == 'mg':
+                    tex += "\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n".format(
+                        credo.name,
+                        credo.page,
+                    )
+                else:
+                    tex += "\\Partoche{{/GR/credo/{}}}\n".format(
+                        grid_gl,
+                    )
+                    tex += "\\Traduction{{2cm}}{{\\input{{{}livrets/data/GR/ordinaire/credo.tex}}}}\n".format(
+                        settings.STATIC_ROOT,
+                    )
 
         # Offertoire:
         grid_of = request_get['of_' + str(i + 1)]
@@ -342,7 +393,7 @@ def pdf(request):
             ).filter(
                 ref=grid_of
             ).first()
-            if offertoire:
+            if offertoire and mode == 'mg':
                 tex += "\\TitreB{{Antienne d\'offertoire~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
                     offertoire.name,
                     offertoire.page,
@@ -352,6 +403,14 @@ def pdf(request):
                 tex += "\\PartocheWithTraduction{{GR/offertoire/{}}}\\par\n".format(
                     grid_of,
                 )
+
+        # Orate fratres :
+        if (mode == "Livret complet"):
+            tex += "\\TitreB{Offertoire~:}\n\n"
+            tex += "\\Rubrique{Après l'encensement de l'autel (et des fidèles s'il y a lieu), le célébrant s'adresse aux fidèles en ces termes~:}\n"
+            tex += "\\input{{{}livrets/data/ordinaire/offertoire.tex}}}}\n".format(
+                settings.STATIC_ROOT,
+            )
 
         # Prayer Super oblata:
         if data['prayers_mg']:
@@ -370,7 +429,7 @@ def pdf(request):
             )
         else:
             preface = Preface.objects.get(pk=data['preface_id'])
-            if preface.page:
+            if preface.page and mode == 'mg':
                 tex += "\\TitreB{{{}~:}}\\Normal{{p. {}.}}\\par\n".format(
                     preface.name,
                     preface.page,
@@ -397,14 +456,32 @@ def pdf(request):
             ).filter(
                 ref=grid_sa
             ).first()
-            tex += '\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n'.format(
-                sanctus.name,
-                sanctus.page,
-            )
+            if sanctus:
+                if mode == 'mg':
+                    tex += "\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n".format(
+                        sanctus.name,
+                        sanctus.page,
+                    )
+                else:
+                    tex += "\\Partoche{{/GR/sanctus/{}}}\n".format(
+                        grid_gl,
+                    )
+                    tex += "\\Traduction{{2cm}}{{\\input{{{}livrets/data/GR/ordinaire/sanctus.tex}}}}\n".format(
+                        settings.STATIC_ROOT,
+                    )
 
         # Canon:
-        tex += "\\TitreB{Prière eucharistique n. 1}\\Normal{(p. 22).}\\par\n"
-        tex += "\\TitreB{Rites de communion~:}\\Normal{p. 41.}\\par\n"
+        if mode == 'mg':
+            tex += "\\TitreB{Prière eucharistique n. 1}\\Normal{(p. 22).}\\par\n"
+            tex += "\\TitreB{Rites de communion~:}\\Normal{p. 41.}\\par\n"
+        else:
+            tex += "\\Image{canon}{8cm}{3cm}\n"
+            tex += "\\TitreA{{Prière eucharistique n. 1}}\n\\input{{{}livrets/data/ordinaire/canon.tex}}\n".format(
+                settings.STATIC_ROOT,
+            )
+            tex += "\\TitreB{{Rites de communion~:}}\\input{{{}livrets/data/ordinaire/pater.tex}}\n".format(
+                settings.STATIC_ROOT,
+            )
 
         # Agnus:
         grid_sa = request_get['sa_' + str(i + 1)]
@@ -414,10 +491,19 @@ def pdf(request):
             ).filter(
                 ref=grid_sa
             ).first()
-            tex += '\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n'.format(
-                agnus.name,
-                agnus.page,
-            )
+            if agnus:
+                if mode == 'mg':
+                    tex += "\\TitreB{{{}}}\\Normal{{(p. {}).}}\\par\n".format(
+                        agnus.name,
+                        agnus.page,
+                    )
+                else:
+                    tex += "\\Partoche{{/GR/agnus/{}}}\n".format(
+                        grid_gl,
+                    )
+                    tex += "\\Traduction{{2cm}}{{\\input{{{}livrets/data/GR/ordinaire/agnus.tex}}}}\n".format(
+                        settings.STATIC_ROOT,
+                    )
 
         # Communion:
         grid_co = request_get['co_' + str(i + 1)]
@@ -427,7 +513,7 @@ def pdf(request):
             ).filter(
                 ref=grid_co
             ).first()
-            if communion:
+            if communion and mode == 'mg':
                 tex += "\\TitreB{{Antienne de Communion~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
                     communion.name,
                     communion.page,
@@ -449,7 +535,12 @@ def pdf(request):
             )
 
         # Conclusion:
-        tex += "\\TitreB{Conclusion~:}{\\Normal{p. 47.}}\\par\n"
+        if mode == 'mg':
+            tex += "\\TitreB{Conclusion~:}{\\Normal{p. 47.}}\\par\n"
+        else:
+            tex += "\\TitreB{{Conclusion~:}}\\input{{{}livrets/data/ordinaire/conclusion.tex}}\n".format(
+                settings.STATIC_ROOT,
+            )
 
     tex += "\n\\vspace{3cm}\n"
     tex += "\\begin{center}\n"
