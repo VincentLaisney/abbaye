@@ -292,7 +292,7 @@ def pdf(request):
                     grid_gr,
                 )
 
-        # Second reading (if gr) and alleluia:
+        # Second reading (if both gr and al) and alleluia:
         grid_al = request_get['al_' + str(i + 1)]
         if grid_al:
             if grid_gr:
@@ -533,6 +533,8 @@ def pdf(request):
             tex += "\\Oraison{{Prière après la Communion}}{{3}}{{{}}}\\par\n".format(
                 data['ref'],
             )
+
+        # TODO: Super populum (Carême).
 
         # Conclusion:
         if mode == 'mg':
