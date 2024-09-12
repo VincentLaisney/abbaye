@@ -27,7 +27,7 @@ def home(request):
 
 
 def score(request):
-    """ Check that score exists and where. """
+    """ Check whether score exists and where. """
     request_get = request.GET
     TYPES = {
         'IN': 'introit',
@@ -36,20 +36,25 @@ def score(request):
         'OF': 'offertoire',
         'CO': 'communion',
     }
-    path = '{}/apps/livrets/static/livrets/data/GR/{}/{}.gabc'.format(
-        settings.BASE_DIR,
+    path = '{}livrets/data/GR/{}/{}.gabc'.format(
+        settings.STATIC_ROOT,
         TYPES[request_get['type']],
         request_get['score'],
     )
     if Score.objects.filter(type=request_get['type'], ref=request_get['score']):
-        color = 'blue'
-        title = "Cette partition se trouve dans le Missel grégorien."
+        if os.path.isfile(path):
+            color = 'purple'
+            title = "Cette partition se trouve dans le Missel grégorien ET comme fichier Gregorio."
+        else:
+            color = 'blue'
+            title = "Cette partition se trouve dans le Missel grégorien."
+
     elif os.path.isfile(path):
         color = 'green'
-        title = "Cette partition ne se trouve pas dans le Missel grégorien mais existe au format Gregorio."
+        title = "Cette partition ne se trouve pas dans le Missel grégorien mais existe comme fichier Gregorio."
     else:
         color = 'red'
-        title = "Cette partition ne se trouve ni dans le Missel grégorien ni au format Gregorio."
+        title = "Cette partition ne se trouve ni dans le Missel grégorien ni comme fichier Gregorio."
     return JsonResponse(
         {
             'color': color,
