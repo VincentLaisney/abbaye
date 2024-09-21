@@ -1,3 +1,4 @@
+// TODO: Delete this file when everything is moved to views.py:pdf().
 // Fonctions écrivant le contenu du fichier tex à partir du retour de request.php.
 
 function write_latex(data) {
