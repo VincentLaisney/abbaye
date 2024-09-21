@@ -74,6 +74,7 @@ $(document).ready(function () {
       'justify-content': 'center',
     });
     const data = {
+      'mode': $('#mode input[type=radio]:checked').attr('id'),
       'start': $('#start').val(),
       'number_of_days': $('#number_of_days').val(),
     };
