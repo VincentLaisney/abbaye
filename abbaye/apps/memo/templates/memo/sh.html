@@ -14,17 +14,51 @@
     <div class="w-75">
         <h4>RENOMMER DES FICHIERS</h4>
             <div class="group">
-                <p class="descr">Le script suivant change tous les fichiers php en fichiers html dans le dossier mon_dossier.</p>
+                <p class="descr">Le script suivant change tous les fichiers php en fichiers html dans le dossier mon_dossier :</p>
                 <pre class="terminal">
     #!/bin/bash
     cd '/chemin/vers/mon_dossier'
     find . -type f -name '*.php' | sort | while read
     do
-    f=`echo "$REPLY"`
-    fn=`echo "$REPLY" | sed 's/php/html/g'`
-    #echo "$fn"
-    mv "$f" "$fn"
+        f=`echo "$REPLY"`
+        fn=`echo "$REPLY" | sed 's/php/html/g'`
+        #echo "$fn"
+        mv "$f" "$fn"
     done</pre>
+            </div>
+
+            <div class="group">
+                <p class="descr">Plus simple :</p>
+                <pre class="terminal">
+    # Rename all *.txt to *.text
+    for file in *.txt; do
+        mv -- "$file" "${file%.txt}.text"
+    done</pre>
+            </div>
+
+            <div class="group">
+                <p class="descr">Ou encore :</p>
+                <pre class="terminal">
+    for file in *.txt; do
+        mv -- "$file" "$(basename -- "$file" .txt).text"
+    done</pre>
+            </div>
+
+            <div class="group">
+                <p class="descr">Voir aussi l'utilitaire <span class="font-monospace">rename</span>:</p>
+                <pre class="terminal">
+Given the files foo1, ..., foo9, foo10, ..., foo278, the commands
+rename foo foo00 foo?
+rename foo foo0 foo??
+will turn them into foo001, ..., foo009, foo010, ..., foo278.
+
+And
+rename .htm .html *.htm
+will fix the extension of your html files.
+
+Provide an empty string for shortening:
+rename '_with_long_name' '' file_with_long_name.*
+will remove the substring in the filenames.</pre>
             </div>
 
         <h4>TEST SUR UNE LISTE</h4>
