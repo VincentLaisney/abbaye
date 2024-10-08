@@ -415,7 +415,7 @@ def pdf(request):
         # Prayer Super oblata:
         if data['prayers_mg']:
             tex += "\\TitreB{{Prière sur les offrandes~:}}\\Normal{{p. {}.}}\\par\n".format(
-                data['prayers_mg'].split('/')[0],
+                data['prayers_mg'].split('/')[1],
             )
         else:
             tex += "\\Oraison{{Prière sur les offrandes}}{{2}}{{{}}}\\par\n".format(
@@ -527,7 +527,7 @@ def pdf(request):
         # Prayer Postcommunion:
         if data['prayers_mg']:
             tex += "\\TitreB{{Prière après la Communion~:}}\\Normal{{p. {}.}}\\par\n".format(
-                data['prayers_mg'].split('/')[0],
+                data['prayers_mg'].split('/')[2],
             )
         else:
             tex += "\\Oraison{{Prière après la Communion}}{{3}}{{{}}}\\par\n".format(
