@@ -196,6 +196,152 @@
         root@debian:~# vim .bash_history 
         root@debian:~# 
 
+- Installation Debian 12:
+Pour Django avec MySQL, mettre à jour la commande :
+apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config
+
+Au lieu de pip3 install virtualenv:
+apt-get install python3-virtualenv 
+virtualenv -p python3.11 abbaye
+
+Mysql:
+wget https://dev.mysql.com/get/mysql-apt-config_0.8.30-1_all.deb
+dpkg -i mysql-apt-config_0.8.30-1_all.deb 
+apt update
+apt install mysql-server
+Pour pouvoir installer libssl:
+wget http://snapshot.debian.org/archive/debian/20190501T215844Z/pool/main/g/glibc/multiarch-support_2.28-10_amd64.deb
+dpkg -i multiarch-support*.deb
+Installer libssl:
+wget https://snapshot.debian.org/archive/debian-archive/20240331T102506Z/debian/pool/main/o/openssl/libssl1.1_1.1.1n-0%2Bdeb10u3_amd64.deb
+dpkg -i libssl1.1_1.1.1n-0+deb10u3_amd64.deb
+apt install mysql-server
+Faire:
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '<my_password>';
+Avant de faire:
+mysql_secure_installation
+Si problème, faire un killall -9 mysql_secure_installation dans un autre Terminal, puis Alter user, puis de nouveau secure_install.
+
+Apache : redirection de "services.asj.com/" vers "http://python.asj.com:8011/abbaye/" :
+<VirtualHost *:80>
+    ServerName services.asj.com
+    Redirect "/" "http://python.asj.com:8011/abbaye/"
+</VirtualHost>
+
+---
+
+MySQL : Mettre à jour le champ "commentaire_listing" de la table abbaye.hotellerie_sejour en récupérant ce même champ dans une ancienne table ("hotellerie.sejours_sejour") et en se basant sur l'ID :
+>>> UPDATE abbaye.hotellerie_sejour AS a INNER JOIN hotellerie.sejours_sejour AS h ON a.id = h.id SET a.commentaire_listing = h.commentaire_listing;
+
+---
+
+Python:
+I have a list of lists like
+
+[
+    [1, 2, 3],
+    [4, 5, 6],
+    [7],
+    [8, 9]
+]
+
+How can I flatten it to get [1, 2, 3, 4, 5, 6, 7, 8, 9]?
+
+Answer:
+flat_list = [
+    x
+    for xs in xss
+    for x in xs
+]
+
+------
+
+HTML:
+Rediriger d'une page html vers une autre:
+Dans le <head>:
+<meta http-equiv="refresh" content="0; url=http://example.com/" />
+
+------
+
+MySQL:
+Jointures:
+
+Assuming you're joining on columns with no duplicates, which is a very common case:
+
+    An inner join of A and B gives the result of A intersect B, i.e. the inner part of a Venn diagram intersection.
+
+    An outer join of A and B gives the results of A union B, i.e. the outer parts of a Venn diagram union.
+
+Examples
+
+Suppose you have two tables, with a single column each, and data as follows:
+
+A    B
+-    -
+1    3
+2    4
+3    5
+4    6
+
+Note that (1,2) are unique to A, (3,4) are common, and (5,6) are unique to B.
+
+Inner join
+
+An inner join using either of the equivalent queries gives the intersection of the two tables, i.e. the two rows they have in common.
+
+select * from a INNER JOIN b on a.a = b.b;
+select a.*, b.*  from a,b where a.a = b.b;
+
+a | b
+--+--
+3 | 3
+4 | 4
+
+Left outer join
+
+A left outer join will give all rows in A, plus any common rows in B.
+
+select * from a LEFT OUTER JOIN b on a.a = b.b;
+select a.*, b.*  from a,b where a.a = b.b(+);
+
+a |  b
+--+-----
+1 | null
+2 | null
+3 |    3
+4 |    4
+
+Right outer join
+
+A right outer join will give all rows in B, plus any common rows in A.
+
+select * from a RIGHT OUTER JOIN b on a.a = b.b;
+select a.*, b.*  from a,b where a.a(+) = b.b;
+
+a    |  b
+-----+----
+3    |  3
+4    |  4
+null |  5
+null |  6
+
+Full outer join
+
+A full outer join will give you the union of A and B, i.e. all the rows in A and all the rows in B. If something in A doesn't have a corresponding datum in B, then the B portion is null, and vice versa.
+
+select * from a FULL OUTER JOIN b on a.a = b.b;
+
+ a   |  b
+-----+-----
+   1 | null
+   2 | null
+   3 |    3
+   4 |    4
+null |    6
+null |    5
+
+------
+
 # MOINES:
 - Models: check dates are consistent (birthday < entry < habit etc.).
 - Details: modal.
@@ -343,7 +489,17 @@ Supprimer "In ML: Missa in PAL; præfatio de sanctis."
 
 Office de saints Maur et Placide : prendre répons, hymne et verset du commun de plusieurs confesseurs (5 octobre) sauf hymne de saint Maur
 
-ND du Mont-Carmel (16/07): préface propre CM32?
+Corrections 2024 :
+    • * Évangile Vigile pascale année B : Mc 16, 1-7 (corriger dans l’évangéliaire)
+    • * 17 février (et non pas le 18) : décès du T.R.P. Irénée Henriot
+    • 19 et 21 mars : « année I, saint Joseph les trois premiers psaumes, saint Benoît les trois suivants, et l’inverse l’année II » (dans ce cas, il faudrait appliquer la même logique à toutes les fêtes)
+    • * 25 mars : vérifier Salut pour Annonciation
+    • * 12 septembre : Saint Nom de Marie, préface propre CM 21
+    • * 23 octobre : Notre-Dame de la Sainte-Espérance, préface propre CM 37
+    • Quatre-Temps de septembre (IIIe semaine) :
+        ◦ * c’est le samedi, et non pas le mercredi, qu’il y a une forma Missæ brevior ;
+# FIXME messe du samedi des 4 Temps de septembre (III Septembris) décalée par erreur à la IVe semaine de septembre en 2024.
+    • * Va-t-on se décider à mettre plus souvent la Préface II de la Ste Vierge ?
 
 # POLYGLOTTE:
 - Table de correspondance des versets.
