@@ -13,6 +13,16 @@ class MonkForm(forms.ModelForm):
         label='Nom',
         label_suffix=' :',
     )
+    civil_first_name = forms.CharField(
+        max_length=255,
+        label='Prénom civil',
+        label_suffix=' :',
+    )
+    civil_last_name = forms.CharField(
+        max_length=255,
+        label='Nom civil',
+        label_suffix=' :',
+    )
     # Dates:
     birthday = forms.DateField(
         required=False,

@@ -39,7 +39,8 @@
             {% for monk in monks %}
                 <tr>
                     <td class="col-2 fw-bold">
-                        <a class="button_details" data-bs-toggle='modal' data-bs-target='#monk_details' id="details_{{ monk.pk }}" title="Voir les détails, modifier, supprimer">{{ monk }}</a>
+                        <a class="button_details" data-bs-toggle='modal' data-bs-target='#monk_details' id="details_{{ monk.pk }}" title="Voir les détails, modifier, supprimer">{{ monk }}</a><br>
+                        <small>{{ monk.civil_first_name }} {{ monk.civil_last_name }}</small>
                     </td>
 
                     <td class="col-1">
