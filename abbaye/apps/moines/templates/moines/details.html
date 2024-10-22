@@ -8,7 +8,8 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <h3 class="my-5">{{ monk }}</h3>
+    <h3>{{ monk }}</h3>
+    <h5 class="my-5">{{ monk.civil_first_name }} {{ monk.civil_last_name }}</h5>
 
     <div class="col-5 mb-5">
         <table class="table table-borderless table-sm">
