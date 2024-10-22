@@ -287,7 +287,7 @@ def write_pdf(year):
                 dict_new_day["body"] = dict_new_day_sancto["body"] if "body" in dict_new_day_sancto else ""
                 # Si pas vendredi du TP (férie ou mém. mineure, pour lesquelles il faut garder l'antienne spéciale),
                 # on remplace les IIe Vêpres du tempo par celles du sancto :
-                if not(new_day_date > date_paques and new_day_date < date_paques + datetime.timedelta(days=39) and ("de ea" in dict_new_day["header"] or "minor" in dict_new_day["header"])):
+                if not (new_day_date > date_paques and new_day_date < date_paques + datetime.timedelta(days=39) and ("de ea" in dict_new_day["header"] or "minor" in dict_new_day["header"])):
                     dict_new_day["II_vesp"] = dict_new_day_sancto["II_vesp"] if "II_vesp" in dict_new_day_sancto else ""
 
             # Cas où l'on veut garder le header du tempo et ajouter le body du sancto (mémoires pendant le carême par ex.) :
@@ -386,18 +386,18 @@ def write_pdf(year):
         str(year - 1) + "-" + str(year) + "}}"
 
     # Jubilés :
-    # text_ordo += "\n\n\\newpage"
-    # text_ordo += "\n\n\\thispagestyle{empty}"
-    # text_ordo += "\n\\ApplyParBox{3cm}{}"
-    # text_ordo += "\n\\ApplyGenerTitleHuge{IUBILÆUM}\\vspace{1cm}"
-    # text_ordo += "\n\\ApplyGenerTitleLarge{Hoc anno celebrabunt:}"
-    # text_ordo += "\n\\begin{center}"
-    # text_ordo += "\n\\medskip\n\\fontsize{12}{12}\\selectfont\n\\setlength{\\parskip}{0.1cm}"
-    # text_ordo += "\nDie 8 decembris 2023:\\par"
-    # text_ordo += "\nR.P. Michael Maria \\textsc{Caillaud} (50 Prof.)\\vspace{0.5cm}\\par"
-    # text_ordo += "\nDie 11 novembris 2024:\\par"
-    # text_ordo += "\nR.P. Ioannes Maria \\textsc{Pommarès} (50 Prof.)\\par"
-    # text_ordo += "\n\\end{center}"
+    text_ordo += "\n\n\\newpage"
+    text_ordo += "\n\n\\thispagestyle{empty}"
+    text_ordo += "\n\\ApplyParBox{3cm}{}"
+    text_ordo += "\n\\ApplyGenerTitleHuge{IUBILÆUM}\\vspace{1cm}"
+    text_ordo += "\n\\ApplyGenerTitleLarge{Hoc anno celebrabunt:}"
+    text_ordo += "\n\\begin{center}"
+    text_ordo += "\n\\medskip\n\\fontsize{12}{12}\\selectfont\n\\setlength{\\parskip}{0.1cm}"
+    text_ordo += "\nDie 13 aprilis 2025 :\\par"
+    text_ordo += "\nR.P. Emmanuel Maria \\textsc{Vernet} (50 Prof.)\\vspace{0.5cm}\\par"
+    text_ordo += "\nDie 15 augusti 2025 :\\par"
+    text_ordo += "\nR.P. Thomas Maria \\textsc{Guérard} (50 Prof.)\\par"
+    text_ordo += "\n\\end{center}"
 
     # End of document :
     text_ordo += "\n\n\\end{document}"
