@@ -176,9 +176,12 @@ def pdf(request):
                 tex += "\\TitreB{Asperges me I}\\Normal{(p. 71).}\\par\n"
 
         # Tierce:
-        tierce_antiphon = \
-            data['tierce'] if data['tierce'] \
-            else [
+        if data['tierce']:
+            tierce_antiphon = data['tierce']
+        elif date.day == 2 and date.month == 11:
+            tierce_antiphon = ''
+        else:
+            tierce_antiphon = [
                 'adjuva_me',
                 'clamavi',
                 'servite_domino',
