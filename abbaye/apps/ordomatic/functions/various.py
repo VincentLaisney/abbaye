@@ -78,7 +78,7 @@ mc_bmv[8][4] = "\n\\item Ad Vigilias: lectio sabbato 4.\n\\item In MC: \\textit{
 mc_bmv[8][5] = "\n\\item Ad Vigilias: lectio sabbato 5.\n\\item In MC: \\textit{Beatæ Mariæ Virginis, Imaginis et Matris Ecclesiæ I} (CM 25); præfatio propria."
 mc_bmv[9] = {}
 mc_bmv[9][1] = "\n\\item Ad Vigilias: lectio sabbato 1.\n\\item Ad Benedictus: ø \\textit{Beata es} (AM 1074).\n\\item \\textit{In ML: Immaculati Cordis Beatæ Mariæ Virginis.}\n\\item In MC: \\textit{Immaculati Cordis Beatæ Mariæ Virginis} (CM 28); præfatio propria."
-mc_bmv[9][2] = "\n\\item Ad Vigilias: lectio sabbato 2.\n\\item In MC: \\textit{Beatæ Mariæ Virginis, Mater pulchræ dilectionis} (CM 36); præfatio propria."
+mc_bmv[9][2] = "\n\\item Ad Vigilias: lectio sabbato 2.\n\\item In MC: \\textit{Beatæ Mariæ Virginis, Mater pulchræ dilectionis} (CM 36); præfatio propria."
 mc_bmv[9][3] = "\n\\item Ad Vigilias: lectio sabbato 3.\n\\item In MC: \\textit{Beatæ Mariæ Virginis de Mercede} (CM 43); præfatio propria."
 mc_bmv[9][4] = "\n\\item Ad Vigilias: lectio sabbato 4.\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}\n\\item In MC: \\textit{Beatæ Mariæ Virginis, Causæ nostræ lætitiæ} (CM 34); præfatio propria."
 mc_bmv[9][5] = "\n\\item Ad Vigilias: lectio sabbato 5.\n\\item In MC: \\textit{Beatæ Mariæ Virginis, Fidei præsidii} (CM 35); præfatio propria."
@@ -169,8 +169,8 @@ def f_mc_bmv(date_bmv, paques): # Renvoie le "body" de la messe BMV :
 		# Samedi dans l'octave de Pentecôte:
 		if date_bmv > paques + datetime.timedelta(days = 49) and date_bmv < paques + datetime.timedelta(days = 56):
 			if num_sam == 1:
-				return(mc_bmv[current_month][num_sam].replace("\\textit{In ML: Immaculati Cordis Beatæ Mariæ Virginis.}", "\\textit{In ML (Rub.): Quatuor Temporum Pentecostes (forma Missæ brevior)} (Credo)."))
+				return(mc_bmv[current_month][num_sam].replace("\\textit{In ML: Immaculati Cordis Beatæ Mariæ Virginis.}", "\\textit{In ML (Rub.): Quatuor Temporum Pentecostes (forma Missæ brevior)} (Credo)."))
 			else:
-				return(mc_bmv[current_month][num_sam].replace("\n\\item In MC", "\n\\item \\textit{In ML (Rub.): Quatuor Temporum Pentecostes (forma Missæ brevior)} (Credo).\n\\item In MC"))
+				return(mc_bmv[current_month][num_sam].replace("\n\\item In MC", "\n\\item \\textit{In ML (Rub.): Quatuor Temporum Pentecostes (forma Missæ brevior)} (Credo).\n\\item In MC"))
 		else:
 			return(mc_bmv[current_month][num_sam])
