@@ -2200,23 +2200,25 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     comm_defunts["header"] = text_dim + \
         " - \\textbf{\\textsc{In Commemoratione omnium fidelium defunctorum}} - \\textit{Nigr.}"
     if comm_defunts_date.weekday() == 6:
-        # TODO: Séparer les cas.
         rajout_dimanche = "\n\\item Officium fit de dominica, officio defunctorum omisso. Missæ omnes sunt de Commemoratione omnium fidelium defunctorum."
         rajout_dim_ml = "\n\\item In ML: \\textit{Credo}."
         rajout_dim_mc = " non fit aspersio; psalmodia Tertiæ in directum; non dicitur hymnus angelicus \\textit{Gloria}; "
         credo_mc = " \\emph{Credo};"
+        nocturnes = ""
+        complies = ""
     else:
         rajout_dimanche = ""
         rajout_dim_ml = ""
         rajout_dim_mc = ""
         credo_mc = ""
-    Nocturnes = "psalmi et lectiones sumuntur e I et II Nocturnis." if even_year else "psalmi sumuntur e I et II NocturnisI; lectiones sumuntur e I et II Nocturnis."
-    comm_defunts["body"] = rajout_dimanche + "\n\\item ß \\textit{Gloria Patri} dicitur in fine omnium psalmorum et canticorum. In responsoriis omittitur ß \\textit{Requiem æternam}.\n\\item Ad Vigilias: absolute incipitur ab invitatorio (psalmus 94); " + Nocturnes + " Post II Nocturnum dicitur responsorium.\n\\item \\textit{Hodie, licet omnibus sacerdotibus tres Missas celebrare, ea tamen lege, ut unam tantum libere applicare et pro ea stipem percipere queant: tenentur vero, nulla stipe percepta, alteram in suffragium omnium fidelium defunctorum, tertiam ad mentem Summi Pontificis applicare.}\n\\item \\textit{Ritus in Missis servandus: in prima et secunda Missa, si immediate sacerdos aliam Missam sit celebraturus, sumpto divino Sanguine, purificat calicem cum aqua tantum.}" + \
+        nocturnes = "\n\\item ß \\textit{Gloria Patri} dicitur in fine omnium psalmorum et canticorum. In responsoriis omittitur ß \\textit{Requiem æternam}.\n\\item Ad Vigilias: absolute incipitur ab invitatorio (psalmus 94); psalmi et lectiones sumuntur e I et II Nocturnis." if even_year else "psalmi sumuntur e I et III Nocturnis; lectiones sumuntur e I et II Nocturnis. Post II Nocturnum dicitur responsorium"
+        complies = "\\item Completorium pro defunctis: incipitur a \\textit{Confiteor}, post examen conscientiæ; aspersio de more."
+    comm_defunts["body"] = rajout_dimanche + nocturnes + ".\n\\item \\textit{Hodie, licet omnibus sacerdotibus tres Missas celebrare, ea tamen lege, ut unam tantum libere applicare et pro ea stipem percipere queant: tenentur vero, nulla stipe percepta, alteram in suffragium omnium fidelium defunctorum, tertiam ad mentem Summi Pontificis applicare.}\n\\item \\textit{Ritus in Missis servandus: in prima et secunda Missa, si immediate sacerdos aliam Missam sit celebraturus, sumpto divino Sanguine, purificat calicem cum aqua tantum.}" + \
         rajout_dim_ml + "\n\\item In MC \\textit{(1a Missa)}:" + rajout_dim_mc + \
         " lectiones propriæ: Is \\textbf{25}, 6a-9 / 1 Co \\textbf{15}, 51-54.57; sequentia \\textit{Dies iræ} (Besnier 53) / Io \\textbf{6}, 51-59;" + \
         credo_mc + " præfatio I de defunctis."
     comm_defunts["II_vesp"] = "\\item I Vesperæ dominicæ sequentis." if comm_defunts_date.weekday(
-    ) == 5 else "\\item Completorium pro defunctis: incipitur a \\textit{Confiteor}, post examen conscientiæ; aspersio de more."
+    ) == 5 else complies
     # Si 1er vendredi du mois, reporter le jeûne au lendemain:
     if comm_defunts_date.weekday() == 4:
         dict_tempo[comm_defunts_date]["symbols"] = dict_tempo[comm_defunts_date]["symbols"].replace(
