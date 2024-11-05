@@ -83,17 +83,21 @@ $(document).ready(function () {
       {
         target: 3,
       },
-      // Prix remise :
+      // Feuilles par paquet :
       {
         target: 4,
       },
-      // Prix full :
+      // Prix remise :
       {
         target: 5,
       },
-      // Détails:
+      // Prix full :
       {
         target: 6,
+      },
+      // Détails:
+      {
+        target: 7,
         orderable: false,
         searchable: false,
       },

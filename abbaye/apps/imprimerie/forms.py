@@ -72,8 +72,16 @@ class PaperForm(forms.ModelForm):
     thickness = forms.IntegerField(
         label='Épaisseur (µ) :'
     )
-    price = forms.DecimalField(
-        label='Prix au mille (€) :',
+    sheets_by_pack = forms.IntegerField(
+        label='Feuilles par paquet :',
+        required=False,
+    )
+    price_remise = forms.DecimalField(
+        label='Prix remise (€) :',
+        required=False,
+    )
+    price_full = forms.DecimalField(
+        label='Prix full (€) :',
         required=False,
     )
 
