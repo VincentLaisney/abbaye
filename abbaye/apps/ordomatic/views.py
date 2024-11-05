@@ -64,6 +64,10 @@ def write_pdf(year):
     dict_sancto = dict_sancto_create(
         year, even_year, year_letter, dict_tempo, date_paques, nb_dim_ap_pentec)
 
+    # Entrer ici les dates des MC votives semailles et récoltes :
+    date_semailles = datetime.date(year, 5, 28)
+    date_recoltes = datetime.date(year, 9, 24)
+
     text_ordo = "\\input{config.tex}"
     text_ordo += "\n\\fancyhead[CO]{\\textbf{Cyclus liturgicus " + \
         year_letter + ("/II" if even_year else "/I") + "}}"
@@ -315,8 +319,10 @@ def write_pdf(year):
             dict_new_day["body"] = comment_rogations + dict_new_day["body"]
 
         # Semailles et récoltes : on ajoute le texte après le body éventuellement existant.
-        # dict_new_day["body"] = (dict_new_day["body"] if dict_new_day["body"] != "" else "") + ("\n\\item In MC: Missa \\textit{In conserendis agris} (MR 1127 A - GR 654); præfatio V de dominicis per annum." if new_day_date == date_semailles else "")
-        # dict_new_day["body"] = (dict_new_day["body"] if dict_new_day["body"] != "" else "") + ("\n\\item In MC: Missa \\textit{post collectos fructus terræ} (MR 1129 - GR 654); præfatio V de dominicis per annum." if new_day_date == date_recoltes else "")
+        dict_new_day["body"] = (dict_new_day["body"] if dict_new_day["body"] != "" else "") + (
+            "\n\\item In MC: Missa \\textit{In conserendis agris} (MR 1127 A - GR 654); præfatio V de dominicis per annum." if new_day_date == date_semailles else "")
+        dict_new_day["body"] = (dict_new_day["body"] if dict_new_day["body"] != "" else "") + (
+            "\n\\item In MC: Missa \\textit{post collectos fructus terræ} (MR 1129 - GR 654); præfatio V de dominicis per annum." if new_day_date == date_recoltes else "")
 
         # Lundi de Pentecôte : "Ad mensam" sans mention de Pentecôte si c'est festum et supra :
         if new_day_date == date_paques + datetime.timedelta(days=50):
@@ -394,9 +400,9 @@ def write_pdf(year):
     text_ordo += "\n\\begin{center}"
     text_ordo += "\n\\medskip\n\\fontsize{12}{12}\\selectfont\n\\setlength{\\parskip}{0.1cm}"
     text_ordo += "\nDie 13 aprilis 2025 :\\par"
-    text_ordo += "\nR.P. Emmanuel Maria \\textsc{Vernet} (50 Prof.)\\vspace{0.5cm}\\par"
+    text_ordo += "\nR.~P. Emmanuel Maria \\textsc{Vernet} (50 Prof.)\\vspace{0.5cm}\\par"
     text_ordo += "\nDie 15 augusti 2025 :\\par"
-    text_ordo += "\nR.P. Thomas Maria \\textsc{Guérard} (50 Prof.)\\par"
+    text_ordo += "\nR.~P. Thomas Maria \\textsc{Guérard} (50 Prof.)\\par"
     text_ordo += "\n\\end{center}"
 
     # End of document :
