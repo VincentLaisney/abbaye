@@ -138,26 +138,50 @@
                 {% endif %}
             </div>
 
-            <!-- Prix -->
+            <!-- Prix remise -->
             <div class='form-group d-flex flex-column align-items-start'>
-                {{ form.price.label_tag }}
+                {{ form.price_remise.label_tag }}
                 {% if form.is_bound %}
-                    {% if form.price.errors %}
-                        {% render_field form.price class='is-invalid' %}
-                        {% for error in form.price.errors %}
+                    {% if form.price_remise.errors %}
+                        {% render_field form.price_remise class='is-invalid' %}
+                        {% for error in form.price_remise.errors %}
                             <div class='invalid-feedback d-block'>
                                 {{ error }}
                             </div>
                         {% endfor %}
                     {% else %}
-                        {% render_field form.price class='is-valid' %}
+                        {% render_field form.price_remise class='is-valid' %}
                     {% endif %}
                 {% else %}
-                    {% render_field form.price %}
+                    {% render_field form.price_remise %}
                 {% endif %}
-                {% if form.price.help_text %}
+                {% if form.price_remise.help_text %}
                     <small class='form-text text-muted'>
-                        {{ form.price.help_text }}
+                        {{ form.price_remise.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Prix full -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.price_full.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.price_full.errors %}
+                        {% render_field form.price_full class='is-invalid' %}
+                        {% for error in form.price_full.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.price_full class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.price_full %}
+                {% endif %}
+                {% if form.price_full.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.price_full.help_text }}
                     </small>
                 {% endif %}
             </div>
