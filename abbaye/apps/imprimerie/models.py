@@ -32,6 +32,14 @@ class Client(models.Model):
     name = models.CharField(
         max_length=255,
     )
+    address_home = models.TextField(
+        null=True,
+        blank=True,
+    )
+    address_invoice = models.TextField(
+        null=True,
+        blank=True,
+    )
     notes = models.TextField(
         null=True,
         blank=True,
@@ -60,7 +68,11 @@ class Paper(models.Model):
         max_length=4,
     )
     thickness = models.IntegerField()
-    price = models.DecimalField(
+    price_remise = models.DecimalField(
+        decimal_places=2,
+        max_digits=7,
+    )
+    price_full = models.DecimalField(
         decimal_places=2,
         max_digits=7,
     )
@@ -198,6 +210,10 @@ class Element(models.Model):
         blank=True,
     )
     agrafage = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    various = models.IntegerField(
         null=True,
         blank=True,
     )

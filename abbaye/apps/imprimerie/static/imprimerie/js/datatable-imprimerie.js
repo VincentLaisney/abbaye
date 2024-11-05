@@ -83,13 +83,17 @@ $(document).ready(function () {
       {
         target: 3,
       },
-      // Prix au mille :
+      // Prix remise :
       {
         target: 4,
       },
-      // Détails:
+      // Prix full :
       {
         target: 5,
+      },
+      // Détails:
+      {
+        target: 6,
         orderable: false,
         searchable: false,
       },

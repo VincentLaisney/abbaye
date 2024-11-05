@@ -54,7 +54,7 @@ def pdf(request, *args, **kwargs):
 
 def write_pdf(year):
     """ Write the PDF of the Ordo according to the year. """
-    even_year = True if year % 2 == 0 else False
+    even_year = year % 2 == 0
 
     letters = ["A", "B", "C"]
     year_letter = letters[(year - 2011) % 3]
@@ -63,6 +63,10 @@ def write_pdf(year):
         year, even_year, year_letter)
     dict_sancto = dict_sancto_create(
         year, even_year, year_letter, dict_tempo, date_paques, nb_dim_ap_pentec)
+
+    # Entrer ici les dates des MC votives semailles et récoltes :
+    date_semailles = datetime.date(year, 5, 28)
+    date_recoltes = datetime.date(year, 9, 24)
 
     text_ordo = "\\input{config.tex}"
     text_ordo += "\n\\fancyhead[CO]{\\textbf{Cyclus liturgicus " + \
@@ -140,7 +144,7 @@ def write_pdf(year):
     text_ordo += "\nµ & \\small{Ieiunium regulare cum abstinentia carnium.}\\\\"
     text_ordo += "\nł & \\small{Abstinentia carnium servanda secundum normas Declarationum nostrarum.}\\\\"
     text_ordo += "\nŧ & \\small{Prima dominica in mense: ad Completorium, dicitur antiphona Beatæ Mariæ Virginis in honorem Dominæ Nostræ Ephesini ad intentiones diocesis Smyrnensis (Izmir).}\\\\"
-    text_ordo += "\n£ & \\small{Prima feria VI in mense : fit expositio Sanctissimi Sacramenti, in honorem Sacratissimi Cordis Iesu, a Vigiliis usque ad Completorium.}\\\\"
+    text_ordo += "\n£ & \\small{Prima feria VI in mense: fit expositio Sanctissimi Sacramenti, in honorem Sacratissimi Cordis Iesu, a Vigiliis usque ad Completorium.}\\\\"
     text_ordo += "\n§ & \\small{Primum sabbatum in mense.}\\\\"
     text_ordo += "\n & \\\\"
     text_ordo += "\n\\small{AM} & \\small{Antiphonale monasticum.}\\\\"
@@ -230,9 +234,9 @@ def write_pdf(year):
     text_ordo += "\n\\thispagestyle{empty}"
     text_ordo += "\n\\ApplyGenerTitleLarge{Notanda}"
     text_ordo += "\n\\ApplyGenerSubTitle{In Officio}"
-    text_ordo += "\n\\ApplyGenerList{\n\\item In dominicis et festis, ad Vigilias, lectiones e Breviario 1962 sumptæ sic distribuuntur, nisi aliter notetur :\\par\t- in I Nocturno : lectiones de Scriptura e I Nocturno.\\par\t- in II Nocturno : anno I, lectiones e III Nocturno; anno II : lectiones e II Nocturno.\\par\t Post ultimam lectionem, aliquantulum servatur sacrum silentium; signo dato a Superiore, dicitur hymnus \\textit{Te Deum}, quem sequitur oratio conveniens.\n\\item In memoriis maioribus a dominica prima novembris usque ad Pascha, post tres psalmos primi Nocturni Vigiliarum, leguntur tres lectiones de Scriptura occurrenti (nisi propriæ sint) quibus adiungitur sine mora responsorium sine \\textit{Gloria Patri} ; deinde legitur lectio de sancto, post quam aliquantulum servatur sacrum silentium ; signo dato a Superiore, dicitur responsorium de sancto cum versiculo \\textit{Gloria Patri}.\n\\item In officiis sanctorum, quando sumitur antiphona propria ad Benedictus vel ad Magnificat, dicendum est versiculum e Laudibus vel e II Vesperis de communi sanctorum aut de officio proprio, nisi aliter notetur.}"
+    text_ordo += "\n\\ApplyGenerList{\n\\item Ad Vigilias: in solemnitatibus et festis, psalmi sic distribuuntur: anno I cantantur tres primi psalmi utriusque Nocturni, anno vero II tres novissimi.\\par\n\\item Item ad Vigilias: In dominicis et festis, lectiones e Breviario 1962 sumptæ sic distribuuntur, nisi aliter notetur:\\par\t- in I Nocturno: lectiones de Scriptura e I Nocturno.\\par\t- in II Nocturno: anno I, lectiones e III Nocturno; anno II: lectiones e II Nocturno.\\par\t Post ultimam lectionem, aliquantulum servatur sacrum silentium; signo dato a Superiore, dicitur hymnus \\textit{Te Deum}, quem sequitur oratio conveniens.\n\\item In memoriis maioribus a dominica prima novembris usque ad Pascha, post tres psalmos primi Nocturni Vigiliarum, leguntur tres lectiones de Scriptura occurrenti (nisi propriæ sint) quibus adiungitur sine mora responsorium sine \\textit{Gloria Patri}; deinde legitur lectio de sancto, post quam aliquantulum servatur sacrum silentium; signo dato a Superiore, dicitur responsorium de sancto cum versiculo \\textit{Gloria Patri}.\n\\item In officiis sanctorum, quando sumitur antiphona propria ad Benedictus vel ad Magnificat, dicendum est versiculum e Laudibus vel e II Vesperis de communi sanctorum aut de officio proprio, nisi aliter notetur.}"
     text_ordo += "\n\\ApplyGenerSubTitle{In ML}"
-    text_ordo += "\n\\ApplyGenerList{\n\\item Paramenta celebrantis debent esse coloris convenientis Missæ diei aut alteræ Missæ celebrandæ (cf. \\textit{Rubricæ generales Missalis Romani} n. 117).\n\\item Color paramentorum, in Missis votivis, debet esse cuique Missæ conveniens ; sed in missis votivis lectis IV classis non conventualibus, adhiberi potest etiam color Officii diei, servato tamen colore violaceo et nigro unice pro Missis quibus per se competit (\\textit{Rubricæ generales Missalis Romani} n. 323).\n\\item Missa votiva IV classis est Missa votiva quæ celebrari potest tantum in diebus liturgicis IV classis (\\textit{Rubricæ generales Missalis Romani} n. 387).\n\\item Præfatio de Martyribus dici potest in Missis festivis et votivis Sanctorum Martyrum, nisi aliter notetur.\n\\item Præfatio de Angelis dici potest in missis festivis et votivis Angelorum.\n\\item Missæ defunctorum IV classis sunt Missæ defunctorum «cotidianæ», quæ celebrari possunt, loco Missæ Officio diei respondentis, in feriis IV classis tantum, extra tempus natalicium. Maxime convenit ut hæ Missæ defunctorum IV classis tunc tantum dicantur cum revera pro defunctis, aut in genere aut certo designatis, applicantur (\\textit{Rubricæ generales Missalis Romani} n. 423). In Missis defunctorum «cotidianis» nigro colore utendum est.}"
+    text_ordo += "\n\\ApplyGenerList{\n\\item Paramenta celebrantis debent esse coloris convenientis Missæ diei aut alteræ Missæ celebrandæ (cf. \\textit{Rubricæ generales Missalis Romani} n. 117).\n\\item Color paramentorum, in Missis votivis, debet esse cuique Missæ conveniens; sed in missis votivis lectis IV classis non conventualibus, adhiberi potest etiam color Officii diei, servato tamen colore violaceo et nigro unice pro Missis quibus per se competit (\\textit{Rubricæ generales Missalis Romani} n. 323).\n\\item Missa votiva IV classis est Missa votiva quæ celebrari potest tantum in diebus liturgicis IV classis (\\textit{Rubricæ generales Missalis Romani} n. 387).\n\\item Præfatio de Martyribus dici potest in Missis festivis et votivis Sanctorum Martyrum, nisi aliter notetur.\n\\item Præfatio de Angelis dici potest in missis festivis et votivis Angelorum.\n\\item Missæ defunctorum IV classis sunt Missæ defunctorum «cotidianæ», quæ celebrari possunt, loco Missæ Officio diei respondentis, in feriis IV classis tantum, extra tempus natalicium. Maxime convenit ut hæ Missæ defunctorum IV classis tunc tantum dicantur cum revera pro defunctis, aut in genere aut certo designatis, applicantur (\\textit{Rubricæ generales Missalis Romani} n. 423). In Missis defunctorum «cotidianis» nigro colore utendum est.}"
     text_ordo += "\n\\ApplyGenerSubTitle{In MC}"
     text_ordo += "\n\\ApplyGenerList{\n\\item In feriis cantatur præfatio in tono simplici, sed in memoriis minoribus in tono sollemni.\n\\item Per hebdomadam dicitur semper eadem præfatio, nisi aliter notetur.\\item Singulis diebus, omnes genuflectant ad consecrationem, et ante Communionem quando sacerdos dicit \\textit{Ecce Agnus Dei}. Diebus ieiunii vero, genuflectandum est ab acclamatione \\textit{Sanctus} expleta usque ad finem Precis eucharisticæ.\\item Oratio dominica cantatur in tono B in feriis Adventus et Quadragesimæ atque in Missis defunctorum. In solemnitatibus vero maioribus cantatur in tono C. Reliquis diebus, usurpatur tonus A.}"
     text_ordo += "\n\\thispagestyle{empty}"
@@ -315,13 +319,15 @@ def write_pdf(year):
             dict_new_day["body"] = comment_rogations + dict_new_day["body"]
 
         # Semailles et récoltes : on ajoute le texte après le body éventuellement existant.
-        # dict_new_day["body"] = (dict_new_day["body"] if dict_new_day["body"] != "" else "") + ("\n\\item In MC : Missa \\textit{In conserendis agris} (MR 1127 A - GR 654) ; præfatio V de dominicis per annum." if new_day_date == date_semailles else "")
-        # dict_new_day["body"] = (dict_new_day["body"] if dict_new_day["body"] != "" else "") + ("\n\\item In MC : Missa \\textit{post collectos fructus terræ} (MR 1129 - GR 654) ; præfatio V de dominicis per annum." if new_day_date == date_recoltes else "")
+        dict_new_day["body"] = (dict_new_day["body"] if dict_new_day["body"] != "" else "") + (
+            "\n\\item In MC: Missa \\textit{In conserendis agris} (MR 1127 A - GR 654); præfatio V de dominicis per annum." if new_day_date == date_semailles else "")
+        dict_new_day["body"] = (dict_new_day["body"] if dict_new_day["body"] != "" else "") + (
+            "\n\\item In MC: Missa \\textit{post collectos fructus terræ} (MR 1129 - GR 654); præfatio V de dominicis per annum." if new_day_date == date_recoltes else "")
 
         # Lundi de Pentecôte : "Ad mensam" sans mention de Pentecôte si c'est festum et supra :
         if new_day_date == date_paques + datetime.timedelta(days=50):
             dict_new_day["generalities"] = dict_new_day["generalities"].replace(
-                " cras benedictio de Pentecoste ; a feria III", "") if not "de ea" in dict_new_day["header"] else dict_new_day["generalities"]
+                " cras benedictio de Pentecoste; a feria III", "") if not "de ea" in dict_new_day["header"] else dict_new_day["generalities"]
 
         # IIe Vêpres : peuvent être les Ières Vêpres du jour suivant (auquel cas on opère le changement) :
         if i != nb_days - 1:
@@ -346,7 +352,7 @@ def write_pdf(year):
             elif new_day_date.year == year and new_day_date.month == 11 and new_day_date.day != 1:
                 dict_new_day["body"] = "\n\\item Ad Benedictus: ø \\textit{Cum videritis} (AM 617).\n\\item Ad Magnificat: ø \\textit{Amen dico vobis} (AM 618)."
             elif new_day_date.year == year and new_day_date.month == 12 and new_day_date.day == 1:
-                dict_new_day["body"] = "\n\\item Ad Benedictus: ø \\textit{Cum videritis} (AM 617).\n\\item \\textit{In ML (Alb.) : Missa de sacratissimo Corde Iesu \\emph{(Gloria)}.}\n\\item MC1V\n\\item Ad Magnificat: ø \\textit{Amen dico vobis} (AM 618)."
+                dict_new_day["body"] = "\n\\item Ad Benedictus: ø \\textit{Cum videritis} (AM 617).\n\\item \\textit{In ML (Alb.): Missa de sacratissimo Corde Iesu \\emph{(Gloria)}.}\n\\item MC1V\n\\item Ad Magnificat: ø \\textit{Amen dico vobis} (AM 618)."
 
         # Enfin on ajoute le dictionnaire courant à l'ordo, en le faisant précéder du mois si besoin :
         text_ordo += "\n" + \
@@ -394,16 +400,15 @@ def write_pdf(year):
     text_ordo += "\n\\begin{center}"
     text_ordo += "\n\\medskip\n\\fontsize{12}{12}\\selectfont\n\\setlength{\\parskip}{0.1cm}"
     text_ordo += "\nDie 13 aprilis 2025 :\\par"
-    text_ordo += "\nR.P. Emmanuel Maria \\textsc{Vernet} (50 Prof.)\\vspace{0.5cm}\\par"
+    text_ordo += "\nR.~P. Emmanuel Maria \\textsc{Vernet} (50 Prof.)\\vspace{0.5cm}\\par"
     text_ordo += "\nDie 15 augusti 2025 :\\par"
-    text_ordo += "\nR.P. Thomas Maria \\textsc{Guérard} (50 Prof.)\\par"
+    text_ordo += "\nR.~P. Thomas Maria \\textsc{Guérard} (50 Prof.)\\par"
     text_ordo += "\n\\end{center}"
 
     # End of document :
     text_ordo += "\n\n\\end{document}"
 
     # Espaces avant les signes de ponctuation doubles :
-    text_ordo = re.sub(r'[  ]([:;!?])', r'\1', text_ordo)
     text_ordo = re.sub(r'([;:!?])', r'~\1', text_ordo)
 
     # Remplacement des MC des 1ers vendredis du mois, en alternant d'un vendredi sur l'autres les 2 messes possibles (voir various.py) :
@@ -413,5 +418,5 @@ def write_pdf(year):
         i = 1 if i == 2 else 2  # Pour alterner d'un vendredi sur l'autre.
 
     # Écriture du fichier TeX :
-    with open(os.path.join(Path(__file__).resolve().parent, 'tex/ordo.tex'), 'w') as tex_file:
+    with open(os.path.join(Path(__file__).resolve().parent, 'tex/ordo.tex'), 'w', encoding="utf-8") as tex_file:
         tex_file.write(text_ordo)

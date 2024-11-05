@@ -58,7 +58,7 @@ function refresh(data_paper) {
   }
 
   // Prix du papier :
-  var prix_mille = Number.parseFloat(data_paper['price']);
+  var prix_mille = Number.parseFloat(data_paper['price_full']);
   $('#prix_mille').text(prix_mille.toFixed(2));
   var paper_cut_into = Number.parseInt($('#id_paper_cut_into').val());
   var prix_feuille = prix_mille / 1000 / paper_cut_into;

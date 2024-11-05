@@ -501,5 +501,34 @@ Corrections 2024 :
 # FIXME messe du samedi des 4 Temps de septembre (III Septembris) décalée par erreur à la IVe semaine de septembre en 2024.
     • * Va-t-on se décider à mettre plus souvent la Préface II de la Ste Vierge ?
 
+2025 :
+Horreur! On a remplacé mes jolies espaces insécables par cet affreux gribouillis: ☒ => Pas trouvé.
+Manque une espace p. 106 (2 novembre) « NoctunisI ». Mais, de toute façon, il faudra supprimer ce paragraphe (ut infra). Enfin, ça servira pour les autres années. => Ai remplacé le I par une espace insécable. Par contre je ne comprends pas la ligne de code : « Nocturnes = "psalmi et lectiones sumuntur e I et II Nocturnis." if even_year else "psalmi sumuntur e I et II Nocturnis ; lectiones sumuntur e I et II Nocturnis."». Quelle différence entre années paires et impaires?
+Insérer une rubrique pour la répartition des psaumes des vigiles des fêtes et solennités sur année paire ou impaire (p. 7). => Done.
+Par voie de conséquence:
+    Supprimer la rubrique du jour de Noël « Ad Vigilias : psalmi hebdomadæ I. »
+    Sainte Famille: si Noël tombe un dimanche, mettre les psaumes de l’année opposée: « Ad Vigilias: antiphonæ et psalmi anni I / II. »
+    Idem, psaumes de l’année opposée pour:
+        21 mars, saint Benoît
+        => aussi saint Thomas.
+        23 juillet, sainte Brigitte
+        8 septembre, Nativité de la Sainte Vierge
+        13 novembre, saint Bénigne
+    Vérifier qu’il ne reste plus nulle part la mention « psalmi hebdomadæ ». => OK, sauf pour les 5 occurrences mentionnées.
+
+Remettre « (forma Missæ brevior) » pour le samedi des Quatre-Temps de septembre (p. 98).
+🤫 Un indice pour vous mettre sur la piste: en 2024, si on se retrouvait avec la Messe du samedi des Quatre-Temps en IVᵉ semaine (au lieu de la IIIᵉ), c’est sans doute parce que cette Messe était écrasée par la Saint-Matthieu (samedi 21 septembre).
+Mercredi 28 mai: Messe pour les semailles « In MC: Missa In conserendis agris (MR 1127 A - GR 654); præfatio V de dominicis per annum. »
+Mercredi 24 septembre: Messe pour les récoltes « In MC: Missa post collectos fructus terræ (MR 1129 - GR 654); præfatio V de dominicis per annum. »
+Messes pour les défunts:
+
+    Mardi 4 février: « In MC (Nigr.): Missa defunctorum pro omnibus benefactoribus nostris defunctis (MR 1225); lectiones propriæ: Rom 5, 5-11 / Mt 5, 1-12a; præfatio II de defunctis. »
+    Mercredi 4 juin: « In MC (Nigr.): Missa defunctorum pro omnibus benefactoribus nostris defunctis (MR 1225); lectiones propriæ: Rom 8, 14-23 / Lc 12, 35-40; præfatio III de defunctis. »
+    Lundi 1ᵉʳ septembre: « In MC (Nigr.): Missa defunctorum pro omnibus benefactoribus nostris defunctis (MR 1225); lectiones propriæ: 1 Io 3, 14-16 / Io 5, 24-29; præfatio IV de defunctis. »
+    Mercredi 5 novembre: « In MC (Nigr.): Missa defunctorum pro omnibus benefactoribus nostris defunctis (MR 1225); lectiones propriæ: Ap 20, 11 – 21, 1 / Io 14, 1-6; præfatio V de defunctis. »
+
+P. 52, remonter le bloc « SACRUM TRIDUUM PASCHALE »
+Dimanche 2 novembre: office du dimanche, Messes des défunts. Supprimer tout ce qui a trait à l’office des défunts (Gloria Patri, vigiles, complies).
+
 # POLYGLOTTE:
 - Table de correspondance des versets.
