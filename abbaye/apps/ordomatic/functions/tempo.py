@@ -2,7 +2,7 @@
 
 import datetime
 from .lectiones import *
-from .various import hebdo_psalterii, ad_omnes_horas, ant_bened_adv_3, ant_bened_adv_4, ant_bened_temps_epiph, ant_magnif_temps_epiph, ant_vepres_vendr_tp, f_num_prefaces, f_mc_bmv, f_num_summer, octave_pentec, mc_bmv, f_symbols, f_transf_month_genitive, f_roman_numbers, f_transf_weekday
+from .various import hebdo_psalterii, hebdo_psalterii_inv, ad_omnes_horas, ant_bened_adv_3, ant_bened_adv_4, ant_bened_temps_epiph, ant_magnif_temps_epiph, ant_vepres_vendr_tp, f_num_prefaces, f_mc_bmv, f_num_summer, octave_pentec, mc_bmv, f_symbols, f_transf_month_genitive, f_roman_numbers, f_transf_weekday
 
 
 def dict_tempo_create(current_year, even_year, year_letter):
@@ -260,10 +260,8 @@ def dict_tempo_create(current_year, even_year, year_letter):
         "¬ \\textbf{\\MakeUppercase{In Nativitate Domini Nostri Iesu Christi} - sollemnitas maior cum octava} - \\textit{Alb}."
     noel["hebdo_psalt"] = "- Hebdomada " + hebdo_psalterii[((noel_date - datetime.date(
         2011, 11, 27)).days // 7) % 2] + " psalterii -" if noel_date.weekday() == 6 else ""
-    # Cette donnée servira pour la Ste Famille.
-    hebdo_psalt_noel = "II" if even_year else "I"
-    noel["body"] = "\\item Ad Vigilias: psalmi hebdomadæ " + hebdo_psalt_noel + \
-        ".\n\\item Hodie omnes sacerdotes tres Missas celebrare possunt, dummodo hæ suo tempore celebrentur.\n\\item \\textit{In ML: præfatio et \\emph{Communicantes} de Nativitate per totam octavam.}\n\\item In omnibus Missis Nativitatis ad verba symboli \\textit{Et incarnatus est} omnes genua flectunt.\n\\item Ad Missam in nocte: ad hymnum \\textit{Gloria} pulsantur campanæ; præfatio I de Nativitate Domini; \\textit{Communicantes} proprium hodie et per totam octavam; \\textit{Pater} in tono C (GR 814).\n\\item Laudes in aurora celebrantur; psalmi 148 et 149 omittuntur.\n\\item Ad Missam in die: præfatio II de Nativitate Domini; \\textit{Pater} in tono C; Missa concluditur benedictione sollemni.\n\\item Vesperæ sollemnitatis; benedictio Sanctissimi Sacramenti."
+    noel[
+        "body"] = "\\item Hodie omnes sacerdotes tres Missas celebrare possunt, dummodo hæ suo tempore celebrentur.\n\\item \\textit{In ML: præfatio et \\emph{Communicantes} de Nativitate per totam octavam.}\n\\item In omnibus Missis Nativitatis ad verba symboli \\textit{Et incarnatus est} omnes genua flectunt.\n\\item Ad Missam in nocte: ad hymnum \\textit{Gloria} pulsantur campanæ; præfatio I de Nativitate Domini; \\textit{Communicantes} proprium hodie et per totam octavam; \\textit{Pater} in tono C (GR 814).\n\\item Laudes in aurora celebrantur; psalmi 148 et 149 omittuntur.\n\\item Ad Missam in die: præfatio II de Nativitate Domini; \\textit{Pater} in tono C; Missa concluditur benedictione sollemni.\n\\item Vesperæ sollemnitatis; benedictio Sanctissimi Sacramenti."
     noel["lectiones_header"] = "\nIn Nativitate Domini Nostri: lectiones de tempore"
     lectiones_body = "\n\\item[In nocte] Is \\textbf{9}, 2-4.6-7 / Tit \\textbf{2}, 11-14 / Lc \\textbf{2}, 1-14"
     lectiones_body += "\n\\item[In aurora] Is \\textbf{62}, 11-12 / Tit \\textbf{3}, 4-7 / Lc \\textbf{2}, 15-20"
@@ -297,11 +295,8 @@ def dict_tempo_create(current_year, even_year, year_letter):
     ste_famille["header"] = " \\textbf{\\textsc{" + ("Dominica I post nativitatem - " if noel_weekday !=
                                                      6 else "\\textnormal{Feria VI - }") + "Sanctæ Familiæ Iesu, Mariæ et Ioseph}} - \\textbf{festum} - \\textit{Alb}."
     # Hebdo_psalt_vigiles:
-    hebdo_psalt_vigiles = ""
-    if hebdo_psalt_noel == "I" and hebdo_psalterii[((ste_famille_date - datetime.date(2011, 11, 27)).days // 7) % 2] == "I":
-        hebdo_psalt_vigiles = "\n\\item Ad Vigilias: psalmi hebdomadæ II; lectiones sumuntur e I et II Nocturnis."
-    elif hebdo_psalt_noel == "II" and hebdo_psalterii[((ste_famille_date - datetime.date(2011, 11, 27)).days // 7) % 2] == "II":
-        hebdo_psalt_vigiles = "\n\\item Ad Vigilias: psalmi hebdomadæ I; lectiones sumuntur e I et II Nocturnis."
+    hebdo_psalt_vigiles = "\n\\item Ad Vigilias: psalmi hebdomadæ {}.".format(
+        hebdo_psalterii_inv[even_year])
     # Antiennes de Bened. et Magnificat:
     if year_letter == "A":
         ste_famille_bened = "\\item Ad Benedictus: ø \\textit{Iacob autem} (AM 836)."
