@@ -138,6 +138,30 @@
                 {% endif %}
             </div>
 
+            <!-- Feuilles par paquet -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.sheets_by_pack.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.sheets_by_pack.errors %}
+                        {% render_field form.sheets_by_pack class='is-invalid' %}
+                        {% for error in form.sheets_by_pack.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.sheets_by_pack class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.sheets_by_pack %}
+                {% endif %}
+                {% if form.sheets_by_pack.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.sheets_by_pack.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
             <!-- Prix remise -->
             <div class='form-group d-flex flex-column align-items-start'>
                 {{ form.price_remise.label_tag }}

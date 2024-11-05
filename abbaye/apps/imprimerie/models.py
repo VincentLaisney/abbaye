@@ -68,6 +68,7 @@ class Paper(models.Model):
         max_length=4,
     )
     thickness = models.IntegerField()
+    sheets_by_pack = models.IntegerField()
     price_remise = models.DecimalField(
         decimal_places=2,
         max_digits=7,
