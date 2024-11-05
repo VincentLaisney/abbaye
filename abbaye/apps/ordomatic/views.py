@@ -54,7 +54,7 @@ def pdf(request, *args, **kwargs):
 
 def write_pdf(year):
     """ Write the PDF of the Ordo according to the year. """
-    even_year = True if year % 2 == 0 else False
+    even_year = year % 2 == 0
 
     letters = ["A", "B", "C"]
     year_letter = letters[(year - 2011) % 3]
