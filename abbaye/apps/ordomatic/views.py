@@ -412,5 +412,5 @@ def write_pdf(year):
         i = 1 if i == 2 else 2  # Pour alterner d'un vendredi sur l'autre.
 
     # Écriture du fichier TeX :
-    with open(os.path.join(Path(__file__).resolve().parent, 'tex/ordo.tex'), 'w') as tex_file:
+    with open(os.path.join(Path(__file__).resolve().parent, 'tex/ordo.tex'), 'w', encoding="utf-8") as tex_file:
         tex_file.write(text_ordo)
