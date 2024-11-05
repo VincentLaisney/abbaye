@@ -42,6 +42,54 @@
                 {% endif %}
             </div>
 
+            <!-- Adresse de livraison -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.address_home.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.address_home.errors %}
+                        {% render_field form.address_home class='is-invalid' %}
+                        {% for error in form.address_home.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.address_home class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.address_home %}
+                {% endif %}
+                {% if form.address_home.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.address_home.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Adresse de facturation -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.address_invoice.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.address_invoice.errors %}
+                        {% render_field form.address_invoice class='is-invalid' %}
+                        {% for error in form.address_invoice.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.address_invoice class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.address_invoice %}
+                {% endif %}
+                {% if form.address_invoice.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.address_invoice.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
             <!-- Notes -->
             <div class='form-group d-flex flex-column align-items-start'>
                 {{ form.notes.label_tag }}
