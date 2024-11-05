@@ -32,6 +32,14 @@ class Client(models.Model):
     name = models.CharField(
         max_length=255,
     )
+    address_home = models.TextField(
+        null=True,
+        blank=True,
+    )
+    address_invoice = models.TextField(
+        null=True,
+        blank=True,
+    )
     notes = models.TextField(
         null=True,
         blank=True,
@@ -198,6 +206,10 @@ class Element(models.Model):
         blank=True,
     )
     agrafage = models.IntegerField(
+        null=True,
+        blank=True,
+    )
+    various = models.IntegerField(
         null=True,
         blank=True,
     )

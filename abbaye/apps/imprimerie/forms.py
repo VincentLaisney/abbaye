@@ -33,6 +33,16 @@ class ClientForm(forms.ModelForm):
         },
         widget=forms.TextInput(),
     )
+    address_home = forms.CharField(
+        label='Adresse de livraison :',
+        required=False,
+        widget=forms.Textarea(),
+    )
+    address_invoice = forms.CharField(
+        label='Adresse de facturation :',
+        required=False,
+        widget=forms.Textarea(),
+    )
     notes = forms.CharField(
         label='Notes :',
         required=False,
@@ -317,6 +327,17 @@ class ElementForm(forms.ModelForm):
         label='Agrafage (min) :',
         required=False,
         initial=0,
+        widget=forms.NumberInput(
+            attrs={
+                'class': 'number',
+            },
+        )
+    )
+    various = forms.IntegerField(
+        label='Divers (min) :',
+        required=False,
+        initial=0,
+        help_text='Coins arrondis, binding…',
         widget=forms.NumberInput(
             attrs={
                 'class': 'number',
