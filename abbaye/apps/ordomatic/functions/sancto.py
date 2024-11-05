@@ -2238,7 +2238,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saint_charles_borromee["force"] = 40
     saint_charles_borromee["header"] = " - \\textsc{S. Caroli}, episcopi - \\textbf{memoria maior} - \\textit{Alb.}"
     saint_charles_borromee[
-        "body"] = "\n\\item Ad Vigilias: lectio de memoria in supplemento 183.\n\\item Ad Benedictus: ø \\textit{Euge} (AM 661).\n\\item \\textit{In ML: Missa in proprio sanctorum vel in PAL.}\n\\item In MC: præfatio de sanctis pastoribus."
+        "body"] = "\n\\item Ad Vigilias: lectio de memoria in supplemento 183.\n\\item \\textit{In ML: Missa in proprio sanctorum vel in PAL.}\n\\item In MC: præfatio de sanctis pastoribus."
     saint_charles_borromee[
         "II_vesp"] = "\n\\item Ad Magnificat: ø \\textit{Sacerdos et pontifex} (AM 656)."
 
