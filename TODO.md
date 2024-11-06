@@ -529,6 +529,7 @@ Messes pour les défunts:
 
 P. 52, remonter le bloc « SACRUM TRIDUUM PASCHALE »
 Dimanche 2 novembre: office du dimanche, Messes des défunts. Supprimer tout ce qui a trait à l’office des défunts (Gloria Patri, vigiles, complies).
+Pour la Messe conventuelle du 2 novembre, le Père Abbé m’a signalé que les références des lectures dans l’Ordo n’étaient pas exactement celles du lectionnaire. Voici les bonnes références: Is 25, 6a.7-9 / 1 Co 15, 51-57 / Jn 6, 51-58
 
 # POLYGLOTTE:
 - Table de correspondance des versets.
