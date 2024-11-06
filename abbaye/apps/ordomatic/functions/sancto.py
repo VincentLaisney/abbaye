@@ -2219,12 +2219,6 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
         credo_mc + " præfatio I de defunctis."
     comm_defunts["II_vesp"] = "\\item I Vesperæ dominicæ sequentis." if comm_defunts_date.weekday(
     ) == 5 else complies
-    # Si 1er vendredi du mois, reporter le jeûne au lendemain:
-    if comm_defunts_date.weekday() == 4:
-        dict_tempo[comm_defunts_date]["symbols"] = dict_tempo[comm_defunts_date]["symbols"].replace(
-            " µ", " ł")
-        dict_tempo[comm_defunts_date + datetime.timedelta(
-            days=1)]["symbols"] = " µ" + dict_tempo[comm_defunts_date + datetime.timedelta(days=1)]["symbols"]
 
     saint_martin_porres_date = datetime.date(current_year, 11, 3)
     saint_martin_porres = dict_sancto[saint_martin_porres_date] = {}
