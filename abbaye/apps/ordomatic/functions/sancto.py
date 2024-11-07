@@ -1633,7 +1633,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
         text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
             " per annum}}" + " (" + text_ap_pentec + ")"
     else:
-        transfiguration["force"] = 70
+        transfiguration["force"] = 90
         text_dim = ""
     transfiguration["header"] = text_dim + \
         " - \\textbf{\\textsc{in Transfiguratione Domini}} - \\textbf{festum} - \\textit{Alb.}"
@@ -2212,7 +2212,9 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
         rajout_dim_ml = ""
         rajout_dim_mc = ""
         credo_mc = ""
-        nocturnes = "\n\\item ß \\textit{Gloria Patri} dicitur in fine omnium psalmorum et canticorum. In responsoriis omittitur ß \\textit{Requiem æternam}.\n\\item Ad Vigilias: absolute incipitur ab invitatorio (psalmus 94); psalmi et lectiones sumuntur e I et II Nocturnis." if even_year else "psalmi sumuntur e I et III Nocturnis; lectiones sumuntur e I et II Nocturnis. Post II Nocturnum dicitur responsorium"
+        nocturnes = "\n\\item ß \\textit{Gloria Patri} dicitur in fine omnium psalmorum et canticorum. In responsoriis omittitur ß \\textit{Requiem æternam}.\n\\item Ad Vigilias: absolute incipitur ab invitatorio (psalmus 94);" + \
+            ("psalmi et lectiones sumuntur e I et II Nocturnis;" if even_year else "psalmi sumuntur e I et III Nocturnis; lectiones sumuntur e I et II Nocturnis;") + \
+            " post II Nocturnum dicitur responsorium."
         complies = "\\item Completorium pro defunctis: incipitur a \\textit{Confiteor}, post examen conscientiæ; aspersio de more."
     comm_defunts["body"] = rajout_dimanche + nocturnes + ".\n\\item \\textit{Hodie, licet omnibus sacerdotibus tres Missas celebrare, ea tamen lege, ut unam tantum libere applicare et pro ea stipem percipere queant: tenentur vero, nulla stipe percepta, alteram in suffragium omnium fidelium defunctorum, tertiam ad mentem Summi Pontificis applicare.}\n\\item \\textit{Ritus in Missis servandus: in prima et secunda Missa, si immediate sacerdos aliam Missam sit celebraturus, sumpto divino Sanguine, purificat calicem cum aqua tantum.}" + \
         rajout_dim_ml + "\n\\item In MC \\textit{(1a Missa)}:" + rajout_dim_mc + \
