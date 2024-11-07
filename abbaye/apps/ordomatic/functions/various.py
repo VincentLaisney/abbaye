@@ -108,69 +108,69 @@ ult_ant_dict = {20:14, 21:26, 22:27, 23:28, 24:29, 25:29, 26:1}
 ##################################################
 
 def f_symbols(day_date, temps_liturg = ""):
-	if day_date.weekday() == 2:
-		jeune_abst = " ł"
-	elif day_date.weekday() == 4:
-		jeune_abst = " ł" if temps_liturg != "Quadr" else " µ"
-	else:
-		jeune_abst = ""
+    if day_date.weekday() == 2:
+        jeune_abst = " ł"
+    elif day_date.weekday() == 4:
+        jeune_abst = " ł" if temps_liturg != "Quadr" else " µ"
+    else:
+        jeune_abst = ""
 
-	first_in_month = {4: " £", 5: " §", 6: " ŧ"}
-	if day_date.day < 8:
-		first_day_in_month = (first_in_month[day_date.weekday()]) if day_date.weekday() in first_in_month else ""
-		if first_day_in_month == " £": jeune_abst = (" µ" if temps_liturg != "TP" else " ł")
-	else:
-		first_day_in_month = ""
+    first_in_month = {4: " £", 5: " §", 6: " ŧ"}
+    if day_date.day < 8:
+        first_day_in_month = (first_in_month[day_date.weekday()]) if day_date.weekday() in first_in_month else ""
+        if first_day_in_month == " £": jeune_abst = (" µ" if temps_liturg != "TP" else " ł")
+    else:
+        first_day_in_month = ""
 
-	return(jeune_abst, first_day_in_month) # On distingue les deux, car dans certains cas (Vendredi Saint, etc.), on ne voudra que le 2e item du résultat, le 1er étant fixé dans le Temporal.
+    return(jeune_abst, first_day_in_month) # On distingue les deux, car dans certains cas (Vendredi Saint, etc.), on ne voudra que le 2e item du résultat, le 1er étant fixé dans le Temporal.
 
 def f_roman_numbers(chiffre):
-	liste_latin = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII","XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV"]
-	return(liste_latin[chiffre - 1])
+    liste_latin = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI", "XXVII","XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV"]
+    return(liste_latin[chiffre - 1])
 
 def f_transf_weekday(num_weekday):
-	liste_num = [0, 1, 2, 3 ,4 ,5 ,6]
-	liste_latin = ["Feria II", "Feria III", "Feria IV", "Feria V", "Feria VI", "Sabbato", ""]
-	return(liste_latin[liste_num.index(num_weekday)])
+    liste_num = [0, 1, 2, 3 ,4 ,5 ,6]
+    liste_latin = ["Feria II", "Feria III", "Feria IV", "Feria V", "Feria VI", "Sabbato", ""]
+    return(liste_latin[liste_num.index(num_weekday)])
 
 def f_transf_month(num_month):
-	liste_num = [1, 2, 3 ,4 ,5 ,6, 7, 8, 9, 10, 11, 12]
-	liste_latin = ["Ianuarius", "Februarius", "Martius", "Aprilis", "Maius", "Iunius", "Iulius", "Augustus", "September", "October", "November", "December"]
-	return(liste_latin[liste_num.index(num_month)])
+    liste_num = [1, 2, 3 ,4 ,5 ,6, 7, 8, 9, 10, 11, 12]
+    liste_latin = ["Ianuarius", "Februarius", "Martius", "Aprilis", "Maius", "Iunius", "Iulius", "Augustus", "September", "October", "November", "December"]
+    return(liste_latin[liste_num.index(num_month)])
 
 def f_transf_month_genitive(num_month):
-	liste_num = [1, 2, 3 ,4 ,5 ,6, 7, 8, 9, 10, 11, 12]
-	liste_latin = [" ianuarii", " februarii", " martii", " aprilis", " maii", " iunii", " iulii", " augusti", " septembris", " octobris", " novembris", " decembris"]
-	return(liste_latin[liste_num.index(num_month)])
-	
+    liste_num = [1, 2, 3 ,4 ,5 ,6, 7, 8, 9, 10, 11, 12]
+    liste_latin = [" ianuarii", " februarii", " martii", " aprilis", " maii", " iunii", " iulii", " augusti", " septembris", " octobris", " novembris", " decembris"]
+    return(liste_latin[liste_num.index(num_month)])
+    
 special_months = ["", "", "", "Sancto Ioseph consecratus", "", "Beatæ Mariæ Virgini consecratus", "SS.MO Cordi Iesu consecratus", "", "", "", "", "", ""]
-	
+    
 def f_num_prefaces(i):
-	num_pref_dim = f_roman_numbers((i + 1) % 8) if ((i + 1) % 8 != 0) else f_roman_numbers(8)
-	num_pref_fer = f_roman_numbers((i + 1) % 6) if ((i + 1) % 6 != 0) else f_roman_numbers(6)
-	return(num_pref_dim, num_pref_fer)
-	
+    num_pref_dim = f_roman_numbers((i + 1) % 8) if ((i + 1) % 8 != 0) else f_roman_numbers(8)
+    num_pref_fer = f_roman_numbers((i + 1) % 6) if ((i + 1) % 6 != 0) else f_roman_numbers(6)
+    return(num_pref_dim, num_pref_fer)
+    
 def f_num_summer(date_dim):
-	date_month = date_dim.month
-	date_day = date_dim.day
-	num_dim = (date_day // 7) + 1 if (date_day % 7 != 0) else (date_day // 7)
-	return(f_roman_numbers(num_dim), f_transf_month_genitive(date_month))
+    date_month = date_dim.month
+    date_day = date_dim.day
+    num_dim = (date_day // 7) + 1 if (date_day % 7 != 0) else (date_day // 7)
+    return(f_roman_numbers(num_dim), f_transf_month_genitive(date_month))
 
 def f_mc_bmv(date_bmv, paques): # Renvoie le "body" de la messe BMV :
-	if date_bmv.day < 8: num_sam = 1
-	elif date_bmv.day < 15: num_sam = 2
-	elif date_bmv.day < 22: num_sam = 3
-	elif date_bmv.day < 29: num_sam = 4
-	else: num_sam = 5
-	current_month = date_bmv.month
-	if current_month == 2 and num_sam == 1:
-		return(mc_bmv[2][1]["before_pres"] if date_bmv.day == 1 else mc_bmv[2][1]["after_pres"])
-	else:
-		# Samedi dans l'octave de Pentecôte:
-		if date_bmv > paques + datetime.timedelta(days = 49) and date_bmv < paques + datetime.timedelta(days = 56):
-			if num_sam == 1:
-				return(mc_bmv[current_month][num_sam].replace("\\textit{In ML: Immaculati Cordis Beatæ Mariæ Virginis.}", "\\textit{In ML (Rub.): Quatuor Temporum Pentecostes (forma Missæ brevior)} (Credo)."))
-			else:
-				return(mc_bmv[current_month][num_sam].replace("\n\\item In MC", "\n\\item \\textit{In ML (Rub.): Quatuor Temporum Pentecostes (forma Missæ brevior)} (Credo).\n\\item In MC"))
-		else:
-			return(mc_bmv[current_month][num_sam])
+    if date_bmv.day < 8: num_sam = 1
+    elif date_bmv.day < 15: num_sam = 2
+    elif date_bmv.day < 22: num_sam = 3
+    elif date_bmv.day < 29: num_sam = 4
+    else: num_sam = 5
+    current_month = date_bmv.month
+    if current_month == 2 and num_sam == 1:
+        return(mc_bmv[2][1]["before_pres"] if date_bmv.day == 1 else mc_bmv[2][1]["after_pres"])
+    else:
+        # Samedi dans l'octave de Pentecôte:
+        if date_bmv > paques + datetime.timedelta(days = 49) and date_bmv < paques + datetime.timedelta(days = 56):
+            if num_sam == 1:
+                return(mc_bmv[current_month][num_sam].replace("\\textit{In ML: Immaculati Cordis Beatæ Mariæ Virginis.}", "\\textit{In ML (Rub.): Quatuor Temporum Pentecostes (forma Missæ brevior)} (Credo)."))
+            else:
+                return(mc_bmv[current_month][num_sam].replace("\n\\item In MC", "\n\\item \\textit{In ML (Rub.): Quatuor Temporum Pentecostes (forma Missæ brevior)} (Credo).\n\\item In MC"))
+        else:
+            return(mc_bmv[current_month][num_sam])
