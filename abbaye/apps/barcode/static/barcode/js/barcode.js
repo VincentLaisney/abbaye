@@ -1,14 +1,16 @@
 $(document).ready(function () {
+  // Barcode:
   $('#input_barcode').keyup(function () {
+    $('#image_barcode').attr('src', '');
     var barcode = $(this).val();
     if (barcode.length == 13) {
-      $('#warning').text('')
+      $('#warning').text('');
       if (check_barcode(barcode)) {
         $.get(
-          'create/' + barcode + '/',
+          'create_barcode/' + barcode + '/',
           function (data) {
             if (data['status'] == 'ready') {
-              $('#image').attr('src', '/statics/barcode/img/archives/' + barcode + '.png');
+              $('#image_barcode').attr('src', '/media/barcode/barcode.png?' + new Date().getTime());
             }
           },
           'json'
@@ -26,6 +28,22 @@ $(document).ready(function () {
       else {
         $('#warning').text('');
       }
+    }
+  });
+
+  // QR code:
+  $('#input_qrcode').keyup(function () {
+    var qrcode = encodeURIComponent($('#input_qrcode').val());
+    if (qrcode != '') {
+      $.get(
+        'create_qrcode/' + qrcode + '/',
+        function (data) {
+          if (data['status'] == 'ready') {
+            $('#image_qrcode').attr('src', '/media/barcode/qrcode.png?' + new Date().getTime());
+          }
+        },
+        'json'
+      )
     }
   });
 });

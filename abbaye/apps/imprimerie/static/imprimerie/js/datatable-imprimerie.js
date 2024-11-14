@@ -87,7 +87,7 @@ $(document).ready(function () {
       {
         target: 4,
       },
-      // Prix remise :
+      // Prix remisé :
       {
         target: 5,
       },
