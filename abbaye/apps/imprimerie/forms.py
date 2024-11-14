@@ -77,7 +77,7 @@ class PaperForm(forms.ModelForm):
         required=False,
     )
     price_remise = forms.DecimalField(
-        label='Prix remise (€) :',
+        label='Prix remisé (€) :',
         required=False,
     )
     price_full = forms.DecimalField(

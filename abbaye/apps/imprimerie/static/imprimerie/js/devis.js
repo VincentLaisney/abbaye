@@ -61,12 +61,20 @@ function refresh(data_paper) {
   var prix_mille = Number.parseFloat(data_paper['price_full']);
   $('#prix_mille').text(prix_mille.toFixed(2));
   var paper_cut_into = Number.parseInt($('#id_paper_cut_into').val());
+  if (paper_cut_into == 1) {
+    var forfait_coupe_papier = 0;
+    $('#forfait_coupe_papier').text('')
+  }
+  else {
+    var forfait_coupe_papier = 10;
+    $('#forfait_coupe_papier').text('Forfait coupe papier : 10 €')
+  }
   var prix_feuille = prix_mille / 1000 / paper_cut_into;
   $('#prix_feuille').text(prix_feuille.toFixed(3));
   var number_of_pages_doc = Number.parseInt($('#id_number_of_pages_doc').val());
   var nb_feuilles_machine = (number_of_pages_doc / $('#id_imposition').val() / recto_verso) * quantity;
   $('#nb_feuilles_machine').html(nb_feuilles_machine);
-  var prix_papier = nb_feuilles_machine * prix_feuille * marge_papier;
+  var prix_papier = (nb_feuilles_machine * prix_feuille * marge_papier) + forfait_coupe_papier;
   $('#prix_papier').html(prix_papier.toFixed(2) + ' €');
 
   // Épaisseur théorique :
