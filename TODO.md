@@ -7,16 +7,26 @@
 - Boutons "Annuler" : ajouter une flèche gauche avant le mot "Annuler".
 - Everywhere in the site: when create and update, put an "else:" corresponding to the "if request.method == 'POST':" before "form = …".
 
+
 # AGENDA:
 - Calendrier.
 - Fetcher les retraites et leurs nombres dans la page du P. Savio.
 - Empêcher date_to < date_from.
 - On change date_from: date_to = date_from.
 
+
 # HÔTELLERIE:
 - Jours de promenades, retraites.
 - Séjour : dans le formulaire, mettre tous les repas avec cases à cocher, pour pouvoir décliquer les repas sautés au cas par cas. (Autre solution : un formset de date + repas ?)
 - Un laïc (Personne "non-prêtre") ne devrait pas pouvoir célébrer (case "Prêtre avec Messe" dans la fiche Séjour).
+
+
+# IMPRIMERIE:
+- "Ajouter…" (client, projet etc.) : bouton à mettre en haut.
+- Générer devis PDF.
+- Générer BL PDF.
+- Suivi projet de A à Z.
+
 
 # MÉMO:
 - Rafraîchir les fichiers de conf. à partir des fichiers actuels, et vérifier qu'ils y sont tous.
@@ -342,9 +352,11 @@ null |    5
 
 ------
 
+
 # MOINES:
 - Models: check dates are consistent (birthday < entry < habit etc.).
 - Details: modal.
+
 
 # ORDOMATIC:
 - Ordos 2011 et 2038 à voir : pb 3e samedi de juin.
@@ -489,46 +501,10 @@ Supprimer "In ML: Missa in PAL; præfatio de sanctis."
 
 Office de saints Maur et Placide : prendre répons, hymne et verset du commun de plusieurs confesseurs (5 octobre) sauf hymne de saint Maur
 
-Corrections 2024 :
-    • * Évangile Vigile pascale année B : Mc 16, 1-7 (corriger dans l’évangéliaire)
-    • * 17 février (et non pas le 18) : décès du T.R.P. Irénée Henriot
-    • 19 et 21 mars : « année I, saint Joseph les trois premiers psaumes, saint Benoît les trois suivants, et l’inverse l’année II » (dans ce cas, il faudrait appliquer la même logique à toutes les fêtes)
-    • * 25 mars : vérifier Salut pour Annonciation
-    • * 12 septembre : Saint Nom de Marie, préface propre CM 21
-    • * 23 octobre : Notre-Dame de la Sainte-Espérance, préface propre CM 37
-    • Quatre-Temps de septembre (IIIe semaine) :
-        ◦ * c’est le samedi, et non pas le mercredi, qu’il y a une forma Missæ brevior ;
-# FIXME messe du samedi des 4 Temps de septembre (III Septembris) décalée par erreur à la IVe semaine de septembre en 2024.
-    • * Va-t-on se décider à mettre plus souvent la Préface II de la Ste Vierge ?
+2024: Messe du samedi des 4 Temps de septembre (III Septembris) décalée par erreur à la IVe semaine de septembre en 2024 (dû à saint Matthieu ?).
 
-2025 :
-Horreur! On a remplacé mes jolies espaces insécables par cet affreux gribouillis: ☒ => Pas trouvé.
-Manque une espace p. 106 (2 novembre) « NoctunisI ». Mais, de toute façon, il faudra supprimer ce paragraphe (ut infra). Enfin, ça servira pour les autres années. => Ai remplacé le I par une espace insécable. Par contre je ne comprends pas la ligne de code : « Nocturnes = "psalmi et lectiones sumuntur e I et II Nocturnis." if even_year else "psalmi sumuntur e I et II Nocturnis ; lectiones sumuntur e I et II Nocturnis."». Quelle différence entre années paires et impaires?
-Insérer une rubrique pour la répartition des psaumes des vigiles des fêtes et solennités sur année paire ou impaire (p. 7). => Done.
-Par voie de conséquence:
-    Supprimer la rubrique du jour de Noël « Ad Vigilias : psalmi hebdomadæ I. »
-    Sainte Famille: si Noël tombe un dimanche, mettre les psaumes de l’année opposée: « Ad Vigilias: antiphonæ et psalmi anni I / II. »
-    Idem, psaumes de l’année opposée pour:
-        21 mars, saint Benoît
-        => aussi saint Thomas.
-        23 juillet, sainte Brigitte
-        8 septembre, Nativité de la Sainte Vierge
-        13 novembre, saint Bénigne
-    Vérifier qu’il ne reste plus nulle part la mention « psalmi hebdomadæ ». => OK, sauf pour les 5 occurrences mentionnées.
+Faire la chasse aux ant. de Benedictus et Magnificat inutilement indiquées car tirées du Commun.
 
-Remettre « (forma Missæ brevior) » pour le samedi des Quatre-Temps de septembre (p. 98).
-🤫 Un indice pour vous mettre sur la piste: en 2024, si on se retrouvait avec la Messe du samedi des Quatre-Temps en IVᵉ semaine (au lieu de la IIIᵉ), c’est sans doute parce que cette Messe était écrasée par la Saint-Matthieu (samedi 21 septembre).
-Mercredi 28 mai: Messe pour les semailles « In MC: Missa In conserendis agris (MR 1127 A - GR 654); præfatio V de dominicis per annum. »
-Mercredi 24 septembre: Messe pour les récoltes « In MC: Missa post collectos fructus terræ (MR 1129 - GR 654); præfatio V de dominicis per annum. »
-Messes pour les défunts:
-
-    Mardi 4 février: « In MC (Nigr.): Missa defunctorum pro omnibus benefactoribus nostris defunctis (MR 1225); lectiones propriæ: Rom 5, 5-11 / Mt 5, 1-12a; præfatio II de defunctis. »
-    Mercredi 4 juin: « In MC (Nigr.): Missa defunctorum pro omnibus benefactoribus nostris defunctis (MR 1225); lectiones propriæ: Rom 8, 14-23 / Lc 12, 35-40; præfatio III de defunctis. »
-    Lundi 1ᵉʳ septembre: « In MC (Nigr.): Missa defunctorum pro omnibus benefactoribus nostris defunctis (MR 1225); lectiones propriæ: 1 Io 3, 14-16 / Io 5, 24-29; præfatio IV de defunctis. »
-    Mercredi 5 novembre: « In MC (Nigr.): Missa defunctorum pro omnibus benefactoribus nostris defunctis (MR 1225); lectiones propriæ: Ap 20, 11 – 21, 1 / Io 14, 1-6; præfatio V de defunctis. »
-
-P. 52, remonter le bloc « SACRUM TRIDUUM PASCHALE »
-Dimanche 2 novembre: office du dimanche, Messes des défunts. Supprimer tout ce qui a trait à l’office des défunts (Gloria Patri, vigiles, complies).
 
 # POLYGLOTTE:
 - Table de correspondance des versets.
