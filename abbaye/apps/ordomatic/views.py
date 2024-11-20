@@ -36,7 +36,7 @@ def pdf(request, *args, **kwargs):
         year=year,
     )
     if not os.path.exists(path):
-        write_pdf(year)
+        write_tex(year)
         command = "cd {base_dir}/apps/ordomatic/tex; lualatex --shell-escape ordo.tex; cp ordo.pdf {path}".format(
             base_dir=settings.BASE_DIR,
             path=path,
@@ -52,8 +52,8 @@ def pdf(request, *args, **kwargs):
     )
 
 
-def write_pdf(year):
-    """ Write the PDF of the Ordo according to the year. """
+def write_tex(year):
+    """ Write the tex of the Ordo according to the year. """
     even_year = year % 2 == 0
 
     letters = ["A", "B", "C"]
