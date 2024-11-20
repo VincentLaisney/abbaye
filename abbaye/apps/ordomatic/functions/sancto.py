@@ -1864,7 +1864,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saint_nom_marie["force"] = 40
     saint_nom_marie["header"] = " - \\textsc{Ss. Nominis Beatæ Virginis Mariæ} - \\textbf{\\textit{memoria maior}} - \\textit{Alb.}"
     saint_nom_marie[
-        "body"] = "\n\\item In Officio: oratio in supplemento 171*.\n\\item Ad Vigilias: lectio in supplemento 169*.\n\\item Ad Benedictus: ø \\textit{Sancta Maria} (AM 705).\n\\item In MC: præfatio propria."
+        "body"] = "\n\\item In Officio: oratio in supplemento 171*.\n\\item Ad Vigilias: lectio in supplemento 169*.\n\\item Ad Benedictus: ø \\textit{Sancta Maria} (AM 705).\n\\item In MC: præfatio propria (CM 21)."
 
     saint_jean_chrysostome_date = datetime.date(current_year, 9, 13)
     saint_jean_chrysostome = dict_sancto[saint_jean_chrysostome_date] = {}
