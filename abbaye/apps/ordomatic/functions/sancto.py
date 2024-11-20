@@ -76,7 +76,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     messe_defunts = dict_sancto[messe_defunts_date] = {}
     messe_defunts["force"] = 10
     messe_defunts["body"] = "\n\\item In MC (\\textit{Nigr.}): Missa defunctorum pro omnibus benefactoribus nostris defunctis (MR 1225); lectiones propriæ: Ap \\textbf{20}, 11 – \\textbf{21}, 1 / Io \\textbf{14}, 1-6; præfatio V de defunctis."
-    # Semailles et récoltes : voir ordo_write.py.
+    # Semailles et récoltes : voir views.py/write_tex().
 
     ###################################
     # FIN DES MESSES MANUELLES
