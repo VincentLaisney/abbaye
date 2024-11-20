@@ -1941,8 +1941,13 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saint_seine = dict_sancto[saint_seine_date] = {}
     saint_seine["force"] = 40
     saint_seine["header"] = " - S. Sequani, abbatis - memoria minor - \\textit{Vir.}"
-    messe_lue = "\n\\item \\textit{In ML (Alb.): Missa pro abbate.}" if not (is_third_week_of_september(
-        saint_seine_date) and saint_seine_date.weekday() in [2, 4, 5]) else "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}"
+    if is_third_week_of_september(saint_seine_date):
+        if saint_seine_date.weekday() in [2, 4]:
+            messe_lue = "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}"
+        elif saint_seine_date.weekday() == 5:
+            messe_lue = "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris (forma Missæ brevior).}"
+    else:
+        messe_lue = "\n\\item \\textit{In ML (Alb.): Missa pro abbate.}"
     saint_seine["body"] = "\n\\item Ad Benedictus: ø \\textit{Serve bone} (AM 673); oratio in supplemento 172." + \
         messe_lue + \
         "\n\\item In MC \\textit{(Alb.)}: collecta propria; Commune sanctorum et sanctarum (MR 958)."
@@ -1952,8 +1957,13 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saint_just_breteniere["force"] = 40
     saint_just_breteniere[
         "header"] = " - S. Iusti de Bretenières, presbyteri et martyris - memoria minor - \\textit{Vir.}"
-    messe_lue = "\n\\item \\textit{In ML (Rub.): Missa pro martyre non pontifice.}" if not (is_third_week_of_september(
-        saint_just_breteniere_date) and saint_just_breteniere_date.weekday() in [2, 4, 5]) else "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}"
+    if is_third_week_of_september(saint_just_breteniere_date):
+        if saint_just_breteniere_date.weekday() in [2, 4]:
+            messe_lue = "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}"
+        elif saint_just_breteniere_date.weekday() == 5:
+            messe_lue = "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris (forma Missæ brevior).}"
+    else:
+        messe_lue = "\n\\item \\textit{In ML (Rub.): Missa pro martyre non pontifice.}"
     saint_just_breteniere["body"] = "\n\\item Ad Benedictus: ø \\textit{Alias oves} (AM 486); oratio in supplemento 172." + \
         messe_lue + \
         "\n\\item In MC \\textit{(Rub.)}: collecta propria; Commune martyrum (MR 917)."
@@ -1969,16 +1979,27 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saint_maurice_date = datetime.date(current_year, 9, 22)
     saint_maurice = dict_sancto[saint_maurice_date] = {}
     saint_maurice["force"] = 10
-    saint_maurice["body"] = "\n\\item \\textit{In ML (Rub.): Missa Ss. Mauritii et sociorum.}" if not (is_third_week_of_september(
-        saint_maurice_date) and saint_maurice_date.weekday() in [2, 4, 5]) else "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}"
+    if is_third_week_of_september(saint_maurice_date):
+        if saint_maurice_date.weekday() in [2, 4]:
+            messe_lue = "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}"
+        elif saint_maurice_date.weekday() == 5:
+            messe_lue = "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris (forma Missæ brevior).}"
+    else:
+        messe_lue = "\n\\item \\textit{In ML (Rub.): Missa Ss. Mauritii et sociorum.}"
+    saint_maurice["body"] = messe_lue
 
     saint_padre_pio_date = datetime.date(current_year, 9, 23)
     saint_padre_pio = dict_sancto[saint_padre_pio_date] = {}
     saint_padre_pio["force"] = 40
     saint_padre_pio[
         "header"] = " - S. Pii de Pietrelcina, presbyteri - memoria minor - \\textit{Vir.}"
-    messe_lue = "\n\\item \\textit{In ML (Alb.): Missa pro confessore non pontifice.}" if not (is_third_week_of_september(
-        saint_padre_pio_date) and saint_padre_pio_date.weekday() in [2, 4, 5]) else "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}"
+    if is_third_week_of_september(saint_padre_pio_date):
+        if saint_padre_pio_date.weekday() in [2, 4]:
+            messe_lue = "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}"
+        elif saint_padre_pio_date.weekday() == 5:
+            messe_lue = "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris (forma Missæ brevior).}"
+    else:
+        messe_lue = "\n\\item \\textit{In ML (Alb.): Missa pro confessore non pontifice.}"
     saint_padre_pio["body"] = "\n\\item Ad Benedictus: ø \\textit{Vivo autem} (AM 1128); oratio in supplemento 172*." + \
         messe_lue + \
         "\n\\item In MC \\textit{(Alb.)}: Commune sanctorum et sanctarum (MR 961)."
@@ -1988,8 +2009,13 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saints_come_damien["force"] = 20
     saints_come_damien[
         "header"] = " - Ss. Cosmæ et Damiani, martyrum - \\textit{memoria minor} - \\textit{Vir.} (olim die 27 huius)."
-    messe_lue = "\n\\item \\textit{In ML: Rub.}" if not (is_third_week_of_september(saints_come_damien_date) and saints_come_damien_date.weekday() in [
-        2, 4, 5]) else "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}"
+    if is_third_week_of_september(saints_come_damien_date):
+        if saints_come_damien_date.weekday() in [2, 4]:
+            messe_lue = "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}"
+        elif saints_come_damien_date.weekday() == 5:
+            messe_lue = "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris (forma Missæ brevior).}"
+    else:
+        messe_lue = "\n\\item \\textit{In ML: Rub.}"
     saints_come_damien[
         "body"] = "\n\\item Ad Benedictus: ø \\textit{Sanctorum precibus} in tono VIII G (AM 829)." + messe_lue + "\n\\item In MC: \\textit{Rub.}"
 
@@ -1998,8 +2024,13 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saint_vincent_de_paul["force"] = 40
     saint_vincent_de_paul[
         "header"] = " - \\textsc{S. Vincentii de Paul}, presbyteri - \\textbf{memoria maior} - \\textit{Alb.} (olim die 19 iulii)."
-    messe_lue = "\n\\item \\textit{In ML: Missa in proprio sanctorum vel in PAL.}" if not (is_third_week_of_september(
-        saint_vincent_de_paul_date) and saint_vincent_de_paul_date.weekday() in [2, 4, 5]) else "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}"
+    if is_third_week_of_september(saint_vincent_de_paul_date):
+        if saint_vincent_de_paul_date.weekday() in [2, 4]:
+            messe_lue = "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris.}"
+        elif saint_vincent_de_paul_date.weekday() == 5:
+            messe_lue = "\n\\item \\textit{In ML (Viol.): Quatuor Temporum Septembris (forma Missæ brevior).}"
+    else:
+        messe_lue = "\n\\item \\textit{In ML: Missa in proprio sanctorum vel in PAL.}"
     saint_vincent_de_paul[
         "body"] = "\n\\item Ad Vigilias: lectio in supplemento 172.\n\\item Ad Benedictus: ø \\textit{Amen dico vobis} in tono I f (AM 829)." + messe_lue + "\n\\item In MC: præfatio II de sanctis."
     saint_vincent_de_paul[
