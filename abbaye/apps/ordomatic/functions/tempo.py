@@ -295,7 +295,7 @@ def dict_tempo_create(current_year, even_year, year_letter):
     ste_famille["header"] = " \\textbf{\\textsc{" + ("Dominica I post nativitatem - " if noel_weekday !=
                                                      6 else "\\textnormal{Feria VI - }") + "Sanctæ Familiæ Iesu, Mariæ et Ioseph}} - \\textbf{festum} - \\textit{Alb}."
     # Hebdo_psalt_vigiles:
-    hebdo_psalt_vigiles = "\n\\item Ad Vigilias: psalmi hebdomadæ {}.".format(
+    hebdo_psalt_vigiles = "\n\\item Ad Vigilias: psalmi anni {}.".format(
         hebdo_psalterii_inv[even_year])
     # Antiennes de Bened. et Magnificat:
     if year_letter == "A":
@@ -686,9 +686,9 @@ def dict_tempo_create(current_year, even_year, year_letter):
             "header"] = " - \\textbf{\\textsc{De Octava Paschæ}} - \\textit{Alb}." if i != 5 else " - \\textbf{\\textsc{De Octava Paschæ}} (Sabbato in Albis) - \\textit{Alb.}"
         txt_body = ""
         if i == 0:
-            txt_body = "\n\\item Ad Vigilias: psalmi de festo hebdomada I.\n\\item \\textit{postmeridiani laboris datur vacatio}."
+            txt_body = "\n\\item Ad Vigilias: psalmi de festo, anno I.\n\\item \\textit{postmeridiani laboris datur vacatio}."
         elif i == 1:
-            txt_body = "\n\\item Ad Vigilias: psalmi de festo hebdomada II."
+            txt_body = "\n\\item Ad Vigilias: psalmi de festo, anno II."
         elif i == 2:
             txt_body = "\n\\item Ad Vigilias: psalmi de feria cum antiphonis propriis et sic usque ad sabbatum in Albis."
         if txt_body != "":

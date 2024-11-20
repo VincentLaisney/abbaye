@@ -682,7 +682,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saint_benoit_transitus["force"] = 70
     saint_benoit_transitus["header"] = " - \\textsc{\\textbf{Transitus S.P.N. Benedicti}, abbatis} - \\textbf{festum} - \\textit{Alb.}"
     # Si 19/03 et 21/03 appartiennent à la même semaine, on inverse la semaine du psautier pour les Vigiles:
-    inv_sem_vigiles = "\n antiphonæ et psalmi hebdomadæ " + \
+    inv_sem_vigiles = "\n antiphonæ et psalmi anni " + \
         hebdo_psalterii_inv[even_year]
     vigiles_lectiones = ((";" if inv_sem_vigiles else "") +
                          " in II Nocturno sumuntur lectiones III Nocturni") if even_year else ""
@@ -1425,7 +1425,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saint_thomas_ap[
         "header"] = " - \\textbf{\\textsc{S. Thomæ, apostoli}} - \\textbf{festum} - \\textit{Rub.} (olim die 21 decembris)."
     # Si 29/06 et 03/07 appartiennent à la même semaine, on inverse la semaine du psautier pour les Vigiles:
-    inv_sem_vigiles = "; antiphonæ et psalmi hebdomadæ " + \
+    inv_sem_vigiles = "; antiphonæ et psalmi anni " + \
         hebdo_psalterii_inv[even_year]
     saint_thomas_ap["body"] = "\n\\item Ad Vigilias: in supplemento 138" + inv_sem_vigiles + \
         ".\n\\item Ad Benedictus: ø \\textit{Quia vidisti} (AM 479).\n\\item In MC: lectiones propriæ: Ep \\textbf{2}, 19-22 / Io \\textbf{20}, 24-29; præfatio I de Apostolis."
@@ -1531,7 +1531,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     sainte_brigitte[
         "header"] = " - \\textbf{\\textsc{S. Birgittæ, religiosæ, Europæ patronæ}} - \\textbf{festum} - \\textit{Alb.} (olim die 8 octobris)."
     lectures_mc = "Ga \\textbf{2}, 19-20 / Mc \\textbf{3}, 31-35" if even_year else "Tb \\textbf{8}, 4b-7 / Io \\textbf{15}, 1-8"
-    sainte_brigitte["body"] = "\n\\item In Officio: omnia de Communi nec virginis nec martyris præter sequentia.\n\\item Oratio in supplemento 146*.\n\\item Ad Vigilias: antiphonæ et psalmi hebdomadæ " + hebdo_psalterii_inv[even_year] + \
+    sainte_brigitte["body"] = "\n\\item In Officio: omnia de Communi nec virginis nec martyris præter sequentia.\n\\item Oratio in supplemento 146*.\n\\item Ad Vigilias: antiphonæ et psalmi anni " + hebdo_psalterii_inv[even_year] + \
         "; lectio II Nocturni in supplemento 144*.\n\\item \\textit{In ML: præfatio de sanctis.}\n\\item In MC: Commune sanctorum et sanctarum (MR 966); lectiones propriæ: " + \
         lectures_mc + "; præfatio I de sanctis."
 
@@ -1855,7 +1855,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     hebdo_psalt_vigiles = hebdo_psalterii_inv[even_year]
     ant_bened = "" if even_year else "\\item Ad Benedictus: ø \\textit{Gloriosæ} (AM 1031)."
     lectures_mc = "Rom \\textbf{8}, 28-30" if even_year else "Mic \\textbf{5}, 1-4a"
-    nativite_bmv["body"] = "\n\\item Ad Vigilias: antiphonæ et psalmi hebdomadæ " + hebdo_psalt_vigiles + "." + \
+    nativite_bmv["body"] = "\n\\item Ad Vigilias: antiphonæ et psalmi anni " + hebdo_psalt_vigiles + "." + \
         ant_bened + "\\item In MC: lectiones propriæ: " + lectures_mc + \
         " / Mt \\textbf{1}, 18-23 \\textit{(formula brevior)}; præfatio I de Beata Maria Virgine."
 
@@ -2312,7 +2312,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     # saint_benigne["anniv"] = "\\textup{†} Cras recurrit anniversarium obitus R. P. Lini Mariæ \\textsc{Delbos}, sacerdotis, qui die 13 novembris 2011, in Abbatia Dominæ Nostræ Mayliliensis, obdormivit in Domino."
     saint_benigne["header"] = " - \\textbf{\\textsc{S. Benigni, martyris}} - \\textbf{festum} - \\textit{Rub.}"
     # Si 11/11 et 13/11 appartiennent à la même semaine, on inverse la semaine du psautier pour les Vigiles:
-    inv_sem_vigiles = "; antiphonæ et psalmi hebdomadæ " + \
+    inv_sem_vigiles = "; antiphonæ et psalmi anni " + \
         hebdo_psalterii_inv[even_year]
     saint_benigne["body"] = "\n\\item In Officio: omnia de Communi unius martyris; oratio in supplemento 188.\n\\item Ad Vigilias: invitatorium proprium in supplemento 59; hymnus in supplemento 185" + inv_sem_vigiles + \
         "; lectiones I et II Nocturnorum in supplemento 185*.\n\\item \\textit{In ML: Missa et præfatio propriæ (olim die 20 novembris; non dicitur \\emph{Credo}).}\n\\item In MC: oratio propria; Commune martyrum (MR 915); lectiones propriæ: 1 Thes \\textbf{2}, 2-8 / Mc \\textbf{16}, 15-18; præfatio de sanctis martyribus."
