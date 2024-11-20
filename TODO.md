@@ -505,6 +505,12 @@ Office de saints Maur et Placide : prendre répons, hymne et verset du commun d
 
 Faire la chasse aux ant. de Benedictus et Magnificat inutilement indiquées car tirées du Commun.
 
+Annonciation : le report à Pâques + 8 ne fonctionne pas (2027).
+
+Césures : pas moins de 2 lettres.
+
+Problème du "Quatuor": enlever la queue. Ou changer de police ?
+
 
 # POLYGLOTTE:
 - Table de correspondance des versets.
