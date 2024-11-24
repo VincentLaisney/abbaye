@@ -850,7 +850,12 @@ def dict_tempo_create(current_year, even_year, year_letter):
         "body"] = "\n\\item Ad Vigilias et Laudes : ß \\textit{Benedicamus Domino} cum duobus \\textit{Alleluia}\n\\item In MC : sequentia; præfatio et \\textit{Communicantes} propria; \\textit{Pater} in tono C (GR 814); Missa concluditur benedictione sollemni; \\textit{Ite Missa est, Alleluia Alleluia} ut in die Paschæ."
     pentecote["II_vesp"] = "\n\\item Vesperæ sollemnitatis: hymnus \\textit{Veni, Creator}: indulgentia plenaria; ß \\textit{Benedicamus Domino} cum duobus \\textit{Alleluia}; benedictio Sanctissimi Sacramenti."
     pentecote["lectiones_header"] = "Dominica Pentecostes: lectiones"
-    pentecote["lectiones_body"] = "\n\\item[Dom.] Act \\textbf{2}, 1-11 / 1 Co \\textbf{12}, 3b-7.12-13 / Io \\textbf{20}, 19-23"
+    lectures_pentecote = {
+        'A': "\n\\item[Dom. A] Act \\textbf{2}, 1-11 / 1 Co \\textbf{12}, 3b-7.12-13 / Io \\textbf{20}, 19-23",
+        'B': "\n\\item[Dom. B] Act \\textbf{2}, 1-11 / Ga \\textbf{5}, 16-25 / Io \\textbf{15}, 26-27; \\textbf{16}, 12-15",
+        'C': "\n\\item[Dom. C] Act \\textbf{2}, 1-11 / Rom \\textbf{8}, 8-17 / Io \\textbf{14}, 15-16.23b-26",
+    }
+    pentecote["lectiones_body"] = lectures_pentecote[year_letter]
 
     # (La Trinité sera traitée dans les Dimanches per annum.)
 
