@@ -1,0 +1,288 @@
+{% extends 'moines/main_moines.html' %}
+
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Téléphone</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1 class="mb-3">Téléphone</h1>
+
+    <h6 class="red mb-5"><i >Pour les numéros de téléphone des moines, c'est</i>  <a href={% url 'moines:list' %}><b>ici</b><a >.</h4>
+
+    <div class="d-flex w-100 mb-5">
+        <div class="col-6 border border-dark rounded p-2 mx-2">
+            <h5 class="text-center mb-3">Cabines et ateliers</h5>
+            <table>
+                <tr>
+                    <td class="col-9 fw-bold green">Portier portes extérieures</td>
+                    <td>160</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Portes parloirs, livreurs, portail</td>
+                    <td>161, 162, 163</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Standardiste téléphone extérieur</td>
+                    <td>164</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Lettres mensuelles RP Emmanuel</td>
+                    <td>165</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">RP Nicolas bureau PAO</td>
+                    <td>166</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Porterie accueil</td>
+                    <td>167</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Retraites – Fr Assist, RP Dir 1 et 2</td>
+                    <td>169, 170 et 171</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Couture</td>
+                    <td>172</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Menuiserie</td>
+                    <td>173</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Bibliothèque</td>
+                    <td>174</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Cuisine</td>
+                    <td>177</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Secrétariat – RP Dominique-Savio</td>
+                    <td>181</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Secrétariat – RP Alphonse</td>
+                    <td>182</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Secrétariat – RP Marc</td>
+                    <td>183</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Secrétariat – Étage</td>
+                    <td>184, 185</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Comptabilité Abbaye – RP Bénigne</td>
+                    <td>186</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Comptabilité TM – RP Maurice</td>
+                    <td>187</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Imprimerie</td>
+                    <td>189</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Inséreuse</td>
+                    <td>190</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Expéditions</td>
+                    <td>191</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Aluminium – Fr Dysmas-Joseph</td>
+                    <td>192</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Départ courrier poste – Fr Denis</td>
+                    <td>193</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Cabine central téléphonique</td>
+                    <td>194</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Cabine locutorium TRP Abbé</td>
+                    <td>195</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Cabine réfectoire</td>
+                    <td>196</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Cabine palier Saint Ignace</td>
+                    <td>197</td>
+                </tr>
+
+                <tr>
+                    <td class="col-9 fw-bold green">Cabine bâtiment Saint Jean-Baptiste</td>
+                    <td>198</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="col-6col-6 border border-dark rounded p-2 mx-2">
+            <h5 class="text-center mb-3">Commandes téléphoniques</h5>
+            <table class="table table-sm table-borderless mb-5">
+                <tr>
+                    <td class="col-2 fw-bold green">0</td>
+                    <td>Ligne extérieure.</td>
+                </tr>
+        
+                <tr>
+                    <td class="col-2 fw-bold green">®</td>
+                    <td>Touche R : uniquement pour les téléphones fixes.</td>
+                </tr>
+        
+                <tr>
+                    <td class="col-2 fw-bold green">® xxx</td>
+                    <td>Transférer une communication vers le xxx.</td>
+                </tr>
+        
+                <tr>
+                    <td class="col-2 fw-bold green">® 2</td>
+                    <td>Quitter un 2ème correspondant.</td>
+                </tr>
+        
+                <tr>
+                    <td class="col-2 fw-bold green">® 3</td>
+                    <td>Va-et-vient: passer d'un correspondant à l'autre.</td>
+                </tr>
+        
+                <tr>
+                    <td class="col-2 fw-bold green">® 4</td>
+                    <td>Conférence avec 2 correspondants.</td>
+                </tr>
+        
+                <tr>
+                    <td class="col-2 fw-bold green">® 60</td>
+                    <td>Consulter un 2ème correspondant cherchant à vous joindre.</td>
+                </tr>
+        
+                <tr>
+                    <td class="col-2 fw-bold green">® 61 xxx</td>
+                    <td>Transférer une communication en cours vers la boîte vocale xxx.</td>
+                </tr>
+        
+                <tr>
+                    <td class="col-2 fw-bold green">® 63</td>
+                    <td>Demander un rappel automatique, si le poste que vous appelez est occupé. (<i>Annuler : 63.</i>)</td>
+                </tr>
+        
+                <tr>
+                    <td class="col-2 fw-bold green">® 65</td>
+                    <td>Parquer une ligne extérieure.</td>
+                </tr>
+
+                <tr>
+                    <td class="col-2 fw-bold green">65 xxx</td>
+                    <td>Reprendre un parcage (xxx : poste à partir duquel a été parquée la ligne extérieure).</td>
+                </tr>
+
+                <tr>
+                    <td class="col-2 fw-bold green">® 66</td>
+                    <td>Allocation de ligne extérieure (si vous êtes habilité) : donner à un moine la ligne extérieure, pour qu’il puisse composer un numéro.</td>
+                </tr>
+
+                <tr>
+                    <td class="col-2 fw-bold green">71 xxx</td>
+                    <td>Intercepter un appel destiné à un autre poste.</td>
+                </tr>
+
+                <tr>
+                    <td class="col-2 fw-bold green">77</td>
+                    <td>Bis : recomposer le dernier numéro extérieur.</td>
+                </tr>
+
+                <tr>
+                    <td class="col-2 fw-bold green">79</td>
+                    <td>
+                        Renvois :
+                        <table>
+                            <tr>
+                                <td class="col-2 fw-bold green">791 xxx</td>
+                                <td>Renvoi vers le poste xxx.</td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-2 fw-bold green">791 500</td>
+                                <td>Renvoi direct vers sa boîte vocale.</td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-2 fw-bold green">793</td>
+                                <td>"Ne pas déranger".</td>
+                            </tr>
+            
+                            <tr>
+                                <td class="col-2 fw-bold green">790</td>
+                                <td>Annulation de tous les renvois.</td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-2 fw-bold green">60 hhmm</td>
+                    <td>Réveil temporaire (heures-min). Uniquement pour les téléphones fixes. (<i>Pour annuler : 60.</i>)</td>
+                </tr>
+
+                <tr>
+                    <td class="col-2 fw-bold green">67</td>
+                    <td>Consulter sa boîte vocale / Envoyer un message vocal / Initialiser sa boîte vocale.</td>
+                </tr>
+
+                <tr>
+                    <td class="col-2 fw-bold green">701</td>
+                    <td>Personnaliser sa boîte vocale (annonce…)</td>
+                </tr>
+
+                <tr>
+                    <td class="col-2 fw-bold green">704</td>
+                    <td>Modifier le mot de passe de sa boîte vocale.</td>
+                </tr>
+
+                <tr>
+                    <td class="col-2 fw-bold green">500</td>
+                    <td>Menu général des boîtes vocales / Consulter une boîte vocale au choix / Personnaliser une boîte vocale au choix / Envoyer un message vocal.</td>
+                </tr>
+
+                <tr>
+                    <td>*</td>
+                    <td>Menus d’accueil, ordres spéciaux (menus « Tapez 1 pour les commandes, 2 pour… »). Une fois en communication, composer une seule fois l’étoile * avant l’ensemble des ordres.</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+{% endblock content %}

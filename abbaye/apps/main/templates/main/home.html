@@ -15,6 +15,7 @@
                 <h3>Vie du monastère</h3>
                     <a href={% url 'moines:list' %}>MOINES</a><p>Tout sur nous.</p>
                     <a href={% url 'moines:statistiques' %}>STATISTIQUES</a><p>Statistiques communautaires.</p>
+                    <a href={% url 'moines:telephone' %}>TÉLÉPHONE</a><p>Liste des téléphones publics (cabines, ateliers) et des codes téléphoniques (renvois etc.). Pour les téléphones des moines, consultez la page "MOINES" ci-dessus.</p>
                     <a href={% url 'agenda:calendar' %}>AGENDA COMMUNAUTAIRE</a><p>Conférences, retraites, promenades, fêtes des moines… (P. Prieur)</p>
                     <a href="https://docs.google.com/spreadsheets/d/14BfFLTsF54yjQVkQhylWuqB65ag2LhMYe08ubXkvlYE/edit#gid=0">TABLEAU DES SERVICES</a><p>Sur GoogleSheets (P. Louis).</p>
                     <a href={% url 'hotellerie:listing_cuisine' %}>LISTE DES HÔTES</a><p>Listing de la cuisine.</p>
@@ -47,7 +48,7 @@
                     <a href={% url 'livrets:home' %}>LIVRETS</a><p>Livrets de messe pour les retraites.</p>
                     <a href={% url 'accenteur:home' %}>ACCENTEUR</a><p>Numéricum instruméntum ad latínos textus accentizándos.</p>
                     <!-- TODO: Move barcode and qrcode to Editions. -->
-                    <a href={% url 'barcode:home' %}>BARCODE/QRCODE</a><p>Un sympathique petit générateur de codes barres et de QR codes.</p>
+                    <a href={% url 'barcode:home' %}><span class="fas fa-barcode"></span> BARCODE / <span class="fas fa-qrcode"></span> QRCODE</a><p>Un sympathique petit générateur de codes barres et de QR codes.</p>
 
                 <h3>Gregorio</h3>
                     <a href="http://gregorio-doc.asj.com">GREGORIO-DOC</a><p>Offline official doc of Gregorio.</p>

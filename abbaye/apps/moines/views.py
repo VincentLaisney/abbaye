@@ -233,3 +233,13 @@ def check_advanced_user(request):
         if bool(request.user.groups.filter(name='Moines')) or request.user.is_superuser:
             advanced_user = True
     return advanced_user
+
+
+def telephone(request):
+    """ Telephone view of Monks. """
+
+    return render(
+        request,
+        'moines/telephone.html',
+        {},
+    )
