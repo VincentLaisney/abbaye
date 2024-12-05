@@ -176,20 +176,33 @@ def pdf(request):
                 tex += "\\TitreB{Asperges me I}\\Normal{(p. 71).}\\par\n"
 
         # Tierce:
-        if data['tierce']:
-            tierce_antiphon = data['tierce']
-        elif date.day == 2 and date.month == 11:
+        # 2 novembre: pas d'antienne:
+        if date.day == 2 and date.month == 11:
             tierce_antiphon = ''
+        # Antienne propre:
+        elif data['tierce']:
+            tierce_antiphon = data['tierce']
+        # Pas d'antienne propre:
         else:
-            tierce_antiphon = [
-                'adjuva_me',
-                'clamavi',
-                'servite_domino',
-                'exsurge_domine',
-                'inclina_domine',
-                'vivit_dominus',
-                'alleluia_dim_per_annum',
-            ][date.weekday()]
+            # Avent:
+            if data['tempo'].startswith('adv_'):
+                week_advent = int(data['tempo'].split('_')[1])
+                tierce_antiphon = [
+                    'jucundare',
+                    'urbs_fortitudinis',
+                    'jerusalem_gaude',
+                ][week_advent - 1]
+            # Per Annum:
+            else:
+                tierce_antiphon = [
+                    'adjuva_me',
+                    'clamavi',
+                    'servite_domino',
+                    'exsurge_domine',
+                    'inclina_domine',
+                    'vivit_dominus',
+                    'alleluia_dim_per_annum',
+                ][date.weekday()]
         tierce_page = ['4', '6', '9', '12', '15', '17', '2'][date.weekday()]
         if mode == 'mg':
             tex += "\\TierceMG{{{}}}{{{}}}\\par\n".format(
@@ -426,12 +439,22 @@ def pdf(request):
             )
 
         # Preface:
+        # BMV:
         if str(data['preface_id']).startswith('cm_'):
             tex += "\\Preface{{Préface propre}}{{{}}}\\par\n".format(
                 data['preface_id']
             )
         else:
-            preface = Preface.objects.get(pk=data['preface_id'])
+            # Avent:
+            if data['ref'].startswith('adv_'):
+                if date.day < 17:
+                    preface = Preface.objects.get(ref='adv_1')
+                else:
+                    preface = Preface.objects.get(ref='adv_2')
+            else:
+                preface = Preface.objects.get(pk=data['preface_id'])
+
+            # Reste de l'année:
             if preface.page and mode == 'mg':
                 tex += "\\TitreB{{{}~:}}\\Normal{{p. {}.}}\\par\n".format(
                     preface.name,
