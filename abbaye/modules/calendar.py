@@ -661,4 +661,4 @@ def get_liturgical_day(date):
     else:
         sancto = None
         liturgical_day = tempo
-    return(tempo, sancto, liturgical_day)
+    return (tempo, sancto, liturgical_day)
