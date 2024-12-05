@@ -100,14 +100,14 @@ def pdf(request):
         year_even = 2 if date.year % 2 == 0 else 1
         data_tempo, data_sancto, liturgical_day = get_data(date)
         data = data_tempo
-        data['readings'] = data['ref']
+        data['tempo'] = data['ref']
         if data_sancto:
             if liturgical_day == data_sancto['ref']:
                 data = data_sancto
                 if data['proper_readings']:
-                    data['readings'] = data_sancto['ref']
+                    data['tempo'] = data_sancto['ref']
                 else:
-                    data['readings'] = data_tempo['ref']
+                    data['tempo'] = data_tempo['ref']
                 if not data['readings_cycle']:
                     data['readings_cycle'] = data_tempo['readings_cycle']
                 if not data['preface_id']:
@@ -258,7 +258,7 @@ def pdf(request):
 
         # First reading:
         tex += "\\Lecture{{Première lecture}}{{{}".format(
-            data['readings'],
+            data['tempo'],
         )
         if data['readings_cycle'] == 6:
             tex += "_1_{}_{}}}\\par\n".format(
@@ -301,7 +301,7 @@ def pdf(request):
             if grid_gr:
                 # Second reading:
                 tex += "\\Lecture{{Deuxième lecture}}{{{}".format(
-                    data['readings'],
+                    data['tempo'],
                 )
                 if data['readings_cycle'] == 6:
                     tex += "_2_{}_{}}}\\par\n".format(
@@ -346,9 +346,9 @@ def pdf(request):
 
         # Gospel:
         tex += "\\Lecture{{Évangile}}{{{}".format(
-            data['readings'],
+            data['tempo'],
         )
-        if data['readings'].startswith('pa_') and not data['readings'].endswith('_0'):
+        if data['tempo'].startswith('pa_') and not data['tempo'].endswith('_0'):
             tex += "_ev}\\par\n"
         elif data['readings_cycle'] == 6:
             tex += "_ev_{}_{}}}\\par\n".format(
