@@ -33,7 +33,7 @@ $(document).ready(function () {
 
   // QR code:
   $('#input_qrcode').keyup(function () {
-    var qrcode = encodeURIComponent($('#input_qrcode').val());
+    var qrcode = $('#input_qrcode').val();
     if (qrcode != '') {
       $.get(
         'create_qrcode/' + qrcode + '/',
