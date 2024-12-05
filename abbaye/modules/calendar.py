@@ -604,7 +604,9 @@ def get_tempo(date):
     first_sunday_of_next_advent = get_first_sunday_of_advent(liturgical_year)
     christ_king = first_sunday_of_next_advent - datetime.timedelta(days=7)
     if first_sunday_of_advent <= date < christmas:
-        tempo = 'adv'
+        days = (date - first_sunday_of_advent).days
+        week = floor((days / 7) + 1)
+        tempo = 'adv_{}_{}'.format(week, weekday)
     elif christmas <= date < baptism_of_christ:
         tempo = 'noel'
     elif baptism_of_christ <= date < ash:
