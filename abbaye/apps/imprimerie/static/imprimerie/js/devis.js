@@ -140,8 +140,16 @@ function refresh(data_paper) {
   var prix_pelliculage = Number.parseInt($('#id_pelliculage').val());
   var prix_rainage = Number.parseInt($('#id_rainage').val());
   var prix_encollage = Number.parseInt($('#id_encollage').val());
+  if (prix_encollage == 0) {
+    var forfait_thermorelieur = 0;
+    $('#forfait_thermorelieur').text('')
+  }
+  else {
+    var forfait_thermorelieur = 50;
+    $('#forfait_thermorelieur').text('Forfait thermorelieur : 50 €')
+  }
   var prix_agrafage = Number.parseInt($('#id_agrafage').val());
-  var prix_finition = (prix_massicot + prix_pelliculage + prix_rainage + prix_encollage + prix_agrafage) * cout_heure / 60;
+  var prix_finition = (prix_massicot + prix_pelliculage + prix_rainage + prix_encollage + forfait_thermorelieur + prix_agrafage) * cout_heure / 60;
   $('#prix_finition').html(prix_finition.toFixed(2) + ' €');
 
   // Total :
