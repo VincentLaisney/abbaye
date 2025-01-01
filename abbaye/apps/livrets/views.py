@@ -48,7 +48,6 @@ def score(request):
         else:
             color = 'blue'
             title = "Cette partition se trouve dans le Missel grégorien."
-
     elif os.path.isfile(path):
         color = 'green'
         title = "Cette partition ne se trouve pas dans le Missel grégorien mais existe comme fichier Gregorio."
