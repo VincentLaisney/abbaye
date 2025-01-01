@@ -567,6 +567,12 @@ def get_first_sunday_of_advent(year):
     return christmas_date - datetime.timedelta(days=(christmas_weekday + 22))
 
 
+def get_liturgical_year(date):
+    """ Return the liturgical year of the given date. """
+    first_sunday_of_advent = get_first_sunday_of_advent(date.year)
+    return (date.year if date < first_sunday_of_advent else (date.year + 1))
+
+
 def get_easter(year):
     """ Returns the Easter date for the given liturgical year. """
     v1 = year - 1900
@@ -585,9 +591,7 @@ def get_tempo(date):
     """ Returns the tempo ref according to the given date. """
 
     weekday = (date.weekday() + 1) if date.weekday() != 6 else 0
-    first_sunday_of_advent = get_first_sunday_of_advent(date.year)
-    liturgical_year = date.year if date < first_sunday_of_advent\
-        else (date.year + 1)
+    liturgical_year = get_liturgical_year(date)
     first_sunday_of_advent = get_first_sunday_of_advent(liturgical_year - 1)
     christmas = datetime.date(liturgical_year - 1, 12, 25)
     if christmas.weekday() == 6:
@@ -608,7 +612,13 @@ def get_tempo(date):
         week = floor((days / 7) + 1)
         tempo = 'adv_{}_{}'.format(week, weekday)
     elif christmas <= date < baptism_of_christ:
-        tempo = 'noel'
+        # TODO: À affiner (ici, seulement les jours après Noël et la Ste Famille "dimanche" (cas le plus fréquent)).
+        # Cas de la Ste Famille le 30 ('ste_famille_fer').
+        # Féries après le 1er janvier jusqu'au Baptême ('noel_time_2' et 'noel_time_3').
+        if weekday == 0:
+            tempo = 'ste_famille_dim'
+        else:
+            tempo = 'noel_time_1'
     elif baptism_of_christ <= date < ash:
         tempo = 'pa_before_ash'
     elif ash <= date < easter:

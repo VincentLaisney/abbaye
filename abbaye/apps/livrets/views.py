@@ -10,7 +10,7 @@ from django.conf import settings
 from django.http import JsonResponse
 from django.shortcuts import render
 
-from modules.calendar import get_liturgical_day
+from modules.calendar import get_liturgical_day, get_liturgical_year
 
 from .models import BMV, Day, Preface, Score
 
@@ -48,7 +48,6 @@ def score(request):
         else:
             color = 'blue'
             title = "Cette partition se trouve dans le Missel grégorien."
-
     elif os.path.isfile(path):
         color = 'green'
         title = "Cette partition ne se trouve pas dans le Missel grégorien mais existe comme fichier Gregorio."
@@ -96,8 +95,9 @@ def pdf(request):
     tex += "\\TitreA{Messe conventuelle}\n"
     for i in range(number_of_days):
         date = start + datetime.timedelta(days=i)
-        year_cycle = ['A', 'B', 'C'][(date.year - 2020) % 3]
-        year_even = 2 if date.year % 2 == 0 else 1
+        liturgical_year = get_liturgical_year(date)
+        year_cycle = ['A', 'B', 'C'][(liturgical_year - 2020) % 3]
+        year_even = 2 if liturgical_year % 2 == 0 else 1
         data_tempo, data_sancto, liturgical_day = get_data(date)
         data = data_tempo
         data['tempo'] = data['ref']
@@ -192,6 +192,11 @@ def pdf(request):
                     'urbs_fortitudinis',
                     'jerusalem_gaude',
                 ][week_advent - 1]
+
+            # Noël:
+            elif data['tempo'] in ['1230', '1231']:
+                tierce_antiphon = 'genuit_puerpera'
+
             # Per Annum:
             else:
                 tierce_antiphon = [
