@@ -192,6 +192,11 @@ def pdf(request):
                     'urbs_fortitudinis',
                     'jerusalem_gaude',
                 ][week_advent - 1]
+
+            # Noël:
+            elif data['tempo'] in ['1230', '1231']:
+                tierce_antiphon = 'genuit_puerpera'
+
             # Per Annum:
             else:
                 tierce_antiphon = [
