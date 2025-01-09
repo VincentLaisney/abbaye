@@ -47,6 +47,30 @@ Pour les livrets "full":
 
 
 # MÉMO:
+- Install : _Calibre_ pour lire epubs, GoldenDict.
+- Anki :
+tar xaf anki-24.11-linux-qt6.tar.zst
+cd cd anki-24.11-linux-qt6/
+./install.sh
+- Install : Fichier /etc/fstab:
+# /etc/fstab: static file system information.
+#
+# Use 'blkid' to print the universally unique identifier for a
+# device; this may be used with UUID= as a more robust way to name devices
+# that works even if disks are added and removed. See fstab(5).
+#
+# systemd generates mount units based on this file, see systemd.mount(5).
+# Please run 'systemctl daemon-reload' after making changes here.
+#
+# <file system> <mount point>   <type>  <options>       <dump>  <pass>
+# / was on /dev/sda1 during installation
+UUID=b3b077a0-6fac-461d-8dcf-5c51d8f7f542 /               ext4    errors=remount-ro 0       1
+# /media/frromain/DATA was on /dev/sda2 during installation
+UUID=9cbb4ca5-7d85-4267-b759-4446a8d4a1f4 /media/frromain/DATA ext4    defaults        0       2
+# swap was on /dev/sda5 during installation
+UUID=43967b17-11a5-47be-bec3-a999ed811195 none            swap    sw              0       0
+/dev/sr0        /media/cdrom0   udf,iso9660 user,noauto     0       0
+- Commandes : Liste de tous les paquets installés : 'apt list --installed'.
 - Python : Ajouter 'WSGIApplicationGroup %{GLOBAL}' dans le virtual host d'Apache.
 - Rafraîchir les fichiers de conf. à partir des fichiers actuels, et vérifier qu'ils y sont tous.
 - Taskwarrior: + 'verbose=off'.
