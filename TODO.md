@@ -47,6 +47,7 @@ Pour les livrets "full":
 
 
 # MÉMO:
+## INSTALL:
 - Install : _Calibre_ pour lire epubs, GoldenDict.
 - Anki :
 tar xaf anki-24.11-linux-qt6.tar.zst
@@ -143,42 +144,11 @@ Apache : redirection de "services.asj.com/" vers "http://python.asj.com:8011/abb
 
 ---
 
-MySQL : Mettre à jour le champ "commentaire_listing" de la table abbaye.hotellerie_sejour en récupérant ce même champ dans une ancienne table ("hotellerie.sejours_sejour") et en se basant sur l'ID :
+## MySQL :
+- Mettre à jour le champ "commentaire_listing" de la table abbaye.hotellerie_sejour en récupérant ce même champ dans une ancienne table ("hotellerie.sejours_sejour") et en se basant sur l'ID :
 >>> UPDATE abbaye.hotellerie_sejour AS a INNER JOIN hotellerie.sejours_sejour AS h ON a.id = h.id SET a.commentaire_listing = h.commentaire_listing;
 
----
-
-Python:
-I have a list of lists like
-
-[
-    [1, 2, 3],
-    [4, 5, 6],
-    [7],
-    [8, 9]
-]
-
-How can I flatten it to get [1, 2, 3, 4, 5, 6, 7, 8, 9]?
-
-Answer:
-flat_list = [
-    x
-    for xs in xss
-    for x in xs
-]
-
-------
-
-HTML:
-Rediriger d'une page html vers une autre:
-Dans le <head>:
-<meta http-equiv="refresh" content="0; url=http://example.com/" />
-
-------
-
-MySQL:
-Jointures:
-
+- Jointures:
 Assuming you're joining on columns with no duplicates, which is a very common case:
 
     An inner join of A and B gives the result of A intersect B, i.e. the inner part of a Venn diagram intersection.
@@ -253,8 +223,65 @@ select * from a FULL OUTER JOIN b on a.a = b.b;
 null |    6
 null |    5
 
+---
+
+## Python:
+I have a list of lists like
+
+[
+    [1, 2, 3],
+    [4, 5, 6],
+    [7],
+    [8, 9]
+]
+
+How can I flatten it to get [1, 2, 3, 4, 5, 6, 7, 8, 9]?
+
+Answer:
+flat_list = [
+    x
+    for xs in xss
+    for x in xs
+]
+
 ------
 
+## HTML:
+Rediriger d'une page html vers une autre:
+Dans le <head>:
+<meta http-equiv="refresh" content="0; url=http://example.com/" />
+
+------
+
+## Bash scripts:
+- Substring Removal
+${string#substring}
+Deletes shortest match of $substring from front of $string.
+${string##substring}
+Deletes longest match of $substring from front of $string.
+${string%substring}
+Deletes shortest match of $substring from back of $string.
+${string%%substring}
+Deletes longest match of $substring from back of $string.
+Exemple :
+url="http://clairval.com"
+echo ${url#*/}
+>>> /clairval.com
+echo ${url##*/}
+>>> clairval.com
+echo ${url%/*}
+>>> http:/
+echo ${url%%/*}
+>>> http:
+url="http://clairval.com/"
+echo ${url#*/}
+>>> /clairval.com/
+echo ${url##*/}
+>>>
+echo ${url%/*}
+>>> http://clairval.com
+echo ${url%%/*}
+>>> http:
 
 # MOINES:
 - Models: check dates are consistent (birthday < entry < habit etc.).
