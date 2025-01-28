@@ -48,12 +48,12 @@ Pour les livrets "full":
 
 # MÉMO:
 ## INSTALL:
-- Install : _Calibre_ pour lire epubs, GoldenDict.
-- Anki :
+### _Calibre_ pour lire epubs, GoldenDict.
+### Anki :
 tar xaf anki-24.11-linux-qt6.tar.zst
 cd cd anki-24.11-linux-qt6/
 ./install.sh
-- Install : Fichier /etc/fstab:
+### Install : Fichier /etc/fstab:
 # /etc/fstab: static file system information.
 #
 # Use 'blkid' to print the universally unique identifier for a
@@ -81,7 +81,6 @@ UUID=43967b17-11a5-47be-bec3-a999ed811195 none            swap    sw            
       /sda3 (peut être changé après avec GParted?): pas plus de 8Go
     - Gregorio: nécessite le paquet 'cmake'.
     - Mettre à jour l'IP du proxy partout.
-    - MySQL : Pour Debian11: '…0.8.22-1_all.deb'
     - Virtual Box:
         + Installation :
         wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
@@ -110,15 +109,15 @@ UUID=43967b17-11a5-47be-bec3-a999ed811195 none            swap    sw            
         sudo apt autoremove
         sudo rm /etc/apt/sources.list.d/virtualbox.list
 
-- Installation Debian 12:
-Pour Django avec MySQL, mettre à jour la commande :
+### Installation Debian 12:
+#### Pour Django avec MySQL, mettre à jour la commande :
 apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config
 
-Au lieu de pip3 install virtualenv:
+#### Au lieu de pip3 install virtualenv:
 apt-get install python3-virtualenv 
 virtualenv -p python3.11 abbaye
 
-Mysql:
+#### Mysql:
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.30-1_all.deb
 dpkg -i mysql-apt-config_0.8.30-1_all.deb 
 apt update
@@ -136,15 +135,30 @@ Avant de faire:
 mysql_secure_installation
 Si problème, faire un killall -9 mysql_secure_installation dans un autre Terminal, puis Alter user, puis de nouveau secure_install.
 
-Apache : redirection de "services.asj.com/" vers "http://python.asj.com:8011/abbaye/" :
+#### Apache : redirection de "services.asj.com/" vers "http://python.asj.com:8011/abbaye/" :
 <VirtualHost *:80>
     ServerName services.asj.com
     Redirect "/" "http://python.asj.com:8011/abbaye/"
 </VirtualHost>
 
+#### Mutt:
+~/.msmtprc :
+account dev
+account default : dev 
+user clairval
+host <my_host>
+port 587
+auth plain
+password <my_super_password>
+
 ---
 
-## MySQL :
+## Commandes:
+- 'free' pour avoir la RAM.
+
+---
+
+## MySQL:
 - Mettre à jour le champ "commentaire_listing" de la table abbaye.hotellerie_sejour en récupérant ce même champ dans une ancienne table ("hotellerie.sejours_sejour") et en se basant sur l'ID :
 >>> UPDATE abbaye.hotellerie_sejour AS a INNER JOIN hotellerie.sejours_sejour AS h ON a.id = h.id SET a.commentaire_listing = h.commentaire_listing;
 
@@ -282,6 +296,7 @@ echo ${url%/*}
 >>> http://clairval.com
 echo ${url%%/*}
 >>> http:
+
 
 # MOINES:
 - Models: check dates are consistent (birthday < entry < habit etc.).
