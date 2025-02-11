@@ -53,7 +53,8 @@ Pour les livrets "full":
 tar xaf anki-24.11-linux-qt6.tar.zst
 cd cd anki-24.11-linux-qt6/
 ./install.sh
-### Install : Fichier /etc/fstab:
+### Ajouter le paquet "rename" pour renommer des fichiers en série.
+- Install : Fichier /etc/fstab:
 # /etc/fstab: static file system information.
 #
 # Use 'blkid' to print the universally unique identifier for a
@@ -296,6 +297,12 @@ echo ${url%/*}
 >>> http://clairval.com
 echo ${url%%/*}
 >>> http:
+
+------
+
+## Commandes:
+## Rename files with find:
+find . -name 'file_*' -exec rename 's/file_/mywish_/' {} \;
 
 
 # MOINES:
