@@ -40,6 +40,14 @@ class Client(models.Model):
         null=True,
         blank=True,
     )
+    email = models.EmailField(
+        (""),
+        max_length=254,
+    )
+    phone = models.CharField(
+        (""),
+        max_length=50,
+    )
     notes = models.TextField(
         null=True,
         blank=True,
