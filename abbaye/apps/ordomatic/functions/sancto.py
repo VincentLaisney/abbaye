@@ -922,7 +922,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     else:
         messe_lue = "\n\\item \\textit{In ML: Missa pro abbate.}"
     saint_pacome[
-        "body"] = "\n\\item In Officio: oratio in supplemento 120 vel in variationibus 21.\n\\item Ad Vigilias: lectio in supplemento 119." + messe_lue + "\n\\item In MC: collecta in MP; Commune sanctorum et sanctarum (MR 958); lectiones propriæ: Gal \\textbf{5}, 22 – \\textbf{6}, 2 / Mt \\textbf{5}, 1-12a; præfatio I de sanctis."
+        "body"] = "\n\\item In Officio: oratio in supplemento 120 vel in variationibus 21.\n\\item Ad Vigilias: lectio in supplemento 119." + messe_lue + "\n\\item In MC: collecta in MP; Commune sanctorum et sanctarum (MR 958); lectiones propriæ: Gal \\textbf{5}, 22 – \\textbf{6}, 2 / Mt \\textbf{5}, 1-12a; præfatio de sanctis pastoribus."
 
     saint_jean_Ier_date = datetime.date(current_year, 5, 18)
     saint_jean_Ier = dict_sancto[saint_jean_Ier_date] = {}
