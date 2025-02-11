@@ -620,7 +620,9 @@ def get_tempo(date):
         else:
             tempo = 'noel_time_1'
     elif baptism_of_christ <= date < ash:
-        tempo = 'pa_before_ash'
+        days = (date - baptism_of_christ).days
+        week = floor((days/7)+1)
+        tempo = 'pa_{}_{}'.format(week, weekday)
     elif ash <= date < easter:
         tempo = 'lent'
     elif easter <= date <= pentecost:

@@ -100,14 +100,15 @@ def pdf(request):
         year_even = 2 if liturgical_year % 2 == 0 else 1
         data_tempo, data_sancto, liturgical_day = get_data(date)
         data = data_tempo
-        data['tempo'] = data['ref']
+        ref_tempo = data['ref']
+        ref_readings = data['ref']
         if data_sancto:
             if liturgical_day == data_sancto['ref']:
                 data = data_sancto
                 if data['proper_readings']:
-                    data['tempo'] = data_sancto['ref']
+                    ref_readings = data_sancto['ref']
                 else:
-                    data['tempo'] = data_tempo['ref']
+                    ref_readings = data_tempo['ref']
                 if not data['readings_cycle']:
                     data['readings_cycle'] = data_tempo['readings_cycle']
                 if not data['preface_id']:
@@ -126,6 +127,12 @@ def pdf(request):
             data['tierce'] = 'laeva_ejus'
             data['prayers_mg'] = None
             data['preface_id'] = 'cm_{}'.format(bmv['cm'])
+        data['tempo'] = ref_tempo
+        if not data['prayers_mg']:
+            if data['ref'].startswith('pa_1_'):
+                ref_prayers = 'pa_1'
+            else:
+                ref_prayers = data['ref']
 
         # Liturgical day:
         tex += "\n\\section{{{}}}\n".format(
@@ -271,12 +278,12 @@ def pdf(request):
             )
         else:
             tex += "\\Oraison{{Oraison}}{{1}}{{{}}}\\par\n".format(
-                data['ref'],
+                ref_prayers,
             )
 
         # First reading:
         tex += "\\Lecture{{Première lecture}}{{{}".format(
-            data['tempo'],
+            ref_readings,
         )
         if data['readings_cycle'] == 6:
             tex += "_1_{}_{}}}\\par\n".format(
@@ -319,7 +326,7 @@ def pdf(request):
             if grid_gr:
                 # Second reading:
                 tex += "\\Lecture{{Deuxième lecture}}{{{}".format(
-                    data['tempo'],
+                    ref_readings,
                 )
                 if data['readings_cycle'] == 6:
                     tex += "_2_{}_{}}}\\par\n".format(
@@ -364,7 +371,7 @@ def pdf(request):
 
         # Gospel:
         tex += "\\Lecture{{Évangile}}{{{}".format(
-            data['tempo'],
+            ref_readings,
         )
         if data['tempo'].startswith('pa_') and not data['tempo'].endswith('_0'):
             tex += "_ev}\\par\n"
@@ -440,7 +447,7 @@ def pdf(request):
             )
         else:
             tex += "\\Oraison{{Prière sur les offrandes}}{{2}}{{{}}}\\par\n".format(
-                data['ref'],
+                ref_prayers,
             )
 
         # Preface:
@@ -562,7 +569,7 @@ def pdf(request):
             )
         else:
             tex += "\\Oraison{{Prière après la Communion}}{{3}}{{{}}}\\par\n".format(
-                data['ref'],
+                ref_prayers,
             )
 
         # TODO: Super populum (Carême).
