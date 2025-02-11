@@ -1,0 +1,7 @@
+{% extends 'delete.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'toubibs:list' 1 %}>Médecins</a></li>
+    <li class="breadcrumb-item"><a href={% url 'toubibs:detail' toubib.id %}>{{ toubib }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
+{% endblock breadcrumbs %}

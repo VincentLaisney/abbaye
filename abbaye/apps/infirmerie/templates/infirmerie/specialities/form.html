@@ -1,0 +1,56 @@
+{% extends 'main.html' %}
+
+{% load static %}
+{% load widget_tweaks %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'toubibs:specialities_list' %}>Spécialités</a></li>
+    {% if spe %}
+        <li class="breadcrumb-item active">Modifier</li>
+    {% else %}
+        <li class="breadcrumb-item active">Créer</li>
+    {% endif %}
+{% endblock breadcrumbs %}
+
+{% block content %}
+    {% if spe %}
+        <h4>Modifier une spécialité</h4>
+    {% else %}
+        <h4>Créer une spécialité</h4>
+    {% endif %}
+
+    <form method="post" novalidate>
+        {% csrf_token %}
+
+        <!-- Spécialité -->
+        <div class="row mt-3">
+            {{ form.speciality.label_tag }}
+
+            {% if form.is_bound %}
+                {% if form.speciality.errors %}
+                    {% render_field form.speciality class="form-control is-invalid" %}
+                    {% for error in form.speciality.errors %}
+                        <div class="invalid-feedback" style="display: block;">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field form.speciality class="form-control is-valid" %}
+                {% endif %}
+            {% else %}
+                {% render_field form.speciality class="form-control" %}
+            {% endif %}
+
+            {% if form.speciality.help_text %}
+                <small class="form-text text-muted">
+                    {{ form.speciality.help_text }}
+                </small>
+            {% endif %}
+        </div>
+
+        <!-- Validation -->
+        <div class="mt-5 d-flex justify-content-center">
+            <a href={% url 'toubibs:specialities_list' %} class="btn btn-primary mx-3">Annuler</a>
+            <button type="submit" class="btn btn-success mx-3">Valider</button>
+        </div>
+{% endblock content %}

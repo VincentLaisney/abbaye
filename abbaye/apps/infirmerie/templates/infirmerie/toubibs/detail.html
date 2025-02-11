@@ -1,0 +1,41 @@
+{% extends 'main.html' %}
+
+{% load tz %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'toubibs:list' 1 %}>Médecins</a></li>
+    <li class="breadcrumb-item active">{{ toubib }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>{{ toubib }}</h1>
+    <h4>{{ toubib.prenom_civil }} {{ toubib.nom_civil }}</h4>
+    <h4>{{ toubib.specialite }}</h4>
+
+    <div class="d-flex flex-column align-items-start">
+        {% localtime on %}
+            <small>Créé le : {{ toubib.created_at|date:"d/m/Y" }} à {{ toubib.created_at|time:"H:i:s" }}</small>
+            <small>Dernière modification le : {{ toubib.last_modified|date:"d/m/Y" }} à {{ toubib.last_modified|time:"H:i:s" }}</small>
+        {% endlocaltime %}
+    </div>
+
+    <div id="logos_detail" class="d-flex justify-content-center">
+        <a href={% url 'toubibs:list' 1 %}><span class="fas fa-reply" title="Retour à la liste"></span></a>
+        <a href={% url 'toubibs:update' toubib.id %}><span class="fas fa-edit" title="Modifier ce médecin"></span></a>
+        <a href={% url 'toubibs:delete' toubib.id %}><span class="fas fa-trash-alt" title="Supprimer ce médecin"></span></a>
+    </div>
+
+    <div class="block row justify-content-center mt-3 mb-2">
+        <table class="table table-borderless my-0">
+            <tr>
+                <td><label>Adresse :</label></td><td>{{ toubib.adresse_complete|linebreaks }}</td>
+            </tr>
+            <tr>
+                <td><label>Téléphone :</label></td><td>{{ toubib.telephone }}</td>
+            </tr>
+            <tr>
+                <td><label>Email :</label></td><td>{{ toubib.email }}</td>
+            </tr>
+        </table>
+    </div>
+{% endblock content %}

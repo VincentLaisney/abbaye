@@ -1,0 +1,7 @@
+{% extends 'delete.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item"><a href={% url 'billets:home' %}>Billets</a></li>
+    <li class="breadcrumb-item"><a href={% url 'billets:detail' billet.id %}>{{ billet }}</a></li>
+    <li class="breadcrumb-item active">Supprimer</li>
+{% endblock breadcrumbs %}

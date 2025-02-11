@@ -1,0 +1,31 @@
+{% extends 'main.html' %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Médecins</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <div class="d-flex align-self-stretch">
+        <div id="title" class="form-inline">
+            <h1>Médecins</h1>
+            <a href={% url 'toubibs:create' %}><p class="mr-auto" title="Ajouter un médecin"><span class="fas fa-plus-circle"></p></a>
+            <a href={% url 'toubibs:list' 1 %} title="Switch to list view"><span class="fas fa-list ml-2"></span></a>
+        </div>
+    </div>
+
+    <ul id="letters" class="list-inline row mx-5 mt-0 mb-3">
+        {% for letter in letters %}
+            {% if letter == current %}
+                <span><li class="mx-1 red li-letter">{{ letter }}</li></span>
+            {% else %}
+                <li class="mx-1"><a href={% url 'toubibs:repertoire' letter %}>{{ letter }}</a></li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+ 
+    <ul class="list-inline">
+        {% for toubib in toubibs %}
+            <li><a href={% url 'toubibs:detail' toubib.id %}>{{ toubib }}</a></li>
+        {% endfor %}
+    </ul>
+{% endblock content %}

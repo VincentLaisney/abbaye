@@ -1,0 +1,51 @@
+{% extends 'main.html' %}
+
+{% load tz %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">{{ billet }}</li>
+{% endblock breadcrumbs %}
+
+{% block content %}
+    <h1>{{ billet }}</h1>
+    <h4>{{ billet.date_time }}</h4>
+
+    <div class="d-flex flex-column align-items-start">
+        {% localtime on %}
+            <small>Créé le : {{ billet.created_at|date:"d/m/Y" }} à {{ billet.created_at|time:"H:i:s" }}</small>
+            <small>Dernière modification le : {{ billet.last_modified|date:"d/m/Y" }} à {{ billet.last_modified|time:"H:i:s" }}</small>
+        {% endlocaltime %}
+    </div>
+
+    <div id="logos_detail" class="d-flex justify-content-center">
+        <a href={% url 'billets:home' %}><span class="fas fa-reply" title="Retour à l'agenda"></span></a>
+        <a href={% url 'billets:update' billet.id %}><span class="fas fa-edit" title="Modifier ce billet"></span></a>
+        <a href={% url 'billets:pdf' billet.id %}><span class="fas fa-file-pdf" title="Voir le pdf"></span></a>
+        <a href={% url 'billets:delete' billet.id %}><span class="fas fa-trash-alt" title="Supprimer ce billet"></span></a>
+    </div>
+
+    <div class="block row justify-content-center mt-3 mb-2">
+        <table class="table table-borderless my-0">
+            <tr>
+                <td><label>Moine(s) :</label></td><td>{{ billet.moines }}</td>
+            </tr>
+            <tr>
+                <td><label>Médecin :</label></td><td>{{ billet.toubib }}</td>
+            </tr>
+                <td><label>Lieu :</label></td><td>{{ billet.where }}</td>
+            </tr>
+            <tr>
+                <td><label>Prix :</label></td><td>{{ billet.prix|floatformat:"-2"|default_if_none:'?' }} €</td>
+            </tr>
+                <td><label>Facture :</label></td><td>{{ billet.facture|yesno:'oui,non' }}</td>
+            </tr>
+                <td><label>Gratis :</label></td><td>{{ billet.gratis|yesno:'oui,non' }}</td>
+            </tr>
+                <td><label>Carte vitale :</label></td><td>{{ billet.vitale|yesno:'oui,non' }}</td>
+            </tr>
+            </tr>
+                <td><label>Remarques :</label></td><td>{{ billet.remarque|linebreaks }}</td>
+            </tr>
+        </table>
+    </div>
+{% endblock content %}
