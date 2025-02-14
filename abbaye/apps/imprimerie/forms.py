@@ -43,6 +43,14 @@ class ClientForm(forms.ModelForm):
         required=False,
         widget=forms.Textarea(),
     )
+    email = forms.EmailField(
+        label='Email :',
+        required=False,
+    )
+    phone = forms.CharField(
+        label='Téléphone :',
+        required=False,
+    )
     notes = forms.CharField(
         label='Notes :',
         required=False,
@@ -102,6 +110,23 @@ class ProjectForm(forms.ModelForm):
             url='imprimerie:clients_autocomplete'
         ),
     )
+    # Status: "Far project".
+    project = forms.BooleanField(
+        required=False,
+    )
+    # Status: "Quotation validated".
+    quotation = forms.BooleanField(
+        required=False,
+    )
+    # Status: "BL sent to compta".
+    bl = forms.BooleanField(
+        required=False,
+    )
+    # Status: "Invoice sent to client."
+    invoice = forms.BooleanField(
+        required=False,
+    )
+
     notes = forms.CharField(
         label='Notes :',
         required=False,
