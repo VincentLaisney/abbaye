@@ -99,6 +99,10 @@ class Project(models.Model):
         Client,
         on_delete=CASCADE,
     )
+    project = models.BooleanField()  # Far project.
+    quotation = models.BooleanField()  # Quotation validated.
+    bl = models.BooleanField()  # BL sent to compta.
+    invoice = models.BooleanField()  # Invoice sent to client.
     notes = models.TextField(
         null=True,
         blank=True,
