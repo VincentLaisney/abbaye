@@ -98,7 +98,7 @@ UUID=43967b17-11a5-47be-bec3-a999ed811195 none            swap    sw            
         vboxmanage list extpacks
 
         + Ajouter User to the vboxusers Group :
-        sudo usermod -a -G vboxusers $USER
+        sudo usermod -a -G vboxusers frromain
 
         + Reboot.
 
@@ -120,7 +120,7 @@ virtualenv -p python3.11 abbaye
 
 #### Mysql:
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.30-1_all.deb
-dpkg -i mysql-apt-config_0.8.30-1_all.deb 
+dpkg -i mysql-apt-config_0.8.30-1_all.deb
 apt update
 apt install mysql-server
 Pour pouvoir installer libssl:
