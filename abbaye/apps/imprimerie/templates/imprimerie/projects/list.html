@@ -15,6 +15,8 @@
 {% block content %}
     <h4>Liste des projets</h4>
 
+    <a href={% url 'imprimerie:project_create' %} class="btn btn-primary my-3">Créer un nouveau projet</a>
+
     <table id="table-projects" class="cell-border order-column hover w-100">
         <thead>
             <tr class="text-center">
@@ -22,6 +24,7 @@
                 <th class="grey-dark">Modifié</th>
                 <th class="red">Nom</th>
                 <th>Client</th>
+                <th class="col-1">Statut</th>
                 <th>Notes</th>
                 <th></th>
             </tr>
@@ -44,14 +47,37 @@
                     </td>
                     <td class="fw-bold">{{ project }}</td>
                     <td>{{ project.client }}</td>
+                    <td>
+                        {% if project.project %}
+                            <span class="green">P</span>
+                        {% else %}
+                            <span class="red">P</span>
+                        {% endif %}
+
+                        {% if project.quotation %}
+                            <span class="green">D</span>
+                        {% else %}
+                            <span class="red">D</span>
+                        {% endif %}
+
+                        {% if project.bl %}
+                            <span class="green">B</span>
+                        {% else %}
+                            <span class="red">B</span>
+                        {% endif %}
+
+                        {% if project.invoice %}
+                            <span class="green">F</span>
+                        {% else %}
+                            <span class="red">F</span>
+                        {% endif %}
+                    </td>
                     <td>{{ project.notes|truncatechars:50 }}</td>
                     <td><a href={% url 'imprimerie:project_details' project.pk %}>Détails</a></td>
                 </tr>
             {% endfor %}
         </tbody>
     </table>
-
-    <a href={% url 'imprimerie:project_create' %} class="btn btn-primary mb-5">Créer un nouveau projet</a>
 {% endblock content %}
 
 {% block javascript %}

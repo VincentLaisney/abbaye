@@ -140,13 +140,19 @@ $(document).ready(function () {
       {
         target: 3,
       },
-      // Notes:
+      // Statut:
       {
         target: 4,
+        orderable: false,
+        searchable: false,
+      },
+      // Notes:
+      {
+        target: 5,
       },
       // Détails:
       {
-        target: 5,
+        target: 6,
         orderable: false,
         searchable: false,
       },
