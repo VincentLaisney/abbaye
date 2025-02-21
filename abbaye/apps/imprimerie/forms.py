@@ -113,18 +113,46 @@ class ProjectForm(forms.ModelForm):
     # Status: "Far project".
     project = forms.BooleanField(
         required=False,
+        label='Simple projet',
+        label_suffix='',
+        widget=forms.CheckboxInput(
+            attrs={
+                'style': 'margin: 0 5px 0 0;'
+            },
+        ),
     )
     # Status: "Quotation validated".
     quotation = forms.BooleanField(
         required=False,
+        label='Devis validé par le client',
+        label_suffix='',
+        widget=forms.CheckboxInput(
+            attrs={
+                'style': 'margin: 0 5px 0 0;'
+            },
+        ),
     )
     # Status: "BL sent to compta".
     bl = forms.BooleanField(
         required=False,
+        label='BL envoyé à la compta',
+        label_suffix='',
+        widget=forms.CheckboxInput(
+            attrs={
+                'style': 'margin: 0 5px 0 0;'
+            },
+        ),
     )
     # Status: "Invoice sent to client."
     invoice = forms.BooleanField(
         required=False,
+        label='Facture envoyée au client',
+        label_suffix='',
+        widget=forms.CheckboxInput(
+            attrs={
+                'style': 'margin: 0 5px 0 0;'
+            },
+        ),
     )
 
     notes = forms.CharField(
