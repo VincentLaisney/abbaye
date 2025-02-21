@@ -90,6 +90,54 @@
                 {% endif %}
             </div>
 
+            <!-- Email -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.email.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.email.errors %}
+                        {% render_field form.email class='is-invalid' %}
+                        {% for error in form.email.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.email class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.email %}
+                {% endif %}
+                {% if form.email.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.email.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
+            <!-- Téléphone -->
+            <div class='form-group d-flex flex-column align-items-start'>
+                {{ form.phone.label_tag }}
+                {% if form.is_bound %}
+                    {% if form.phone.errors %}
+                        {% render_field form.phone class='is-invalid' %}
+                        {% for error in form.phone.errors %}
+                            <div class='invalid-feedback d-block'>
+                                {{ error }}
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        {% render_field form.phone class='is-valid' %}
+                    {% endif %}
+                {% else %}
+                    {% render_field form.phone %}
+                {% endif %}
+                {% if form.phone.help_text %}
+                    <small class='form-text text-muted'>
+                        {{ form.phone.help_text }}
+                    </small>
+                {% endif %}
+            </div>
+
             <!-- Notes -->
             <div class='form-group d-flex flex-column align-items-start'>
                 {{ form.notes.label_tag }}
