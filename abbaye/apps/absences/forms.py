@@ -144,6 +144,7 @@ class TicketForm(forms.ModelForm):
         .filter(absences_recipient=False)
         .filter(is_active=True)
         .exclude(email='')
+        .exclude(email=None)
         .order_by('absolute_rank', 'entry', 'rank_entry'),
         widget=forms.CheckboxSelectMultiple(),
         help_text='Cochez les moines supplémentaires à qui vous souhaitez faire parvenir ce message.',
