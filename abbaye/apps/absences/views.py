@@ -13,7 +13,7 @@ from .models import Monk, Ticket
 
 def list(request, *args, **kwargs):
     """ List of Tickets (home page of Absences). """
-    tickets = Ticket.objects.all().order_by('-go_date', '-back_date')
+    tickets = Ticket.objects.all().order_by('-go_date', '-back_date')[:50]
     return render(
         request,
         'absences/list.html',

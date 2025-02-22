@@ -110,10 +110,10 @@ class ProjectForm(forms.ModelForm):
             url='imprimerie:clients_autocomplete'
         ),
     )
-    # Status: "Far project".
-    project = forms.BooleanField(
+    # Status: "Quotation sent to client".
+    quotation = forms.BooleanField(
         required=False,
-        label='Simple projet',
+        label='Devis envoyé au client',
         label_suffix='',
         widget=forms.CheckboxInput(
             attrs={
@@ -121,8 +121,8 @@ class ProjectForm(forms.ModelForm):
             },
         ),
     )
-    # Status: "Quotation validated".
-    quotation = forms.BooleanField(
+    # Status: "Quotation validated by client".
+    validated = forms.BooleanField(
         required=False,
         label='Devis validé par le client',
         label_suffix='',

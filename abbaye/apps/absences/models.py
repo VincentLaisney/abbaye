@@ -39,9 +39,11 @@ class Ticket(models.Model):
     go_station = models.CharField(
         max_length=25,
         null=True,
+        blank=True,
     )
     go_hour = models.TimeField(
         null=True,
+        blank=True,
     )
     back_date = models.DateField()
     back_moment = models.CharField(
@@ -56,15 +58,18 @@ class Ticket(models.Model):
     back_station = models.CharField(
         max_length=25,
         null=True,
+        blank=True,
     )
     back_hour = models.TimeField(
         null=True,
+        blank=True,
     )
     ordinary_form = models.BooleanField(
         null=True,
     )
     commentary = models.TextField(
         null=True,
+        blank=True,
     )
     additional_recipients = models.ManyToManyField(
         Monk,
