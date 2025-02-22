@@ -23,16 +23,16 @@
                 <tr>
                     <td class="fw-bold col-3">Statut :
                         <td>
-                            {% if project.project %}
-                                <span class="green">P</span>
-                            {% else %}
-                                <span class="red">P</span>
-                            {% endif %}
-    
                             {% if project.quotation %}
                                 <span class="green">D</span>
                             {% else %}
                                 <span class="red">D</span>
+                            {% endif %}
+    
+                            {% if project.validated %}
+                                <span class="green">V</span>
+                            {% else %}
+                                <span class="red">V</span>
                             {% endif %}
     
                             {% if project.bl %}

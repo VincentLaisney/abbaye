@@ -75,31 +75,7 @@
 
             <label class="fw-bold green">Statut :</label>
             <div class="ps-2">
-                <!-- Status: "Project" -->
-                <div class='form-group d-flex align-items-center'>
-                    {% if form.is_bound %}
-                        {% if form.project.errors %}
-                            {% render_field form.project class='is-invalid' %}
-                            {% for error in form.project.errors %}
-                                <div class='invalid-feedback d-block'>
-                                    {{ error }}
-                                </div>
-                            {% endfor %}
-                        {% else %}
-                            {% render_field form.project class='is-valid' %}
-                        {% endif %}
-                    {% else %}
-                        {% render_field form.project %}
-                    {% endif %}
-                    {% if form.project.help_text %}
-                        <small class='form-text text-muted'>
-                            {{ form.project.help_text }}
-                        </small>
-                    {% endif %}
-                    {{ form.project.label_tag }}
-                </div>
-    
-                <!-- Status: "Quotation validated" -->
+                <!-- Status: "Quotation sent to client" -->
                 <div class='form-group d-flex align-items-center'>
                     {% if form.is_bound %}
                         {% if form.quotation.errors %}
@@ -121,6 +97,30 @@
                         </small>
                     {% endif %}
                     {{ form.quotation.label_tag }}
+                </div>
+    
+                <!-- Status: "Quotation validated by client" -->
+                <div class='form-group d-flex align-items-center'>
+                    {% if form.is_bound %}
+                        {% if form.validated.errors %}
+                            {% render_field form.validated class='is-invalid' %}
+                            {% for error in form.validated.errors %}
+                                <div class='invalid-feedback d-block'>
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.validated class='is-valid' %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field form.validated %}
+                    {% endif %}
+                    {% if form.validated.help_text %}
+                        <small class='form-text text-muted'>
+                            {{ form.validated.help_text }}
+                        </small>
+                    {% endif %}
+                    {{ form.validated.label_tag }}
                 </div>
     
                 <!-- Status: "BL sent to compta" -->
