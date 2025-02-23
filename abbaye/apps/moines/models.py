@@ -8,12 +8,12 @@ class Monk(models.Model):
     name = models.CharField(
         max_length=255,
     )
-    civil_first_name = models.CharField(
-        max_length=255,
-    )
-    civil_last_name = models.CharField(
-        max_length=255,
-    )
+    # civil_first_name = models.CharField(
+    #     max_length=255,
+    # )
+    # civil_last_name = models.CharField(
+    #     max_length=255,
+    # )
     # Dates:
     birthday = models.DateField(
         blank=True,

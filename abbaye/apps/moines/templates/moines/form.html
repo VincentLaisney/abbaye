@@ -51,7 +51,7 @@
         </div>
 
         <!-- Prénom civil -->
-        <div class="row justify-content-start ml-0">
+        {% comment %} <div class="row justify-content-start ml-0">
             <div class="form-group">
                 {{ form.civil_first_name.label_tag }}
 
@@ -76,10 +76,10 @@
                     </small>
                 {% endif %}
             </div>
-        </div>
+        </div> {% endcomment %}
 
         <!-- Nom civil -->
-        <div class="row justify-content-start ml-0">
+        {% comment %} <div class="row justify-content-start ml-0">
             <div class="form-group">
                 {{ form.civil_last_name.label_tag }}
 
@@ -104,7 +104,7 @@
                     </small>
                 {% endif %}
             </div>
-        </div>
+        </div> {% endcomment %}
 
         <!-- Date de naissance -->
         <div class="row justify-content-start ml-0">
