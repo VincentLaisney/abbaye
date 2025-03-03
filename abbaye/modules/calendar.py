@@ -624,7 +624,12 @@ def get_tempo(date):
         week = floor((days/7)+1)
         tempo = 'pa_{}_{}'.format(week, weekday)
     elif ash <= date < easter:
-        tempo = 'lent'
+        days = (date - ash).days
+        if days < 4:
+            tempo = 'cendres_{}'.format(days)
+        else:
+            week = floor((days/7)+1)
+            tempo = 'qua_{}_{}'.format(week, weekday)
     elif easter <= date <= pentecost:
         tempo = 'tp'
     elif pentecost <= date < first_sunday_of_next_advent:

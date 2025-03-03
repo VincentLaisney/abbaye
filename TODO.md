@@ -376,8 +376,20 @@ sys     0m0.003s # <-- CPU time kernel-space.
 ------
 
 ## Commandes:
-## Rename files with find:
+### Rename files with find:
 find . -name 'file_*' -exec rename 's/file_/mywish_/' {} \;
+
+### Rename files with find: replace spaces with underscores:
+find -name '* *' -exec bash -c 'mv "$1" "${1// /_}"' -- {} \;
+
+### Remove files of a dir, except 'file.txt':
+find . ! -name 'file.txt' -type f -exec rm -f {} +
+
+### Taille d'un dossier:
+du -h --max-depth=2 . | sort -hr
+-h : human-readable
+--max-depth=2 : taille des sous-dossiers avec une profondeur de 2.
+-hr : trier ('sort') par le champ 'human-readable' ('h') en sens inverse ('r', les plus lourds d'abord)
 
 
 # MOINES:
