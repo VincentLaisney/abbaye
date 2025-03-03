@@ -350,13 +350,22 @@ def pdf(request):
             ).filter(
                 ref=grid_al
             ).first()
+            title = "Trait" if ref_tempo.startswith(
+                (
+                    'cendres_',
+                    'qua_',
+                )
+            ) else "Alléluia"
             if alleluia and mode == 'mg':
-                tex += "\\TitreB{{Alléluia~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
+                tex += "\\TitreB{{{}~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
+                    title,
                     alleluia.name,
                     alleluia.page,
                 )
             else:
-                tex += "\\TitreB{Alléluia~:}\\par\n"
+                tex += "\\TitreB{{{}~:}}\\par\n".format(
+                    title,
+                )
                 tex += "\\PartocheWithTraduction{{GR/alleluia/{}}}\n".format(
                     grid_al,
                 )
