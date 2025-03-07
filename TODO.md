@@ -29,7 +29,10 @@
 
 
 # LIVRETS:
-## *Oratio super populum* pendant le Carême.
+## Carême:
+- *Oratio super populum*.
+- Commémoraisons (Stes Perpétue et Félicité etc.)
+- Cendres (et autres ?): Prière universelle.
 ## Pour les livrets "full":
 - P. Vianney:
     • Lettrine au début et à chaque division de psaume (si possible) à Tierce
