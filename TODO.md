@@ -29,8 +29,8 @@
 
 
 # LIVRETS:
-Pour les livrets "full":
-
+## *Oratio super populum* pendant le Carême.
+## Pour les livrets "full":
 - P. Vianney:
     • Lettrine au début et à chaque division de psaume (si possible) à Tierce
     • Oraison du jour sur une seule page
@@ -40,7 +40,6 @@ Pour les livrets "full":
     • Lettrine au début du canon
     • Quand il y a des V/. et R/. la deuxième ligne devrait être en retrait (si possible), cf. p. 2, 18, 20
     • Enlever la rubrique en bas de la page 20.
-
 - P. Louis;
     • Par esprit de contradiction, je n’ai pas de correction importante, mais seulement de détail (ma spécialité est plutôt dans le filtrage du moucheron): on ne met pas deux-points en fin de ligne dans un titre (par ex. « Antienne d’Introït : »). Et pour la lecture et l’évangile, je mettrais plutôt comme dans un missel « Lecture de la lettre de saint Paul Apôtre aux Éphésiens »… Bon, évidemment, vous allez trouver ça compliqué!
     • Dans la partition du « Per ipsum », PER devrait être en capitales.
@@ -82,7 +81,7 @@ UUID=43967b17-11a5-47be-bec3-a999ed811195 none            swap    sw            
       /sda3 (peut être changé après avec GParted?): pas plus de 8Go
     - Gregorio: nécessite le paquet 'cmake'.
     - Mettre à jour l'IP du proxy partout.
-    - Virtual Box:
+    - Virtual Box sur Debian 12:
         + Installation :
         wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
         echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
@@ -109,13 +108,25 @@ UUID=43967b17-11a5-47be-bec3-a999ed811195 none            swap    sw            
         sudo apt purge virtualbox-7.1
         sudo apt autoremove
         sudo rm /etc/apt/sources.list.d/virtualbox.list
+    - Virtual Box sur Debian 10:
+    Créer le fichier /etc/apt/sources.list.d/virtualbox.list:
+    vim /etc/apt/sources.list.d/virtualbox.list
+    Écrire la ligne suivante, enregistrer et fermer:
+    deb https://download.virtualbox.org/virtualbox/debian buster contrib
+    Puis:
+    wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
+    apt-get update
+    apt-get install virtualbox-7.0
+    Extensions:
+    wget https://download.virtualbox.org/virtualbox/7.0.0/Oracle_VM_VirtualBox_Extension_Pack-7.0.0.vbox-extpack
 
 ### Installation Debian 12:
 #### Pour Django avec MySQL, mettre à jour la commande :
 apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config
 
 #### Au lieu de pip3 install virtualenv:
-apt-get install python3-virtualenv 
+apt-get install python3-virtualenv
 virtualenv -p python3.11 abbaye
 
 #### Mysql:
