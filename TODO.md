@@ -170,6 +170,12 @@ password <my_super_password>
 
 ---
 
+## Git:
+Pour rapatrier un submodule:
+git submodule update --remote
+
+---
+
 ## MySQL:
 - Mettre à jour le champ "commentaire_listing" de la table abbaye.hotellerie_sejour en récupérant ce même champ dans une ancienne table ("hotellerie.sejours_sejour") et en se basant sur l'ID :
 >>> UPDATE abbaye.hotellerie_sejour AS a INNER JOIN hotellerie.sejours_sejour AS h ON a.id = h.id SET a.commentaire_listing = h.commentaire_listing;
