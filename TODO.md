@@ -29,8 +29,8 @@
 
 
 # LIVRETS:
-Pour les livrets "full":
-
+## *Oratio super populum* pendant le Carême.
+## Pour les livrets "full":
 - P. Vianney:
     • Lettrine au début et à chaque division de psaume (si possible) à Tierce
     • Oraison du jour sur une seule page
@@ -40,7 +40,6 @@ Pour les livrets "full":
     • Lettrine au début du canon
     • Quand il y a des V/. et R/. la deuxième ligne devrait être en retrait (si possible), cf. p. 2, 18, 20
     • Enlever la rubrique en bas de la page 20.
-
 - P. Louis;
     • Par esprit de contradiction, je n’ai pas de correction importante, mais seulement de détail (ma spécialité est plutôt dans le filtrage du moucheron): on ne met pas deux-points en fin de ligne dans un titre (par ex. « Antienne d’Introït : »). Et pour la lecture et l’évangile, je mettrais plutôt comme dans un missel « Lecture de la lettre de saint Paul Apôtre aux Éphésiens »… Bon, évidemment, vous allez trouver ça compliqué!
     • Dans la partition du « Per ipsum », PER devrait être en capitales.
@@ -48,11 +47,12 @@ Pour les livrets "full":
 
 # MÉMO:
 ## INSTALL:
-- Install : _Calibre_ pour lire epubs, GoldenDict.
-- Anki :
+### _Calibre_ pour lire epubs, GoldenDict.
+### Anki :
 tar xaf anki-24.11-linux-qt6.tar.zst
 cd cd anki-24.11-linux-qt6/
 ./install.sh
+### Ajouter le paquet "rename" pour renommer des fichiers en série.
 - Install : Fichier /etc/fstab:
 # /etc/fstab: static file system information.
 #
@@ -81,8 +81,7 @@ UUID=43967b17-11a5-47be-bec3-a999ed811195 none            swap    sw            
       /sda3 (peut être changé après avec GParted?): pas plus de 8Go
     - Gregorio: nécessite le paquet 'cmake'.
     - Mettre à jour l'IP du proxy partout.
-    - MySQL : Pour Debian11: '…0.8.22-1_all.deb'
-    - Virtual Box:
+    - Virtual Box sur Debian 12:
         + Installation :
         wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
         echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
@@ -98,7 +97,7 @@ UUID=43967b17-11a5-47be-bec3-a999ed811195 none            swap    sw            
         vboxmanage list extpacks
 
         + Ajouter User to the vboxusers Group :
-        sudo usermod -a -G vboxusers $USER
+        sudo usermod -a -G vboxusers frromain
 
         + Reboot.
 
@@ -109,18 +108,30 @@ UUID=43967b17-11a5-47be-bec3-a999ed811195 none            swap    sw            
         sudo apt purge virtualbox-7.1
         sudo apt autoremove
         sudo rm /etc/apt/sources.list.d/virtualbox.list
+    - Virtual Box sur Debian 10:
+    Créer le fichier /etc/apt/sources.list.d/virtualbox.list:
+    vim /etc/apt/sources.list.d/virtualbox.list
+    Écrire la ligne suivante, enregistrer et fermer:
+    deb https://download.virtualbox.org/virtualbox/debian buster contrib
+    Puis:
+    wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+    wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
+    apt-get update
+    apt-get install virtualbox-7.0
+    Extensions:
+    wget https://download.virtualbox.org/virtualbox/7.0.0/Oracle_VM_VirtualBox_Extension_Pack-7.0.0.vbox-extpack
 
-- Installation Debian 12:
-Pour Django avec MySQL, mettre à jour la commande :
+### Installation Debian 12:
+#### Pour Django avec MySQL, mettre à jour la commande :
 apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config
 
-Au lieu de pip3 install virtualenv:
-apt-get install python3-virtualenv 
+#### Au lieu de pip3 install virtualenv:
+apt-get install python3-virtualenv
 virtualenv -p python3.11 abbaye
 
-Mysql:
+#### Mysql:
 wget https://dev.mysql.com/get/mysql-apt-config_0.8.30-1_all.deb
-dpkg -i mysql-apt-config_0.8.30-1_all.deb 
+dpkg -i mysql-apt-config_0.8.30-1_all.deb
 apt update
 apt install mysql-server
 Pour pouvoir installer libssl:
@@ -136,15 +147,36 @@ Avant de faire:
 mysql_secure_installation
 Si problème, faire un killall -9 mysql_secure_installation dans un autre Terminal, puis Alter user, puis de nouveau secure_install.
 
-Apache : redirection de "services.asj.com/" vers "http://python.asj.com:8011/abbaye/" :
+#### Apache : redirection de "services.asj.com/" vers "http://python.asj.com:8011/abbaye/" :
 <VirtualHost *:80>
     ServerName services.asj.com
     Redirect "/" "http://python.asj.com:8011/abbaye/"
 </VirtualHost>
 
+#### Mutt:
+~/.msmtprc :
+account dev
+account default : dev 
+user clairval
+host <my_host>
+port 587
+auth plain
+password <my_super_password>
+
 ---
 
-## MySQL :
+## Commandes:
+- 'free' pour avoir la RAM.
+
+---
+
+## Git:
+Pour rapatrier un submodule:
+git submodule update --remote
+
+---
+
+## MySQL:
 - Mettre à jour le champ "commentaire_listing" de la table abbaye.hotellerie_sejour en récupérant ce même champ dans une ancienne table ("hotellerie.sejours_sejour") et en se basant sur l'ID :
 >>> UPDATE abbaye.hotellerie_sejour AS a INNER JOIN hotellerie.sejours_sejour AS h ON a.id = h.id SET a.commentaire_listing = h.commentaire_listing;
 
@@ -254,7 +286,7 @@ Dans le <head>:
 ------
 
 ## Bash scripts:
-- Substring Removal
+### Substring Removal
 ${string#substring}
 Deletes shortest match of $substring from front of $string.
 ${string##substring}
@@ -282,6 +314,100 @@ echo ${url%/*}
 >>> http://clairval.com
 echo ${url%%/*}
 >>> http:
+
+### Cut:
+$ s='one_two_three_four_five'
+$ A="$(cut -d'_' -f2 <<<"$s")"
+$ echo "$A"
+two
+$ B="$(cut -d'_' -f4 <<<"$s")"
+$ echo "$B"
+four
+La même chose avec awk:
+A=$(awk -F_ '{print $2}' <<< 'one_two_three_four_five')
+B=$(awk -F_ '{print $4}' <<< 'one_two_three_four_five')  
+
+### Save the output of a command to a file:
+          || visible in terminal ||   visible in file   || existing
+  Syntax  ||  StdOut  |  StdErr  ||  StdOut  |  StdErr  ||   file   
+==========++==========+==========++==========+==========++===========
+    >     ||    no    |   yes    ||   yes    |    no    || overwrite
+    >>    ||    no    |   yes    ||   yes    |    no    ||  append
+          ||          |          ||          |          ||
+   2>     ||   yes    |    no    ||    no    |   yes    || overwrite
+   2>>    ||   yes    |    no    ||    no    |   yes    ||  append
+          ||          |          ||          |          ||
+   &>     ||    no    |    no    ||   yes    |   yes    || overwrite
+   &>>    ||    no    |    no    ||   yes    |   yes    ||  append
+          ||          |          ||          |          ||
+ | tee    ||   yes    |   yes    ||   yes    |    no    || overwrite
+ | tee -a ||   yes    |   yes    ||   yes    |    no    ||  append
+          ||          |          ||          |          ||
+ n.e. (*) ||   yes    |   yes    ||    no    |   yes    || overwrite
+ n.e. (*) ||   yes    |   yes    ||    no    |   yes    ||  append
+          ||          |          ||          |          ||
+|& tee    ||   yes    |   yes    ||   yes    |   yes    || overwrite
+|& tee -a ||   yes    |   yes    ||   yes    |   yes    ||  append
+
+List:
+    command > output.txt
+    The standard output stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, it gets overwritten.
+
+    command >> output.txt
+    The standard output stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, the new data will get appended to the end of the file.
+
+    command 2> output.txt
+    The standard error stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, it gets overwritten.
+
+    command 2>> output.txt
+    The standard error stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, the new data will get appended to the end of the file.
+
+    command &> output.txt
+    Both the standard output and standard error stream will be redirected to the file only, nothing will be visible in the terminal. If the file already exists, it gets overwritten.
+
+    command &>> output.txt
+    Both the standard output and standard error stream will be redirected to the file only, nothing will be visible in the terminal. If the file already exists, the new data will get appended to the end of the file..
+
+    command | tee output.txt
+    The standard output stream will be copied to the file, it will still be visible in the terminal. If the file already exists, it gets overwritten.
+
+    command | tee -a output.txt
+    The standard output stream will be copied to the file, it will still be visible in the terminal. If the file already exists, the new data will get appended to the end of the file.
+
+    (*)
+    Bash has no shorthand syntax that allows piping only StdErr to a second command, which would be needed here in combination with tee again to complete the table. If you really need something like that, please look at "How to pipe stderr, and not stdout?" on Stack Overflow for some ways how this can be done e.g. by swapping streams or using process substitution.
+
+    command |& tee output.txt
+    Both the standard output and standard error streams will be copied to the file while still being visible in the terminal. If the file already exists, it gets overwritten.
+
+    command |& tee -a output.txt
+    Both the standard output and standard error streams will be copied to the file while still being visible in the terminal. If the file already exists, the new data will get appended to the end of the file.
+
+### Durée d'exécution d'un script:
+time my_script.sh
+Retourne:
+real    2m5.034s # <-- Actual time taken from start to finish.
+user    0m0.000s # <-- CPU time user-space.
+sys     0m0.003s # <-- CPU time kernel-space.
+
+------
+
+## Commandes:
+### Rename files with find:
+find . -name 'file_*' -exec rename 's/file_/mywish_/' {} \;
+
+### Rename files with find: replace spaces with underscores:
+find -name '* *' -exec bash -c 'mv "$1" "${1// /_}"' -- {} \;
+
+### Remove files of a dir, except 'file.txt':
+find . ! -name 'file.txt' -type f -exec rm -f {} +
+
+### Taille d'un dossier:
+du -h --max-depth=2 . | sort -hr
+-h : human-readable
+--max-depth=2 : taille des sous-dossiers avec une profondeur de 2.
+-hr : trier ('sort') par le champ 'human-readable' ('h') en sens inverse ('r', les plus lourds d'abord)
+
 
 # MOINES:
 - Models: check dates are consistent (birthday < entry < habit etc.).

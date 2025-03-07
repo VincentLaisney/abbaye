@@ -73,6 +73,105 @@
                 {% endif %}
             </div>
 
+            <label class="fw-bold green">Statut :</label>
+            <div class="ps-2">
+                <!-- Status: "Quotation sent to client" -->
+                <div class='form-group d-flex align-items-center'>
+                    {% if form.is_bound %}
+                        {% if form.quotation.errors %}
+                            {% render_field form.quotation class='is-invalid' %}
+                            {% for error in form.quotation.errors %}
+                                <div class='invalid-feedback d-block'>
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.quotation class='is-valid' %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field form.quotation %}
+                    {% endif %}
+                    {% if form.quotation.help_text %}
+                        <small class='form-text text-muted'>
+                            {{ form.quotation.help_text }}
+                        </small>
+                    {% endif %}
+                    {{ form.quotation.label_tag }}
+                </div>
+    
+                <!-- Status: "Quotation validated by client" -->
+                <div class='form-group d-flex align-items-center'>
+                    {% if form.is_bound %}
+                        {% if form.validated.errors %}
+                            {% render_field form.validated class='is-invalid' %}
+                            {% for error in form.validated.errors %}
+                                <div class='invalid-feedback d-block'>
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.validated class='is-valid' %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field form.validated %}
+                    {% endif %}
+                    {% if form.validated.help_text %}
+                        <small class='form-text text-muted'>
+                            {{ form.validated.help_text }}
+                        </small>
+                    {% endif %}
+                    {{ form.validated.label_tag }}
+                </div>
+    
+                <!-- Status: "BL sent to compta" -->
+                <div class='form-group d-flex align-items-center'>
+                    {% if form.is_bound %}
+                        {% if form.bl.errors %}
+                            {% render_field form.bl class='is-invalid' %}
+                            {% for error in form.bl.errors %}
+                                <div class='invalid-feedback d-block'>
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.bl class='is-valid' %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field form.bl %}
+                    {% endif %}
+                    {% if form.bl.help_text %}
+                        <small class='form-text text-muted'>
+                            {{ form.bl.help_text }}
+                        </small>
+                    {% endif %}
+                    {{ form.bl.label_tag }}
+                </div>
+    
+                <!-- Status: "Invoice sent to client" -->
+                <div class='form-group d-flex align-items-center'>
+                    {% if form.is_bound %}
+                        {% if form.invoice.errors %}
+                            {% render_field form.invoice class='is-invalid' %}
+                            {% for error in form.invoice.errors %}
+                                <div class='invalid-feedback d-block'>
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.invoice class='is-valid' %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field form.invoice %}
+                    {% endif %}
+                    {% if form.invoice.help_text %}
+                        <small class='form-text text-muted'>
+                            {{ form.invoice.help_text }}
+                        </small>
+                    {% endif %}
+                    {{ form.invoice.label_tag }}
+                </div>
+            </div>
+
             <!-- Notes -->
             <div class='form-group d-flex flex-column align-items-start'>
                 {{ form.notes.label_tag }}

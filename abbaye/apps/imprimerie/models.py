@@ -40,6 +40,14 @@ class Client(models.Model):
         null=True,
         blank=True,
     )
+    email = models.EmailField(
+        (""),
+        max_length=254,
+    )
+    phone = models.CharField(
+        (""),
+        max_length=50,
+    )
     notes = models.TextField(
         null=True,
         blank=True,
@@ -91,6 +99,10 @@ class Project(models.Model):
         Client,
         on_delete=CASCADE,
     )
+    quotation = models.BooleanField()  # Quotation sent to client.
+    validated = models.BooleanField()  # Quotation validated.
+    bl = models.BooleanField()  # BL sent to compta.
+    invoice = models.BooleanField()  # Invoice sent to client.
     notes = models.TextField(
         null=True,
         blank=True,

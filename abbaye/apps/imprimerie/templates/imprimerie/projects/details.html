@@ -13,15 +13,44 @@
         <div class="d-flex flex-column align-items-center w-50">
             <table class="table table-borderless table-sm w-50">
                 <tr>
-                    <td class="fw-bold">Nom :</td>
-                    <td>{{ project.name }}</td>
+                    <td class="fw-bold col-3">Nom :</td>
+                    <td class="text-start">{{ project.name }}</td>
                 </tr>
                 <tr>
-                    <td class="fw-bold">Client :</td>
+                    <td class="fw-bold col-3">Client :</td>
                     <td>{{ project.client }}</td>
                 </tr>
                 <tr>
-                    <td class="fw-bold">Notes :</td>
+                    <td class="fw-bold col-3">Statut :
+                        <td>
+                            {% if project.quotation %}
+                                <span class="green">D</span>
+                            {% else %}
+                                <span class="red">D</span>
+                            {% endif %}
+    
+                            {% if project.validated %}
+                                <span class="green">V</span>
+                            {% else %}
+                                <span class="red">V</span>
+                            {% endif %}
+    
+                            {% if project.bl %}
+                                <span class="green">B</span>
+                            {% else %}
+                                <span class="red">B</span>
+                            {% endif %}
+    
+                            {% if project.invoice %}
+                                <span class="green">F</span>
+                            {% else %}
+                                <span class="red">F</span>
+                            {% endif %}
+                        </td>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="fw-bold col-3">Notes :</td>
                     <td>{{ project.notes }}</td>
                 </tr>
             </table>

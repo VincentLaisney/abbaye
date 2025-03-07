@@ -43,6 +43,14 @@ class ClientForm(forms.ModelForm):
         required=False,
         widget=forms.Textarea(),
     )
+    email = forms.EmailField(
+        label='Email :',
+        required=False,
+    )
+    phone = forms.CharField(
+        label='Téléphone :',
+        required=False,
+    )
     notes = forms.CharField(
         label='Notes :',
         required=False,
@@ -102,6 +110,51 @@ class ProjectForm(forms.ModelForm):
             url='imprimerie:clients_autocomplete'
         ),
     )
+    # Status: "Quotation sent to client".
+    quotation = forms.BooleanField(
+        required=False,
+        label='Devis envoyé au client',
+        label_suffix='',
+        widget=forms.CheckboxInput(
+            attrs={
+                'style': 'margin: 0 5px 0 0;'
+            },
+        ),
+    )
+    # Status: "Quotation validated by client".
+    validated = forms.BooleanField(
+        required=False,
+        label='Devis validé par le client',
+        label_suffix='',
+        widget=forms.CheckboxInput(
+            attrs={
+                'style': 'margin: 0 5px 0 0;'
+            },
+        ),
+    )
+    # Status: "BL sent to compta".
+    bl = forms.BooleanField(
+        required=False,
+        label='BL envoyé à la compta',
+        label_suffix='',
+        widget=forms.CheckboxInput(
+            attrs={
+                'style': 'margin: 0 5px 0 0;'
+            },
+        ),
+    )
+    # Status: "Invoice sent to client."
+    invoice = forms.BooleanField(
+        required=False,
+        label='Facture envoyée au client',
+        label_suffix='',
+        widget=forms.CheckboxInput(
+            attrs={
+                'style': 'margin: 0 5px 0 0;'
+            },
+        ),
+    )
+
     notes = forms.CharField(
         label='Notes :',
         required=False,

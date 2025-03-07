@@ -315,8 +315,10 @@ class SejourForm(forms.ModelForm):
             ('', '---------'),
             ('Reliques', 'Reliques'),
             ('Salette', 'Salette'),
+            ('Notre-Dame', 'Notre-Dame'),
             ('Saint-Jérôme', 'Saint-Jérôme'),
             ('Saint-Thomas', 'Saint-Thomas'),
+            ('2e étage', '2e étage'),
             ('Saint-Joseph', 'Saint-Joseph'),
         ],
     )

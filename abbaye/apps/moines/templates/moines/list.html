@@ -40,7 +40,7 @@
                 <tr>
                     <td class="col-2 fw-bold">
                         <a class="button_details" data-bs-toggle='modal' data-bs-target='#monk_details' id="details_{{ monk.pk }}" title="Voir les détails, modifier, supprimer">{{ monk }}</a><br>
-                        <small>{{ monk.civil_first_name }} {{ monk.civil_last_name }}</small>
+                        {% comment %} <small>{{ monk.civil_first_name }} {{ monk.civil_last_name }}</small> {% endcomment %}
                     </td>
 
                     <td class="col-1">
