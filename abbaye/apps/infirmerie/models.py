@@ -2,7 +2,7 @@
 
 from django.db import models
 
-from apps.moines.models import Monk
+#from apps.moines.models import Monk
 
 
 class Speciality(models.Model):
@@ -121,35 +121,35 @@ class Billet(models.Model):
     titre = models.CharField(
         max_length=255,
     )
-    moine1 = models.ForeignKey(
-        Monk,
-        related_name='billets_moine1',
-        on_delete=models.CASCADE,
-    )
-    moine2 = models.ForeignKey(
-        Monk,
-        related_name='billets_moine2',
-        on_delete=models.CASCADE,
-        null=True,
-    )
-    moine3 = models.ForeignKey(
-        Monk,
-        related_name='billets_moine3',
-        on_delete=models.CASCADE,
-        null=True,
-    )
-    moine4 = models.ForeignKey(
-        Monk,
-        related_name='billets_moine4',
-        on_delete=models.CASCADE,
-        null=True,
-    )
-    chauffeur = models.ForeignKey(
-        Monk,
-        related_name='billets_chauffeur',
-        on_delete=models.CASCADE,
-        null=True,
-    )
+#    moine1 = models.ForeignKey(
+#        Monk,
+#        related_name='billets_moine1',
+#        on_delete=models.CASCADE,
+#    )
+#    moine2 = models.ForeignKey(
+#        Monk,
+#        related_name='billets_moine2',
+#        on_delete=models.CASCADE,
+#        null=True,
+#    )
+#    moine3 = models.ForeignKey(
+#        Monk,
+#        related_name='billets_moine3',
+#        on_delete=models.CASCADE,
+#        null=True,
+#    )
+#    moine4 = models.ForeignKey(
+#        Monk,
+#        related_name='billets_moine4',
+#        on_delete=models.CASCADE,
+#        null=True,
+#    )
+#    chauffeur = models.ForeignKey(
+#        Monk,
+#        related_name='billets_chauffeur',
+#        on_delete=models.CASCADE,
+#        null=True,
+#    )
     toubib = models.ForeignKey(
         Toubib,
         related_name='billets_toubib',

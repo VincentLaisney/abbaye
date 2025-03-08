@@ -6,9 +6,9 @@ from dal import autocomplete
 
 from .models import Billet, Speciality, Toubib
 
-from apps.moines.models import Moine
+#from apps.moines.models import Moine
 
-# from tempus_dominus.widgets import DateTimePicker
+#from tempus_dominus.widgets import DateTimePicker
 
 
 
@@ -114,23 +114,23 @@ class BilletForm(forms.ModelForm):
         },
         help_text='Par exemple "P. Vianney (ophtalmo)"',
     )
-    when = forms.DateTimeField(
-        label='Date et heure :',
-        input_formats=[
-            '%d/%m/%Y %H:%M',
-        ],
-        widget=DateTimePicker(
-            options={
-                'format': 'DD/MM/YYYY HH:mm',
-                'locale': 'fr',
-                'sideBySide': True,
-            },
-        ),
-        error_messages={
-            'invalid': 'Date invalide.',
-            'required': 'Ce champ est obligatoire',
-        }
-    )
+#    when = forms.DateTimeField(
+#        label='Date et heure :',
+#        input_formats=[
+#            '%d/%m/%Y %H:%M',
+#        ],
+#        widget=DateTimePicker(
+#            options={
+#                'format': 'DD/MM/YYYY HH:mm',
+#                'locale': 'fr',
+#                'sideBySide': True,
+#            },
+#        ),
+#        error_messages={
+#            'invalid': 'Date invalide.',
+#            'required': 'Ce champ est obligatoire',
+#        }
+#    )
     where = forms.ChoiceField(
         choices=[
             ('Travail', 'Travail'),
@@ -140,34 +140,34 @@ class BilletForm(forms.ModelForm):
         ],
         label='Lieu :',
     )
-    moine1 = forms.ModelChoiceField(
-        queryset=Moine.objects.all().order_by('nom_religieux'),
-        label='Moine 1 :',
-        error_messages={
-            'required': 'Ce champ est obligatoire',
-        },
-    )
-    moine2 = forms.ModelChoiceField(
-        required=False,
-        queryset=Moine.objects.all().order_by('nom_religieux'),
-        label='Moine 2 :',
-    )
-    moine3 = forms.ModelChoiceField(
-        required=False,
-        queryset=Moine.objects.all().order_by('nom_religieux'),
-        label='Moine 3 :',
-    )
-    moine4 = forms.ModelChoiceField(
-        required=False,
-        queryset=Moine.objects.all().order_by('nom_religieux'),
-        label='Moine 4 :',
-    )
-    chauffeur = forms.ModelChoiceField(
-        required=False,
-        queryset=Moine.objects.filter(
-            is_chauffeur=True).order_by('nom_religieux'),
-        label='Chauffeur :',
-    )
+#    moine1 = forms.ModelChoiceField(
+#        queryset=Moine.objects.all().order_by('nom_religieux'),
+#        label='Moine 1 :',
+#        error_messages={
+#            'required': 'Ce champ est obligatoire',
+#        },
+#    )
+#    moine2 = forms.ModelChoiceField(
+#        required=False,
+#        queryset=Moine.objects.all().order_by('nom_religieux'),
+#        label='Moine 2 :',
+#    )
+#    moine3 = forms.ModelChoiceField(
+#        required=False,
+#        queryset=Moine.objects.all().order_by('nom_religieux'),
+#        label='Moine 3 :',
+#    )
+#    moine4 = forms.ModelChoiceField(
+#        required=False,
+#        queryset=Moine.objects.all().order_by('nom_religieux'),
+#        label='Moine 4 :',
+#    )
+#    chauffeur = forms.ModelChoiceField(
+#        required=False,
+#        queryset=Moine.objects.filter(
+#            is_chauffeur=True).order_by('nom_religieux'),
+#        label='Chauffeur :',
+#    )
     prix = forms.FloatField(
         required=False,
         label='Prix :',
