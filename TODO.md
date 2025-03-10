@@ -124,6 +124,29 @@ UUID=43967b17-11a5-47be-bec3-a999ed811195 none            swap    sw            
     Extensions:
     wget https://download.virtualbox.org/virtualbox/7.0.0/Oracle_VM_VirtualBox_Extension_Pack-7.0.0.vbox-extpack
 
+## Raccourcis clavier:
+Vetus Latina:
+evince /home/frromain/Documents/Sainte\ Écriture/0\ Bibles/Vetus\ Latina.pdf
+Polyglotte de Walton
+evince /home/frromain/Documents/Sainte\ Écriture/0\ Bibles/Polyglotte\ Walton/Walton\'s\ Polyglot\ -\ Totum.pdf
+Jastrow
+evince /home/frromain/Documents/Sainte\ Écriture/Langues\ bibliques/Araméen/Jastrow-AramaicHebrew.pdf
+Syriaque
+evince /home/frromain/Documents/Sainte\ Écriture/Langues\ bibliques/Syriaque/epdf.pub_a-compendious-syriac-dictionary.pdf
+PierreQuiBible
+python3 /home/frromain/Documents/Sainte\ Écriture/Divers/PQV/PierreQuiBible/rollingBible.py
+Gaffiot
+evince /home/frromain/Documents/Langues/Latin/Dictionnaires\ latins/Gaffiot_2016.pdf
+Bailly
+evince /home/frromain/Documents/Langues/Grec/Bailly_DictionnaireGrecFrancais.pdf
+Zorell grec
+evince /home/frromain/Documents/Sainte\ Écriture/Langues\ bibliques/Grec/NT/Zorell\ grec.pdf
+Zorell hébreu
+evince /home/frromain/Documents/Sainte\ Écriture/Langues\ bibliques/Hébreu/Zorell\ hébreu.pdf
+Utiles
+libreoffice /media/frromain/DATA/Documents/Divers/Utiles.ods
+
+
 ### Installation Debian 12:
 #### Pour Django avec MySQL, mettre à jour la commande :
 apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config
