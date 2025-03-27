@@ -50,6 +50,28 @@
 
 # MÉMO:
 ## INSTALL:
+### Crontab:
+*/20 8-20 * * * /home/frromain/Scripts/server.sh
+30 10,16 * * * /home/frromain/Scripts/github.sh
+### Vimrc:
+colorscheme default
+set laststatus=2
+set statusline+=%F%r%m%=\ %p%%\ %l:%c
+set number
+set formatoptions+=w
+set textwidth=0
+set tabstop=4
+set softtabstop=4
+set shiftwidth=2
+set expandtab
+set autoindent
+set wrap
+set linebreak
+set breakindent
+set cursorline
+:hi CursorLine cterm=bold
+:map <CR> $a<Del> <Esc>
+:map <C-N> i{}<Esc>hpl%
 ### _Calibre_ pour lire epubs, GoldenDict.
 ### Anki :
 tar xaf anki-24.11-linux-qt6.tar.zst
@@ -138,7 +160,7 @@ python3 /home/frromain/Documents/Sainte\ Écriture/Divers/PQV/PierreQuiBible/rol
 Gaffiot
 evince /home/frromain/Documents/Langues/Latin/Dictionnaires\ latins/Gaffiot_2016.pdf
 Bailly
-evince /home/frromain/Documents/Langues/Grec/Bailly_DictionnaireGrecFrancais.pdf
+evince /home/frromain/Documents/Langues/Grec/bailly-2020-hugo-chavez-20200718.pdf
 Zorell grec
 evince /home/frromain/Documents/Sainte\ Écriture/Langues\ bibliques/Grec/NT/Zorell\ grec.pdf
 Zorell hébreu
