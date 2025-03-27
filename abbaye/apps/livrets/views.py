@@ -581,7 +581,16 @@ def pdf(request):
                 ref_prayers,
             )
 
-        # TODO: Super populum (Carême).
+        # Super populum (Lent).
+        if data['ref'].startswith(
+            (
+                'cendres_',
+                'qua_',
+            )
+        ):
+            tex += "\\Oraison{{Oraison sur le peuple}}{{4}}{{{}}}\\par\n".format(
+                data['ref'],
+            )
 
         # Conclusion:
         if mode == 'mg':
