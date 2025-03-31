@@ -2247,7 +2247,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
         complies = "\\item Completorium pro defunctis: incipitur a \\textit{Confiteor}, post examen conscientiæ; aspersio de more."
     comm_defunts["body"] = rajout_dimanche + nocturnes + "\n\\item \\textit{Hodie, licet omnibus sacerdotibus tres Missas celebrare, ea tamen lege, ut unam tantum libere applicare et pro ea stipem percipere queant: tenentur vero, nulla stipe percepta, alteram in suffragium omnium fidelium defunctorum, tertiam ad mentem Summi Pontificis applicare.}\n\\item \\textit{Ritus in Missis servandus: in prima et secunda Missa, si immediate sacerdos aliam Missam sit celebraturus, sumpto divino Sanguine, purificat calicem cum aqua tantum.}" + \
         rajout_dim_ml + "\n\\item In MC \\textit{(1a Missa)}:" + rajout_dim_mc + \
-        " lectiones propriæ: Is \\textbf{25}, 6a-9 / 1 Co \\textbf{15}, 51-54.57; sequentia \\textit{Dies iræ} (Besnier 53) / Io \\textbf{6}, 51-59;" + \
+        " lectiones propriæ: Is \\textbf{25}, 6a.7-9 / 1 Co \\textbf{15}, 51-57; sequentia \\textit{Dies iræ} (Besnier 53) / Io \\textbf{6}, 51-58;" + \
         credo_mc + " præfatio I de defunctis."
     comm_defunts["II_vesp"] = "\\item I Vesperæ dominicæ sequentis." if comm_defunts_date.weekday(
     ) == 5 else complies
