@@ -1633,7 +1633,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
         text_dim = " \\textbf{\\textsc{Dominica " + num_dim_per_annum + \
             " per annum}}" + " (" + text_ap_pentec + ")"
     else:
-        transfiguration["force"] = 70
+        transfiguration["force"] = 90
         text_dim = ""
     transfiguration["header"] = text_dim + \
         " - \\textbf{\\textsc{in Transfiguratione Domini}} - \\textbf{festum} - \\textit{Alb.}"
