@@ -467,7 +467,8 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     sainte_agathe = dict_sancto[sainte_agathe_date] = {}
     if is_careme(sainte_agathe_date):
         sainte_agathe["force"] = 10
-        sainte_agathe["body"] = "\n\\item Ad Laudes: pro commemoratione S. Agathæ ø \\textit{Paganorum} (AM 809).\n\\item In MC: collecta de sancta.\n\\item Ad Vesperas: pro commemoratione S. Agathæ ø \\textit{Stans beata} (AM 806)."
+        sainte_agathe[
+            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Agathæ ø \\textit{Paganorum} et ß \\textit{Diffusa est} (AM 809).\n\\item In MC: collecta de sancta.\n\\item Ad Vesperas: pro commemoratione S. Agathæ ø \\textit{Stans beata} (AM 806)."
     else:
         sainte_agathe["force"] = 40
         sainte_agathe["header"] = " - \\textsc{S. Agathæ}, virginis et martyris - \\textbf{memoria maior} - \\textit{Rub.}"
@@ -480,7 +481,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     if is_careme(saint_paul_miki_date):
         saint_paul_miki["force"] = 10
         saint_paul_miki[
-            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Pauli Miki et sociorum ø \\textit{Beati eritis} (AM 1121); oratio in supplemento 96.\n\\item In MC: collecta de sanctis."
+            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Pauli Miki et sociorum ø \\textit{Beati eritis} (AM 1121); ß \\textit{Exsultabunt} (AM 738); oratio in supplemento 96.\n\\item In MC: collecta de sanctis."
     else:
         saint_paul_miki["force"] = 40
         saint_paul_miki["header"] = " - \\textsc{Ss. Pauli Miki et sociorum}, martyrum - \\textbf{memoria maior} - \\textit{Rub.}"
@@ -525,7 +526,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     if is_careme(saint_benoit_aniane_date):
         saint_benoit_aniane["force"] = 10
         saint_benoit_aniane[
-            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Benedicti Anianensis ø \\textit{Serve bone} (AM 673); oratio in supplemento 99.\n\\item In MC: collecta in MP."
+            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Benedicti Anianensis ø \\textit{Serve bone} (AM 673); ß \\textit{Iustum deduxit} (AM 743); oratio in supplemento 99.\n\\item In MC: collecta in MP."
     else:
         saint_benoit_aniane["force"] = 40
         saint_benoit_aniane["header"] = " - \\textsc{S. Benedicti Anianensis}, abbatis - \\textbf{\\textit{memoria maior}} - \\textit{Alb.}"
@@ -570,7 +571,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     if is_careme(saint_pierre_damien_date):
         saint_pierre_damien["force"] = 10
         saint_pierre_damien[
-            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Petri Damiani ø \\textit{Euge} (AM 661); oratio: olim die 23 huius.\n\\item In MC: collecta de sancto."
+            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Petri Damiani ø \\textit{Euge} (AM 661); ß \\textit{Iustum deduxit} (AM 740); oratio: olim die 23 huius.\n\\item In MC: collecta de sancto."
     else:
         saint_pierre_damien["force"] = 40
         saint_pierre_damien[
@@ -594,7 +595,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     if is_careme(saint_polycarpe_date):
         saint_polycarpe["force"] = 10
         saint_polycarpe[
-            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Polycarpi ø \\textit{Qui odit} (AM 642); oratio : olim die 26 ianuarii vel in supplemento 110.\n\\item In MC: collecta de sancto."
+            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Polycarpi ø \\textit{Qui odit} (AM 642); ß \\textit{Iustus ut palma} (AM 737); oratio : olim die 26 ianuarii vel in supplemento 110.\n\\item In MC: collecta de sancto."
     else:
         saint_polycarpe["force"] = 40
         saint_polycarpe[
@@ -615,7 +616,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     if is_careme(saintes_perpetue_felicitee_date):
         saintes_perpetue_felicitee["force"] = 10
         saintes_perpetue_felicitee[
-            "body"] = "\n\\item Ad Laudes: pro commemoratione Ss. Perpetuæ et Felicitatis, ø \\textit{Istarum} (AM 748); oratio vide ad diem 6 martii.\n\\item In MC: collecta de sanctis."
+            "body"] = "\n\\item Ad Laudes: pro commemoratione Ss. Perpetuæ et Felicitatis, ø \\textit{Istarum} (AM 748); ß \\textit{Gloria et honore} (AM 748); oratio vide ad diem 6 martii.\n\\item In MC: collecta de sanctis."
     else:
         saintes_perpetue_felicitee["force"] = 40
         saintes_perpetue_felicitee[
@@ -637,7 +638,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     if is_careme(sainte_francoise_romaine_date):
         sainte_francoise_romaine["force"] = 10
         sainte_francoise_romaine[
-            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Franciscæ Romanæ, ø \\textit{Simile est} (AM 685).\n\\item In MC: collecta de sancta."
+            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Franciscæ Romanæ, ø \\textit{Simile est} (AM 685); ß \\textit{Diffusa} (AM 747).\n\\item In MC: collecta de sancta."
     else:
         sainte_francoise_romaine["force"] = 40
         sainte_francoise_romaine["header"] = " - \\textsc{S. Franciscæ Romanæ}, religiosæ - \\textbf{memoria maior} - \\textit{Alb.}"
@@ -648,13 +649,13 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     saint_patrick = dict_sancto[saint_patrick_date] = {}
     saint_patrick["force"] = 10
     saint_patrick[
-        "body"] = "\n\\item Ad Laudes: pro commemoratione S. Patricii, ø \\textit{Euntes in mundum} sine \\textit{Alleluia} (AM 484*); oratio in supplemento 113.\n\\item In MC: collecta de sancto."
+        "body"] = "\n\\item Ad Laudes: pro commemoratione S. Patricii, ø \\textit{Euntes in mundum} sine \\textit{Alleluia} (AM 484*); ß \\textit{Iustum deduxit} (AM 740); oratio in supplemento 113.\n\\item In MC: collecta de sancto."
 
     saint_cyrille_jerusalem_date = datetime.date(current_year, 3, 18)
     saint_cyrille_jerusalem = dict_sancto[saint_cyrille_jerusalem_date] = {}
     saint_cyrille_jerusalem["force"] = 10
     saint_cyrille_jerusalem[
-        "body"] = "\n\\item Ad Laudes: pro commemoratione S. Cyrilli Hierosolymitani, ø \\textit{Amavit} (AM 663).\n\\item In MC: collecta de sancto."
+        "body"] = "\n\\item Ad Laudes: pro commemoratione S. Cyrilli Hierosolymitani, ø \\textit{Amavit} (AM 663); ß \\textit{Iustum deduxit} (AM 740).\n\\item In MC: collecta de sancto."
 
     saint_joseph_date = datetime.date(current_year, 3, 19)
     if is_near_paques(saint_joseph_date):
@@ -732,7 +733,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     if is_careme(saint_jb_de_la_salle_date):
         saint_jb_de_la_salle["force"] = 10
         saint_jb_de_la_salle[
-            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Ioannis Baptistæ de la Salle, ø \\textit{Amen dico vobis} (AM 974); oratio in supplemento 115.\n\\item In MC: collecta de sancto."
+            "body"] = "\n\\item Ad Laudes: pro commemoratione S. Ioannis Baptistæ de la Salle, ø \\textit{Amen dico vobis} (AM 974); ß \\textit{Iustum deduxit} (AM 743); oratio in supplemento 115.\n\\item In MC: collecta de sancto."
     else:
         saint_jb_de_la_salle["force"] = 40
         saint_jb_de_la_salle[
