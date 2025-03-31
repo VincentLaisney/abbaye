@@ -2119,9 +2119,9 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
     sainte_therese_avila["force"] = 40
     sainte_therese_avila["header"] = " - \\textsc{S. Teresiæ a Iesu, virginis et Ecclesiæ doctoris} - \\textbf{memoria maior} - \\textit{Alb.}"
     sainte_therese_avila[
-        "body"] = "\n\\item Ad Laudes: hymnus proprius; ad Benedictus: ø \\textit{O beata anima} (AM 1131).\n\\item \\textit{In ML: Missa in proprio sanctorum vel in PAL.}\n\\item In MC: præfatio de sanctis virginibus et religiosis."
+        "body"] = "\n\\item Ad Vigilias, Laudes et Vesperas: hymni proprii.\n\\item Ad Benedictus: ø \\textit{O beata anima} (AM 1131).\n\\item \\textit{In ML: Missa in proprio sanctorum vel in PAL.}\n\\item In MC: præfatio de sanctis virginibus et religiosis."
     sainte_therese_avila[
-        "II_vesp"] = "\n\\item Ad Vesperas: hymnus proprius; ad Magnificat: ø \\textit{Sanctissima Christi sponsa} (AM 1128)."
+        "II_vesp"] = "\n\\item Ad Magnificat: ø \\textit{Sanctissima Christi sponsa} (AM 1128)."
 
     sainte_marguerite_marie_date = datetime.date(current_year, 10, 16)
     sainte_marguerite_marie = dict_sancto[sainte_marguerite_marie_date] = {}
