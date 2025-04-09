@@ -147,7 +147,7 @@ UUID=43967b17-11a5-47be-bec3-a999ed811195 none            swap    sw            
     wget https://download.virtualbox.org/virtualbox/7.0.0/Oracle_VM_VirtualBox_Extension_Pack-7.0.0.vbox-extpack
 
 ## Raccourcis clavier:
-Vetus Latina:
+Vetus Latina
 evince /home/frromain/Documents/Sainte\ Écriture/0\ Bibles/Vetus\ Latina.pdf
 Polyglotte de Walton
 evince /home/frromain/Documents/Sainte\ Écriture/0\ Bibles/Polyglotte\ Walton/Walton\'s\ Polyglot\ -\ Totum.pdf
@@ -171,10 +171,10 @@ libreoffice /media/frromain/DATA/Documents/Divers/Utiles.ods
 
 ### Installation Debian 12:
 #### Pour Django avec MySQL, mettre à jour la commande :
-apt-get install python3-dev default-libmysqlclient-dev build-essential pkg-config
+aptitude install python3-dev default-libmysqlclient-dev build-essential pkg-config
 
 #### Au lieu de pip3 install virtualenv:
-apt-get install python3-virtualenv
+aptitude install python3-virtualenv
 virtualenv -p python3.11 abbaye
 
 #### Mysql:
