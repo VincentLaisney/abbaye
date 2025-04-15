@@ -514,7 +514,7 @@ NameVirtualHost *:8000
 
         <h4>Polices</h4>
             <div class="group">
-                <p class="descr">Fonts (Arno Pro, FlavGaramond, Garamond Premier Pro, GregPlantin, Menlo-Regular.ttf, PlantinStd, SilentiumPro-RomanI.otf) à copier dans /usr/local/share/fonts (ttf dans truetype et otf dans opentype). Puis :</p>
+                <p class="descr">Fonts (Arno Pro, FlavGaramond, Garamond Premier Pro, GregPlantin, Menlo-Regular.ttf, PlantinStd, SilentiumPro-RomanI.otf) à copier dans /usr/share/fonts (ttf dans truetype et otf dans opentype). Puis :</p>
                 <p class="terminal">fc-cache -fv</p>
                 <p class="descr">Ou lancer (en tant que su-) le script <samp>/home/frromain/Scripts/fonts.sh</samp>.</p>
             </div>
@@ -525,7 +525,7 @@ NameVirtualHost *:8000
                 <p class="descr">Installer texlive texlive-luatex texlive-xetex texlive-lang-european texlive-lang-french texlive-extra-utils.</p>
                 <p class="descr">Ne pas installer texlive-full, qui semble faire des problèmes.</p>
                 <p class="descr">texlive-extra-utils contient latexindent, qui sert pour VSCode (formattage et compilation lors du Ctrl-S).</p>
-                <p class="descr">Les polices doivent être dans /usr/share/local/fonts. En cas de "font not found", vider le cache (c'est-à-dire supprimer le dossier <tt>~/.texlive2013/texmf-var/luatex-cache/</tt>).</p>
+                <p class="descr">En cas de "font not found", vider le cache (c'est-à-dire supprimer le dossier <tt>~/.texlive2013/texmf-var/luatex-cache/</tt>).</p>
             </div>
         
 
