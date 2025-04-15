@@ -478,11 +478,21 @@ $ python -m SimpleHTTPServer 8000
             </div>
 
 
+        <h4>PIP</h4>
+            <div class="group">
+                <p class="descr">Installation :</p>
+                <pre class="terminal">
+aptitude install python3-pip</pre>
+            </div>
+
         <h4>ENVIRONNEMENTS VIRTUELS</h4>
             <div class="group">
-                <p class="descr">Installation de virtualenv (en su -):</p>
+                <p class="descr">Installation de virtualenv (en su -) (Debian 10):</p>
                 <pre class="terminal">
 pip3 install virtualenv</pre>
+                <p class="descr">(Debian 12):</p>
+                <pre class="terminal">
+aptitude install python3-virtualenv</pre>
 
                 <p class="descr">Création du projet my_project dans un environnement virtuel :</p>
                 <pre class="terminal">
@@ -589,6 +599,7 @@ ServerAdmin editeur@traditions-monastiques.com
 DocumentRoot /home/frromain/Sites/infirmerie/infirmerie
 WSGIDaemonProcess infirmerie.asj.com processes=2 threads=15 display-name=%{GROUP} python-home=/home/frromain/Sites/infirmerie python-path=/home_frromain/Sites/infirmerie/infirmerie
 WSGIProcessGroup infirmerie.asj.com
+WSGIApplicationGroup %{GLOBAL}
 WSGIScriptAlias / /home/frromain/Sites/infirmerie/infirmerie/infirmerie/wsgi.py
 &lt;Directory /home/frromain/Sites/infirmerie/infirmerie/infirmerie&gt;
 &lt;Files wsgi.py&gt;
@@ -615,9 +626,12 @@ listen 8002</pre>
                 <pre class="terminal">
 aptitude install libapache2-mod-wsgi-py3</pre>
 
-                <p class="descr">Si besoin de MySQL :</p>
+                <p class="descr">Si besoin de MySQL (Debian 10):</p>
                 <pre class="terminal">
 aptitude install libssl-dev python3.7-dev libmysqlclient-dev</pre>
+                <p class="descr">(Debian 12):</p>
+                <pre class="terminal">
+aptitude install python3-dev default-libmysqlclient-dev build-essential pkg-config</pre>
 
                 <p class="descr">Modifier settings.py :</p>
                 <pre class="file">
