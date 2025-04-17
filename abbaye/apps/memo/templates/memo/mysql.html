@@ -134,12 +134,20 @@ null |    5</pre>
 
         <h4>UPDATE</h4>
             <div class="group">
-            <p class="descr">Mettre à jour tous les enregistrements d'une table (ici Objets) en attribuant à un champ une valeur extraite d'une table jointe (ici Interpretes_CD) (on fait le INNER JOIN et ensuite le SET):</p>
+                <p class="descr">Mettre à jour tous les enregistrements d'une table (ici <code>Objets</code>) en attribuant à un champ une valeur extraite d'une table jointe (ici <code>Interpretes_CD</code>) (on fait le INNER JOIN et ensuite le SET):</p>
                 <pre class="terminal">
 >>> UPDATE Objets AS o
 INNER JOIN Interpretes_CD AS i
 ON o.Interprete_CD = i.ID
 SET o.Interprete = i.Interprete;</pre>
+
+
+                <p class="descr">On peut faire une jointure avec une autre base. Ici nous allons mettre à jour le champ <code>commentaire_listing</code> de la table <code>abbaye.hotellerie_sejour</code> en récupérant ce même champ dans une ancienne table (<code>hotellerie.sejours_sejour</code>) et en nous basant sur l'ID :</p>
+                <pre class="terminal">
+>>> UPDATE abbaye.hotellerie_sejour AS a
+INNER JOIN hotellerie.sejours_sejour AS h
+ON a.id = h.id
+SET a.commentaire_listing = h.commentaire_listing;</pre>
             </div>
 
 
@@ -267,6 +275,6 @@ FROM Objets AS o;</pre>
             <p class="descr">Exécuter un statement depuis le fichier file.sql sur la base my_database :</p>
                 <pre class="terminal">
 mysql my_database < file.sql</pre>
-                </div>
+            </div>
     </div>
 {% endblock content %}
