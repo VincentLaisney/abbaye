@@ -12,10 +12,67 @@
         <h5 class="descr text-center mb-5">Ces scripts ont pour but de montrer la syntaxe des scripts shell<br>et la manière d'y utiliser des boucles, conditions, redirections, paramètres et enchaînements de commandes.</h5>
 
     <div class="w-75">
+    <h4>SUBSTRINGS</h4>
+    <div class="group">
+        <p class="descr">
+            <b>Substring removal:</b><br>
+            <b>${string#substring}</b><br>
+            Deletes shortest match of <code>$substring</code> from front of <code>$string</code>.<br>
+            <b>${string##substring}</b><br>
+            Deletes longest match of <code>$substring</code> from front of <code>$string</code>.<br>
+            <b>${string%substring}</b><br>
+            Deletes shortest match of <code>$substring</code> from back of <code>$string</code>.<br>
+            <b>${string%%substring}</b><br>
+            Deletes longest match of <code>$substring</code> from back of <code>$string</code>.<br>
+            <b>Examples:</b>
+        </p>
+        <pre class="terminal">
+url="http://clairval.com"
+echo ${url#*/}
+>>> /clairval.com
+echo ${url##*/}
+>>> clairval.com
+echo ${url%/*}
+>>> http:/
+echo ${url%%/*}
+>>> http:
+url="http://clairval.com/"
+echo ${url#*/}
+>>> /clairval.com/
+echo ${url##*/}
+>>>
+echo ${url%/*}
+>>> http://clairval.com
+echo ${url%%/*}
+>>> http:</pre>
+
+        <p class="descr">Avec <code>cut</code>:</p>
+        <pre class="terminal">
+$ s='one_two_three_four_five'
+$ A="$(cut -d'_' -f2 <<<"$s")"
+$ echo "$A"
+two
+$ B="$(cut -d'_' -f4 <<<"$s")"
+$ echo "$B"
+four</pre>
+
+        <p class="descr">Avec <code>awk</code>:</p>
+        <pre class="terminal">
+A=$(awk -F_ '{print $2}' <<< 'one_two_three_four_five')
+B=$(awk -F_ '{print $4}' <<< 'one_two_three_four_five')</pre>
+
+        <p class="descr">Remove <code>n</code> characters from a string:</p>
+        <pre class="terminal">
+a=123
+echo "${a::-1}"
+=> 12</pre>
+    </div>
+
+
     <h4>RENOMMER DES FICHIERS</h4>
-        <div class="group">
-            <p class="descr">Le script suivant change tous les fichiers php en fichiers html dans le dossier mon_dossier :</p>
-            <pre class="terminal">
+    <div class="group">
+        <p class="descr">Le script suivant change tous les fichiers php en fichiers html dans le dossier mon_dossier :</p>
+        <pre class="terminal">
 #!/bin/bash
 cd '/chemin/vers/mon_dossier'
 find . -type f -name '*.php' | sort | while read
@@ -25,28 +82,28 @@ fn=`echo "$REPLY" | sed 's/php/html/g'`
 #echo "$fn"
 mv "$f" "$fn"
 done</pre>
-        </div>
+    </div>
 
-        <div class="group">
-            <p class="descr">Plus simple :</p>
-            <pre class="terminal">
+    <div class="group">
+        <p class="descr">Plus simple :</p>
+        <pre class="terminal">
 # Rename all *.txt to *.text
 for file in *.txt; do
 mv -- "$file" "${file%.txt}.text"
 done</pre>
-        </div>
+    </div>
 
-        <div class="group">
-            <p class="descr">Ou encore :</p>
-            <pre class="terminal">
+    <div class="group">
+        <p class="descr">Ou encore :</p>
+        <pre class="terminal">
 for file in *.txt; do
-    mv -- "$file" "$(basename -- "$file" .txt).text"
+mv -- "$file" "$(basename -- "$file" .txt).text"
 done</pre>
-        </div>
+    </div>
 
-        <div class="group">
-            <p class="descr">Voir aussi l'utilitaire <span class="font-monospace">rename</span>:</p>
-            <pre class="terminal">
+    <div class="group">
+        <p class="descr">Voir aussi l'utilitaire <span class="font-monospace">rename</span>:</p>
+        <pre class="terminal">
 Given the files foo1, ..., foo9, foo10, ..., foo278, the commands
 rename foo foo00 foo?
 rename foo foo0 foo??
@@ -59,7 +116,7 @@ will fix the extension of your html files.
 Provide an empty string for shortening:
 rename '_with_long_name' '' file_with_long_name.*
 will remove the substring in the filenames.</pre>
-        </div>
+    </div>
 
 
         <h4>TEST SUR UNE LISTE</h4>
@@ -87,25 +144,18 @@ Fri|Sat|Sun)
 echo "Fri|Sat|Sun";;
 *) ;;
 esac</pre>
+
             <p class="descr">Commentaire :<br>Le & fait tester le statement suivant, même si le précédent matche.</p>
-            <pre class="file">
+            <pre class="terminal">
 $ ./myscript thursday
 Tue|Wed|Thu|Fri</pre>
-            <pre class="file">
+            <pre class="terminal">
 $ ./myscript friday
 Tue|Wed|Thu|Fri
 Fri|Sat|Sun</pre>
-            <pre class="file">
+            <pre class="terminal">
 $ ./myscript saturday
 Fri|Sat|Sun</pre>
-        </div>
-
-        <h4>SUBSTRINGS</h4>
-        <div class="group">
-            <pre class="terminal">
-a=123
-echo "${a::-1}"
-=> 12</pre>
         </div>
 
 
@@ -143,6 +193,7 @@ done</pre>
 
         <h4>EXTRAIRE LE NOM D'UN FICHIER OU SON EXTENSION</h4>
         <div class="group">
+            <p class="descri">(Voir aussi le paragraphe "Substrings").</p>
             <pre class="terminal">
 FILE="example.tar.gz"
 echo "${FILE%%.*}"
