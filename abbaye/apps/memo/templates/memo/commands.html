@@ -10,1194 +10,1194 @@
 
     <div class="w-75">
         <h4>SYSTÈME</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">apt-get update</p></td>
-                    <td><p class="descr">Met à jour le gestionnaire de paquets.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">apt-get update</p></td>
+                <td><p class="descr">Met à jour le gestionnaire de paquets.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt-get upgrade</p></td>
-                    <td><p class="descr">Met à jour les paquets à leur dernière version.</p></td>
-                </tr>
-            
-            
-                <tr>
-                    <td><p class="terminal">do-release-upgrade</p></td>
-                    <td><p class="descr">Upgrade operating system to latest release.</p></td>
-                </tr>
-                <tr>
-                    <td><p class="terminal">cat /etc/issue</p></td>
-                    <td><p class="descr">Version du système.</p></td>
-                </tr>
-                <tr>
-                    <td><p class="terminal">hwclock –show</p></td>
-                    <td><p class="descr">Heure du système.</p></td>
-                </tr>
-                <tr>
-                    <td><p class="terminal">systemctl status systemd-timesyncd.service</p></td>
-                    <td><p class="descr">Donne le statut du démon de synchronisation de l'heure locale à un serveur distant. Pour indiquer le serveur à connecter, éditer le fichier /etc/systemd/timesyncd.conf (ajouter les serveurs, séparés par des espaces, sur la ligne "NTP=" décommentée).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">apt-get upgrade</p></td>
+                <td><p class="descr">Met à jour les paquets à leur dernière version.</p></td>
+            </tr>
+        
+        
+            <tr>
+                <td><p class="terminal">do-release-upgrade</p></td>
+                <td><p class="descr">Upgrade operating system to latest release.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">cat /etc/issue</p></td>
+                <td><p class="descr">Version du système.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">hwclock –show</p></td>
+                <td><p class="descr">Heure du système.</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">systemctl status systemd-timesyncd.service</p></td>
+                <td><p class="descr">Donne le statut du démon de synchronisation de l'heure locale à un serveur distant. Pour indiquer le serveur à connecter, éditer le fichier /etc/systemd/timesyncd.conf (ajouter les serveurs, séparés par des espaces, sur la ligne "NTP=" décommentée).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">su</p></td>
-                    <td><p class="descr">Se logger comme root.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">su</p></td>
+                <td><p class="descr">Se logger comme root.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">su -</p></td>
-                    <td><p class="descr">Se logger comme root avec l'environnement de root, y compris la variable PATH.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">su -</p></td>
+                <td><p class="descr">Se logger comme root avec l'environnement de root, y compris la variable PATH.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">passwd</p></td>
-                    <td><p class="descr">Changer mon pw.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">passwd</p></td>
+                <td><p class="descr">Changer mon pw.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">passwd USERNAME</p></td>
-                    <td><p class="descr">Changer le pw d'un autre utilisateur. Se mettre en su pour éviter les contraintes de longueur et complexité.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">passwd USERNAME</p></td>
+                <td><p class="descr">Changer le pw d'un autre utilisateur. Se mettre en su pour éviter les contraintes de longueur et complexité.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt policy linux-generic</p></td>
-                    <td><p class="descr">Version du kernel.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">apt policy linux-generic</p></td>
+                <td><p class="descr">Version du kernel.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">uname -s</p></td>
-                    <td><p class="descr">Nom du kernel.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">uname -s</p></td>
+                <td><p class="descr">Nom du kernel.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">uname -r</p></td>
-                    <td><p class="descr">Version du kernel.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">uname -r</p></td>
+                <td><p class="descr">Version du kernel.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">purge-old-kernels</p></td>
-                    <td><p class="descr">Purge les vieux kernels (s'appuie sur byobu qui doit être installé).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">purge-old-kernels</p></td>
+                <td><p class="descr">Purge les vieux kernels (s'appuie sur byobu qui doit être installé).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">dpkg -l linux-image-\* | grep ^ii</p></td>
-                    <td><p class="descr">Voir tous les kernels installés.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">dpkg -l linux-image-\* | grep ^ii</p></td>
+                <td><p class="descr">Voir tous les kernels installés.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">lspci -k</p></td>
-                    <td><p class="descr">Liste tous les drivers PCI, et indique les modules kernels capables de s'en occuper.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">lspci -k</p></td>
+                <td><p class="descr">Liste tous les drivers PCI, et indique les modules kernels capables de s'en occuper.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">lscpu</p></td>
-                    <td><p class="descr">Informations sur l'architecture CPU.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">lscpu</p></td>
+                <td><p class="descr">Informations sur l'architecture CPU.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">xdg-user-dirs-update</p></td>
-                    <td><p class="descr">Updates the current state of the users user-dirs.dir. Utile pour restaurer les icônes par défaut (Pictures, Music…) si on a remplacé les folders initiaux par des liens symboliques vers un disque externe. Éditer ensuite ~/.config/user-dirs.dirs</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">xdg-user-dirs-update</p></td>
+                <td><p class="descr">Updates the current state of the users user-dirs.dir. Utile pour restaurer les icônes par défaut (Pictures, Music…) si on a remplacé les folders initiaux par des liens symboliques vers un disque externe. Éditer ensuite ~/.config/user-dirs.dirs</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">dconf-editor</p></td>
-                    <td><p class="descr">Éditeur graphique de gsettings et dconf.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">dconf-editor</p></td>
+                <td><p class="descr">Éditeur graphique de gsettings et dconf.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">free</p></td>
-                    <td><p class="descr">RAM - Display amount of free and used memory in the system.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">free</p></td>
+                <td><p class="descr">RAM - Display amount of free and used memory in the system.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">~/.config/user-dirs.dirs</p></td>
-                    <td><p class="descr">Éditer ce fichier pour modifier les dossiers systèmes de l'utilisateur (donc aussi les vignettes).</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">~/.config/user-dirs.dirs</p></td>
+                <td><p class="descr">Éditer ce fichier pour modifier les dossiers systèmes de l'utilisateur (donc aussi les vignettes).</p></td>
+            </tr>
+        </table>
 
         <h4>MATÉRIEL</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">xset -q</p></td>
-                    <td><p class="descr">Informations on the current settings (keyboard, pointer, screen…).</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">xset -q</p></td>
+                <td><p class="descr">Informations on the current settings (keyboard, pointer, screen…).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">xset r rate 250 70</p></td>
-                    <td><p class="descr">Vitesse de répétition des touches du clavier.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">xset r rate 250 70</p></td>
+                <td><p class="descr">Vitesse de répétition des touches du clavier.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">xinput</p></td>
-                    <td><p class="descr">Lister et modifier les réglages concernant le matériel d'input (souris, clavier).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">xinput</p></td>
+                <td><p class="descr">Lister et modifier les réglages concernant le matériel d'input (souris, clavier).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">xinput list-props 10</p></td>
-                    <td><p class="descr">Propriétés du device 10 (indice à prendre dans la liste, cf. ligne précédente).</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">xinput list-props 10</p></td>
+                <td><p class="descr">Propriétés du device 10 (indice à prendre dans la liste, cf. ligne précédente).</p></td>
+            </tr>
+        </table>
 
         <h4>CRONTAB</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">crontab -l</p></td>
-                    <td><p class="descr">Voir mon fichier crontab.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">crontab -l</p></td>
+                <td><p class="descr">Voir mon fichier crontab.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">crontab -e</p></td>
-                    <td><p class="descr">Éditer mon fichier crontab.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">crontab -e</p></td>
+                <td><p class="descr">Éditer mon fichier crontab.</p></td>
+            </tr>
 
-                <tr>
-                    <td><pre class="terminal">
-    # .---------------- minute (0 - 59)
-    # |  .------------- hour (0 - 23)
-    # |  |  .---------- day of month (1 - 31)
-    # |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
-    # |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
-    # |  |  |  |  |
-    # *  *  *  *  *  &lt;user_command_to_be_executed&gt;</pre></td>
-                    <td><p class="descr">Syntaxe d'une ligne de crontab.</p></td>
-                </tr>
+            <tr>
+                <td><pre class="terminal">
+# .---------------- minute (0 - 59)
+# |  .------------- hour (0 - 23)
+# |  |  .---------- day of month (1 - 31)
+# |  |  |  .------- month (1 - 12) OR jan,feb,mar,apr ...
+# |  |  |  |  .---- day of week (0 - 6) (Sunday=0 or 7) OR sun,mon,tue,wed,thu,fri,sat
+# |  |  |  |  |
+# *  *  *  *  *  &lt;user_command_to_be_executed&gt;</pre></td>
+                <td><p class="descr">Syntaxe d'une ligne de crontab.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">0 0 13 1 5 tâche</p></td>
-                    <td><p class="descr">Exécuter tâche le 13 janvier et tous les vendredis.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">0 0 13 1 5 tâche</p></td>
+                <td><p class="descr">Exécuter tâche le 13 janvier et tous les vendredis.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">*/5 9-17 * * mon,tue,wed,thu,fri wall "Où en es tu ?"</p></td>
-                    <td><p class="descr">Afficher un message toutes les 5 minutes entre 9h et 17h.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">*/5 9-17 * * mon,tue,wed,thu,fri wall "Où en es tu ?"</p></td>
+                <td><p class="descr">Afficher un message toutes les 5 minutes entre 9h et 17h.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">00 */6 * * * /root/scripts/synchronisation-ftp.sh</p></td>
-                    <td><p class="descr">Exécution d'une commande toutes les 6 heures.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">00 */6 * * * /root/scripts/synchronisation-ftp.sh</p></td>
+                <td><p class="descr">Exécution d'une commande toutes les 6 heures.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">00 22 * * * /root/scripts/sauvegarde.sh >> sauvegarde.log</p></td>
-                    <td><p class="descr">Exécution d'une commande à 22h et écriture dans un fichier log.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">00 22 * * * /root/scripts/sauvegarde.sh >> sauvegarde.log</p></td>
+                <td><p class="descr">Exécution d'une commande à 22h et écriture dans un fichier log.</p></td>
+            </tr>
+        </table>
 
         <h4>WATCH</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">watch -n 5 &lt;command&gt;</p></td>
-                    <td><p class="descr">Exécute &lt;command&gt; toutes les 5 secondes et affiche le résultat rafraîchi dans le Terminal.</p></td>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <td><p class="terminal">watch -n 5 &lt;command&gt;</p></td>
+                <td><p class="descr">Exécute &lt;command&gt; toutes les 5 secondes et affiche le résultat rafraîchi dans le Terminal.</p></td>
+            </tr>
+        </table>
 
         <h4>RÉSEAU</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">ip [OBJECT]</p></td>
-                    <td><p class="descr">Infos sur le réseau et les interfaces (voir man ip pour les objets disponibles).</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">ip [OBJECT]</p></td>
+                <td><p class="descr">Infos sur le réseau et les interfaces (voir man ip pour les objets disponibles).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">ip -s -c -h a</p></td>
-                    <td><p class="descr">Adresses, avec stats, couleurs et option 'human'.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">ip -s -c -h a</p></td>
+                <td><p class="descr">Adresses, avec stats, couleurs et option 'human'.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">hostname -I</p></td>
-                    <td><p class="descr">Renvoie l'adresse IP de ce poste.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">hostname -I</p></td>
+                <td><p class="descr">Renvoie l'adresse IP de ce poste.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">nmap 192.168.1.11</p></td>
-                    <td><p class="descr">Scanne les ports ouverts sur une machine du réseau.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">nmap 192.168.1.11</p></td>
+                <td><p class="descr">Scanne les ports ouverts sur une machine du réseau.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">netdiscover -r 192.168.1.0/24</p></td>
-                    <td><p class="descr">Scanne le réseau local.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">netdiscover -r 192.168.1.0/24</p></td>
+                <td><p class="descr">Scanne le réseau local.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">avahi-browse --all --terminate</p></td>
-                    <td><p class="descr">Idem.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">avahi-browse --all --terminate</p></td>
+                <td><p class="descr">Idem.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">avahi-resolve-address 192.168.1.254</p></td>
-                    <td><p class="descr">Résout l'adresse IP passée en paramètre.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">avahi-resolve-address 192.168.1.254</p></td>
+                <td><p class="descr">Résout l'adresse IP passée en paramètre.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">nmcli</p></td>
-                    <td><p class="descr">Command-line tool for controlling NetworkManager. Use "nmcli device show" to get complete information about known devices and "nmcli connection show" to get an overview on active connection profiles.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">nmcli</p></td>
+                <td><p class="descr">Command-line tool for controlling NetworkManager. Use "nmcli device show" to get complete information about known devices and "nmcli connection show" to get an overview on active connection profiles.</p></td>
+            </tr>
+        </table>
 
         <h4>DEVICES/MOUNT</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">df -h</p></td>
-                    <td><p class="descr">Espace libre/utilisé sur disque.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">df -h</p></td>
+                <td><p class="descr">Espace libre/utilisé sur disque.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">df -h | grep "^/dev/sd*" | sort</p></td>
-                    <td><p class="descr">Idem, mais seulement les «/dev/sd*».</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">df -h | grep "^/dev/sd*" | sort</p></td>
+                <td><p class="descr">Idem, mais seulement les «/dev/sd*».</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">fdisk -l</p></td>
-                    <td><p class="descr">(sudo required) Liste des devices (indique notamment la partition de boot).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">fdisk -l</p></td>
+                <td><p class="descr">(sudo required) Liste des devices (indique notamment la partition de boot).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">mount -t ntfs /dev/sda1  /mnt/</p></td>
-                    <td><p class="descr">Monter /dev/sda1 sur /mnt (type ntfs, pour usb: usually vfat, pour linux: usually ext).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">mount -t ntfs /dev/sda1  /mnt/</p></td>
+                <td><p class="descr">Monter /dev/sda1 sur /mnt (type ntfs, pour usb: usually vfat, pour linux: usually ext).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">mount /dev/disk/by-id/ata-ST31500341AS_9VS2AM04-part1 /some/dir</p></td>
-                    <td><p class="descr">Idem by verbose path (other names: /dev/disk/by-uuid/, /dev/disk/by-path/, /dev/disk/by-label/).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">mount /dev/disk/by-id/ata-ST31500341AS_9VS2AM04-part1 /some/dir</p></td>
+                <td><p class="descr">Idem by verbose path (other names: /dev/disk/by-uuid/, /dev/disk/by-path/, /dev/disk/by-label/).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">mount --bind /some/where /else/where</p></td>
-                    <td><p class="descr">Montage avec --bind: The directories and files in the bind mount are the same as the original. Any modification on one side is immediately reflected on the other side, since the two views show the same data.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">mount --bind /some/where /else/where</p></td>
+                <td><p class="descr">Montage avec --bind: The directories and files in the bind mount are the same as the original. Any modification on one side is immediately reflected on the other side, since the two views show the same data.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">lsblk --fs -l -o NAME,FSTYPE,LABEL,UUID,MOUNTPOINT,SIZE</p></td>
-                    <td><p class="descr">Vue générale des filesystems et partitions (permet de voir les types, uuid etc.). Voir les available columns en tapant 'lsblk --help'.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">lsblk --fs -l -o NAME,FSTYPE,LABEL,UUID,MOUNTPOINT,SIZE</p></td>
+                <td><p class="descr">Vue générale des filesystems et partitions (permet de voir les types, uuid etc.). Voir les available columns en tapant 'lsblk --help'.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">blkid</p></td>
-                    <td><p class="descr">Locate/print block device attributes.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">blkid</p></td>
+                <td><p class="descr">Locate/print block device attributes.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">findmnt</p></td>
-                    <td><p class="descr">Trouver un filesystem.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">findmnt</p></td>
+                <td><p class="descr">Trouver un filesystem.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">findmnt -lo source,target,fstype,label,options,used -t ext4</p></td>
-                    <td><p class="descr">-l: list; -o: options list; -t: filter.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">findmnt -lo source,target,fstype,label,options,used -t ext4</p></td>
+                <td><p class="descr">-l: list; -o: options list; -t: filter.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">lsusb</p></td>
-                    <td><p class="descr">Liste les devices usb.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">lsusb</p></td>
+                <td><p class="descr">Liste les devices usb.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">cat /proc/partitions</p></td>
-                    <td><p class="descr">Liste les partitions.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">cat /proc/partitions</p></td>
+                <td><p class="descr">Liste les partitions.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">lsblk -io KNAME,TYPE,SIZE,MODEL</p></td>
-                    <td><p class="descr">Lists  information  about  all available or the specified block devices.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">lsblk -io KNAME,TYPE,SIZE,MODEL</p></td>
+                <td><p class="descr">Lists  information  about  all available or the specified block devices.</p></td>
+            </tr>
+        </table>
 
         <h4>MODULES</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">modprobe <nom_du_module></p></td>
-                    <td><p class="descr">Charger un module kernel.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">modprobe <nom_du_module></p></td>
+                <td><p class="descr">Charger un module kernel.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">depmod</p></td>
-                    <td><p class="descr">Handle dependency descrs for loadable kernel modules.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">depmod</p></td>
+                <td><p class="descr">Handle dependency descrs for loadable kernel modules.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">insmod</p></td>
-                    <td><p class="descr">Install loadable kernel module.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">insmod</p></td>
+                <td><p class="descr">Install loadable kernel module.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">lsmod</p></td>
-                    <td><p class="descr">List loaded modules. /proc/modules shows what kernel modules (drivers) are currently loaded into memory.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">lsmod</p></td>
+                <td><p class="descr">List loaded modules. /proc/modules shows what kernel modules (drivers) are currently loaded into memory.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">modinfo</p></td>
-                    <td><p class="descr">Display information about a kernel module.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">modinfo</p></td>
+                <td><p class="descr">Display information about a kernel module.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">modprobe</p></td>
-                    <td><p class="descr">High level handling of loadable modules.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">modprobe</p></td>
+                <td><p class="descr">High level handling of loadable modules.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">rmmod</p></td>
-                    <td><p class="descr">Unload loadable modules.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">rmmod</p></td>
+                <td><p class="descr">Unload loadable modules.</p></td>
+            </tr>
+        </table>
 
         <h4>SERVICES/DÉMONS</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">systemctl list-unit-files *service</p></td>
-                    <td><p class="descr">Liste tous les services (systemctl) et leur état.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">systemctl list-unit-files *service</p></td>
+                <td><p class="descr">Liste tous les services (systemctl) et leur état.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">systemctl | grep running</p></td>
-                    <td><p class="descr">Liste tous les services dont le statut est “running”.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">systemctl | grep running</p></td>
+                <td><p class="descr">Liste tous les services dont le statut est “running”.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">systemctl list-unit-files --state=enabled</p></td>
-                    <td><p class="descr">Liste tous les services dont le statut est “enabled”.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">systemctl list-unit-files --state=enabled</p></td>
+                <td><p class="descr">Liste tous les services dont le statut est “enabled”.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">service --status-all</p></td>
-                    <td><p class="descr">Runs all init scripts with the status command.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">service --status-all</p></td>
+                <td><p class="descr">Runs all init scripts with the status command.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">ls /etc/init.d</p></td>
-                    <td><p class="descr">Liste tous les démons.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">ls /etc/init.d</p></td>
+                <td><p class="descr">Liste tous les démons.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">cd /etc/systemd/system chmod a+x sdcard.service  systemctl --system daemon-reload  systemctl start sdcard.service</p></td>
-                    <td><p class="descr">Pour ajouter le service sdcard.service.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">cd /etc/systemd/system chmod a+x sdcard.service  systemctl --system daemon-reload  systemctl start sdcard.service</p></td>
+                <td><p class="descr">Pour ajouter le service sdcard.service.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">systemctl stop sdcard.service systemctl disable sdcard.service rm sdcard.service rm sdcard.service systemctl daemon-reload  systemctl reset-failed</p></td>
-                    <td><p class="descr">Pour supprimer le service sdcard.service.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">systemctl stop sdcard.service systemctl disable sdcard.service rm sdcard.service rm sdcard.service systemctl daemon-reload  systemctl reset-failed</p></td>
+                <td><p class="descr">Pour supprimer le service sdcard.service.</p></td>
+            </tr>
+        </table>
 
         <h4>MAILS</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">cd ~/.thunderbird/xxx.default/Mail/localhost<br>ln -s ~/Mails/Inbox Inbox</p></td>
-                    <td><p class="descr">Voir les mails de ~/Mails/Inbox sur Thunderbird.</p></td>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <td><p class="terminal">cd ~/.thunderbird/xxx.default/Mail/localhost<br>ln -s ~/Mails/Inbox Inbox</p></td>
+                <td><p class="descr">Voir les mails de ~/Mails/Inbox sur Thunderbird.</p></td>
+            </tr>
+        </table>
 
         <h4>ACCÈS</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">id</p></td>
-                    <td><p class="descr">Pour voir dans quels groupes je suis inscrit.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">id</p></td>
+                <td><p class="descr">Pour voir dans quels groupes je suis inscrit.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">groups</p></td>
-                    <td><p class="descr">Idem (plus simple).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">groups</p></td>
+                <td><p class="descr">Idem (plus simple).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">whoami</p></td>
-                    <td><p class="descr">To know who I am.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">whoami</p></td>
+                <td><p class="descr">To know who I am.</p></td>
+            </tr>
+        </table>
 
         <h4>PAQUETS</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">dpkg -i *.deb</p></td>
-                    <td><p class="descr">Installer un paquet deb.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">dpkg -i *.deb</p></td>
+                <td><p class="descr">Installer un paquet deb.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">dpkg --purge my_app</p></td>
-                    <td><p class="descr">Désinstaller une application installée avec un paquet deb (faire un dpkg --list + grep pour faire la liste et rechercher le nom exact de l'application).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">dpkg --purge my_app</p></td>
+                <td><p class="descr">Désinstaller une application installée avec un paquet deb (faire un dpkg --list + grep pour faire la liste et rechercher le nom exact de l'application).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">dpkg-query -l</p></td>
-                    <td><p class="descr">Liste des paquets présents dans la database dpkg.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">dpkg-query -l</p></td>
+                <td><p class="descr">Liste des paquets présents dans la database dpkg.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt list --installed</p></td>
-                    <td><p class="descr">Liste des paquets installés.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">apt list --installed</p></td>
+                <td><p class="descr">Liste des paquets installés.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">dpkg-query -f '${status} ${package}\n' -W | awk '$3 == "half-configured" {print $4}'</p></td>
-                    <td><p class="descr">Liste des paquets à moitié installés.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">dpkg-query -f '${status} ${package}\n' -W | awk '$3 == "half-configured" {print $4}'</p></td>
+                <td><p class="descr">Liste des paquets à moitié installés.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">dpkg-query -f '${status} ${package}\n' -W | awk '$3 != "installed" {print $4}'</p></td>
-                    <td><p class="descr">Idem.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">dpkg-query -f '${status} ${package}\n' -W | awk '$3 != "installed" {print $4}'</p></td>
+                <td><p class="descr">Idem.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">aptitude search '~i!~M'</p></td>
-                    <td><p class="descr">Idem avec aptitude.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">aptitude search '~i!~M'</p></td>
+                <td><p class="descr">Idem avec aptitude.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt-file search 'word'</p></td>
-                    <td><p class="descr">Cherche un paquet contenant 'word'.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">apt-file search 'word'</p></td>
+                <td><p class="descr">Cherche un paquet contenant 'word'.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt-get autoremove</p></td>
-                    <td><p class="descr">Supprime les paquets installés en raison de dépendances, et devenus inutiles.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">apt-get autoremove</p></td>
+                <td><p class="descr">Supprime les paquets installés en raison de dépendances, et devenus inutiles.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt-get autoremove --purge</p></td>
-                    <td><p class="descr">Supprimer les anciens noyaux.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">apt-get autoremove --purge</p></td>
+                <td><p class="descr">Supprimer les anciens noyaux.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt-get autoremove --purge <nom-du-paquet></p></td>
-                    <td><p class="descr">Supprimer le paquet, ses dépendances et ses fichiers de configuration.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">apt-get autoremove --purge <nom-du-paquet></p></td>
+                <td><p class="descr">Supprimer le paquet, ses dépendances et ses fichiers de configuration.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt-get upgrade</p></td>
-                    <td><p class="descr">Installe nouvelles versions de tous les paquets.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">apt-get upgrade</p></td>
+                <td><p class="descr">Installe nouvelles versions de tous les paquets.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt-get dist-upgrade</p></td>
-                    <td><p class="descr">Mise à jour des paquets, se charge de gérer les changements de paquets dépendants (cf. aptitude full-upgrade).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">apt-get dist-upgrade</p></td>
+                <td><p class="descr">Mise à jour des paquets, se charge de gérer les changements de paquets dépendants (cf. aptitude full-upgrade).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt-get update; apt-get upgrade; apt-get dist-upgrade; apt autoremove</p></td>
-                    <td><p class="descr">Full update.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">apt-get update; apt-get upgrade; apt-get dist-upgrade; apt autoremove</p></td>
+                <td><p class="descr">Full update.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt-get check</p></td>
-                    <td><p class="descr">Checks for broken dependencies.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">apt-get check</p></td>
+                <td><p class="descr">Checks for broken dependencies.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">aptitude update</p></td>
-                    <td><p class="descr">Met à jour la liste des paquets disponibles.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">aptitude update</p></td>
+                <td><p class="descr">Met à jour la liste des paquets disponibles.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">aptitude safe-upgrade</p></td>
-                    <td><p class="descr">Met à jour les paquets installés vers leurs versions les plus récentes, sans détruire l'existant.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">aptitude safe-upgrade</p></td>
+                <td><p class="descr">Met à jour les paquets installés vers leurs versions les plus récentes, sans détruire l'existant.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">aptitude full-upgrade</p></td>
-                    <td><p class="descr">Idem mais installe et supprime selon les besoins.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">aptitude full-upgrade</p></td>
+                <td><p class="descr">Idem mais installe et supprime selon les besoins.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">aptitude autoclean</p></td>
-                    <td><p class="descr">Supprime du cache les paquets qui ne peuvent plus être downloadés.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">aptitude autoclean</p></td>
+                <td><p class="descr">Supprime du cache les paquets qui ne peuvent plus être downloadés.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">deborphan</p></td>
-                    <td><p class="descr">Liste les paquets orphelins.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">deborphan</p></td>
+                <td><p class="descr">Liste les paquets orphelins.</p></td>
+            </tr>
+        </table>
 
         <h4>REPOSITORIES</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">add-apt-repository ppa:<user>/<ppa-name></p></td>
-                    <td><p class="descr">Ajoute un repository dans /etc/apt/sources.list.d/.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">add-apt-repository ppa:<user>/<ppa-name></p></td>
+                <td><p class="descr">Ajoute un repository dans /etc/apt/sources.list.d/.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">add-apt-repository --remove ppa:virtualbox</p></td>
-                    <td><p class="descr">Supprimer un repository.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">add-apt-repository --remove ppa:virtualbox</p></td>
+                <td><p class="descr">Supprimer un repository.</p></td>
+            </tr>
+        </table>
 
         <h4>KEYS</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -</p></td>
-                    <td><p class="descr">Ajouter une clé.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -</p></td>
+                <td><p class="descr">Ajouter une clé.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key --keyring /tmp/test add -</p></td>
-                    <td><p class="descr">Ajouter une clé dans un autre dossier que /etc/apt/.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key --keyring /tmp/test add -</p></td>
+                <td><p class="descr">Ajouter une clé dans un autre dossier que /etc/apt/.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt-key list</p></td>
-                    <td><p class="descr">Liste des clés.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">apt-key list</p></td>
+                <td><p class="descr">Liste des clés.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">apt-key del B9F8</p></td>
-                    <td><p class="descr">Supprimer une clé.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">apt-key del B9F8</p></td>
+                <td><p class="descr">Supprimer une clé.</p></td>
+            </tr>
+        </table>
 
         <h4>CD</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">cd "$(find -L . -name 'xxx' -type d)"</p></td>
-                    <td><p class="descr">Commande en argument de cd.</p></td>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <td><p class="terminal">cd "$(find -L . -name 'xxx' -type d)"</p></td>
+                <td><p class="descr">Commande en argument de cd.</p></td>
+            </tr>
+        </table>
 
         <h4>CP</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">cp ./test/{file1,file2,file3} ./dest</p></td>
-                    <td><p class="descr">Copie de plusieurs fichiers contenus dans le dossier test.</p></td>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <td><p class="terminal">cp ./test/{file1,file2,file3} ./dest</p></td>
+                <td><p class="descr">Copie de plusieurs fichiers contenus dans le dossier test.</p></td>
+            </tr>
+        </table>
 
         <h4>CHMOD</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">chmod -R a+rw my_rep</p></td>
-                    <td><p class="descr">Droits rw à tout le monde de manière récursive.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">chmod -R a+rw my_rep</p></td>
+                <td><p class="descr">Droits rw à tout le monde de manière récursive.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">chmod -R u-x,g-x,o-x,u+X,g+X,o+X my_rep</p></td>
-                    <td><p class="descr">Droits x au rép. + sous-rép., et non-x aux fichiers.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">chmod -R u-x,g-x,o-x,u+X,g+X,o+X my_rep</p></td>
+                <td><p class="descr">Droits x au rép. + sous-rép., et non-x aux fichiers.</p></td>
+            </tr>
+        </table>
 
         <h4>PROCESSES</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">echo $$</p></td>
-                    <td><p class="descr">Donne le pid du shell courant ('1000' par ex.).</p></td>
+        <table>
+            <tr>
+                <td><p class="terminal">echo $$</p></td>
+                <td><p class="descr">Donne le pid du shell courant ('1000' par ex.).</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">ps --pid 1000</p></td>
+                <td><p class="descr">Montre que c'est un shell.</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">ps -o ppid= -p 1000</p></td>
+                <td><p class="descr">Donne le pid du parent.</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">ps -aux</p></td>
+                <td><p class="descr">Liste des processes.</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">ps -aux | grep firefox</p></td>
+                <td><p class="descr">Trouver le pid de Firefox.</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">pgrep firefox</p></td>
+                <td><p class="descr">Idem.</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">pidof firefox</p></td>
+                <td><p class="descr">Idem.</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">kill -9 2301</p></td>
+                <td><p class="descr">Kill le process 2301.</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">kill -9 `pidof firefox`</p></td>
+                <td><p class="descr">Tuer le process de Firefox.</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">pkill firefox</p></td>
+                <td><p class="descr">Idem (encore faut-il être sûr qu'il n'y a qu'un process firefox).</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">ps -aux | grep fetchmail &gt; ~/tmp; awk '$11 == "fetchmail" {system("kill -9 " $2)}' ~/tmp; rm ~/tmp</p></td>
+                <td><p class="descr">Tuer tous les process 'fetchmail' avec awk. On redirige d'abord dans un fichier temporaire la sortie de la commande 'ps -aux | grep fetchmail'. On lance ensuite awk sur chaque ligne de ce fichier : si le 11e champ est égal à "fetchmail", on kill le process qui a pour numéro le 2e champ.</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">top</p></td>
+                <td><p class="descr">Displays Linux processes (dynamique). Press shift+m after running the top command or you can interactively choose which column to sort on press Shift+f to enter the interactive menu press the up or down arrow until the %MEM choice is highlighted press s to select %MEM choice press enter to save your selection press q to exit the interactive menu</p></td>
                 </tr>
 
-                <tr>
-                    <td><p class="terminal">ps --pid 1000</p></td>
-                    <td><p class="descr">Montre que c'est un shell.</p></td>
-                </tr>
-
-                <tr>
-                    <td><p class="terminal">ps -o ppid= -p 1000</p></td>
-                    <td><p class="descr">Donne le pid du parent.</p></td>
-                </tr>
-
-                <tr>
-                    <td><p class="terminal">ps -aux</p></td>
-                    <td><p class="descr">Liste des processes.</p></td>
-                </tr>
-
-                <tr>
-                    <td><p class="terminal">ps -aux | grep firefox</p></td>
-                    <td><p class="descr">Trouver le pid de Firefox.</p></td>
-                </tr>
-
-                <tr>
-                    <td><p class="terminal">pgrep firefox</p></td>
-                    <td><p class="descr">Idem.</p></td>
-                </tr>
-
-                <tr>
-                    <td><p class="terminal">pidof firefox</p></td>
-                    <td><p class="descr">Idem.</p></td>
-                </tr>
-
-                <tr>
-                    <td><p class="terminal">kill -9 2301</p></td>
-                    <td><p class="descr">Kill le process 2301.</p></td>
-                </tr>
-
-                <tr>
-                    <td><p class="terminal">kill -9 `pidof firefox`</p></td>
-                    <td><p class="descr">Tuer le process de Firefox.</p></td>
-                </tr>
-
-                <tr>
-                    <td><p class="terminal">pkill firefox</p></td>
-                    <td><p class="descr">Idem (encore faut-il être sûr qu'il n'y a qu'un process firefox).</p></td>
-                </tr>
-
-                <tr>
-                    <td><p class="terminal">ps -aux | grep fetchmail &gt; ~/tmp; awk '$11 == "fetchmail" {system("kill -9 " $2)}' ~/tmp; rm ~/tmp</p></td>
-                    <td><p class="descr">Tuer tous les process 'fetchmail' avec awk. On redirige d'abord dans un fichier temporaire la sortie de la commande 'ps -aux | grep fetchmail'. On lance ensuite awk sur chaque ligne de ce fichier : si le 11e champ est égal à "fetchmail", on kill le process qui a pour numéro le 2e champ.</p></td>
-                </tr>
-
-                <tr>
-                    <td><p class="terminal">top</p></td>
-                    <td><p class="descr">Displays Linux processes (dynamique). Press shift+m after running the top command or you can interactively choose which column to sort on press Shift+f to enter the interactive menu press the up or down arrow until the %MEM choice is highlighted press s to select %MEM choice press enter to save your selection press q to exit the interactive menu</p></td>
-                    </tr>
-
-                <tr>
-                    <td><p class="terminal">htop</p></td>
-                    <td><p class="descr">Idem (beaucoup mieux).</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">htop</p></td>
+                <td><p class="descr">Idem (beaucoup mieux).</p></td>
+            </tr>
+        </table>
 
         <h4>SCRIPTS :</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">long-running-command [Ctrl+Z] bg</p></td>
-                    <td><p class="descr">Mettre une commande en background.</p></td>
-                </tr>
-                <tr>
-                    <td><pre class="terminal">
-    ./script.sh 1 &
-    ./script.sh 2 &
-    ./script.sh 3 &
-    ./script.sh 4</pre></td>
-                    <td><p class="descr">
-    If you run the command chain you specify, the invocation ./script.sh 4 will be in the foreground, and the other scripts will be running in the background. Input will be sent to the foreground script. To suspend the foreground script, press CtrlZ. To send the suspended script to the background to continue running, use the bg command. To see the scripts (or more correctly, jobs) you have and the states they're in, use jobs. To bring a specific job to the fore, use fg and its number (as reported by the aforementioned jobs) with a % prefix, e. g. fg %2. To terminate a specific job, you can either bring it to the foreground with fg and terminate it sanely, or you can kill it, e. g. kill -TERM %2.
-    </p></td>
-                </tr>
-                <tr>
-                    <td><p class="terminal">time ./script.sh</p></td>
-                    <td><p class="descr">Exécute script.sh et affiche le temps d'exécution.</p></td>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <td><p class="terminal">long-running-command [Ctrl+Z] bg</p></td>
+                <td><p class="descr">Mettre une commande en background.</p></td>
+            </tr>
+            <tr>
+                <td><pre class="terminal">
+./script.sh 1 &
+./script.sh 2 &
+./script.sh 3 &
+./script.sh 4</pre></td>
+                <td><p class="descr">
+If you run the command chain you specify, the invocation ./script.sh 4 will be in the foreground, and the other scripts will be running in the background. Input will be sent to the foreground script. To suspend the foreground script, press CtrlZ. To send the suspended script to the background to continue running, use the bg command. To see the scripts (or more correctly, jobs) you have and the states they're in, use jobs. To bring a specific job to the fore, use fg and its number (as reported by the aforementioned jobs) with a % prefix, e. g. fg %2. To terminate a specific job, you can either bring it to the foreground with fg and terminate it sanely, or you can kill it, e. g. kill -TERM %2.
+</p></td>
+            </tr>
+            <tr>
+                <td><p class="terminal">time ./script.sh</p></td>
+                <td><p class="descr">Exécute script.sh et affiche le temps d'exécution.</p></td>
+            </tr>
+        </table>
 
         <h4>PROGRAMMES :</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">ldd /usr/bin/program</p></td>
-                    <td><p class="descr">Lister les dépendances requises par un programme.</p></td>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <td><p class="terminal">ldd /usr/bin/program</p></td>
+                <td><p class="descr">Lister les dépendances requises par un programme.</p></td>
+            </tr>
+        </table>
 
         <h4>CHAÎNES</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">printf "%s.\n" $(seq 10)</p></td>
-                    <td><p class="descr">Affiche les nombres de 1 à 10 + point + retour à la ligne.</p></td>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <td><p class="terminal">printf "%s.\n" $(seq 10)</p></td>
+                <td><p class="descr">Affiche les nombres de 1 à 10 + point + retour à la ligne.</p></td>
+            </tr>
+        </table>
 
         <h4>FIND</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">find . type f -printf '%p %s'</p></td>
-                    <td><p class="descr">printf = formate le résultat (voir man find pour la liste des balises). %p = nom, %s = taille du fichier.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">find . type f -printf '%p %s'</p></td>
+                <td><p class="descr">printf = formate le résultat (voir man find pour la liste des balises). %p = nom, %s = taille du fichier.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">find -L</p></td>
-                    <td><p class="descr">Follow symbolic links.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">find -L</p></td>
+                <td><p class="descr">Follow symbolic links.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">find . ! -name '*light*' -delete</p></td>
-                    <td><p class="descr">Delete every find which doesn't contain 'light'.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">find . ! -name '*light*' -delete</p></td>
+                <td><p class="descr">Delete every find which doesn't contain 'light'.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">find ~ -type f -mmin -3 -exec grep -Fl 'rc' {} \;</p></td>
-                    <td><p class="descr">Combiner find et grep (fichier modifié il y a moins de 3 minutes et contenant 'rc').</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">find ~ -type f -mmin -3 -exec grep -Fl 'rc' {} \;</p></td>
+                <td><p class="descr">Combiner find et grep (fichier modifié il y a moins de 3 minutes et contenant 'rc').</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">find . -type f -name wsgi.py -execdir test -f settings.py \; -printf '%h\n'</p></td>
-                    <td><p class="descr">Afficher les dossiers contenant à la fois un fichier "wsgi.py" et un fichier "settings.py" ('execdir': exécute une commande sur le dossier contenant le fichier trouvé, '%h' = folder).</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">find . -type f -name wsgi.py -execdir test -f settings.py \; -printf '%h\n'</p></td>
+                <td><p class="descr">Afficher les dossiers contenant à la fois un fichier "wsgi.py" et un fichier "settings.py" ('execdir': exécute une commande sur le dossier contenant le fichier trouvé, '%h' = folder).</p></td>
+            </tr>
+        </table>
 
         <h4>GREP</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">grep -rn --include=*.php word</p></td>
-                    <td><p class="descr">Inclut seulement les fichiers tex et cherche le mot 'word' (-r = recursive, -n = affiche les numéros de lignes).</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">grep -rn --include=*.php word</p></td>
+                <td><p class="descr">Inclut seulement les fichiers tex et cherche le mot 'word' (-r = recursive, -n = affiche les numéros de lignes).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">--exclude=\*.{c,h}</p></td>
-                    <td><p class="descr">Exclut les fichiers .c et .h.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">--exclude=\*.{c,h}</p></td>
+                <td><p class="descr">Exclut les fichiers .c et .h.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">--exclude-dir={dir1,*.dst}</p></td>
-                    <td><p class="descr">Exclut des répertoires.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">--exclude-dir={dir1,*.dst}</p></td>
+                <td><p class="descr">Exclut des répertoires.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">-l (L minuscule)</p></td>
-                    <td><p class="descr">Ne retourne que les noms de fichiers.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">-l (L minuscule)</p></td>
+                <td><p class="descr">Ne retourne que les noms de fichiers.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">grep -v 'pattern'</p></td>
-                    <td><p class="descr">Retourne les lignes qui ne matchent pas 'pattern'.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">grep -v 'pattern'</p></td>
+                <td><p class="descr">Retourne les lignes qui ne matchent pas 'pattern'.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">grep -w 'pattern'</p></td>
-                    <td><p class="descr">Retourne les lignes qui matchent exactement 'pattern' (pas 'pattern1', 'pattern2' etc.).</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">grep -w 'pattern'</p></td>
+                <td><p class="descr">Retourne les lignes qui matchent exactement 'pattern' (pas 'pattern1', 'pattern2' etc.).</p></td>
+            </tr>
+        </table>
 
         <h4>NOMBRES</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">seq 1 10</p></td>
-                    <td><p class="descr">Écrit les nombres de 1 à 10 en colonne.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">seq 1 10</p></td>
+                <td><p class="descr">Écrit les nombres de 1 à 10 en colonne.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">seq -f "%02g" 6</p></td>
-                    <td><p class="descr">Écrit les nombres de 1 à 6 avec 4 caractères ('0001' etc.).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">seq -f "%02g" 6</p></td>
+                <td><p class="descr">Écrit les nombres de 1 à 6 avec 4 caractères ('0001' etc.).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">jot 10</p></td>
-                    <td><p class="descr">Écrit les nombres de 1 à 10 en colonne.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">jot 10</p></td>
+                <td><p class="descr">Écrit les nombres de 1 à 10 en colonne.</p></td>
+            </tr>
+        </table>
 
         <h4>DOSSIERS</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">mkdir dossier && cd $_</p></td>
-                    <td><p class="descr">Créer un dossier et y aller.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">mkdir dossier && cd $_</p></td>
+                <td><p class="descr">Créer un dossier et y aller.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">du -hsc *</p></td>
-                    <td><p class="descr">Taille d'un dossier et de ses sous-dossiers.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">du -hsc *</p></td>
+                <td><p class="descr">Taille d'un dossier et de ses sous-dossiers.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">ncdu [path]</p></td>
-                    <td><p class="descr">Taille d'un dossier et de ses sous-dossiers + interface (basé sur le précédent). Défaut : répertoire courant.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">ncdu [path]</p></td>
+                <td><p class="descr">Taille d'un dossier et de ses sous-dossiers + interface (basé sur le précédent). Défaut : répertoire courant.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">tree -L 2 <nom_du_dossier></p></td>
-                    <td><p class="descr">Visualiser l'arborescence d'un dossier avec une profondeur de 2.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">tree -L 2 <nom_du_dossier></p></td>
+                <td><p class="descr">Visualiser l'arborescence d'un dossier avec une profondeur de 2.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">dir</p></td>
-                    <td><p class="descr">List current directory contents.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">dir</p></td>
+                <td><p class="descr">List current directory contents.</p></td>
+            </tr>
+        </table>
 
         <h4>FICHIERS</h4>
-            <table>
-                <tr>
-                    <td><pre class="terminal">
-    Number    Permission            Symbol
-    0         No Permission         ---
-    1         Execute               --x
-    2         Write                 -w-
-    3         Execute + Write       -wx
-    4         Read                  r--
-    5         Read + Execute        r-x
-    6         Read + Write          rw-
-    7         Read + Write +Execute rwx</pre></td>
-                    <td><p class="descr">
-                        Permission sur les fichiers et les dossiers. Ainsi 744 équivaut à "rwxr--r--", soit "lecture écriture exécution" pour "u" (user) et "lecture seule" pour "g" (group) et "o" (others).
-                        Pour les dossiers : Read (r) : The ability to read the names of files stored in this directory.
-                        Write (w) : The ability to rename files in the directory, create new files, or delete existing files, if you also have Execute permissions. If you don't have execute perms, then write perms are meaningless.
-                        Execute (x) : The ability to cd into this directory, and access the files in this directory.
-                    </p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><pre class="terminal">
+Number    Permission            Symbol
+0         No Permission         ---
+1         Execute               --x
+2         Write                 -w-
+3         Execute + Write       -wx
+4         Read                  r--
+5         Read + Execute        r-x
+6         Read + Write          rw-
+7         Read + Write +Execute rwx</pre></td>
+                <td><p class="descr">
+                    Permission sur les fichiers et les dossiers. Ainsi 744 équivaut à "rwxr--r--", soit "lecture écriture exécution" pour "u" (user) et "lecture seule" pour "g" (group) et "o" (others).
+                    Pour les dossiers : Read (r) : The ability to read the names of files stored in this directory.
+                    Write (w) : The ability to rename files in the directory, create new files, or delete existing files, if you also have Execute permissions. If you don't have execute perms, then write perms are meaningless.
+                    Execute (x) : The ability to cd into this directory, and access the files in this directory.
+                </p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">file path/to/file</p></td>
-                    <td><p class="descr">Renvoie les caractéristiques du fichier.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">file path/to/file</p></td>
+                <td><p class="descr">Renvoie les caractéristiques du fichier.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">| sort</p></td>
-                    <td><p class="descr">Trie des fichiers.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">| sort</p></td>
+                <td><p class="descr">Trie des fichiers.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">locate file_name.ext</p></td>
-                    <td><p class="descr">Localise le fichier passé en paramètre.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">locate file_name.ext</p></td>
+                <td><p class="descr">Localise le fichier passé en paramètre.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">evince `locate file.pdf`</p></td>
-                    <td><p class="descr">Ouvre le pdf passé en paramètre.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">evince `locate file.pdf`</p></td>
+                <td><p class="descr">Ouvre le pdf passé en paramètre.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">od -t x name_of_file</p></td>
-                    <td><p class="descr">Lire un fichier en hexadécimal (ou autre format, voire options dans man).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">od -t x name_of_file</p></td>
+                <td><p class="descr">Lire un fichier en hexadécimal (ou autre format, voire options dans man).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">dirname $file</p></td>
-                    <td><p class="descr">Extrait le nom du dossier parent de $file.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">dirname $file</p></td>
+                <td><p class="descr">Extrait le nom du dossier parent de $file.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">split -n 8 [FILE_NAME]</p></td>
-                    <td><p class="descr">Coupe un fichier en 8.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">split -n 8 [FILE_NAME]</p></td>
+                <td><p class="descr">Coupe un fichier en 8.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">echo 'abcd1234' | tr -d [a-z]</p></td>
-                    <td><p class="descr">Retourne '1234' (efface les caractères [a-z]). Attention au pathname expansion (cf. man bash): pour l'éviter on peut mettre a-z sans les crochets.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">echo 'abcd1234' | tr -d [a-z]</p></td>
+                <td><p class="descr">Retourne '1234' (efface les caractères [a-z]). Attention au pathname expansion (cf. man bash): pour l'éviter on peut mettre a-z sans les crochets.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">echo 'abcd1234' | tr ad3 zy9</p></td>
-                    <td><p class="descr">Retourne 'zbcy1294'.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">echo 'abcd1234' | tr ad3 zy9</p></td>
+                <td><p class="descr">Retourne 'zbcy1294'.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">tr -s ' ' < data</p></td>
-                    <td><p class="descr">Supprime (squeeze) les espaces en trop dans data.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">tr -s ' ' < data</p></td>
+                <td><p class="descr">Supprime (squeeze) les espaces en trop dans data.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">column test.txt -t -s "|"</p></td>
-                    <td><p class="descr">Dispose un fichier en colonnes : No.|Country|Yes/No 01|India|Y 02|US|Y 03|Australia|Y => No.  Country      Yes/No 01   India        Y 02   US           Y 03   Australia    Y</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">column test.txt -t -s "|"</p></td>
+                <td><p class="descr">Dispose un fichier en colonnes : No.|Country|Yes/No 01|India|Y 02|US|Y 03|Australia|Y => No.  Country      Yes/No 01   India        Y 02   US           Y 03   Australia    Y</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">touch $(seq -f "file%g" 1 10)</p></td>
-                    <td><p class="descr">Créer les fichiers 'file1', 'file2'… 'file10'.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">touch $(seq -f "file%g" 1 10)</p></td>
+                <td><p class="descr">Créer les fichiers 'file1', 'file2'… 'file10'.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">jot 36 | rs 4 9</p></td>
-                    <td><p class="descr">Dispose les nombres de 1 à 36 sur 4 lignes et 9 colonnes.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">jot 36 | rs 4 9</p></td>
+                <td><p class="descr">Dispose les nombres de 1 à 36 sur 4 lignes et 9 colonnes.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">uniq -f2 FileName | wc -l</p></td>
-                    <td><p class="descr">Renvoie le nombre de termes différents dans le champ 3 (les 2 premiers champs sont sautés) du fichier FileName. (uniq: report or omit repeated lines)</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">uniq -f2 FileName | wc -l</p></td>
+                <td><p class="descr">Renvoie le nombre de termes différents dans le champ 3 (les 2 premiers champs sont sautés) du fichier FileName. (uniq: report or omit repeated lines)</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">sort -uk3 FileName | wc -l</p></td>
-                    <td><p class="descr">La même chose si les entrées ne sont pas pré-triées.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">sort -uk3 FileName | wc -l</p></td>
+                <td><p class="descr">La même chose si les entrées ne sont pas pré-triées.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">pdfunite file1.pdf file2.pdf [fileN.pdf] out.pdf</p></td>
-                    <td><p class="descr">Merge plusieurs pdf dans out.pdf.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">pdfunite file1.pdf file2.pdf [fileN.pdf] out.pdf</p></td>
+                <td><p class="descr">Merge plusieurs pdf dans out.pdf.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">cut -d: -f1 < /etc/passwd</p></td>
-                    <td><p class="descr">Extrait du fichier /etc/passwd le 1er field, en utilisant comme délimiteur le caractère ':'</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">cut -d: -f1 < /etc/passwd</p></td>
+                <td><p class="descr">Extrait du fichier /etc/passwd le 1er field, en utilisant comme délimiteur le caractère ':'</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">$ s='one_two_three_four_five' $ A="$(cut -d'_' -f2 <<<"$s")" $ echo "$A" two $ B="$(cut -d'_' -f4 <<<"$s")" $ echo "$B" four</p></td>
-                    <td><p class="descr">Autre exemple.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">$ s='one_two_three_four_five' $ A="$(cut -d'_' -f2 <<<"$s")" $ echo "$A" two $ B="$(cut -d'_' -f4 <<<"$s")" $ echo "$B" four</p></td>
+                <td><p class="descr">Autre exemple.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">head -10 file</p></td>
-                    <td><p class="descr">Donne les 10 premières ligne de file.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">head -10 file</p></td>
+                <td><p class="descr">Donne les 10 premières ligne de file.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">awk '$2 ~ /^L/' file</p></td>
-                    <td><p class="descr">Extrait de file toutes les lignes dont le 2e champ ($2) commence par “L”. Example file = 59  LOUIS   1202    +1 60  FREDDIE 1201    +4 61  FINLAY  1200    -2 62  LEON    1137    +12 63  HARLEY  1132    +6 64  DAVID   1127    -1</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">awk '$2 ~ /^L/' file</p></td>
+                <td><p class="descr">Extrait de file toutes les lignes dont le 2e champ ($2) commence par “L”. Example file = 59  LOUIS   1202    +1 60  FREDDIE 1201    +4 61  FINLAY  1200    -2 62  LEON    1137    +12 63  HARLEY  1132    +6 64  DAVID   1127    -1</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">paste</p></td>
-                    <td><p class="descr">Fusionne plusieurs fichiers en plusieurs colonnes séparées par des tabs :<br>$ cat state Arunachal Pradesh Assam Andhra Pradesh Bihar Chhattisgrah<br>$ cat capital Itanagar Dispur Hyderabad Patna Raipur<br>$ paste number state capital 1       Arunachal Pradesh       Itanagar 2       Assam   Dispur 3       Andhra Pradesh  Hyderabad 4       Bihar   Patna 5       Chhattisgrah    Raipur</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">paste</p></td>
+                <td><p class="descr">Fusionne plusieurs fichiers en plusieurs colonnes séparées par des tabs :<br>$ cat state Arunachal Pradesh Assam Andhra Pradesh Bihar Chhattisgrah<br>$ cat capital Itanagar Dispur Hyderabad Patna Raipur<br>$ paste number state capital 1       Arunachal Pradesh       Itanagar 2       Assam   Dispur 3       Andhra Pradesh  Hyderabad 4       Bihar   Patna 5       Chhattisgrah    Raipur</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">nl file1 > file2</p></td>
-                    <td><p class="descr">Ajoute le numéro de ligne devant chaque ligne de file1. Il faut rediriger vers un autre fichier (file2) sous peine de se retrouver avec un fichier vide.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">nl file1 > file2</p></td>
+                <td><p class="descr">Ajoute le numéro de ligne devant chaque ligne de file1. Il faut rediriger vers un autre fichier (file2) sous peine de se retrouver avec un fichier vide.</p></td>
+            </tr>
+        </table>
 
         <h4>INSTALLATION FROM SOURCES</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">./configure<br>make<br>make install</p></td>
-                    <td><p class="descr">1. Configure the software<br>The configure script is responsible for getting ready to build the software on your specific system. It makes sure all of the dependencies for the rest of the build and install process are available, and finds out whatever it needs to know to use those dependencies.<br>Unix programs are often written in C, so we'll usually need a C compiler to build them. In these cases the configure script will establish that your system does indeed have a C compiler, and find out what it's called and where to find it.<br>2. Build the software<br>Once configure has done its job, we can invoke make to build the software. This runs a series of tasks defined in a Makefile to build the finished program from its source code.<br>The tarball you download usually doesn't include a finished Makefile. Instead it comes with a template called Makefile.in and the configure script produces a customised Makefile specific to your system.3. Install the software<br>Now that the software is built and ready to run, the files can be copied to their final destinations. The make install command will copy the built program, and its libraries and documentation, to the correct locations.<br>This usually means that the program's binary will be copied to a directory on your PATH, the program's manual page will be copied to a directory on your MANPATH, and any other files it depends on will be safely stored in the appropriate place.<br>Since the install step is also defined in the Makefile, where the software is installed can change based on options passed to the configure script, or things the configure script discovered about your system.<br>Depending on where the software is being installed, you might need escalated permissions for this step so you can copy files to system directories. Using will often do the trick.</p></td>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <td><p class="terminal">./configure<br>make<br>make install</p></td>
+                <td><p class="descr">1. Configure the software<br>The configure script is responsible for getting ready to build the software on your specific system. It makes sure all of the dependencies for the rest of the build and install process are available, and finds out whatever it needs to know to use those dependencies.<br>Unix programs are often written in C, so we'll usually need a C compiler to build them. In these cases the configure script will establish that your system does indeed have a C compiler, and find out what it's called and where to find it.<br>2. Build the software<br>Once configure has done its job, we can invoke make to build the software. This runs a series of tasks defined in a Makefile to build the finished program from its source code.<br>The tarball you download usually doesn't include a finished Makefile. Instead it comes with a template called Makefile.in and the configure script produces a customised Makefile specific to your system.3. Install the software<br>Now that the software is built and ready to run, the files can be copied to their final destinations. The make install command will copy the built program, and its libraries and documentation, to the correct locations.<br>This usually means that the program's binary will be copied to a directory on your PATH, the program's manual page will be copied to a directory on your MANPATH, and any other files it depends on will be safely stored in the appropriate place.<br>Since the install step is also defined in the Makefile, where the software is installed can change based on options passed to the configure script, or things the configure script discovered about your system.<br>Depending on where the software is being installed, you might need escalated permissions for this step so you can copy files to system directories. Using will often do the trick.</p></td>
+            </tr>
+        </table>
 
         <h4>SORTIES STANDARD</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">command > output.txt</p></td>
-                    <td><p class="descr">The standard output stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, it gets overwritten.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">command > output.txt</p></td>
+                <td><p class="descr">The standard output stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, it gets overwritten.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">command >> output.txt</p></td>
-                    <td><p class="descr">The standard output stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, the new data will get appended to the end of the file.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">command >> output.txt</p></td>
+                <td><p class="descr">The standard output stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, the new data will get appended to the end of the file.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">command 2> output.txt</p></td>
-                    <td><p class="descr">The standard error stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, it gets overwritten.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">command 2> output.txt</p></td>
+                <td><p class="descr">The standard error stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, it gets overwritten.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">command 2>> output.txt</p></td>
-                    <td><p class="descr">The standard error stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, the new data will get appended to the end of the file.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">command 2>> output.txt</p></td>
+                <td><p class="descr">The standard error stream will be redirected to the file only, it will not be visible in the terminal. If the file already exists, the new data will get appended to the end of the file.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">command &> output.txt</p></td>
-                    <td><p class="descr">Both the standard output and standard error stream will be redirected to the file only, nothing will be visible in the terminal. If the file already exists, it gets overwritten.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">command &> output.txt</p></td>
+                <td><p class="descr">Both the standard output and standard error stream will be redirected to the file only, nothing will be visible in the terminal. If the file already exists, it gets overwritten.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">command &>> output.txt</p></td>
-                    <td><p class="descr">Both the standard output and standard error stream will be redirected to the file only, nothing will be visible in the terminal. If the file already exists, the new data will get appended to the end of the file..</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">command &>> output.txt</p></td>
+                <td><p class="descr">Both the standard output and standard error stream will be redirected to the file only, nothing will be visible in the terminal. If the file already exists, the new data will get appended to the end of the file..</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">command | tee output.txt</p></td>
-                    <td><p class="descr">The standard output stream will be copied to the file, it will still be visible in the terminal. If the file already exists, it gets overwritten.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">command | tee output.txt</p></td>
+                <td><p class="descr">The standard output stream will be copied to the file, it will still be visible in the terminal. If the file already exists, it gets overwritten.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">command | tee -a output.txt</p></td>
-                    <td><p class="descr">The standard output stream will be copied to the file, it will still be visible in the terminal. If the file already exists, the new data will get appended to the end of the file.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">command | tee -a output.txt</p></td>
+                <td><p class="descr">The standard output stream will be copied to the file, it will still be visible in the terminal. If the file already exists, the new data will get appended to the end of the file.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">command |& tee output.txt</p></td>
-                    <td><p class="descr">Both the standard output and standard error streams will be copied to the file while still being visible in the terminal. If the file already exists, it gets overwritten.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">command |& tee output.txt</p></td>
+                <td><p class="descr">Both the standard output and standard error streams will be copied to the file while still being visible in the terminal. If the file already exists, it gets overwritten.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">command |& tee -a output.txt</p></td>
-                    <td><p class="descr">Both the standard output and standard error streams will be copied to the file while still being visible in the terminal. If the file already exists, the new data will get appended to the end of the file.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">command |& tee -a output.txt</p></td>
+                <td><p class="descr">Both the standard output and standard error streams will be copied to the file while still being visible in the terminal. If the file already exists, the new data will get appended to the end of the file.</p></td>
+            </tr>
+        </table>
 
         <h4>SONS</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">soundconverter -b -m audio/mpeg -s .mp3 fichier.wma</p></td>
-                    <td><p class="descr">Convertit 'fichier.wma' en 'fichier.mp3'.</p></td>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <td><p class="terminal">soundconverter -b -m audio/mpeg -s .mp3 fichier.wma</p></td>
+                <td><p class="descr">Convertit 'fichier.wma' en 'fichier.mp3'.</p></td>
+            </tr>
+        </table>
 
         <h4>IMAGES</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">display image.jpg</p></td>
-                    <td><p class="descr">Ouvre l'image.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">display image.jpg</p></td>
+                <td><p class="descr">Ouvre l'image.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">convert -thumbnail 120x image.jpg image_thumb.jpg</p></td>
-                    <td><p class="descr">Crée une vignette à partir de image.jpg (largeur 120).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">convert -thumbnail 120x image.jpg image_thumb.jpg</p></td>
+                <td><p class="descr">Crée une vignette à partir de image.jpg (largeur 120).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">convert -thumbnail x120 image.jpg image_thumb.jpg</p></td>
-                    <td><p class="descr">Crée une vignette à partir de image.jpg (hauteur 120).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">convert -thumbnail x120 image.jpg image_thumb.jpg</p></td>
+                <td><p class="descr">Crée une vignette à partir de image.jpg (hauteur 120).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">convert image.jpg image.tiff</p></td>
-                    <td><p class="descr">Convertit un jpeg en tiff.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">convert image.jpg image.tiff</p></td>
+                <td><p class="descr">Convertit un jpeg en tiff.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">convert image.jpg -colorspace CMYK image_cmyk.jpg</p></td>
-                    <td><p class="descr">Convertit une image en CMJN.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">convert image.jpg -colorspace CMYK image_cmyk.jpg</p></td>
+                <td><p class="descr">Convertit une image en CMJN.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">convert image.tiff -density 300 image_300.tiff</p></td>
-                    <td><p class="descr">Convertit une image en 300 dpi.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">convert image.tiff -density 300 image_300.tiff</p></td>
+                <td><p class="descr">Convertit une image en 300 dpi.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">identify -verbose image.jpg</p></td>
-                    <td><p class="descr">Détails sur une image.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">identify -verbose image.jpg</p></td>
+                <td><p class="descr">Détails sur une image.</p></td>
+            </tr>
+        </table>
 
         <h4>XARGS</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">cut -d: -f1 < /etc/passwd | sort | xargs echo</p></td>
-                    <td><p class="descr">Passe en paramètre à la commande 'echo' les arguments donnés en entrée standard.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">cut -d: -f1 < /etc/passwd | sort | xargs echo</p></td>
+                <td><p class="descr">Passe en paramètre à la commande 'echo' les arguments donnés en entrée standard.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">echo {1..9} | xargs -n2 -P2 --process-slot-var=index sh -c 'echo "$index" "$@" "$$"' _</p></td>
-                    <td><p class="descr">Processes parallèles.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">echo {1..9} | xargs -n2 -P2 --process-slot-var=index sh -c 'echo "$index" "$@" "$$"' _</p></td>
+                <td><p class="descr">Processes parallèles.</p></td>
+            </tr>
+        </table>
 
         <h4>INTERNET</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">nslookup site.com</p></td>
-                    <td><p class="descr">Renvoie l'adresse IP de site.com.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">nslookup site.com</p></td>
+                <td><p class="descr">Renvoie l'adresse IP de site.com.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">dig site.com</p></td>
-                    <td><p class="descr">Idem.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">dig site.com</p></td>
+                <td><p class="descr">Idem.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">host site.com</p></td>
-                    <td><p class="descr">Idem.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">host site.com</p></td>
+                <td><p class="descr">Idem.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">getent hosts site.com</p></td>
-                    <td><p class="descr">Idem.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">getent hosts site.com</p></td>
+                <td><p class="descr">Idem.</p></td>
+            </tr>
+        </table>
 
         <h4>LS</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">ls -alh</p></td>
-                    <td><p class="descr">a = all (y compris fichiers cachés), l = list, h = human readable</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">ls -alh</p></td>
+                <td><p class="descr">a = all (y compris fichiers cachés), l = list, h = human readable</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">ls *.py</p></td>
-                    <td><p class="descr">Liste tous les fichiers .py du dossier courant (on peut utiliser une regex, like [0-9]*, etc.).</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">ls *.py</p></td>
+                <td><p class="descr">Liste tous les fichiers .py du dossier courant (on peut utiliser une regex, like [0-9]*, etc.).</p></td>
+            </tr>
+        </table>
 
         <h4>CONNEXION & COPIE À DISTANCE</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">ssh user@192.168.1.xxx</p></td>
-                    <td><p class="descr">Secure shell distant.</p></td>
-                </tr>
-                
-                <tr>
-                    <td><p class="terminal">netstat -tnpa | grep 'ESTABLISHED.*ssh'</p></td>
-                    <td><p class="descr">Liste de toutes les connexions ssh en cours.</p></td>
-                </tr>
-                
-                <tr>
-                    <td><p class="terminal">rsync -av /home/user/Desktop/file user@191.168.1.21:/home/user/Desktop/remote_file</p></td>
-                    <td><p class="descr">Copie file vers remote_file.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">ssh user@192.168.1.xxx</p></td>
+                <td><p class="descr">Secure shell distant.</p></td>
+            </tr>
+            
+            <tr>
+                <td><p class="terminal">netstat -tnpa | grep 'ESTABLISHED.*ssh'</p></td>
+                <td><p class="descr">Liste de toutes les connexions ssh en cours.</p></td>
+            </tr>
+            
+            <tr>
+                <td><p class="terminal">rsync -av /home/user/Desktop/file user@191.168.1.21:/home/user/Desktop/remote_file</p></td>
+                <td><p class="descr">Copie file vers remote_file.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">scp src dest</p></td>
-                    <td><p class="descr">Idem.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">scp src dest</p></td>
+                <td><p class="descr">Idem.</p></td>
+            </tr>
+        </table>
 
         <h4>DATE</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">date</p></td>
-                    <td><p class="descr">Date.</p></td>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <td><p class="terminal">date</p></td>
+                <td><p class="descr">Date.</p></td>
+            </tr>
+        </table>
 
         <h4>TIPS & TRICKS</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">touch foo bar && ls -l !#:2</p></td>
-                    <td><p class="descr">Équivalent de 'touch foo bar && ls -l bar'</p></td>
-                </tr>
-            </table>
+        <table>
+            <tr>
+                <td><p class="terminal">touch foo bar && ls -l !#:2</p></td>
+                <td><p class="descr">Équivalent de 'touch foo bar && ls -l bar'</p></td>
+            </tr>
+        </table>
 
         <h4>ARCHIVES</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">unzip file.zip [-d destination_folder]</p></td>
-                    <td><p class="descr">Unzip a file [to a particular dest. folder].</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">unzip file.zip [-d destination_folder]</p></td>
+                <td><p class="descr">Unzip a file [to a particular dest. folder].</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">tar -cvf nom_archive nom_dossier</p></td>
-                    <td><p class="descr">Créer une archive tar.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">tar -cvf nom_archive nom_dossier</p></td>
+                <td><p class="descr">Créer une archive tar.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">tar -tf nom_archive.tar</p></td>
-                    <td><p class="descr">Voir contenu sans extraire.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">tar -tf nom_archive.tar</p></td>
+                <td><p class="descr">Voir contenu sans extraire.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">tar -xvf nom_archive.tar</p></td>
-                    <td><p class="descr">Extraire le contenu de l'archive.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">tar -xvf nom_archive.tar</p></td>
+                <td><p class="descr">Extraire le contenu de l'archive.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">tar xzvf nom_archive.tar.gz  -C repertoire</p></td>
-                    <td><p class="descr">Idem vers un autre répertoire.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">tar xzvf nom_archive.tar.gz  -C repertoire</p></td>
+                <td><p class="descr">Idem vers un autre répertoire.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">gzip nom_archive.tar</p></td>
-                    <td><p class="descr">Compresser un tar en .tar.gz (plus courant).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">gzip nom_archive.tar</p></td>
+                <td><p class="descr">Compresser un tar en .tar.gz (plus courant).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">bzip2 nom_archive.tar</p></td>
-                    <td><p class="descr">Compresser un tar en bz2 (plus puissant et plus lent).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">bzip2 nom_archive.tar</p></td>
+                <td><p class="descr">Compresser un tar en bz2 (plus puissant et plus lent).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">gunzip nom_archive.tar.gz</p></td>
-                    <td><p class="descr">Décompresser un .tar.gz.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">gunzip nom_archive.tar.gz</p></td>
+                <td><p class="descr">Décompresser un .tar.gz.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">bunzip2 nom_archive.tar.bz2</p></td>
-                    <td><p class="descr">Décompresser un .tar.bz2.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">bunzip2 nom_archive.tar.bz2</p></td>
+                <td><p class="descr">Décompresser un .tar.bz2.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">tar -zcvf nom_archive.tar.gz nom_dossier</p></td>
-                    <td><p class="descr">Créer une archive tar + compresser automatiquement en gz.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">tar -zcvf nom_archive.tar.gz nom_dossier</p></td>
+                <td><p class="descr">Créer une archive tar + compresser automatiquement en gz.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">tar -jcvf nom_archive.tar.bz2 nom_dossier</p></td>
-                    <td><p class="descr">Créer une archive tar + compresser automatiquement en bz2.</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">tar -jcvf nom_archive.tar.bz2 nom_dossier</p></td>
+                <td><p class="descr">Créer une archive tar + compresser automatiquement en bz2.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">tar -zxvf nom_archive.tar.gz</p></td>
-                    <td><p class="descr">Extraire le contenu de l'archive après avoir décompressé automatiquement (.gz).</p></td>
-                </tr>
+            <tr>
+                <td><p class="terminal">tar -zxvf nom_archive.tar.gz</p></td>
+                <td><p class="descr">Extraire le contenu de l'archive après avoir décompressé automatiquement (.gz).</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">tar -jxvf nom_archive.tar.bz2</p></td>
-                    <td><p class="descr">Extraire le contenu de l'archive après avoir décompressé automatiquement  (.bz2).</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">tar -jxvf nom_archive.tar.bz2</p></td>
+                <td><p class="descr">Extraire le contenu de l'archive après avoir décompressé automatiquement  (.bz2).</p></td>
+            </tr>
+        </table>
 
         <h4>ENVIRONNEMENT</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">env</p></td>
-                    <td><p class="descr">Liste des variables d'environnement.</p></td>
-                </tr>
+        <table>
+            <tr>
+                <td><p class="terminal">env</p></td>
+                <td><p class="descr">Liste des variables d'environnement.</p></td>
+            </tr>
 
-                <tr>
-                    <td><p class="terminal">VARNAME="my value"</p></td>
-                    <td><p class="descr">À mettre dans .bashrc [/etc/environment] pour ajouter VARNAME à toutes les futures sessions bash [system wide] de manière permanente.</p></td>
-                </tr>
-            </table>
+            <tr>
+                <td><p class="terminal">VARNAME="my value"</p></td>
+                <td><p class="descr">À mettre dans .bashrc [/etc/environment] pour ajouter VARNAME à toutes les futures sessions bash [system wide] de manière permanente.</p></td>
+            </tr>
+        </table>
 
         <h4>ASPIRATEUR DE SITES</h4>
-            <table>
-                <tr>
-                    <td><p class="terminal">httrack https://site.com -r2 -P 192.168.1.250</p></td>
-                    <td><p class="descr">Aspire le site https://site.com, avec une profondeur de 2 et en passant par le proxy.</p></td>
-            </table>
+        <table>
+            <tr>
+                <td><p class="terminal">httrack https://site.com -r2 -P 192.168.1.250</p></td>
+                <td><p class="descr">Aspire le site https://site.com, avec une profondeur de 2 et en passant par le proxy.</p></td>
+        </table>
     </div>
 {% endblock content %}
