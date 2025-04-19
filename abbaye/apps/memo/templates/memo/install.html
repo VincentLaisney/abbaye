@@ -9,18 +9,31 @@
     <h1>Installation Debian/Ubuntu</h1>
 
     <div class="w-75">
-        <h4>Préparer la clé bootable :</h4>
+        <h4>Préparer la clé bootable</h4>
             <div class="group">
                 <p class="descr">Télécharger l'image iso de Debian (small image), et se placer dans le répertoire contenant cette image.<br>Insérer la clé USB, puis chercher son identifiant (en tant que su):</p>
                 <pre class="terminal">
-    fdisk -l
-    => /dev/sdd1    *   1   487 3911796 6   FAT16</pre>
-                <p class="descr">On voit que notre clé USB est montée sur /dev/sdd.<br>Lancer la copie des fichiers :</p>
-                <p class="terminal">dd if=image.iso of=/dev/sdd bs=4M && sync</p>
-                <p class="descr">Il ne reste plus qu'à booter sur la clé USB et à se laisser guider.<br>Quand l'installateur demande s'il faut installer le paquet iwlwifi à partir d'un volume externe, dire non. Ce paquet sera installé après coup (cf. ci-dessous).</p>
+fdisk -l
+=> /dev/sdd1    *   1   487 3911796 6   FAT16</pre>
+                <p class="descr">
+                    On voit que notre clé USB est montée sur /dev/sdd.<br>
+                    Lancer la copie des fichiers :
+                </p>
+                <p class="terminal">
+                    dd if=image.iso of=/dev/sdd bs=4M && sync
+                </p>
+                <p class="descr">
+                    Il ne reste plus qu'à booter sur la clé USB et à se laisser guider.<br>
+                    Partitions :<br>
+                        - /sda1: point de montage: "/". Ne pas oublier de cocher 'bootable'. Label = "SYSTEM".<br>
+                        - /sda2: point de montage: "/media/frromain/DATA".<br>
+                        - /sda3 (peut être changé après avec GParted?): pas plus de 8Go.<br>
+                    Debian 10 : Quand l'installateur demande s'il faut installer le paquet iwlwifi à partir d'un volume externe, dire non. Ce paquet sera installé après coup (cf. ci-dessous).
+                </p>
             </div>
 
-        <h4>Installer le wifi :</h4>
+
+        <h4>Installer le wifi</h4>
             <div class="group">
                 <p class="descr">Il faut d'abord ajouter l'option "non free" à la ligne  "deb.debian.org" du fichier /etc/apt/sources.list :</p>
                 <p class="file">deb http://deb.debian.org/debian/ buster main contrib non-free</p>
@@ -28,40 +41,83 @@
                 <p class="terminal">apt-get install firmware-iwlwifi</p>
             </div>
 
-        <h4>Montage de la partition DATA au démarrage :</h4>
+
+        <h4>Montage de la partition DATA au démarrage</h4>
             <div class="group">
                 <p class="descr">Ajouter la ligne suivante dans /etc/fstab :</p>
-                <p class="terminal">UUID=e42f2506-cd08-4910-8602-57f43ca5be49	/media/frromain/DATA	ext4	defaults	0	2</p>
+                <p class="terminal">
+# /media/frromain/DATA was on /dev/sda2 during installation<br>
+UUID=9cbb4ca5-7d85-4267-b759-4446a8d4a1f4 /media/frromain/DATA ext4    defaults        0       2
+                </p>
             </div>
 
-        <h4>Installer aptitude, curl, tree, htop, ncdu, rsync, locate, imagemagick et imagemagick-doc, barcode, qrencode, aspell-fr, mplayer, calcurse (ou taskwarrior), units.</h4>
 
-        <h4>Configurer le réseau.</h4>
+        <h4>Paquets</h4>
+            aptitude, curl, tree, htop, ncdu, rsync, locate, imagemagick et imagemagick-doc, barcode, qrencode, rename (pour renommer des fichiers en série), aspell-fr, mplayer, calcurse (ou taskwarrior), units
 
-        <h4>Echanges.</h4>
+
+        <h4>Configurer le réseau</h4>
+
+
+        <h4>Echanges</h4>
             <div class="group">
                 <p class="descr">smb://tm-rs820rp-01.local/data/Echanges</p>
             </div>
 
-        <h4>Mac imprimerie.</h4>
+
+        <h4>Mac imprimerie</h4>
             <div class="group">
                 <p class="descr">sftp://mac-mini-imprimerie.local/Users/perebenoit-joseph</p>
             </div>
 
-        <h4>Raccourcis clavier dans Settings.</h4>
+
+        <h4>Default applications</h4>
             <div class="group">
-                <p class="descr">Home folder (Alt+Super+N), Calculator (Alt+Super+K), Email (Alt+Super+M), Browser (Alt+Super+B), Switch windows of an application (Ctrl+Tab), Settings (Alt+Super+S), Media player (Alt+Super+R), Lock screen (Alt+Super+L), Screen reader (disabled)</p>
-                <p class="descr">Anki (Alt+Super+A), Golden Dict (Alt+Super+G), Virtual Box (Alt+Super+I), Collatinus (Alt+Super+C), XnView (Alt+Super+X), VS Code (Alt+Super+V), Terminal (Alt+Super+T)</p>
-                <p class="descr"><b>Zorell hébreu : </b>(Alt+Super+Z) evince /media/frromain/DATA/Documents/Sainte\ Écriture/Langues\ bibliques/Hébreu\ et\ araméen/Zorell\ hébreu.pdf</p>
-                <p class="descr"><b>Zorell grec : </b>(Alt+Super+Shift+Z) evince /media/frromain/DATA/Documents/Sainte\ Écriture/Langues\ bibliques/Grec/Zorell\ grec.pdf</p>
-                <p class="descr"><b>Bailly : </b>(Alt+Super+H) evince /media/frromain/DATA/Documents/Langues/Grec/bailly-2020-hugo-chavez-20200718.pdf</p>
-                <p class="descr"><b>DevDocs : </b>(Alt+Super+D) /opt/google/chrome/google-chrome --profile-directory=Default --app-id=ahiigpfcghkbjfcibpojancebdfjmoop</p>
-                <p class="descr"><b>Text Edit : </b>(Alt+Super+E) gnome-text-editor --new-window</p>
-                <p class="descr"><b>Screenshot : </b>(Alt+Super+O) gnome-screenshot -i</p>
-                <p class="descr"><b>Utiles : </b>(Alt+Super+U) libreoffice /media/frromain/DATA/Documents/Divers/Utiles.ods</p>
+                <p class="descr">
+                    <b>Mails</b>: Thunderbird</br>
+                    <b>Calendar</b>: Thunderbird</br>
+                    <b>Music</b>: Videos</br>
+                    <b>Videos</b>: VLC
+                </p>
             </div>
 
-        <h4>Suppression de la mise en veille automatique (typiquement dans le cas d'un serveur).</h4>
+
+        <h4>Raccourcis clavier dans Settings</h4>
+            <div class="group">
+                <p class="descr">
+                    <b>Home folder</b>: Alt+Super+N<br>
+                    <b>Terminal</b>: Alt+Super+T<br>
+                    <b>Text Edit</b> <code>(gnome-text-editor --new-window)</code>: Alt+Super+E<br>
+                    <b>Email</b>: Alt+Super+M<br>
+                    <b>Browser</b>: Alt+Super+B<br>
+                    <b>Calculator</b>: Alt+Super+K<br>
+                    <b>Settings</b>: Alt+Super+S<br>
+                    <b>Screenshot</b> (Debian 10 seulement) (gnome-screenshot -i): (Alt+Super+O)<br>
+                    <b>Switch windows of an application</b>: Ctrl+Tab<br>
+                    <b>Screen reader</b>: disabled<br>
+                    <b>Rhythmbox</b> <code>(rhythmbox)</code>: Alt+Super+R<br>
+                    <b>Anki</b> <code>(anki)</code>: Alt+Super+A<br>
+                    <b>Golden Dict</b> <code>(goldendict)</code>: Alt+Super+G<br>
+                    <b>Virtual Box</b> <code>(virtualbox)</code>: Alt+Super+V<br>
+                    <b>Collatinus (Debian 10 seulement)</b> <code>(collatinus)</code>: Alt+Super+C<br>
+                    <b>XnView</b> <code>(xnview)</code>: Alt+Super+X<br>
+                    <b>VSCode</b> <code>(code)</code>: Alt+Super+C<br>
+                    <b>Utiles</b> <code>(libreoffice /media/frromain/DATA/Documents/Divers/Utiles.ods)</code>: Alt+Super+U<br>
+                    <b>Zorell hébreu</b><code> (evince /home/frromain/Documents/Sainte\ Écriture/Langues\ bibliques/Hébreu/Zorell\ hébreu.pdf)</code>: Alt+Super+Z<br>
+                    <b>Zorell grec</b> <code>(evince /home/frromain/Documents/Sainte\ Écriture/Langues\ bibliques/Grec/NT/Zorell\ grec.pdf)</code>: Alt+Super+Shift+Z<br>
+                    <b>Bailly</b> <code>(evince /home/frromain/Documents/Langues/Grec/bailly-2020-hugo-chavez-20200718.pdf)</code>: Alt+Super+H<br>
+                    <b>Jastrow</b> <code>(evince /home/frromain/Documents/Sainte\ Écriture/Langues\ bibliques/Araméen/Jastrow-AramaicHebrew.pdf)</code>: Alt+Super+W<br>
+                    <b>Syriaque</b> <code>(evince /home/frromain/Documents/Sainte\ Écriture/Langues\ bibliques/Syriaque/epdf.pub_a-compendious-syriac-dictionary.pdf)</code>: Alt+Super+Y<br>
+                    <b>Gaffiot</b> <code>(evince /home/frromain/Documents/Langues/Latin/Dictionnaires\ latins/Gaffiot_2016.pdf)</code>: Alt+Super+F<br>
+                    <b>Vetus Latina</b> <code>(evince /home/frromain/Documents/Sainte\ Écriture/0\ Bibles/Vetus\ Latina.pdf)</code>: Alt+Super+I<br>
+                    <b>Polyglotte de Walton</b> <code>(evince /home/frromain/Documents/Sainte\ Écriture/0\ Bibles/Polyglotte\ Walton/Walton\'s\ Polyglot\ -\ Totum.pdf)</code>: Alt+Super+P<br>
+                    <b>PierreQuiBible</b> (needs package <samp>python3-pyqt5</samp>) <code>(python3 /home/frromain/Documents/Sainte\ Écriture/Divers/PQV/PierreQuiBible/rollingBible.py)</code>: Alt+Super+Shift+P<br>
+                    <b>DevDocs</b> <code>(/opt/google/chrome/google-chrome --profile-directory=Default --app-id=ahiigpfcghkbjfcibpojancebdfjmoop)</code>: Alt+Super+D
+                </p>
+            </div>
+
+
+        <h4>Suppression de la mise en veille automatique (typiquement dans le cas d'un serveur)</h4>
             <div class="group">
                 <p class="descr">Il suffit de modifer (en tant que su) le fichier /etc/systemd/sleep.conf :</p>
                 <pre class="terminal">
@@ -71,23 +127,49 @@
     AllowHybridSleep=no</pre>
             </div>
 
-        <h4>Clés SSH :</h4>
+
+        <h4>Clés SSH</h4>
             <div class="group">
                 <p class="terminal">ssh-keygen</p>
                 <p class="terminal">ssh-copy-id username@remote</p>
             </div>
 
-        <h4>Firefox :</h4>
+
+        <h4>Firefox</h4>
             <div class="group">
                 <p class="descr">Bookmarks, home, proxy, sécurité, dossier de téléchargement, xdebug-helper (addon pour débugger PHP).</p>
             </div>
 
-        <h4>Vim :</h4>
+
+        <h4>Vim</h4>
+            <div class="group">
+                <p class="descr">~/.vimrc :</p>
+                <pre class="file">
+    colorscheme default
+    set laststatus=2
+    set statusline+=%F%r%m%=\ %p%%\ %l:%c
+    set number
+    set formatoptions+=w
+    set textwidth=0
+    set tabstop=4
+    set softtabstop=4
+    set shiftwidth=2
+    set expandtab
+    set autoindent
+    set wrap
+    set linebreak
+    set breakindent
+    set cursorline
+    :hi CursorLine cterm=bold
+    :map &lt;CR&gt; $a&lt;Del&gt; &lt;Esc&gt;
+    :map &lt;C-N&gt; i{}&lt;Esc&gt;hpl%</pre>
+            </div>
+
             <div class="group">
                 <p class="descr">Ne pas oublier d'installer vim-gtk3, afin de pouvoir utiliser le clipboard système.</p>
             </div>
 
-        <h4>Mails (mutt) :</h4>
+        <h4>Mails (mutt)</h4>
             <div class="group">
                 <p class="descr">
                     Installer mutt, ripmime, fetchmail, procmail, msmtp et links.<br>
@@ -160,9 +242,9 @@
     unset markers</pre>
                 <p class="descr">~/.fetchmailrc :</p>
                 <pre class="file">
-    poll 192.168.1.11
+    poll 192.168.1.250
     uidl
-    port 110
+    port 995
     protocol POP3
     username editeur@traditions-monastiques.com
     password my_super_password
@@ -180,15 +262,17 @@
     :0
     * ^From.*
     $DEFAULT</pre>
+
                 <p class="descr">~/.msmtprc :</p>
                 <pre class="file">
-    account editeur
-    host 192.168.1.11
-    port 25
-    auth off 
-    from editeur@traditions-monastiques.com
+    account dev
+    account default : dev
+    user clairval
+    host <my_host>
+    port 587
+    auth plain
+    password &lt;my_super_password&gt;</pre>
 
-    account default : editeur</pre>
                 <p class="descr">~/.mailcap :</p>
                 <pre class="file">
     # Pour ouvrir des messages au format html avec Firefox (raccourci clavier "m"):
@@ -206,7 +290,7 @@
                 <p class="terminal">rm ~/.fetchmail.pid; fetchmail --nosslcertck -av -d 10; mutt</p>
             </div>
 
-        <h4>Taskwarrior :</h4>
+        <h4>Taskwarrior</h4>
             <div class="group">
                 <p class="descr">Fichier de config (~/.taskrc) :</p>
                 <pre class="file">
@@ -221,10 +305,12 @@
     nag=""
     report.list.columns=id,project,description
     report.list.labels=id,Project,Description
-    report.list.sort=priority+\/,project+\/,description+</pre>
+    report.list.sort=priority+\/,project+\/,description+
+    verbose=off</pre>
             </div>
 
-        <h4>Configurer le proxy pour root :</h4>
+
+        <h4>Configurer le proxy pour root</h4>
             <div class="group">
                 <p class="descr">Dans ~/.bashrc :</p>
                 <p class="terminal">export HTTP_PROXY=http://192.168.1.250:8080</p>
@@ -237,19 +323,69 @@
                 <p class="terminal">HTTPS_PROXY=http://192.168.1.250:8080</p>
             </div>
 
-        <h4>Virtualbox :</h4>
-                <div class="group">
-                <p class="descr">Pour installer :</p>
-                <pre class="terminal">wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -</pre>
-                <pre class="terminal">echo "deb [arch=amd64] http://download.virtualbox.org/virtualbox/debian bionic contrib" | tee /etc/apt/sources.list.d/virtualbox.list</pre>
-                <pre class="terminal">apt update</pre>
-                <pre class="terminal">apt install virtualbox-6.1</pre>
 
-                <p class="descr">Pour désinstaller :</p>
-                <pre class="terminal">apt-get remove virtualbox-6.1</pre>
+        <h4>Clés</h4>
+            <div class="group">
+                <p class="descr">Lors d'une installation, en cas de "clé inexistante", la télécharger (remplacer &lt;KEY&gt; par la clé) :</p>
+                <p class="terminal">apt-key adv --keyserver keyserver.ubuntu.com --keyserver-options http-proxy=http://192.168.1.250:8080 --recv-keys &lt;KEY&gt;</p>
             </div>
 
-        <h4>Apache :</h4>
+
+        <h4>Virtualbox (Debian 10)</h4>
+            <div class="group">
+                <p class="descr">Créer le fichier /etc/apt/sources.list.d/virtualbox.list:</p>
+                <pre class="terminal">vim /etc/apt/sources.list.d/virtualbox.list</pre>
+
+                <p class="descr">Écrire la ligne suivante, enregistrer et fermer:</p>
+                <pre class="terminal">deb https://download.virtualbox.org/virtualbox/debian buster contrib</pre>
+
+                <p class="descr">Puis:</p>
+                <pre class="terminal">
+wget -q https://www.virtualbox.org/download/oracle_vbox_2016.asc -O- | apt-key add -
+wget -q https://www.virtualbox.org/download/oracle_vbox.asc -O- | apt-key add -
+apt-get update
+apt-get install virtualbox-7.0</pre>
+
+                <p class="descr">Extensions:</p>
+                <pre class="terminal">wget https://download.virtualbox.org/virtualbox/7.0.0/Oracle_VM_VirtualBox_Extension_Pack-7.0.0.vbox-extpack</pre>
+            </div>
+
+
+        <h4>Virtualbox (Debian 12)</h4>
+            <div class="group">
+                <p class="descr">Installation :</p>
+                <pre class="terminal">
+wget -O- -q https://www.virtualbox.org/download/oracle_vbox_2016.asc | sudo gpg --dearmour -o /usr/share/keyrings/oracle_vbox_2016.gpg
+echo "deb [arch=amd64 signed-by=/usr/share/keyrings/oracle_vbox_2016.gpg] http://download.virtualbox.org/virtualbox/debian bookworm contrib" | sudo tee /etc/apt/sources.list.d/virtualbox.list
+sudo apt update
+sudo apt install virtualbox-7.1</pre>
+
+                <p class="descr">Extensions :</p>
+                <pre class="terminal">
+sudo apt install virtualbox-7.1
+wget https://download.virtualbox.org/virtualbox/7.1.0/Oracle_VirtualBox_Extension_Pack-7.1.0.vbox-extpack
+sudo vboxmanage extpack install Oracle_VirtualBox_Extension_Pack-7.1.0.vbox-extpack</pre>
+
+                <p class="descr">Vérification des extensions :</p>
+                <pre class="terminal">vboxmanage list extpacks</pre>
+
+                <p class="descr">Ajouter User to the vboxusers Group :</p>
+                <pre class="terminal">sudo usermod -a -G vboxusers frromain</pre>
+
+                <p class="descr">Reboot.</p>
+
+                <p class="descr">Vérifier que User est dans vboxusers :</p>
+                <pre class="terminal">groups $USER</pre>
+
+                <p class="descr">Uninstall :</p>
+                <pre class="terminal">
+sudo apt purge virtualbox-7.1
+sudo apt autoremove
+sudo rm /etc/apt/sources.list.d/virtualbox.list</pre>
+            </div>
+
+
+        <h4>Apache</h4>
             <div class="group">
                 <p class="descr">Ajouter o+rx sur le dossier /media/frromain.</p>
 
@@ -325,26 +461,26 @@ NameVirtualHost *:8000
 # vim: syntax=apache ts=4 sw=4 sts=4 sr noet
             </div>
 
-        <h4>MySQL :</h4>
+
+        <h4>MySQL</h4>
             <div class="group">
                 <p class="descr">MySQL8 n'est pas dispo dans les paquets Debian. Il faut l'installer manuellement à partir d'un dépôt distant :</p>
                 <p class="terminal">cd /tmp</p>
+                <p class="descr">Debian 10:</p>
                 <p class="terminal">wget https://dev.mysql.com/get/mysql-apt-config_0.8.22-1_all.deb</p>
                 <p class="terminal">dpkg -i mysql-apt-config_0.8.22-1_all.deb</p>
+
+                <p class="descr">Debian 12:</p>
+                <p class="terminal">wget https://dev.mysql.com/get/mysql-apt-config_0.8.30-1_all.deb</p>
+                <p class="terminal">dpkg -i mysql-apt-config_0.8.30-1_all.deb</p>
 
                 <p class="descr">Puis :</p>
                 <p class="terminal">apt update</p>
                 <p class="terminal">apt install mysql-server</p>
-
-                <p class="descr">En cas de clé inexistante, la télécharger (remplacer &lt;KEY&gt; par la clé) :</p>
-                <p class="terminal">apt-key adv --keyserver keyserver.ubuntu.com --keyserver-options http-proxy=http://192.168.1.250:8080 --recv-keys &lt;KEY&gt;</p>
-                <p class="terminal">apt-get update --allow-releaseinfo-change</p>
+                <p class="descr">Attention : bien sélectionner <b>mysql8.0</b> ! (pas la version "LTS")</p>
 
                 <p class="descr">Une fois l'installation achevée, procéder à l'installation sécurisée :</p>
                 <p class="terminal">mysql_secure_installation</p>
-
-                <p class="descr">Enfin dans une console MySQL :</p>
-                <p class="terminal">ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '&lt;my_password&gt;';</p>
 
                 <p class="descr">Créer le fichier ~/.my.cnf (pour ne pas avoir à saisir user et mdp à chaque connexion MySQL) :</p>
                 <pre class="file">
@@ -354,9 +490,13 @@ NameVirtualHost *:8000
     [mysqldump]
     user=root
     password=my_super_password</pre>
+
+                <p class="descr">Enfin dans une console MySQL :</p>
+                <p class="terminal">ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '&lt;my_password&gt;';</p>
             </div>
 
-        <h4>Python :</h4>
+
+        <h4>Python</h4>
             <div class="group">
                 <p class="descr">Installer pip, l'installateur de packages Python :</p>
                 <p class="terminal">aptitude install python3-pip</p>
@@ -365,27 +505,33 @@ NameVirtualHost *:8000
                 <p class="terminal">pip3 install virtualenv</p>
             </div>
 
-        <h4>PHP7.3 + modules php7.3-mysql et php7.3-gd (ce dernier pour les statistiques).</h4>
 
-        <h4>Importer les bases de données.</h4>
+        <h4>PHP7.3 + modules php7.3-mysql et php7.3-gd (ce dernier pour les statistiques)</h4>
 
-        <h4>Polices :</h4>
+
+        <h4>Importer les bases de données</h4>
+
+
+        <h4>Polices</h4>
             <div class="group">
-                <p class="descr">Fonts (Arno Pro, FlavGaramond, Garamond Premier Pro, GregPlantin, Menlo-Regular.ttf, PlantinStd, SilentiumPro-RomanI.otf) à copier dans /usr/local/share/fonts (ttf dans truetype et otf dans opentype). Puis :</p>
+                <p class="descr">Fonts (Arno Pro, FlavGaramond, Garamond Premier Pro, GregPlantin, Menlo-Regular.ttf, PlantinStd, SilentiumPro-RomanI.otf) à copier dans /usr/share/fonts (ttf dans truetype et otf dans opentype). Puis :</p>
                 <p class="terminal">fc-cache -fv</p>
+                <p class="descr">Ou lancer (en tant que su-) le script <samp>/home/frromain/Scripts/fonts.sh</samp>.</p>
             </div>
 
-        <h4>LaTeX :</h4>
+
+        <h4>LaTeX</h4>
             <div class="group">
                 <p class="descr">Installer texlive texlive-luatex texlive-xetex texlive-lang-european texlive-lang-french texlive-extra-utils.</p>
                 <p class="descr">Ne pas installer texlive-full, qui semble faire des problèmes.</p>
                 <p class="descr">texlive-extra-utils contient latexindent, qui sert pour VSCode (formattage et compilation lors du Ctrl-S).</p>
-                <p class="descr">Les polices doivent être dans /usr/share/local/fonts. En cas de "font not found", vider le cache (c'est-à-dire supprimer le dossier <tt>~/.texlive2013/texmf-var/luatex-cache/</tt>).</p>
+                <p class="descr">En cas de "font not found", vider le cache (c'est-à-dire supprimer le dossier <tt>~/.texlive2013/texmf-var/luatex-cache/</tt>).</p>
             </div>
         
 
-        <h4>Gregorio :</h4>
+        <h4>Gregorio</h4>
             <div class="group">
+                <p class="descr">Nécessite le paquet cmake.</p>
                 <p class="descr">Télécharger l'archive tar.bz2 sur le site de gregorio (releases).</p>
                 <p class="descr">Désarchiver.</p>
                 <p class="descr">Dans le dossier obtenu, exécuter <b>(en tant que su)</b> :</p>
@@ -393,7 +539,8 @@ NameVirtualHost *:8000
                 <p class="terminal">./install.sh</p>
             </div>
 
-        <h4>Git :</h4>
+
+        <h4>Git</h4>
             <div class="group">
                 <p class="descr">Fichier ~/.gitconfig :</p>
                 <pre class="file">
@@ -419,17 +566,18 @@ NameVirtualHost *:8000
                 <pre class="file">machine github.com login BrRoman password my_super_password</pre>
             </div>
 
-        <h4>Crons :</h4>
+        <h4>Crons</h4>
             <div class="group">
                 <p class="descr">Éditer le crontab :</p>
                 <p class="terminal">crontab -e</p>
                 <p class="descr">Lignes à ajouter à la fin du fichier :</p>
                 <pre class="file">
-    */30 9-20 * * * /home/frromain/Scripts/server.sh
-    10 10,16 * * * /home/frromain/Scripts/github.sh</pre>
+    */20 8-20 * * * /home/frromain/Scripts/server.sh
+    30 10,16 * * * /home/frromain/Scripts/github.sh</pre>
             </div>
 
-        <h4>VSCode :</h4>
+
+        <h4>VSCode</h4>
             <div class="group">
                 <p class="descr">Clé :</p>
                 <p class="terminal">curl --proxy http://192.168.1.250:8080 https://packages.microsoft.com/keys/microsoft.asc | gpg --dearmor > microsoft.gpg</p>
@@ -615,7 +763,7 @@ NameVirtualHost *:8000
     Vim</pre>
             </div>
 
-        <h4>Collatinus :</h4>
+        <h4>Collatinus</h4>
             <div class="group">
                 <p class="descr">Installation (paquet) :</p>
                 <pre class="terminal">
@@ -627,19 +775,31 @@ NameVirtualHost *:8000
                 <p class="descr">2. Copier à la main le contenu du dossier ~/Documents/Langues/Latin/Collatinus/dicos/ dans ~/.local/share/collatinus/data/dicos/ :</p>
             </div>
 
-        <h4>Autres logiciels :</h4>
+        <h4>Anki (pour Debian 12)</h4>
             <div class="group">
-                <p class="descr">Anki (paquet), Audacity, FBReader pour lire les epubs (paquet), Gimp et gimp-help-en (paquets), Google chrome (.deb), RawTherapee (paquet), Scribus (paquet), Stellarium (paquet), VLC (paquet), XnView (.deb).</p>
+                <p class="descr">Aller dans le répertoire où se trouve l'archive, puis :</p>
+                <pre class="terminal">
+tar xaf anki-24.11-linux-qt6.tar.zst
+cd anki-24.11-linux-qt6/
+./install.sh</pre>
             </div>
 
-        <h4>Installation sans proxy :</h4>
+
+        <h4>Autres logiciels</h4>
+            <div class="group">
+                <p class="descr">Anki (paquet dans Debian 10 seulement), Audacity, Calibre pour lire les epubs (paquet), Gimp et gimp-help-en (paquets), GoldenDict (paquet), Google chrome (.deb), RawTherapee (paquet), Scribus (paquet), Stellarium (paquet), VLC (paquet), XnView (.deb).</p>
+            </div>
+
+
+        <h4>Installation sans proxy</h4>
             <div class="group">
                 <p class="descr">Aptitude avec option sans proxy :</p>
                 <pre class="terminal">
     aptitude -o Acquire::http::proxy=false install &lt;package&gt;</pre>
             </div>
 
-        <h4>Installation automatique :</h4>
+
+        <h4>Installation automatique</h4>
             <div class="group">
                 <p class="descr">Exporter la liste des paquets installés :</p>
                 <p class="terminal">dpkg --get-selections > my_package_list.txt</p>
