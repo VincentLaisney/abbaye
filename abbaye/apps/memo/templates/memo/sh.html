@@ -12,41 +12,99 @@
         <h5 class="descr text-center mb-5">Ces scripts ont pour but de montrer la syntaxe des scripts shell<br>et la manière d'y utiliser des boucles, conditions, redirections, paramètres et enchaînements de commandes.</h5>
 
     <div class="w-75">
-        <h4>RENOMMER DES FICHIERS</h4>
-            <div class="group">
-                <p class="descr">Le script suivant change tous les fichiers php en fichiers html dans le dossier mon_dossier :</p>
-                <pre class="terminal">
-    #!/bin/bash
-    cd '/chemin/vers/mon_dossier'
-    find . -type f -name '*.php' | sort | while read
-    do
-        f=`echo "$REPLY"`
-        fn=`echo "$REPLY" | sed 's/php/html/g'`
-        #echo "$fn"
-        mv "$f" "$fn"
-    done</pre>
-            </div>
+    <h4>SUBSTRINGS</h4>
+    <div class="group">
+        <p class="descr">
+            <b>Substring removal:</b><br>
+            <b>${string#substring}</b><br>
+            Deletes shortest match of <code>$substring</code> from front of <code>$string</code>.<br>
+            <b>${string##substring}</b><br>
+            Deletes longest match of <code>$substring</code> from front of <code>$string</code>.<br>
+            <b>${string%substring}</b><br>
+            Deletes shortest match of <code>$substring</code> from back of <code>$string</code>.<br>
+            <b>${string%%substring}</b><br>
+            Deletes longest match of <code>$substring</code> from back of <code>$string</code>.<br>
+            <b>Examples:</b>
+        </p>
+        <pre class="terminal">
+url="http://clairval.com"
+echo ${url#*/}
+>>> /clairval.com
+echo ${url##*/}
+>>> clairval.com
+echo ${url%/*}
+>>> http:/
+echo ${url%%/*}
+>>> http:
+url="http://clairval.com/"
+echo ${url#*/}
+>>> /clairval.com/
+echo ${url##*/}
+>>>
+echo ${url%/*}
+>>> http://clairval.com
+echo ${url%%/*}
+>>> http:</pre>
 
-            <div class="group">
-                <p class="descr">Plus simple :</p>
-                <pre class="terminal">
-    # Rename all *.txt to *.text
-    for file in *.txt; do
-        mv -- "$file" "${file%.txt}.text"
-    done</pre>
-            </div>
+        <p class="descr">Avec <code>cut</code>:</p>
+        <pre class="terminal">
+$ s='one_two_three_four_five'
+$ A="$(cut -d'_' -f2 <<<"$s")"
+$ echo "$A"
+two
+$ B="$(cut -d'_' -f4 <<<"$s")"
+$ echo "$B"
+four</pre>
 
-            <div class="group">
-                <p class="descr">Ou encore :</p>
-                <pre class="terminal">
-    for file in *.txt; do
-        mv -- "$file" "$(basename -- "$file" .txt).text"
-    done</pre>
-            </div>
+        <p class="descr">Avec <code>awk</code>:</p>
+        <pre class="terminal">
+A=$(awk -F_ '{print $2}' <<< 'one_two_three_four_five')
+B=$(awk -F_ '{print $4}' <<< 'one_two_three_four_five')</pre>
 
-            <div class="group">
-                <p class="descr">Voir aussi l'utilitaire <span class="font-monospace">rename</span>:</p>
-                <pre class="terminal">
+        <p class="descr">Remove <code>n</code> characters from a string:</p>
+        <pre class="terminal">
+a=123
+echo "${a::-1}"
+=> 12</pre>
+    </div>
+
+
+    <h4>RENOMMER DES FICHIERS</h4>
+    <div class="group">
+        <p class="descr">(Voir aussi la commande "find" dans la page "Commandes".)</p>
+        <p class="descr">Le script suivant change tous les fichiers php en fichiers html dans le dossier mon_dossier :</p>
+        <pre class="terminal">
+#!/bin/bash
+cd '/chemin/vers/mon_dossier'
+find . -type f -name '*.php' | sort | while read
+do
+f=`echo "$REPLY"`
+fn=`echo "$REPLY" | sed 's/php/html/g'`
+#echo "$fn"
+mv "$f" "$fn"
+done</pre>
+    </div>
+
+    <div class="group">
+        <p class="descr">Plus simple :</p>
+        <pre class="terminal">
+# Rename all *.txt to *.text
+for file in *.txt; do
+mv -- "$file" "${file%.txt}.text"
+done</pre>
+    </div>
+
+    <div class="group">
+        <p class="descr">Ou encore :</p>
+        <pre class="terminal">
+for file in *.txt; do
+mv -- "$file" "$(basename -- "$file" .txt).text"
+done</pre>
+    </div>
+
+    <div class="group">
+        <p class="descr">Voir aussi l'utilitaire <span class="font-monospace">rename</span>:</p>
+        <pre class="terminal">
 Given the files foo1, ..., foo9, foo10, ..., foo278, the commands
 rename foo foo00 foo?
 rename foo foo0 foo??
@@ -59,202 +117,247 @@ will fix the extension of your html files.
 Provide an empty string for shortening:
 rename '_with_long_name' '' file_with_long_name.*
 will remove the substring in the filenames.</pre>
-            </div>
+    </div>
+
 
         <h4>TEST SUR UNE LISTE</h4>
-            <div class="group">
-                <p class="descr">Le script suivant cherche si le paramètre $1 est dans la liste [cat, dog, mouse].</p>
-                <pre class="terminal">
-    case "$1" in "cat"|"dog"|"mouse")
-    echo "dollar 1 is either a cat or a dog or a mouse" ;;
-    *) echo "none of the above" ;;
-    esac</pre>
-            </div>
+        <div class="group">
+            <p class="descr">Le script suivant cherche si le paramètre $1 est dans la liste [cat, dog, mouse].</p>
+            <pre class="terminal">
+case "$1" in "cat"|"dog"|"mouse")
+echo "dollar 1 is either a cat or a dog or a mouse" ;;
+*) echo "none of the above" ;;
+esac</pre>
+        </div>
+
 
         <h4>TESTS EN CASCADE</h4>
-            <div class="group">
-                <pre class="terminal">
-    #!/bin/bash
-    NOW=$(date -d "$1" +"%a")
-    case $NOW in
-    Mon)
-    echo "Mon";;
-    Tue|Wed|Thu|Fri)
-    echo "Tue|Wed|Thu|Fri";;&
-    Fri|Sat|Sun)
-    echo "Fri|Sat|Sun";;
-    *) ;;
-    esac</pre>
-                <p class="descr">Commentaire :<br>Le & fait tester le statement suivant, même si le précédent matche.</p>
-                <pre class="file">
-    $ ./myscript thursday
-    Tue|Wed|Thu|Fri</pre>
-                <pre class="file">
-    $ ./myscript friday
-    Tue|Wed|Thu|Fri
-    Fri|Sat|Sun</pre>
-                <pre class="file">
-    $ ./myscript saturday
-    Fri|Sat|Sun</pre>
-            </div>
+        <div class="group">
+            <pre class="terminal">
+#!/bin/bash
+NOW=$(date -d "$1" +"%a")
+case $NOW in
+Mon)
+echo "Mon";;
+Tue|Wed|Thu|Fri)
+echo "Tue|Wed|Thu|Fri";;&
+Fri|Sat|Sun)
+echo "Fri|Sat|Sun";;
+*) ;;
+esac</pre>
 
-        <h4>SUBSTRINGS</h4>
-            <div class="group">
-                <pre class="terminal">
-    a=123
-    echo "${a::-1}"
-    => 12</pre>
-            </div>
+            <p class="descr">Commentaire :<br>Le & fait tester le statement suivant, même si le précédent matche.</p>
+            <pre class="terminal">
+$ ./myscript thursday
+Tue|Wed|Thu|Fri</pre>
+            <pre class="terminal">
+$ ./myscript friday
+Tue|Wed|Thu|Fri
+Fri|Sat|Sun</pre>
+            <pre class="terminal">
+$ ./myscript saturday
+Fri|Sat|Sun</pre>
+        </div>
+
 
         <h4>EXPANSION DE VARIABLES</h4>
-            <div class="group">
-                <pre class="terminal">
-    var=test
-    test="my string"
-    echo "$var"
-    => test
-    echo "${!var}"
-    => my string</pre>
-            </div>
+        <div class="group">
+            <pre class="terminal">
+var=test
+test="my string"
+echo "$var"
+=> test
+echo "${!var}"
+=> my string</pre>
+        </div>
+
 
         <h4>REMPLACEMENTS MULTIPLES SUR UNE SÉRIE DE FICHIERS</h4>
-            <div class="group">
-                <p class="descr">Le script suivant effectue un rechercher/remplacer sur tous les fichiers de mon_dossier dont l'extension est '.txt' ou '.tex' ou '.gabc'.</p>
-                <pre class="terminal">
-    #!/bin/bash
-    cd /chemin/vers/mon_dossier
-    find . \( -name '*.txt' -o -name '*.tex' -o -name '*.gabc' \) | while read
-    do
-    sed -i "s/√/↓/g" "$REPLY"
-    sed -i "s/®/¶/g" "$REPLY"
-    sed -i "s/†/ŧ/g" "$REPLY"
-    sed -i "s/ã/å/g" "$REPLY"
-    sed -i "s/õ/Ø/g" "$REPLY"
-    sed -i "s/Ï/¥/g" "$REPLY"
-    sed -i "s/™/Ŧ/g" "$REPLY"
-    sed -i "s/∏/Þ/g" "$REPLY"
-    done</pre>
-            </div>
+        <div class="group">
+            <p class="descr">Le script suivant effectue un rechercher/remplacer sur tous les fichiers de mon_dossier dont l'extension est '.txt' ou '.tex' ou '.gabc'.</p>
+            <pre class="terminal">
+#!/bin/bash
+cd /chemin/vers/mon_dossier
+find . \( -name '*.txt' -o -name '*.tex' -o -name '*.gabc' \) | while read
+do
+sed -i "s/√/↓/g" "$REPLY"
+sed -i "s/®/¶/g" "$REPLY"
+sed -i "s/†/ŧ/g" "$REPLY"
+sed -i "s/ã/å/g" "$REPLY"
+sed -i "s/õ/Ø/g" "$REPLY"
+sed -i "s/Ï/¥/g" "$REPLY"
+sed -i "s/™/Ŧ/g" "$REPLY"
+sed -i "s/∏/Þ/g" "$REPLY"
+done</pre>
+        </div>
+
 
         <h4>EXTRAIRE LE NOM D'UN FICHIER OU SON EXTENSION</h4>
-            <div class="group">
-                <pre class="terminal">
-    FILE="example.tar.gz"
-    echo "${FILE%%.*}"
-    => example
-    echo "${FILE%.*}"
-    => example.tar
-    echo "${FILE#*.}"
-    => tar.gz
-    echo "${FILE##*.}"
-    => gz</pre>
-            </div>
+        <div class="group">
+            <p class="descri">(Voir aussi le paragraphe "Substrings").</p>
+            <pre class="terminal">
+FILE="example.tar.gz"
+echo "${FILE%%.*}"
+=> example
+echo "${FILE%.*}"
+=> example.tar
+echo "${FILE#*.}"
+=> tar.gz
+echo "${FILE##*.}"
+=> gz</pre>
+        </div>
+
 
         <h4>OPÉRATIONS SUR DES NOMBRES</h4>
-            <div class="group">
-                <p class="descr">Pour réaliser des opérations mathématiques en shell, on entoure l'expression d'une double paire de parenthèses.</p>
-                <p class="descr">Le script suivant donne les doubles des chiffres de 1 à 10.</p>
-                <pre class="terminal">
-    #!/bin/bash
-    for i in {1..10}
-    do
-    echo $(($i*2))
-    done</pre>
+        <div class="group">
+            <p class="descr">Pour réaliser des opérations mathématiques en shell, on entoure l'expression d'une double paire de parenthèses.</p>
+            <p class="descr">Le script suivant donne les doubles des chiffres de 1 à 10.</p>
+            <pre class="terminal">
+#!/bin/bash
+for i in {1..10}
+do
+echo $(($i*2))
+done</pre>
 
-                <p class="descr">Le script suivant additionne 2 nombres entrés par l’utilisateur.</p>
-                <pre class="terminal">
-    #!/bin/bash
-    echo "Enter two numbers:"
-    read num1 num2
-    sum=$((num1 + num2))
-    echo "The sum is $sum."</pre>
-            </div>
+            <p class="descr">Le script suivant additionne 2 nombres entrés par l’utilisateur.</p>
+            <pre class="terminal">
+#!/bin/bash
+echo "Enter two numbers:"
+read num1 num2
+sum=$((num1 + num2))
+echo "The sum is $sum."</pre>
+        </div>
+
 
         <h4>OPÉRATIONS SUR LES DATES</h4>
-            <div class="group">
-                <p class="descr">Pour écrire la date courante (utile dans des fichiers logs) :</p>
-                <pre class="terminal">
-    #!/bin/bash
-    echo `date`</pre>
-                <p class="descr">Ou bien :</p>
-                <pre class="terminal">
-    #!/bin/bash
-    echo `date +%c`</pre>
-            </div>
+        <div class="group">
+            <p class="descr">Pour écrire la date courante (utile dans des fichiers logs) :</p>
+            <pre class="terminal">
+#!/bin/bash
+echo `date`</pre>
+            <p class="descr">Ou bien :</p>
+            <pre class="terminal">
+#!/bin/bash
+echo `date +%c`</pre>
+        </div>
+
 
         <h4>OPÉRATIONS SUR DES FICHIERS</h4>
-            <div class="group">
-                <p class="descr">Le script suivant teste le type de l'argument donné en paramètre.</p>
-                <pre class="terminal">
-    #!/bin/bash
-    arg=$1
-    if [[ -d $arg ]]; then
-    echo 'Dossier !'
-    elif [[ -f $arg ]]; then
-    echo 'Fichier !'
-    else
-    echo 'Argument invalide !'
-    exit 1
-    fi</pre>
-                <p class="descr">Le script suivant grep sur le contenu d’un fichier et exporte ce fichier vers un fichier au nom semblable (2008-QTR1.tsv > 2008Q1.txt).</p>
-                <pre class="terminal">
-    for f in *-QTR*.tsv do
-    grep 8-K < "$f" > "${f:0:4}"Q"${f:8:1}".txt
-    done</pre>
-                <p class="descr">Le script suivant renomme une série de fichiers *.gf à partir d’une liste de noms contenus dans le fichier list.txt.</p>
-                <pre class="terminal">
-    mapfile -t list < list.txt
-    i=0
-    for f in *.gf; do
-    echo mv "$f" "${list[i++]}_$f"
-    done</pre>
-            </div>
+        <div class="group">
+            <p class="descr">Le script suivant teste le type de l'argument donné en paramètre.</p>
+            <pre class="terminal">
+#!/bin/bash
+arg=$1
+if [[ -d $arg ]]; then
+echo 'Dossier !'
+elif [[ -f $arg ]]; then
+echo 'Fichier !'
+else
+echo 'Argument invalide !'
+exit 1
+fi</pre>
+            <p class="descr">Le script suivant grep sur le contenu d’un fichier et exporte ce fichier vers un fichier au nom semblable (2008-QTR1.tsv > 2008Q1.txt).</p>
+            <pre class="terminal">
+for f in *-QTR*.tsv do
+grep 8-K < "$f" > "${f:0:4}"Q"${f:8:1}".txt
+done</pre>
+            <p class="descr">Le script suivant renomme une série de fichiers *.gf à partir d’une liste de noms contenus dans le fichier list.txt.</p>
+            <pre class="terminal">
+mapfile -t list < list.txt
+i=0
+for f in *.gf; do
+echo mv "$f" "${list[i++]}_$f"
+done</pre>
+        </div>
+
+
+        <h4>OPÉRATIONS SUR LES SCRIPTS</h4>
+        <div class="group">
+            <p class="descr">Durée d'exécution d'un script :</p>
+            <pre class="terminal">
+time my_script.sh
+
+real    2m5.034s # <-- Actual time taken from start to finish.
+user    0m0.000s # <-- CPU time user-space.
+sys     0m0.003s # <-- CPU time kernel-space.</pre>
+        </div>
+
 
         <h4>TESTS SUR DES PROCESS</h4>
-            <div class="group">
-                <p class="descr">Le script suivant teste si le process 'fetchmail' existe, et si non le lance.</p>
-                <pre class="terminal">
-    if [ -z `pidof fetchmail` ] then
-    echo 'Fetchmail starting…'
-    fetchmail -av -d 15
-    fi</pre>
-                <p class="descr">Commentaire :<br>'-z' signifie 'chaîne de longueur nulle'.</p>
-            </div>
+        <div class="group">
+            <p class="descr">Le script suivant teste si le process 'fetchmail' existe, et si non le lance.</p>
+            <pre class="terminal">
+if [ -z `pidof fetchmail` ] then
+echo 'Fetchmail starting…'
+fetchmail -av -d 15
+fi</pre>
+            <p class="descr">Commentaire :<br>'-z' signifie 'chaîne de longueur nulle'.</p>
+        </div>
+
 
         <h4>CRÉER DES DOSSIERS EN SÉRIE</h4>
-            <div class="group">
-                <p class="descr">Le script suivant crée une série de dossiers dont le nom est construit à partir d'une boucle for.</p>
-                <pre class="terminal">
-    for i in {15..52} do
-    mkdir L13"$i"F
-    done</pre>
-                <p class="descr">Le script suivant boucle sur un array, vérifie que chaque item existe, sinon crée le dossier.</p>
-                <pre class="terminal">
-    #!/bin/bash
-    array=( /apache /apache/bin /apache/conf /apache/lib )
-    for dir in "${array[@]}"
-    do
-    [[ ! -d "$dir" ]] && mkdir "$dir"
-    done</pre>
-            </div>
+        <div class="group">
+            <p class="descr">Le script suivant crée une série de dossiers dont le nom est construit à partir d'une boucle for.</p>
+            <pre class="terminal">
+for i in {15..52} do
+mkdir L13"$i"F
+done</pre>
+            <p class="descr">Le script suivant boucle sur un array, vérifie que chaque item existe, sinon crée le dossier.</p>
+            <pre class="terminal">
+#!/bin/bash
+array=( /apache /apache/bin /apache/conf /apache/lib )
+for dir in "${array[@]}"
+do
+[[ ! -d "$dir" ]] && mkdir "$dir"
+done</pre>
+        </div>
+
 
         <h4>MAPFILE TO READ INPUT LINES</h4>
-            <div class="group">
-                <p class="descr">Le script suivant lit une par une des lignes de données et en utilise les champs :</p>
-                <pre class="terminal">
-    lines='John Smith
-    James Johnson'
+        <div class="group">
+            <p class="descr">Le script suivant lit une par une des lignes de données et en utilise les champs :</p>
+            <pre class="terminal">
+lines='John Smith
+James Johnson'
 
-    mapfile -t lines <<< "$lines"
-    for line in "${lines[@]}"; do
-    read name surname <<< "$line"
-    read -p "Do you want to echo name? surname otherwise "
-    if [[ $REPLY == "y" ]]; then
-    echo $name
-    else
-    echo $surname
-    fi
-    done</pre>
-                <p class="descr">If lines comes from the output of some command, you could similarly use mapfile -t lines < <(somecommand) directly.</p>
+mapfile -t lines <<< "$lines"
+for line in "${lines[@]}"; do
+read name surname <<< "$line"
+read -p "Do you want to echo name? surname otherwise "
+if [[ $REPLY == "y" ]]; then
+echo $name
+else
+echo $surname
+fi
+done</pre>
+            <p class="descr">If lines comes from the output of some command, you could similarly use mapfile -t lines < <(somecommand) directly.</p>
+        </div>
+
+
+        <h4>REDIRECTIONS</h4>
+        <div class="group">
+            <p class="descr">Tableau synthétique. Pour les les descriptions détaillées de chaque redirection, voir à la page "Commandes".</data></p>
+            <pre class="terminal">
+          || visible in terminal ||   visible in file   || existing
+  Syntax  ||  StdOut  |  StdErr  ||  StdOut  |  StdErr  ||   file   
+==========++==========+==========++==========+==========++===========
+    >     ||    no    |   yes    ||   yes    |    no    || overwrite
+    >>    ||    no    |   yes    ||   yes    |    no    ||  append
+          ||          |          ||          |          ||
+   2>     ||   yes    |    no    ||    no    |   yes    || overwrite
+   2>>    ||   yes    |    no    ||    no    |   yes    ||  append
+          ||          |          ||          |          ||
+   &>     ||    no    |    no    ||   yes    |   yes    || overwrite
+   &>>    ||    no    |    no    ||   yes    |   yes    ||  append
+          ||          |          ||          |          ||
+ | tee    ||   yes    |   yes    ||   yes    |    no    || overwrite
+ | tee -a ||   yes    |   yes    ||   yes    |    no    ||  append
+          ||          |          ||          |          ||
+ n.e. (*) ||   yes    |   yes    ||    no    |   yes    || overwrite
+ n.e. (*) ||   yes    |   yes    ||    no    |   yes    ||  append
+          ||          |          ||          |          ||
+|& tee    ||   yes    |   yes    ||   yes    |   yes    || overwrite
+|& tee -a ||   yes    |   yes    ||   yes    |   yes    ||  append</pre>
+        </div>
     </div>
 {% endblock content %}

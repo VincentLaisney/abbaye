@@ -49,14 +49,105 @@
             </div>
 
 
+            <h4>JOINTURES</h4>
+            <div class="group">
+                <p class="descr">
+                    Assuming you're joining on columns with no duplicates, which is a very common case:<br>
+                    An inner join of A and B gives the result of A intersect B, i.e. the inner part of a Venn diagram intersection.<br>
+                    An outer join of A and B gives the results of A union B, i.e. the outer parts of a Venn diagram union.
+                </p>
+
+                <p class="descr">
+                    <b>Examples :</b><br>
+                    Suppose you have two tables, with a single column each, and data as follows:
+                </p>
+                <pre class="terminal">
+A    B
+-    -
+1    3
+2    4
+3    5
+4    6</pre>
+                <p class="descr">Note that (1,2) are unique to A, (3,4) are common, and (5,6) are unique to B.</p>
+
+                <p class="descr">
+                    <b>INNER JOIN</b><br>
+                    An inner join using either of the equivalent queries gives the intersection of the two tables, i.e. the two rows they have in common.
+                </p>
+                <pre class="terminal">
+SELECT * FROM a INNER JOIN b ON a.a = b.b;
+SELECT a.*, b.* FROM a,b WHERE a.a = b.b;
+
+a | b
+--+--
+3 | 3
+4 | 4</pre>
+
+                <p class="descr">
+                    <b>LEFT OUTER JOIN</b><br>
+                    A left outer join will give all rows in A, plus any common rows in B.<br>
+                </p>
+                <pre class="terminal">
+SELECT * FROM a LEFT OUTER JOIN b ON a.a = b.b;
+SELECT a.*, b.*  FROM a,b WHERE a.a = b.b(+);
+
+a |  b
+--+-----
+1 | null
+2 | null
+3 |    3
+4 |    4</pre>
+
+                <p class="descr">
+                    <b>RIGHT OUTER JOIN</b><br>
+                    A right outer join will give all rows in B, plus any common rows in A.
+                </p>
+                <pre class="terminal">
+SELECT * FROM a RIGHT OUTER JOIN b ON a.a = b.b;
+SELECT a.*, b.*  FROM a,b WHERE a.a(+) = b.b;
+
+a    |  b
+-----+----
+3    |  3
+4    |  4
+null |  5
+null |  6</pre>
+
+                <p class="descr">
+                    <b>FULL OUTER JOIN</b><br>
+                    A full outer join will give you the union of A and B, i.e. all the rows in A and all the rows in B. If something in A doesn't have a corresponding datum in B, then the B portion is null, and vice versa.
+                </p>
+
+                <pre class="terminal">
+SELECT * FROM a FULL OUTER JOIN b ON a.a = b.b;
+
+a   |  b
+-----+-----
+1 | null
+2 | null
+3 |    3
+4 |    4
+null |    6
+null |    5</pre>
+            </div>
+
+
         <h4>UPDATE</h4>
             <div class="group">
-            <p class="descr">Mettre à jour tous les enregistrements d'une table (ici Objets) en attribuant à un champ une valeur extraite d'une table jointe (ici Interpretes_CD) (on fait le INNER JOIN et ensuite le SET):</p>
+                <p class="descr">Mettre à jour tous les enregistrements d'une table (ici <code>Objets</code>) en attribuant à un champ une valeur extraite d'une table jointe (ici <code>Interpretes_CD</code>) (on fait le INNER JOIN et ensuite le SET):</p>
                 <pre class="terminal">
 >>> UPDATE Objets AS o
 INNER JOIN Interpretes_CD AS i
 ON o.Interprete_CD = i.ID
 SET o.Interprete = i.Interprete;</pre>
+
+
+                <p class="descr">On peut faire une jointure avec une autre base. Ici nous allons mettre à jour le champ <code>commentaire_listing</code> de la table <code>abbaye.hotellerie_sejour</code> en récupérant ce même champ dans une ancienne table (<code>hotellerie.sejours_sejour</code>) et en nous basant sur l'ID :</p>
+                <pre class="terminal">
+>>> UPDATE abbaye.hotellerie_sejour AS a
+INNER JOIN hotellerie.sejours_sejour AS h
+ON a.id = h.id
+SET a.commentaire_listing = h.commentaire_listing;</pre>
             </div>
 
 
@@ -184,6 +275,6 @@ FROM Objets AS o;</pre>
             <p class="descr">Exécuter un statement depuis le fichier file.sql sur la base my_database :</p>
                 <pre class="terminal">
 mysql my_database < file.sql</pre>
-                </div>
+            </div>
     </div>
 {% endblock content %}
