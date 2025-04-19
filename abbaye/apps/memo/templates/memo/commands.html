@@ -704,6 +704,22 @@ If you run the command chain you specify, the invocation ./script.sh 4 will be i
                 <td><p class="terminal">find . -type f -name wsgi.py -execdir test -f settings.py \; -printf '%h\n'</p></td>
                 <td><p class="descr">Afficher les dossiers contenant à la fois un fichier "wsgi.py" et un fichier "settings.py" ('execdir': exécute une commande sur le dossier contenant le fichier trouvé, '%h' = folder).</p></td>
             </tr>
+
+            <tr>
+                <td><p class="terminal">find . -name 'file_*' -exec rename 's/file_/mywish_/' {} \;</p></td>
+                <td><p class="descr">Rename files with find.</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">find -name '* *' -exec bash -c 'mv "$1" "${1// /_}"' -- {} \;
+                </p></td>
+                <td><p class="descr">Rename files with find: replace spaces with underscores.</p></td>
+            </tr>
+
+            <tr>
+                <td><p class="terminal">find . ! -name 'file.txt' -type f -exec rm -f {} +</p></td>
+                <td><p class="descr">Remove files of a dir, except 'file.txt'.</p></td>
+            </tr>
         </table>
 
         <h4>GREP</h4>
