@@ -786,6 +786,18 @@ If you run the command chain you specify, the invocation ./script.sh 4 will be i
             </tr>
 
             <tr>
+                <td><p class="terminal">du -h --max-depth=2 . | sort -hr</p></td>
+                <td>
+                    <p class="descr">
+                        Idem.<br>
+                        -h : human-readable<br>
+                        --max-depth=2 : taille des sous-dossiers avec une profondeur de 2.<br>
+                        -hr : trier ('sort') par le champ 'human-readable' ('h') en sens inverse ('r', les plus lourds d'abord)
+                    </p>
+                </td>
+            </tr>
+
+            <tr>
                 <td><p class="terminal">ncdu [path]</p></td>
                 <td><p class="descr">Taille d'un dossier et de ses sous-dossiers + interface (basé sur le précédent). Défaut : répertoire courant.</p></td>
             </tr>
