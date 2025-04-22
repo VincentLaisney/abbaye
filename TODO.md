@@ -49,6 +49,10 @@
 
 
 # MÉMO:
+## Installation:
+### Raccourcis clavier:
+VirtualBox WindowsXP
+virtualbox VirtualBox\ VMs/WindowsXP/WindowsXP.vbox
 
 ## HTML:
 Rediriger d'une page html vers une autre:
