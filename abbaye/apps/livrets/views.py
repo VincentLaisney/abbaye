@@ -376,11 +376,21 @@ def pdf(request):
 
         # Sequence:
         if data['sequence']:
-            # TODO: if mode 'full'…
-            tex += "\\TitreB{Séquence~:}\\par\n"
-            tex += "\\PartocheWithTraduction{{GR/sequences/{}}}\n".format(
-                data['sequence']
-            )
+            sequence = Score.objects.filter(
+                type='SQ',
+            ).filter(
+                ref=data['sequence']
+            ).first()
+            if sequence and mode == 'mg':
+                tex += "\\TitreB{{Séquence~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
+                    sequence.name,
+                    sequence.page,
+                )
+            else:
+                tex += "\\TitreB{Séquence~:}\\par\n"
+                tex += "\\PartocheWithTraduction{{GR/sequence/{}}}\\par\n".format(
+                    data['sequence'],
+                )
 
         # Gospel:
         tex += "\\Lecture{{Évangile}}{{{}".format(
