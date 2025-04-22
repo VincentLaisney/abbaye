@@ -304,18 +304,22 @@ def pdf(request):
         # Graduel:
         grid_gr = request_get['gr_' + str(i + 1)]
         if grid_gr:
+            gral = 'AL' if ref_tempo.startswith('tp_') else 'GR'
             graduel = Score.objects.filter(
-                type='GR',
+                type=gral,
             ).filter(
                 ref=grid_gr
             ).first()
             if graduel and mode == 'mg':
-                tex += "\\TitreB{{Graduel~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
+                tex += "\\TitreB{{{}~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
+                    "Alléluia" if ref_tempo.startswith('tp_') else 'Graduel',
                     graduel.name,
                     graduel.page,
                 )
             else:
-                tex += "\\TitreB{Graduel~:}\\par\n"
+                tex += "\\TitreB{{{}~:}}\\par\n".format(
+                    "Alléluia" if ref_tempo.startswith('tp_') else 'Graduel',
+                )
                 tex += "\\PartocheWithTraduction{{GR/graduel/{}}}\\par\n".format(
                     grid_gr,
                 )
@@ -372,11 +376,21 @@ def pdf(request):
 
         # Sequence:
         if data['sequence']:
-            # TODO: if mode 'full'…
-            tex += "\\TitreB{Séquence~:}\\par\n"
-            tex += "\\PartocheWithTraduction{{GR/sequences/{}}}\n".format(
-                data['sequence']
-            )
+            sequence = Score.objects.filter(
+                type='SQ',
+            ).filter(
+                ref=data['sequence']
+            ).first()
+            if sequence and mode == 'mg':
+                tex += "\\TitreB{{Séquence~:}}\\Normal{{\\textit{{{}}} (p. {}).}}\\par\n".format(
+                    sequence.name,
+                    sequence.page,
+                )
+            else:
+                tex += "\\TitreB{Séquence~:}\\par\n"
+                tex += "\\PartocheWithTraduction{{GR/sequence/{}}}\\par\n".format(
+                    data['sequence'],
+                )
 
         # Gospel:
         tex += "\\Lecture{{Évangile}}{{{}".format(
