@@ -1,7 +1,27 @@
 {% extends 'main.html' %}
 
+{% load static %}
+
+{% block breadcrumbs %}
+    <li class="breadcrumb-item active">Infirmerie</li>
+{% endblock breadcrumbs %}
+
 {% block content %}
     <div class="d-flex flex-column align-items-center">
         <h1>Bienvenue sur Infirmerie !</h1>
     </div>
+
+    <div class="d-flex flex-column align-items-center mt-5">
+        <div class="form-group">
+            <label>Entrez votre code Cavimac (sans la clé) :</label>
+        </div>
+        <div class="d-flex">
+            <input type="text" id="body">
+        </div>
+        <div id="message"></div>
+    </div>
 {% endblock content %}
+
+{% block javascript %}
+    <script src={% static 'infirmerie/js/infirmerie.js' %}></script>
+{% endblock javascript %}
