@@ -6,6 +6,7 @@
   - Recevoir mail fêtes moines ("la veille", "le jour même", "jamais").
 - Boutons "Annuler" : ajouter une flèche gauche avant le mot "Annuler".
 - Everywhere in the site: when create and update, put an "else:" corresponding to the "if request.method == 'POST':" before "form = …".
+- Pagination (datatables trop lourdes et lentes) pour hôtellerie, séjours etc. Inutile pour des petits tableaux.
 
 
 # AGENDA:
@@ -49,6 +50,10 @@
 
 
 # MÉMO:
+## Installation:
+### Raccourcis clavier:
+VirtualBox WindowsXP
+virtualbox VirtualBox\ VMs/WindowsXP/WindowsXP.vbox
 
 ## HTML:
 Rediriger d'une page html vers une autre:
