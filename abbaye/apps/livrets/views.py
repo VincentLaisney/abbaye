@@ -204,6 +204,18 @@ def pdf(request):
             elif data['tempo'] in ['1230', '1231']:
                 tierce_antiphon = 'genuit_puerpera'
 
+            # TP:
+            elif data['tempo'].startswith('tp_'):
+                tierce_antiphon = [
+                    'alleluia_lundi_tp',
+                    'alleluia_feries_tp',
+                    'alleluia_feries_tp',
+                    'alleluia_feries_tp',
+                    'alleluia_feries_tp',
+                    'alleluia_feries_tp',
+                    'alleluia_dim_tp',
+                ][date.weekday()]
+
             # Per Annum:
             else:
                 tierce_antiphon = [
