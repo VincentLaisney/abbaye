@@ -30,6 +30,7 @@
 
 
 # LIVRETS:
+- Option "3 jours" ne fonctionne pas: parce qu'il attend 5 jours? à cause du formset? (suppr. de 2 forms)
 ## Carême:
 - *Oratio super populum*.
 - Commémoraisons (Stes Perpétue et Félicité etc.)
