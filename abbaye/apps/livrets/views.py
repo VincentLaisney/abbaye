@@ -313,24 +313,29 @@ def pdf(request):
                 )
 
         # First reading:
-        tex += "\\Lecture{{Première lecture}}{{{}".format(
-            ref_readings,
-        )
-        if data['readings_cycle'] == 6:
-            tex += "_1_{}_{}}}\\par\n".format(
-                year_cycle,
-                year_even,
+        if request_get['special_' + str(i + 1)] in ['def_1', 'def_2', 'def_3', 'def_4']:
+            tex += "\\Lecture{{Première lecture}}{{{}_1}}\\par\n".format(
+                request_get['special_' + str(i + 1)],
             )
-        elif data['readings_cycle'] == 3:
-            tex += "_{}_1}}\\par\n".format(
-                year_cycle,
+        else:
+            tex += "\\Lecture{{Première lecture}}{{{}".format(
+                ref_readings,
             )
-        elif data['readings_cycle'] == 2:
-            tex += "_1_{}}}\\par\n".format(
-                year_even,
-            )
-        elif data['readings_cycle'] == 1:
-            tex += "_1}\\par\n"
+            if data['readings_cycle'] == 6:
+                tex += "_1_{}_{}}}\\par\n".format(
+                    year_cycle,
+                    year_even,
+                )
+            elif data['readings_cycle'] == 3:
+                tex += "_{}_1}}\\par\n".format(
+                    year_cycle,
+                )
+            elif data['readings_cycle'] == 2:
+                tex += "_1_{}}}\\par\n".format(
+                    year_even,
+                )
+            elif data['readings_cycle'] == 1:
+                tex += "_1}\\par\n"
 
         # Graduel:
         grid_gr = request_get['gr_' + str(i + 1)]
@@ -424,26 +429,31 @@ def pdf(request):
                 )
 
         # Gospel:
-        tex += "\\Lecture{{Évangile}}{{{}".format(
-            ref_readings,
-        )
-        if data['tempo'].startswith('pa_') and not data['tempo'].endswith('_0'):
-            tex += "_ev}\\par\n"
-        elif data['readings_cycle'] == 6:
-            tex += "_ev_{}_{}}}\\par\n".format(
-                year_cycle,
-                year_even,
+        if request_get['special_' + str(i + 1)] in ['def_1', 'def_2', 'def_3', 'def_4']:
+            tex += "\\Lecture{{Évangile}}{{{}_ev}}\\par\n".format(
+                request_get['special_' + str(i + 1)],
             )
-        elif data['readings_cycle'] == 3:
-            tex += "_{}_ev}}\\par\n".format(
-                year_cycle,
+        else:
+            tex += "\\Lecture{{Évangile}}{{{}".format(
+                ref_readings,
             )
-        elif data['readings_cycle'] == 2:
-            tex += "_ev_{}}}\\par\n".format(
-                year_even,
-            )
-        elif data['readings_cycle'] == 1:
-            tex += "_ev}\\par\n"
+            if data['tempo'].startswith('pa_') and not data['tempo'].endswith('_0'):
+                tex += "_ev}\\par\n"
+            elif data['readings_cycle'] == 6:
+                tex += "_ev_{}_{}}}\\par\n".format(
+                    year_cycle,
+                    year_even,
+                )
+            elif data['readings_cycle'] == 3:
+                tex += "_{}_ev}}\\par\n".format(
+                    year_cycle,
+                )
+            elif data['readings_cycle'] == 2:
+                tex += "_ev_{}}}\\par\n".format(
+                    year_even,
+                )
+            elif data['readings_cycle'] == 1:
+                tex += "_ev}\\par\n"
 
         # Credo:
         grid_cr = request_get['cr_' + str(i + 1)]
@@ -514,6 +524,37 @@ def pdf(request):
         if str(data['preface_id']).startswith('cm_'):
             tex += "\\Preface{{Préface propre}}{{{}}}\\par\n".format(
                 data['preface_id']
+            )
+        elif request_get['special_' + str(i + 1)] in ['def_1', 'def_2', 'def_3', 'def_4']:
+            prefaces_defunts = {
+                'def_1': {
+                    'chiffre_romain': "II",
+                    'page': 65,
+                },
+                'def_2': {
+                    'chiffre_romain': "III",
+                    'page': 66,
+                },
+                'def_3': {
+                    'chiffre_romain': "IV",
+                    'page': 66,
+                },
+                'def_4': {
+                    'chiffre_romain': "V",
+                    'page': 67,
+                },
+            }
+            tex += "\\TitreB{{Préface des défunts {}~:}}\\Normal{{p. {}.}}\\par\n".format(
+                prefaces_defunts[
+                    request_get['special_' + str(i + 1)]
+                ][
+                    'chiffre_romain'
+                ],
+                prefaces_defunts[
+                    request_get['special_' + str(i + 1)]
+                ][
+                    'page'
+                ],
             )
         else:
             # Avent:
