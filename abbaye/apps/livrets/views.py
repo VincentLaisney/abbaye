@@ -138,10 +138,23 @@ def pdf(request):
         tex += "\n\\section{{{}}}\n".format(
             request_get['date_' + str(i + 1)],
         )
-        tex += "\\JourLiturgique{{{}}}{{{}}}\\par\n".format(
-            data['title'],
-            data['rang'] if data['rang'] else '',
-        )
+        if request_get['special_' + str(i + 1)] in ['def_1', 'def_2', 'def_3', 'def_4']:
+            tex += "\\JourLiturgique{Messe votive pour les défunts}{}\\par\n"
+        elif request_get['special_' + str(i + 1)] == "sacre_coeur":
+            tex += "\\JourLiturgique{Messe votive du Sacré-Cœur}{}\\par\n"
+        elif request_get['special_' + str(i + 1)] == "misericorde":
+            tex += "\\JourLiturgique{Messe votive de la divine Miséricorde}{}\\par\n"
+        elif request_get['special_' + str(i + 1)] == "pro_unitate":
+            tex += "\\JourLiturgique{Messe votive pour l'unité des chrétiens}{}\\par\n"
+        elif request_get['special_' + str(i + 1)] == "semailles":
+            tex += "\\JourLiturgique{Messe votive après les semailles}{}\\par\n"
+        elif request_get['special_' + str(i + 1)] == "recoltes":
+            tex += "\\JourLiturgique{Messe votive après les récoltes}{}\\par\n"
+        else:
+            tex += "\\JourLiturgique{{{}}}{{{}}}\\par\n".format(
+                data['title'],
+                data['rang'] if data['rang'] else '',
+            )
 
         # Introit:
         grid_in = request_get['in_' + str(i + 1)]
