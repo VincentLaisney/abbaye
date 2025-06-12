@@ -114,7 +114,7 @@ def pdf(request):
                 if not data['preface_id']:
                     data['preface_id'] = data_tempo['preface_id']
         # BMV samedi:
-        if date.weekday() == 5 and data['precedence'] < 30:
+        if date.weekday() == 5 and not data_tempo['ref'].startswith(('adv_', 'qua_', 'tp_')):
             ref_bmv = 'icm' if date.day < 8 \
                 else '{}_{}'.format(
                     date.month,
