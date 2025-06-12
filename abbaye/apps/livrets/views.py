@@ -298,14 +298,19 @@ def pdf(request):
                     )
 
         # Prayer Collecte:
-        if data['prayers_mg'] and mode == 'mg':
-            tex += "\\TitreB{{Oraison~:}}\\Normal{{p. {}.}}\\par\n".format(
-                data['prayers_mg'].split('/')[0]
+        if request_get['special_' + str(i + 1)]:
+            tex += "\\Oraison{{Oraison}}{{1}}{{{}}}\\par\n".format(
+                request_get['special_' + str(i + 1)],
             )
         else:
-            tex += "\\Oraison{{Oraison}}{{1}}{{{}}}\\par\n".format(
-                ref_prayers,
-            )
+            if data['prayers_mg'] and mode == 'mg':
+                tex += "\\TitreB{{Oraison~:}}\\Normal{{p. {}.}}\\par\n".format(
+                    data['prayers_mg'].split('/')[0]
+                )
+            else:
+                tex += "\\Oraison{{Oraison}}{{1}}{{{}}}\\par\n".format(
+                    ref_prayers,
+                )
 
         # First reading:
         tex += "\\Lecture{{Première lecture}}{{{}".format(
@@ -490,14 +495,19 @@ def pdf(request):
             )
 
         # Prayer Super oblata:
-        if data['prayers_mg']:
-            tex += "\\TitreB{{Prière sur les offrandes~:}}\\Normal{{p. {}.}}\\par\n".format(
-                data['prayers_mg'].split('/')[1],
+        if request_get['special_' + str(i + 1)]:
+            tex += "\\Oraison{{Prière sur les offrandes}}{{2}}{{{}}}\\par\n".format(
+                request_get['special_' + str(i + 1)],
             )
         else:
-            tex += "\\Oraison{{Prière sur les offrandes}}{{2}}{{{}}}\\par\n".format(
-                ref_prayers,
-            )
+            if data['prayers_mg']:
+                tex += "\\TitreB{{Prière sur les offrandes~:}}\\Normal{{p. {}.}}\\par\n".format(
+                    data['prayers_mg'].split('/')[1],
+                )
+            else:
+                tex += "\\Oraison{{Prière sur les offrandes}}{{2}}{{{}}}\\par\n".format(
+                    ref_prayers,
+                )
 
         # Preface:
         # BMV:
@@ -612,14 +622,19 @@ def pdf(request):
                 )
 
         # Prayer Postcommunion:
-        if data['prayers_mg']:
-            tex += "\\TitreB{{Prière après la Communion~:}}\\Normal{{p. {}.}}\\par\n".format(
-                data['prayers_mg'].split('/')[2],
+        if request_get['special_' + str(i + 1)]:
+            tex += "\\Oraison{{Prière après la Communion}}{{3}}{{{}}}\\par\n".format(
+                request_get['special_' + str(i + 1)],
             )
         else:
-            tex += "\\Oraison{{Prière après la Communion}}{{3}}{{{}}}\\par\n".format(
-                ref_prayers,
-            )
+            if data['prayers_mg']:
+                tex += "\\TitreB{{Prière après la Communion~:}}\\Normal{{p. {}.}}\\par\n".format(
+                    data['prayers_mg'].split('/')[2],
+                )
+            else:
+                tex += "\\Oraison{{Prière après la Communion}}{{3}}{{{}}}\\par\n".format(
+                    ref_prayers,
+                )
 
         # Super populum (Lent).
         if data['ref'].startswith(
