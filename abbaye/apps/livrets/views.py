@@ -196,8 +196,9 @@ def pdf(request):
                 tex += "\\TitreB{Asperges me I}\\Normal{(p. 71).}\\par\n"
 
         # Tierce:
-        # 2 novembre: pas d'antienne:
-        if date.day == 2 and date.month == 11:
+        # 2 novembre et défunts: pas d'antienne:
+        if (date.day == 2 and date.month == 11) or \
+                request_get['special_' + str(i + 1)] in ['def_1', 'def_2', 'def_3', 'def_4']:
             tierce_antiphon = ''
         # Antienne propre:
         elif data['tierce']:
