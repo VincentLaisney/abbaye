@@ -129,7 +129,11 @@ def pdf(request):
             data['tierce'] = 'laeva_ejus'
             data['prayers_mg'] = None
             data['preface_id'] = 'cm_{}'.format(bmv['cm'])
+
+        # Data tempo:
         data['tempo'] = ref_tempo
+
+        # Ref prayers:
         if not data['prayers_mg']:
             if data['ref'].startswith('pa_1_'):
                 ref_prayers = 'pa_1'
@@ -746,6 +750,8 @@ def get_data(date):
     """ Return the data of the given date. """
     tempo, sancto, liturgical_day = get_liturgical_day(date)
     data_tempo = Day.objects.filter(ref=tempo).values()[0]
-    data_sancto = Day.objects.filter(ref=sancto).values()[
-        0] if sancto else {}
+    if sancto:
+        data_sancto = Day.objects.filter(ref=sancto).values()[0]
+    else:
+        data_sancto = {}
     return (data_tempo, data_sancto, liturgical_day)
