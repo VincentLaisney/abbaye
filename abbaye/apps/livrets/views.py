@@ -114,14 +114,16 @@ def pdf(request):
                 if not data['preface_id']:
                     data['preface_id'] = data_tempo['preface_id']
         # BMV samedi:
-        if date.weekday() == 5 and not data_tempo['ref'].startswith(('adv_', 'qua_', 'tp_')):
-            ref_bmv = 'icm' if date.day < 8 \
+        if date.weekday() == 5 \
+                and not data_tempo['ref'].startswith(('adv_', 'qua_', 'tp_')) \
+                and not data_sancto['precedence'] > 30:
+            ref_cm = 'cm_28' if date.day < 8 \
                 else '{}_{}'.format(
                     date.month,
                     ceil(date.day / 7),
                 )
-            bmv = BMV.objects.filter(ref=ref_bmv).values()[0]
-            data['ref'] = 'bmv_{}'.format(bmv['cm'])
+            bmv = BMV.objects.filter(ref=ref_cm).values()[0]
+            data['ref'] = 'cm_{}'.format(bmv['cm'])
             data['title'] = bmv['title']
             data['rang'] = 'Mémoire majeure'
             data['tierce'] = 'laeva_ejus'
