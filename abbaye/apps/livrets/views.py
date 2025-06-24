@@ -562,6 +562,8 @@ def pdf(request):
                     'page'
                 ],
             )
+        elif request_get['special_' + str(i + 1)] in ['semailles', 'recoltes']:
+            tex += "\\TitreB{Préface des dimanches ordinaires V~:}\\Normal{p. 61.}\\par\n"
         else:
             # Avent:
             if data['ref'].startswith('adv_'):
