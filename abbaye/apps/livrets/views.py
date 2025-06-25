@@ -531,6 +531,7 @@ def pdf(request):
             tex += "\\Preface{{Préface propre}}{{{}}}\\par\n".format(
                 data['preface_id']
             )
+        # Défunts:
         elif request_get['special_' + str(i + 1)] in ['def_1', 'def_2', 'def_3', 'def_4']:
             prefaces_defunts = {
                 'def_1': {
@@ -562,14 +563,18 @@ def pdf(request):
                     'page'
                 ],
             )
-        elif request_get['special_' + str(i + 1)] in ['semailles', 'recoltes']:
-            tex += "\\TitreB{Préface des dimanches ordinaires V~:}\\Normal{p. 61.}\\par\n"
         # Sacré-Cœur:
         elif request_get['special_' + str(i + 1)] == "misericorde":
             tex += "\\TitreB{Préface du Sacré-Cœur~:}\\Normal{p. 428.}\\par\n"
         # Miséricorde:
         elif request_get['special_' + str(i + 1)] == "misericorde":
             tex += "\\Preface{Préface commune II}{com_2}\\par\n"
+        # Pro unitate:
+        elif request_get['special_' + str(i + 1)] == "pro_unitate":
+            tex += "\\Preface{Préface propre}{pro_unitate}\\par\n"
+        # Semailles et récoltes:
+        elif request_get['special_' + str(i + 1)] in ['semailles', 'recoltes']:
+            tex += "\\TitreB{Préface des dimanches ordinaires V~:}\\Normal{p. 61.}\\par\n"
         # Sinon:
         else:
             # Avent:
