@@ -116,7 +116,7 @@ def pdf(request):
         # BMV samedi:
         if date.weekday() == 5 \
                 and not data_tempo['ref'].startswith(('adv_', 'qua_', 'tp_')) \
-                and not data_sancto['precedence'] > 30:
+                and not (data_sancto and data_sancto['precedence'] > 30):
             ref_cm = 'cm_28' if date.day < 8 \
                 else '{}_{}'.format(
                     date.month,
@@ -126,7 +126,9 @@ def pdf(request):
             data['ref'] = 'cm_{}'.format(bmv['cm'])
             data['title'] = bmv['title']
             data['rang'] = 'Mémoire majeure'
-            data['tierce'] = 'laeva_ejus'
+            data['tierce'] = 'quando_natus_es' \
+                if (date.month == 1 or (date.month == 2 and date.day == 1)) \
+                else 'laeva_ejus'
             data['prayers_mg'] = None
             data['preface_id'] = 'cm_{}'.format(bmv['cm'])
 
@@ -223,6 +225,16 @@ def pdf(request):
             # Noël:
             elif data['tempo'] in ['1230', '1231']:
                 tierce_antiphon = 'genuit_puerpera'
+
+            # BMV samedi:
+            # if date.weekday() == 5 \
+            #         and not data_tempo['ref'].startswith(('adv_', 'qua_', 'tp_')) \
+            #         and not data_sancto['precedence'] > 30:
+            #     ref_cm = 'cm_28' if date.day < 8 \
+            #         else '{}_{}'.format(
+            #             date.month,
+            #             ceil(date.day / 7),
+            #         )
 
             # TP:
             elif data['tempo'].startswith('tp_'):
