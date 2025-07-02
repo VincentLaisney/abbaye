@@ -609,6 +609,7 @@ def get_tempo(date):
     pentecost = easter + datetime.timedelta(days=49)
     first_sunday_of_next_advent = get_first_sunday_of_advent(liturgical_year)
     christ_king = first_sunday_of_next_advent - datetime.timedelta(days=7)
+    tempo = None
     if first_sunday_of_advent <= date < christmas:
         days = (date - first_sunday_of_advent).days
         week = floor((days / 7) + 1)
