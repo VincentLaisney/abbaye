@@ -170,6 +170,30 @@
                     {% endif %}
                     {{ form.invoice.label_tag }}
                 </div>
+    
+                <!-- Status: "Canceled" -->
+                <div class='form-group d-flex align-items-center'>
+                    {% if form.is_bound %}
+                        {% if form.canceled.errors %}
+                            {% render_field form.canceled class='is-invalid' %}
+                            {% for error in form.canceled.errors %}
+                                <div class='invalid-feedback d-block'>
+                                    {{ error }}
+                                </div>
+                            {% endfor %}
+                        {% else %}
+                            {% render_field form.canceled class='is-valid' %}
+                        {% endif %}
+                    {% else %}
+                        {% render_field form.canceled %}
+                    {% endif %}
+                    {% if form.canceled.help_text %}
+                        <small class='form-text text-muted'>
+                            {{ form.canceled.help_text }}
+                        </small>
+                    {% endif %}
+                    {{ form.canceled.label_tag }}
+                </div>
             </div>
 
             <!-- Notes -->

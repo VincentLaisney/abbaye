@@ -103,6 +103,7 @@ class Project(models.Model):
     validated = models.BooleanField()  # Quotation validated.
     bl = models.BooleanField()  # BL sent to compta.
     invoice = models.BooleanField()  # Invoice sent to client.
+    canceled = models.BooleanField()  # Project canceled.
     notes = models.TextField(
         null=True,
         blank=True,

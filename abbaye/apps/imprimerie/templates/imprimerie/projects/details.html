@@ -23,29 +23,9 @@
                 <tr>
                     <td class="fw-bold col-3">Statut :
                         <td>
-                            {% if project.quotation %}
-                                <span class="green">D</span>
-                            {% else %}
-                                <span class="red">D</span>
-                            {% endif %}
-    
-                            {% if project.validated %}
-                                <span class="green">V</span>
-                            {% else %}
-                                <span class="red">V</span>
-                            {% endif %}
-    
-                            {% if project.bl %}
-                                <span class="green">B</span>
-                            {% else %}
-                                <span class="red">B</span>
-                            {% endif %}
-    
-                            {% if project.invoice %}
-                                <span class="green">F</span>
-                            {% else %}
-                                <span class="red">F</span>
-                            {% endif %}
+                            {% if project.canceled %}<s>{% else %}<div>{% endif %}
+                                {% include "./status.html" %}
+                            {% if project.canceled %}</s>{% else %}</div>{% endif %}
                         </td>
                     </td>
                 </tr>

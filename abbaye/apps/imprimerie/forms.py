@@ -154,6 +154,17 @@ class ProjectForm(forms.ModelForm):
             },
         ),
     )
+    # Status: "Canceled."
+    canceled = forms.BooleanField(
+        required=False,
+        label='Projet annulé',
+        label_suffix='',
+        widget=forms.CheckboxInput(
+            attrs={
+                'style': 'margin: 0 5px 0 0;'
+            },
+        ),
+    )
 
     notes = forms.CharField(
         label='Notes :',

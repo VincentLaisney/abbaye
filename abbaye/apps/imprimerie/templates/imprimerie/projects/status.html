@@ -21,3 +21,7 @@
 {% else %}
     <span class="red" title="Facture pas envoyée au client">F</span>
 {% endif %}
+
+{% if project.canceled %}
+    <span class="red fw-bold" title="Projet annulé">A</span>
+{% endif %}
