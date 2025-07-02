@@ -134,7 +134,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
 
     nd_lorette_date = datetime.date(current_year - 1, 12, 10)
     nd_lorette = dict_sancto[nd_lorette_date] = {}
-    nd_lorette["force"] = 40
+    nd_lorette["force"] = 20
     nd_lorette["header"] = " - Beatæ Mariæ Virginis de Loreto - \\textit{memoria minor} - \\textit{Viol.}"
     nd_lorette["body"] = "\n\\item Ad Benedictus: ø \\textit{Beatam} (AM 711); oratio in supplemento 60*.\n\\item \\textit{In ML: Alb.}\n\\item In MC \\textit{(Alb.)}: Commune Beatæ Mariæ Virginis (MR 905); præfatio I de Beata Maria Virgine."
 
@@ -1094,7 +1094,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
         else:
             messe_lue = ""
     else:
-        messe_lue = "\n\\item \\textit{In ML: Missa in PAL; præfatio de sanctis.}"
+        messe_lue = ""
     lectures_mc = "Rom \\textbf{12}, 9-16b" if even_year else "Soph \\textbf{3}, 14-18"
     visitation["body"] = suppl_vigiles + messe_lue + "\\item In MC: lectiones propriæ: " + \
         lectures_mc + \
@@ -1297,9 +1297,9 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
 
     saint_louis_gonzague_date = datetime.date(current_year, 6, 21)
     saint_louis_gonzague = dict_sancto[saint_louis_gonzague_date] = {}
-    saint_louis_gonzague["force"] = 20
+    saint_louis_gonzague["force"] = 40
     saint_louis_gonzague[
-        "header"] = " - S. Aloisii Gonzaga, religiosi - \\textit{memoria minor} - \\textit{Vir.}"
+        "header"] = " - S. Aloisii Gonzaga, religiosi - memoria minor - \\textit{Vir.}"
     saint_louis_gonzague[
         "body"] = "\n\\item Ad Benedictus: ø \\textit{Sanctorum velut} (AM 652).\n\\item \\textit{In ML: Alb.}\n\\item In MC: \\textit{Alb.}"
 

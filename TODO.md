@@ -14,6 +14,7 @@
 - Fetcher les retraites et leurs nombres dans la page du P. Savio.
 - Empêcher date_to < date_from.
 - On change date_from: date_to = date_from.
+- Après validation d'un événement : renvoyer sur la semaine de l'événement (pas la semaine en cours).
 
 
 # HÔTELLERIE:
@@ -23,6 +24,7 @@
 
 
 # IMPRIMERIE:
+- Ajouter option "Projet annulé" => barré + grisé dans la liste.
 - "Ajouter…" (client, projet etc.) : bouton à mettre en haut.
 - Générer devis PDF.
 - Générer BL PDF.
@@ -30,9 +32,14 @@
 
 
 # LIVRETS:
+## Option "3 jours" ne fonctionne pas: parce qu'il attend 5 jours? à cause du formset? (suppr. de 2 forms)
+## Vérifier lectures propres pour les Abbés (saint Antoine au moins ne semble pas fait).
+## Lectures Ste Famille année C.
+## Cendres: antiennes ad lotionem pedum.
+## Dimanches, solennités, Cendres etc.: homélie.
 ## Carême:
 - *Oratio super populum*.
-- Commémoraisons (Stes Perpétue et Félicité etc.)
+- Commémoraisons (Stes Perpétue et Félicité etc.).
 - Cendres (et autres ?): Prière universelle.
 ## Pour les livrets "full":
 - P. Vianney:
@@ -67,6 +74,7 @@ Dans le <head>:
 
 
 # ORDOMATIC:
+- Créer des tests Python.
 - Ordos 2011 et 2038 à voir : pb 3e samedi de juin.
 - Ordo 2007 : bug.
 - Anniv. professions etc.
@@ -149,7 +157,7 @@ Page 112 (lundi 14 novembre): MC pour les bienfaiteurs défunts (collision avec 
 Baptême : refondre.
 
 7/1 : Inverser ML/MC.
-2/2 : He (pas Hebr), et Lc en gras.
+2/2 : He (pas Hebr (?)), et Lc en gras.
 
 Pour l’évangile de ce lundi notre ordo indique Jn 8, 12-20.
 Or, pour les années C, le lectionnaire dit de lire cet évangile lorsque l’évangile de la femme adultère (Jn 8, 1-11) a été lu le dimanche précédent ; donc, lorsque celui-ci n’a pas été lu le dimanche (ce qui est notre cas puisque on a lu celui de l’année A), il faut le lire le lundi.
@@ -218,6 +226,24 @@ Annonciation : le report à Pâques + 8 ne fonctionne pas (2027).
 Césures : pas moins de 2 lettres.
 
 Problème du "Quatuor": enlever la queue. Ou changer de police ?
+
+Dominica VII Paschæ: inutile de préciser R. et hymne aux Vêpres, dans la mesure où c'est déjà dit plus haut ("office férial et dominical").
+
+Saint Joseph 1er mai: oraison: 1 fois.
+
+Ordinaire Ascension.
+
+Abbés Cluny: Apoc => Ap (?).
+
+24/6 (2023 ? 2024 ? 2025 ?): "Vesperae solemnitatis" ?
+
+Sainte Famille: préciser dès samedi soir: "Oratio…"
+
+Dom. II post Nativ.: -supprimer "et vesperas" si 5 janvier - "Post I Noct. Resp. IV" ? ou celui du jour.
+
+St Nom de Jésus: inutile de précier (2e Vêpres 2025).
+
+7/1: inutile de préciser "in MC: lectiones feriales": déjà dit 2 fois!
 
 
 # POLYGLOTTE:

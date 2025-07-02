@@ -114,20 +114,28 @@ def pdf(request):
                 if not data['preface_id']:
                     data['preface_id'] = data_tempo['preface_id']
         # BMV samedi:
-        if date.weekday() == 5 and data['precedence'] < 30:
-            ref_bmv = 'icm' if date.day < 8 \
+        if date.weekday() == 5 \
+                and not data_tempo['ref'].startswith(('adv_', 'qua_', 'tp_')) \
+                and not (data_sancto and data_sancto['precedence'] > 30):
+            ref_cm = 'cm_28' if date.day < 8 \
                 else '{}_{}'.format(
                     date.month,
                     ceil(date.day / 7),
                 )
-            bmv = BMV.objects.filter(ref=ref_bmv).values()[0]
-            data['ref'] = 'bmv_{}'.format(bmv['cm'])
+            bmv = BMV.objects.filter(ref=ref_cm).values()[0]
+            data['ref'] = 'cm_{}'.format(bmv['cm'])
             data['title'] = bmv['title']
             data['rang'] = 'Mémoire majeure'
-            data['tierce'] = 'laeva_ejus'
+            data['tierce'] = 'quando_natus_es' \
+                if (date.month == 1 or (date.month == 2 and date.day == 1)) \
+                else 'laeva_ejus'
             data['prayers_mg'] = None
             data['preface_id'] = 'cm_{}'.format(bmv['cm'])
+
+        # Data tempo:
         data['tempo'] = ref_tempo
+
+        # Ref prayers:
         if not data['prayers_mg']:
             if data['ref'].startswith('pa_1_'):
                 ref_prayers = 'pa_1'
@@ -138,10 +146,23 @@ def pdf(request):
         tex += "\n\\section{{{}}}\n".format(
             request_get['date_' + str(i + 1)],
         )
-        tex += "\\JourLiturgique{{{}}}{{{}}}\\par\n".format(
-            data['title'],
-            data['rang'] if data['rang'] else '',
-        )
+        if request_get['special_' + str(i + 1)] in ['def_1', 'def_2', 'def_3', 'def_4']:
+            tex += "\\JourLiturgique{Messe votive pour les défunts}{}\\par\n"
+        elif request_get['special_' + str(i + 1)] == "sacre_coeur":
+            tex += "\\JourLiturgique{Messe votive du Sacré-Cœur}{}\\par\n"
+        elif request_get['special_' + str(i + 1)] == "misericorde":
+            tex += "\\JourLiturgique{Messe votive de la divine Miséricorde}{}\\par\n"
+        elif request_get['special_' + str(i + 1)] == "pro_unitate":
+            tex += "\\JourLiturgique{Messe votive pour l'unité des chrétiens}{}\\par\n"
+        elif request_get['special_' + str(i + 1)] == "semailles":
+            tex += "\\JourLiturgique{Messe votive après les semailles}{}\\par\n"
+        elif request_get['special_' + str(i + 1)] == "recoltes":
+            tex += "\\JourLiturgique{Messe votive après les récoltes}{}\\par\n"
+        else:
+            tex += "\\JourLiturgique{{{}}}{{{}}}\\par\n".format(
+                data['title'],
+                data['rang'] if data['rang'] else '',
+            )
 
         # Introit:
         grid_in = request_get['in_' + str(i + 1)]
@@ -183,8 +204,9 @@ def pdf(request):
                 tex += "\\TitreB{Asperges me I}\\Normal{(p. 71).}\\par\n"
 
         # Tierce:
-        # 2 novembre: pas d'antienne:
-        if date.day == 2 and date.month == 11:
+        # 2 novembre et défunts: pas d'antienne:
+        if (date.day == 2 and date.month == 11) or \
+                request_get['special_' + str(i + 1)] in ['def_1', 'def_2', 'def_3', 'def_4']:
             tierce_antiphon = ''
         # Antienne propre:
         elif data['tierce']:
@@ -203,6 +225,28 @@ def pdf(request):
             # Noël:
             elif data['tempo'] in ['1230', '1231']:
                 tierce_antiphon = 'genuit_puerpera'
+
+            # BMV samedi:
+            # if date.weekday() == 5 \
+            #         and not data_tempo['ref'].startswith(('adv_', 'qua_', 'tp_')) \
+            #         and not data_sancto['precedence'] > 30:
+            #     ref_cm = 'cm_28' if date.day < 8 \
+            #         else '{}_{}'.format(
+            #             date.month,
+            #             ceil(date.day / 7),
+            #         )
+
+            # TP:
+            elif data['tempo'].startswith('tp_'):
+                tierce_antiphon = [
+                    'alleluia_lundi_tp',
+                    'alleluia_feries_tp',
+                    'alleluia_feries_tp',
+                    'alleluia_feries_tp',
+                    'alleluia_feries_tp',
+                    'alleluia_feries_tp',
+                    'alleluia_dim_tp',
+                ][date.weekday()]
 
             # Per Annum:
             else:
@@ -272,34 +316,44 @@ def pdf(request):
                     )
 
         # Prayer Collecte:
-        if data['prayers_mg'] and mode == 'mg':
-            tex += "\\TitreB{{Oraison~:}}\\Normal{{p. {}.}}\\par\n".format(
-                data['prayers_mg'].split('/')[0]
+        if request_get['special_' + str(i + 1)]:
+            tex += "\\Oraison{{Oraison}}{{1}}{{{}}}\\par\n".format(
+                request_get['special_' + str(i + 1)],
             )
         else:
-            tex += "\\Oraison{{Oraison}}{{1}}{{{}}}\\par\n".format(
-                ref_prayers,
-            )
+            if data['prayers_mg'] and mode == 'mg':
+                tex += "\\TitreB{{Oraison~:}}\\Normal{{p. {}.}}\\par\n".format(
+                    data['prayers_mg'].split('/')[0]
+                )
+            else:
+                tex += "\\Oraison{{Oraison}}{{1}}{{{}}}\\par\n".format(
+                    ref_prayers,
+                )
 
         # First reading:
-        tex += "\\Lecture{{Première lecture}}{{{}".format(
-            ref_readings,
-        )
-        if data['readings_cycle'] == 6:
-            tex += "_1_{}_{}}}\\par\n".format(
-                year_cycle,
-                year_even,
+        if request_get['special_' + str(i + 1)] in ['def_1', 'def_2', 'def_3', 'def_4']:
+            tex += "\\Lecture{{Première lecture}}{{{}_1}}\\par\n".format(
+                request_get['special_' + str(i + 1)],
             )
-        elif data['readings_cycle'] == 3:
-            tex += "_{}_1}}\\par\n".format(
-                year_cycle,
+        else:
+            tex += "\\Lecture{{Première lecture}}{{{}".format(
+                ref_readings,
             )
-        elif data['readings_cycle'] == 2:
-            tex += "_1_{}}}\\par\n".format(
-                year_even,
-            )
-        elif data['readings_cycle'] == 1:
-            tex += "_1}\\par\n"
+            if data['readings_cycle'] == 6:
+                tex += "_1_{}_{}}}\\par\n".format(
+                    year_cycle,
+                    year_even,
+                )
+            elif data['readings_cycle'] == 3:
+                tex += "_{}_1}}\\par\n".format(
+                    year_cycle,
+                )
+            elif data['readings_cycle'] == 2:
+                tex += "_1_{}}}\\par\n".format(
+                    year_even,
+                )
+            elif data['readings_cycle'] == 1:
+                tex += "_1}\\par\n"
 
         # Graduel:
         grid_gr = request_get['gr_' + str(i + 1)]
@@ -393,26 +447,31 @@ def pdf(request):
                 )
 
         # Gospel:
-        tex += "\\Lecture{{Évangile}}{{{}".format(
-            ref_readings,
-        )
-        if data['tempo'].startswith('pa_') and not data['tempo'].endswith('_0'):
-            tex += "_ev}\\par\n"
-        elif data['readings_cycle'] == 6:
-            tex += "_ev_{}_{}}}\\par\n".format(
-                year_cycle,
-                year_even,
+        if request_get['special_' + str(i + 1)] in ['def_1', 'def_2', 'def_3', 'def_4']:
+            tex += "\\Lecture{{Évangile}}{{{}_ev}}\\par\n".format(
+                request_get['special_' + str(i + 1)],
             )
-        elif data['readings_cycle'] == 3:
-            tex += "_{}_ev}}\\par\n".format(
-                year_cycle,
+        else:
+            tex += "\\Lecture{{Évangile}}{{{}".format(
+                ref_readings,
             )
-        elif data['readings_cycle'] == 2:
-            tex += "_ev_{}}}\\par\n".format(
-                year_even,
-            )
-        elif data['readings_cycle'] == 1:
-            tex += "_ev}\\par\n"
+            if data['tempo'].startswith('pa_') and not data['tempo'].endswith('_0'):
+                tex += "_ev}\\par\n"
+            elif data['readings_cycle'] == 6:
+                tex += "_ev_{}_{}}}\\par\n".format(
+                    year_cycle,
+                    year_even,
+                )
+            elif data['readings_cycle'] == 3:
+                tex += "_{}_ev}}\\par\n".format(
+                    year_cycle,
+                )
+            elif data['readings_cycle'] == 2:
+                tex += "_ev_{}}}\\par\n".format(
+                    year_even,
+                )
+            elif data['readings_cycle'] == 1:
+                tex += "_ev}\\par\n"
 
         # Credo:
         grid_cr = request_get['cr_' + str(i + 1)]
@@ -464,14 +523,19 @@ def pdf(request):
             )
 
         # Prayer Super oblata:
-        if data['prayers_mg']:
-            tex += "\\TitreB{{Prière sur les offrandes~:}}\\Normal{{p. {}.}}\\par\n".format(
-                data['prayers_mg'].split('/')[1],
+        if request_get['special_' + str(i + 1)]:
+            tex += "\\Oraison{{Prière sur les offrandes}}{{2}}{{{}}}\\par\n".format(
+                request_get['special_' + str(i + 1)],
             )
         else:
-            tex += "\\Oraison{{Prière sur les offrandes}}{{2}}{{{}}}\\par\n".format(
-                ref_prayers,
-            )
+            if data['prayers_mg']:
+                tex += "\\TitreB{{Prière sur les offrandes~:}}\\Normal{{p. {}.}}\\par\n".format(
+                    data['prayers_mg'].split('/')[1],
+                )
+            else:
+                tex += "\\Oraison{{Prière sur les offrandes}}{{2}}{{{}}}\\par\n".format(
+                    ref_prayers,
+                )
 
         # Preface:
         # BMV:
@@ -479,6 +543,51 @@ def pdf(request):
             tex += "\\Preface{{Préface propre}}{{{}}}\\par\n".format(
                 data['preface_id']
             )
+        # Défunts:
+        elif request_get['special_' + str(i + 1)] in ['def_1', 'def_2', 'def_3', 'def_4']:
+            prefaces_defunts = {
+                'def_1': {
+                    'chiffre_romain': "II",
+                    'page': 65,
+                },
+                'def_2': {
+                    'chiffre_romain': "III",
+                    'page': 66,
+                },
+                'def_3': {
+                    'chiffre_romain': "IV",
+                    'page': 66,
+                },
+                'def_4': {
+                    'chiffre_romain': "V",
+                    'page': 67,
+                },
+            }
+            tex += "\\TitreB{{Préface des défunts {}~:}}\\Normal{{p. {}.}}\\par\n".format(
+                prefaces_defunts[
+                    request_get['special_' + str(i + 1)]
+                ][
+                    'chiffre_romain'
+                ],
+                prefaces_defunts[
+                    request_get['special_' + str(i + 1)]
+                ][
+                    'page'
+                ],
+            )
+        # Sacré-Cœur:
+        elif request_get['special_' + str(i + 1)] == "misericorde":
+            tex += "\\TitreB{Préface du Sacré-Cœur~:}\\Normal{p. 428.}\\par\n"
+        # Miséricorde:
+        elif request_get['special_' + str(i + 1)] == "misericorde":
+            tex += "\\Preface{Préface commune II}{com_2}\\par\n"
+        # Pro unitate:
+        elif request_get['special_' + str(i + 1)] == "pro_unitate":
+            tex += "\\Preface{Préface propre}{pro_unitate}\\par\n"
+        # Semailles et récoltes:
+        elif request_get['special_' + str(i + 1)] in ['semailles', 'recoltes']:
+            tex += "\\TitreB{Préface des dimanches ordinaires V~:}\\Normal{p. 61.}\\par\n"
+        # Sinon:
         else:
             # Avent:
             if data['ref'].startswith('adv_'):
@@ -586,14 +695,19 @@ def pdf(request):
                 )
 
         # Prayer Postcommunion:
-        if data['prayers_mg']:
-            tex += "\\TitreB{{Prière après la Communion~:}}\\Normal{{p. {}.}}\\par\n".format(
-                data['prayers_mg'].split('/')[2],
+        if request_get['special_' + str(i + 1)]:
+            tex += "\\Oraison{{Prière après la Communion}}{{3}}{{{}}}\\par\n".format(
+                request_get['special_' + str(i + 1)],
             )
         else:
-            tex += "\\Oraison{{Prière après la Communion}}{{3}}{{{}}}\\par\n".format(
-                ref_prayers,
-            )
+            if data['prayers_mg']:
+                tex += "\\TitreB{{Prière après la Communion~:}}\\Normal{{p. {}.}}\\par\n".format(
+                    data['prayers_mg'].split('/')[2],
+                )
+            else:
+                tex += "\\Oraison{{Prière après la Communion}}{{3}}{{{}}}\\par\n".format(
+                    ref_prayers,
+                )
 
         # Super populum (Lent).
         if data['ref'].startswith(
@@ -662,6 +776,8 @@ def get_data(date):
     """ Return the data of the given date. """
     tempo, sancto, liturgical_day = get_liturgical_day(date)
     data_tempo = Day.objects.filter(ref=tempo).values()[0]
-    data_sancto = Day.objects.filter(ref=sancto).values()[
-        0] if sancto else {}
+    if sancto:
+        data_sancto = Day.objects.filter(ref=sancto).values()[0]
+    else:
+        data_sancto = {}
     return (data_tempo, data_sancto, liturgical_day)

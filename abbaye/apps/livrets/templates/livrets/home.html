@@ -61,6 +61,7 @@
         <table id="graduel" class="table table-borderless">
             <tr>
                 <th class="green text-center"></th>
+                <th class="green text-center">Messes spéciales</th>
                 <th class="green text-center">IN</th>
                 <th class="green text-center">GR</th>
                 <th class="green text-center">AL</th>
@@ -74,6 +75,20 @@
             {% for i in number_of_days %}
                 <tr id="row_{{ i }}">
                     <td id="date_{{ i }}" class="date fw-bold"></td>
+                    <td id="special_{{ i }}">
+                        <select class="form-select form-select-sm" aria-label="Small select example">
+                            <option value="" selected></option>
+                            <option value="def_1">Défunts 1</option>
+                            <option value="def_2">Défunts 2</option>
+                            <option value="def_3">Défunts 3</option>
+                            <option value="def_4">Défunts 4</option>
+                            <option value="sacre_coeur">Sacré-Cœur</option>
+                            <option value="misericorde">Miséricorde</option>
+                            <option value="pro_unitate">Pro unitate</option>
+                            <option value="semailles">Semailles</option>
+                            <option value="recoltes">Récoltes</option>
+                        </select>
+                    </td>
                     <td><input type="text" id="in_{{ forloop.counter }}" class="score form-control"></td>
                     <td><input type="text" id="gr_{{ forloop.counter }}" class="score form-control"></td>
                     <td><input type="text" id="al_{{ forloop.counter }}" class="score form-control"></td>
