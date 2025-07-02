@@ -1094,7 +1094,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
         else:
             messe_lue = ""
     else:
-        messe_lue = "\n\\item \\textit{In ML: Missa in PAL; præfatio de sanctis.}"
+        messe_lue = ""
     lectures_mc = "Rom \\textbf{12}, 9-16b" if even_year else "Soph \\textbf{3}, 14-18"
     visitation["body"] = suppl_vigiles + messe_lue + "\\item In MC: lectiones propriæ: " + \
         lectures_mc + \
