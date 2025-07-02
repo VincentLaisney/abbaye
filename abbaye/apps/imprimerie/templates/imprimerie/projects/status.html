@@ -1,0 +1,27 @@
+{% if project.quotation %}
+    <span class="green" title="Devis envoyé au client">D</span>
+{% else %}
+    <span class="red" title="Devis pas envoyé au client">D</span>
+{% endif %}
+
+{% if project.validated %}
+    <span class="green" title="Devis validé par le client">V</span>
+{% else %}
+    <span class="red" title="Devis pas validé par le client">V</span>
+{% endif %}
+
+{% if project.bl %}
+    <span class="green" title="BL envoyé à la compta">B</span>
+{% else %}
+    <span class="red" title="BL pas envoyé à la compta">B</span>
+{% endif %}
+
+{% if project.invoice %}
+    <span class="green" title="Facture envoyée au client">F</span>
+{% else %}
+    <span class="red" title="Facture pas envoyée au client">F</span>
+{% endif %}
+
+{% if project.canceled %}
+    <span class="red fw-bold" title="Projet annulé">A</span>
+{% endif %}
