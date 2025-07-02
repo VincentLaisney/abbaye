@@ -1297,9 +1297,9 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
 
     saint_louis_gonzague_date = datetime.date(current_year, 6, 21)
     saint_louis_gonzague = dict_sancto[saint_louis_gonzague_date] = {}
-    saint_louis_gonzague["force"] = 20
+    saint_louis_gonzague["force"] = 40
     saint_louis_gonzague[
-        "header"] = " - S. Aloisii Gonzaga, religiosi - \\textit{memoria minor} - \\textit{Vir.}"
+        "header"] = " - S. Aloisii Gonzaga, religiosi - memoria minor - \\textit{Vir.}"
     saint_louis_gonzague[
         "body"] = "\n\\item Ad Benedictus: ø \\textit{Sanctorum velut} (AM 652).\n\\item \\textit{In ML: Alb.}\n\\item In MC: \\textit{Alb.}"
 
