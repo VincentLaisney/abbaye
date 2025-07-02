@@ -90,8 +90,8 @@ $(document).ready(function () {
         $('#id_destination').attr('hidden', false);
         $('#id_destination').css('color', 'rgb(33,37,41');
       }
-      $('#group_servants_picnic').attr('hidden', 'false');
-      $('#group_keep_hot').attr('hidden', 'false');
+      $('#group_servants_picnic').removeAttr('hidden');
+      $('#group_keep_hot').removeAttr('hidden');
       $('#id_summary_label_go').text('Départ :');
       $('#id_summary_label_back').text('Retour :');
     }
