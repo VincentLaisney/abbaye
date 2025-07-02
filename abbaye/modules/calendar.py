@@ -643,6 +643,8 @@ def get_tempo(date):
             tempo = 'fete_dieu'
         elif date == pentecost + datetime.timedelta(days=19):
             tempo = 'sacre_coeur'
+        elif date == pentecost + datetime.timedelta(days=20):
+            tempo = 'icm'
         elif date == christ_king:
             tempo = 'christ_roi'
         else:
