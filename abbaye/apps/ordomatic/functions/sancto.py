@@ -134,7 +134,7 @@ def dict_sancto_create(current_year, even_year, year_letter, dict_tempo, paques,
 
     nd_lorette_date = datetime.date(current_year - 1, 12, 10)
     nd_lorette = dict_sancto[nd_lorette_date] = {}
-    nd_lorette["force"] = 40
+    nd_lorette["force"] = 20
     nd_lorette["header"] = " - Beatæ Mariæ Virginis de Loreto - \\textit{memoria minor} - \\textit{Viol.}"
     nd_lorette["body"] = "\n\\item Ad Benedictus: ø \\textit{Beatam} (AM 711); oratio in supplemento 60*.\n\\item \\textit{In ML: Alb.}\n\\item In MC \\textit{(Alb.)}: Commune Beatæ Mariæ Virginis (MR 905); præfatio I de Beata Maria Virgine."
 
