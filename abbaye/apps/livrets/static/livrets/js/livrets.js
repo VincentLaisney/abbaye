@@ -80,6 +80,7 @@ $(document).ready(function () {
     };
     for (i = 1; i <= Number($('#number_of_days').val()); i++) {
       data['date_' + String(i)] = $('#date_' + String(i)).text();
+      data['special_' + String(i)] = $('#special_' + String(i) + ' option:selected').val();
       data['in_' + String(i)] = $('#in_' + String(i)).val();
       data['gr_' + String(i)] = $('#gr_' + String(i)).val();
       data['al_' + String(i)] = $('#al_' + String(i)).val();
