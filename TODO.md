@@ -24,7 +24,6 @@
 
 
 # IMPRIMERIE:
-- Ajouter option "Projet annulé" => barré + grisé dans la liste.
 - "Ajouter…" (client, projet etc.) : bouton à mettre en haut.
 - Générer devis PDF.
 - Générer BL PDF.
@@ -61,6 +60,9 @@
 ### Raccourcis clavier:
 VirtualBox WindowsXP
 virtualbox VirtualBox\ VMs/WindowsXP/WindowsXP.vbox
+### Installation avec aptitude hors-proxy:
+aptitude -o Acquire::http::proxy=false install […]
+
 
 ## HTML:
 Rediriger d'une page html vers une autre:
