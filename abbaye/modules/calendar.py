@@ -112,6 +112,11 @@ def get_sancto(date):
             sancto += '_dim'
         else:
             sancto += '_fer'
+    if sancto == '0716':
+        if weekday == 6:
+            sancto += '_sam'
+        else:
+            sancto += '_fer'
     if sancto == '1209' and weekday == 1:
         sancto = '1208'
     return sancto
