@@ -20,6 +20,7 @@ urlpatterns = [
     path('abbaye/infirmerie/', include('apps.infirmerie.urls')),
     path('abbaye/jgabc/', include('apps.jgabc.urls')),
     path('abbaye/livrets/', include('apps.livrets.urls')),
+    path('abbaye/maisons/', include('apps.maisons.urls')),
     path('abbaye/memo/', include('apps.memo.urls')),
     path('abbaye/moines/', include('apps.moines.urls')),
     path('abbaye/ordomatic/', include('apps.ordomatic.urls')),
