@@ -18,11 +18,11 @@
                 </tr>
                 <tr>
                     <td class="col-4 fw-bold">Adresse de livraison :</td>
-                    <td class="col-8">{{ client.address_home|default_if_none:"" }}</td>
+                    <td class="col-8">{{ client.address_home|default_if_none:""|linebreaks }}</td>
                 </tr>
                 <tr>
                     <td class="col-4 fw-bold">Adresse de facturation :</td>
-                    <td class="col-8">{{ client.address_invoice|default_if_none:"" }}</td>
+                    <td class="col-8">{{ client.address_invoice|default_if_none:""|linebreaks }}</td>
                 </tr>
                 <tr>
                     <td class="col-4 fw-bold">Notes :</td>
