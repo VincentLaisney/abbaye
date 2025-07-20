@@ -89,7 +89,6 @@ def pdf(request):
     tex += "\\begin{center}\n"
     tex += "+\\par\n"
     tex += "PAX\\par\n"
-    tex += "\\vspace{.5cm}\n"
     tex += "\\TitreB{Abbaye Saint-Joseph de Clairval}\n"
     tex += "\\end{center}\n\n"
     tex += "\\TitreA{Messe conventuelle}\n"
