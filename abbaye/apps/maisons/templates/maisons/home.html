@@ -5,8 +5,14 @@
 {% endblock breadcrumbs %}
 
 {% block content %}
-    <div class="d-flex flex-column align-items-center">
-        <h1>Calendrier des maisons</h1>
-        <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FParis&showPrint=0&src=aG90ZWxsZXJpZS5mbGF2aWdueUBnbWFpbC5jb20&src=YWQyZmNhMDE4NmI1NDU3NmM4NDFjZGZiNTE1ZTA1MDdhM2ZkOGRhMTJlODdhYzM5OTZmNGRjZGVkOWY5OGFlNUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=MWE1MzdmZGQ4NTZkYmVmNTgwMzI3YzM3NGQ0ZWNiYzg4ZjhmMWY2ZjJiYjRmOWZhOTk4ZDVhMTM3MmRkM2ZkNUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YTI2NGRkYzQ3ZDBmZmUyNTljZDU3NzIzOTllYjdmNGQ1ZDI0YzhmZWRmZmY0MWM1MDU1ZDYxMmQwYTE3OTZhZUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23f6bf26&color=%234285f4&color=%23009688&color=%23d50000" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+    <h1>Calendrier des maisons</h1>
+
+    <iframe src="https://calendar.google.com/calendar/embed?height=600&wkst=1&ctz=Europe%2FParis&showPrint=0&src=aG90ZWxsZXJpZS5mbGF2aWdueUBnbWFpbC5jb20&src=YWQyZmNhMDE4NmI1NDU3NmM4NDFjZGZiNTE1ZTA1MDdhM2ZkOGRhMTJlODdhYzM5OTZmNGRjZGVkOWY5OGFlNUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=MWE1MzdmZGQ4NTZkYmVmNTgwMzI3YzM3NGQ0ZWNiYzg4ZjhmMWY2ZjJiYjRmOWZhOTk4ZDVhMTM3MmRkM2ZkNUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&src=YTI2NGRkYzQ3ZDBmZmUyNTljZDU3NzIzOTllYjdmNGQ1ZDI0YzhmZWRmZmY0MWM1MDU1ZDYxMmQwYTE3OTZhZUBncm91cC5jYWxlbmRhci5nb29nbGUuY29t&color=%23f6bf26&color=%234285f4&color=%23009688&color=%23d50000" style="border: 0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
+
+    <div class="d-flex justify-content-center mt-2 mb-5 w-50">
+        <div class="col-3 text-center"><span class="fas fa-square me-2" style="color: rgb(246, 191, 38)"></span>Sainte-Marthe</div>
+        <div class="col-3 text-center"><span class="fas fa-square me-2" style="color: rgb(213, 0, 0)"></span>Sainte-Reine</div>
+        <div class="col-3 text-center"><span class="fas fa-square me-2" style="color: rgb(0, 150, 136)"></span>Sainte-Chantal</div>
+        <div class="col-3 text-center"><span class="fas fa-square me-2" style="color: rgb(66, 133, 244)"></span>Sainte-Bernadette</div>
     </div>
 {% endblock content %}
