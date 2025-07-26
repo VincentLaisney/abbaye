@@ -89,7 +89,6 @@ def pdf(request):
     tex += "\\begin{center}\n"
     tex += "+\\par\n"
     tex += "PAX\\par\n"
-    tex += "\\vspace{.5cm}\n"
     tex += "\\TitreB{Abbaye Saint-Joseph de Clairval}\n"
     tex += "\\end{center}\n\n"
     tex += "\\TitreA{Messe conventuelle}\n"
@@ -455,7 +454,7 @@ def pdf(request):
             tex += "\\Lecture{{Évangile}}{{{}".format(
                 ref_readings,
             )
-            if data['tempo'].startswith('pa_') and not data['tempo'].endswith('_0'):
+            if ref_readings.startswith('pa_') and not ref_readings.endswith('_0'):
                 tex += "_ev}\\par\n"
             elif data['readings_cycle'] == 6:
                 tex += "_ev_{}_{}}}\\par\n".format(
