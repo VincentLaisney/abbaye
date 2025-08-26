@@ -116,7 +116,7 @@ def pdf(request):
         if date.weekday() == 5 \
                 and not data_tempo['ref'].startswith(('adv_', 'qua_', 'tp_')) \
                 and not (data_sancto and data_sancto['precedence'] > 30):
-            ref_cm = 'cm_28' if date.day < 8 \
+            ref_cm = 'icm' if date.day < 8 \
                 else '{}_{}'.format(
                     date.month,
                     ceil(date.day / 7),
