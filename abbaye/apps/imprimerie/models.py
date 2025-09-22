@@ -64,7 +64,7 @@ class Client(models.Model):
 
 
 class Paper(models.Model):
-    """ Element Model. """
+    """ Paper Model. """
     name = models.CharField(
         max_length=255,
     )
