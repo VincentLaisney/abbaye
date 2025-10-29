@@ -51,22 +51,24 @@ class Personne(models.Model):
     )
 
     def __str__(self):
-        nom_complet = self.qualite
-        nom_complet += ' ' if self.qualite or self.prenom else ''
-        nom_complet += self.prenom if self.prenom else ''
-        nom_complet += ' ' if self.prenom or self.nom else ''
-        name = re.sub(
-            r'^DE ',
-            lambda match: 'de ',
-            self.nom.upper()
-        )
-        name = re.sub(
-            r'^D\'',
-            lambda match: 'd\'',
-            self.nom.upper()
-        )
-        nom_complet += name if self.nom else ''
-        return nom_complet
+        # nom_complet = self.qualite
+        # nom_complet += ' ' if self.qualite or self.prenom else ''
+        # nom_complet += self.prenom if self.prenom else ''
+        # nom_complet += ' ' if self.prenom or self.nom else ''
+        # name = re.sub(
+        #     r'^DE ',
+        #     lambda match: 'de ',
+        #     self.nom.upper()
+        # )
+        # name = re.sub(
+        #     r'^D\'',
+        #     lambda match: 'd\'',
+        #     self.nom.upper()
+        # )
+        # nom_complet += name if self.nom else ''
+        # return nom_complet
+        nom_liste = self.nom + ' ' + self.prenom + ' ' + self.qualite 
+        return nom_liste
 
 
 class Mail(models.Model):

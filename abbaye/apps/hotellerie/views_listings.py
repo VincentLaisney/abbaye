@@ -287,7 +287,7 @@ def cuisine(request):
         }
 
     # Export in csv file:
-    with open(os.path.join(settings.MEDIA_ROOT, 'hotellerie/hospites.csv'), 'w', newline='') as csvfile:
+    with open(os.path.join(settings.MEDIA_ROOT, 'hotellerie/hospites.csv'), 'w', encoding = 'UTF-8', newline = '') as csvfile:
         content = csv.writer(
             csvfile,
             delimiter=',',

@@ -205,8 +205,8 @@ class SejourForm(forms.ModelForm):
             'required': 'Ce champ est obligatoire',
         },
         queryset=Personne.objects.all(),
-        widget=autocomplete.ModelSelect2(
-            url='hotellerie:personnes_autocomplete_hotes'),
+        # widget=autocomplete.ModelSelect2(
+        #     url='hotellerie:personnes_autocomplete_hotes'),
     )
     sejour_du = forms.DateField(
         label='Du :',
