@@ -204,7 +204,9 @@ class SejourForm(forms.ModelForm):
         error_messages={
             'required': 'Ce champ est obligatoire',
         },
-        queryset=Personne.objects.all(),
+        queryset=Personne.objects
+                 .filter(moine_flav=False)
+                #  .order_by('nom','prenom','last_modified'),
         # widget=autocomplete.ModelSelect2(
         #     url='hotellerie:personnes_autocomplete_hotes'),
     )

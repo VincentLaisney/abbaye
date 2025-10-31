@@ -8,6 +8,9 @@ from django.db import models
 
 class Personne(models.Model):
     """ Personne model. """
+    class Meta:
+        ordering = ['nom', 'prenom', 'last_modified']
+
     nom = models.CharField(
         max_length=255,
     )
