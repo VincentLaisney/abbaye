@@ -1,6 +1,9 @@
 """ Module mails. """
 
-from django.core.mail import send_mail
+import smtplib
+from email.message import EmailMessage
+
+from django.conf import settings
 
 from modules.preferences import PREFERENCES
 
@@ -32,7 +35,8 @@ def mail_sacristie(sejour):
     body += 'Bien à vous.\n'
     body += 'P. Martin Marie'
 
-    send_mail(
+    #provisory solution for problem with django email
+    send_a_mail(
         'MESSE : {}'.format(priest),
         body,
         PREFERENCES['mail_hotelier'],
@@ -41,7 +45,6 @@ def mail_sacristie(sejour):
             PREFERENCES['mail_reliques'],
             PREFERENCES['mail_services'],
         ],
-        fail_silently=False,
     )
 
 
@@ -65,7 +68,7 @@ def mail_pere_suiveur(sejour):
     body += 'In Domino.\n'
     body += 'Père Martin Marie'
 
-    send_mail(
+    send_a_mail(
         'HÔTE : {}'.format(guest),
         body,
         PREFERENCES['mail_hotelier'],
@@ -73,5 +76,15 @@ def mail_pere_suiveur(sejour):
             [str(mail)
              for mail in Mail.objects.filter(personne=guest.pere_suiveur)]
         )],
-        fail_silently=False,
     )
+
+def send_a_mail(subject, body, sender, dest):
+    msg = EmailMessage()
+    msg['Subject'] = subject
+    msg['From'] = sender
+    msg['To'] = dest
+    msg.set_content(body)
+
+    with smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT) as server:
+        server.starttls()
+        server.send_message(msg)

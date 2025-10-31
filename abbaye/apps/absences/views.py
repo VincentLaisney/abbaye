@@ -1,9 +1,5 @@
 """ apps/absences/views.py """
 
-import smtplib
-from email.message import EmailMessage
-
-from django.core.mail import send_mail
 from django.http import HttpResponseRedirect
 from django.conf import settings
 from django.shortcuts import get_object_or_404, render
@@ -11,6 +7,7 @@ from django.urls import reverse
 
 from .forms import TicketForm
 from .models import Monk, Ticket
+from modules.mails import send_a_mail
 
 
 def list(request, *args, **kwargs):
@@ -198,17 +195,6 @@ def send_email(data, monks, mandatory_recipients, additional_recipients, action=
         settings.DEFAULT_FROM_EMAIL,
         recipients_emails,
     )
-
-def send_a_mail(subject, body, sender, dest):
-    msg = EmailMessage()
-    msg['Subject'] = subject
-    msg['From'] = sender
-    msg['To'] = dest
-    msg.set_content(body)
-
-    with smtplib.SMTP(settings.EMAIL_HOST, settings.EMAIL_PORT) as server:
-        server.starttls()
-        server.send_message(msg)
 
 def write_body(data, monks, action):
     """ Write the body of the mail. """

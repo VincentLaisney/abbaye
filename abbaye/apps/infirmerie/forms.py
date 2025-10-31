@@ -1,8 +1,9 @@
 """ apps/infirmerie/forms.py """
 
 from django import forms
-from django.core.mail import send_mail
 from dal import autocomplete
+
+from modules.mails import send_a_mail
 
 from .models import Billet, Speciality, Toubib
 
@@ -238,4 +239,4 @@ class BilletForm(forms.ModelForm):
             'courses@clairval.com'
         ]
 
-        send_mail(mail_subject, mail_message, mail_from, mail_to)
+        send_a_mail(mail_subject, mail_message, mail_from, mail_to)
