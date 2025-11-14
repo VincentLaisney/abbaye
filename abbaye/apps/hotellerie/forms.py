@@ -374,23 +374,23 @@ class ParloirForm(forms.ModelForm):
         error_messages={
             'required': 'Ce champ est obligatoire',
         },
-        queryset=Personne.objects.all(),
-        widget=autocomplete.ModelSelect2(
-            url='hotellerie:personnes_autocomplete_monks'),
+        queryset=Personne.objects.all().filter(moine_flav=True)
+        # widget=autocomplete.ModelSelect2(
+        #     url='hotellerie:personnes_autocomplete_monks'),
     )
     personne_2 = forms.ModelChoiceField(
         label='Moine 2 :',
         required=False,
-        queryset=Personne.objects.all(),
-        widget=autocomplete.ModelSelect2(
-            url='hotellerie:personnes_autocomplete_monks'),
+        queryset=Personne.objects.all().filter(moine_flav=True)
+        # widget=autocomplete.ModelSelect2(
+        #     url='hotellerie:personnes_autocomplete_monks'),
     )
     personne_3 = forms.ModelChoiceField(
         label='Moine 3 :',
         required=False,
-        queryset=Personne.objects.all(),
-        widget=autocomplete.ModelSelect2(
-            url='hotellerie:personnes_autocomplete_monks'),
+        queryset=Personne.objects.all().filter(moine_flav=True)
+        # widget=autocomplete.ModelSelect2(
+        #     url='hotellerie:personnes_autocomplete_monks'),
     )
     date = forms.DateField(
         label='Date :',
