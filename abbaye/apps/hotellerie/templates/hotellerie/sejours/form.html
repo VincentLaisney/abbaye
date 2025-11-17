@@ -29,6 +29,14 @@
     <form class="col-5" method="post" novalidate>
         {% csrf_token %}
 
+        {% if form.errors %}
+            {% for error in form.errors %}
+                <div class="invalid-feedback" style="display: block;">
+                    {{ error }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
         <!-- Personne -->
         <div class="form-group">
             {{ form.personne.label_tag }}

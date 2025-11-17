@@ -365,7 +365,21 @@ class SejourForm(forms.ModelForm):
     class Meta:
         model = Sejour
         fields = ('__all__')
+    
+    # def clean(self):
+    #     cleaned_data = super().clean()
+    #     start = cleaned_data.get('sejour_du')
+    #     end = cleaned_data.get('sejour_au')
+    #     if start > end:
+    #         raise forms.ValidationError("La date de fin de séjour ne doit pas précéder celle de début de séjour.")
+    #     return cleaned_data
 
+    def clean_sejour_au(self):
+        start = self.cleaned_data.get('sejour_du')
+        end = self.cleaned_data.get('sejour_au')
+        if start > end:
+            raise forms.ValidationError("La date de fin de séjour ne doit pas précéder celle de début de séjour.")
+        return end
 
 class ParloirForm(forms.ModelForm):
     """ Form for Parloirs. """
