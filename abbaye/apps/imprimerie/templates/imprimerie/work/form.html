@@ -17,6 +17,7 @@
     <h2>Modifier les travaux de l'imprimerie</h2>
 
     <form method="post" novalidate class="w-75 mb-3">
+        {% csrf_token %}
        
         {{ form.content }}
 
