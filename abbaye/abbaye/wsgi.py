@@ -7,9 +7,7 @@ For more information on this file, see
 https://docs.djangoproject.com/en/4.2/howto/deployment/wsgi/
 """
 
-import os,sys
-
-sys.path.append('/home/p-vincent/.local/lib/python3.12/site-packages')
+import os
 
 from django.core.wsgi import get_wsgi_application
 
