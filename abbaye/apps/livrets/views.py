@@ -759,13 +759,13 @@ def pdf(request):
 
     tex += "\n\\end{document}\n\n"
 
-    with open(os.path.join(Path(__file__).resolve().parent, 'tex/livret.tex'), 'w') as tex_file:
+    with open(os.path.join(Path(__file__).resolve().parent, 'tex/livret.tex'), 'w', encoding='utf-8') as tex_file:
         tex_file.write(tex)
-        command = "cd {base_dir}/apps/livrets/tex; lualatex --shell-escape livret.tex; cp livret.pdf {media_dir}/livrets".format(
-            base_dir=settings.BASE_DIR,
-            media_dir=settings.MEDIA_ROOT,
-        )
-        os.system(command)
+    command = "cd {base_dir}/apps/livrets/tex; export TEXMFVAR={base_dir}/apps/livrets/tex/.texlive2024/; lualatex --shell-escape livret.tex; cp livret.pdf {media_dir}/livrets".format(
+        base_dir=settings.BASE_DIR,
+        media_dir=settings.MEDIA_ROOT,
+    )
+    os.system(command)
     return JsonResponse(
         {'back': 'OK'},
     )
