@@ -1,6 +1,7 @@
 """ apps/maisons/views.py """
 
 from django.shortcuts import render
+from django.conf import settings
 
 
 def home(request):
@@ -8,5 +9,7 @@ def home(request):
     return render(
         request,
         'maisons/home.html',
-        {},
+        {
+            'google_maisons': settings.GOOGLE_MAISONS,
+        },
     )
