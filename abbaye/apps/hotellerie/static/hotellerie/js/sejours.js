@@ -14,6 +14,7 @@ $(document).ready(function () {
         if ($("#id_sejour_au").val() == "") {
           $("#id_sejour_au").val($("#id_sejour_du").val());
         }
+        $("#id_sejour_au").datepicker("option", "minDate", $("#id_sejour_du").val());
         refresh_rooms();
       },
     }
