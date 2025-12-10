@@ -15,6 +15,7 @@ $(document).ready(function () {
           $("#id_sejour_au").val($("#id_sejour_du").val());
         }
         $("#id_sejour_au").datepicker("option", "minDate", $("#id_sejour_du").val());
+        fill_repas_list();
         refresh_rooms();
       },
     }
@@ -67,7 +68,66 @@ $(document).ready(function () {
 
 
 // ---------------------------------------------------------------------------------
+const MS_IN_DAY = (1000 * 60 * 60 * 24)
+function fill_repas_list() {
+  if ($("#id_sejour_du").val() != $("#id_debut_sejour").val() || 
+    $("#id_sejour_au").val() - $("#id_sejour_du").val() != $("#id_meal_list").children().length) {
+    // tout effacer 
+    $("#id_meal_list").empty();
+    $("#id_debut_sejour").val($("#id_sejour_du").val());
+    const nb_days = (($("#id_sejour_au").datepicker('getDate') - $("#id_sejour_du").datepicker('getDate'))/ MS_IN_DAY) + 1;
+    console.log("nb_days: " + nb_days);
+    const begin = $("#id_sejour_du").datepicker('getDate');
+    console.log("begin");
+    console.log($.datepicker.formatDate("dd/mm/yy", begin));
+    for (let i = 0; i < nb_days; i++) {
+      // let item = "<li>" + $.datepicker.formatDate("DD, dd/mm/yy", begin + i * MS_IN_DAY) + "</li>";
+      // console.log(item);
+      day = new Date(begin.getTime() + i * MS_IN_DAY);
+      day_formatted = $.datepicker.formatDate("D dd/mm/yy", day, {
+        dayNamesShort: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+      });
+      console.log(day_formatted);
+      item = $(`<li id ='${i}'>` + day_formatted + "</li>");
+      $("<label><input type='checkbox' checked='true' classe='ptd' style='margin: 2px 10px'/>Petit déjeuner</label>").appendTo(item);
+      $("<label><input type='checkbox' checked='true' classe='dej' style='margin: 2px 10px'/>Déjeuner</label>").appendTo(item);
+      $("<label><input type='checkbox' checked='true' classe='din' style='margin: 2px 10px'/>Diner</label>").appendTo(item);
+      $("#id_meal_list").append(item);
+    }
 
+  }
+
+
+
+  // if (($("#id_sejour_du").val() != "" && $("#id_sejour_au").val() != "") && 
+  //   ($("#id_sejour_du").val() <= $("#id_sejour_au").val())) {
+  //     // erase list 
+  //     $("#id_meal_list").empty()
+  //     const nb_days = $("#id_sejour_au").val() - $("#id_sejour_du").val()
+  //     console.log("nb_days" + nb_days)
+  //     const begin = $("#id_sejour_du").val()
+  //     console.log("begin")
+  //     console.log(begin)
+  //     for (let i = 0; i < nb_days; i++) {
+  //       let date = document.createElement("p")
+  //       date.innerText = begin + 2 * i
+  //       $("#id_meal_list").append(date)
+  //       let petit = document.createElement("input")
+  //       petit.type = "checkbox"
+  //       petit.name = "petit_dejeuner"
+  //       petit.id = String(i)
+  //       let dej = document.createElement("input")
+  //       dej.type = "checkbox"
+  //       dej.name = "dejeuner"
+  //       dej.id = String(i)
+  //       let diner = document.createElement("input")
+  //       diner.type = "checkbox"
+  //       diner.name = "diner"
+  //       diner.id = String(i)
+  //       $("#id_meal_list").append(petit).append(dej),append(diner)
+  //     }
+  //   }
+}
 
 function check_pere_suiveur() {
   const green = $('#id_personne').parent().find('label').css('color');
