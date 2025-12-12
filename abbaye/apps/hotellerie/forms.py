@@ -231,6 +231,8 @@ class SejourForm(forms.ModelForm):
             ('Dîner', 'Dîner'),
         ],
     )
+    repas_detailles = forms.HiddenInput()
+
     chambre = forms.MultipleChoiceField(
         required=False,
         label='Chambres :',

@@ -160,6 +160,10 @@ class Sejour(models.Model):
     repas_au = models.CharField(
         max_length=25,
     )
+    repas_detailles = models.CharField(
+        max_length=300,
+        default="",
+    )
     mensa = models.CharField(
         max_length=25,
     )
