@@ -101,6 +101,8 @@ def pdf(request):
         data = data_tempo
         ref_tempo = data['ref']
         ref_readings = data['ref']
+        if liturgical_day.startswith(('adv_ult_', 'noel_time_1', 'noel_time_2')):
+            ref_readings = "{}{}".format(date.month, date.day)
         if data_sancto:
             if liturgical_day == data_sancto['ref']:
                 data = data_sancto
@@ -138,6 +140,8 @@ def pdf(request):
         if not data['prayers_mg']:
             if data['ref'].startswith('pa_1_'):
                 ref_prayers = 'pa_1'
+            elif data['ref'].startswith(('adv_ult_', 'noel_time_1')):
+                ref_prayers = "{}{}".format(date.month, date.day)
             else:
                 ref_prayers = data['ref']
 
@@ -214,15 +218,27 @@ def pdf(request):
         else:
             # Avent:
             if data['tempo'].startswith('adv_'):
-                week_advent = int(data['tempo'].split('_')[1])
-                tierce_antiphon = [
-                    'jucundare',
-                    'urbs_fortitudinis',
-                    'jerusalem_gaude',
-                ][week_advent - 1]
+                week_advent = data['tempo'].split('_')[1]
+                if week_advent != "ult":
+                    tierce_antiphon = [
+                        'jucundare',
+                        'urbs_fortitudinis',
+                        'jerusalem_gaude',
+                        'erunt_prava_in_directa',
+                    ][int(week_advent) - 1]
+                else:
+                    tierce_antiphon = [
+                        'erunt_prava_in_directa',
+                        'dum_venerit_filius',
+                        'emitte_agnum_domine',
+                        'spiritus_domini_super_me',
+                        'convertere_domine_aliquantulum',
+                        'ad_te_domine_levavi',
+                        'Multiplicabitur',
+                    ][int(data['tempo'].split('_')[2])] # weekday
 
             # Noël:
-            elif data['tempo'] in ['1230', '1231']:
+            elif data['tempo'] in ['1229', '1230', '1231']:
                 tierce_antiphon = 'genuit_puerpera'
 
             # BMV samedi:

@@ -55,9 +55,14 @@ def get_tempo(date):
     christ_king = first_sunday_of_next_advent - datetime.timedelta(days=7)
     tempo = None
     if first_sunday_of_advent <= date < christmas:
-        days = (date - first_sunday_of_advent).days
-        week = floor((days / 7) + 1)
-        tempo = 'adv_{}_{}'.format(week, weekday)
+        if date.day < 17 or weekday == 0:
+            days = (date - first_sunday_of_advent).days
+            week = floor((days / 7) + 1)
+            tempo = 'adv_{}_{}'.format(week, weekday)
+        elif date.day < 24:
+            tempo = 'adv_ult_{}'.format(weekday)
+        else:
+            tempo = 'vil_noel'
     elif christmas <= date < baptism_of_christ:
         # TODO: À affiner (ici, seulement les jours après Noël et la Ste Famille "dimanche" (cas le plus fréquent)).
         # Cas de la Ste Famille le 30 ('ste_famille_fer').
