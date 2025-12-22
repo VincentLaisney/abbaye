@@ -38,7 +38,7 @@ def create_qrcode(request, **kwargs):
     code = kwargs['qrcode']
 
     os.system(
-        "qrencode -o /home/vincent/Sites/abbaye/abbaye/apps/barcode/static/barcode/img/qrcode.png {0}; \
+        "qrencode -o /home/vincent/Sites/abbaye/abbaye/apps/barcode/static/barcode/img/qrcode.png '{0}'; \
         cp /home/vincent/Sites/abbaye/abbaye/apps/barcode/static/barcode/img/qrcode.png /home/vincent/Sites/abbaye/abbaye/media/barcode/qrcode.png"
         .format(code))
 
