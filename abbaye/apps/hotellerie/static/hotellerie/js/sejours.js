@@ -121,17 +121,12 @@ function fill_repas_list() {
         });
         // console.log(day_formatted);
         item = $(`<li id ='${i}'>` + day_formatted + "</li>");
-        $("<label><input type='checkbox' checked='true' class='repas ptd' style='margin: 2px 10px'/>Petit déjeuner</label>").on(
-          "change", null, {jr: `${i}`, rp: 4}, function(event) {
-            ch_repas_change(event)
-          }
-        ).appendTo(item);
         $("<label><input type='checkbox' checked='true' class='repas dej' style='margin: 2px 10px'/>Déjeuner</label>").on(
           "change", null, {jr: `${i}`, rp: 2}, function(event) {
             ch_repas_change(event)
           }
         ).appendTo(item);
-        $("<label><input type='checkbox' checked='true' class='repas din' style='margin: 2px 10px'/>Diner</label>").on(
+        $("<label><input type='checkbox' checked='true' class='repas din' style='margin: 2px 10px'/>Dîner</label>").on(
           "change", null, {jr: `${i}`, rp: 1}, function(event) {
             ch_repas_change(event)
           }
@@ -144,8 +139,8 @@ function fill_repas_list() {
 
 function ch_repas_change(event) {
   console.log( event.data );
-  jour = event.data["nb"];
-  repas = event.data["rp"];
+  jour = +(event.data["jr"]);
+  repas = +(event.data["rp"]);
   let checked = event.target.checked;
   console.log(checked);
   str_repas_detailles = $("#id_repas_detailles").val();
@@ -155,7 +150,8 @@ function ch_repas_change(event) {
   } else {
     chr = String( parseInt(chr) -  repas)
   }
-  
+  new_str_repas_detailles = str_repas_detailles.slice(0, jour) + chr + str_repas_detailles.slice(jour + 1)
+  $("#id_repas_detailles").val(new_str_repas_detailles)
 }
 
 
