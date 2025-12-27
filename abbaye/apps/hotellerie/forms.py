@@ -267,6 +267,13 @@ class SejourForm(forms.ModelForm):
             ('25', '25'),
             ('26', '26'),
             ('Chambre de l\'évêque', 'CE'),
+            ('Chambre en clôture 1', 'CC1'),
+            ('Chambre en clôture 2', 'CC2'),
+            ('Chambre en clôture 3', 'CC3'),
+            ('Maison Sainte Marthe', 'MSM'),
+            ('Maison Sainte Reine', 'MSR'),
+            ('Maison Sainte Bernadette', 'MSB'),
+            ('Maison Sainte Chantal', 'MSC'),
         ],
     )
     mensa = forms.ChoiceField(
