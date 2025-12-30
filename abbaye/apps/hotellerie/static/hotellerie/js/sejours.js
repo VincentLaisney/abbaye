@@ -23,6 +23,10 @@ $(document).ready(function () {
     $("#id_sejour_au").datepicker(values);
   });
 
+  if ($('#id_sejour_du').val() != '') {
+    $('#id_sejour_au').datepicker('option', 'minDate', $('#id_sejour_du').val());
+  }
+
   // Sejours: has the personne a pere_suiveur?
   // On start (if we are on the right page,
   // elsewhere it raises an error on the server):
@@ -77,65 +81,122 @@ $(document).ready(function () {
   });
 });
 
+$("#id_repas_du").on("change", function(e) {
+  console.log(e.target.value);
+  if (e.target.value == "Dîner") {
+    if ($("#repas_0_1").is(':checked') == false) {
+      $("#repas_0_1").prop('checked',  true).trigger('change');
+    }
+    if ($("#repas_0_2").is(':checked') == true) {
+      $("#repas_0_2").prop('checked',  false).trigger('change');
+    }
+  } else if (e.target.value == "Déjeuner") {
+    if ($("#repas_0_2").is(':checked') == false) {
+      $("#repas_0_2").prop('checked',  true).trigger('change');
+    }
+    if ($("#repas_0_1").is(':checked') == false ) {
+      $("#repas_0_1").prop('checked',  true).trigger('change');
+    }
+  }
+});
+
+$("#id_repas_au").on("change", function(e) {
+  console.log(e.target.value);
+  nb_days = $("#id_meal_table > tbody").children().length;
+  console.log("nb_days: " + nb_days);
+  last = nb_days - 1;
+  if (e.target.value == "Dîner") {
+    if ($("#repas_" + last + "_1").is(':checked') == true) {
+      $("#repas_" + last + "_1").prop('checked',  false).trigger('change');
+    }
+    if ($("#repas_" + last + "_2").is(':checked') == false) {
+      $("#repas_" + last + "_2").prop('checked',  true).trigger('change');
+    }
+  } else if (e.target.value == "Déjeuner") {
+    if ($("#repas_" + last + "_2").is(':checked') == true) {
+      $("#repas_" + last + "_2").prop('checked',  false).trigger('change');
+    }
+    if ($("#repas_" + last + "_1").is(':checked') == true ) {
+      $("#repas_" + last + "_1").prop('checked',  false).trigger('change');
+    }
+  }
+});
+
 
 // ---------------------------------------------------------------------------------
 const MS_IN_DAY = (1000 * 60 * 60 * 24)
 function fill_repas_list() {
-  if ($("#id_sejour_du").val() != $("#id_debut_sejour").val() || 
-    $("#id_sejour_au").val() - $("#id_sejour_du").val() != $("#id_meal_list").children().length) {
+  if ($("#id_sejour_du").val() != $("#id_debut_sejour").val()) {
     // tout effacer 
-    $("#id_meal_list").empty();
+    $("#id_meal_table").find("tbody").empty();
     $("#id_debut_sejour").val($("#id_sejour_du").val());
+  }
 
-    const reg_ex = /(\d\d)\/(\d\d)\/(\d+)/;
-    let begin = $("#id_sejour_du").datepicker('getDate');
-    if (begin == null) {
-      let sejour_begin = $("#id_sejour_du").val();
-      if (sejour_begin != null) {
-        let parsed = sejour_begin.match(reg_ex);
-        begin = new Date(parsed[3], parsed[2] - 1, parsed[1]);
-      }
+  if ($("#id_sejour_du").val() == '' || $("#id_sejour_au").val() == '') {
+    return;
+  }
+  
+  const reg_ex = /(\d\d)\/(\d\d)\/(\d+)/;
+  let begin = $("#id_sejour_du").datepicker('getDate');
+  if (begin == null) {
+    let sejour_begin = $("#id_sejour_du").val();
+    if (sejour_begin != '') {
+      let parsed = sejour_begin.match(reg_ex);
+      begin = new Date(parsed[3], parsed[2] - 1, parsed[1]);
     }
-    let end_sejour = $("#id_sejour_au").datepicker('getDate');
-    if (end_sejour == null) {
-      let sejour_end = $("#id_sejour_au").val();
-      if (sejour_end != null) {
-        let parsed = sejour_end.match(reg_ex);
-        end_sejour = new Date(parsed[3], parsed[2] - 1, parsed[1]);
-      }
+  }
+  let end_sejour = $("#id_sejour_au").datepicker('getDate');
+  if (end_sejour == null) {
+    let sejour_end = $("#id_sejour_au").val();
+    if (sejour_end != '') {
+      let parsed = sejour_end.match(reg_ex);
+      end_sejour = new Date(parsed[3], parsed[2] - 1, parsed[1]);
     }
+  }
 
-    const nb_days = ((end_sejour - begin)/ MS_IN_DAY) + 1;
-    // console.log("nb_days: " + nb_days);
-    $("#id_repas_detailles").val("7".repeat(nb_days));
-    
-    if (begin != null) {
-      // console.log("begin");
-      // console.log($.datepicker.formatDate("dd/mm/yy", begin));
-      for (let i = 0; i < nb_days; i++) {
-        // let item = "<li>" + $.datepicker.formatDate("DD, dd/mm/yy", begin + i * MS_IN_DAY) + "</li>";
-        // console.log(item);
-        day = new Date(begin.getTime() + i * MS_IN_DAY);
-        day_formatted = $.datepicker.formatDate("D dd/mm/yy", day, {
-          dayNamesShort: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
-        });
-        // console.log(day_formatted);
-        item = $(`<li id ='${i}'>` + day_formatted + "</li>");
-        $("<label><input type='checkbox' checked='true' class='repas dej' style='margin: 2px 10px'/>Déjeuner</label>").on(
-          "change", null, {jr: `${i}`, rp: 2}, function(event) {
-            ch_repas_change(event)
-          }
-        ).appendTo(item);
-        $("<label><input type='checkbox' checked='true' class='repas din' style='margin: 2px 10px'/>Dîner</label>").on(
-          "change", null, {jr: `${i}`, rp: 1}, function(event) {
-            ch_repas_change(event)
-          }
-        ).appendTo(item);
-        $("#id_meal_list").append(item);
-      }
+  const nb_days = ((end_sejour - begin)/ MS_IN_DAY) + 1;
+  // console.log("nb_days: " + nb_days);
+  repas_detailles = $("#id_repas_detailles").val();
+  if (repas_detailles.length != nb_days) {
+    console.log("reset repas_detailles");
+    if (repas_detailles.length > nb_days) {
+      console.log("too long");
+      repas_detailles = repas_detailles.slice(0, nb_days);
+    } else {
+      console.log("too short");
+      repas_detailles = repas_detailles + "7".repeat(nb_days - repas_detailles.length);
+    }
+    $("#id_repas_detailles").val(repas_detailles);
+  }
+
+  if (begin != null) {
+    // console.log("begin");
+    // console.log($.datepicker.formatDate("dd/mm/yy", begin));
+    for (let i = 0; i < nb_days; i++) {
+      // let item = "<li>" + $.datepicker.formatDate("DD, dd/mm/yy", begin + i * MS_IN_DAY) + "</li>";
+      // console.log(item);
+      day = new Date(begin.getTime() + i * MS_IN_DAY);
+      day_formatted = $.datepicker.formatDate("D dd/mm/yy", day, {
+        dayNamesShort: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+      });
+      // console.log(day_formatted);
+      item = $('<tr><th scope="row" >' + day_formatted + "</th>");
+      $(`<td><label><input type='checkbox' id ='repas_${i}_2' checked='true' class='repas dej' style='margin: 2px 10px'/>Déjeuner</label></td>`).on(
+        "change", null, {jr: `${i}`, rp: 2}, function(event) {
+          ch_repas_change(event)
+        }
+      ).appendTo(item);
+      $(`<td><label><input type='checkbox' id ='repas_${i}_1' checked='true' class='repas din' style='margin: 2px 10px'/>Dîner</label></td>`).on(
+        "change", null, {jr: `${i}`, rp: 1}, function(event) {
+          ch_repas_change(event)
+        }
+      ).appendTo(item);
+      $("</tr>").appendTo(item);
+      $("#id_meal_table").find("tbody").append(item);
     }
   }
 }
+
 
 function ch_repas_change(event) {
   console.log( event.data );
