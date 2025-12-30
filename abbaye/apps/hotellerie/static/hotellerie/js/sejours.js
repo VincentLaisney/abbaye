@@ -15,7 +15,7 @@ $(document).ready(function () {
           $("#id_sejour_au").val($("#id_sejour_du").val());
         }
         $("#id_sejour_au").datepicker("option", "minDate", $("#id_sejour_du").val());
-        fill_repas_list();
+        fill_repas_table();
         refresh_rooms();
       },
     }
@@ -40,15 +40,8 @@ $(document).ready(function () {
 
   // repas détaillés
   // on start:
-  fill_repas_list();
-  // on change:
-  // $(".repas").change(function() {
-  //   if ($(this).is(':checked')) {
-  //     console.log("checked")
-  //   } else {
-  //     console.log("unchecked")
-  //   }
-  // });
+  fill_repas_table();
+  set_repas_table();
   
   // Sejours: manage rooms (checkboxes) and selects:
   // On start:
@@ -125,7 +118,7 @@ $("#id_repas_au").on("change", function(e) {
 
 // ---------------------------------------------------------------------------------
 const MS_IN_DAY = (1000 * 60 * 60 * 24)
-function fill_repas_list() {
+function fill_repas_table() {
   if ($("#id_sejour_du").val() != $("#id_debut_sejour").val()) {
     // tout effacer 
     $("#id_meal_table").find("tbody").empty();
@@ -193,6 +186,35 @@ function fill_repas_list() {
       ).appendTo(item);
       $("</tr>").appendTo(item);
       $("#id_meal_table").find("tbody").append(item);
+    }
+  }
+}
+
+function set_repas_table() {
+  str_repas_detailles = $("#id_repas_detailles").val();
+  // console.log("set_repas_table: " + str_repas_detailles);
+  for (let jour = 0; jour < str_repas_detailles.length; jour++) {
+    chr = str_repas_detailles[jour];
+    // console.log("jour " + jour + " chr: " + chr);
+    // repas = 2 (déjeuner)
+    if ( (parseInt(chr) & 2) == 2 ) {
+      // coché
+      // console.log("déjeuner coché");
+      $(`#repas_${jour}_2`).prop('checked', true);
+    } else {
+      // non coché
+      // console.log("déjeuner non coché");
+      $(`#repas_${jour}_2`).prop('checked', false);
+    }
+    // repas = 1 (dîner)
+    if ( (parseInt(chr) & 1) == 1 ) {
+      // coché
+      // console.log("dîner coché");
+      $(`#repas_${jour}_1`).prop('checked', true);
+    } else {
+      // non coché
+      // console.log("dîner non coché");
+      $(`#repas_${jour}_1`).prop('checked', false);
     }
   }
 }
