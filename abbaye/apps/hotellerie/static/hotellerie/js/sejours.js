@@ -75,7 +75,7 @@ $(document).ready(function () {
 });
 
 $("#id_repas_du").on("change", function(e) {
-  console.log(e.target.value);
+  // console.log(e.target.value);
   if (e.target.value == "Dîner") {
     if ($("#repas_0_1").is(':checked') == false) {
       $("#repas_0_1").prop('checked',  true).trigger('change');
@@ -94,10 +94,10 @@ $("#id_repas_du").on("change", function(e) {
 });
 
 $("#id_repas_au").on("change", function(e) {
-  console.log(e.target.value);
-  nb_days = $("#id_meal_table > tbody").children().length;
-  console.log("nb_days: " + nb_days);
-  last = nb_days - 1;
+  // console.log(e.target.value);
+  const nb_days = $("#id_meal_table > tbody").children().length;
+  // console.log("nb_days: " + nb_days);
+  const last = nb_days - 1;
   if (e.target.value == "Dîner") {
     if ($("#repas_" + last + "_1").is(':checked') == true) {
       $("#repas_" + last + "_1").prop('checked',  false).trigger('change');
@@ -149,31 +149,36 @@ function fill_repas_table() {
 
   const nb_days = ((end_sejour - begin)/ MS_IN_DAY) + 1;
   // console.log("nb_days: " + nb_days);
-  repas_detailles = $("#id_repas_detailles").val();
+  let repas_detailles = $("#id_repas_detailles").val();
+  const old_repas_detailles_ln = repas_detailles.length;
+  // console.log("old_repas_detailles_ln: " + old_repas_detailles_ln);
   if (repas_detailles.length != nb_days) {
-    console.log("reset repas_detailles");
     if (repas_detailles.length > nb_days) {
-      console.log("too long");
       repas_detailles = repas_detailles.slice(0, nb_days);
     } else {
-      console.log("too short");
       repas_detailles = repas_detailles + "7".repeat(nb_days - repas_detailles.length);
     }
     $("#id_repas_detailles").val(repas_detailles);
   }
 
+
   if (begin != null) {
-    // console.log("begin");
-    // console.log($.datepicker.formatDate("dd/mm/yy", begin));
-    for (let i = 0; i < nb_days; i++) {
-      // let item = "<li>" + $.datepicker.formatDate("DD, dd/mm/yy", begin + i * MS_IN_DAY) + "</li>";
-      // console.log(item);
-      day = new Date(begin.getTime() + i * MS_IN_DAY);
-      day_formatted = $.datepicker.formatDate("D dd/mm/yy", day, {
+    const len_days_repas = $("#id_meal_table").find("tbody").children().length;
+    if (len_days_repas > nb_days) {
+      // il y en avait trop, on enlève les lignes en trop
+      for (let i = nb_days; i < len_days_repas; i++) {
+        // console.log("remove day " + i);
+        $(`#repas_${i}_1`).parent().parent().parent().remove();
+      }
+    }
+    // on ajoute les lignes manquantes
+    for (let i = len_days_repas; i < nb_days; i++) {
+      let day = new Date(begin.getTime() + i * MS_IN_DAY);
+      let day_formatted = $.datepicker.formatDate("D dd/mm/yy", day, {
         dayNamesShort: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
       });
       // console.log(day_formatted);
-      item = $('<tr><th scope="row" >' + day_formatted + "</th>");
+      let item = $('<tr><th scope="row" >' + day_formatted + "</th>");
       $(`<td><label><input type='checkbox' id ='repas_${i}_2' checked='true' class='repas dej' style='margin: 2px 10px'/>Déjeuner</label></td>`).on(
         "change", null, {jr: `${i}`, rp: 2}, function(event) {
           ch_repas_change(event)
@@ -190,11 +195,12 @@ function fill_repas_table() {
   }
 }
 
+
 function set_repas_table() {
-  str_repas_detailles = $("#id_repas_detailles").val();
+  const str_repas_detailles = $("#id_repas_detailles").val();
   // console.log("set_repas_table: " + str_repas_detailles);
   for (let jour = 0; jour < str_repas_detailles.length; jour++) {
-    chr = str_repas_detailles[jour];
+    let chr = str_repas_detailles[jour];
     // console.log("jour " + jour + " chr: " + chr);
     // repas = 2 (déjeuner)
     if ( (parseInt(chr) & 2) == 2 ) {
@@ -229,9 +235,9 @@ function ch_repas_change(event) {
   str_repas_detailles = $("#id_repas_detailles").val();
   chr = str_repas_detailles[jour];
   if (checked) {
-    chr = String( parseInt(chr) + repas )
+    chr = String( parseInt(chr) | repas ) 
   } else {
-    chr = String( parseInt(chr) -  repas)
+    chr = String( parseInt(chr) & (~repas) )
   }
   new_str_repas_detailles = str_repas_detailles.slice(0, jour) + chr + str_repas_detailles.slice(jour + 1)
   $("#id_repas_detailles").val(new_str_repas_detailles)
