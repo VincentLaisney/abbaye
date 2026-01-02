@@ -74,71 +74,79 @@ def cuisine(request):
             hote = sejour.personne.__str__()
             nombre = len(sejour.chambres_string().split(', '))
             commentaire_cuisine = sejour.commentaire_cuisine
-            is_first_repas = (
-                sejour.sejour_du == day
-            ) and ((
-                sejour.repas_du == 'Déjeuner'
-            ) or (
-                sejour.repas_du == 'Petit-déjeuner'
-            ))
-            is_last_repas = ((
-                sejour.sejour_au == day
-            ) and (
-                sejour.repas_au == 'Déjeuner'
-            ))
-            is_monorepas = (
-                sejour.sejour_du == sejour.sejour_au
-            ) and (
-                sejour.repas_du == sejour.repas_au
-            )
+            if (is_repas_checked(sejour.sejour_du, sejour.repas_detailles, day, 2)): # déjeuner
+                is_first_repas = (
+                    sejour.sejour_du == day
+                ) and ((
+                    sejour.repas_du == 'Déjeuner'
+                ) or (
+                    sejour.repas_du == 'Petit-déjeuner'
+                ))
+                is_last_repas = (
+                    sejour.sejour_au == day
+                ) and ((
+                    sejour.repas_au == 'Déjeuner'
+                ) or (
+                    not is_repas_checked(
+                        sejour.sejour_du,
+                        sejour.repas_detailles,
+                        day,
+                        1
+                    ) # will be absent for dinner
+                ))
+                is_monorepas = (
+                    sejour.sejour_du == sejour.sejour_au
+                ) and (
+                    sejour.repas_du == sejour.repas_au
+                )
 
-            # Midi - tables hôtes:
-            if sejour.mensa == 'Hôtes':
-                total_table_hotes_midi += nombre
-                table_hotes_midi.append({
-                    'hote': hote,
-                    'nombre': nombre,
-                    'commentaire_cuisine': commentaire_cuisine,
-                    'is_first_repas': is_first_repas,
-                    'is_last_repas': is_last_repas,
-                    'is_monorepas': is_monorepas,
-                })
+                # Midi - tables hôtes:
+                if sejour.mensa == 'Hôtes':
+                    total_table_hotes_midi += nombre
+                    table_hotes_midi.append({
+                        'hote': hote,
+                        'nombre': nombre,
+                        'commentaire_cuisine': commentaire_cuisine,
+                        'is_first_repas': is_first_repas,
+                        'is_last_repas': is_last_repas,
+                        'is_monorepas': is_monorepas,
+                    })
 
-            # Midi - table abbatiale:
-            if sejour.mensa == 'Table abbatiale':
-                total_table_abbatiale_midi += nombre
-                table_abbatiale_midi.append({
-                    'hote': hote,
-                    'nombre': nombre,
-                    'commentaire_cuisine': commentaire_cuisine,
-                    'is_first_repas': is_first_repas,
-                    'is_last_repas': is_last_repas,
-                    'is_monorepas': is_monorepas,
-                })
+                # Midi - table abbatiale:
+                if sejour.mensa == 'Table abbatiale':
+                    total_table_abbatiale_midi += nombre
+                    table_abbatiale_midi.append({
+                        'hote': hote,
+                        'nombre': nombre,
+                        'commentaire_cuisine': commentaire_cuisine,
+                        'is_first_repas': is_first_repas,
+                        'is_last_repas': is_last_repas,
+                        'is_monorepas': is_monorepas,
+                    })
 
-            # Midi - table moines:
-            if sejour.mensa == 'Moines':
-                total_table_moines_midi += nombre
-                table_moines_midi.append({
-                    'hote': hote,
-                    'nombre': nombre,
-                    'commentaire_cuisine': commentaire_cuisine,
-                    'is_first_repas': is_first_repas,
-                    'is_last_repas': is_last_repas,
-                    'is_monorepas': is_monorepas,
-                })
+                # Midi - table moines:
+                if sejour.mensa == 'Moines':
+                    total_table_moines_midi += nombre
+                    table_moines_midi.append({
+                        'hote': hote,
+                        'nombre': nombre,
+                        'commentaire_cuisine': commentaire_cuisine,
+                        'is_first_repas': is_first_repas,
+                        'is_last_repas': is_last_repas,
+                        'is_monorepas': is_monorepas,
+                    })
 
-            # Midi - repas aux parloirs:
-            if sejour.mensa == 'Parloirs':
-                total_table_parloirs_midi += nombre
-                table_parloirs_midi.append({
-                    'hote': hote,
-                    'nombre': nombre,
-                    'commentaire_cuisine': commentaire_cuisine,
-                    'is_first_repas': is_first_repas,
-                    'is_last_repas': is_last_repas,
-                    'is_monorepas': is_monorepas,
-                })
+                # Midi - repas aux parloirs:
+                if sejour.mensa == 'Parloirs':
+                    total_table_parloirs_midi += nombre
+                    table_parloirs_midi.append({
+                        'hote': hote,
+                        'nombre': nombre,
+                        'commentaire_cuisine': commentaire_cuisine,
+                        'is_first_repas': is_first_repas,
+                        'is_last_repas': is_last_repas,
+                        'is_monorepas': is_monorepas,
+                    })
 
         # Midi: moines aux parloirs:
         parloirs_midi = Parloir.objects.filter(
@@ -176,61 +184,62 @@ def cuisine(request):
             hote = sejour.personne.__str__()
             nombre = len(sejour.chambres_string().split(', '))
             commentaire_cuisine = sejour.commentaire_cuisine
-            is_first_repas = (
-                sejour.sejour_du == day
-            ) and (
-                sejour.repas_du == 'Dîner'
-            )
-            is_last_repas = ((
-                sejour.sejour_au == day
-            ) and (
-                sejour.repas_au == 'Dîner'
-            )) or ((
-                sejour.sejour_au == day + timedelta(days=1)
-            ) and (
-                sejour.repas_au == 'Petit-déjeuner'
-            ))
-            is_monorepas = (
-                sejour.sejour_du == sejour.sejour_au
-            ) and (
-                sejour.repas_du == sejour.repas_au
-            )
+            if (is_repas_checked(sejour.sejour_du, sejour.repas_detailles, day, 1)): # dîner
+                is_first_repas = (
+                    sejour.sejour_du == day
+                ) and (
+                    sejour.repas_du == 'Dîner'
+                )
+                is_last_repas = ((
+                    sejour.sejour_au == day
+                ) and (
+                    sejour.repas_au == 'Dîner'
+                )) or ((
+                    sejour.sejour_au == day + timedelta(days=1)
+                ) and (
+                    sejour.repas_au == 'Petit-déjeuner'
+                ))
+                is_monorepas = (
+                    sejour.sejour_du == sejour.sejour_au
+                ) and (
+                    sejour.repas_du == sejour.repas_au
+                )
 
-            # Soir - tables hôtes:
-            if sejour.mensa == 'Hôtes':
-                total_table_hotes_soir += nombre
-                table_hotes_soir.append({
-                    'hote': hote,
-                    'nombre': nombre,
-                    'commentaire_cuisine': commentaire_cuisine,
-                    'is_first_repas': is_first_repas,
-                    'is_last_repas': is_last_repas,
-                    'is_monorepas': is_monorepas,
-                })
+                # Soir - tables hôtes:
+                if sejour.mensa == 'Hôtes':
+                    total_table_hotes_soir += nombre
+                    table_hotes_soir.append({
+                        'hote': hote,
+                        'nombre': nombre,
+                        'commentaire_cuisine': commentaire_cuisine,
+                        'is_first_repas': is_first_repas,
+                        'is_last_repas': is_last_repas,
+                        'is_monorepas': is_monorepas,
+                    })
 
-            # Soir - table abbatiale:
-            if sejour.mensa == 'Table abbatiale':
-                total_table_abbatiale_soir += nombre
-                table_abbatiale_soir.append({
-                    'hote': hote,
-                    'nombre': nombre,
-                    'commentaire_cuisine': commentaire_cuisine,
-                    'is_first_repas': is_first_repas,
-                    'is_last_repas': is_last_repas,
-                    'is_monorepas': is_monorepas,
-                })
+                # Soir - table abbatiale:
+                if sejour.mensa == 'Table abbatiale':
+                    total_table_abbatiale_soir += nombre
+                    table_abbatiale_soir.append({
+                        'hote': hote,
+                        'nombre': nombre,
+                        'commentaire_cuisine': commentaire_cuisine,
+                        'is_first_repas': is_first_repas,
+                        'is_last_repas': is_last_repas,
+                        'is_monorepas': is_monorepas,
+                    })
 
-            # Soir - table moines:
-            if sejour.mensa == 'Moines':
-                total_table_moines_soir += nombre
-                table_moines_soir.append({
-                    'hote': hote,
-                    'nombre': nombre,
-                    'commentaire_cuisine': commentaire_cuisine,
-                    'is_first_repas': is_first_repas,
-                    'is_last_repas': is_last_repas,
-                    'is_monorepas': is_monorepas,
-                })
+                # Soir - table moines:
+                if sejour.mensa == 'Moines':
+                    total_table_moines_soir += nombre
+                    table_moines_soir.append({
+                        'hote': hote,
+                        'nombre': nombre,
+                        'commentaire_cuisine': commentaire_cuisine,
+                        'is_first_repas': is_first_repas,
+                        'is_last_repas': is_last_repas,
+                        'is_monorepas': is_monorepas,
+                    })
 
             # Soir - repas aux parloirs:
             if sejour.mensa == 'Parloirs':
@@ -330,6 +339,15 @@ def cuisine(request):
             )
 
     return render(request, 'hotellerie/listings/cuisine.html', {'days': DAYS})
+
+
+def is_repas_checked(sejour_du, repas_detailles, day, repas):
+    """ Return True if the repas is checked for the given day. """
+    delta_days = (day - sejour_du).days
+    if delta_days < 0 or delta_days >= len(repas_detailles):
+        return False
+    chr = repas_detailles[delta_days]
+    return (int(chr) & repas) == repas
 
 
 def hotellerie(request):
