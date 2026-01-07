@@ -219,18 +219,18 @@ class SejourForm(forms.ModelForm):
     )
     repas_du = forms.ChoiceField(
         choices=[
-            ('Petit-déjeuner', 'Petit-déjeuner'),
-            ('Déjeuner', 'Déjeuner'),
-            ('Dîner', 'Dîner'),
+            ('Déjeuner', 'Matinée'),
+            ('Dîner', 'Après-midi'),
         ],
     )
     repas_au = forms.ChoiceField(
         choices=[
-            ('Petit-déjeuner', 'Petit-déjeuner'),
-            ('Déjeuner', 'Déjeuner'),
-            ('Dîner', 'Dîner'),
+            ('Déjeuner', 'Matinée'),
+            ('Dîner', 'Après-midi'),
         ],
     )
+    repas_detailles = forms.HiddenInput()
+
     chambre = forms.MultipleChoiceField(
         required=False,
         label='Chambres :',

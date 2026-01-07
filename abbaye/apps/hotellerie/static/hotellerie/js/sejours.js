@@ -15,12 +15,17 @@ $(document).ready(function () {
           $("#id_sejour_au").val($("#id_sejour_du").val());
         }
         $("#id_sejour_au").datepicker("option", "minDate", $("#id_sejour_du").val());
+        fill_repas_table();
         refresh_rooms();
       },
     }
     $("#id_sejour_du").datepicker(values);
     $("#id_sejour_au").datepicker(values);
   });
+
+  if ($('#id_sejour_du').val() != '') {
+    $('#id_sejour_au').datepicker('option', 'minDate', $('#id_sejour_du').val());
+  }
 
   // Sejours: has the personne a pere_suiveur?
   // On start (if we are on the right page,
@@ -33,7 +38,11 @@ $(document).ready(function () {
     check_pere_suiveur();
   });
 
-
+  // repas détaillés
+  // on start:
+  fill_repas_table();
+  set_repas_table();
+  
   // Sejours: manage rooms (checkboxes) and selects:
   // On start:
   refresh_rooms();
@@ -65,8 +74,152 @@ $(document).ready(function () {
   });
 });
 
+$("#id_repas_du").on("change", function(e) {
+  if (e.target.value == "Dîner") {
+    if ($("#repas_0_1").is(':checked') == false) {
+      $("#repas_0_1").prop('checked',  true).trigger('change');
+    }
+    if ($("#repas_0_2").is(':checked') == true) {
+      $("#repas_0_2").prop('checked',  false).trigger('change');
+    }
+  } else if (e.target.value == "Déjeuner") {
+    if ($("#repas_0_2").is(':checked') == false) {
+      $("#repas_0_2").prop('checked',  true).trigger('change');
+    }
+    if ($("#repas_0_1").is(':checked') == false ) {
+      $("#repas_0_1").prop('checked',  true).trigger('change');
+    }
+  }
+});
+
+$("#id_repas_au").on("change", function(e) {
+  const nb_days = $("#id_meal_table > tbody").children().length;
+  const last = nb_days - 1;
+  if (e.target.value == "Dîner") {
+    if ($("#repas_" + last + "_1").is(':checked') == true) {
+      $("#repas_" + last + "_1").prop('checked',  false).trigger('change');
+    }
+    if ($("#repas_" + last + "_2").is(':checked') == false) {
+      $("#repas_" + last + "_2").prop('checked',  true).trigger('change');
+    }
+  } else if (e.target.value == "Déjeuner") {
+    if ($("#repas_" + last + "_2").is(':checked') == true) {
+      $("#repas_" + last + "_2").prop('checked',  false).trigger('change');
+    }
+    if ($("#repas_" + last + "_1").is(':checked') == true ) {
+      $("#repas_" + last + "_1").prop('checked',  false).trigger('change');
+    }
+  }
+});
+
 
 // ---------------------------------------------------------------------------------
+const MS_IN_DAY = (1000 * 60 * 60 * 24)
+function fill_repas_table() {
+  if ($("#id_sejour_du").val() != $("#id_debut_sejour").val()) {
+    // tout effacer 
+    $("#id_meal_table > tbody").empty();
+    $("#id_debut_sejour").val($("#id_sejour_du").val());
+  }
+
+  if ($("#id_sejour_du").val() == '' || $("#id_sejour_au").val() == '') {
+    return;
+  }
+  
+  const reg_ex = /(\d\d)\/(\d\d)\/(\d+)/;
+  let begin = $("#id_sejour_du").datepicker('getDate');
+  if (begin == null) {
+    let sejour_begin = $("#id_sejour_du").val();
+    if (sejour_begin != '') {
+      let parsed = sejour_begin.match(reg_ex);
+      begin = new Date(parsed[3], parsed[2] - 1, parsed[1]);
+    }
+  }
+  let end_sejour = $("#id_sejour_au").datepicker('getDate');
+  if (end_sejour == null) {
+    let sejour_end = $("#id_sejour_au").val();
+    if (sejour_end != '') {
+      let parsed = sejour_end.match(reg_ex);
+      end_sejour = new Date(parsed[3], parsed[2] - 1, parsed[1]);
+    }
+  }
+
+  const nb_days = ((end_sejour - begin)/ MS_IN_DAY) + 1;
+  let repas_detailles = $("#id_repas_detailles").val();
+  const old_repas_detailles_ln = repas_detailles.length;
+  if (repas_detailles.length != nb_days) {
+    if (repas_detailles.length > nb_days) {
+      repas_detailles = repas_detailles.slice(0, nb_days);
+    } else {
+      repas_detailles = repas_detailles + "7".repeat(nb_days - repas_detailles.length);
+    }
+    $("#id_repas_detailles").val(repas_detailles);
+  }
+
+
+  if (begin != null) {
+    const len_days_repas = $("#id_meal_table > tbody").children().length;
+    if (len_days_repas > nb_days) {
+      for (let i = nb_days; i < len_days_repas; i++) {
+        $(`#repas_${i}_1`).parent().parent().parent().remove();
+      }
+    }
+    // on ajoute les lignes manquantes
+    for (let i = len_days_repas; i < nb_days; i++) {
+      let day = new Date(begin.getTime() + i * MS_IN_DAY);
+      let day_formatted = $.datepicker.formatDate("D dd/mm/yy", day, {
+        dayNamesShort: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
+      });
+      let item = $('<tr><th scope="row" >' + day_formatted + "</th>");
+      $(`<td><label><input type='checkbox' id ='repas_${i}_2' checked='true' class='repas dej' style='margin: 2px 10px'/>Déjeuner</label></td>`).on(
+        "change", null, {jr: `${i}`, rp: 2}, function(event) {
+          ch_repas_change(event)
+        }
+      ).appendTo(item);
+      $(`<td><label><input type='checkbox' id ='repas_${i}_1' checked='true' class='repas din' style='margin: 2px 10px'/>Dîner</label></td>`).on(
+        "change", null, {jr: `${i}`, rp: 1}, function(event) {
+          ch_repas_change(event)
+        }
+      ).appendTo(item);
+      $("</tr>").appendTo(item);
+      $("#id_meal_table > tbody").append(item);
+    }
+  }
+}
+
+
+function set_repas_table() {
+  const str_repas_detailles = $("#id_repas_detailles").val();
+  for (let jour = 0; jour < str_repas_detailles.length; jour++) {
+    let chr = str_repas_detailles[jour];
+    if ( (parseInt(chr) & 2) == 2 ) { // déjeuner
+      $(`#repas_${jour}_2`).prop('checked', true);
+    } else {
+      $(`#repas_${jour}_2`).prop('checked', false);
+    }
+    if ( (parseInt(chr) & 1) == 1 ) { // dîner
+      $(`#repas_${jour}_1`).prop('checked', true);
+    } else {
+      $(`#repas_${jour}_1`).prop('checked', false);
+    }
+  }
+}
+
+
+function ch_repas_change(event) {
+  const jour = +(event.data["jr"]);
+  const repas = +(event.data["rp"]);
+  const checked = event.target.checked;
+  let str_repas_detailles = $("#id_repas_detailles").val();
+  let chr = str_repas_detailles[jour];
+  if (checked) {
+    chr = String( parseInt(chr) | repas ) 
+  } else {
+    chr = String( parseInt(chr) & (~repas) )
+  }
+  str_repas_detailles = str_repas_detailles.slice(0, jour) + chr + str_repas_detailles.slice(jour + 1)
+  $("#id_repas_detailles").val(str_repas_detailles)
+}
 
 
 function check_pere_suiveur() {

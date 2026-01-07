@@ -179,6 +179,17 @@
             </div>
         </div>
 
+        <!-- Repas détaillés -->
+        <div class="row justify-content-between ms-0">
+        <!--    {{ form.repas_detailles.label_tag }} -->
+            <span style="margin-top: '10px';">Repas détaillés:</span>
+            <input type="hidden" id="id_debut_sejour" value="">
+            {{ form.repas_detailles.as_hidden }}
+            <table class="table table-sm" id="id_meal_table">
+                <tbody>
+                </tbody>         
+            </table>
+        </div>
 
         <!-- Chambres -->
         <div class="row justify-content-between ms-0">
