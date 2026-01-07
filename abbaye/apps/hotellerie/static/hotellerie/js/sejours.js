@@ -75,7 +75,6 @@ $(document).ready(function () {
 });
 
 $("#id_repas_du").on("change", function(e) {
-  // console.log(e.target.value);
   if (e.target.value == "Dîner") {
     if ($("#repas_0_1").is(':checked') == false) {
       $("#repas_0_1").prop('checked',  true).trigger('change');
@@ -94,9 +93,7 @@ $("#id_repas_du").on("change", function(e) {
 });
 
 $("#id_repas_au").on("change", function(e) {
-  // console.log(e.target.value);
   const nb_days = $("#id_meal_table > tbody").children().length;
-  // console.log("nb_days: " + nb_days);
   const last = nb_days - 1;
   if (e.target.value == "Dîner") {
     if ($("#repas_" + last + "_1").is(':checked') == true) {
@@ -121,7 +118,7 @@ const MS_IN_DAY = (1000 * 60 * 60 * 24)
 function fill_repas_table() {
   if ($("#id_sejour_du").val() != $("#id_debut_sejour").val()) {
     // tout effacer 
-    $("#id_meal_table").find("tbody").empty();
+    $("#id_meal_table > tbody").empty();
     $("#id_debut_sejour").val($("#id_sejour_du").val());
   }
 
@@ -148,10 +145,8 @@ function fill_repas_table() {
   }
 
   const nb_days = ((end_sejour - begin)/ MS_IN_DAY) + 1;
-  // console.log("nb_days: " + nb_days);
   let repas_detailles = $("#id_repas_detailles").val();
   const old_repas_detailles_ln = repas_detailles.length;
-  // console.log("old_repas_detailles_ln: " + old_repas_detailles_ln);
   if (repas_detailles.length != nb_days) {
     if (repas_detailles.length > nb_days) {
       repas_detailles = repas_detailles.slice(0, nb_days);
@@ -163,11 +158,9 @@ function fill_repas_table() {
 
 
   if (begin != null) {
-    const len_days_repas = $("#id_meal_table").find("tbody").children().length;
+    const len_days_repas = $("#id_meal_table > tbody").children().length;
     if (len_days_repas > nb_days) {
-      // il y en avait trop, on enlève les lignes en trop
       for (let i = nb_days; i < len_days_repas; i++) {
-        // console.log("remove day " + i);
         $(`#repas_${i}_1`).parent().parent().parent().remove();
       }
     }
@@ -177,7 +170,6 @@ function fill_repas_table() {
       let day_formatted = $.datepicker.formatDate("D dd/mm/yy", day, {
         dayNamesShort: ["Di", "Lu", "Ma", "Me", "Je", "Ve", "Sa"],
       });
-      // console.log(day_formatted);
       let item = $('<tr><th scope="row" >' + day_formatted + "</th>");
       $(`<td><label><input type='checkbox' id ='repas_${i}_2' checked='true' class='repas dej' style='margin: 2px 10px'/>Déjeuner</label></td>`).on(
         "change", null, {jr: `${i}`, rp: 2}, function(event) {
@@ -190,7 +182,7 @@ function fill_repas_table() {
         }
       ).appendTo(item);
       $("</tr>").appendTo(item);
-      $("#id_meal_table").find("tbody").append(item);
+      $("#id_meal_table > tbody").append(item);
     }
   }
 }
@@ -198,28 +190,16 @@ function fill_repas_table() {
 
 function set_repas_table() {
   const str_repas_detailles = $("#id_repas_detailles").val();
-  // console.log("set_repas_table: " + str_repas_detailles);
   for (let jour = 0; jour < str_repas_detailles.length; jour++) {
     let chr = str_repas_detailles[jour];
-    // console.log("jour " + jour + " chr: " + chr);
-    // repas = 2 (déjeuner)
-    if ( (parseInt(chr) & 2) == 2 ) {
-      // coché
-      // console.log("déjeuner coché");
+    if ( (parseInt(chr) & 2) == 2 ) { // déjeuner
       $(`#repas_${jour}_2`).prop('checked', true);
     } else {
-      // non coché
-      // console.log("déjeuner non coché");
       $(`#repas_${jour}_2`).prop('checked', false);
     }
-    // repas = 1 (dîner)
-    if ( (parseInt(chr) & 1) == 1 ) {
-      // coché
-      // console.log("dîner coché");
+    if ( (parseInt(chr) & 1) == 1 ) { // dîner
       $(`#repas_${jour}_1`).prop('checked', true);
     } else {
-      // non coché
-      // console.log("dîner non coché");
       $(`#repas_${jour}_1`).prop('checked', false);
     }
   }
@@ -227,20 +207,18 @@ function set_repas_table() {
 
 
 function ch_repas_change(event) {
-  console.log( event.data );
-  jour = +(event.data["jr"]);
-  repas = +(event.data["rp"]);
-  let checked = event.target.checked;
-  console.log(checked);
-  str_repas_detailles = $("#id_repas_detailles").val();
-  chr = str_repas_detailles[jour];
+  const jour = +(event.data["jr"]);
+  const repas = +(event.data["rp"]);
+  const checked = event.target.checked;
+  let str_repas_detailles = $("#id_repas_detailles").val();
+  let chr = str_repas_detailles[jour];
   if (checked) {
     chr = String( parseInt(chr) | repas ) 
   } else {
     chr = String( parseInt(chr) & (~repas) )
   }
-  new_str_repas_detailles = str_repas_detailles.slice(0, jour) + chr + str_repas_detailles.slice(jour + 1)
-  $("#id_repas_detailles").val(new_str_repas_detailles)
+  str_repas_detailles = str_repas_detailles.slice(0, jour) + chr + str_repas_detailles.slice(jour + 1)
+  $("#id_repas_detailles").val(str_repas_detailles)
 }
 
 
