@@ -145,43 +145,43 @@ def get_rooms_status(request):
 
     # Create the rooms' dict:
     rooms = {}
-    for i in range(27):
-        rooms[str(i)] = {
-            'occupied': '',
-            'title': '',
-        }
-    rooms['Chambre de l\'évêque'] = {
-        'occupied': '',
-        'title': '',
-    }
-    rooms['Chambre en clôture 1'] = {
-        'occupied': '',
-        'title': '',
-    }
-    rooms['Chambre en clôture 2'] = {
-        'occupied': '',
-        'title': '',
-    }
-    rooms['Chambre en clôture 3'] = {
-        'occupied': '',
-        'title': '',
-    }
-    rooms['Maison Sainte Marthe'] = {
-        'occupied': '',
-        'title': '',
-    }
-    rooms['Maison Sainte Reine'] = {
-        'occupied': '',
-        'title': '',
-    }
-    rooms['Maison Sainte Bernadette'] = {
-        'occupied': '',
-        'title': '',
-    }
-    rooms['Maison Sainte Chantal'] = {
-        'occupied': '',
-        'title': '',
-    }
+    # for i in range(27):
+    #     rooms[str(i)] = {
+    #         'occupied': '',
+    #         'title': '',
+    #     }
+    # rooms['Chambre de l\'évêque'] = {
+    #     'occupied': '',
+    #     'title': '',
+    # }
+    # rooms['Chambre en clôture 1'] = {
+    #     'occupied': '',
+    #     'title': '',
+    # }
+    # rooms['Chambre en clôture 2'] = {
+    #     'occupied': '',
+    #     'title': '',
+    # }
+    # rooms['Chambre en clôture 3'] = {
+    #     'occupied': '',
+    #     'title': '',
+    # }
+    # rooms['Maison Sainte Marthe'] = {
+    #     'occupied': '',
+    #     'title': '',
+    # }
+    # rooms['Maison Sainte Reine'] = {
+    #     'occupied': '',
+    #     'title': '',
+    # }
+    # rooms['Maison Sainte Bernadette'] = {
+    #     'occupied': '',
+    #     'title': '',
+    # }
+    # rooms['Maison Sainte Chantal'] = {
+    #     'occupied': '',
+    #     'title': '',
+    # }
 
     # Get sejours having a day between start and end:
     sejours_du_inside = Sejour.objects.filter(
@@ -208,6 +208,11 @@ def get_rooms_status(request):
         chambres = Chambre.objects.filter(sejour=sejour)
         if sejour.pk != id_sejour:
             for j, chambre in enumerate(chambres):
+                if chambre.chambre not in rooms:
+                    rooms[chambre.chambre] = {
+                        'occupied': '',
+                        'title': '',
+                    }
                 rooms[chambre.chambre]['occupied'] = True
                 rooms[chambre.chambre]['title'] += '{}\n'.format(sejour)
 
