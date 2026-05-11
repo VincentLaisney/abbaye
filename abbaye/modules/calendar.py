@@ -82,12 +82,14 @@ def get_tempo(date):
         else:
             week = floor(((days + 3)/7))
             tempo = 'qua_{}_{}'.format(week, weekday)
-    elif easter <= date <= pentecost:
+    elif easter <= date < pentecost:
         days = (date - easter).days
         week = floor((days/7)+1)
         tempo = 'tp_{}_{}'.format(week, weekday)
     elif pentecost <= date < first_sunday_of_next_advent:
-        if date == pentecost + datetime.timedelta(days=7):
+        if date == pentecost:
+            tempo = 'pentec'
+        elif date == pentecost + datetime.timedelta(days=7):
             tempo = 'trinite'
         elif date == pentecost + datetime.timedelta(days=11):
             tempo = 'fete_dieu'

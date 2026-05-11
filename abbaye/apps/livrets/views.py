@@ -137,7 +137,7 @@ def pdf(request):
         data['tempo'] = ref_tempo
 
         # Ref prayers:
-        if not data['prayers_mg']:
+        if not data['prayers_mg'] or not mode == 'mg':
             if data['ref'].startswith('pa_1_'):
                 ref_prayers = 'pa_1'
             elif data['ref'].startswith(('adv_ult_', 'noel_time_1')):
@@ -336,7 +336,7 @@ def pdf(request):
                 request_get['special_' + str(i + 1)],
             )
         else:
-            if data['prayers_mg'] and mode == 'mg':
+            if mode == 'mg' and data['prayers_mg'] :
                 tex += "\\TitreB{{Oraison~:}}\\Normal{{p. {}.}}\\par\n".format(
                     data['prayers_mg'].split('/')[0]
                 )
@@ -373,7 +373,7 @@ def pdf(request):
         # Graduel:
         grid_gr = request_get['gr_' + str(i + 1)]
         if grid_gr:
-            gral = 'AL' if ref_tempo.startswith('tp_') else 'GR'
+            gral = 'AL' if ref_tempo.startswith('tp_') or ref_tempo.startswith('pentec') else 'GR'
             graduel = Score.objects.filter(
                 type=gral,
             ).filter(
@@ -387,9 +387,10 @@ def pdf(request):
                 )
             else:
                 tex += "\\TitreB{{{}~:}}\\par\n".format(
-                    "Alléluia" if ref_tempo.startswith('tp_') else 'Graduel',
+                    "Alléluia" if ref_tempo.startswith('tp_') or ref_tempo.startswith('pentec') else 'Graduel',
                 )
-                tex += "\\PartocheWithTraduction{{GR/graduel/{}}}\\par\n".format(
+                tex += "\\PartocheWithTraduction{{GR/{}/{}}}\\par\n".format(
+                    'alleluia' if ref_tempo.startswith('tp_') or ref_tempo.startswith('pentec') else 'graduel',
                     grid_gr,
                 )
 
@@ -543,7 +544,7 @@ def pdf(request):
                 request_get['special_' + str(i + 1)],
             )
         else:
-            if data['prayers_mg']:
+            if mode == 'mg' and data['prayers_mg']:
                 tex += "\\TitreB{{Prière sur les offrandes~:}}\\Normal{{p. {}.}}\\par\n".format(
                     data['prayers_mg'].split('/')[1],
                 )
@@ -715,7 +716,7 @@ def pdf(request):
                 request_get['special_' + str(i + 1)],
             )
         else:
-            if data['prayers_mg']:
+            if mode == 'mg' and data['prayers_mg']:
                 tex += "\\TitreB{{Prière après la Communion~:}}\\Normal{{p. {}.}}\\par\n".format(
                     data['prayers_mg'].split('/')[2],
                 )
