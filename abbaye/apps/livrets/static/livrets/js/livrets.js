@@ -65,8 +65,25 @@ $(document).ready(function () {
     }
   });
 
+  function showErrorOverlay() {
+    $('#overlay_wait').css('display', 'none');
+    $('#overlay_ready').css('display', 'none');
+    $('#overlay_error').css({
+      'display': 'flex',
+      'flex-direction': 'column',
+      'align-items': 'center',
+      'justify-content': 'center',
+    });
+  }
+
+  $('#close_error').click(function () {
+    $('#overlay_error').css('display', 'none');
+  });
+
   // Create PDF:
   $('#pdf').click(function () {
+    $('#overlay_ready').css('display', 'none');
+    $('#overlay_error').css('display', 'none');
     $('#overlay_wait').css({
       'display': 'flex',
       'flex-direction': 'column',
@@ -103,9 +120,13 @@ $(document).ready(function () {
             'align-items': 'center',
             'justify-content': 'center',
           });
+        } else {
+          showErrorOverlay();
         }
       }
-    )
+    ).fail(function () {
+      showErrorOverlay();
+    });
   });
 
   // View PDF:

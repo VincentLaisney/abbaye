@@ -109,11 +109,38 @@
             </div>
         </div>
 
+        <!-- Instructions -->
+        <div class="alert alert-info" role="alert">
+            <p>Instructions pour utiliser le générateur de livrets :</p>
+            <ul>
+                <li>Choisissez le mode de génération (Missel Grégorien ou Livret Complet).</li>
+                <li>Sélectionnez la date de départ. Pour une retraite, c'est le lendemain de la date du commencement.</li>
+                <li>Indiquez le nombre de jours à inclure.</li>
+                <li>Remplissez les champs de saisie pour chaque jour.</li>
+                <ul>
+                    <li>Indiquez la messe spéciale quand elle ne suit pas le temporal ou le sanctoral.</li>
+                    <li>Pour les chants du Graduel indiquez les pages selon le billlet du P. Bénigne.</li>
+                    <li>Quand il y a un numéro en exposant, séparez-le par un souligné (_).</li>
+                    <li>Les numéros du Kyriale doivent être indiqués en chiffres romains.</li>
+                </ul>
+                <li>Cliquez sur "Voir le PDF" pour générer le livret.</li>
+            </ul>
+        </div>
+
         <!-- Screen "Wait please…" -->
         <div id="overlay_wait">
             <img src={% static 'main/img/wait.gif' %} class="mx-auto mb-5" style="height: 30px; width:30px;">
             <p>Votre livret est en cours de préparation…</p>
             <p>Veuillez patienter quelques instants…</p>
+        </div>
+
+        <!-- Screen "Error" -->
+        <div id="overlay_error" style="display: none;">
+            <p>Une erreur est survenue lors de la création du livret.</p>
+            <p>Veuillez réessayer ou contacter l'administrateur.</p>
+            <div class="mt-3">
+                <button id="close_error" class="btn btn-secondary">Fermer</button>
+            </div>
         </div>
 
         <!-- Screen "Ready!" -->
