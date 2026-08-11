@@ -778,11 +778,23 @@ def pdf(request):
 
     with open(os.path.join(Path(__file__).resolve().parent, 'tex/livret.tex'), 'w', encoding='utf-8') as tex_file:
         tex_file.write(tex)
-    command = "cd {base_dir}/apps/livrets/tex; export TEXMFVAR={base_dir}/apps/livrets/tex/.texlive2024/; lualatex --shell-escape livret.tex; cp livret.pdf {media_dir}/livrets".format(
+    command = "cd {base_dir}/apps/livrets/tex; export TEXMFVAR={base_dir}/apps/livrets/tex/.texlive2024/; lualatex --shell-escape livret.tex".format(
         base_dir=settings.BASE_DIR,
         media_dir=settings.MEDIA_ROOT,
     )
-    os.system(command)
+    status = os.system(command)
+    if status == 0:
+        command = "cd {base_dir}/apps/livrets/tex; cp livret.pdf {media_dir}/livrets".format(
+            base_dir=settings.BASE_DIR,
+            media_dir=settings.MEDIA_ROOT,
+        )
+        status = os.system(command)
+    if status != 0:
+
+        return JsonResponse(
+            {'back': 'error',
+             'error_code': status,},
+        )
     return JsonResponse(
         {'back': 'OK'},
     )
