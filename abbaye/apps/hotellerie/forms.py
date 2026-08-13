@@ -450,6 +450,12 @@ class ParloirForm(forms.ModelForm):
         label='Repas apporté',
         label_suffix='',
     )
+    mange_refectoire = forms.BooleanField(
+        required=False,
+        label='Moine(s) au réfectoire',
+        help_text="Cochez cette case si le(s) moine(s) mange(nt) au réfectoire, et seulement sa/leur famille au parloir.",
+        label_suffix='',
+    )
     remarque = forms.CharField(
         required=False,
         label='Remarques :',

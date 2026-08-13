@@ -156,10 +156,9 @@ def cuisine(request):
         )
         for index, parloir in enumerate(parloirs_midi):
             if not parloir.repas_apporte:
-                total_parloirs_midi += (
-                    parloir.nombre + 1 +
-                    len(re.findall(' + ', parloir.moines_string()))
-                )
+                total_parloirs_midi += parloir.nombre
+                if not parloir.mange_refectoire:
+                    total_parloirs_midi += (1 + len(re.findall(' + ', parloir.moines_string())))
 
         # SOIR:
         sejours_soir = ((Sejour.objects.filter(
@@ -261,10 +260,9 @@ def cuisine(request):
         )
         for index, parloir in enumerate(parloirs_soir):
             if not parloir.repas_apporte:
-                total_parloirs_soir += (
-                    parloir.nombre + 1 +
-                    len(re.findall(' + ', parloir.moines_string()))
-                )
+                total_parloirs_soir += parloir.nombre
+                if not parloir.mange_refectoire:
+                    total_parloirs_soir += (1 + len(re.findall(' + ', parloir.moines_string())))
 
         # On compile le tout pour le jour concerné :
         DAYS[day] = {
@@ -333,8 +331,10 @@ def cuisine(request):
                     '',
                     '',
                     '',
-                    DAYS[day]['midi']['total_table_parloirs_midi'],
-                    DAYS[day]['soir']['total_table_parloirs_soir'],
+                    DAYS[day]['midi']['total_table_parloirs_midi'] +
+                    DAYS[day]['midi']['total_parloirs_midi'],
+                    DAYS[day]['soir']['total_table_parloirs_soir'] +
+                    DAYS[day]['soir']['total_parloirs_soir'],
                 ]
             )
 

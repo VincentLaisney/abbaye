@@ -252,6 +252,33 @@
             {{ form.repas_apporte.label_tag }}
         </div>
 
+        <!-- Mange au réfectoire -->
+        <div class="d-flex my-2">
+            {% if form.is_bound %}
+                {% if form.mange_refectoire.errors %}
+                    {% render_field form.mange_refectoire class="is-invalid" %}
+                    {% for error in form.mange_refectoire.errors %}
+                        <div class="invalid-feedback" style="display: block;">
+                            {{ error }}
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    {% render_field form.mange_refectoire class="is-valid" %}
+                {% endif %}
+            {% else %}
+                {% render_field form.mange_refectoire %}
+            {% endif %} 
+
+            {{ form.mange_refectoire.label_tag }}
+        </div>
+        <div class="d-flex my-2">
+            {% if form.mange_refectoire.help_text %}
+                <small class="form-text text-muted">
+                    {{ form.mange_refectoire.help_text }}
+                </small>
+            {% endif %}
+        </div>
+
         <!-- Commentaire -->
         <div class="form-group">
             {{ form.remarque.label_tag }}

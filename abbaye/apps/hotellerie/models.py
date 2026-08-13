@@ -298,6 +298,9 @@ class Parloir(models.Model):
     repas_apporte = models.BooleanField(
         default=False,
     )
+    mange_refectoire = models.BooleanField(
+        default=False,
+    )
     remarque = models.TextField()
     created_at = models.DateTimeField(
         auto_now_add=True,
